@@ -1,0 +1,89 @@
+\select@language {french}
+\contentsline {chapter}{Introcuction générale}{3}{chapter*.1}
+\contentsline {chapter}{\numberline {I}RIPE Atlas}{5}{chapter.1}
+\contentsline {section}{\numberline {I.1}Introduction}{5}{section.1.1}
+\contentsline {section}{\numberline {I.2}A propos RIPE NCC}{5}{section.1.2}
+\contentsline {section}{\numberline {I.3}Présentation du projet RIPE Atlas }{6}{section.1.3}
+\contentsline {subsection}{\numberline {I.3.1}Les mesures actives et passives de l'Internet}{6}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {I.3.2}Généralités sur les sondes Atlas}{6}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {I.3.3}Les générations des sondes Atlas }{7}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {I.3.4}La connexion des sondes Atlas à Internet}{9}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {I.3.5}Architecture du système RIPE Atlas}{9}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {I.3.6}Les sondes Atlas et la vie privée}{13}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {I.3.7}La sécurité dans RIPE Atlas}{13}{subsection.1.3.7}
+\contentsline {subsection}{\numberline {I.3.8}Les ancres VS sondes Atlas}{14}{subsection.1.3.8}
+\contentsline {subsection}{\numberline {I.3.9}Les mesures intégrées : Built-in }{15}{subsection.1.3.9}
+\contentsline {subsection}{\numberline {I.3.10}Le système de crédits Atlas}{16}{subsection.1.3.10}
+\contentsline {subsection}{\numberline {I.3.11}Les mesures personnalisées : User Defined mesurement}{18}{subsection.1.3.11}
+\contentsline {subsection}{\numberline {I.3.12}La sélection des sondes Atlas}{18}{subsection.1.3.12}
+\contentsline {subsection}{\numberline {I.3.13}Les sources de données Atlas}{19}{subsection.1.3.13}
+\contentsline {subsection}{\numberline {I.3.14}Les versions du firmware des sondes Atlas}{20}{subsection.1.3.14}
+\contentsline {subsection}{\numberline {I.3.15}Les limitations du RIPE Atlas}{20}{subsection.1.3.15}
+\contentsline {subsection}{\numberline {I.3.16}Confiance aux données Atlas}{21}{subsection.1.3.16}
+\contentsline {section}{\numberline {I.4}Projets existants de mesures d'Internet}{22}{section.1.4}
+\contentsline {subsection}{\numberline {I.4.1}Test Traffic Measurement Service}{22}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {I.4.2}ProbeAPI}{23}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {I.4.3}Archipelago}{24}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {I.4.4}DIMES}{25}{subsection.1.4.4}
+\contentsline {subsection}{\numberline {I.4.5}SamKnows}{25}{subsection.1.4.5}
+\contentsline {section}{\numberline {I.5}Quelques cas d'utilisation des données collectées par les sondes Atlas}{25}{section.1.5}
+\contentsline {subsection}{\numberline {I.5.1}Détection des coupures d'Internet}{25}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {I.5.2}Aide à la prise de décision}{26}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {I.5.3}Le suivi des censures}{26}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {I.5.4}Le suivi des performances d'un réseau}{27}{subsection.1.5.4}
+\contentsline {paragraph}{Les ancres Atlas}{27}{section*.11}
+\contentsline {paragraph}{La vérification de la cohérence du Traceroute}{29}{section*.13}
+\contentsline {paragraph}{BGP+traceroute}{29}{section*.15}
+\contentsline {paragraph}{BGP Atlas Monitor "BAM!"}{30}{section*.16}
+\contentsline {paragraph}{Prédiction des routeurs provoquant la perte des paquets }{30}{section*.17}
+\contentsline {subsection}{\numberline {I.5.5}Le suivi des détours dans un trafic local}{30}{subsection.1.5.5}
+\contentsline {subsection}{\numberline {I.5.6}Visualisation : indicateurs et dashboard}{31}{subsection.1.5.6}
+\contentsline {section}{\numberline {I.6}Conclusion}{31}{section.1.6}
+\contentsline {chapter}{\numberline {II}Algorithme de détection des anomalies}{33}{chapter.2}
+\contentsline {section}{\numberline {II.1}Introduction}{33}{section.2.1}
+\contentsline {section}{\numberline {II.2}L'étude des délais des liens }{34}{section.2.2}
+\contentsline {subsection}{\numberline {II.2.1}Les données utilisées dans l'analyse des délais}{34}{subsection.2.2.1}
+\contentsline {section}{\numberline {II.3}La description de la détection des délais anormaux des liens}{35}{section.2.3}
+\contentsline {subsection}{\numberline {II.3.1}RTT différentiel }{35}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {II.3.2}Le principe de la détection des changements des délais}{36}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {II.3.3}Les résultats de l'analyse des délais des liens}{37}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {II.3.4}Présentation de l'algorithme de la détection des changements anormaux : Résultat I}{37}{subsection.2.3.4}
+\contentsline {paragraph}{Description de l'algorithme de détection}{37}{section*.20}
+\contentsline {paragraph}{Description des paramètres de l'analyse des délais}{37}{section*.21}
+\contentsline {subparagraph}{start}{38}{section*.22}
+\contentsline {subparagraph}{end}{38}{section*.23}
+\contentsline {subparagraph}{timeWindow}{38}{section*.24}
+\contentsline {subparagraph}{alpha}{38}{section*.26}
+\contentsline {subparagraph}{minASN}{39}{section*.27}
+\contentsline {subparagraph}{minASNEntropy}{40}{section*.28}
+\contentsline {paragraph}{L'entropie }{40}{section*.29}
+\contentsline {subparagraph}{minSeen}{40}{section*.30}
+\contentsline {subparagraph}{af}{40}{section*.31}
+\contentsline {subparagraph}{comment}{41}{section*.32}
+\contentsline {subparagraph}{prefixes}{41}{section*.33}
+\contentsline {subparagraph}{experimentDate}{41}{section*.34}
+\contentsline {subparagraph}{confInterval}{41}{section*.35}
+\contentsline {paragraph}{Intervalle de confiance d'une moyenne}{42}{section*.36}
+\contentsline {subparagraph}{Exemple des paramètres de l'analyse des délais}{44}{section*.38}
+\contentsline {paragraph}{Les étapes de l'analyse des délais}{44}{section*.39}
+\contentsline {subparagraph}{computeRtt}{44}{section*.40}
+\contentsline {subparagraph}{mergeRttResults}{47}{section*.42}
+\contentsline {subparagraph}{outlierDetection}{48}{section*.47}
+\contentsline {subsection}{\numberline {II.3.5}Présentation de l'algorithme de la détection des changements anormaux : Résultat II}{50}{subsection.2.3.5}
+\contentsline {paragraph}{Introduction}{50}{section*.48}
+\contentsline {paragraph}{Caractéristiques d'un lien}{51}{section*.49}
+\contentsline {paragraph}{La procédure de création de l'évolution des RTTs différentiel d'un lien }{52}{section*.50}
+\contentsline {subparagraph}{Objectif}{52}{section*.51}
+\contentsline {subparagraph}{Entrées}{52}{section*.52}
+\contentsline {subparagraph}{Sorties}{52}{section*.53}
+\contentsline {subparagraph}{Etapes}{52}{section*.54}
+\contentsline {subparagraph}{Précisions relatives au pseudo-code}{53}{section*.55}
+\contentsline {subparagraph}{Pseudo Code}{53}{section*.56}
+\contentsline {subsection}{\numberline {II.3.6}Quelques chiffres sur la médiane des RTTs différentiel}{55}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {II.3.7}Notes sur les traceroutes }{55}{subsection.2.3.7}
+\contentsline {paragraph}{Traceroute réussi ou échoué totalement.}{56}{section*.58}
+\contentsline {paragraph}{Traceroute réussi ou échoué partiellement.}{56}{section*.59}
+\contentsline {paragraph}{Les adresses IP privées dans traceroute.}{56}{section*.60}
+\contentsline {paragraph}{L'utilité des attributs d'un enregistrement traceroute.}{56}{section*.61}
+\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{59}{appendix.A}
+\contentsline {chapter}{Conclusion}{61}{appendix*.64}

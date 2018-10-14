@@ -1,0 +1,49 @@
+\BOOKMARK [0][-]{chapter*.1}{Introcuction générale}{}% 1
+\BOOKMARK [0][-]{chapter.1}{RIPE\040Atlas}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Introduction}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{A\040propos\040RIPE\040NCC}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Présentation du projet RIPE Atlas }{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.3.1}{Les\040mesures\040actives\040et\040passives\040de\040l'Internet}{section.1.3}% 6
+\BOOKMARK [2][-]{subsection.1.3.2}{Généralités sur les sondes Atlas}{section.1.3}% 7
+\BOOKMARK [2][-]{subsection.1.3.3}{Les générations des sondes Atlas }{section.1.3}% 8
+\BOOKMARK [2][-]{subsection.1.3.4}{La connexion des sondes Atlas à Internet}{section.1.3}% 9
+\BOOKMARK [2][-]{subsection.1.3.5}{Architecture du système RIPE Atlas}{section.1.3}% 10
+\BOOKMARK [2][-]{subsection.1.3.6}{Les sondes Atlas et la vie privée}{section.1.3}% 11
+\BOOKMARK [2][-]{subsection.1.3.7}{La sécurité dans RIPE Atlas}{section.1.3}% 12
+\BOOKMARK [2][-]{subsection.1.3.8}{Les\040ancres\040VS\040sondes\040Atlas}{section.1.3}% 13
+\BOOKMARK [2][-]{subsection.1.3.9}{Les mesures intégrées : Built-in }{section.1.3}% 14
+\BOOKMARK [2][-]{subsection.1.3.10}{Le système de crédits Atlas}{section.1.3}% 15
+\BOOKMARK [2][-]{subsection.1.3.11}{Les mesures personnalisées : User Defined mesurement}{section.1.3}% 16
+\BOOKMARK [2][-]{subsection.1.3.12}{La sélection des sondes Atlas}{section.1.3}% 17
+\BOOKMARK [2][-]{subsection.1.3.13}{Les sources de données Atlas}{section.1.3}% 18
+\BOOKMARK [2][-]{subsection.1.3.14}{Les\040versions\040du\040firmware\040des\040sondes\040Atlas}{section.1.3}% 19
+\BOOKMARK [2][-]{subsection.1.3.15}{Les\040limitations\040du\040RIPE\040Atlas}{section.1.3}% 20
+\BOOKMARK [2][-]{subsection.1.3.16}{Confiance aux données Atlas}{section.1.3}% 21
+\BOOKMARK [1][-]{section.1.4}{Projets\040existants\040de\040mesures\040d'Internet}{chapter.1}% 22
+\BOOKMARK [2][-]{subsection.1.4.1}{Test\040Traffic\040Measurement\040Service}{section.1.4}% 23
+\BOOKMARK [2][-]{subsection.1.4.2}{ProbeAPI}{section.1.4}% 24
+\BOOKMARK [2][-]{subsection.1.4.3}{Archipelago}{section.1.4}% 25
+\BOOKMARK [2][-]{subsection.1.4.4}{DIMES}{section.1.4}% 26
+\BOOKMARK [2][-]{subsection.1.4.5}{SamKnows}{section.1.4}% 27
+\BOOKMARK [1][-]{section.1.5}{Quelques cas d'utilisation des données collectées par les sondes Atlas}{chapter.1}% 28
+\BOOKMARK [2][-]{subsection.1.5.1}{Détection des coupures d'Internet}{section.1.5}% 29
+\BOOKMARK [2][-]{subsection.1.5.2}{Aide à la prise de décision}{section.1.5}% 30
+\BOOKMARK [2][-]{subsection.1.5.3}{Le\040suivi\040des\040censures}{section.1.5}% 31
+\BOOKMARK [2][-]{subsection.1.5.4}{Le suivi des performances d'un réseau}{section.1.5}% 32
+\BOOKMARK [2][-]{subsection.1.5.5}{Le suivi des détours dans un trafic local}{section.1.5}% 33
+\BOOKMARK [2][-]{subsection.1.5.6}{Visualisation\040:\040indicateurs\040et\040dashboard}{section.1.5}% 34
+\BOOKMARK [1][-]{section.1.6}{Conclusion}{chapter.1}% 35
+\BOOKMARK [0][-]{chapter.2}{Algorithme de détection des anomalies}{}% 36
+\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 37
+\BOOKMARK [1][-]{section.2.2}{L'étude des délais des liens }{chapter.2}% 38
+\BOOKMARK [2][-]{subsection.2.2.1}{Les données utilisées dans l'analyse des délais}{section.2.2}% 39
+\BOOKMARK [1][-]{section.2.3}{La description de la détection des délais anormaux des liens}{chapter.2}% 40
+\BOOKMARK [2][-]{subsection.2.3.1}{RTT différentiel }{section.2.3}% 41
+\BOOKMARK [2][-]{subsection.2.3.2}{Le principe de la détection des changements des délais}{section.2.3}% 42
+\BOOKMARK [2][-]{subsection.2.3.3}{Les résultats de l'analyse des délais des liens}{section.2.3}% 43
+\BOOKMARK [2][-]{subsection.2.3.4}{Présentation de l'algorithme de la détection des changements anormaux : Résultat I}{section.2.3}% 44
+\BOOKMARK [2][-]{subsection.2.3.5}{Présentation de l'algorithme de la détection des changements anormaux : Résultat II}{section.2.3}% 45
+\BOOKMARK [2][-]{subsection.2.3.6}{Quelques chiffres sur la médiane des RTTs différentiel}{section.2.3}% 46
+\BOOKMARK [2][-]{subsection.2.3.7}{Notes\040sur\040les\040traceroutes\040}{section.2.3}% 47
+\BOOKMARK [0][-]{appendix.A}{Illustration du théorème central limite}{}% 48
+\BOOKMARK [0][-]{appendix*.64}{Conclusion}{}% 49

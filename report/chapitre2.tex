@@ -1,0 +1,849 @@
+%chapitre2
+
+\chapter{Algorithme de détection des anomalies}
+
+\section{Introduction}
+
+ Dans leur travail \cite{DBLP:journals/corr/FontugneAPB16},  R. Fontugne et al. ont exploité la  distribution répandue des sondes Atlas dans le monde afin d'étudier un des problèmes relatifs aux performances des réseaux informatiques. 
+ 
+    Il est  difficile  d'avoir une idée globale sur la topologie de l'Internet. Toutefois, les opérateurs des réseaux informatiques  disposent d'un aperçu de l'état des entités qui forment leurs réseaux, les relations entre ces entités ainsi que les éventuels problèmes. Avec la distribution abondante des sondes Atlas dans le monde en terme de type d'adressage : sondes Atlas supportant seulement l'adressage IPv4, d'autres qui supportent en plus l'adressage IPv6, en terme de  la diversité géographique, la diversité en terme d'ASs hébergeant les sondes Atlas, etc, il était  possible d'aborder  les délais dans les réseaux informatiques à travers de nouvelles approches, reposées sur des fondements statistiques. Parmi les points forts de l'analyse menée par R. Fontugne et al., c'était la possibilité de valider les   méthodes proposées avec des événements  marquants sur Internet.
+    
+Le travail de R. Fontugne et al. reprend trois méthodes basées sur les données collectées par les sondes Atlas, chaque méthode reflète l'approche utilisée pour étudier les performances des réseaux informatiques. Ces méthodes sont les suivantes:
+
+\begin{enumerate}
+	\item la détection des changements des délais que subissent les liens intermédiaires dans les traceroutes; 
+	
+	\item la conception d'un modèle de forwording pour un routeur donné. Ce modèle  prédit l'acheminement du trafic afin d'identifier les routeurs  et les liens en panne dans le cas  d'un problème  de perte de paquets;
+	
+	\item la création d'un score par Système Autonome afin d'évaluer l'état de ce dernier.
+	
+\end{enumerate}
+
+Dans la suite de ce travail, nous allons reprendre seulement la première méthode.  Il s'agit d'étudier le délai d'un lien topologique, c'est le délai entre deux routeurs adjacents sur Internet.
+ 
+
+\section{L'étude des délais des liens }
+ 
+\subsection{Les données utilisées dans l'analyse des délais}~
+
+La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons \footnote{L'échantillon de la métrique qui caractérise un lien : RTT différentiel.} considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité et  qui sont capables de collecter une quantité importante de données relatives aux performances des réseaux informatiques, c'est ce qu'assure le projet RIPE Atlas. Le travail de référence implique principalement les mesures de traceroutes, ainsi deux catégories de mesures sont utilisées :
+
+\begin{itemize}
+	\item \textit{builtin} : ce sont les traceroutes effectués par toutes les sondes Atlas vers les instances des  $13$ serveurs DNS racines. Les traceroutes sont effectués chaque $30$ minutes. En pratique, certains serveurs racines DNS déploient l'anycast. Au moment de la réalisation du travail de référence, c'étaient des traceroutes vers $ 500 $ instances des serveurs DNS racines;
+	\begin{tcolorbox}
+		 \textbf{DNS Anycast} est une solution   utilisée pour accélérer le fonctionnement  des serveurs DNS. Les serveurs DNS adoptant cette approche fournissent des temps de réponse plus courts, et ce partout dans le monde. Les requêtes en provenance de l'utilisateur sont redirigées vers un n\oe{}ud adéquat suivant un algorithme prédéfini. 
+	\end{tcolorbox}
+	
+	\item \textit{anchoring} : ce sont les traceroutes effectués par environ $400$ sondes Atlas à destination de $189$ serveurs\footnote{Sondes Atlas ayant des fonctionnalités avancées.} et ce chaque $15$ minutes.
+\end{itemize}
+
+En ce qui concerne les traceroutes analysés, le tableau \ref{tab:dataset} reprend plus de détails.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& \textbf{Nombre de traceroute}s& \textbf{Nombre de sondes}\\ \hline
+		IPv4		&2.8 billion & 11,538\\ \hline
+		IPv6	&	1.2 billion & 4,30 \\ \hline
+	\end{tabular}
+	\caption{Récapitulatif des traceroutes utilisés dans le travail de référence }
+	\label{tab:dataset}
+\end{table}
+
+
+L'étude des délais ne concerne pas  les adresses privées, ainsi, le suivi des délais ne concerne pas les réseaux privés.  De plus, ce  suivi  se base sur les requêtes de type traceroute, et traceroute reprend une partie de la topologie de l'Internet. En effet, les liens considérés sont ceux topologiques et ne sont pas  les liens physiques. 
+
+
+
+
+
+
+
+%\paragraph{Les limitations du travail}
+
+
+%Les valeurs des RTTs reportées par traceroute sont dynamiques. L'utilisation du minimum, maximum, ou bien du Nème percentiles dépend des besoins. Dans le travail de R. Fontugne et al., ils ont utilisé le 50 ème percentile, qui représente la médiane.
+
+\section{La description de la détection des délais anormaux des liens}
+
+%La détection des délais des liens exploite le nombre important des sondes dans le monde, par conséquent, les données abondantes collectées par ces sondes. Avant de passer aux détails de l'algorithme, on introduit d'abord le RTT différentiel.  
+
+\subsection{RTT différentiel }~
+
+Il est indispensable de présenter la définition du RTT  (Round Trip Time)  différentiel d'un lien avant de procéder à la description de l'algorithme de la détection des anomalies. 
+
+
+\begin{tcolorbox}
+	
+	Le \textbf{temps RTT} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet sondé  et le timestamp associé à la réception de la réponse ICMP\footnote{Internet Control Message Protocol est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.}. C'est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies avec l'utilitaire traceroute et ping. En ce qui concerne traceroute,  ce dernier fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination. Le temps RTT inclut le temps pour atteindre un saut dans le sens du forwarding, à ce temps, il s'ajoute le temps de propagation des réponses. De plus, il y a  le temps de traitement des requêtes au niveau des routeurs. 
+\end{tcolorbox}
+
+La figure 	\ref{fig:rtt-differ} (a)  illustre le RTT entre la sonde P et les deux routeurs B et C. Le RTT différentiel  entre deux routeurs $B$ et $C$ adjacents, noté $\Delta_{PBC}$, est la différence entre le RTT entre la sonde $P$ et $B$ (bleu) d'une part, et le RTT entre la sonde $P$ et $C$ (rouge) dans la figure 	\ref{fig:rtt-differ} (b). 
+
+\begin{align*}
+\Delta_{PBC} &= RTT_{PC} - RTT_{PB} \\
+&= \delta_{BC} + \delta_{CD} + \delta_{DA}  - \delta_{BA} \\
+&= \delta_{BC} + \varepsilon_{PBC}
+\end{align*}
+
+où $\delta_{BC}$ est le délai du lien $BC$ et $\varepsilon_{PBC}$ est la différence entre les deux chemins de retour ($B$ vers $P$ et $C$ vers $P$). 
+%La première composante dépend de l'état des routeurs $B$ et $C$. La deuxième composante dépend de la sonde $P$. L'analyse du RTT différentiel repose sur la variation de valeurs qu'il prend, au lieu des valeurs exactes, dans  le cas des valeurs exactes, elles peuvent dévier l'interprétation.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{illustrations/rtt-differ}
+	\caption{}
+	\label{fig:rtt-differ}
+\end{figure}
+
+\subsection{Le principe de la détection des changements des délais}
+
+Le suivi du délai d'un lien est déduit du suivi de l'évolution de son RTT différentiel. Reprenons la formule du RTT différentiel du lien BC :  $\delta_{BC}$ + $\varepsilon_{PBC}$. Supposons qu'on dispose d'un nombre $n$ de sondes Atlas P$_i$, $i$ $\in$ [$1$, $n$], telles que toutes les sondes ont un chemin de retour différent depuis B et depuis C.  En effet, les RTTs différentiel pour chacune des sondes Atlas $\Delta_{P{_i}BC}$ partagent la même composante $\delta_{BC}$, toutefois, ces RTTs ont des valeurs des  $\varepsilon_{P_{i}BC}$ indépendantes. L'indépendance de ces valeurs implique que la distribution $\Delta_{P_{i}BC}$ est estimé d'être stable au cours du temps si $\delta_{BC}$ est constant. Cependant, un changement significatif de la valeur du $\delta_{BC}$ influence les valeurs des RTTs différentiel, dans ce cas, la distribution des RTTs différentiel changes si $\delta_{BC}$ change. Enfin, les changements des délais sont déduits des changements des RTTs différentiel qu'on peut les quantifier.
+
+La détection des anomalies en délais repose sur un théorème très important en statistiques, c'est le théorème  central limite (TCL). Ce théorème  annonce que si on a une suite de variables aléatoires indépendantes ayant la même espérance et la même variance, la moyenne de ces variables aléatoires est une variable aléatoire qui suit une loi normale. De manière générale, le théorème central limite explique la distribution des moyennes des échantillons. Ce théorème peut être appliquer aux différents lois. Par exemple la loi normale \footnote{Un exemple illustratif dans \ref{appendix:clt-exemple}.}, binomiale, etc. 
+
+
+
+
+
+\subsection{Les résultats de l'analyse des délais des liens}
+
+Nous distinguons deux sortes de résultat à l'issu de l'analyse des changements des délais. Premièrement, ce sont les changements identifiés tout au long de la durée de l'analyse, chaque changement est caractérisé par un ensemble de détails. Pour le deuxième  résultat, ce sont des graphiques reprenant les changements ainsi que les changements jugés anormaux, ce qu'on va appeler par la suite par \textit{anomalies}, précisément ces graphiques présentent l'évolution du RTT différentiel d'un lien au cours du temps.
+
+\subsection{Présentation de l'algorithme de la détection des changements anormaux : Résultat I}
+
+\paragraph{Description de l'algorithme de détection} ~
+
+Les étapes principales de la détection des changements des délais sont résumées dans l'algorithme \ref{algo:steps}. Nous allons détailler chaque étape : ses objectifs, ses entrées et ses sorties. En ce qui concerne l'entrée du programme principal, ce sont les paramètres présentés dans la section  \ref{par:parametre-de-lanalyse}.
+
+
+\begin{algorithm}[H]
+
+ 	\begin{algorithmic}[1]
+ 		\Procedure{detectRttChangesMongo}{$expId$}
+ 		\ForAll {$currDate \in dates$}
+ 		\State computeRtt()
+ 		\State mergeRttResults()
+ 		\State outlierDetection()
+ 		\EndFor
+ 		\EndProcedure
+ 	\end{algorithmic}
+ 	\caption{Les étapes de la procédure detectRttChangesMongo()}
+ 	\label{algo:steps}
+\end{algorithm}
+
+\paragraph{Description des paramètres de l'analyse des délais} \label{par:parametre-de-lanalyse}~
+
+La détection des changements des délais nécessite l'ajustement d'un nombre de paramètres. La valeur de chaque paramètre est relative au  fondement utilisé théorique ou bien empirique, qui a été  justifié par les auteurs du travail de référence.   Ci-dessous les paramètres à ajuster avant de lancer une analyse.  Chaque paramètre sera défini dans son contexte.
+
+\subparagraph{start} : c'est la date de début de l'analyse. Ce sont les traceroutes capturés par les sondes Atlas à partir de cette date qui seront analysés.
+
+\subparagraph{end} : c'est la date marquant la fin de l'analyse. Comme le paramètre \textit{start}, c'est la date des derniers traceroutes capturés par les sondes Atlas à considérer dans la présente analyse.
+
+\subparagraph{timeWindow} :  ce paramètre est exprimé en seconde. La durée de l'analyse, qui est le temps écoulé entre \textit{start} et \textit{end}, est divisée sur des périodes de même taille : \textit{timeWindow}. Pour chacune de ces périodes, on caractérise les liens identifiés sur les traceroutes capturés en cette période. La figure \ref{fig:timewindow} reprend le contexte des trois paramètres \textit{start}, \textit{end} et \textit{timeWindow} avec les étapes principales.
+
+\begin{figure}[h]
+	
+	\centering
+	\resizebox{\textwidth}{!}{
+		\input{dia/timewindow.tex} 
+	}
+	\caption{Illustration du paramètre timeWindow}
+	\label{fig:timewindow}
+\end{figure}
+
+
+\subparagraph{alpha}: c'est le paramètre du lissage exponentiel.
+
+\guillemotleft \textit{ Les méthodes de lissage exponentiel  sont un ensemble de techniques empiriques de prévision qui accordent plus ou moins d'importance aux valeurs du passé d'une série temporelle.\footnote{Source : \url{https://perso.math.univ-toulouse.fr/lagnoux/files/2013/12/Chap6.pdf}, consultée le $30/09/2018.$}} \guillemotright
+
+Pour calculer la prochaine  valeur de la médiane des RTTs différentiel de référence $ \overline{m}_{t}$ du timeWindow  courant $ t $ , soit: 
+
+ $m_t$ = $\Delta^{(m)}$ la médiane des RTTs différentiel observée pour un lien durant le timeWindow $t$. 
+ 
+ $ \overline{m}_{t-1}$ = $ \overline{\Delta}^{(m)}$ est la médiane des  RTTs différentiel  de référence durant le timeWindow $ t-1 $,  la prochaine  valeur de la médiane de référence $ \overline{m}_{t}$ est obtenue par : 
+
+\begin{center}
+	$ \overline{m}_{t}$ =  $\alpha$ ${m}_{t}$ + (1-  $\alpha$) $ \overline{m}_{t-1}$
+\end{center}
+
+Le paramètre alpha $\alpha$, tel que  $\alpha \in (0, 1)$, est le seul paramètre à définir dans le calcul de $ \overline{m}_{t}$.  Ce paramètre contrôle l'importance  des mesures précédentes par rapport aux mesures récentes.
+
+\guillemotleft \textit{Plus $\alpha$ est proche de $ 1 $ plus les observations récentes influent sur la prévision, à l'inverse un $\alpha$ proche de $0$ conduit à une prévision très stable prenant en compte un passé lointain. \footnote{Source : \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf}, consultée le $30/09/2018$.}}\guillemotright.  Dans la présente étude, le paramètre $\alpha$ est préféré d'être petit.
+
+
+
+
+
+\subparagraph{minASN} : les paramètres \textit{minASN}, \textit{minASNEntropy} ainsi que  \textit{minSeen} dont les deux derniers seront détaillés dans la suite sont associés à l'aspect diversité des sondes Atlas pour assurer une exactitude des résultats obtenus.
+
+
+L'analyse des RTTs différentiel est appliquée seulement sous certaines conditions. Ainsi, la détection des anomalies dans les délais d'un lien est valide si les éléments suivants sont vrais. (1) Le lien est surveillé par plusieurs sondes et que le chemin de retours vers ces sondes soit différent à chaque fois. (2) Les paquets ayant passés par le lien XY, doivent aussi passer par le lien XY en leur retour, mais dans le sens opposé. 
+
+Les valeurs des RTTs ambiguës sont filtrées en éliminant les liens surveillés seulement par les sondes appartenant au même Système Autonome, car généralement le chemin de retour est similaire pour ces sondes suite à leur présence au sein du même Système Autonome (généralement même politique de routage). Seuls les liens surveillés par au moins $3$ Systèmes Autonomes qui sont conservés, la valeur de $3$ pour le paramètre \textit{minASN} est choisie de manière empirique. Sachant qu'une valeur plus petite que $3$ peut affecter l'exactitude des résultats. 
+
+
+
+
+
+\subparagraph{minASNEntropy} : Il important qu'un lien soit identifié par au moins \textit{minASN} Systèmes Autonomes, toutefois, le nombre de sondes Atlas ayant identifié ce lien doit être équilibré entre ces Systèmes Autonomes.  En ce qui concerne l'équilibre du nombre de sondes ayant surveillé un lien par AS, il est mesuré par une entropie normalisée. Soit $A = \{ a_i \mid i \in [1, n] \}$, $ a_i $ est le nombre de sondes pour chaque AS parmi les n ASs surveillant un lien donné. L'entropie $H(A)$ est défini avec :
+
+\begin{center}
+	$H(A) =  - \frac{1}{\ln} \sum_{i=1}^{n} P(a_i) \ln P(a_i) $
+\end{center}
+
+Le nombre de sondes par Système Autonome sera équilibré jusqu'à l'atteinte de l'entropie minimale donnée par \textit{minASNEntropy}. L'idée est d'éliminer des sondes Atlas, de manière aléatoire, de l'AS qui a un grand nombre de sondes Atlas jusqu'à avoir l'équilibre mesuré par l'entropie.     Dans la présente analyse, les liens ayant une entropie $> 0.5$ sont conservés, cependant, si  l'entropie d'un lien est $< 0.5$,  chercher une sonde, de manière aléatoire, qui se trouve dans l'AS $i$ tel que $a_i = max (A)$, ensuite recalculer l'entropie avec la sonde. L'opération de l'élimination est répétée jusqu'à avoir une entropie $ > 0.5 $.
+
+   \paragraph{L'entropie } \label{par:entrepie-sondes-par-as}~
+   
+\begin{tcolorbox}
+\textit{\textbf{L'entropie} est une grandeur d'état extensive  qui caractérise l'état de désordre du système.} \footnote{Source : \url{ http://ressources.univ-lemans.fr/AccesLibre/UM/Pedago/chimie/01/03-Reaction_chimique/co/module_03-Reaction_chimique_26.html
+   	}, consultée le $30/09/2018$.}
+De faible valeurs d'entropie,$H(A) \backsimeq 0$ , indiquent que la majorité des sondes sont concentrées dans un seul AS, et les grandes valeurs d'entropie, $H(A) \backsimeq 1$, indiquent que les sondes sont réparties équitablement sur les ASs. 
+\end{tcolorbox}
+   
+
+
+\subparagraph{minSeen} : comme l'analyse est faite sur plusieurs périodes : timeWindow, le paramètre \textit{minSeen} indique le nombre de fois où un lien a été identifié. Par exemple, un lien peut être identifié dans $3$ timeWindow, ou bien être identifié en une seule fois durant toute la période de l'analyse.
+
+\subparagraph{af} : ce paramètre indique l'étendue de l'analyse des délais en matière de type d'adressage. Telle qu'une analyse peut concentrer sur les liens en IPv4 ou bien en IPv6. Pour précision, il est pris en compte  le type d'adressage IP lors du stockage des traceroutes dans MongoDB\footnote{C'est une base de données NoSQL utilisée dans le stockage des données dans le travail de référence.}. Ce que permet de choisir les traceroutes suivant ce paramètre\footnote{Dans MongoDB, la collection traceroute\_2017\_05\_15 reprend les traceroutes de la date 15/05/2017 en IPv4, et la collection traceroute6\_2017\_05\_15 pour la même date mais en IPv6.}. 
+
+\subparagraph{comment} : un commentaire est utile pour donner plus d'informations sur une analyse en particulier. Les commentaires sont à titre informatifs et n'affectent pas l'analyse.
+
+\subparagraph{prefixes} : les liens analysés sont finalement les liens entre deux routeurs adjacents dans la topologie. Avec l'expression régulière fournie à travers le paramètre \textit{prefixes}, il est possible de limiter l'analyse sur les liens où les routeurs appartiennent aux blocs d'adresses définis par \textit{prefixes}.  
+
+
+\subparagraph{experimentDate} : le paramètre \textit{experimentDate} indique la date de lancement de l'expérience. Les auteurs enregistrent les expériences dans une collection dans la base de données MongoDB. Ce que permet de faciliter la comparaison entre les différentes expériences.
+
+\subparagraph{confInterval} : 
+
+\begin{tcolorbox}
+	Afin de calculer l'incertitude associée à un ensemble de résultats, il faut répéter les mesures. Chaque mesure sur un échantillon peut donner des résultats différents. Ainsi, en se basant sur la déviation sur les résultats, il est possible de calculer l'incertitude de la "moyenne" calculée de ces résultats. Cette incertitude permet de donner une indication sur les données. Par exemple, est-ce que la moyenne calculée $N$ représente la valeur réelle avec une incertitude de plus ou moins  $m$?
+\end{tcolorbox}
+\begin{tcolorbox}
+	   En statistiques, le \textit{binomial proportion confidence interval} est l'intervalle de confiance pour la probabilité de succès calculée à partir des séries d'expériences de succès-échec. C'est un intervalle qui estime la probabilité de succès $p$ si seulement le nombre d'expériences $n$ et celles réussites $n_s$ sont connus.
+	   
+	   Il existe plusieurs formules pour calculer l'intervalle de confiance binomial. Toutefois, elles se basent toutes sur une distribution binomiale.  Une distribution binomial s'applique si une expérience est répétée un nombre fixe de fois, chaque tentative a deux possibilités : succès ou échec. La probabilité est la même à chaque tentative et les tentatives sont statistiquement indépendantes. La distribution binomiale est une distribution de probabilité discrète, il est difficile de calculer pour un grand nombre de tentatives, il existe une variété d'approximations pour le calcul de l'intervalle de confiance.
+	   
+\end{tcolorbox}
+
+les intervalles de confiance sont formulés par un calcul binomial avec distribution - free . Ce calcul  est approché par le score de Wilson. C'est une méthode pour calculer l'intervalle de confiance. Le score de Wilson fournit deux valeurs dans l'intervalle $ [0, 1]$. 
+
+
+\paragraph{Intervalle de confiance d'une moyenne}~
+
+L'intervalle de confiance (IC) est défini comme représentant les valeurs probables que peut prendre une moyenne, si l'on accepte une marge d'erreur définie à l'avance (e.g 5\%). Il existe plusieurs méthodes pour calculer l'intervalle de confiance d'une proportion. Parmi les critères impliqués sur le choix de la méthode de calcul, il y a N, le nombre total d'essais (nombre des expériences).
+
+Dans le travail de référence, les auteurs ont utilisé la méthode du score de wilson pour calculer l'intervalle de confiance de la médiane\footnote{Le choix d'utilisation de la médiane à la place de la moyenne a été justifié dans le travail de référence.}.  Le score de wilson a montré ses performances même dans le cas où le nombre total d'essais est petit. Par exemple, il se peut qu'un lien soit caractérisé par seulement $ 3 $ RTTs différentiel durant un timeWindow. \footnote{Source : \url{http://npsycog.over-blog.com/article-3274585.html}, consultée le $ 12/10/2018 $.}
+
+	 Chaque valeur de médiane a son intervalle de confiance. On compare le chevauchement entre l'intervalle de confiance de la médiane de référence avec l'intervalle de confiance de la valeur de médiane calculée en cours, d'un lien donné. Afin d'évaluer si la différence entre ces deux intervalles est significative statistiquement. En particulier une différence de $1$ $ms$ est non significative. On distingue trois cas comme illustré par la figure \ref{fig:illustration-cas-intervalles-deconfiance} et la formule \ref{equ:confidenceIntervalle}. 
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{illustrations/illustration-cas-intervalles-deconfiance}
+	\caption{La comparaison entre les intervalles de confiance de la médiane de référence et de la médiane calculée.}
+	\label{fig:illustration-cas-intervalles-deconfiance}
+\end{figure}
+
+Le cas $ 1 $ et $ 2 $ dans la figure 	\ref{fig:illustration-cas-intervalles-deconfiance} illustrent un changement anormal dans le délai du lien en question. Toutefois, le cas $ 3 $ où l'intervalle de confiance courant est inclus dans l'intervalle de référence, est le cas normal, autrement dit,  le délai de ce lien est normal. La différence entre les deux intervalles intervalles de confiance est quantifiée par la déviation $d$ définie par la formule \ref{equ:confidenceIntervalle}.
+
+\begin{equation} \label{equ:confidenceIntervalle}
+d=\begin{cases}
+\frac{\Delta^{(l)} - \overline{\Delta}^{(u)}}{\overline{\Delta}^{(u)} - \overline{\Delta}^{(m)}}    , & \text{if $\overline{\Delta}^{(u)}<\Delta^{(l)}$}.\\
+
+\frac{\overline{\Delta}^{(l)} - \Delta^{(u)}}{\overline{\Delta}^{(u)} - \overline{\Delta}^{(m)}}, & \text{if $\overline{\Delta}^{(m)}<\Delta^{(l)}$}.\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+L'intervalle de confiance est calculé, dans la présente implémentation, avec la fonction  \textit{sm.stats.proportion\_confint}\footnote{Source : \url{https://www.statsmodels.org/dev/generated/statsmodels.stats.proportion.proportion_confint.html}, consultée le $ 07/10/2018 $.}.
+
+\begin{lstlisting}[basicstyle=\tiny]
+statsmodels.stats.proportion.proportion_confint(count, nobs, alpha=0.05, method='normal')
+\end{lstlisting} 
+
+\textit{proportion\_confint} est une implémentation, en python, pour le calcul du score de Wilson. Elle prend les paramètres suivants : 
+\begin{itemize}
+	\item count  : c'est le nombre de fois où une expérience  réussit.
+	\item nobs : c'est le nombre total d'expériences.
+	\item alpha : c'est le paramètre de risque. Généralement il prend les valeurs suivantes $ 5\% $, $ 1\% $ ou $ 0,1\% $. C'est un des paramètres de l'expérience.
+	\item method: on distingue plusieurs méthodes, celle utilisée est \textit{wilson}.
+\end{itemize}
+
+
+En retour, la fonction \textit{proportion\_confint}  fournie \textit{ci\_low} et \textit{ci\_upp}. Ces deux grandeurs sont utilisés pour construire l'intervalle de confiance.
+%, respectivement, ce sont les deux bord de l'intervalle de confiance  avec une probabilité  approximativement de  1-alpha.
+
+%Un lien topologique, noté par (IP1, IP2),  
+
+\subparagraph{Exemple des  paramètres de l'analyse des délais}~
+
+\begin{lstlisting}[language=json,firstnumber=1,basicstyle=\tiny]
+expParam = {
+    	"timeWindow": 60*60, # in seconds 
+    	"start": datetime(2018, 1, 1, 0, 0, tzinfo=timezone("UTC")), 
+    	"end":   datetime(2018, 1, 1, 23, 0, tzinfo=timezone("UTC")),
+    	"alpha": 0.01, 
+    	"confInterval": 0.05,
+    	"minASN": 3,
+    	"minASNEntropy": 0.5,
+    	"minSeen": 3,
+    	"experimentDate": datetime.now(),
+    	"af": "",
+    	"comment": "some comment",
+    	"prefixes": None
+}
+  \end{lstlisting}
+   %or \small or \footnotesize etc.
+   
+   
+  \paragraph{Les étapes de l'analyse des délais}~
+  
+  Les sections suivantes présentent chaque étape brièvement des étapes présentées dans l'algorithme 	\ref{algo:steps}, c'est pour l'illustration, car des détails peuvent manquer comme les paramètres des fonctions.
+  \subparagraph{computeRtt} :
+  
+    \underline{Objectif} : identification de tout  lien dans les traceroutes analysés.
+    
+    \underline{Entrées} : af, start, end,  prefixes.
+    
+    \underline{Sorties} : la caractérisation des liens en calculant leur RTT différentiel.  
+
+    \underline{Pseudo-code} : 
+    
+      \begin{algorithm}
+      	\caption{caractérisation des liens }
+      	\begin{algorithmic}[1]
+      		\Function{computeRtt}{af, start, end, prefixes}
+      		
+      		\State $ diffRtt  \leftarrow   \{\} $
+      		
+      		\State $nbRow \leftarrow 0 $
+      		
+	  		\State $ traceroutes  \leftarrow  findTraceroutes(af, start, end, prefixes) $
+	  		\ForAll {$trace \in traceroutes$}
+		  		\State readOneTraceroute( $trace$ )
+	  		\EndFor
+	  		
+	        \Return $ diffRtt $, $ nbRow $
+      		\EndFunction
+      	\end{algorithmic}
+
+      	\label{algo:step-computeRtt}
+      \end{algorithm}
+      
+      \underline{Description : }
+      \begin{enumerate}
+      	\item Rechercher les traceroutes, dans la base de données, capturés entre la date \textit{start} et \textit{end}, parmi les traceroutes ayant \textit{af} comme adressage. Si \textit{prefixes} est fixé, seuls les traceroutes ayant  impliqué des routeurs appartenant au bloc d'adresses défini par \textit{prefixes} qui seront conservés.
+      	
+      	\item Analyser chaque traceroute, \textit{trace}, à travers les étapes suivantes: 
+      	\begin{enumerate}
+      		\item élimination du traceroute échoué en vérifiant la présence des attributs "error" ou "err" dans les résultats de ce traceroute;
+      		
+      		\item si le traceroute n'a pas été éliminé durant l'étape précédente, on passe à l'évaluation de chaque saut. Un saut est éliminé si l'adresse IP est absente pour ce saut, s'il s'agit d'une adresse privée, si l'information sur le RTT est absente et enfin si le RTT a une valeur négative;
+      		
+      		\item caractérisation des liens en notons pour chaque couple d'adresses IP la distribution des RTTs, les sondes  Atlas et les identifiants des mesures. 
+      	\end{enumerate}
+      \end{enumerate}
+      
+   Soit un exemple illustratif des opérations décrites ci-dessus, la figure   \ref{fig:computertt} reprend les détails. Tel que :
+   
+   \begin{itemize}
+   	\item Lien : lien à suivre, défini par deux adresses IP.
+   	\item RTT différentiel : le RTT différentiel calculé du lien en question.
+   	\item Probe : l'ensemble de sondes ayant surveillé le lien.
+   	\item msmId : l'ensemble de mesures ayant surveillé le lien. Comme un identifiant de mesure définit la requête à lancer par toutes les sondes Atlas, ainsi, un lien peut être surveillé dans le cadre d'une mesure et avec une ou plusieurs sondes Atlas.
+   \end{itemize}
+   
+   Pour le lien $ ('160.242.100.88', '196.216.48.144') $,  le calcul du RTT différentiel est décrit ci-dessous : 
+    	\begin{align*}
+    	RTT(160.242.100.88) & = 4.263; 6.082; 11.834 \\ 
+    	mediane (4.263; 6.082; 11.834)&=  6.082 \\
+    	RTT(160.242.100.88) &= 3.678; 15.568; 3.655\\
+    	mediane(3.678; 15.568; 3.655)&= 3.678 \\
+    	RTT Diff ('160.242.100.88', '196.216.48.144') &=  6.082 - 3.678  = 2,404
+    	\end{align*}
+
+
+    \begin{landscape}
+    	\begin{figure}[H]
+    		\centering
+    		\resizebox{20cm}{!}{
+    			\input{dia/traceroute-exemple.tex} 
+    		}
+    		\caption{Caractérisation des liens dans un traceroute}
+    		\label{fig:computertt}
+    	\end{figure}
+    \end{landscape}
+
+
+
+  \subparagraph{mergeRttResults}~
+  
+  Durant l'analyse des traceroutes identifiés dans un timeWindow, il se peut qu'un lien soit identifié dans plusieurs traceroutes. La méthode \textit{mergeRttResults} permet de fusionner les détails d'un lien donné, ce sont des détails obtenus avec plus d'un traceroute. Prenons le lien $('160.242.100.88', '196.216.48.144')$, ce dernier a été  identifié dans trois traceroutes comme suit :
+  
+  
+  
+  \begin{table}[H]
+  	   		\resizebox{\textwidth}{!}{
+  	\begin{tabular}{c c c c}
+(IP1,IP2) &	RTT&	Probes&	MSM\\ \hline \rowcolor{mygray}
+
+('160.242.100.88', '196.216.48.144') &	[63.474000000000004]&	[u'196.216.164.50']	&
+
+5004 : set([14465]) \\
+
+('196.49.6.10', '192.5.5.241')&	[3.4729999999999848]&	['196.216.164.50']	&
+
+5004 : set([14465]) \\
+
+('196.216.164.1', '196.12.10.246')&	[-1.379]&	['196.216.164.50']	&
+
+5004 : set([14465]) \\
+
+('196.12.10.246', '160.242.100.88') &	[0.21799999999999997]&	['196.216.164.50']	&
+
+5004 : set([14465]) \\
+
+
+  	\end{tabular}
+  }
+  \caption{Exemple de traceroute : 1}
+  \label{tab:trace1}
+  \end{table}
+  
+   \begin{table}[H]
+   	   		\resizebox{\textwidth}{!}{
+   	\begin{tabular}{c c c c}
+   		
+   		(IP1,IP2)&	RTT	&Probes	&MSM \\ \hline
+   		('185.147.12.31', '185.147.12.19')&	[-0.02900000000000036]&	[u'89.105.202.4']&	
+   		
+   		5004 : set([4247]) \\
+   		
+   		('185.147.12.19', '160.242.100.88')&	[0.5350000000000001]&	['89.105.202.4']	&
+   		
+   		5004 : set([4247]) \\
+   		
+   		('89.105.200.57', '185.147.12.31')&	[1.463]&	['89.105.202.4']	&
+   		
+   		5004 : set([4247]) \\
+   		
+   		('196.216.48.144', '193.239.116.112')&	[1.6290000000000004]&	['89.105.202.4']	&
+   		
+   		5004 : set([4247]) \\
+   		
+   		('193.239.116.112', '192.5.5.241') &	[0.5169999999999995]&	['89.105.202.4']	&
+   		
+   		5004 : set([4247]) \\ \rowcolor{mygray}
+   		
+   		('160.242.100.88', '196.216.48.144')&	[2.404]&	['89.105.202.4']	&
+   		
+   		5004 : set([4247]) \\
+   	\end{tabular}
+   }
+     \caption{Exemple de traceroute : 2}
+    \label{tab:trace2}
+   \end{table}
+   
+   \begin{table}[H]
+   	   	   		\resizebox{\textwidth}{!}{
+   	\begin{tabular}{c c c c}
+   		(IP1,IP2) &	RTT&	Probes&	MSM \\ \hline
+   		('199.189.117.17', '199.189.116.229')&	[-0.02400000000000091]&	['134.197.113.7']&5004 : set([6201]) \\
+   		
+   		('160.242.100.88', '207.197.17.101')&	[19.261999999999997]&	['134.197.113.7']&5004 : set([6201]) \\
+   		
+   		('199.189.116.229', '63.158.61.169')&	[2.34]&	[u'134.197.113.7']&5004 : set([6201]) \\
+   		
+   		('205.171.1.18', '192.5.5.241')&	[-0.18400000000000105]&	['134.197.113.7'] & 5004 : set([6201]) \\
+   		
+   		('63.158.61.169', '205.171.234.102')&	[-2.0219999999999985]&	['134.197.113.7'] &5004 : set([6201]) \\
+   		
+   		('134.197.113.14', '196.216.48.144')&	[-0.5369999999999999]&	['134.197.113.7']&	5004 : set([6201]) \\
+   		
+   		('207.197.17.101', '199.189.117.17')&	[2.1290000000000013]&	['134.197.113.7']&5004 : set([6201]) \\
+   		
+   		('205.171.234.102', '205.171.1.18')&	[-0.17099999999999937]&	['134.197.113.7']&5004 : set([6201]) \\ \rowcolor{mygray}
+   		
+   		('196.216.48.144', '160.242.100.88')&	[0.065]&	[u'134.197.113.7'] &	5004 : set([6201])\\ 
+   	\end{tabular}
+   }
+     \caption{Exemple de traceroute : 3}
+    \label{tab:trace3}
+   \end{table}
+   
+   Afin d'illustrer l'opération de fusion, on reprend seulement les détails du lien qui a subi la fusion en se référant aux résultats intermédiaires présentés dans les tableaux  \ref{tab:trace1}, \ref{tab:trace2} et \ref{tab:trace3}. En effet, on obtient :
+      \begin{table}[H]
+      	\resizebox{\textwidth}{!}{
+      		\begin{tabular}{c c c c}
+      			(IP1,IP2)&	RTT	&Probes&	MSM \\ \hline
+    ('160.242.100.88', '196.216.48.144'): & [0.065, 2.404, 63.474000000000004] & ['134.197.113.7', '89.105.202.4', '196.216.164.50']&{5004: set([6201, 4247, 14465])}\\
+    
+       		\end{tabular}
+       	}
+       \end{table}
+
+Ce qu'on peut apprendre à travers cette fusion, le délai d'un lien ne dépend pas de l'ordre des routeurs.
+   
+
+  \subparagraph{outlierDetection} ~
+  
+  Dans le présent contexte, la détection des \textit{outliers} dénote la détection des changements anormaux. Cette opération implique plusieurs notions et principes. Les étapes de la détection des outliers sont illustrées dans l'algorithme \ref{algo:step-alarmsDetectione}. 
+  
+      \underline{Objectif} : trouver les changements anormaux des délais après la caractérisation des liens.
+      
+      \underline{Entrées} : diffRTT, le résultat de l'étape \textit{mergeRttResults},  la liste des éléments par lien comme :
+      
+      
+ \begin{lstlisting}[language=json,firstnumber=1,basicstyle=\tiny]
+{  
+   (u'160.242.100.88', u'196.216.48.144'): {'rtt': [0.065, 2.404, 63.474000000000004], 
+   'probe': [u'134.197.113.7', u'89.105.202.4', u'196.216.164.50'], 
+   'msmId': defaultdict(<type 'set'>, {5004: set([6201, 4247, 14465])})}
+} 
+      \end{lstlisting}
+      
+      
+      \underline{Sorties} : la liste des alarmes. 
+      
+      \underline{Pseudo-code} : 
+  
+  \begin{algorithm}
+  	\caption{La détection des changements anormaux des liens }
+  	\begin{algorithmic}[1]
+  		%sampleDistributions, smoothMean, param, expId, ts, probe2asn, i2a, collection=None, streaming=False, probeip2asn=None
+  		\Function{outlierDetection}{diffRTT, smoothMean}
+  		\State smoothMean $\leftarrow $ \{\} \Comment{La médiane de référence d'un lien }
+  		\State $ alarms  \leftarrow   [] $ \Comment{La liste des anomalies détectées}
+  		\State $ alpha \leftarrow float(param["alpha"])$
+  		\State $ minAsn \leftarrow  param["minASN"]$
+  		\State $ minASNEntropy \leftarrow  param["minASNEntropy"]$
+  		\State $ confInterval  \leftarrow  param["confInterval"]$
+  		\State $minSeen  \leftarrow  param["minSeen"]$
+  		
+  		
+  		%\State $ traceroutes  \leftarrow  findTraceroutes(af, start, end, prefixes) $
+  		\ForAll {$ipPair \in sampleDistributions$}
+  		\State $dist \leftarrow $ la distribution des RTTs différentiel précédemment calculée.
+  		
+  		\State probes $\leftarrow $ les sondes ayant surveillé le lien ipPair 
+  		
+  		\State asn $\leftarrow $  probe2asn(probes)
+  		\State asnEntropy $\leftarrow $ computeAsnEntropy() 
+  		\While{ asnEntropy < minASNEntropy $ AND $ len(asn) > minAsn   } 
+  		\State  trimDistribution()
+  		\EndWhile
+  		
+  		\State findAlarms(smoothMean)
+  		
+  		\EndFor
+  		
+  		\Return diffRtt, nbRow
+  		
+  		\EndFunction
+  	\end{algorithmic}
+  	\label{algo:step-alarmsDetectione}
+  \end{algorithm}
+
+\underline{Description : }
+
+\begin{itemize}
+	\item probe2asn(probes) : cette étape permet de faire l'association entre l'adresse IP de la sonde Atlas et son ASN. Cette association permet d'avoir une idée sur le nombre de sondes Atlas ayant surveillé le lien par Système Autonome. Ce que explique la section \ref{par:entrepie-sondes-par-as}.
+	
+	\item  trimDistribution() : l'objectif de cette étape est d'équilibrer le nombre de sondes Atlas par AS ayant surveillé un lien en vue d'éviter les résultats biaisées. 
+	
+	\item computeAsnEntropy() : calcul de l'entropie d'une distribution pour des valeurs de probabilité données. \textit{stats.entropy} est l'implémentation, en python, du calcul de l'entropie.  
+	$ stats.entropy(asn.values())/np.log(len(asn)) $.
+	
+	\item findAlarms() : dans cette étape, on discute la procédure d'identification des anomalies, autrement dit, les alarmes. Pour une raison de clarté et de lisibilité,  cette étape est détaillée avec l'algorithme 	  	\ref{algo:step-ab}.
+	
+\end{itemize}
+\newpage
+  \begin{algorithm} [H] 	\caption{caractérisation des liens }
+\begin{algorithmic}[1]
+	\label{algo:step-outlierDetection}
+	\State  nbProbes  $\leftarrow $ len(probes)
+	\State n $\leftarrow $  len(dist) 
+	\State med $\leftarrow $ np.median(dist)
+	\State  wilsonCi $\leftarrow $  sm.stats.proportion\_confint(len(dist)/2, len(dist), confInterval, "wilson")
+	\State currLow $\leftarrow $ dist[int(wilsonCi[0])] \label{lst:line:currL}
+	\State currHi $\leftarrow $ dist[int(wilsonCi[1])]  \label{lst:line:currHi}
+	
+    \State reported $\leftarrow $ False
+	\If {ipPair in smoothMean} \Comment{mise à jour de la référence d'un lien identifié}
+		\If{ref["nbSeen"] >= minSeen}
+		    \If {ref["high"] < currLow or ref["low"] > currHi}
+		        \If {med < ref["mean"]}
+		           \State update  diff, diffMed, deviation, devBound 
+		        \Else
+		           \State update  diff, diffMed, deviation, devBound 
+		        \EndIf
+		        
+              \State alarm $\leftarrow $ describeAlarm()
+              \State reported $\leftarrow $ True
+		    \EndIf
+		\EndIf
+		\State updateReference()
+	\Else \Comment{nouveau lien donc nouvelle référence}
+		\If {minSeen > 1}
+			\State  smoothMean[ipPair] $\leftarrow $ updateReference()
+		\Else
+		    \State  smoothMean[ipPair] $\leftarrow $ updateReference()
+		\EndIf
+	\EndIf
+\end{algorithmic}
+  	\label{algo:step-ab}
+  \end{algorithm}
+  
+  Les deux valeurs de l'intervalle de confiance calculé avec le score de Wilson sont illustrées dans les deux lignes \ref{lst:line:currHi} et \ref{lst:line:currL} de l'algorithme 	\ref{algo:step-ab}. 
+  
+  Le principe de la détection des anomalies est repris dans la section \ref{resultII}, c'est le même principe de la détection, toutefois les étapes sont adaptées pour générer les résultats. 
+  
+
+
+\subsection{Présentation de l'algorithme de la détection des changements anormaux : Résultat II} \label{resultII}
+  
+\paragraph{Introduction} ~
+  
+  Cette analyse permet le suivi des RTTs différentiel d'un lien donné, entre la date \textit{start} et la date \textit{end}. Ce suivi se base sur les dernières valeurs du RTT différentiel. Rappelons que chaque lien est caractérisé par son RTT différentiel qui représente la médiane de tous les RTTs  différentiel enregistrés pendant une durée $d$. Cette médiane a un intervalle de confiance. Afin de pouvoir répondre à la question suivante : à $95$ \%, la médiane de référence calculée, \textit{smoothAvg},  ayant comme intervalle de confiance  \textit{smoothHi} et \textit{smoothLow} représente l'estimation réelle du RTT différentiel du lien en question. 
+  
+
+L'idée de base de l'outil de détection est d'analyser les données, qui sont des traceroutes, d'une période $D$ en la décomposant en de petites périodes :
+
+ $ d_1, d_2, ..., d_i, ..., d_j, ..., d_n$, tel que \textit{timeWindow} = $d_{j+1}$ - $d_{j}$, \textit{timeWindow} est exprimé en secondes, $d_1$ représente \textit{start} et $d_n$ représente \textit{end}.
+ 
+ \paragraph{Caractéristiques d'un lien} ~
+ 
+A l'issue d'une préparation préalable des traceroutes, chaque lien est caractérisé par les dates pendant lesquelles il était identifié ainsi que les RTTs différentiel relatives à ces dates. C'est ce que illustre \textit{rttDiff}.
+
+\textit{rttDiff} = $ ([d_1,d_2,...,d_i, d_j, ..., d_n], [r_1, r_2, ..., r_n]) $,  $ i, j$ $ \in $$  [0,n] $, n est entier. 
+
+où $ d_i $ est la date marquant le début d'un  timeWindow et $ r_i $ est le RTT différentiel  enregistré durant $ d_i $, n est le nombre de fois où $e$ a été identifié.  $\exists i, j $ tel que $d_i=d_j $, c'est le cas où un lien a été identifié plusieurs fois durant un timeWindow, et comme on présente l'évolution par timeWindow, les RTTs différentiel seront combinés par la suite en calculant la médiane par ce timeWindow.
+
+\begin{lstlisting}[firstnumber=1,basicstyle=\tiny]
+rttDiff[e] = (dates, rttDiffs)
+dates :  [datetime.datetime(2018, 1, 2, 1, 5), datetime.datetime(2018, 1, 2, 1,5), datetime.datetime(2018, 1, 2, 2, 5)]
+rttDiffs : [1.463, 4.394, 358.394]
+\end{lstlisting}
+On caractérise  un lien $ e $ durant la période $ d_j $ avec les éléments suivants :
+
+\begin{itemize}
+    \item \textit{dest[]} : c'est la distribution  des RTTs différentiel du lien $e$ durant $d_i$. Une distribution   de moins de $3$ RTTs différentiel pour $d_i$ est à ne pas considérer.
+	
+	\item \textit{smoothAvg[]}: c'est l'estimation de la médiane de référence. 
+	
+	\item \textit{smoothHi[]}: c'est l'estimation de la médiane minimale de référence. C'est la borne supérieure de l'intervalle de confiance de référence. 
+	
+	\item \textit{smoothLow[]}: c'est l'estimation de la médiane maximale de référence. C'est la borne inférieure de l'intervalle de confiance de référence 
+	
+	\item  \textit{alarmsDates[]}: les dates pendant lesquelles une anomalie a été détectée. 
+	
+	\item \textit{alarmsValues[]}: les médianes des RTTs différentiel considérées comme  anormales. 
+	
+	\item \textit{median[]} : les médianes des RTTs différentiel calculées caractérisant le lien tout au long de la période de l'analyse, une médiane par $d_j$.
+	
+	\item \textit{mean[]} : la moyenne des RTTs différentiel. L'utilisation de la moyenne a pour but la comparaison des performances de cette dernière avec celles de la médiane. Alors que l'outil de détection repose principalement sur la médiane.
+	
+	\item \textit{ciLow[]} : la borne inférieure de l'intervalle de confiance de la médiane calculée.
+	
+	\item \textit{ciHigh[]} : la borne supérieure de l'intervalle de confiance de la médiane calculée.
+	
+	\item \textit{dates[]} : les dates à présenter dans le graphique. Certaines dates ne sont pas présentables si le nombre des RTTs différentiel est petit durant ces dates.
+	
+\end{itemize}
+
+\paragraph{La procédure de création de l'évolution des RTTs différentiel d'un lien }
+
+\subparagraph{Objectif}  : Analyser l'évolution du RTT différentiel d'un lien donné, noté $e$.
+
+\subparagraph{Entrées} : les détails du lien, c'est une instance du rttDiff. 
+
+\subparagraph{Sorties} : l'évolution des RTTs différentiel du lien avec la présentation des anomalies si elles étaient identifiées.
+
+\subparagraph{Etapes} : d'abord on distingue deux étapes principales, la première a pour objectif la préparation de données. Ainsi, pour chaque lien trouvé, on le caractérise avec leurs RTTs différentiels ainsi que la date pendant laquelle un RTT différentiel a été enregistré. Deuxièmement, en partant des résultats de la première étape, on génère l'évolution du RTT d'un lien. La deuxième étape est décrite avec l'algorithme \ref{algo:rttevolutionLink} dont on peut noter les étapes de cette dernière:
+
+\begin{enumerate}
+	\item Préparation des données du timeWindow, entre \ref{prepare-start} et \ref{prepare-end}.
+	
+	\begin{itemize}
+		\item calcul du score de wilson
+		\item calcul de la médiane et de son intervalle de confiance.
+	\end{itemize}
+	
+	
+	\item Mise à jour des données du lien en calculant la médiane de référence et l'intervalle de confiance de la médiane de référence:
+	\begin{itemize}
+		\item Tant que le nombre des médianes est inférieure strictement  à $ 24 $, on met à jour les distributions smoothAvg, smoothHi et smoothLow.
+		
+		\item Si le nombre de médianes est égale à $ 24 $, on construit une sorte de médiane de  référence ($ 25 $ ème), c'est la médiane des médianes précédemment notées pour ce lien, ensuite les 24 premières médianes seront mises à jour avec cette médiane de référence.
+		\item A partir d'un nombre de médianes plus grand que $ 24 $, la nouvelle médiane est prédite à travers la formule du lissage exponentiel. 
+	\end{itemize}
+	\item Détection des anomalies en comparant les deux intervalles de confiance : le courant avec celui de référence.
+	\item Génération de l'évolution : après avoir calculé pour chaque timeWindow de la période l'analyse:
+	
+	\begin{itemize}
+		\item la médiane des RTTs différentiel de référence;
+		\item l'intervalle de confiance de la médiane de référence;
+		\item la médiane des RTTs différentiel estimée;
+		\item l'intervalle de confiance  de la médiane estimée.
+	\end{itemize}
+	La comparaison des deux intervalles de confiance permet d'affirmer si la médiane estimée est une anomalie.
+\end{enumerate}
+
+
+\subparagraph{Précisions relatives au pseudo-code} : 
+
+\begin{itemize}
+	\item a.append($ b $): ajouter $ b $ à la fin de la série de valeurs  $ a $.
+	
+	\item median($ a $) : calculer la médiane de la série de valeurs  $ a $.
+	
+	\item a.sort() : ordonner les valeurs de la série de valeurs $ a $, par défaut, par ordre croissant.
+	
+	\item size($ a $) : donner la taille de la série de valeurs $a$.
+	
+	\item proportion\_confint() : calcul de la borne inférieure et supérieur du score de Wilson. 
+	
+	\item  \textit{dateranges}  : la succession des dates marquant la durée de l'analyse.
+\end{itemize}
+
+
+\subparagraph{Pseudo Code} :
+\newpage
+\begin{algorithm}[H]
+		\caption{}
+ 	\begin{algorithmic}[1]
+
+	\ForAll { d in dateranges}
+		
+		\State indices $\Leftarrow$  rttDiff[1]==d  \label{prepare-start} \Comment{Trouver les indices des RTTs différentiel  identifiés durant $ d $}
+	    \State dist $\Leftarrow$ rttDiffs[indices]  \Comment{Récupérer les RTTs Différentiel  aux $ indices $}
+	     
+	    \If{$ size(dist) < 3 $} 
+	      \State passer à la date suivante dans dateranges
+	    \EndIf
+	    \State dates.append(d) 
+	     \State median.append(median(dist)) \Comment{mettre à jour la médiane}
+	     \State mean.append(mean(dist))
+	     \State dist.sort()
+	     \State  wilsonCiLow, wilsonCiHi  $Leftarrow$   proportion\_confint()  \Comment{Calcul de score de Wilson}
+	     \State wilsonCi $\Leftarrow$ np.array(wilsonCi)*len(dist)
+	     \State currLow.append(median[-1] - dist[int(wilsonCi[0])])  \Comment{mettre à jour la médiane minimale}
+	     \State ciHigh.append( dist[int(wilsonCi[1])] - median[-1] ) \label{prepare-end} \Comment{mettre à jour la médiane maximale}
+	     
+	     \If {$ len(smoothAvg)<24 $}
+	         
+             \State  smoothAvg.append(median[-1])
+               \State smoothHi.append(dist[int(wilsonCi[1])])
+               \State smoothLow.append(dist[int(wilsonCi[0])])
+	     \ElsIf{$ len(smoothAvg) == 24 $}
+	                 \State smoothAvg.append(np.median(smoothAvg))
+	                 \State smoothHi.append(np.median(smoothHi))
+	                 \State smoothLow.append(np.median(smoothLow))
+	                  \For{i in [0,24]} 
+	                  \State   smoothAvg[i] = smoothAvg[-1]
+	                  \State   smoothHi[i] = smoothHi[-1]
+	                  \State  smoothLow[i] = smoothLow[-1]
+	                  \EndFor
+	     \Else
+					 \Comment{Utilisation du lissage exponentiel pour prédire smoothAvg, smoothHi et smoothLow }
+	                 \State smoothAvg.append(0.99*smoothAvg[-1]+0.01*median[-1])
+	                 \State smoothHi.append(0.99*smoothHi[-1]+0.01*dist[int(wilsonCi[1])])
+	                 \State smoothLow.append(0.99*smoothLow[-1]+0.01*dist[int(wilsonCi[0])])
+	                  
+
+	                 
+	                 \Comment{La détection des anomalies se déclenche dés avoir un échantillon de taille 25 }
+	                 \If {(median[-1]-ciLow[-1] > smoothHi[-1] OR median[-1]+ciHigh[-1] < smoothLow[-1]) AND np.abs(median[-1]-smoothAvg[-1])>1}
+	                       \State       alarmsDates.append(d)
+	                       \State alarmsValues.append(median[-1])
+	                 \EndIf
+	                 
+	                            
+	     \EndIf
+	    
+	    \State 
+	\EndFor
+
+\end{algorithmic}
+\label{algo:rttevolutionLink}
+\end{algorithm}
+
+
+
+
+\subsection{Quelques chiffres  sur la médiane des RTTs différentiel}
+
+L'adaptation du théorème centrale limite pour l'utilisation de la médiane au lien de la moyenne peut engendrer des contraintes en matière de performances si la distribution pour laquelle on souhaite calculer la médiane est grande. 
+
+La figure \ref{fig:size_dist_med} présente les trente premières distributions des médianes. L'axe des abscisses représente les liens et l'axe des ordonnées représente la taille de la distribution des médianes des RTT différentiel d'un lien, ce sont les RTTs différentiel caractérisant le lien pendant lors un timeWindow parmi les timeWindows entre \textit{start} et \textit{end}.   Pour une  raison de clarté,  le reste des distributions est présenté dans le document disponible sur GitHub\footnote{\url{ RipeAtlasTraceroutesAnalysis/tableaux/taille_distributions_medianes.pdf }, consulté le $14/10/2018$.}. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/size_dist_med}
+\caption{ La taille de la distribution des médianes des RTT différentiel }
+\label{fig:size_dist_med}
+\end{figure}
+
+
+\subsection{Notes sur les traceroutes }
+
+L'analyse menée sur les traceroutes collectées par les sondes Atlas n'utilise pas totalement les traceroutes sélectionnés suivant quand ils ont été capturés. 
+
+\paragraph{Traceroute réussi ou échoué totalement.} Dans le travail de référence, les traceroutes sont stockés tels qu'ils sont, sans prétraitement à l'avance. Or un traceroute peut être éliminé à l'avance si ce dernier a échoué pour atteindre la destination prédéfinie. 
+
+
+\paragraph{Traceroute réussi ou échoué partiellement.} Dans certains cas, la sonde Atlas ne parvient pas à atteindre un routeur intermédiaire durant son chemin vers la destination finale. Rappelons que pour un saut, l'implémentation du traceroute utilisée par les sondes Atlas envoie $3$ signaux par saut,  ainsi, on distingue deux cas : 
+\begin{itemize}
+	\item  la sonde ne reçoit aucune information sur les trois signaux;
+	\item la sonde reçoit les informations de $1$ ou $2$ signaux.
+\end{itemize}
+
+
+\paragraph{Les adresses IP privées dans traceroute.} Dans la présente analyse, les adresses IP privées n'ont  aucune valeur ajoutée. Les liens à surveiller sont ceux visibles sur Internet, alors que les adresses IP privées reflètent la configuration des réseaux non publique.
+
+
+
+\paragraph{L'utilité des attributs d'un enregistrement traceroute.} Une requête  traceroute est caractérisée par plusieurs attributs, plus de 40, décrits dans la figure \ref{fig:traceroute_attributes}. Les n\oe{}uds en gris sont de type liste, un élément de la liste est un objet formé les successeurs du n\oe{}ud en question. Les n\oe{}uds en vert sont les attributs utilisés par l'outil de détection des changements anormaux dans les délais d'un lien.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{illustrations/traceroute_attributes}
+\caption{Les attributs possibles dans le résultat d'une requête traceroute}
+\label{fig:traceroute_attributes}
+\end{figure}
+
+
+
+
+
+\appendix
+
+\chapter{Illustration du théorème central limite} \label{appendix:clt-exemple}
+La figure \ref{fig:tcl} illustre par l'exemple le principe du TCL avec une distribution qui suit la loi normale. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{illustrations/tcl}
+	\caption{}
+	\label{fig:tcl}
+	\source{\url{http://webapps.fundp.ac.be/biostats/biostat/modules/module70/page4.html}, consultée le $ 28/09/2018 $.}
+	
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

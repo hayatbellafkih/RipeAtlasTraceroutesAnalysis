@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: memoire.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: chapitre1.aux
+A level-1 auxiliary file: chapitre2.aux
+A level-1 auxiliary file: chapitre3.aux
+A level-1 auxiliary file: chapitre4.aux
+The style file: acm.bst
+Database file #1: references.bib
+You're missing a field part---line 164 of file references.bib
+ :   year         = 
+ :                  ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in ripe-atlas-data
+Warning--to sort, need author or key in LantronixXPortPro
+Warning--to sort, need author or key in create-UDM
+Warning--to sort, need author or key in probes-data
+Warning--to sort, need author or key in bugs-ripe-atlas
+Warning--to sort, need author or key in Archipelago
+Warning--to sort, need author or key in CAIDA
+Warning--to sort, need author or key in SamKnows
+You've used 28 entries,
+            2253 wiz_defined-function locations,
+            684 strings with 8847 characters,
+and the built_in function-call counts, 6468 in all, are:
+= -- 628
+> -- 213
+< -- 0
++ -- 94
+- -- 66
+* -- 308
+:= -- 1003
+add.period$ -- 99
+call.type$ -- 28
+change.case$ -- 117
+chr.to.int$ -- 0
+cite$ -- 36
+duplicate$ -- 243
+empty$ -- 664
+format.name$ -- 66
+if$ -- 1434
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 5
+newline$ -- 158
+num.names$ -- 40
+pop$ -- 238
+preamble$ -- 1
+purify$ -- 89
+quote$ -- 0
+skip$ -- 166
+stack$ -- 0
+substring$ -- 191
+swap$ -- 56
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 112
+warning$ -- 8
+while$ -- 45
+width$ -- 30
+write$ -- 302
+(There was 1 error message)
