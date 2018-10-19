@@ -809,12 +809,112 @@ L'analyse menée sur les traceroutes collectées par les sondes Atlas n'utilise 
 \paragraph{L'utilité des attributs d'un enregistrement traceroute.} Une requête  traceroute est caractérisée par plusieurs attributs, plus de 40, décrits dans la figure \ref{fig:traceroute_attributes}. Les n\oe{}uds en gris sont de type liste, un élément de la liste est un objet formé les successeurs du n\oe{}ud en question. Les n\oe{}uds en vert sont les attributs utilisés par l'outil de détection des changements anormaux dans les délais d'un lien.
 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{illustrations/traceroute_attributes}
 \caption{Les attributs possibles dans le résultat d'une requête traceroute}
 \label{fig:traceroute_attributes}
 \end{figure}
+
+
+
+\section{En pratique ...}
+
+\paragraph{Le travail de référence}
+
+Le processus de l'analyse se fait en récupérant  d'abord les enregistrements des traceroutes depuis la base de données MongoDB. Ensuite, le traitement de chaque traceroute se poursuit dans la machine locale. De même pour les résultats de type I, qui sont les changements de délais de tous les liens identifiés, ils sont sont stockés localement dans la machine locale.
+De plus, les détails de l'expérience sont aussi stockées dans MongoDB. Pour conclure toute les opérations se déroulent dans la machine locale comme c'est illustré dans la figure \ref{fig:travail-de-reference}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/travail-de-reference}
+\caption{Le processus d'analyse des traceroutes dans le travail de référence}
+\label{fig:travail-de-reference}
+\end{figure}
+
+\paragraph{Implémentation aws  athena + s3} \label{par:aws-stockage-seulement}
+
+
+La première adaptation du travail de référence en vue d'intégrer les services web d'Amazon est présentée dans la figure \ref{fig:travail-de-reference-avec-athena}. La différence par rapport à l'implémentation proposée dans le travail de référence est au niveau du stockage des données. En effet, au lieu de récupérer les traceroutes depuis les collections présentes dans MongoDB, les traceroutes sont récupérés depuis le le service de stockage Amazon S3. Ces données ont été adaptées pour être utilisées par l'outil de détection.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/travail-de-reference-avec-athena}
+\caption{}
+\label{fig:travail-de-reference-avec-athena}
+\end{figure}
+
+\paragraph{Aller au delà du stockage }
+
+Les données manipulées par l'outil de détection sont volumineuses, en plus du besoin du stockage, il faut aussi adopter les outils adéquats pour le traitement de ces données, ce qui n'était pas pris en considération dans l'adaptation décrite dans la section \ref{par:aws-stockage-seulement}.  Si on imagine une implémentation prenant en considération la manipulation des données massives en plus du stockage de ces dernières. On rappelle qu'une détection se déroule en récupérant d'abords les traceroutes de la période souhaitée, ensuite, chaque traceroute est analysé pour identifier les liens avec leur RTT différentiel (computeRTT()).Ces résultats sont fusionnés avec mergeRTT(). Enfin, la détection des anomalies se déclenche (outlierDetection()). Afin d'évaluer cette possibilité, on présente dans la figure \ref{fig:organigram-rttAnalysis} l'organigramme de la première étape dans la détection les changements des délais : computeRtt(). 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/organigram-rttAnalysis}
+\caption{ L'organigramme de  l'étape computeRTT()}
+\label{fig:organigram-rttAnalysis}
+\end{figure}
+
+Soient les cas suivants :
+\subparagraph{cas 1}
+
+Supposant qu'il n'existe pas une requête SQL valide sur AWS Athena pour traiter tous les traceroutes en une seule fois, dans  ce cas, on doit créer une requête par traceroute. De plus, on doit créer un fichier résultat qui stocke les résultats à passer à l'étape mergeRTT(). En pratique, une heure comme période d'analyse a repris environ $ 18400 $ traceroute. En effet, pour une heure, il faut lancer $ 18400 $ requêtes sur AWS Athena et $ 18400 $ opérations de lecture/écriture sur un fichier résultat si on souhaite le stocker dans AWS S3. Alors pour une semaine d'analyse? 
+
+
+\subparagraph{cas 2}
+
+Jusqu'à maintenant, avec la requête suivante \footnote{A faire évoluer si les services web d'Amazon qui seront utilisés dans la suite du mémoire.}:
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/request}
+\caption{}
+\label{fig:request}
+\end{figure}
+
+Nous avons comme résultat :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/data_request}
+\caption{}
+\label{fig:data_request}
+\end{figure}
+
+Un lien est formé par l'adresse IP ayant avec \textit{hop} = i+1 et l'adresse IP ayant \textit{hop} = i. Le RTT différentiel est calculé en faisant la différence entre \textit{med} avec hop = i+1 et med avec hop = i. i est un entier et doit concerner le même traceroute. Les résultats présentés dans \ref{fig:data_request} ne différencie pas sauts du même traceroute.
+
+
+Supposons qu'il existe une seule requête SQL valide sur AWS Athena et capable d'assurer toutes les opérations décrites dans l'organigramme \ref{fig:organigram-rttAnalysis} (y inclus l'inférence des liens), dans ce cas, il faut stocker les résultats intermédiaires pour qu'ils soient l'entrée de l'étape mergeRTT(). Et supposons aussi qu'il existe une requête SQL sur Athena capable de lire les résultats en question et d'appliquer la fusion entre les liens. Evaluons maintenant l'étape \textit{outlierDetection()}\footnote{Le principe de la détection est le même pour outlierDetection (résultat I) et rttEvolution (Résultats II)}. 
+
+
+ On peut présenter brièvement l'étape \textit{outlierDetection()} avec l'organigramme suivant :
+ 
+ \begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{illustrations/outlier_detection_organigramm}
+\caption{L'organigramme de  l'étape outlierDetection()}
+\label{fig:outlier_detection_organigramm}
+\end{figure}
+
+Ce qu'on peut noter à travers cet organigramme, c'est que l'évaluation de chaque lien $l$ nécessite, nécessite l'accès en lecture aux résultats de l'étape mergeRtt()  d'une part et d'accéder à la référence de chaque lien  en lecture et écriture d'autre part. Si on suppose que les résultats intermédiaires sont stockés dans des fichiers disponibles sur AWS S3.
+
+\begin{table}
+	\begin{tabular}{ll}
+période & entre 2015-10-20 00:00:00 et 2015-10-20 01:00:00\\ 
+msm_id &  5004\\
+Nb traceroutes &  17816\\
+Adressage IP & 4 \\
+Nb de liens &26295\\
+Données analysées & \\ 
+	\end{tabular}
+\end{table}
+
+Le service web d'Amazon Athena permet le mode lecture seulement, ainsi les tables créées ne peuvent pas être mises à jour. 
+
+
+
+
 
 
 

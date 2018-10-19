@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.12)  14 OCT 2018 18:52
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2018.4.12)  19 OCT 2018 01:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1532,13 +1532,48 @@ File: illustrations/size_dist_med.png Graphic file (type QTm)
 <use  "illustrations/size_dist_med.png" > [55]
 File: illustrations/traceroute_attributes.png Graphic file (type QTm)
 
-<use  "illustrations/traceroute_attributes.png" > [56] [57] [58
+<use  "illustrations/traceroute_attributes.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]
+[57]
+File: illustrations/travail-de-reference.png Graphic file (type QTm)
+ <use  "illustrations/travail-de-reference.png" >
+File: illustrations/travail-de-reference-avec-athena.png Graphic file (type QTm
+)
+
+<use  "illustrations/travail-de-reference-avec-athena.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [58]
+File: illustrations/organigram-rttAnalysis.png Graphic file (type QTm)
+
+<use  "illustrations/organigram-rttAnalysis.png" >
+Underfull \vbox (badness 4805) has occurred while \output is active []
+
+ [59]
+File: illustrations/request.png Graphic file (type QTm)
+
+<use  "illustrations/request.png" >
+Underfull \vbox (badness 4391) has occurred while \output is active []
+
+ [60]
+File: illustrations/data_request.png Graphic file (type QTm)
+
+<use  "illustrations/data_request.png" > [61]
+Overfull \hbox (0.47461pt too wide) in paragraph at lines 891--892
+[]\T1/ptm/m/n/12 On peut pré-sen-ter briè-ve-ment l'étape \T1/ptm/m/it/12 out-l
+ier-De-tec-tion() \T1/ptm/m/n/12 avec l'or-ga-ni-gramme|
+ []
+
+File: illustrations/outlier_detection_organigramm.png Graphic file (type QTm)
+<use  "illustrations/outlier_detection_organigramm.png" > [62] [63] [64
 
 ]
 Annexe A.
 File: illustrations/tcl.png Graphic file (type QTm)
 <use  "illustrations/tcl.png" >
-Underfull \hbox (badness 10000) in paragraph at lines 832--832
+Underfull \hbox (badness 10000) in paragraph at lines 918--918
 []|\T1/ptm/m/n/12 Source : [][]$\T1/pcr/m/n/12 http : / / webapps . fundp . ac 
 . be / biostats / biostat /
  []
@@ -1546,8 +1581,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 832--832
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59])
-[60]
+ [65])
+[66]
 \openout2 = `chapitre3.aux'.
 
 
@@ -1555,14 +1590,14 @@ No file chapitre3.tex.
 \openout2 = `chapitre4.aux'.
 
 No file chapitre4.tex.
-(./memoire.bbl [61
+(./memoire.bbl [67
 
 
 
 
 
 
-] [62
+] [68
 
 ]
 Underfull \hbox (badness 5161) in paragraph at lines 19--22
@@ -1606,7 +1641,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 60--66
 ring -[]
  []
 
-[63]
+[69]
 Underfull \hbox (badness 10000) in paragraph at lines 74--79
 \T1/pcr/m/n/12 github . com / vdidonato / Traceroute -[] consistency -[] check$
 [][]\T1/ptm/m/n/12 ,
@@ -1666,7 +1701,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 130--136
 bes$[][]\T1/ptm/m/n/12 , 2017.
  []
 
-[64]
+[70]
 Underfull \hbox (badness 4505) in paragraph at lines 138--144
 []\T1/ptm/m/sc/12 Kisteleki, R.  \T1/ptm/m/n/12 RIPE At-las probes as IoT de-vi
 ces.  URL :
@@ -1696,7 +1731,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--182
 ] and -[]
  []
 
-) [65]
+) [71]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
  (./memoire.aux (./introduction.aux) (./chapitre1.aux) (./chapitre2.aux)
@@ -1709,12 +1744,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 30461 strings out of 493638
- 534727 string characters out of 6146796
- 1673053 words of memory out of 5000000
- 33204 multiletter control sequences out of 15000+600000
+ 30480 strings out of 493638
+ 535289 string characters out of 6146796
+ 1673479 words of memory out of 5000000
+ 33217 multiletter control sequences out of 15000+600000
  54709 words of font info for 75 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  57i,20n,96p,1223b,1463s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (67 pages).
+Output written on memoire.pdf (73 pages).
