@@ -85,11 +85,12 @@
 \contentsline {paragraph}{Traceroute réussi ou échoué partiellement.}{56}{section*.59}
 \contentsline {paragraph}{Les adresses IP privées dans traceroute.}{56}{section*.60}
 \contentsline {paragraph}{L'utilité des attributs d'un enregistrement traceroute.}{56}{section*.61}
-\contentsline {section}{\numberline {II.4}En pratique ...}{57}{section.2.4}
-\contentsline {paragraph}{Le travail de référence}{57}{section*.63}
-\contentsline {paragraph}{Implémentation aws athena + s3}{58}{section*.65}
-\contentsline {paragraph}{Aller au delà du stockage }{59}{section*.67}
+\contentsline {section}{\numberline {II.4}En pratique ...}{58}{section.2.4}
+\contentsline {paragraph}{Le travail de référence}{58}{section*.63}
+\contentsline {paragraph}{Intégration des AWS Athena + S3 dans le travail de référence}{58}{section*.65}
+\contentsline {paragraph}{Aller au delà du stockage sur Amazon S3}{59}{section*.67}
 \contentsline {subparagraph}{cas 1}{60}{section*.69}
 \contentsline {subparagraph}{cas 2}{60}{section*.70}
-\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{65}{appendix.A}
-\contentsline {chapter}{Conclusion}{67}{appendix*.75}
+\contentsline {paragraph}{Conclusion}{64}{section*.76}
+\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{67}{appendix.A}
+\contentsline {chapter}{Conclusion}{69}{appendix*.78}

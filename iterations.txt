@@ -1,0 +1,8 @@
+## Itération I :
+
+Objectif : description de l'algorithme de la détection des anomalies dans les délais des liens.
+Outputs  : chapitre II: pages entre 33 et 57, dans report/memoire.pdf
+
+## Itération II :
+Objectif : complément de la description décrite dans l'itération I; description avec des organigrammes et des shémas.
+Outputs  : chapitre II: pages entre 58 et 65, dans report/memoire.pdf.
