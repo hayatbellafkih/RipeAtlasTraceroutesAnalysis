@@ -6,3 +6,7 @@ Outputs  : chapitre II: pages entre 33 et 57, dans report/memoire.pdf
 ## Itération II :
 Objectif : complément de la description décrite dans l'itération I; description avec des organigrammes et des shémas.
 Outputs  : chapitre II: pages entre 58 et 65, dans report/memoire.pdf.
+
+## Itération III:
+Objectif : description de l'algorithme de la détection avec un nombre limité des traceroutes.
+Outputs  : chapitre II: pages à partir de  66 dans report/memoire.pdf.

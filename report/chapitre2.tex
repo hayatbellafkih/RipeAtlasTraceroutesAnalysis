@@ -947,28 +947,1626 @@ Le service web d'Amazon Athena permet le mode lecture seulement des données, ai
  
 
 
+\newpage
+\section{L'algorithme de la détection des anomalies des délais d'un lien}
+
+\subsection{Introduction}
+Le suivi de l'évolution du RTT différentiel d'un lien (Résultat II) est effectué en deux grandes étapes : 
+\begin{enumerate}
+	\item La préparation des données (computeRTT(), MergeRttResults(), Prétraitement des résultats par timeWindow).
+	\item L'évaluation des RTTs différentiels (rttEvolution()).
+\end{enumerate}
+
+Pour l'illustration, nous avons utilisé seulement deux traceroutes afin de montrer l'étape 1. Afin d'illustrer l'étape 2, nous avons choisi plusieurs\footnote{\url{ RipeAtlasTraceroutesAnalysis/data/traceroute_2018_01_01.json } et \url{ RipeAtlasTraceroutesAnalysis/data/traceroute_2018_01_02.json }} traceroutes pour les prérequis de l'algorithme de la détection. Les traceroutes ont été générés avec un script python. L'idée c'est de partir d'un traceroute et changer les RTTs du deuxième saut. Comme la détéction se déclenche à partir du 25 ème timeWindow, nous avons utilisé des RTTs avec des valeurs grandes afin d'assurer la détection d'une anomalie. 
+
+Par exemple, tous les traceroutes du 01/01/2018 sont créés tel que :
 
 
+\begin{lstlisting}
+rtt1= [1, 2, 1, 3]
+allrtts=[rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1,rtt1]
+\end{lstlisting}
 
-
-
-
-
-\appendix
-
-\chapter{Illustration du théorème central limite} \label{appendix:clt-exemple}
-La figure \ref{fig:tcl} illustre par l'exemple le principe du TCL avec une distribution qui suit la loi normale. 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\linewidth]{illustrations/tcl}
-	\caption{}
-	\label{fig:tcl}
-	\source{\url{http://webapps.fundp.ac.be/biostats/biostat/modules/module70/page4.html}, consultée le $ 28/09/2018 $.}
+\begin{algorithm}[H]
 	
+	\begin{algorithmic}[1]
+
+		\State $i   \leftrightarrow  1$
+		\ForAll {$rtt \in allrtts$}
+		
+			\ForAll {$val \in rtt$}
+		        \State tmptrace $ \leftrightarrow $ loadreferenceTraceroute()
+		        
+		                     \State   tmptrace["result"][1]['result'][0]['rtt'] $ \leftrightarrow $ tmptrace["result"][1]['result'][0]['rtt']+ val
+		                     \State   tmptrace["result"][1]['result'][1]['rtt'] $ \leftrightarrow $ tmptrace["result"][1]['result'][1]['rtt']+ val
+		                     \State   tmptrace["result"][1]['result'][2]['rtt'] $ \leftrightarrow $  tmptrace["result"][1]['result'][2]['rtt']+ val
+		                    \State tmptrace["timestamp"]  $ \leftrightarrow $ tmptrace["timestamp"] + int(3600) * int(i)
+	     	     \EndFor
+	     	     \State i$ \leftrightarrow $ i+1
+		
+		\EndFor
+
+	\end{algorithmic}
+	\caption{}
+	\label{algo:co}
+\end{algorithm}
+
+
+De la même manière nous avons généré les traceroutes concernant la journée 02/01/2018, avec :
+\begin{lstlisting}
+rtt1=[1, 2, 1, 3]
+rtt11=[10680,10845,10998,10800]
+rtt12=[1060,1045,1098,1080]
+rtt13=[1060,1045,1098,1080]
+allrtts=[rtt1,rtt1,rtt11,rtt12,rtt13,rtt1,rtt1,rtt1]
+\end{lstlisting}
+
+
+Dans la suite de cette section, nous allons travailler sur le graphique suivant :
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{illustrations/finalrttmodel}
+\caption{L'évolution du RTT différentiel du lien 185\_147\_12\_31 - 89\_105\_200\_57}
+\label{fig:finalrttmodel}
 \end{figure}
 
 
 
+ \subsection{Le fonctionnement de l'algorithme de la détection}
+\paragraph{computeRTT()}~
+
+\begin{algorithm}[H]
+	
+	\begin{algorithmic}[1]
+		\Procedure{$start$, $end$}{}
+		 \State $traceroutes$ $\leftrightarrow$ traceroutes capturés entre $start$ et $end$
+		\ForAll {$currDate \in dates$}
+		\State readOneTraceroute()
+		\EndFor
+		\EndProcedure
+	\end{algorithmic}
+	\caption{}
+	\label{algo:computRTT}
+\end{algorithm}
+
+Le traitement d'un traceroute est détaillé si dessous, soit le premier traceroute dans timeWindow 2018-01-01 02:01:01:
+\newpage
+\begin{lstlisting}
+{
+	"lts":165,
+	"msm_id":5004,
+	"from":"89.105.202.4",
+	"dst_name":"192.5.5.241",
+	"proto":"UDP",
+	"timestamp":1514773209,
+	"fw":4790,
+	"paris_id":9,
+	"stored_timestamp":1514768539,
+	"prb_id":4247,
+	"af":4,
+	"result":[
+	{
+		"result":[
+		{
+			"rtt":1.955,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		},
+		{
+			"rtt":1.7,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		},
+		{
+			"rtt":1.709,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		}
+		],
+		"hop":1
+	},
+	{
+		"result":[
+		{
+			"rtt":7.743,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		},
+		{
+			"rtt":3.3030000000000004,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		},
+		{
+			"rtt":3.3720000000000003,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		}
+		],
+		"hop":2
+	},
+	{
+		"result":[
+		{
+			"rtt":4.347,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		},
+		{
+			"rtt":2.876,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		},
+		{
+			"rtt":3.143,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		}
+		],
+		"hop":3
+	}
+	],
+	"dst_addr":"192.5.5.241",
+	"src_addr":"89.105.202.4",
+	"endtime":1514768403,
+	"type":"traceroute",
+	"msm_name":"Traceroute",
+	"size":40
+}
+
+\end{lstlisting}
+
+Le tableau suivant reprend chaque étape du traitement d'un traceroute:
+
+
+\begin{landscape}
+	
+Itération 1 :
+\begin{table}[H]
+	\centering
+	\begin{tabularx}{20cm}{|l|X|X|c|}
+		\hline 
+		\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+ 1 & \{'rtt': 1.955, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955]\} & \{\} \\ \hline 
+ 1 & \{'rtt': 1.7, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955, 1.7]\} & \{\} \\ \hline 
+ 1 & \{'rtt': 1.709, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955, 1.7, 1.709]\} & \{\} \\ \hline 
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabularx}{20cm}{|l|X|X|c|X|}
+		\hline 
+		 \textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+89.105.200.57 & [1.955, 1.7, 1.709] & non & 1.709 &\{'89.105.200.57': 1.709\} \\ \hline
+	\end{tabularx}
+\end{table}
+\end{landscape}
+
+\begin{landscape}
+Itération 2 :
+
+\begin{table}[H]
+	\centering
+
+	\begin{tabularx}{20cm}{|c|X|X|X|}
+		\hline 
+		\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+ 2 & \{'rtt': 7.743, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.743]\} & \{'89.105.200.57': 1.709\} \\ \hline 
+ 2 & \{'rtt': 3.3030000000000004, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.743, 3.3030000000000004]\} & \{'89.105.200.57': 1.709\} \\ \hline 
+ 2 & \{'rtt': 3.3720000000000003, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.743, 3.3030000000000004, 3.3720000000000003]\} & \{'89.105.200.57': 1.709\} \\ \hline 
+
+	\end{tabularx}
+\end{table}
+\begin{table}[H]
+	\centering
+	\resizebox{20cm}{!}{
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline 
+		\textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+185.147.12.31 & [7.743, 3.3030000000000004, 3.3720000000000003] & oui  & 3.3720000000000003 &\{'185.147.12.31': 3.3720000000000003\} \\ \hline
+	\end{tabular}}
+\end{table}
+\begin{table}[H]
+	\centering
+	\resizebox{20cm}{!}{
+		\begin{tabular}{|c|c|c|c|}
+			\hline 
+ip2 & ip1 & (ip1, ip2) in diffRtt & diffRtt[(ip1, ip2)] \\ \hline
+185.147.12.31 & 89.105.200.57 &True& {'rtt': [1.7630000000000003], 'probe': ['89.105.202.4'], 'msmId':  {5004: [4247]}} \\ \hline
+
+	\end{tabular}}
+\end{table}
+\begin{table}[H]
+	\centering
+	\resizebox{20cm}{!}{
+		\begin{tabular}{|c|}
+		diffRTT	\\ \hline
+{('89.105.200.57', '185.147.12.31'): {'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  {5004: set([4247])}}} \\ \hline
+	\end{tabular}
+	}
+\end{table}
+
+\begin{lstlisting}
+>>> float(3.3720000000000003 ) - float(1.709)
+1.6630000000000003 (est le RTT différentiel du lien ('89.105.200.57', '185.147.12.31') )
+
+\end{lstlisting}
+\end{landscape}
+
+
+\begin{landscape}
+	Itération 3 : 
+	\begin{table}[H]
+		\centering
+		\resizebox{20cm}{!}{
+	\begin{tabularx}{20cm}{|c|X|X|X|}
+		\hline 
+		\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+		3 & \{'rtt': 4.347, 'from': u'185.147.12.19'\} & \{'185.147.12.19': [4.347]\} & \{'185.147.12.31': 3.3720000000000003\} \\ \hline	 
+		3 & \{'rtt': 2.876, 'from': u'185.147.12.19'\} & \{'185.147.12.19': [4.347, 2.876]\} & \{'185.147.12.31': 3.3720000000000003\} \\ \hline  
+		3 & \{'rtt': 3.143, 'from': u'185.147.12.19'\} & \{'185.147.12.19': [4.347, 2.876, 3.143]\} & \{'185.147.12.31': 3.3720000000000003\}  \\ \hline
+	\end{tabularx}
+}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\resizebox{20cm}{!}{
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline 
+			\textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+			
+			185.147.12.19 & [4.347, 2.876, 3.143] & 1  & 3.143 &{'185.147.12.19': 3.143} 
+			
+			
+			\\ \hline
+		\end{tabular}}
+	\end{table}
+	
+		\begin{table}[H]
+			\centering
+			\resizebox{20cm}{!}{
+				\begin{tabular}{|c|c|c|c|}
+					\hline 
+					ip2 & ip1 & (ip1, ip2) in diffRtt & diffRtt[(ip1, ip2)] \\ \hline
+					185.147.12.19 & 185.147.12.31 &True& {'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  {5004: set([4247])}} 
+					\\ \hline
+					
+				\end{tabular}}
+			\end{table}
+			
+\begin{lstlisting}
+>>>  float(3.143) - float(3.3720000000000003)
+-0.22900000000000054 (est le RTT différentiel du lien ('185.147.12.31', '185.147.12.19') )
+\end{lstlisting}
+			
+			\begin{table}[H]
+				\centering
+				\resizebox{20cm}{!}{
+					\begin{tabular}{|c|}
+						\hline
+						\textbf{diffRTT}	\\ \hline
+						\{('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},  \\
+						('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\}\}
+						\\ \hline
+					\end{tabular}
+				}
+			\end{table}
+				\end{landscape}
+\newpage
+
+A l'issue du traitement du premier traceroute, deux liens ont été identifiés, chacun est décrit par son RTT différentiel, les sondes Atlas ayant identifié ce lien et enfin les mesures lancées par les sondes Atlas ayant impliqué ce lien.  
+
+Soit le deuxième traceroute dans timeWindow 2018-01-01 02:01:01:
+\begin{lstlisting}
+{
+	"lts":165,
+	"msm_id":5004,
+	"from":"89.105.202.4",
+	"dst_name":"192.5.5.241",
+	"proto":"UDP",
+	"timestamp":1514773210,
+	"fw":4790,
+	"paris_id":9,
+	"stored_timestamp":1514768539,
+	"prb_id":4247,
+	"af":4,
+	"result":[
+	{
+		"result":[
+		{
+			"rtt":1.955,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		},
+		{
+			"rtt":1.7,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		},
+		{
+			"rtt":1.709,
+			"size":28,
+			"from":"89.105.200.57",
+			"ttl":255
+		}
+		],
+		"hop":1
+	},
+	{
+		"result":[
+		{
+			"rtt":4.347,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		},
+		{
+			"rtt":2.876,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		},
+		{
+			"rtt":3.143,
+			"size":28,
+			"from":"185.147.12.19",
+			"ttl":253
+		}
+		],
+		"hop":2
+	},
+	{
+		"result":[
+		{
+			"rtt":7.843,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		},
+		{
+			"rtt":6.4,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		},
+		{
+			"rtt":7,
+			"size":28,
+			"from":"185.147.12.31",
+			"ttl":254
+		}
+		],
+		"hop":3
+	}
+	],
+	"dst_addr":"192.5.5.241",
+	"src_addr":"89.105.202.4",
+	"endtime":1514768403,
+	"type":"traceroute",
+	"msm_name":"Traceroute",
+	"size":40
+}
+\end{lstlisting}
+
+Nous allons procéder aux même itérations faites pour le premier traceroute. 
+
+
+\begin{landscape}
+	Itération 1 : 
+	\begin{table}[H]
+		\centering
+		\resizebox{20cm}{!}{
+			\begin{tabularx}{20cm}{|c|X|X|X|}
+				\hline 
+				\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+				 1 & \{'rtt': 1.955, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955]\} & \{\} \\ \hline
+				 1 & \{'rtt': 1.7, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955, 1.7]\} & \{\} \\ \hline
+				 1 & \{'rtt': 1.709, 'from': '89.105.200.57'\} & \{'89.105.200.57': [1.955, 1.7, 1.709]\} & \{\} \\ \hline
+			\end{tabularx}
+		}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\resizebox{20cm}{!}{
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline 
+				\textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+				89.105.200.57 & [1.955, 1.7, 1.709] & 0  & 1.709 &{'89.105.200.57': 1.709} 
+				
+				\\ \hline
+			\end{tabular}}
+		\end{table}
+		
+		
+				\begin{table}[H]
+					\centering
+					\resizebox{20cm}{!}{
+						\begin{tabular}{|c|}
+							\hline
+							diffRTT	\\ \hline
+			\{('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': [u'89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}, \\
+			('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}\}\\ \hline
+						\end{tabular}
+					}
+				\end{table}
+		\end{landscape}
+		
+		
+		\begin{landscape}
+			Itération  2: 
+			\begin{table}[H]
+				\centering
+				\resizebox{20cm}{!}{
+					\begin{tabularx}{20cm}{|c|X|X|X|}
+						\hline 
+						\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+						 2 & \{'rtt': 4.347, 'from': '185.147.12.19'\} & \{'185.147.12.19': [4.347]\} & \{'89.105.200.57': 1.709\} \\ \hline 
+						 2 & \{'rtt': 2.876, 'from': '185.147.12.19'\} & \{'185.147.12.19': [4.347, 2.876]\} & \{'89.105.200.57': 1.709\} \\ \hline 
+						 2 & \{'rtt': 3.143, 'from': '185.147.12.19'\} & \{'185.147.12.19': [4.347, 2.876, 3.143]\} & \{'89.105.200.57': 1.709\} \\ \hline
+					\end{tabularx}
+				}
+			\end{table}
+
+
+			\begin{table}[H]
+				\centering
+				\resizebox{20cm}{!}{
+					\begin{tabular}{|c|c|c|c|c|}
+						\hline 
+						\textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+					185.147.12.19 & [4.347, 2.876, 3.143] & 1  & 3.143 &\{'185.147.12.19': 3.143\} 
+						\\ \hline
+					\end{tabular}}
+				\end{table}
+				
+				\begin{table}[H]
+					\centering
+					\resizebox{20cm}{!}{
+						\begin{tabular}{|c|c|c|c|}
+							\hline 
+							ip2 & ip1 & (ip1, ip2) in diffRtt & diffRtt[(ip1, ip2)] \\ \hline
+185.147.12.19 & 89.105.200.57 &True &\{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\} 
+							\\ \hline
+							
+						\end{tabular}}
+					\end{table}
+					
+\begin{lstlisting}
+>>> float(3.143) - float(1.709) = 1.4339999999999997
+\end{lstlisting}
+					
+\begin{table}[H]
+	\centering
+	\resizebox{20cm}{!}{
+		\begin{tabular}{|c|}
+			\hline
+			\textbf{diffRTT}	\\ \hline
+	\{('89.105.200.57', '185.147.12.19'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\})\},\\ ('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},\\ ('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}\}
+	\\ \hline
+		\end{tabular}
+	}
+\end{table}
+				\end{landscape}
+				
+				
+\begin{landscape}
+	Itération 3 : 
+	\begin{table}[H]
+		\centering
+		\resizebox{20cm}{!}{
+			\begin{tabularx}{20cm}{|c|X|X|X|}
+				\hline 
+				\textbf{Hop} & \textbf{détails du signal}& \textbf{rttList}& \textbf{PrevMed}\\ \hline
+ 3 & \{'rtt': 7.843, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.843]\} & \{'185.147.12.19': 3.143\} \\ \hline  
+ 3 & \{'rtt': 6.4, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.843, 6.4]\} & \{'185.147.12.19': 3.143\} \\ \hline  
+ 3 & \{'rtt': 7, 'from': '185.147.12.31'\} & \{'185.147.12.31': [7.843, 6.4, 7]\} & \{'185.147.12.19': 3.143\} \\ \hline
+			\end{tabularx}
+		}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\resizebox{20cm}{!}{
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline 
+				\textbf{Routeur} & \textbf{dist} & \textbf{PrevMed}& \textbf{Med} & \textbf{rttMed} \\ \hline
+				185.147.12.31 & [7.843, 6.4, 7] & 1  & 7.0 &{'185.147.12.31': 7.0} 
+	 
+				\\ \hline
+			\end{tabular}}
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\resizebox{20cm}{!}{
+				\begin{tabular}{|c|c|c|c|}
+					\hline 
+					ip2 & ip1 & (ip1, ip2) in diffRtt & diffRtt[(ip1, ip2)] \\ \hline
+					185.147.12.31 & 185.147.12.19 &True& \{'rtt': [3.857], 'probe': ['89.105.202.4'], 'msmId':\{5004: set([4247])\}\} 
+					\\ \hline
+					
+				\end{tabular}}
+			\end{table}
+				
+			\begin{table}[H]
+				\centering
+				\resizebox{20cm}{!}{
+					\begin{tabular}{|l|}
+						\hline
+						\textbf{diffRTT}	\\ \hline
+\{('89.105.200.57', '185.147.12.19'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247]\})\},\\ ('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}, \\
+('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},\\ ('185.147.12.19', '185.147.12.31'): \{'rtt': [3.857], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\}\} 
+						
+						\\ \hline
+					\end{tabular}
+				}
+			\end{table}
+		\end{landscape}
+
+\paragraph{MergeRttResults()}~
+
+On constate que les deux routeurs '185.147.12.19' et '185.147.12.31' sont impliqués dans deux liens  mais l'ordre est différent. Dans le travail de référence, les liens ('185.147.12.19', '185.147.12.31') et ('185.147.12.31','185.147.12.19')sont similaires en terme du RTT différentiel qui les caractérisent. De ce fait, une fois tous les traceroutes sont analysés d'un timeWindow, une fusion est appliquée. 
+La fusion s'applique sur les RTTs différentiel, les sondes Atlas et les identifiants des mesures.  Par exemple, les deux traceroutes analysés ci-dessus ont impliqué un même lien, la fusion des informations sur les deux liens donne le résultat dans le tableau \ref{tab:aftermerge}.
+
+
+	\begin{landscape}
+		
+		Avant :
+					\begin{table}[H]
+						\centering
+						\resizebox{20cm}{!}{
+							\begin{tabular}{|l|}
+								\hline
+								\textbf{diffRTT}	\\ \hline
+								\{('89.105.200.57', '185.147.12.19'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247]\})\},\\ ('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}, \\
+								('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},\\ ('185.147.12.19', '185.147.12.31'): \{'rtt': [3.857], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\}\} 
+								
+								\\ \hline
+							\end{tabular}
+						}
+					\end{table}
+		Après: 
+	
+	
+		
+		\begin{table}[H]
+			\centering
+			\resizebox{20cm}{!}{
+				\begin{tabular}{|l|}
+					\hline
+					\textbf{diffRTT}	\\ \hline
+					
+					\{('185.147.12.19', '185.147.12.31'): \{'rtt': [-0.22900000000000054, 3.857], 'probe': ['89.105.202.4', '89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},\\
+					
+					('185.147.12.31', '89.105.200.57'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\},\\
+					
+					('185.147.12.19', '89.105.200.57'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\}\}
+					\\ \hline
+				\end{tabular}
+			}
+				\caption{After Merge}
+				\label{tab:aftermerge}
+		\end{table}
+		\end{landscape}
+		
+\paragraph{Prétraitement des résultats par timeWindow}~
+
+Le suivi de l'évolution du délai du lien dépend de son RTT différentiel. Ce suivi est fait par timeWindow. Après avoir traiter tous les traceroutes, et avoir un diffRTT par timeWindow, on procède une sorte de normalisation. Les dates appartenant à un même timeWindow sont représentées par une seule date appartenant au timewindow.
+
+
+\begin{landscape}
+
+		\begin{table}[H]
+			\centering
+			\resizebox{20cm}{!}{
+				\begin{tabular}{|c|c|}
+					\hline
+\textbf{diffRTT}	 & \textbf{timestamps} \\ \hline
+('89.105.200.57', '185.147.12.19'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}& 1514773210 \\\hline
+
+('89.105.200.57', '185.147.12.31'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\} & 1514773209\\\hline
+('185.147.12.31', '185.147.12.19'): \{'rtt': [-0.22900000000000054], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\})\}&1514773209\\\hline
+('185.147.12.19', '185.147.12.31'): \{'rtt': [3.857], 'probe': ['89.105.202.4'], 'msmId':  \{5004: set([4247])\}\}\} & 1514773210\\\hline
+					
+				\end{tabular}
+			}
+		\end{table}
+		
+		Avec : \textbf{1514773210} = 01/01/2018 02:20:10  et \textbf{1514773209} = 01/01/2018 02:20:09.
+		
+		
+				\begin{table}[H]
+					\centering
+					\resizebox{20cm}{!}{
+						\begin{tabular}{|l|}
+							\hline
+							\textbf{diffRTT}	\\ \hline
+							
+							\{('185.147.12.19', '185.147.12.31'): \{'rtt': [-0.22900000000000054, 3.857], 'probe': ['89.105.202.4', '89.105.202.4'], 'msmId':  \{5004: set([4247])\}\},\\
+							
+							('185.147.12.31', '89.105.200.57'): \{'rtt': [1.6630000000000003], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\},\\
+							
+							('185.147.12.19', '89.105.200.57'): \{'rtt': [1.4339999999999997], 'probe': ['89.105.202.4'], 'msmId': \{5004: set([4247])\}\}\}
+							\\ \hline
+						\end{tabular}
+					}
+					\caption{After Merge}
+					\label{tab:aftermergee}
+				\end{table}
+				
+						\begin{table}[H]
+							\centering
+							\resizebox{20cm}{!}{
+								\begin{tabular}{|c|c|c|}
+									\hline
+									(ip1, ip2) &rtts & date	\\ \hline
+('185.147.12.19', '185.147.12.31') & [-0.22900000000000054, 3.857]&
+
+
+ [datetime.datetime(2018, 1, 1, 2, 1, 1), datetime.datetime(2018, 1, 1, 2, 1, 1)] \\
+
+('185.147.12.31', '89.105.200.57')& [1.6630000000000003]& [datetime.datetime(2018, 1, 1, 2, 1, 1)] \\
+ ('185.147.12.19', '89.105.200.57')& [1.4339999999999997]& [datetime.datetime(2018, 1, 1, 2, 1, 1)]\\ \hline
+										
+								\end{tabular}
+							}
+						\end{table}
+Pourquoi datetime.datetime(2018, 1, 1, 2, 1, 1) et pas datetime.datetime(2018, 1, 1, 2, 20, 09) ? 
+La date de début est 01/01/2018 01:01:01, cette date est convertie en UTC (+1 heure), ainsi le premier timeWindow est 01/01/2018 02:01:01, le suivant est 01/01/2018 03:01:01, etc.
+
+A ce stade, les données brutes sont prêtes passer à la détection des changements dans les délais. Les sorties des étapes décrites ci-dessus sont deux informations \textit{rawDiffRtt} et \textit{rawDates}. Pour chaque lien, on trouve les informations correspondantes à la fois dans \textit{rawDiffRtt} et \textit{rawDates}. Pour l'exemple précédent:
+
+\begin{lstlisting}[language=Python]
+('rawDiffRtt ': defaultdict(<type 'list'>, {
+(u'185.147.12.19', u'185.147.12.31'): [-0.22900000000000054, 3.857], (u'185.147.12.31', u'89.105.200.57'): [1.6630000000000003], (u'185.147.12.19', u'89.105.200.57'): [1.4339999999999997]}))
+('rawDates ': defaultdict(<type 'list'>, 
+{(u'185.147.12.19', u'185.147.12.31'): [datetime.datetime(2018, 1, 1, 2, 1, 1), datetime.datetime(2018, 1, 1, 2, 1, 1)], 
+(u'185.147.12.31', u'89.105.200.57'): [datetime.datetime(2018, 1, 1, 2, 1, 1)], 
+(u'185.147.12.19', u'89.105.200.57'): [datetime.datetime(2018, 1, 1, 2, 1, 1)]}))
+\end{lstlisting}
+\end{landscape}
+
+\paragraph{rttEvolution()}~
+
+Afin d'illustrer la procédure de la détection des anomalies, il faut produire comme données d'entrée au minimum $96$ traceroutes. Afin de procéder la détection, il faut avoir minimum $4$ RTTs différentiels par timeWindow. De plus, la vérification des deux intervalles de confiance se déclenche à partir de la 25 ème timeWindow. Ce que nécessite au minimum $96$ traceroutes afin de passer au moins une fois par toute les étapes de la détection. 
+
+ Comme paramètres de l'analyse on note:
+ 
+ \begin{table}
+\begin{tabular}{ll}
+	 Date de début &\\
+	 Date de fin & Tuesday 2 January 2018 10:14:22\\
+	 TimeWindow (secondes) & 3600 \\ 
+	 Préfixes & None \\
+	 Lien & ('185.147.12.31', '89.105.200.57')\\
+ \end{tabular}
+ \end{table}
+ 
+ Pour chaque timeWindow $d$ les opérations suivantes sont effectuées:
+ 
+ \begin{enumerate}
+ 	\item Calcul de la médiane des RTTs différentiels de la distribution (dist) caractérisant le lien durant $d$ (\textit{median}).
+ 	
+ 	\item Calcul de la moyenne des RTTs différentiels de la distribution caractérisant le lien durant $d$ (\textit{mean}).
+ 	
+ 	\item Calcul du score de wilson \textit{wilsonCi}: wilsonCi[0] et wilsonCi[1].
+ 	
+\begin{lstlisting}
+  wilsonCi = sm.stats.proportion_confint(len(dist)/2, len(dist), 0.05, "wilson")
+  wilsonCi = np.array(wilsonCi)*len(dist)
+\end{lstlisting}
+ 	
+ 	\item Calcul de l'intervalle de confiance \textit{ciLow} et \textit{ciHight} à partir du \textit{wilsonCi}.
+ 	
+\begin{lstlisting}
+ciLow.append( median[-1] - dist[int(wilsonCi[0])] )
+ciHigh.append( dist[int(wilsonCi[1])] - median[-1] )
+\end{lstlisting}
+ 	\item Mise à jour l'intervalle de confiance de référence (\textit{smoothAvg}, \textit{smoothHi} et \textit{smoothLow}).
+ 	
+ 	\item  Comparaison de l'intervalle de confiance calculé pour $d$  avec le dernier intervalle de référence. 
+ 	
+ 	Tant que le nombre des timewindows analysés ne dépassent pas $ 24 $, aucune comparaison ne sera prévue, c'est à partir du $25$ ème timeWindow que la comparaison se fait.
+ 	
+ 	
+ 	Pour précision, les détails des timeWindows qui précèdent $d$ sont conservés, toutefois la comparaison est faite avec le  dernier intervalle de confiance de référence. Ce dernier inclut l'historique du lien en terme des RTTs différentiels.
+ 	
+ 	
+ \end{enumerate}
+ 
+ Les étapes $ 5 $ et $ 6 $ peuvent être illustrées avec le code source suivant:
+ 
+  \begin{lstlisting}[language=python,numbers=left,
+  frame=single,
+  showstringspaces=true,
+  basicstyle=\footnotesize,
+  keywordstyle=\color{blue}\ttfamily\textbf,
+  identifierstyle=\color{magenta}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  commentstyle=\color{cyan}\ttfamily\textit
+  ]
+		#Mise à jour de l'intervalle de confiance de référence
+        if len(smoothAvg)<24:
+	        smoothAvg.append(median[-1])
+	        smoothHi.append(dist[int(wilsonCi[1])])
+	        smoothLow.append(dist[int(wilsonCi[0])])
+        elif len(smoothAvg)==24:
+	        smoothAvg.append(np.median(smoothAvg))
+	        smoothHi.append(np.median(smoothHi))
+	        smoothLow.append(np.median(smoothLow))
+	        for i in range(24):
+		        smoothAvg[i] = smoothAvg[-1]
+		        smoothHi[i] = smoothHi[-1]
+		        smoothLow[i] = smoothLow[-1]
+        else:
+	        #Lissage exponentiel
+	        smoothAvg.append(0.99*smoothAvg[-1]+0.01*median[-1])
+	        smoothHi.append(0.99*smoothHi[-1]+0.01*dist[int(wilsonCi[1])])
+	        smoothLow.append(0.99*smoothLow[-1]+0.01*dist[int(wilsonCi[0])])
+        
+        #La comparaison entre les intervalles de confiance 
+        if (median[-1]-ciLow[-1] > smoothHi[-1] or median[-1]+ciHigh[-1] < smoothLow[-1]) and np.abs(median[-1]-smoothAvg[-1])>1:
+	        alarmsDates.append(d)
+	        alarmsValues.append(median[-1])
+ 
+ \end{lstlisting}
+ 
+ Les tableaux ci-dessous illustrent les différentes  itérations de la détection. 
+
+\begin{table}[H]
+	\centering
+	
+		\resizebox{6cm}{!}{
+				\rowcolors{1}{ligntrose}{lightgray}
+ \begin{tabular}{ll}
+ 		\textbf{Itération}& 1\\
+ \textbf{timeWindow}	 &  01/01/2018 01:04:21 \\
+ \textbf{median} & [2.9630000000000005]\\ 
+ \textbf{mean} &  [3.2130000000000005]\\
+ \textbf{ciLow} & [0.5] \\
+ \textbf{ciHigh}& [1.5000000000000004]\\
+ \textbf{smoothAvg} &[2.9630000000000005] \\
+  \textbf{smoothHi} & [4.463000000000001]\\
+  \textbf{smoothLow} &[2.4630000000000005]\\ 
+  \end{tabular} }
+\end{table}
+\begin{table}[H]
+	\centering
+		\resizebox{8cm}{!}{
+	\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabular}{ll}
+				\textbf{Itération}& 2\\
+				\textbf{timeWindow} &01/01/2018 02:04:21\\ 
+				\textbf{median} &[2.9630000000000005, 2.9630000000000005]\\ \textbf{mean}&[3.2130000000000005, 3.2130000000000005]\\  \textbf{ciLow}&[0.5, 0.5] \\
+				\textbf{ciHigh}  &[1.5000000000000004, 1.5000000000000004]\\  \textbf{smoothAvg}&[2.9630000000000005, 2.9630000000000005] \\ 
+					\textbf{smoothHi}&[4.463000000000001, 4.463000000000001]\\
+					\textbf{smoothLow}  &[2.4630000000000005, 2.4630000000000005]\\
+					
+				\end{tabular} 
+			}
+\end{table}
+
+ \begin{table}[H]
+ 	\centering
+ 	\resizebox{\textwidth}{!}{
+ 			\rowcolors{1}{ligntrose}{lightgray}
+ 		\begin{tabular}{ll}
+ 			\textbf{Itération}& 3\\
+ 			\textbf{timeWindow}	 &   01/01/2018 03:04:21   \\
+ 			\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005]\\ 
+ 			\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005]  \\
+ 			\textbf{ciLow} & [0.5, 0.5, 0.5] \\
+ 			\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004]\\
+ 			\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+ 			\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001]\\
+ 			\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\ 
+ 		\end{tabular} }
+ 	\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\rowcolors{1}{ligntrose}{lightgray}
+		\begin{tabular}{ll}
+			\textbf{Itération}& 4\\
+			\textbf{timeWindow}	 & 2018-01-01 04:04:21   \\
+			\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\ 
+			\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005]  \\
+			\textbf{ciLow} &  [0.5, 0.5, 0.5, 0.5]  \\
+			\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+			\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+			\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+			\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\ 
+		\end{tabular} }
+\end{table}
+
+\begin{table}[H]
+	\centering
+	%\resizebox{\textwidth}{!}{
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 5\\
+		\textbf{timeWindow}	 &   2018-01-01 05:04:21 \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\ 
+		\textbf{mean} &  [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow} &  [0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004]  \\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005]\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\ 
+	\end{tabularx}
+	% }
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 6\\
+		\textbf{timeWindow}	 & 2018-01-01 06:04:21   \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} &  [3.2130000000000005, 3.2130000000000005,  3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} &  [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} &  [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 7\\
+		\textbf{timeWindow}	 &  2018-01-01 07:04:21 \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005]  \\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\ 
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 8 \\
+		\textbf{timeWindow}	 &  2018-01-01 08:04:21    \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} &  [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 9 \\
+		\textbf{timeWindow}	 &   2018-01-01 09:04:21  \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}&[1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 10 \\
+		\textbf{timeWindow}	 &  2018-01-01 10:04:21  \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 11 \\
+		\textbf{timeWindow}	 & 2018-01-01 11:04:21   \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 12 \\
+		\textbf{timeWindow}	 &  2018-01-01 12:04:21  \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		
+		\\
+		\textbf{ciLow} &[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  
+		\\
+		\textbf{ciHigh}&  [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 13\\
+		\textbf{timeWindow}	 & 2018-01-01 13:04:21   \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} &  [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 14\\
+		\textbf{timeWindow}	 & 2018-01-01 14:04:21   \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] 
+		\\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}&15 \\
+		\textbf{timeWindow}	 & 2018-01-01 15:04:21   \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} &  [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothLow} & [2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}&16 \\
+		\textbf{timeWindow}	 & 2018-01-01 16:04:21   \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] 
+		\\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+				\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 17\\
+		\textbf{timeWindow}	 &  2018-01-01 17:04:21  \\
+		\textbf{median} & [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] 
+		\\
+		\textbf{ciLow} & [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] 
+		\\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] 
+		\\
+		\textbf{smoothAvg} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] 
+		\\
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothHi} & [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] 
+		\\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\ 
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 18 \\
+		\textbf{timeWindow} &2018-01-01 18:04:21 \\
+		
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		
+				\end{tabularx} 
+			\end{table}
+			
+			\begin{table}[H]
+				\centering
+				\rowcolors{1}{ligntrose}{lightgray}
+				\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001]\\ 
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 19 \\
+		\textbf{timeWindow}& 2018-01-01 19:04:21  \\
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005]  \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 20\\
+		\textbf{timeWindow} &2018-01-01 20:04:21 \\
+		
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005]\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005]\\ 
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]\\ 
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004]\\ 
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005]\\
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX} 
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 21\\
+		\textbf{timeWindow} &2018-01-01 21:04:21 \\ 
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\
+		
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 22 \\
+		\textbf{timeWindow} &2018-01-01 22:04:21 \\ 
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005] \\
+		
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 23\\
+		\textbf{timeWindow} &2018-01-01 23:04:21 \\
+		
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		
+
+		
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005] \\
+		
+		
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 24\\
+		\textbf{timeWindow} & 2018-01-02 00:04:21 \\
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]\\
+		
+	\end{tabularx} 
+\end{table}
+
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 25 \\
+		\textbf{timeWindow}& 2018-01-02 01:04:21 \\
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005]
+		\\
+	\end{tabularx} 
+\end{table}
+
+
+A l'itération $25$, on a eu les premières 24 valeurs du \textit{smoothAvg}, \textit{smoothHi} et \textit{smoothLow}. Ainsi, à partir de l'itération 26, il y a la comparaison entre les deux intervalles de confiance. Les RTTs différentiel sont les mêmes, pour le lien analysé, jusqu'à l'itération  25. 
+
+Afin d'illustrer les deux intervalles de confiance, la figure [!] montre leurs états pour timeWindow = 2018-01-02 01:04:21.
+
+Pour précision, les valeurs dans les ordonnées (1, 2 et 3) n'ont aucun sens, c'est pour la clarté du graphique.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{illustrations/conf}
+\caption{}
+\label{fig:conf}
+\end{figure}
+
+
+Pour les itérations 26, 27,  etc. Nous allons présenter les détails de l'itération, le graphique reprenant les deux intervalles de confiance ainsi que la moyenne et la médiane et enfin la détection des alarmes.
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}&26 \\
+		\textbf{timeWindow}& 2018-01-02 02:04:21 \\
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5] \\
+		
+			\end{tabularx} 
+		\end{table}
+		
+		\begin{table}[H]
+			\centering
+			\rowcolors{1}{ligntrose}{lightgray}
+			\begin{tabularx}{\textwidth}{lX}
+		  \textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253]\\
+		
+	\end{tabularx} 
+\end{table}
+
+
+
+\begin{figure}[]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/2018-01-0202:04:21}
+\caption{}
+\label{fig:2018-01-0202:04:21}
+\end{figure}
+
+La détection : 
+\begin{lstlisting}[language=python,numbers=left,
+frame=single,
+showstringspaces=true,
+basicstyle=\footnotesize,
+keywordstyle=\color{blue}\ttfamily\textbf,
+identifierstyle=\color{magenta}\ttfamily,
+stringstyle=\color{red}\ttfamily,
+commentstyle=\color{cyan}\ttfamily\textit
+]
+
+condition 1 : (median[-1] , ciLow[-1], median[-1] - ciLow[-1], >, smoothHi[-1])
+( 10823.963 , 142.5, 10681.463, '>', 114.413)
+
+condition 2 : (median[-1] , ciHigh[-1], median[-1] + ciHigh[-1] < smoothLow[-1])
+(10823.963, 175.5, 10999.463, '<', 109.253)
+
+condition 3 :(median[-1] , smoothAvg[-1],  abs(median[-1] - smoothAvg[-1]), >, 1)
+(10823.963, 111.173, 10712.789999999999, '>', 1)
+\end{lstlisting}
+
+Une anomalie est détectée car condition 1 AND condition 3 = True. Rappelons qu'un anomalie est détectée si :
+
+(condition 1 OR condition 2) AND condition 3 = True.
+
+
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 27 \\
+		\textbf{timeWindow}& 2018-01-02 03:04:21 \\
+		
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0] \\
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251]\\
+	\end{tabularx} 
+\end{table}
+
+Les intervalles de confiance, la moyenne et la médiane: 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{illustrations/2018-01-0203:04:21-}
+\caption{}
+\label{fig:2018-01-0203:04:21-}
+\end{figure}
+
+La détection :
+
+\begin{lstlisting}[language=python,numbers=left,
+frame=single,
+showstringspaces=true,
+basicstyle=\footnotesize,
+keywordstyle=\color{blue}\ttfamily\textbf,
+identifierstyle=\color{magenta}\ttfamily,
+stringstyle=\color{red}\ttfamily,
+commentstyle=\color{cyan}\ttfamily\textit
+]
+
+(median[-1] , ciLow[-1], median[-1] - ciLow[-1] > smoothHi[-1])
+(1071.463, 25.0, 1046.463, '>', 124.2635)
+
+(median[-1] + ciHigh[-1] < smoothLow[-1])
+( 1071.463, 28.0, 1099.463, '<', 118.6251)
+
+(abs(median[-1] - smoothAvg[-1]) > 1)
+1071.463, 120.77590000000001, 950.6871, '>', 1)
+\end{lstlisting}
+
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 28\\
+		\textbf{timeWindow}& 2018-01-02 04:04:21 \\
+		
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463, 1071.463]\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213, 1072.213]\\ 
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0, 25.0] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0, 28.0] \\
+		
+					\end{tabularx} 
+				\end{table}
+				
+				\begin{table}[H]
+					\centering
+					\rowcolors{1}{ligntrose}{lightgray}
+					\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001, 130.28277100000003] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635, 134.015495] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251, 127.903479]\\
+		
+		
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 29 \\
+		\textbf{timeWindow} &2018-01-02 05:04:21 \\
+		
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463, 1071.463, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213, 1072.213, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0, 25.0, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0, 28.0, 1.5000000000000004] \\
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001, 130.28277100000003, 129.00957329000002] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635, 134.015495, 132.71997005] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251, 127.903479, 126.64907421000001]\\
+		
+		
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 30\\
+		\textbf{timeWindow} &2018-01-02 06:04:21 \\ 
+		\textbf{median} &[2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463, 1071.463, 2.9630000000000005, 2.9630000000000005]\\ 
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213, 1072.213, 3.2130000000000005, 3.2130000000000005]\\ 
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0, 25.0, 0.5, 0.5] \\
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0, 28.0, 1.5000000000000004, 1.5000000000000004] \\
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001, 130.28277100000003, 129.00957329000002, 127.74910755710002] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635, 134.015495, 132.71997005, 131.43740034950002] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251, 127.903479, 126.64907421000001, 125.40721346790001]\\
+		
+	\end{tabularx} 
+\end{table}
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 31\\
+		\textbf{timeWindow} &2018-01-02 07:04:21 \\
+		
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463, 1071.463, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213, 1072.213, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0, 25.0, 0.5, 0.5, 0.5]\\ 
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0, 28.0, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004]\\ 
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001, 130.28277100000003, 129.00957329000002, 127.74910755710002, 126.50124648152901] \\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635, 134.015495, 132.71997005, 131.43740034950002, 130.16765634600503] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251, 127.903479, 126.64907421000001, 125.40721346790001, 124.177771333221]\\
+		
+	\end{tabularx} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\rowcolors{1}{ligntrose}{lightgray}
+	\begin{tabularx}{\textwidth}{lX}
+		\textbf{Itération}& 32\\
+		\textbf{timeWindow}& 2018-01-02 07:04:21 \\
+		\textbf{median}& [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 10823.963, 1071.463, 1071.463, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005] \\
+		\textbf{mean} & [3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005, 10832.213, 1072.213, 1072.213, 3.2130000000000005, 3.2130000000000005, 3.2130000000000005] \\
+		\textbf{ciLow}& [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 142.5, 25.0, 25.0, 0.5, 0.5, 0.5] \\
+		
+							\end{tabularx} 
+						\end{table}
+						
+						\begin{table}[H]
+							\centering
+							\rowcolors{1}{ligntrose}{lightgray}
+							\begin{tabularx}{\textwidth}{lX}
+		\textbf{ciHigh}& [1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004, 175.5, 28.0, 28.0, 1.5000000000000004, 1.5000000000000004, 1.5000000000000004] \\
+		\textbf{smoothAvg}&  [2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 2.9630000000000005, 111.173, 120.77590000000001, 130.28277100000003, 129.00957329000002, 127.74910755710002, 126.50124648152901]\\
+		\textbf{smoothHi}& [4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 4.463000000000001, 114.413, 124.2635, 134.015495, 132.71997005, 131.43740034950002, 130.16765634600503] \\
+		\textbf{smoothLow} &[2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 2.4630000000000005, 109.253, 118.6251, 127.903479, 126.64907421000001, 125.40721346790001, 124.177771333221]\\
+		
+	\end{tabularx} 
+\end{table}
 
 
 
@@ -976,6 +2574,78 @@ La figure \ref{fig:tcl} illustre par l'exemple le principe du TCL avec une distr
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		\appendix
+		
+		\chapter{Illustration du théorème central limite} \label{appendix:clt-exemple}
+		La figure \ref{fig:tcl} illustre par l'exemple le principe du TCL avec une distribution qui suit la loi normale. 
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{illustrations/tcl}
+			\caption{}
+			\label{fig:tcl}
+			\source{\url{http://webapps.fundp.ac.be/biostats/biostat/modules/module70/page4.html}, consultée le $ 28/09/2018 $.}
+			
+		\end{figure}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 
 

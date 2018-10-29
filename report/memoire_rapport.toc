@@ -92,12 +92,12 @@
 \contentsline {subparagraph}{cas 1}{60}{section*.69}
 \contentsline {subparagraph}{cas 2}{60}{section*.70}
 \contentsline {paragraph}{Conclusion}{64}{section*.76}
-\contentsline {section}{\numberline {II.5}L'algorithme de la détection des anomalies des délais d'un lien}{66}{section.2.5}
-\contentsline {subsection}{\numberline {II.5.1}Introduction}{66}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {II.5.2}Le fonctionnement de l'algorithme de la détection}{67}{subsection.2.5.2}
-\contentsline {paragraph}{computeRTT()}{67}{section*.78}
-\contentsline {paragraph}{MergeRttResults()}{81}{section*.100}
-\contentsline {paragraph}{Prétraitement des résultats par timeWindow}{83}{section*.103}
-\contentsline {paragraph}{rttEvolution()}{86}{section*.107}
-\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{139}{appendix.A}
-\contentsline {chapter}{Conclusion}{141}{appendix*.163}
+\contentsline {section}{\numberline {II.5}L'algorithme de la détection des anomalies des délais d'un lien}{65}{section.2.5}
+\contentsline {subsection}{\numberline {II.5.1}Introduction}{65}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {II.5.2}Le fonctionnement de l'algorithme de la détection}{66}{subsection.2.5.2}
+\contentsline {paragraph}{computeRTT()}{66}{section*.78}
+\contentsline {paragraph}{MergeRttResults()}{80}{section*.100}
+\contentsline {paragraph}{Prétraitaitement des résultats par timeWindow}{82}{section*.103}
+\contentsline {paragraph}{rttEvolution()}{85}{section*.107}
+\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{137}{appendix.A}
+\contentsline {chapter}{Conclusion}{139}{appendix*.163}
