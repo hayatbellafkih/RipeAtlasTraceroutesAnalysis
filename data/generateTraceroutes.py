@@ -31,26 +31,9 @@ allrtts=[
 rtt1,
 rtt1,
 rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
-rtt1,
- rtt1
+rtt9,
+rtt12,
+rtt1
 ]
 
 def generateTraceroutes(traceroute="traceroute.json"):

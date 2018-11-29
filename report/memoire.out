@@ -33,21 +33,11 @@
 \BOOKMARK [2][-]{subsection.1.5.5}{Le suivi des détours dans un trafic local}{section.1.5}% 33
 \BOOKMARK [2][-]{subsection.1.5.6}{Visualisation\040:\040indicateurs\040et\040dashboard}{section.1.5}% 34
 \BOOKMARK [1][-]{section.1.6}{Conclusion}{chapter.1}% 35
-\BOOKMARK [0][-]{chapter.2}{Algorithme de détection des anomalies}{}% 36
+\BOOKMARK [0][-]{chapter.2}{La détection des anomalies dans les délais d'un lien}{}% 36
 \BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 37
-\BOOKMARK [1][-]{section.2.2}{L'étude des délais des liens }{chapter.2}% 38
-\BOOKMARK [2][-]{subsection.2.2.1}{Les données utilisées dans l'analyse des délais}{section.2.2}% 39
-\BOOKMARK [1][-]{section.2.3}{La description de la détection des délais anormaux des liens}{chapter.2}% 40
-\BOOKMARK [2][-]{subsection.2.3.1}{RTT différentiel }{section.2.3}% 41
-\BOOKMARK [2][-]{subsection.2.3.2}{Le principe de la détection des changements des délais}{section.2.3}% 42
-\BOOKMARK [2][-]{subsection.2.3.3}{Les résultats de l'analyse des délais des liens}{section.2.3}% 43
-\BOOKMARK [2][-]{subsection.2.3.4}{Présentation de l'algorithme de la détection des changements anormaux : Résultat I}{section.2.3}% 44
-\BOOKMARK [2][-]{subsection.2.3.5}{Présentation de l'algorithme de la détection des changements anormaux : Résultat II}{section.2.3}% 45
-\BOOKMARK [2][-]{subsection.2.3.6}{Quelques chiffres sur la médiane des RTTs différentiel}{section.2.3}% 46
-\BOOKMARK [2][-]{subsection.2.3.7}{Notes\040sur\040les\040traceroutes\040}{section.2.3}% 47
-\BOOKMARK [1][-]{section.2.4}{En\040pratique\040...}{chapter.2}% 48
-\BOOKMARK [1][-]{section.2.5}{L'algorithme de la détection des anomalies des délais d'un lien}{chapter.2}% 49
-\BOOKMARK [2][-]{subsection.2.5.1}{Introduction}{section.2.5}% 50
-\BOOKMARK [2][-]{subsection.2.5.2}{Le fonctionnement de l'algorithme de la détection}{section.2.5}% 51
-\BOOKMARK [0][-]{appendix.A}{Illustration du théorème central limite}{}% 52
-\BOOKMARK [0][-]{appendix*.163}{Conclusion}{}% 53
+\BOOKMARK [1][-]{section.2.2}{Présentation du travail de référence}{chapter.2}% 38
+\BOOKMARK [1][-]{section.2.3}{Présentation de l'outil de la détection des anomalies }{chapter.2}% 39
+\BOOKMARK [2][-]{subsection.2.3.1}{Paramètres de l'algorithme de la détection}{section.2.3}% 40
+\BOOKMARK [2][-]{subsection.2.3.2}{Le processus de la détection des anomalies dans les délais d'un lien}{section.2.3}% 41
+\BOOKMARK [2][-]{subsection.2.3.3}{Vue globale des étapes de la détection des anomalies}{section.2.3}% 42
+\BOOKMARK [2][-]{subsection.2.3.4}{Complément d'information du processus de la détection avec le langage Scala}{section.2.3}% 43

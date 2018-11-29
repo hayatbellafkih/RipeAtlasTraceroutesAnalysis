@@ -1,4 +1,4 @@
-\select@language {french}
+\babel@toc {french}{}
 \contentsline {chapter}{Introcuction générale}{3}{chapter*.1}
 \contentsline {chapter}{\numberline {I}RIPE Atlas}{5}{chapter.1}
 \contentsline {section}{\numberline {I.1}Introduction}{5}{section.1.1}
@@ -39,65 +39,33 @@
 \contentsline {subsection}{\numberline {I.5.5}Le suivi des détours dans un trafic local}{30}{subsection.1.5.5}
 \contentsline {subsection}{\numberline {I.5.6}Visualisation : indicateurs et dashboard}{31}{subsection.1.5.6}
 \contentsline {section}{\numberline {I.6}Conclusion}{31}{section.1.6}
-\contentsline {chapter}{\numberline {II}Algorithme de détection des anomalies}{33}{chapter.2}
+\contentsline {chapter}{\numberline {II}La détection des anomalies dans les délais d'un lien}{33}{chapter.2}
 \contentsline {section}{\numberline {II.1}Introduction}{33}{section.2.1}
-\contentsline {section}{\numberline {II.2}L'étude des délais des liens }{34}{section.2.2}
-\contentsline {subsection}{\numberline {II.2.1}Les données utilisées dans l'analyse des délais}{34}{subsection.2.2.1}
-\contentsline {section}{\numberline {II.3}La description de la détection des délais anormaux des liens}{35}{section.2.3}
-\contentsline {subsection}{\numberline {II.3.1}RTT différentiel }{35}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {II.3.2}Le principe de la détection des changements des délais}{36}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {II.3.3}Les résultats de l'analyse des délais des liens}{37}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {II.3.4}Présentation de l'algorithme de la détection des changements anormaux : Résultat I}{37}{subsection.2.3.4}
-\contentsline {paragraph}{Description de l'algorithme de détection}{37}{section*.20}
-\contentsline {paragraph}{Description des paramètres de l'analyse des délais}{37}{section*.21}
-\contentsline {subparagraph}{start}{38}{section*.22}
-\contentsline {subparagraph}{end}{38}{section*.23}
-\contentsline {subparagraph}{timeWindow}{38}{section*.24}
-\contentsline {subparagraph}{alpha}{38}{section*.26}
-\contentsline {subparagraph}{minASN}{39}{section*.27}
-\contentsline {subparagraph}{minASNEntropy}{40}{section*.28}
-\contentsline {paragraph}{L'entropie }{40}{section*.29}
-\contentsline {subparagraph}{minSeen}{40}{section*.30}
-\contentsline {subparagraph}{af}{40}{section*.31}
-\contentsline {subparagraph}{comment}{41}{section*.32}
-\contentsline {subparagraph}{prefixes}{41}{section*.33}
-\contentsline {subparagraph}{experimentDate}{41}{section*.34}
-\contentsline {subparagraph}{confInterval}{41}{section*.35}
-\contentsline {paragraph}{Intervalle de confiance d'une moyenne}{42}{section*.36}
-\contentsline {subparagraph}{Exemple des paramètres de l'analyse des délais}{44}{section*.38}
-\contentsline {paragraph}{Les étapes de l'analyse des délais}{44}{section*.39}
-\contentsline {subparagraph}{computeRtt}{44}{section*.40}
-\contentsline {subparagraph}{mergeRttResults}{47}{section*.42}
-\contentsline {subparagraph}{outlierDetection}{48}{section*.47}
-\contentsline {subsection}{\numberline {II.3.5}Présentation de l'algorithme de la détection des changements anormaux : Résultat II}{50}{subsection.2.3.5}
-\contentsline {paragraph}{Introduction}{50}{section*.48}
-\contentsline {paragraph}{Caractéristiques d'un lien}{51}{section*.49}
-\contentsline {paragraph}{La procédure de création de l'évolution des RTTs différentiel d'un lien }{52}{section*.50}
-\contentsline {subparagraph}{Objectif}{52}{section*.51}
-\contentsline {subparagraph}{Entrées}{52}{section*.52}
-\contentsline {subparagraph}{Sorties}{52}{section*.53}
-\contentsline {subparagraph}{Etapes}{52}{section*.54}
-\contentsline {subparagraph}{Précisions relatives au pseudo-code}{53}{section*.55}
-\contentsline {subparagraph}{Pseudo Code}{53}{section*.56}
-\contentsline {subsection}{\numberline {II.3.6}Quelques chiffres sur la médiane des RTTs différentiel}{55}{subsection.2.3.6}
-\contentsline {subsection}{\numberline {II.3.7}Notes sur les traceroutes }{55}{subsection.2.3.7}
-\contentsline {paragraph}{Traceroute réussi ou échoué totalement.}{56}{section*.58}
-\contentsline {paragraph}{Traceroute réussi ou échoué partiellement.}{56}{section*.59}
-\contentsline {paragraph}{Les adresses IP privées dans traceroute.}{56}{section*.60}
-\contentsline {paragraph}{L'utilité des attributs d'un enregistrement traceroute.}{56}{section*.61}
-\contentsline {section}{\numberline {II.4}En pratique ...}{58}{section.2.4}
-\contentsline {paragraph}{Le travail de référence}{58}{section*.63}
-\contentsline {paragraph}{Intégration des AWS Athena + S3 dans le travail de référence}{58}{section*.65}
-\contentsline {paragraph}{Aller au delà du stockage sur Amazon S3}{59}{section*.67}
-\contentsline {subparagraph}{cas 1}{60}{section*.69}
-\contentsline {subparagraph}{cas 2}{60}{section*.70}
-\contentsline {paragraph}{Conclusion}{64}{section*.76}
-\contentsline {section}{\numberline {II.5}L'algorithme de la détection des anomalies des délais d'un lien}{66}{section.2.5}
-\contentsline {subsection}{\numberline {II.5.1}Introduction}{66}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {II.5.2}Le fonctionnement de l'algorithme de la détection}{67}{subsection.2.5.2}
-\contentsline {paragraph}{computeRTT()}{67}{section*.78}
-\contentsline {paragraph}{MergeRttResults()}{81}{section*.100}
-\contentsline {paragraph}{Prétraitement des résultats par timeWindow}{83}{section*.103}
-\contentsline {paragraph}{rttEvolution()}{86}{section*.107}
-\contentsline {chapter}{\numberline {A}Illustration du théorème central limite}{139}{appendix.A}
-\contentsline {chapter}{Conclusion}{141}{appendix*.163}
+\contentsline {section}{\numberline {II.2}Présentation du travail de référence}{33}{section.2.2}
+\contentsline {paragraph}{Une vue globale du travail de référence}{33}{section*.18}
+\contentsline {section}{\numberline {II.3}Présentation de l'outil de la détection des anomalies }{33}{section.2.3}
+\contentsline {subsection}{\numberline {II.3.1}Paramètres de l'algorithme de la détection}{34}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {II.3.2}Le processus de la détection des anomalies dans les délais d'un lien}{34}{subsection.2.3.2}
+\contentsline {paragraph}{1. Trier les traceroutes }{35}{section*.20}
+\contentsline {paragraph}{2. Vérification de la validité de chaque traceroute }{35}{section*.22}
+\contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut.}{35}{section*.23}
+\contentsline {paragraph}{4. Inférence des liens topologiques par traceroute.}{35}{section*.24}
+\contentsline {paragraph}{5. Caractérisation des liens}{36}{section*.26}
+\contentsline {paragraph}{6. Fusion des informations d'un lien. }{36}{section*.27}
+\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et l'intervalle de confiance courant}{37}{section*.28}
+\contentsline {paragraph}{8. Mise à jour de la médiane et de l'intervalle de référence du lien analysé.}{37}{section*.29}
+\contentsline {subsection}{\numberline {II.3.3}Vue globale des étapes de la détection des anomalies}{37}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {II.3.4}Complément d'information du processus de la détection avec le langage Scala}{37}{subsection.2.3.4}
+\contentsline {paragraph}{La classe Signal}{37}{section*.31}
+\contentsline {paragraph}{La classe Hop}{37}{section*.32}
+\contentsline {paragraph}{La classe Traceroutes}{38}{section*.33}
+\contentsline {paragraph}{La classe TraceroutesPerPeriod}{38}{section*.34}
+\contentsline {paragraph}{La classe ProceedSignal }{38}{section*.35}
+\contentsline {paragraph}{La classe ProceedHop }{39}{section*.36}
+\contentsline {paragraph}{La classe MedianByHopTraceroute }{39}{section*.37}
+\contentsline {paragraph}{La classe Link}{39}{section*.38}
+\contentsline {paragraph}{La classe LinksTraceroute}{39}{section*.39}
+\contentsline {paragraph}{La classe LinkIPs}{40}{section*.40}
+\contentsline {paragraph}{La classe DiffRtt}{40}{section*.41}
+\contentsline {paragraph}{La classe DiffRTTPeriod }{40}{section*.42}
+\contentsline {paragraph}{La classe LinkState }{40}{section*.43}

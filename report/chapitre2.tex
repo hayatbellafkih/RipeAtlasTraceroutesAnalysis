@@ -26,7 +26,9 @@ Dans la suite de ce travail, nous allons reprendre seulement la première métho
  
 \subsection{Les données utilisées dans l'analyse des délais}~
 
-La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons \footnote{L'échantillon de la métrique qui caractérise un lien : RTT différentiel.} considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité et  qui sont capables de collecter une quantité importante de données relatives aux performances des réseaux informatiques, c'est ce qu'assure le projet RIPE Atlas. Le travail de référence implique principalement les mesures de traceroutes, ainsi deux catégories de mesures sont utilisées :
+La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons \footnote{L'échantillon de la métrique qui caractérise un lien : RTT différentiel.} considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité et  qui sont capables de collecter une quantité importante de données relatives aux performances des réseaux informatiques, c'est ce qu'assure le projet RIPE Atlas.
+
+ Le travail de référence implique principalement les mesures de traceroutes, ainsi deux catégories de mesures sont utilisées :
 
 \begin{itemize}
 	\item \textit{builtin} : ce sont les traceroutes effectués par toutes les sondes Atlas vers les instances des  $13$ serveurs DNS racines. Les traceroutes sont effectués chaque $30$ minutes. En pratique, certains serveurs racines DNS déploient l'anycast. Au moment de la réalisation du travail de référence, c'étaient des traceroutes vers $ 500 $ instances des serveurs DNS racines;
@@ -70,13 +72,15 @@ L'étude des délais ne concerne pas  les adresses privées, ainsi, le suivi des
 %La détection des délais des liens exploite le nombre important des sondes dans le monde, par conséquent, les données abondantes collectées par ces sondes. Avant de passer aux détails de l'algorithme, on introduit d'abord le RTT différentiel.  
 
 \subsection{RTT différentiel }~
-
+ 
 Il est indispensable de présenter la définition du RTT  (Round Trip Time)  différentiel d'un lien avant de procéder à la description de l'algorithme de la détection des anomalies. 
 
 
 \begin{tcolorbox}
 	
-	Le \textbf{temps RTT} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet sondé  et le timestamp associé à la réception de la réponse ICMP\footnote{Internet Control Message Protocol est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.}. C'est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies avec l'utilitaire traceroute et ping. En ce qui concerne traceroute,  ce dernier fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination. Le temps RTT inclut le temps pour atteindre un saut dans le sens du forwarding, à ce temps, il s'ajoute le temps de propagation des réponses. De plus, il y a  le temps de traitement des requêtes au niveau des routeurs. 
+	\textbf{ICMP} :Internet Control Message Protocol est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.
+	
+	\textbf{ RTT} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet sondé  et le timestamp associé à la réception de la réponse ICMP. C'est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies par les utilitaires traceroute et ping. En ce qui concerne traceroute,  ce dernier fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination.  RTT inclut le temps de transmission, du quering et  du traitement. 
 \end{tcolorbox}
 
 La figure 	\ref{fig:rtt-differ} (a)  illustre le RTT entre la sonde P et les deux routeurs B et C. Le RTT différentiel  entre deux routeurs $B$ et $C$ adjacents, noté $\Delta_{PBC}$, est la différence entre le RTT entre la sonde $P$ et $B$ (bleu) d'une part, et le RTT entre la sonde $P$ et $C$ (rouge) dans la figure 	\ref{fig:rtt-differ} (b). 

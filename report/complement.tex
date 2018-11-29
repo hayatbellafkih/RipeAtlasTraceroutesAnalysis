@@ -1,0 +1,222 @@
+\documentclass[]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[table]{xcolor}
+%######################################################################################################
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{makecell,tabularx}
+\renewcommand\theadfont{\bfseries\scshape}
+\usepackage{graphicx}
+\setcounter{secnumdepth}{3}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\setlength{\parindent}{2em}
+\usepackage{tcolorbox}
+\usepackage{colortbl}
+\usepackage[francais]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{times}
+\usepackage[hyphens]{url}
+\usepackage{standalone}
+\usepackage{comment}
+\usepackage[subfigure]{tocloft} 
+\usepackage{subfigure} 
+%\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{lscape}
+
+\usepackage{color,soul}
+\usepackage{csvsimple,booktabs}
+\usepackage{tikz}
+\usepackage{afterpage}
+\usepackage{rotating}
+\usepackage{csvsimple}
+\usepackage{caption}
+
+%\frenchbsetup{StandardLists=true}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{array}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{mygray}{gray}{0.6}
+\colorlet{numb}{magenta!60!black}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\renewcommand{\bibname}{References}
+\usepackage{enumerate}
+\usepackage{tablefootnote}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{pstricks}
+\usepackage{eqparbox}
+\usepackage{hyperref}
+\usepackage{tablefootnote}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{pifont}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{appendix}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\lstset{
+	showstringspaces=false,
+	string=[s]{"}{"},
+	stringstyle=\color{blue},
+	comment=[l]{:},
+	commentstyle=\color{black},
+	backgroundcolor=\color{lstcolor},
+	breaklines=true,
+}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	numbers=left,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{background},
+	literate=
+	*{0}{{{\color{numb}0}}}{1}
+	{1}{{{\color{numb}1}}}{1}
+	{2}{{{\color{numb}2}}}{1}
+	{3}{{{\color{numb}3}}}{1}
+	{4}{{{\color{numb}4}}}{1}
+	{5}{{{\color{numb}5}}}{1}
+	{6}{{{\color{numb}6}}}{1}
+	{7}{{{\color{numb}7}}}{1}
+	{8}{{{\color{numb}8}}}{1}
+	{9}{{{\color{numb}9}}}{1}
+	{:}{{{\color{punct}{:}}}}{1}
+	{,}{{{\color{punct}{,}}}}{1}
+	{\{}{{{\color{delim}{\{}}}}{1}
+	{\}}{{{\color{delim}{\}}}}}{1}
+	{[}{{{\color{delim}{[}}}}{1}
+	{]}{{{\color{delim}{]}}}}{1},
+}
+
+
+\definecolor{lstcolor}{HTML}{CCCCFF}
+\definecolor{orange}{HTML}{F8F9F9}
+\definecolor{ligntrose}{HTML}{FFF8DC}
+\tcbset{colback= orange,fonttitle=\bfseries, colframe=white }
+
+
+%%%%%%%%%%%%%%%%%%%
+\renewcommand\labelitemi{--}
+\newcommand{\source}[1]{\caption*{Source: {#1}} }
+\definecolor{lightgray}{gray}{0.9}
+				%custom \section
+
+% Title Page
+\title{}
+\author{}
+
+
+\begin{document}
+\maketitle
+
+\section{La détection des anomalies}
+\section{A savoir}
+
+Les entrées de l'algorithme de la détection est un ensemble de traceroutes. Un traceroute (Traceroute) est un ensemble de sauts (Hop). Chaque saut est décrit par un ensemble de signaux (Signal). 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{illustrations/traceroute}
+	\caption{}
+	\label{fig:traceroute}
+\end{figure}
+
+\paragraph{Paramètres de l'algorithme de la détection}
+
+\begin{itemize}
+		\item  Objectif : suivre l'évolution du délais d'un lien au cours du temps en suivant son RTT différentiel par période du temps (\textit{timeWindow}).
+	\item Entrées : l'ensemble des traceroutes stockés dans un fichier, date de début de l'analyse \textit{start}, date du fin de l'analyse \textit{end}, lien à analyser (\textit{link}) et la fenêtre de l'analyse (\textit{timeWindow}).
+	\item Sorties : les dates pendant lesquelles des anomalies ont été détectées.
+\end{itemize}
+
+Soient $ d_1 $,$  d_2 $, ..., $ d_N $ les périodes entre \textit{start} et \textit{end} où $  d_{i+1} $ - $  d_{i} $ = $  d_{j+1} $ - $  d_{j} $ =\textit{step} pour tout $ i $ et $ j $ dans$  [1,N] $
+\section{Etapes : }
+\paragraph{1. Trier les traceroutes } à analyser par \textit{timeWindow}. En effet, chaque $d_i$ est associé à un ensemble de traceroutes ayant été effectués entre $d_i$ et $d_i + step$ \footnote{Chaque traceroute reprend le temps pendant lequel il était effectué.}. 
+
+Les opérations suivantes (2 à 6) concernent  les traceroutes par tout $d_i$.  
+
+\paragraph{2. Vérification de la validité de chaque traceroute } du chaque $d_i$. Ces vérifications reprennent les points suivants:
+\begin{itemize}
+	\item élimination des traceroutes échoués complètement;
+	\item élimination du signal contenant une adresse IP privée;
+	\item élimination du signal qui ne contient pas un RTT ou celui qui contient un RTT négatif;
+	\item  élimination du signal échoué.
+\end{itemize}
+
+\paragraph{3. Calcul de la médiane des RTTs par saut}, autrement dit, pour tout saut d'un traceroute,  on calcul la médiane des RTTs par adresse IP. Soit le saut $h =\{s \}$ où $s$ est un objet Signal, mediane (h)= $\{ median(s)\}$  pour tout signal $s$ ayant la même adresse IP. Ainsi, le saut du traceroute est reconstruit en regroupant les signaux par adresse IP et ensuite en calculant leurs RTTs. 
+
+
+\paragraph{4. Inférence des liens topologiques par traceroute.} Un lien topologique est formé par chaque deux routeurs consécutifs repris par l'utilitaire traceroute. Ce sont les deux routeurs des deux sauts consécutifs. De manière générale, la figure \ref{fig:link-inference} illustre la constitution des liens par traceroute. RAi avec $i \in [1,N]$ est l'ensemble des routeurs pour le saut A et RBj avec $j \in [1,M]$ est l'ensemble des routeurs pour le saut B, avec N et M deux entiers.
+
+
+
+
+Ainsi, les liens  construits sont ceux partant de tout RAi vers tout RBj, où A et B sont deux sauts consécutifs. A l'issue de cette étape, pour tout traceroute, on obtient la liste des liens possibles tout en reprenant des informations générales de la requête traceroute.
+
+\paragraph{5. Caractérisation des liens} avec leur RTTs différentiels. A cette étape, on calcul le RTT différentiel d'un lien en calculant la différence entre les RTTs\footnote{C'est la médiane calculée à l'étape 3.} des deux routeurs du lien en question. En plus du RTT différentiel, on note aussi la sonde Atlas ayant effectué la requête traceroute où le lien a été identifié. 
+
+\paragraph{6. Fusion des informations d'un lien. } Etant donné qu'un lien (IP1, IP2) peut être identifié plusieurs fois pendant un même timeWindow d'une part, et le lien (IP2,IP1) est similaire\footnote{La similarité est mesurée par le RTT différentiel.} au lien  (IP1, IP2) d'autre part, la fusion permet de construire une nouvelle distribution des RTTs différentiels caractérisant le lien (IP1, IP2) qui reprend les RTTs différentiels du (IP1, IP2) et du (IP2, IP1).
+
+
+A la fin de l'étape 6, tous les traceroutes sont analysés tout en identifiant leurs liens, et ce par timeWindow. A présent, l'objectif c'est d'identifier les dates pendant lesquelles des anomalies ont été détectées. Pour ce faire, l'idée du travail de référence c'est de conserver, pour un lien donné, une référence du RTT différentiel médian qui sera d'abord comparée avec la médiane courante du RTT différentiel et ensuite mettre à jour cette référence tout au long de la période de l'analyse.
+
+  
+  \paragraph{7. Calcul de la médiane et de  l'intervalle de confiance courant } du lien analysé.
+  
+  \paragraph{8. Mise à jour de la médiane et de l'intervalle de  référence du lien analysé}
+  
+  \paragraph{9. La détection des anomalies } en comparant l'état du lien courant avec l'état de la référence pour ce même lien.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{illustrations/link-inference}
+	\caption{}
+	\label{fig:link-inference}
+\end{figure}
+
+\section{Vue globale des étapes de la détection des anomalies}
+La figure 	\ref{fig:process-rttanalysis2} présente la succession des étapes de la détection des anomalies dans les délais d'un lien donné. Comme complément à ces étapes, on présente les différentes classes permettant de manipuler les données tout au long du processus de l'analyse.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{../dia/process-rttanalysis_2}
+	\caption{}
+	\label{fig:process-rttanalysis2}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+		\resizebox{\textwidth}{\textheight}{
+	\input{../dia/process-rttanalysis.tex}
+}
+	\caption{}
+	\label{fig:process-rttanalysis_tex}
+\end{figure}
+
+
+\end{document}          

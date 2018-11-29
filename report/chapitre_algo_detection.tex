@@ -1,6 +1,104 @@
 \chapter{La détection des anomalies}
 
+\section{Introduction à la détection des anomalies dans les liens}
 
+\subsection{Introduction}
+
+R. Fontugne et al ont exploité la distribution des sondes Atlas dans le monde afin d'étudier un des problèmes relatifs aux performances des réseaux informatiques. C'est le problème des délais des liens topologiques sur Internet.  Ils ont  exploité l'utilitaire traceroute afin d'identifier des liens topologiques sur Internet et ensuite suivre le délai de chaque lien au cours du temps.
+
+Il est difficile d'avoir une idée globale sur la topologie de l'Internet. Toutefois, les opérateurs des réseaux informatiques disposent d'un aperçu de l'état des entités qui forment leurs réseaux, les relations entre ces entités ainsi que les éventuels problèmes. Avec la distribution abondante des sondes Atlas dans le monde en terme de type d'adressage (IPv4 et IPv6), en terme de diversité géographique, de diversité en terme d'ASs hébergeant les sondes, etc, il était possible d'aborder les délais dans les réseaux informatiques à travers de nouvelles approches reposant sur des fondements statistiques. Un des points forts de l'analyse menée par R. Fontugne et al. la possibilité de valider les méthodes proposées avec des événements marquants sur Internet observés par ailleurs.
+
+Le travail de R. Fontugne et al. reprend trois méthodes basées sur les données collectées par les sondes Atlas. Ces méthodes sont les suivantes:
+
+
+\begin{enumerate}
+	\item la détection des changements des délais subissent les paquets;
+	
+	\item  la conception d'un modèle A pour un routeur donné. Ce modèle prédit l'acheminement du trafic afin d'identifier les routeurs et les liens en panne dans le cas d'un problème de perte de paquets;
+	
+	\item la création d'un score par Système Autonome afin d'évaluer l'état de ce dernier.
+\end{enumerate}
+
+Dans la suite de ce document, nous allons reprendre seulement la première méthode.  Il s'agit d'étudier le délai d'un lien topologique.
+
+
+
+
+
+
+
+\paragraph{RTT différentiel}~
+
+Il est indispensable de présenter la définition du RTT différentiel d'un lien avant de procéder à la description de l'algorithme de la détection des anomalies. 
+
+
+\begin{tcolorbox}
+	
+	\textbf{ICMP (Internet Control Message Protocol)}  est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.
+	
+	\textbf{RTT (Round Trip Time)} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet sondé  et le timestamp associé à la réception de la réponse ICMP. RTT est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies par les utilitaires traceroute et ping. Par exemple, traceroute fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination.  RTT inclut le temps de transmission, du quering et  du traitement. 
+\end{tcolorbox}
+
+La figure 	\ref{fig:rtt-differ} (a)  illustre le RTT entre la sonde P et les deux routeurs B et C. Le RTT différentiel  entre deux routeurs $B$ et $C$ adjacents, noté $\Delta_{PBC}$, est la différence entre le RTT entre la sonde $P$ et $B$ (bleu) d'une part, et le RTT entre la sonde $P$ et $C$ (rouge) dans la figure 	\ref{fig:rtt-differ} (b). 
+
+\begin{align*}
+\Delta_{PBC} &= RTT_{PC} - RTT_{PB} \\
+&= \delta_{BC} + \delta_{CD} + \delta_{DA}  - \delta_{BA} \\
+&= \delta_{BC} + \varepsilon_{PBC}
+\end{align*}
+
+où $\delta_{BC}$ est le délai du lien $BC$ et $\varepsilon_{PBC}$ est la différence entre les deux chemins de retour ($B$ vers $P$ et $C$ vers $P$). 
+%La première composante dépend de l'état des routeurs $B$ et $C$. La deuxième composante dépend de la sonde $P$. L'analyse du RTT différentiel repose sur la variation de valeurs qu'il prend, au lieu des valeurs exactes, dans  le cas des valeurs exactes, elles peuvent dévier l'interprétation.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{illustrations/rtt-differ}
+	\caption{}
+	\label{fig:rtt-differ}
+\end{figure}
+
+
+
+\subsection{Le principe de la détection des changements des délais}
+
+L'évolution du délai d'un lien est déduit  de l'évolution de son RTT différentiel. Reprenons la formule du RTT différentiel du lien BC :  $\delta_{BC}$ + $\varepsilon_{PBC}$. Supposons qu'on dispose d'un nombre $n$ de sondes Atlas P$_i$, $i$ $\in$ [$1$, $n$], telles que toutes les sondes ont un chemin de retour différent depuis B et depuis C.  En effet, les RTTs différentiels pour chacune des sondes Atlas $\Delta_{P{_i}BC}$ partagent la même composante $\delta_{BC}$, toutefois, ces RTTs ont des valeurs des  $\varepsilon_{P_{i}BC}$ indépendantes. L'indépendance de ces valeurs implique que la distribution $\Delta_{P_{i}BC}$ est estimé d'être stable au cours du temps si $\delta_{BC}$ est constant. Cependant, un changement significatif de la valeur de $\delta_{BC}$ influence les valeurs des RTTs différentiels. Dans ce cas, la distribution des RTTs différentiels change si $\delta_{BC}$ change. Enfin, les changements des délais sont déduits des changements des RTTs différentiels qu'on peut les quantifier.
+
+La détection des anomalies des délais repose sur un théorème très important en statistiques, c'est le théorème  central limite (TCL). Ce théorème  annonce que si on a une suite de variables aléatoires $X_i$ indépendantes ayant la même espérance $µ$ et la même variance $\sigma^2$, la moyenne de ces variables aléatoires est une variable aléatoire qui suit une loi normale. 
+
+%De manière générale, le théorème central limite explique la distribution des moyennes des échantillons. Ce théorème peut être appliquer aux différents lois. Par exemple la loi normale \footnote{Un exemple illustratif dans \ref{appendix:clt-exemple}.}, binomiale, etc. 
+
+
+\subsection{Quelques précisions}
+
+Le travail de référence \cite{DBLP:journals/corr/FontugneAPB16} implique principalement les mesures de type  traceroute. Deux catégories de mesures sont utilisées :
+
+\begin{itemize}
+	\item \textit{builtin} : ce sont les traceroutes effectués par toutes les sondes Atlas vers les instances des  $13$ serveurs DNS racines. Les traceroutes sont effectués chaque $30$ minutes. En pratique, certains serveurs racines DNS déploient l'anycast. Au moment de la réalisation du travail de référence\cite{DBLP:journals/corr/FontugneAPB16}, c'étaient des traceroutes vers $ 500 $ instances des serveurs DNS racines;
+	\begin{tcolorbox}
+		\textbf{DNS Anycast} est une solution   utilisée pour accélérer le fonctionnement  des serveurs DNS. Les serveurs DNS adoptant cette approche fournissent des temps de réponse plus courts, et ce partout dans le monde. Les requêtes en provenance de l'utilisateur sont redirigées vers un n\oe{}ud adéquat suivant un routage prédéfini. 
+	\end{tcolorbox}
+	
+	\item \textit{anchoring} : ce sont les traceroutes effectués par environ $400$ sondes Atlas à destination de $189$ serveurs\footnote{Sondes Atlas ayant des fonctionnalités avancées.} et ce chaque $15$ minutes.
+\end{itemize}
+
+ Le tableau \ref{tab:dataset} reprend plus de détails  concernant les traceroutes analysés dans le cadre du travail de référence. Par exemple $2.8$ traceroutes effectués par des sondes Atlas ayant IPv4 comme adressage IP  ont été exploités dans le travail de référence, y inclus les deux autres méthodes. Ces traceroutes ont été effectués par $11.538$ sondes Atlas.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& \textbf{Nombre de traceroutes}& \textbf{Nombre de sondes Atlas }\\ \hline
+		IPv4		&$ 2.8 $ billion & $ 11.538 $\\ \hline
+		IPv6	&	$ 1.2 $ billion & $ 4.30 $ \\ \hline
+	\end{tabular}
+	\caption{Récapitulatif des traceroutes utilisés dans le travail de référence }
+	\label{tab:dataset}
+\end{table}
+
+La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons des RTTs différentiel caractérisant un lien considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité et  qui sont capables de collecter une quantité importante de données relatives aux performances des réseaux informatiques.
+
+
+
+%L'étude des délais ne concerne pas  les adresses privées, ainsi, le suivi des délais ne concerne pas les réseaux privés.  De plus, ce  suivi  se base sur les requêtes de type traceroute, et traceroute reprend une partie de la topologie de l'Internet. En effet, les liens considérés sont ceux topologiques et ne sont pas  les liens physiques. 
 
 \section{Description de la détection des anomalies dans liens}
 
@@ -22,9 +120,37 @@ La détection des anomalies dans les délais des liens passe par deux étapes pr
 \subsection{Préparation des données}
  A l'étape de la préparation des traceroutes, on distingue trois opérations, premièrement c'est l'élimination des données inutiles dans un traceroute, voire le traceroute même s'il a échoué. Deuxièmement, c'est l'identification des liens topologiques et leurs caractérisation. Enfin, c'est la fusion des données si c'est nécessaire. 
  
-\paragraph{L'élimination des données inutiles}  Un traceroute est sauvegardé en étant un object JSON, la figure \ref{annexe:traceroute-attributes} décrit les attributs qu'un traceroute peut contenir. D'une part, il y a les attributs obligatoires dont chaque traceroute doit révéler. D'autre part, il existe les attributs optionnels.  La conservation de tel ou tel attribut dépend de l'objectif pour lequel un traceroute est analysé.  
+\paragraph{L'élimination des données inutiles}~
 
-\paragraph{Vérification de la validation des données utiles} Les données utiles dans l'analyse des délais doivent être validées suivant les objectifs spécifiques prédéfinis. Etant donné que l'analyse des délais ne concerne pas les réseaux informatiques privés, les adresses IP privées sont éliminées. Comme une sonde Atlas peut recevoir jusqu'à trois signaux différents pour un saut donné, chaque signal doit reprendre un RTT et une adresse IP source du signal. Le RTT doit être valide; positif non nul.
+  Un traceroute est sauvegardé en étant un object JSON, la figure \ref{annexe:traceroute-attributes} décrit les attributs qu'un traceroute peut contenir. D'une part, il y a les attributs obligatoires dont chaque traceroute doit révéler. D'autre part, il existe les attributs optionnels.  La conservation de tel ou tel attribut dépend de l'objectif pour lequel un traceroute est analysé.  
+
+\paragraph{Vérification de la validation des données utiles}~
+
+ Les données utiles dans l'analyse des délais doivent être validées suivant les objectifs spécifiques prédéfinis. Etant donné que l'analyse des délais ne concerne pas les réseaux informatiques privés, les adresses IP privées sont éliminées. Comme une sonde Atlas peut recevoir jusqu'à trois signaux différents pour un saut donné, chaque signal doit reprendre un RTT et une adresse IP source du signal. Le RTT doit être valide; positif non nul.
+ 
+ 
+ \paragraph{Inférence des liens à partir d'un traceroute } ~
+ 
+ 
+ La figure \ref{fig:links-inference} montre tous les  liens possibles qu'on peut retrouver en se basant sur l'approche adoptée dans le  travail de référence. Les routeurs impliqués dans le trafic lors d'une requête traceroute entre une  source et une destination forment les liens; chaque deux routeurs (R1, R2) consécutifs forment un lien topologique comme illustré dans la figure \ref{fig:links-inference}. Le RTT différentiel d'un lien est la différence entre le RTT de ces deux routeurs et la sonde Atlas (la source).
+ 
+ 
+     \begin{landscape}
+ 	\begin{figure}[H]
+ 		\centering
+ 		\resizebox{20cm}{!}{
+ 			\input{dia/traceroute-exemple.tex} 
+ 		}
+ 		\caption{Caractérisation des liens dans un traceroute}
+ 		\label{fig:links-inference}
+ 	\end{figure}
+ \end{landscape}
+
+  
+\paragraph{Fusion des détails des liens}~
+ 
+ La méthode conçue pour la détection des anomalies dans les délais des liens a démontré ses performances si le lien suivi a été identifié plusieurs fois. Autrement dit, l'échantillon des RTTs différentiels caractérisant un lien est assez grande. L'ordre des deux routeurs d'un lien est indifférent, de ce fait, le lien (R1, R2) est similaire au lien (R2, R1) en terme du RTT différentiel. Donc après avoir caractérisé chaque lien, à l'étape de la fusion, les RTTs différentiels de chaque lien sont fusionnés afin d'avoir un seul échantillon caractérisant un lien durant une période donnée.
+ 
  
 \subsection{Exploitation des données}
 
