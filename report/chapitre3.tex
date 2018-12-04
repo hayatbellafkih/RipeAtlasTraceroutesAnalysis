@@ -1,145 +1,249 @@
-\chapter{Implementation}
+\chapter{Introduction au Big Data}
+	
+	\section{Introduction}
+	
+	Big Data est un terme associé aux données massives, rapidement générées, ayant une grande diversité où les  outils traditionnels sont incapables de gérer ces données. La complexité du Big Data vient du fait que tout type de données peut être utilisé, en vue de livrer la bonne information à la bonne personne et au bon moment afin d'aider à prendre les bonnes décisions.
+	
+	
+	\section{Quelques concepts associés au Big Data}
+		\subsection{Définition du Big Data : Volume, Vélocité, Variété et Véracité}
+		
+		IBM définit Big Data suivant les quatre dimensions suivants : volume, variété, vélocité et véracité. 
+		\paragraph{Volume de données}~
+		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de Gigaoctets (GB) et de Téraoctets (TB). Toutefois, le Big Data est mesuré en Pétaoctets (PB) et Exaoctets (EB). Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1 ZB = 1000000000000 GB $} par  entreprise en $2020$ .
+		
+		\paragraph{Vélocité de données} ~
+		le Big Data est généré à travers des milliards
+		d'appareils, ces données générées sont communiquées avec la vitesse de la lumière à travers l'Internet. L'augmentation de la vitesse de l'Internet est une  des raisons ayant favorisé l'augmentation de la vitesse de la génération des données.	
+		%la vitesse décrit la fréquence de la génération et du partage des données. Autrement dit, les données sont générées rapidement et doivent être traitées rapidement pour extraire les informations  pertinentes.
+		Par exemple, Wallmart (international discount retail chain) génère environ   $2.5$ Pétaoctets de données chaque  heure via les transactions de ses consommateurs\footnote{Source : \url{https://www.bernardmarr.com/default.asp?contentID=690}, consultée le $ 30/06/2018 $.}.
+		
+		
+		
+		
+		
+		\paragraph{Variété de données} \label{variete-data}
+		
+		Le Big Data inclut toutes les formes des données, des fonctions diversifiés des données et des sources multiples des données.
+		
+		Le premier aspect de la variété  des données massives est la \textbf{forme} de celles-ci, les données manipulées incluent du texte, des graphes, des cartes, des vidéos, des photos, etc.
+		
+		Le deuxième aspect de la variété des données massives concerne les \textbf{fonctions} assurées par ces données. Des données sont issues des conversations humaines, d'autres des transactions des consommateurs, ou bien des données archivées, etc.
+		
+		La source du Big Data est le troisième aspect de la variété. Des données sont en provenance des téléphones mobiles, des tablettes ou des ordinateurs portables, des fichiers journaux, du réseau de capteurs, etc. Les sources du Big Data peuvent être classées en trois grandes catégories : communications \textbf{\textit{human to human}} comme les conversations échangées dans les réseaux sociaux, communications \textbf{\textit{ human to machine}} comme l'accès des utilisateurs aux données dans le web et enfin communications \textbf{\textit{machine to machine}} comme les données issues de la communication entre les capteurs dans un réseau de capteurs.
+		%au-delà des données des transactions habituelles des consommateurs, les données manipulées sont en provenance de sources différentes et de formats différents. Par exemple: des vidéos, des documents, des commentaires, des données géospatiales, des journaux, etc. Les grands ensembles de données sont constitués de données structurées et non structurées, publiques ou privées, locales ou distantes, partagées ou confidentielles, complètes ou incomplètes, etc.
+		
+		
+		
+		\paragraph{Véracité de données}
+		
+		La véracité concerne la crédibilité et la qualité des données. La mauvaise qualité de données est due à de nombreuses raisons telles que les pannes techniques comme le dysfonctionnement des appareils comme les capteurs, les erreurs humaines,  etc. De plus, les données peuvent être intentionnellement erronées pour des raisons de concurrence ou des raisons stratégiques.
+	
+		\subsection{Une architecture du Big Data}
+		
+		L'architecture présentée dans ce qui suit est celle proposée dans  \cite{anil-big-data}, elle est illustrée dans la figure \ref{fig:bigdata-architecture}.
+		
+		Il existe plusieurs sources de données. Ces données  passent ensuite par \textit{ingest system}. Ensuite, les données peuvent passer par deux systèmes : un \textit{stream processing } et un \textit{batch processing}.  Les résultats de ce traitement peuvent être envoyées vers les bases de données NoSQL pour une utilisation ultérieure, ou bien  utiliser ces résultats comme entrées pour d'autres applications. Ainsi, une solution Big Data comprend typiquement  ces  couches logiques. Chacune des couches peut être représentée par une ou plusieurs technologies disponibles. Reprenant chacune des composantes logiques:
+		
+		
+		
+		\paragraph{Big Data sources layer} Le choix des sources de donnés pour une application donnée dépend des objectifs qui dirigent l'analyse en question. Les sources avec leurs différents aspects sont détaillées dans la section \ref{variete-data}.
+		
+		\paragraph{Data Ingest layer} Cette couche permet de récupérer les données depuis les différentes sources de données. Ainsi, les données sont accueillies à travers des points d'entrées multiples. Ces points  sont capables d'acquérir ces données ayant une vélocité variable ainsi qu'une quantité aussi variable.  Après avoir traversé  \textit{Data Ingest layer}, les données sont envoyées au \textit{batch processing system}, au \textit{realtime processing system}, ou bien à un système de stockage particulier.
+		
+		\paragraph{Batch processing layer} Les données reçues sont celles en provenance du \textit{Data Ingest} ou bien d'une des bases de données NoSQL. Ces données sont ensuite traitées en utilisant les techniques de la programmation parallèle, en vue de fournir les résultats souhaités. La présente couche doit avoir connaissance des sources de données, les types de données, les algorithmes qui vont travailler sur ces données et enfin les résultats souhaités. Les résultats des traitements peuvent être utilisées par une des applications ou bien sauvegarder ces données dans une des bases de données adaptées.
+		
+		
+		\paragraph{Stream Processing layer} Cette couche approvisionne les données directement d'une des entrées du \textit{Data Ingest layer}. Pareillement  à  \textit{Batch processing layer} en matière  des techniques de la programmation parallèle utilisées ainsi que la nécessité d'avoir les détails sur les sources des données, les types de données et les résultats souhaités.
+		
+		
+		\paragraph{Data organizing layer} Le rôle de cette couche est d'organiser les données afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part de la  couche  \textit{Stream Processing} ainsi que la couche \textit{Batch processing}. Cette couche est représentée par les bases de données NoSQL. Il existe plusieurs catégories de bases de données NoSQL.
+		
+		\paragraph{Infrastructure layer} Cette composante est responsable de la gestion des ressources de stockage, les ressources du calcul et la gestion de la communication. 
+		Les fonctionnalités de cette couche sont fournies à travers le cloud computing.
+		
+		\paragraph{Distributed File System Layer} Cette couche assure le stockage d'une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toute les couches qui forment un système du Big Data. C'est ce que assure Hadoop Distributed File System (HDFS).
+		
+		\paragraph{Data consumption} Cette dernière couche utilise les sorties produits par les couches de l'analyse. Les résultats fournis peuvent être sous format de rapport, des dashboards, des visualisations, un moteur de recommandation ou tout autre format.
+		
+		
+		
+		
+		
+	
+		\begin{figure}[H]
+			\captionsetup{justification = centering}
+			\centering
+			\includegraphics[width=1\linewidth]{illustrations/bigdata-architecture}
+			\caption{Architecture générique du Big Data \cite{anil-big-data}}
+			\label{fig:bigdata-architecture}
+			
+		\end{figure}
 
-\section{MongoDB}
-
-\section{DynamoDB}
-
-\section{AWS}
-
-\section{Spark Apache avec Scala}
-
-\subsection{Complément d'information du processus de la détection avec le langage Scala}
-Comme complément à aux étapes décrites dans \ref{steps-rtt-analysis}, on présente les différentes classes permettant de modéliser les données tout au long du processus de l'analyse. La définition de ces classes est liée au langage \textit{Scala}. 
-
-Soient les classes suivantes utilisées : 
-
-\paragraph{La classe Signal} modélise un signal \footnote{Un signal dans le contexte d'un traceroute.}. Ainsi, \textit{from} est l'adresse IP du routeur émettant ce signal, \textit{rtt} est le Round Trip Time entre la sonde Atlas et ce routeur et enfin \textit{x} est un indicateur de l'échec du signal.
-\begin{lstlisting}[language=scala]
-case class Signal(
-rtt:  Option[Double],
-x:    Option[String],
-from: Option[String])
-\end{lstlisting}
-
-\paragraph{La classe Hop} modélise un saut dans un traceroute. On caractérise un saut par son identifiant noté \textit{hop} dont il prend comme valeur un entier à partir de la valeur $1$ et la liste des signaux relatifs à ce saut notée par \textit{result}, généralement un saut est représenté par $3$ signaux.
-\begin{lstlisting}[language=scala]
-case class Hop(
-var result: Seq[Signal],
-hop:        Int)
-\end{lstlisting}
-\paragraph{La classe Traceroutes} modélise le résultat d'une requête traceroute effectué par une sonde Atlas. Cette modélisation se limite aux données qui nous intéressent dans la présente analyse. 
-
-\textit{dst\_name} représente l'adresse IP de la destination de la requête traceroute, \textit{from} est l'adresse IP de la sonde Atlas ayant déclenché la requête traceroute, \textit{prb\_id} est l'identifiant de la sonde Atlas ayant déclenché la requête traceroute, \textit{msm\_id} est l'identifiant de mesure Atlas dans le cadre duquel la requête traceroute a été déclenchée, \textit{timestamp} est le temps pendant lequel la requête traceroute a été effectuée et enfin on trouve la liste des sauts qui représentent les routeurs traversés par le trafic entre la source et la destination. 
-
-\begin{lstlisting}[language=scala]
-case class Traceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-result:    Seq[Hop])
-\end{lstlisting}
-\paragraph{La classe TraceroutesPerPeriod} permet de présenter les traceroutes après les avoir trié   suivant la période pendant laquelle ils ont été effectués.  Avec \textit{timeWindow} est le temps unix marquant le début de la période \footnote{Pour précision, la fin de la période peut être inférée en prenant deux débuts de deux périodes car la durée d'une période est fixe tout au long de l'analyse.} et  \textit{traceroutes} est la liste des traceroutes effectués pendant cette période. 
-
-
-A l'étape 2, l'objectif était d'agréger  les signaux par routeur source et ensuite calculer la médiane des RTTs par ce routeur. Par conséquent, un traceroute est présenté différemment, ce qui est  illustré par la classe \textit{MedianByHopTraceroute}.
-
-\paragraph{La classe ProceedSignal }  est une agrégation de tous les signaux, d'un saut donné, par le routeur \textit{from},  la médiane des RTTs calculée est présentée par \textit{medianRtt}.
-\begin{lstlisting}[language=scala]
-case class ProceedSignal(
-medianRtt: Double,
-from:      String)
-\end{lstlisting}
-\paragraph{La classe ProceedHop } modélise un saut après avoir agrégé ses signaux. 
-\begin{lstlisting}[language=scala]
-case class ProceedHop(
-var result: Seq[ProceedSignal],
-hop:        Int)
-\end{lstlisting}
-
-
-\paragraph{La classe MedianByHopTraceroute } modélise un traceroute après avoir agrégé ses sauts. Par rapport au traceroute d'avant l'agrégation, seulement la liste des sauts qui a subi un changement. 
-\begin{lstlisting}[language=scala]
-case class MedianByHopTraceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-result:    Seq[ProceedHop])
-\end{lstlisting}
-
-
-\paragraph{La classe Link} modélise un lien topologique, ce dernier est définit par deux adresses IP  \textit{ip1} et \textit{ip2} et par son RTT différentiel calculé \textit{rttDiff}.
-\begin{lstlisting}[language=scala]
-case class Link(
-ip1:     String,
-ip2:     String,
-rttDiff: Double)
-\end{lstlisting}
-
-\paragraph{La classe LinksTraceroute} permet de modéliser un traceroute après avoir inféré tous les liens de ce dernier. Ainsi, la liste des sauts est remplacée par la liste des liens (\textit{links}). 
-
-\begin{lstlisting}[language=scala]
-case class LinksTraceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-links:     Seq[Link])
-\end{lstlisting}
-
-
-A l'étape 5, l'objectif était de passer d'un traceroute à une liste de liens caractérisés par les informations générales sur la sonde Atlas, la mesure Atlas,etc. Chaque élément de cette liste est présenté par la classe \textit{DiffRtt}, où \textit{LinkIPs} représente les deux adresses IP d'un lien donné.
-\paragraph{La classe LinkIPs} permet présenter un lien par seulement ses deux adresses IP \textit{ip1} et \textit{ip2}.
-\begin{lstlisting}[language=scala]
-case class LinkIPs(
-ip1: String,
-ip2: String)
-\end{lstlisting}
-
-\paragraph{La classe DiffRtt} est une représentation plus détaillée d'un lien, en plus de son RTT différentiel, on ajoute d'autres informations.  Les adresses IP d'un lien sont modélisées par la classe \textit{LinkIPs}.
-
-\begin{lstlisting}[language=scala]
-case class DiffRtt(
-rtt:      Double,
-var link: LinkIPs,
-probe:    BigInt)
-\end{lstlisting}
-
-A l'étape 6.3, on souhaite normaliser les dates de chaque lien; peu importe le moment pendant lequel le traceroute a été effectué durant une période $d_i$, on note seulement le début de cette période. Ainsi,  la classe  \textit{DiffRTTPeriod}  reprend un \textit{lien} donné, les différentes sondes Atlas ayant identifié ce lien (\textit{probes}), les RTTs différentiels de ce lien tout au long de la période et enfin les dates associées à chaque RTT différentiel.
-\paragraph{La classe DiffRTTPeriod } ~
-\begin{lstlisting}[language=scala]
-case class DiffRTTPeriod(
-link:      LinkIPs,
-probes:    Seq[BigInt],
-rtts:      Seq[Double],
-var dates: Seq[Int])
-\end{lstlisting}
-
-A la fin des opérations de l'étape 6, on reprend pour chaque période, pour un lien donné, les RTTs différentiels ainsi que leurs dates, ensuite, on construit les bornes de l'intervalle de confiance courants pour ce lien et les bornes de l'intervalle de confiance de référence, et ce afin de comparer ces deux intervalles en vue d'inférer les anomalies possibles du délais de ce lien.
+	
+	\subsection{Les bases de données NoSQL (Not Only SQL) } \label{sec:nosql}
+	
+	
+	\paragraph{Introduction } ~
+	
+    Au cours de ces dernières années, on constate une révolution dans le stockage de données non structurées ayant une taille importante.  Car les objets à sauvegarder sont complexes; ils sont issus de sources hétérogènes.  Cette complexité a mis en question les performances des bases de données relationnelles. 
+	
+	Le terme NoSQL est apparu pour la première fois en $ 1998 $. Carlo Strozzi  a parlé des bases de données relationnelles qui n'utilisent pas le SQL comme langage d'interrogation des tables. Des années plus tard, des solutions  open source basées sur ce concept ont vu le jour. 
+	
+	Les bases de données relationnelles sont utilisées par la majorité des entreprises pour plusieurs raisons :   la facilité d'utilisation, la disponibilité de plusieurs produits et développeurs, etc. Ces dernières années, avec l'augmentation exponentielle de la quantité de données générées par certaines entreprises, ces dernières ont constaté l'insuffisance des Systèmes de Gestion de Bases de Données Relationnelles (SGBDR) pour répondre à leurs besoins.
+	
+    %	\paragraph{ Les besoins auxquels répondent NoSQL}  ~
+	
+	Les bases de données NoSQL sont conçues pour gérer des  volumes de données importants. L'idée de base de ces bases, c'est d'abord assurer la capacité de stocker des données de grande échelle dont leur  quantité  évolue rapidement, voire exponentiellement.  En deuxième lieu, les données stockées  doivent être interrogées  avec efficacité. Les données stockées dans  les bases de données NoSQL n'obéissent pas à un modèle prédéfini comme le cas des bases de données relationnelles. Cette flexibilité est une des caractéristiques des bases de données NoSQL.
+	
+	
+	\paragraph{Types de base de données NoSQL}   ~
+	
+	Il existe quatre catégories distinctes de bases de données NoSQL. Chaque catégorie répond  à des besoins particuliers. Ainsi, on distingue les bases de données clé-valeur, document, graphe et colonne.
+	
+	
 
 
-\paragraph{La classe LinkState } permet de modéliser l'état d'un lien en matière de ses intervalles de confiance pendant une période $d_i$ donnée. \textit{valueLow} est la borne inférieur de l'intervalle de confiance, \textit{valueHi} est la borne supérieure de l'intervalle de confiance, \textit{valueMedian} est la médiane des RTTs différentiels et enfin \textit{valueMean} est la moyenne des RTTs différentiels. Pour précision, les données concernant l'état d'un lien est une liste, l'idée c'est de garder l'historique de ces valeurs durant tout la période de l'analyse, toutefois, la données qui se trouve à la i ème position est une valeur qui combine les valeurs précédentes.  Pour toute période, on a une instance de \textit{LinkState} pour 
-\begin{lstlisting}[language=scala]
-case class LinkState(
-var valueMedian: Seq[Double],
-var valueHi:     Seq[Double],
-var valueLow:    Seq[Double],
-var valueMean:   Seq[Double])
-\end{lstlisting}
-\paragraph{La classe } 
-\begin{lstlisting}[language=scala]
+	\subparagraph {Clé-valeur} Une base de données de type clé-valeur repose sur le paradigme clé-valeur; chaque donnée, que ce soit un nombre, du texte ou tout autre élément est associé à une clé unique. Cette clé est le seul moyen d'accéder aux données stockées.
+	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La figure \ref{fig:key-value-nosql} reprend un exemple d'une base de données NoSQL de type clé-valeur.
 
-\end{lstlisting}
+	
+	\begin{figure}[H]
+		\captionsetup{justification=centering}
+		\centering
+		\resizebox{!}{!}{
+			\input{illustrations/key-value-nosql-.tex}
+	    }
+		\caption{Illustration d'une base de données NoSQL de type clé-valeur}
+		\label{fig:key-value-nosql}
+	\end{figure}
+	
 
+		\subparagraph{Document} Une base de données NoSQL de type document permet de stocker les données en reposant sur le paradigme clé-valeur. Toutefois, les valeur stockées sont complexes, il s'agit de documents de type JSON, XML, etc. L'accès aux données d'un enregistrement peut se faire de manière hiérarchique. La possibilité de stocker des objets complexes et hétérogènes  est un des points forts des bases de données NoSQL de type  document. Un exemple est fourni dans la figure \ref{fig:document-nosql}.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{illustrations/document-nosql}
+			\caption{Illustration d'une base de données NoSQL de type document}
+			\label{fig:document-nosql}
+		\end{figure}
+	
 
-\section{Résultats}
+		\subparagraph{Colonnes} Dans les bases de données traditionnelles, les données sont stockées sur des lignes. Dans le cas d'une base NoSQL orientée colonne, les données sont stockées par colonne. L'interrogation de ce type de bases travaille sur une colonne particulière sans devoir passer par les autres colonnes comme dans les bases de données relationnelles classiques. Une base de données de type colonne, illustrée dans la figure  	\ref{fig:comomn-nosql}, est adaptée pour les requêtes analytiques comme les requêtes d'agrégation (moyennes, maximum, etc).
 
-\begin{table}
-	\begin{tabular}{cc}
-& \\
-	\end{tabular}
-\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{illustrations/colomn-nosql.png}
+		\caption{Illustration d'une base de données NoSQL de type colonne}
+		\label{fig:comomn-nosql}
+	\end{figure}
+	
+
+	\subparagraph{Graphe} Dans une base de données de type graphe, les données stockées sont les n\oe{}uds, les liens et les propriétés sur les n\oe{}uds et sur les liens. Un exemple concret des bases de données NoSQL de type graphe est le réseau social; chaque entité représente une personne et les relations entre ces personnes peuvent prendre plusieurs formes. Comme il est illustré dans la figure  	\ref{fig:graphe-nosql}.
+
+	
+	\begin{figure}[H]
+		\centering
+		\resizebox{\textwidth}{!}{
+		\input{illustrations/graphe-nosql.tex}
+	    }
+		\caption{Illustration d'une base de données NoSQL de type graphe}
+		\label{fig:graphe-nosql}
+	\end{figure}
+	
+	Il existe plusieurs implémentations des quatre types de bases de données. Chaque implémentation favorise un ou plus des éléments suivants : la disponibilité des données, la cohérence des données et la tolérance au partitionnement.  C'est ce qu'explique le théorème CAP.	
+		
+		\paragraph{Big Data et le théorème  CAP}:
+		
+		Le théorème CAP annonce que dans le cadre d'un système distribué où les données sont réparties sur plusieurs machines (ou n\oe{}uds),
+		%(ou n\oe{}uds) (voir \ref{sec:distruted-camput}),  
+		une base de données ne peut pas garantir les trois attributs suivants: \textit{Consistency}, \textit{Availability}, et \textit{Partition Tolerence}  en même temps. 
+		
+		
+			\subparagraph{ Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. Ainsi, une lecture faite après une écriture doit renvoyer la donnée précédemment écrite;
+			
+			\subparagraph{ Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client; 
+			
+			%En cas d'une panne technique sur un des serveurs qui hébergent  la base de données, il faut s'assurer de desservir  des clients.  Généralement, cela est assuré à travers la réplication des données
+			
+			 \subparagraph{Partition tolerance (ou la tolérance au partitionnement) } Une coupure du réseau entre deux n\oe{}uds ou l'indisponibilité d'un de ces n\oe{}uds ne devrait pas affecter le bon fonctionnement du système. Tout de même,  ce dernier doit répondre à la demande d'un client. 
+
+		
+		%conclusion
+		Les trois attributs du théorème CAP s'opposent entre eux. On distingue les trois scénarios possibles:
+		
+		\begin{itemize}
+			\item [--] Le couple \textbf{CA} : les SGBDR adoptent les deux attributs C et A, qui sont une forte cohérence et disponibilité. Cependant, l'attribut partitionnement réseau n'est pas toujours pris en compte.
+			\item [--] Le couple \textbf{CP} : les implémentations du C et du P assurent la tolérance aux pannes en distribuant les données sur plusieurs serveurs. Malgré cette réplication, ces implémentations assurent la cohérence des données même en présence de mises à jour concurrentielles.
+			\item [--] Le couple \textbf{AP} : les implémentations du A et du  P assurent un temps de réponse rapide et une réplication des données. Cependant, les mises à jour étant asynchrones, la garantie que la version d'une donnée soit bonne, ne peut pas être assurée.
+			
+		\end{itemize}
+		
+		La figure \ref{fig:cap} présente des implémentations des différents types de bases de données NoSQL pour chaque couple CA, CP et AP.
+		
+		\begin{figure}[H]
+			\centering
+			\captionsetup{justification=centering}
+			\includegraphics[width=1\linewidth]{illustrations/cap}
+			\caption{Bases de données NoSQL suivant le théorème de CAP }
+			\label{fig:cap}
+			\source{\url{https://payberah.github.io/files/download/p2p/nosql.pdf}, consultée le $05/08/2018$.}
+		\end{figure}
+		
+		
+		
+		Le choix d'une base de données relationnelle ou NoSQL dépend des besoins des entreprises. En terme de tendances, la figure \ref{fig:ranking-db} reprend un classement des SGBDs au $1$ août $ 2018 $. La suite de la liste ainsi que  la méthode qui dirige ce classement sont    disponibles sur le site  web \textit{DB-Engines Ranking}\footnote{Source : \url{https://db-engines.com/},  consultée le $01/08/2018$.}. Parmi les critères de classement, on trouve le nombre de références du SGBD sur les sites Internet. 
+		
+		%Ce nombre de référence est quantifiable à partir du  nombre lui-même de résultats obtenus des différents moteurs de recherche comme Google, Bing, etc. 
+		
+		\begin{figure}[H]
+			\centering
+			\captionsetup{justification=centering}
+			\includegraphics[width=1\linewidth]{illustrations/ranking-db}
+			\caption{Un classement des SGBDs sur \textit{DB-Engines Ranking} du $1$ août $2018$ }
+			\label{fig:ranking-db}
+			\source{\url{https://db-engines.com/en/ranking}, consultée le $01/08/2018$.}
+		\end{figure}
+		
+		
+		
+		\subsection{Schema on Write VS Schema on Read} \label{sec:schema-read-write}
+		
+		Lors du chargement des données depuis leurs sources de stockage pour tout type de manipulation, on distingue deux approches : \textit{ Schema on Write} et \textit{Schema on Read}.
+		% L'approche \textit{Schema on Read } est celle utilisée par l'outil Amazon Athena présenté dans la section \ref{par:allservices}.
+		
+		Dans la première, il faut définir les colonnes, le format de données, les types, etc. La lecture des données est rapide et moins coûteuse étant donné l'effort entreprit pour définir la structure. C'est le cas des bases de données relationnelles.
+		
+		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, mais le type de la donnée qui diffère.
+		
+		 Les figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\linewidth]{illustrations/on-write}
+			\caption{Schema on Write (Traditionnelle)}
+			\label{fig:on-write}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\captionsetup{justification=centering}
+			\includegraphics[width=0.8\linewidth]{illustrations/on-read}
+			\caption{Schema on Read (Big Data)}
+			\label{fig:on-read}
+			\source{ \url{https://blogs.oracle.com/datawarehousing/big-data-sql-quick-start-schema-on-read-and-schema-on-write-part11}, consultée le $05/08/2018$.}
+		\end{figure}
+		
+		La meilleure approche dépend des besoins de l'analyse. La première approche est meilleure en performances, cependant, la deuxième est tolérante aux erreurs  humaines.
+		
+		
+		\subsection{L'informatique distribuée et l'analyse de données massives} \label{sec:distruted-camput}
+		Il existe deux stratégies pour appliquer des traitements sur un grand ensemble de données: 
+		
+		
+		\begin{itemize}
+			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
+			
+			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. De plus, cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
+		\end{itemize}
+	\section{Parcours de quelques technologies du Big Data}
+	

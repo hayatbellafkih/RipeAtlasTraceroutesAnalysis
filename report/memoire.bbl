@@ -142,6 +142,10 @@ Xport pro.
   2017.
 \newblock (consulté le $ 21/12/2017 $).
 
+\bibitem{anil-big-data}
+{\sc Maheshwari, A.}
+\newblock {\em Big Data}.
+
 \bibitem{TTM}
 {\sc {RIPE NCC}}.
 \newblock {T}est {T}raffic {M}easurement {S}ervice ({TTM}).
@@ -155,6 +159,12 @@ Xport pro.
   \url{https://labs.ripe.net/Members/fanou\_roderick/on-the-diversity-of-interdomain-routing-in-africa},
   2015.
 \newblock (consulté le $11/01/2018$).
+
+\bibitem{6567202}
+{\sc Sagiroglu, S., and Sinanc, D.}
+\newblock Big data: A review.
+\newblock In {\em 2013 International Conference on Collaboration Technologies
+  and Systems (CTS)\/} (May 2013), pp.~42--47.
 
 \bibitem{DBLP:journals/corr/ShaoRDV17}
 {\sc Shao, W., Rougier, J., Devienne, F., and Viste, M.}

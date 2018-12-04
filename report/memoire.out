@@ -35,9 +35,30 @@
 \BOOKMARK [1][-]{section.1.6}{Conclusion}{chapter.1}% 35
 \BOOKMARK [0][-]{chapter.2}{La détection des anomalies dans les délais d'un lien}{}% 36
 \BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 37
-\BOOKMARK [1][-]{section.2.2}{Présentation du travail de référence}{chapter.2}% 38
-\BOOKMARK [1][-]{section.2.3}{Présentation de l'outil de la détection des anomalies }{chapter.2}% 39
-\BOOKMARK [2][-]{subsection.2.3.1}{Paramètres de l'algorithme de la détection}{section.2.3}% 40
-\BOOKMARK [2][-]{subsection.2.3.2}{Le processus de la détection des anomalies dans les délais d'un lien}{section.2.3}% 41
-\BOOKMARK [2][-]{subsection.2.3.3}{Vue globale des étapes de la détection des anomalies}{section.2.3}% 42
-\BOOKMARK [2][-]{subsection.2.3.4}{Complément d'information du processus de la détection avec le langage Scala}{section.2.3}% 43
+\BOOKMARK [1][-]{section.2.2}{L'étude des délais des liens }{chapter.2}% 38
+\BOOKMARK [2][-]{subsection.2.2.1}{Les données utilisées dans l'analyse des délais}{section.2.2}% 39
+\BOOKMARK [1][-]{section.2.3}{Définition du RTT différentiel d'un lien}{chapter.2}% 40
+\BOOKMARK [2][-]{subsection.2.3.1}{RTT différentiel }{section.2.3}% 41
+\BOOKMARK [2][-]{subsection.2.3.2}{Le principe de la détection des changements des délais}{section.2.3}% 42
+\BOOKMARK [1][-]{section.2.4}{Description des paramètres de l'analyse des délais}{chapter.2}% 43
+\BOOKMARK [1][-]{section.2.5}{L'évolution du RTT différentiel d'un lien et la détection des anomalies}{chapter.2}% 44
+\BOOKMARK [2][-]{subsection.2.5.1}{Paramètres de l'algorithme de détection}{section.2.5}% 45
+\BOOKMARK [2][-]{subsection.2.5.2}{Processus de détection des anomalies }{section.2.5}% 46
+\BOOKMARK [2][-]{subsection.2.5.3}{Vue globale des étapes de la détection des anomalies à travers l'évolution des RTTs différentiels}{section.2.5}% 47
+\BOOKMARK [1][-]{section.2.6}{La caractérisation des anomalies dans les délais d'un lien}{chapter.2}% 48
+\BOOKMARK [0][-]{chapter.3}{Introduction\040au\040Big\040Data}{}% 49
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 50
+\BOOKMARK [1][-]{section.3.2}{Quelques concepts associés au Big Data}{chapter.3}% 51
+\BOOKMARK [2][-]{subsection.3.2.1}{Définition du Big Data : Volume, Vélocité, Variété et Véracité}{section.3.2}% 52
+\BOOKMARK [2][-]{subsection.3.2.2}{Une\040architecture\040du\040Big\040Data}{section.3.2}% 53
+\BOOKMARK [2][-]{subsection.3.2.3}{Les bases de données NoSQL \(Not Only SQL\) }{section.3.2}% 54
+\BOOKMARK [2][-]{subsection.3.2.4}{Schema\040on\040Write\040VS\040Schema\040on\040Read}{section.3.2}% 55
+\BOOKMARK [2][-]{subsection.3.2.5}{L'informatique distribuée et l'analyse de données massives}{section.3.2}% 56
+\BOOKMARK [1][-]{section.3.3}{Parcours\040de\040quelques\040technologies\040du\040Big\040Data}{chapter.3}% 57
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 58
+\BOOKMARK [1][-]{section.4.1}{MongoDB}{chapter.4}% 59
+\BOOKMARK [1][-]{section.4.2}{DynamoDB}{chapter.4}% 60
+\BOOKMARK [1][-]{section.4.3}{AWS}{chapter.4}% 61
+\BOOKMARK [1][-]{section.4.4}{Spark\040Apache\040avec\040Scala}{chapter.4}% 62
+\BOOKMARK [2][-]{subsection.4.4.1}{Complément d'information du processus de la détection avec le langage Scala}{section.4.4}% 63
+\BOOKMARK [1][-]{section.4.5}{Résultats}{chapter.4}% 64

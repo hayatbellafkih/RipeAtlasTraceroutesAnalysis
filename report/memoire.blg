@@ -3,7 +3,9 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: memoire.aux
 A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: chapitre1.aux
-A level-1 auxiliary file: chapitre_algo_detection.aux
+A level-1 auxiliary file: chapitre2.aux
+A level-1 auxiliary file: chapitre3.aux
+A level-1 auxiliary file: chapitre4.aux
 The style file: acm.bst
 Database file #1: references.bib
 You're missing a field part---line 164 of file references.bib
@@ -18,45 +20,47 @@ Warning--to sort, need author or key in bugs-ripe-atlas
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
-You've used 28 entries,
+Warning--empty publisher in anil-big-data
+Warning--empty year in anil-big-data
+You've used 30 entries,
             2253 wiz_defined-function locations,
-            682 strings with 8835 characters,
-and the built_in function-call counts, 6468 in all, are:
-= -- 628
-> -- 213
+            693 strings with 9020 characters,
+and the built_in function-call counts, 7085 in all, are:
+= -- 682
+> -- 232
 < -- 0
-+ -- 94
-- -- 66
-* -- 308
-:= -- 1003
-add.period$ -- 99
-call.type$ -- 28
-change.case$ -- 117
++ -- 102
+- -- 72
+* -- 349
+:= -- 1093
+add.period$ -- 104
+call.type$ -- 30
+change.case$ -- 125
 chr.to.int$ -- 0
-cite$ -- 36
-duplicate$ -- 243
-empty$ -- 664
-format.name$ -- 66
-if$ -- 1434
+cite$ -- 40
+duplicate$ -- 278
+empty$ -- 726
+format.name$ -- 72
+if$ -- 1572
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 5
-newline$ -- 158
-num.names$ -- 40
-pop$ -- 238
+int.to.str$ -- 30
+missing$ -- 8
+newline$ -- 167
+num.names$ -- 44
+pop$ -- 258
 preamble$ -- 1
-purify$ -- 89
+purify$ -- 96
 quote$ -- 0
-skip$ -- 166
+skip$ -- 187
 stack$ -- 0
-substring$ -- 191
-swap$ -- 56
+substring$ -- 221
+swap$ -- 66
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 112
-warning$ -- 8
-while$ -- 45
-width$ -- 30
-write$ -- 302
+type$ -- 118
+warning$ -- 10
+while$ -- 51
+width$ -- 32
+write$ -- 319
 (There was 1 error message)
