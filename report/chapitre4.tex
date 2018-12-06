@@ -1,10 +1,38 @@
 \chapter{Implementation}
 
+Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons utilisé pour analyser les traceroutes disponibles dans le dépôt de RIPE Atlas. Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
+
+
 \section{MongoDB}
+
+\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
+
+MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBD adoptant le couple CP (Consistency-Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}
+
+
+
+
+ Chaque document est sauvegardé sous format BSON (Binary JSON) et identifié par un \textit{\_id} unique. 
+
+\begin{tcolorbox}
+	\og\textit{BSON est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB. C'est un format binaire permettant de représenter des structures de données simples et des tableaux associatifs (appelées objets ou des documents dans MongoDB)}.\fg{}  \footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
+\end{tcolorbox}
+
+Plusieurs types de données sont supportés : \textit{null}, \textit{boolean}, \textit{integer} ( 32-bit, 64-bit, MongoInt32, MongoInt64), \textit{double}, \textit{string} (UTF-8), \textit{array}, \textit{associative array}, \textit{MongoRegex}, \textit{MongoId}, \textit{MongoDate}, \textit{MongoCode}, MongoBinData.
+
+En $ 2016 $, MongoDB est passé en mode cloud,  Il est distribué à travers les trois fournisseurs du cloud  Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure, on parle du service nommé  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}. 
+
+En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas. Comme la majorité des offres gratuites, l'offre gratuite est limitée.  Dans tous les cas, les frais d'utilisation de MongoDB Atlas dépend du stockage et de la  RAM allouées mais aussi dépend des options choisies.
+
+
+
 
 \section{DynamoDB}
 
 \section{AWS}
+
+Il existe un ensemble de services web proposés par Amazon Athena adaptés à la manipulation des données massives. 
+
 
 \section{Spark Apache avec Scala}
 
