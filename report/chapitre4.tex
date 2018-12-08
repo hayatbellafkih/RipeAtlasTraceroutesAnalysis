@@ -5,38 +5,151 @@ Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation
 
 \section{MongoDB}
 
+
 \paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
 
-MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBD adoptant le couple CP (Consistency-Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}
+MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBD adoptant le couple CP (Consistency-Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}.
 
+En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépend du stockage, de la  RAM allouées et des options choisies.
 
+\paragraph{Application sur les  traceroutes }~
 
-
- Chaque document est sauvegardé sous format BSON (Binary JSON) et identifié par un \textit{\_id} unique. 
+Les données relatives aux mesures traceroutes peuvent être récupérées de différentes manières. Par exemple,  les traceroutes à destination des instances du serveur DNS K-root. En ce qui concerne le travail de référence, les traceroutes sont récupérés à la fois par type d'adressage : IPv4 et IPv6 en se basant sur  l'identifiant  de la mesure : $ 5001 $, $ 6006 $, etc et par date.  Ainsi les traceroutes sont organisés, dans MongoDB, dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. $V$ est vide en cas d'adressage IPv4 et $V$ égal à $6$ s'il s'agit de l'adressage IPv6. La nomination structurée permet de ne récupérer que les traceroutes concernés. Chaque collection contient un ensemble de traceroutes formatés en format BSON. Ainsi, le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
 
 \begin{tcolorbox}
-	\og\textit{BSON est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB. C'est un format binaire permettant de représenter des structures de données simples et des tableaux associatifs (appelées objets ou des documents dans MongoDB)}.\fg{}  \footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
+BSON (ou Binary JSON) est un format utilisé pour stocker et transférer les données dans la base de données MongoDB. BSON facilite la représentation des structures de données simples et des tableaux associatifs\footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
 \end{tcolorbox}
+\paragraph{Les limitations du MongoDB}
 
-Plusieurs types de données sont supportés : \textit{null}, \textit{boolean}, \textit{integer} ( 32-bit, 64-bit, MongoInt32, MongoInt64), \textit{double}, \textit{string} (UTF-8), \textit{array}, \textit{associative array}, \textit{MongoRegex}, \textit{MongoId}, \textit{MongoDate}, \textit{MongoCode}, MongoBinData.
-
-En $ 2016 $, MongoDB est passé en mode cloud,  Il est distribué à travers les trois fournisseurs du cloud  Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure, on parle du service nommé  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}. 
-
-En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas. Comme la majorité des offres gratuites, l'offre gratuite est limitée.  Dans tous les cas, les frais d'utilisation de MongoDB Atlas dépend du stockage et de la  RAM allouées mais aussi dépend des options choisies.
-
-
+L'implémentation proposée de l'outil de détection utilise la version locale de la base de données MongoDB pour le stockage des données.  La quantité de données dont MongoDB peut stocker dépend de l'espace mémoire de stockage disponible dans la machine dans laquelle MongoDB est installé. De plus, les performances d'une détection lancée concernant une période donnée dépendent de l'espace mémoire vive libre dans la machine en question. Pour conclure, l'utilisation la version locale du MongoDB pour analyser les traceroutes à travers l'outil de détection dépend typiquement de la machine locale.
 
 
 \section{DynamoDB}
 
-\section{AWS}
+ \paragraph{Amazon DynamoDB :}\label{aws:dynmo}~
 
-Il existe un ensemble de services web proposés par Amazon Athena adaptés à la manipulation des données massives. 
+Amazon DynamoDB\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/}, consultée le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est simple et facile à utiliser,  elle ne nécessite aucune configuration préalable. 
+
+Amazon DynamoDB  est une base de données évolutive de façon abstraite pour l'utilisateur final. Elle offre des performances constantes à une échelle essentiellement infinie, limitée uniquement par la taille physique du cloud AWS. Elle est flexible. Aucun schéma n'est requis pour stocker les données. Les frais d'utilisation de ce service dépendent de trois éléments\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/pricing/}, consultée $02/05/2018$.}:
+\begin{itemize}
+	\item[--] la quantité de données stockées : DynamoDB est facturé par Go d'espace disque utilisé ($ 0,250 $ USD par Go par mois);
+	\item[--] la capacité en lecture par seconde ($ 0,470 $ USD par unité de capacité d'écriture par mois);
+	\item[--]  la capacité en écriture par seconde ($ 0,090 $ USD par unité de capacité de lecture par mois);
+\end{itemize}
+
+
+\paragraph{Application sur les traceroutes}~
+
+
+L'évolutivité est une des caractéristiques attirantes d'Amazon DynamoDB. Nous n'avons pas à se soucier des limitations en terme d'espace disponible de stockage. Toutefois, le problème peut se poser au niveau de la récupération et de la manipulation de ces données. Prenant l'exemple de l'analyse des traceroutes, si on souhaite analyser tout les traceroutes effectués durant une heure du temps, il faut ajuster les ressources de la machine qui accueille ces données afin d'assurer le bon déroulement de détection. A titre indicatif, une heure de traceroutes fait en moyen $620$ MB en format compressé (environ $9$ GB).
+
+
+
+
+\section{Amazon S3, Amazon Athena et Amazon Glue }
+
+Il existe un ensemble de services web proposés par Amazon  adaptés à la manipulation des données massives. Le deuxième choix a été dirigé vers une combinaison de services d'Amazon, il s'agit d'Amazon S3, Amazon Glue et Amazon Athena.
+
+\paragraph{Introduction aux services Amazon S3, Amazon Athena et Amazon Glue }
+
+\subparagraph{Amazon S3}
+\footnote{Source : \url{https://aws.amazon.com/fr/s3/}, consultée le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
+
+
+Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, le tableau   	\ref{tab:pricing-s3-standard} illustre les tarifs de la formule standard.
+\begin{table}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\begin{tabular}{l c }
+		\textbf{Région} & UE (Irlande) \\ \hline
+		\textbf{Première tranche de $ 50 $ To/mois} &	$ 0,023 $ USD par Go\\ \hline
+		\textbf{$ 450 $ To suivants/mois} &	$ 0,022 $ USD par Go \\ \hline
+		\textbf{Plus de $ 500 $ To/mois} &	$ 0,021 $ USD par Go\\ \hline
+	\end{tabular}
+	\caption{Les tarifs du AWS S3 (formule Stockage standard S3)}
+	\label{tab:pricing-s3-standard}
+	\source{\url{https://aws.amazon.com/fr/s3/pricing/}, consultée le $05/08/2018$.}
+\end{table}
+
+  
+\subparagraph{Amazon  Glue} \label{aws:glue}
+ \footnote{Source : \url{https://aws.amazon.com/fr/glue/}, consultée le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rendre accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  des données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisables. 
+
+Les frais de ce service dépendent du temps écoulé lors de l'analyse des données par les robots d'analyse durant la découverte du schéma. A ces frais, ils s'ajoutent les frais du catalogue de données qui va être peuplé par les résultats fournis par les robots d'analyse. Par exemple, on paye $ 0,44 $ USD par heure par DPU\footnote{DPU : unité de traitement des données.}, il est facturé à la seconde avec un minimum de $ 10 $ minutes par robot d'analyse exécuté. Plus de détails sont disponibles sur Amazon Glue\footnote{Source : \url{https://aws.amazon.com/fr/glue/pricing/}, consultée le $05/08/2018$.}.
+
+\subparagraph{Amazon Athena}\label{aws:athena}\footnote{Source : \url{https://aws.amazon.com/fr/athena/}, consultée le $06/07/2018$.} est un service de requêtes  interactif. Il permet d'interroger les données présentes dans Amazon S3 avec des requêtes SQL plus avancées. Le service Amazon Athena est considéré comme \textit{serverless}. Amazon Athena utilise l'approche \textbf{\textit{schema-on-read}} (voir la section \ref{sec:schema-read-write}) afin de projeter le schéma donné en entrée sur les données au moment de l'exécution de la requête SQL demandée. Le schéma sur lequel les données peuvent être projetées peut être créé manuellement ou bien utiliser le catalogue créé dans Amazon Glue.
+ Le service Amazon Athena est facturé suivant la quantité de données analysée. Précisément, $ 5 $ USD par To de données analysées.
+
+
+\begin{tcolorbox}
+	Une \textbf{\textit{requête est	interactive}} si on peut  obtenir immédiatement une réponse à la requête.  Dans le cas échéant, les résultats sont obtenus  dans le cadre d'un code source pour un des langages de programmation, souvent à travers une API.
+\end{tcolorbox}
+
+\begin{tcolorbox}
+	\textbf{\textit{Serverless}} peut être décomposé en \textit{server} et \textit{less}. Un outil est \textit{serverless} quand l'utilisateur final de cet outil peut l'utiliser sans se soucier de toute configuration ou gestion des serveurs derrière ce service. C'est un mécanisme présent beaucoup sur le cloud.
+\end{tcolorbox}
+
+L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Presto. pour les instruction DDL, elles sont effectuées par  \textit{Hive Data Definition Language} \footnote{Source : \url{https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL}, consultée le $05/08/2018$.}. Les requêtes DDL incluent la création, la suppression et la mise à jour de la structure de la table dans le cas d'une base de données relationnelles, d'une collection, d'une vue, etc. 
+
+
+
+\begin{tcolorbox}
+	\textbf{\textit{Presto\footnote{Source : \url{http://prestodb.io/}, consultée le $01/08/2018$.} }} est un moteur de requêtes SQL open source destiné au Big Data. Il permet d'exécuter des requêtes analytiques interactives sur des données de taille importante; jusqu'à des Pétaoctets de données.
+	
+	Presto interroge les données où elles sont hébergées. Ce qui inclut les bases de données relationnelles, Amazon S3 et autres dépôts propriétaires. De plus, une même requête SQL peut combiner plusieurs sources de données. C'est intéressant pour les organisations ayant plusieurs sources de données. Il fournit les résultats en quelques secondes, voire quelques minutes.  Il supporte les types de données complexes comme les objets JSON, un tableau d'éléments, etc. Il supporte aussi  des opérations complexes sur les données.
+\end{tcolorbox} 
+
+
+\begin{tcolorbox}
+	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
+\end{tcolorbox}
+
+\paragraph{Application sur les traceroutes}~
+
+Afin d'utiliser Amazon Athena, nous avons besoin du schéma des données. Il s'agit d'une table comme les tables dans un SGBDR. Pour ce faire, 
+nous avons lancé, avec Amazon Glue,  la détection du schéma d'un ensemble de  traceroutes enregistrés dans un fichier faisant $500$ MB. Toutefois, la détection a échoué. Autrement dit, Amazon Glue n'a pas pu inférer le schéma d'une seule table capable de lire tout traceroute dans ce fichier.  L'échec de l'inférence est du au fait que le fichier contient des traceroutes différents en terme de structure. L'origine de cette différence  est le fait que ces traceroutes ont été effectués par des sondes ayant un firmware différent. Car le contenu des résultats d'une requête traceroute  et son organisation dans un objet JSON dépend partiellement du firmware de la sonde. C'est pourquoi nous avons créé le schéma des traceroutes manuellement (voir la section \ref{creer-table-traceroute} dans l'annexe \ref{athena-appendix}). La table a été créée en utilisant le partitionnement des données dans un compartiment S3. Plus de détails sur le partitionnement sont données dans la section \ref{subsubsection:partitionnement} dans l'annexe \ref{athena-appendix}.
+
+
+Une fois les fichiers de données sont synchronisés vers le compartiment AWS S3 et le schéma  de données est créé, on passe à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  On distingue deux possibilités. La première possibilité n'utilise Athena que pour récupérer, dans la machine locale,  les traceroutes vérifiés en terme de validité (étape $1$ et $2$ dans \ref{steps-rtt-analysis} ).  Les traitements qui suivent (étapes  à partir de $3$) sont effectués dans la machine locale. Dans ce cas, l'utilisation des technologies du Big Data est limité qu'au niveau stockage de données massives. En ce qui concerne la deuxième possibilité, l'idée est de maximiser les traitements au niveau d'Athena, de ce fait, la machine locale n'a qu'à recevoir les derniers résultats.
+
+
+
+
+En partant de la deuxième possibilité, les données doivent être interrogées de sorte à maximiser,  	au niveau d'Amazon Athena,  les traitements relatives aux étapes décrites dans la section \ref{steps-rtt-analysis}. Ainsi le défi est de trouver la requête ou bien l'ensemble de requêtes SQL à exécuter sur Athena en vue d'avoir l'évolution du RTT différentiel d'un lien donné.
+
+Supposons qu'il existe une requête SQL capable de trouver les liens possibles avec leur RTT différentiel. A l'étape 4 dans \ref{steps-rtt-analysis}, on construit la distribution des RTTs différentiels pour tout lien $l$ identifié dans les traceroutes de la période $d_i$. Cette distribution est mise à jour à chaque $l$  identifié dans un des traceroutes  de la période $d_i$. Soient  $T_i$ = \{$t_{i, j}$\}  l'ensemble de traceroutes effectués durant $d_i$,  $j \in [1, R]$ et R est le nombre de traceroutes durant $d_i$. On peut décrire le parcours des traceroutes brièvement dans le pseudo-code suivant, sachant que les détails ne sont données, l'objectif est illustré la convenance d'Athena au traitement souhaité :
+\begin{algorithm}[H]
+\begin{algorithmic}[1]
+	 \ForAll{ $t_{i, j}$ $\in$ $T_i$} \
+	  \State $links$ $\leftarrow$ getLinksFromTraceroute($t_j$)
+	  	 \ForAll{$l$ $\in$ $links$}
+	  	 		\State updateLinkRttDistribution($l$) \label{update-link}
+	  	 \EndFor
+	 \EndFor
+\end{algorithmic}
+\caption{Une partie l'étape 4 du processus de la détection des anomalies des délais }
+\label{alo-inference-link}
+\end{algorithm}
+
+\textit{getLinksFromTraceroute($t_j$)} énumère tous les liens possibles dans le traceroute $t_j$.
+\textit{updateLinkRttDistribution($l$)} ajoute le RTT différentiel du lien $l$, précédemment calculé, à la distribution des RTTs différentiels courante.
+
+Le service Athena est conçu pour la lecture de données, toute mise à jour de données n'est pas possible avec ce service. C'est pourquoi la distribution des RTTs différentiels de chaque  lien identifié doit être sauvegardée dans un endroit accessible en lecture et en écriture, par exemple dans un compartiment AWS S3. Que ce soit un fichier reprenant la distribution des RTTs différentiel  par un seul lien ou bien un fichier pour tous les liens,   à la ligne  \ref{update-link} du pseudo-code \ref{alo-inference-link}, un fichier doit être lu et mise à jour avec de nouvelle valeur.
+
+Pour une $d_i$ d'une heure, le nombre de traceroutes est de l'ordre des milliers. Chaque traceroute peut inclure $L$ liens. Dans ce cas, le nombre de mise à jour de la distribution des RTTs différentiels est $R$\texttimes$L$. Avec une autre technologie qui travaille en mémoire, les résultats sont données plus rapidement. 
+
+
+
+
+
 
 
 \section{Spark Apache avec Scala}
 
-\subsection{Complément d'information du processus de la détection avec le langage Scala}
+\subsection{Introduction à Apache Sprk}
+
+\subsection{Application sur traceroutes}
+%\subsection{Complément d'information du processus de la détection avec le langage Scala}
 Comme complément aux étapes décrites dans \ref{steps-rtt-analysis}, on présente les différentes classes permettant de modéliser les données tout au long du processus de l'analyse. La définition de ces classes est liée au langage \textit{Scala}. 
 
 Soient les classes suivantes utilisées : 
