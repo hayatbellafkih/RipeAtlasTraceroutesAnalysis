@@ -88,8 +88,9 @@ où $\delta_{BC}$ est le délai du lien $BC$ et $\varepsilon_{PBC}$ est la diff�
 %La première composante dépend de l'état des routeurs $B$ et $C$. La deuxième composante dépend de la sonde $P$. L'analyse du RTT différentiel repose sur la variation de valeurs qu'il prend, au lieu des valeurs exactes, dans  le cas des valeurs exactes, elles peuvent dévier l'interprétation.
 \begin{figure}[H]
 	\centering
+		\captionsetup{justification= centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/rtt-differ}
-	\caption{Source : \cite{DBLP:journals/corr/FontugneAPB16}}
+	\caption{(a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les  chemins de retours depuis les routeurs B et C vers la sonde P. Source : \cite{DBLP:journals/corr/FontugneAPB16}}
 	\label{fig:rtt-differ}
 \end{figure}
 
@@ -125,7 +126,7 @@ La détection des changements des délais nécessite l'ajustement d'un nombre de
 	\centering
 	\captionsetup{justification=centering}
 	\input{illustrations/timing.tex}
-	\caption{}
+	\caption{Illustration des périodes de l'analyse entre la date de début et la date de fin}
 	\label{fig:timing_tex}
 \end{figure}
 %\begin{figure}[h]	
@@ -169,7 +170,7 @@ L'entrée de l'algorithme de détection est un ensemble de traceroutes. Un trace
 	\resizebox{\textwidth}{!}{
 	\input{illustrations/traceroute.tex}
 }
-	\caption{}
+	\caption{Illustration des sauts d'un traceroute avec leurs informations}
 	\label{fig:traceroute}
 \end{figure}
 

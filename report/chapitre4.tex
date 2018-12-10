@@ -148,6 +148,68 @@ Pour une $d_i$ d'une heure, le nombre de traceroutes est de l'ordre des milliers
 
 \subsection{Introduction à Apache Sprk}
 
+Apache Spark est un moteur de traitement distribué des données. Spark est conçu pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité.
+
+\paragraph{Spark Core Concepts et architecture}
+
+\subparagraph{Spark Clusters et Resource Management System}
+
+Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'onappelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable, il existe un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
+
+Le \textit{cluster manager} a une vue globale de l'emplacement des workers, la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. La Figure \ref{fig:cluster-overview} montre l'interaction entre le cluster manager et les workers.
+
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification= centering}
+	\includegraphics[width=0.7\linewidth]{illustrations/cluster-overview.jpg}
+	\caption{ Interaction entre une application Spark et le cluster manager. Source : \cite{eginning-Apache-Spark-2-cluster-overwiew}}
+	\label{fig:cluster-overview}
+\end{figure}
+
+
+
+
+\subparagraph{Spark Application}
+Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite à travers les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du le driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision, le point d'entrée vers une application Spark est la class \textit{SparkSession}.
+
+\subparagraph{Spark driver et executor}
+
+Chaque Spark executor est alloué exclusivement à une application Spark spécifique et la durée de vie d'un executor est celle de l'application Spark. 
+
+Spark utilise l'architecture master-slave. Spark driver est le master et Spark executor est le slave. De ce fait, une application Spark n'a qu'un seul Spark driver et plusieurs Spark executors. Chaque Spark executor s'occupe d'un traitement  sur une partie de données. Ainsi Spark permet de traiter  les données de manière parallèle. La Figure \ref{fig:small-cluster-3} illustre un exemple d'un cluster. Ce dernier est composé de trois executors.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{illustrations/small-cluster-3}
+	\caption{Un exemple d'un cluster formé de trois executors. Source : \cite{eginning-Apache-Spark-2-cluster-example}}
+	\label{fig:small-cluster-3}
+\end{figure}
+
+
+\subparagraph{Spark Uniffied Stack} Spark offre ce qu'on appelle Spark Stack. C'est un ensemble de composantes construites dessus la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
+\begin{itemize}
+	\item Spark SQL  est conçu pour le traitement interactive;
+	\item Spark Streaming est utilisé pour les traitements en temps réel;
+	\item  GraphX est destiné au traitement de graphe;
+	\item MLib est conçu pour le machine learning;
+	\item SparkR est consacré au traitement lié au machine learning en utilisant l shell R.
+	
+\end{itemize}
+
+\subparagraph{Spark Core} est la base du moteur Spark pour e traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérant au pannes et en lecture seule. 
+La Figure \ref{fig:unified-stack} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{illustrations/unified-stack}
+	\caption{ Spark Unified Stack. Source : \cite{eginning-Apache-Spark-2-unified-stack}}
+	\label{fig:unified-stack}
+\end{figure}
+
+
+
+
+
 \subsection{Application sur traceroutes}
 %\subsection{Complément d'information du processus de la détection avec le langage Scala}
 Comme complément aux étapes décrites dans \ref{steps-rtt-analysis}, on présente les différentes classes permettant de modéliser les données tout au long du processus de l'analyse. La définition de ces classes est liée au langage \textit{Scala}. 
