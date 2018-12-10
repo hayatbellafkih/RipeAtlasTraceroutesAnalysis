@@ -125,6 +125,8 @@
 \renewcommand\labelitemi{--}
 \newcommand{\source}[1]{\caption*{Source: {#1}} }
 \definecolor{lightgray}{gray}{0.9}
+\renewcommand{\cleardoublepage}{}
+%\renewcommand{\clearpage}{}
 %#####################################################################################################
 %\usepackage{hyperref}% hyperliens dans le PDF, pas pour impression
 
@@ -164,11 +166,15 @@
 \include{chapitre4}
 \include{conclusion}
 \include{annexes}
-\include{annex-rappel-de-notions}
+%\include{annex-rappel-de-notions}
+
 \newpage
 \listoffigures
 \newpage
 \listoftables
+\newpage
+\lstlistoflistings
+\newpage
 %\include{chapitre5}
 
 

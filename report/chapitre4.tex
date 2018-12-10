@@ -3,14 +3,6 @@
 Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons utilisé pour analyser les traceroutes disponibles dans le dépôt de RIPE Atlas. Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
 
 
-\section{MongoDB}
-
-
-\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
-
-MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBD adoptant le couple CP (Consistency-Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}.
-
-En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépend du stockage, de la  RAM allouées et des options choisies.
 
 \paragraph{Application sur les  traceroutes }~
 
@@ -48,61 +40,6 @@ L'évolutivité est une des caractéristiques attirantes d'Amazon DynamoDB. Nous
 
 \section{Amazon S3, Amazon Athena et Amazon Glue }
 
-Il existe un ensemble de services web proposés par Amazon  adaptés à la manipulation des données massives. Le deuxième choix a été dirigé vers une combinaison de services d'Amazon, il s'agit d'Amazon S3, Amazon Glue et Amazon Athena.
-
-\paragraph{Introduction aux services Amazon S3, Amazon Athena et Amazon Glue }
-
-\subparagraph{Amazon S3}
-\footnote{Source : \url{https://aws.amazon.com/fr/s3/}, consultée le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
-
-
-Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, le tableau   	\ref{tab:pricing-s3-standard} illustre les tarifs de la formule standard.
-\begin{table}[H]
-	\centering
-	\captionsetup{justification=centering}
-	\begin{tabular}{l c }
-		\textbf{Région} & UE (Irlande) \\ \hline
-		\textbf{Première tranche de $ 50 $ To/mois} &	$ 0,023 $ USD par Go\\ \hline
-		\textbf{$ 450 $ To suivants/mois} &	$ 0,022 $ USD par Go \\ \hline
-		\textbf{Plus de $ 500 $ To/mois} &	$ 0,021 $ USD par Go\\ \hline
-	\end{tabular}
-	\caption{Les tarifs du AWS S3 (formule Stockage standard S3)}
-	\label{tab:pricing-s3-standard}
-	\source{\url{https://aws.amazon.com/fr/s3/pricing/}, consultée le $05/08/2018$.}
-\end{table}
-
-  
-\subparagraph{Amazon  Glue} \label{aws:glue}
- \footnote{Source : \url{https://aws.amazon.com/fr/glue/}, consultée le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rendre accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  des données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisables. 
-
-Les frais de ce service dépendent du temps écoulé lors de l'analyse des données par les robots d'analyse durant la découverte du schéma. A ces frais, ils s'ajoutent les frais du catalogue de données qui va être peuplé par les résultats fournis par les robots d'analyse. Par exemple, on paye $ 0,44 $ USD par heure par DPU\footnote{DPU : unité de traitement des données.}, il est facturé à la seconde avec un minimum de $ 10 $ minutes par robot d'analyse exécuté. Plus de détails sont disponibles sur Amazon Glue\footnote{Source : \url{https://aws.amazon.com/fr/glue/pricing/}, consultée le $05/08/2018$.}.
-
-\subparagraph{Amazon Athena}\label{aws:athena}\footnote{Source : \url{https://aws.amazon.com/fr/athena/}, consultée le $06/07/2018$.} est un service de requêtes  interactif. Il permet d'interroger les données présentes dans Amazon S3 avec des requêtes SQL plus avancées. Le service Amazon Athena est considéré comme \textit{serverless}. Amazon Athena utilise l'approche \textbf{\textit{schema-on-read}} (voir la section \ref{sec:schema-read-write}) afin de projeter le schéma donné en entrée sur les données au moment de l'exécution de la requête SQL demandée. Le schéma sur lequel les données peuvent être projetées peut être créé manuellement ou bien utiliser le catalogue créé dans Amazon Glue.
- Le service Amazon Athena est facturé suivant la quantité de données analysée. Précisément, $ 5 $ USD par To de données analysées.
-
-
-\begin{tcolorbox}
-	Une \textbf{\textit{requête est	interactive}} si on peut  obtenir immédiatement une réponse à la requête.  Dans le cas échéant, les résultats sont obtenus  dans le cadre d'un code source pour un des langages de programmation, souvent à travers une API.
-\end{tcolorbox}
-
-\begin{tcolorbox}
-	\textbf{\textit{Serverless}} peut être décomposé en \textit{server} et \textit{less}. Un outil est \textit{serverless} quand l'utilisateur final de cet outil peut l'utiliser sans se soucier de toute configuration ou gestion des serveurs derrière ce service. C'est un mécanisme présent beaucoup sur le cloud.
-\end{tcolorbox}
-
-L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Presto. pour les instruction DDL, elles sont effectuées par  \textit{Hive Data Definition Language} \footnote{Source : \url{https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL}, consultée le $05/08/2018$.}. Les requêtes DDL incluent la création, la suppression et la mise à jour de la structure de la table dans le cas d'une base de données relationnelles, d'une collection, d'une vue, etc. 
-
-
-
-\begin{tcolorbox}
-	\textbf{\textit{Presto\footnote{Source : \url{http://prestodb.io/}, consultée le $01/08/2018$.} }} est un moteur de requêtes SQL open source destiné au Big Data. Il permet d'exécuter des requêtes analytiques interactives sur des données de taille importante; jusqu'à des Pétaoctets de données.
-	
-	Presto interroge les données où elles sont hébergées. Ce qui inclut les bases de données relationnelles, Amazon S3 et autres dépôts propriétaires. De plus, une même requête SQL peut combiner plusieurs sources de données. C'est intéressant pour les organisations ayant plusieurs sources de données. Il fournit les résultats en quelques secondes, voire quelques minutes.  Il supporte les types de données complexes comme les objets JSON, un tableau d'éléments, etc. Il supporte aussi  des opérations complexes sur les données.
-\end{tcolorbox} 
-
-
-\begin{tcolorbox}
-	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
-\end{tcolorbox}
 
 \paragraph{Application sur les traceroutes}~
 
@@ -146,66 +83,6 @@ Pour une $d_i$ d'une heure, le nombre de traceroutes est de l'ordre des milliers
 
 \section{Spark Apache avec Scala}
 
-\subsection{Introduction à Apache Sprk}
-
-Apache Spark est un moteur de traitement distribué des données. Spark est conçu pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité.
-
-\paragraph{Spark Core Concepts et architecture}
-
-\subparagraph{Spark Clusters et Resource Management System}
-
-Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'onappelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable, il existe un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
-
-Le \textit{cluster manager} a une vue globale de l'emplacement des workers, la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. La Figure \ref{fig:cluster-overview} montre l'interaction entre le cluster manager et les workers.
-
-
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification= centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/cluster-overview.jpg}
-	\caption{ Interaction entre une application Spark et le cluster manager. Source : \cite{eginning-Apache-Spark-2-cluster-overwiew}}
-	\label{fig:cluster-overview}
-\end{figure}
-
-
-
-
-\subparagraph{Spark Application}
-Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite à travers les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du le driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision, le point d'entrée vers une application Spark est la class \textit{SparkSession}.
-
-\subparagraph{Spark driver et executor}
-
-Chaque Spark executor est alloué exclusivement à une application Spark spécifique et la durée de vie d'un executor est celle de l'application Spark. 
-
-Spark utilise l'architecture master-slave. Spark driver est le master et Spark executor est le slave. De ce fait, une application Spark n'a qu'un seul Spark driver et plusieurs Spark executors. Chaque Spark executor s'occupe d'un traitement  sur une partie de données. Ainsi Spark permet de traiter  les données de manière parallèle. La Figure \ref{fig:small-cluster-3} illustre un exemple d'un cluster. Ce dernier est composé de trois executors.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{illustrations/small-cluster-3}
-	\caption{Un exemple d'un cluster formé de trois executors. Source : \cite{eginning-Apache-Spark-2-cluster-example}}
-	\label{fig:small-cluster-3}
-\end{figure}
-
-
-\subparagraph{Spark Uniffied Stack} Spark offre ce qu'on appelle Spark Stack. C'est un ensemble de composantes construites dessus la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
-\begin{itemize}
-	\item Spark SQL  est conçu pour le traitement interactive;
-	\item Spark Streaming est utilisé pour les traitements en temps réel;
-	\item  GraphX est destiné au traitement de graphe;
-	\item MLib est conçu pour le machine learning;
-	\item SparkR est consacré au traitement lié au machine learning en utilisant l shell R.
-	
-\end{itemize}
-
-\subparagraph{Spark Core} est la base du moteur Spark pour e traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérant au pannes et en lecture seule. 
-La Figure \ref{fig:unified-stack} 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{illustrations/unified-stack}
-	\caption{ Spark Unified Stack. Source : \cite{eginning-Apache-Spark-2-unified-stack}}
-	\label{fig:unified-stack}
-\end{figure}
-
 
 
 
@@ -217,15 +94,16 @@ Comme complément aux étapes décrites dans \ref{steps-rtt-analysis}, on prése
 Soient les classes suivantes utilisées : 
 
 \paragraph{La classe Signal} modélise un signal \footnote{Un signal dans le contexte d'un traceroute.}. Ainsi, \textit{from} est l'adresse IP du routeur émettant ce signal, \textit{rtt} est le Round Trip Time entre la sonde Atlas et ce routeur et enfin \textit{x} est un indicateur de l'échec du signal.
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe Signal en Scala }]
 case class Signal(
 rtt:  Option[Double],
 x:    Option[String],
 from: Option[String])
+
 \end{lstlisting}
 
 \paragraph{La classe Hop} modélise un saut dans un traceroute. On caractérise un saut par son identifiant noté \textit{hop}. Celui-ci   prend comme valeur un entier commençant à $1$ et la liste des signaux relatifs à ce saut notée par \textit{result}. Généralement un saut est représenté par $3$ signaux.
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe Hop en Scala }]
 case class Hop(
 var result: Seq[Signal],
 hop:        Int)
@@ -234,7 +112,7 @@ hop:        Int)
 
 \textit{dst\_name} représente l'adresse IP de la destination de la requête traceroute, \textit{from} est l'adresse IP de la sonde, \textit{prb\_id} est l'identifiant de la sonde, \textit{msm\_id} est l'identifiant de mesure, \textit{timestamp} est le temps auquel la requête traceroute a été effectuée et enfin on trouve la liste des sauts qui représentent les routeurs traversés par le trafic entre la source et la destination. 
 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe Traceroute en Scala }]
 case class Traceroute(
 dst_name:  String,
 from:      String,
@@ -249,13 +127,13 @@ result:    Seq[Hop])
 A l'étape 2, l'objectif était d'agréger  les signaux par routeur source et ensuite calculer la médiane des RTTs par ce routeur. Par conséquent, un traceroute est présenté différemment, ce qui est  illustré par la classe \textit{MedianByHopTraceroute}.
 
 \paragraph{La classe PreparedSignal }  est une agrégation de tous les signaux, d'un saut donné, par le routeur \textit{from},  la médiane des RTTs calculée est présentée par \textit{medianRtt}.
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe PreparedSignal en Scala }]
 case class PreparedSignal(
 medianRtt: Double,
 from:      String)
 \end{lstlisting}
 \paragraph{La classe PreparedHop } modélise un saut après avoir agrégé ses signaux. 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe PreparedHop en Scala }]
 case class PreparedHop(
 var result: Seq[PreparedSignal],
 hop:        Int)
@@ -263,7 +141,7 @@ hop:        Int)
 
 
 \paragraph{La classe MedianByHopTraceroute } modélise un traceroute après avoir agrégé ses sauts. Par rapport au traceroute d'avant l'agrégation, seule la liste des sauts  a subi un changement. 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe MedianByHopTraceroute en Scala }]
 case class MedianByHopTraceroute(
 dst_name:  String,
 from:      String,
@@ -275,7 +153,7 @@ result:    Seq[PreparedHop])
 
 
 \paragraph{La classe Link} modélise un lien topologique. Ce dernier est défini par deux adresses IP  \textit{ip1} et \textit{ip2} et par son RTT différentiel calculé \textit{rttDiff}.
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe Link en Scala }]
 case class Link(
 ip1:     String,
 ip2:     String,
@@ -284,7 +162,7 @@ rttDiff: Double)
 
 \paragraph{La classe LinksTraceroute} permet de modéliser un traceroute après avoir inféré tous les liens de ce dernier. Ainsi, la liste des sauts est remplacée par la liste des liens (\textit{links}). 
 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe LinksTraceroute en Scala }]
 case class LinksTraceroute(
 dst_name:  String,
 from:      String,
@@ -297,7 +175,7 @@ links:     Seq[Link])
 
 A l'étape 5, l'objectif était de passer d'un traceroute à une liste de liens caractérisés par les informations générales sur la sonde Atlas, la mesure Atlas, etc. Chaque élément de cette liste est représenté par la classe \textit{DiffRtt}, où \textit{LinkIPs} représente les deux adresses IP d'un lien donné.
 \paragraph{La classe LinkIPs} permet représenter un lien par seulement ses deux adresses IP \textit{ip1} et \textit{ip2}.
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe LinkIPs en Scala }]
 case class LinkIPs(
 ip1: String,
 ip2: String)
@@ -305,7 +183,7 @@ ip2: String)
 
 \paragraph{La classe DiffRtt} est une représentation plus détaillée d'un lien, en plus de son RTT différentiel, on ajoute d'autres informations.  Les adresses IP d'un lien sont modélisées par la classe \textit{LinkIPs}.
 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe DiffRtt en Scala }]
 case class DiffRtt(
 rtt:      Double,
 var link: LinkIPs,
@@ -314,7 +192,7 @@ probe:    BigInt)
 
 A l'étape 6.3, on souhaite normaliser les dates de chaque lien; peu importe le moment pendant lequel le traceroute a été effectué durant une période $d_i$, on note seulement le début de cette période. Ainsi,  la classe  \textit{DiffRTTPeriod}  reprend un \textit{lien} donné, les différentes sondes Atlas ayant identifié ce lien (\textit{probes}), les RTTs différentiels de ce lien tout au long de la période et enfin les dates associées à chaque RTT différentiel.
 \paragraph{La classe DiffRTTPeriod } ~
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe DiffRTTPeriod en Scala }]
 case class DiffRTTPeriod(
 link:      LinkIPs,
 probes:    Seq[BigInt],
@@ -330,7 +208,7 @@ A la fin des opérations de l'étape 6, on reprend pour chaque période, pour un
   
 
 %Pour toute période, on a une instance de \textit{LinkState} pour 
-\begin{lstlisting}[language=scala]
+\begin{lstlisting}[language=scala, caption={La classe LinkState en Scala }]
 case class LinkState(
 var valueMedian: Seq[Double],
 var valueHi:     Seq[Double],
