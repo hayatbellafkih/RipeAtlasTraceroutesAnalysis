@@ -215,26 +215,3 @@ var valueHi:     Seq[Double],
 var valueLow:    Seq[Double],
 var valueMean:   Seq[Double])
 \end{lstlisting}
-\paragraph{La comparaison des intervalles de confiance} 
-
-La comparaison de l'état courant du lien avec celui de référence est effectuée en analysant le chevauchement d'intervalles de confiance  courant et de référence. Le délai d'un lien est jugé anormal si son intervalle de confiance courant est inclus dans l'intervalle de confiance de référence. C'est le cas 1 dans la Figure 	\ref{fig:intervals-comparaison},  \textit{referenceLow} et \textit{referenceHight} sont les bornes de l'intervalle de confiance de référence.  \textit{currentLow} et \textit{currentHight} sont les bornes de l'intervalle de confiance courant.
-
-D'après le travail de référence, on distingue quatre cas possibles  illustrés dans la Figure 	\ref{fig:intervals-comparaison}:
-
-\subparagraph{Cas 1 :} le délai du lien est normal.
-\subparagraph{Cas 2 :} le délai du lien est anormal.
-\subparagraph{Cas 3 :} le délai du lien est anormal.
-\subparagraph{Cas 4 :} le délai du lien est anormal.
-
-Dans le cas où le délai est jugé anormal, on introduit ce qu'on appelle la \textit{déviation}. Cette métrique caractérise l'anomalie détectée. Elle est calculée différemment dans le cas où le délai est anormal.
-
-\begin{figure}[h]
-	\centering
-	\captionsetup{justification=centering}
-	\resizebox{\textwidth}{!}{
-	\input{illustrations/intervals-comparaison.tex}
-}
-	\caption{La comparaison des deux intervalles de confiance : courant et référence }
-	\label{fig:intervals-comparaison}
-\end{figure}
-

@@ -1,12 +1,9 @@
-
 \chapter{La détection des anomalies dans les délais d'un lien}
 
-
-
-Dans le présent chapitre, nous allons présenter l'outil de détection des anomalies dans les délais d'un lien  conçu dans le cadre du travail de R. Fontugne et al \cite{DBLP:journals/corr/FontugneAPB16}. Nous avons choisi ce travail qui exploite des données massives en vue d'évaluer quelques technologies du Big Data.
+Dans le présent chapitre, nous allons présenter l'outil de détection des anomalies dans les délais d'un lien  conçu dans le cadre de l'étude  de R. Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16}. Nous avons choisi ce travail qui exploite des données massives en vue d'évaluer quelques technologies du Big Data.
 
 \section{Introduction}
-Le travail de R. Fontugne \cite{DBLP:journals/corr/FontugneAPB16} et al exploite une des mesures effectuées par les sondes Atlas: la requête traceroute. L'idée de ce travail est de collecter les résultats des requêtes traceroutes effectuées par les sondes Atlas, d'en déterminer une valeur de référence sur base de l'historique, et ensuite de comparer la référence avec la valeur courante. La référence pour le délai  d'un lien donné   est mise à jour au fur et à mesure de l'analyse.
+Le travail de R. Fontugne \cite{DBLP:journals/corr/FontugneAPB16} et al. exploite une des mesures effectuées par les sondes Atlas: la requête traceroute. L'idée de ce travail est de collecter les résultats des requêtes traceroutes effectuées par les sondes Atlas, d'en déterminer une valeur de référence sur base de l'historique, et ensuite de comparer la référence avec la valeur courante. La référence pour le délai  d'un lien donné   est mise à jour au fur et à mesure de l'analyse.
 
 
 
@@ -14,7 +11,7 @@ Dans leur travail \cite{DBLP:journals/corr/FontugneAPB16},  R. Fontugne et al. o
 
 En pratique, il est  difficile  d'avoir une idée globale et exacte sur la topologie de l'Internet. Toutefois, les opérateurs des réseaux informatiques  disposent d'un aperçu de l'état des entités qui forment leurs réseaux, les relations entre ces entités ainsi que les éventuels problèmes. Avec la distribution abondante des sondes Atlas dans le monde en terme de type d'adressage : sondes Atlas supportant seulement l'adressage IPv4, d'autres qui supportent en plus l'adressage IPv6, en terme de  la diversité géographique, la diversité en terme d'ASs hébergeant les sondes Atlas, etc, il était  possible d'aborder  les délais dans les réseaux informatiques à travers de nouvelles approches, reposées sur des fondements statistiques. Parmi les points forts de l'analyse menée par R. Fontugne et al., c'était la possibilité de valider les   méthodes proposées avec des événements  marquants sur Internet.
 
-Le travail de R. Fontugne et al. reprend trois méthodes basées sur les données collectées par les sondes Atlas, chaque méthode reflète l'approche utilisée pour étudier les performances des réseaux informatiques. Ces méthodes sont les suivantes:
+Le travail de R. Fontugne et al. reprend trois méthodes basées sur les données collectées par les sondes Atlas. Chaque méthode reflète l'approche utilisée pour étudier les performances des réseaux informatiques. Ces méthodes sont les suivantes:
 
 \begin{enumerate}
 	\item la détection des changements des délais que subissent les liens intermédiaires dans les traceroutes; 
@@ -25,19 +22,45 @@ Le travail de R. Fontugne et al. reprend trois méthodes basées sur les donnée
 	
 \end{enumerate}
 
-Dans la suite de ce travail, nous allons reprendre seulement la première méthode.  Il s'agit d'étudier le délai d'un lien topologique, c'est le délai entre deux routeurs adjacents sur Internet.
+Dans la suite de ce travail, nous allons reprendre seulement la première méthode.  Il s'agit d'étudier le délai d'un lien topologique; c'est le délai entre deux routeurs adjacents sur Internet.
 
 
-\section{L'étude des délais des liens }
+
+\section{Pourquoi analyser les délais des liens réseaux}
+
+Il existe un bon nombre de sujets à traiter en exploitant les données collectées par les sondes Atlas. Quelques exemples de sujets ont été déjà présentés dans la section \ref{use-cases-atlas}. Notre choix de reprendre le travail de Fontugne et al. a été fait après avoir parcouru un ensemble de travaux basés sur le projet  RIPE Atlas. 
+
+Pour certains travaux, il n'était pas possible  de les reprendre suite au manque de détails et de l'accès à  certaines ressources réseaux utilisées dans ces travaux \footnote{Par exemple, les informations du peering entre les Systèmes Autonomes, la géolocalisation des adresses IP, etc.}. Par exemple, afin d'étudier la censure dans un pays donné, il faut être au courant des spécificités de ce pays, les circonstances politiques et sociales, les opposants,  etc.  Un autre exemple concerne le sujet de la détection des détours du trafic local dans un pays.  Anant Shah  et al. ont travaillé sur la détection des détours \cite{anant-shah} où ils ont présenté  les contraintes relatives à ce sujet: la difficulté d'avoir une géolocalisation exacte d'une adresse IP d'une part et l'absence des informations de peering entre les ASs d'autre part. Ces dernières peuvent changer complètement les conclusions finales. 
+
+Le travail sur lequel nous nous basons \cite{DBLP:journals/corr/FontugneAPB16} s'inscrit dans les travaux traitant les performances des réseaux. Dans la suite de ce document, ce travail sera utilisé comme travail de référence.  Ce travail a été choisi comme référence pour plusieurs raisons:
+
+
+	
+\paragraph{Les données utilisées}  Les auteurs de ce travail ont exploité des données déjà présentes dans la base de données du RIPE Atlas. Ainsi, il n'y a pas besoin de lancer des mesures qui nécessitent la possession d'assez de crédits \footnote{Voir la section \ref{credits-atlas}.}. De plus, les mesures intégrées montrent plus de stabilité par rapport aux mesures personnalisées. Les destinations des mesures intégrées sont prédéfinies, généralement ce sont des instances des serveurs DNS et des serveurs gérés par  RIPE NCC. Cependant, les mesures personnalisées peuvent concerner des destinations moins stables en terme de disponibilité.
+	
+\paragraph{La clarté du travail} La communauté RIPE Atlas est active en nombre de travaux publiés. Cependant, ces travaux reprennent seulement les résultats. Pour certains,  la méthodologie a été bien détaillée. Pour d'autres, la méthodologie adoptée était très brève. En ce qui concerne le  travail choisi, il  est bien détaillé.
+	
+\paragraph{La disponibilité du code source} La détection des anomalies proposée a été mise en pratique à travers un outil. Les code source de cet outil est disponible sur GitHub\cite{InternetHealthReport}. L'accès au code source de l'outil nous a permis de bien comprendre la démarche de la détection.
+
+%Avoir le code source disponible sur GitHub est avantageux. L'objectif n'était pas de réécrire ce que les auteurs ont fait, mais plutôt le comprendre et éventuellement l'ajuster suivant les besoins.  De plus, l'onglet \textit{issues} du projet permet de  demander des détails aux contributeurs mais aussi cela permet de partager les réflexions.
+	
+\paragraph{La possibilité de la validation des résultats}  Comme il était cité dans le travail \cite{DBLP:journals/corr/FontugneAPB16}, les auteurs ont démontré la cohérence de l'outil de détection avec des éventements réels comme les  attaques DDOS.
+	
+	\begin{tcolorbox}
+		Une attaque de type Distributed Denial of Service (\textbf{\textit{DDOS}}) vise la disponibilité d'un serveur en surchargeant ce dernier avec un trafic depuis différentes sources, d'où le terme \textit{Distributed}.
+	\end{tcolorbox}
+	
+
+\section{L'étude des délais des liens } 
 
 \subsection{Les données utilisées dans l'analyse des délais}~
 
-La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons \footnote{L'échantillon de la métrique qui caractérise un lien : RTT différentiel.} considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité et  qui sont capables de collecter une quantité importante de données relatives aux performances des réseaux informatiques, c'est ce qu'assure le projet RIPE Atlas.
+La méthode conçue pour la détection des changements des délais se base sur des fondements statistiques. Ces derniers sont capables de montrer leurs performances si la taille des échantillons \footnote{L'échantillon de la métrique qui caractérise un lien : RTT différentiel.} considérés est grande.   Afin de surveiller un grand nombre de liens sur Internet, il faut avoir un grand nombre de sondes Atlas avec une certaine diversité.
 
-Le travail de référence implique principalement les mesures de traceroutes, ainsi deux catégories de mesures sont utilisées :
+Le travail de référence implique principalement les mesures de traceroutes. On distingue  deux catégories de mesures  utilisées :
 
 \begin{itemize}
-	\item \textit{builtin} : ce sont les traceroutes effectués par toutes les sondes Atlas vers les instances des  $13$ serveurs DNS racines. Les traceroutes sont effectués chaque $30$ minutes. En pratique, certains serveurs racines DNS déploient l'anycast. Au moment de la réalisation du travail de référence, c'étaient des traceroutes vers $ 500 $ instances des serveurs DNS racines;
+	\item \textit{builtin} : ce sont les traceroutes effectués par toutes les sondes Atlas vers les instances des  $13$ serveurs DNS racines. Les traceroutes sont effectués chaque $30$ minutes. En pratique, certains serveurs racines DNS déploient l'anycast. Au moment de la réalisation du travail de référence\footnote{Année $2017$.}, c'étaient des traceroutes vers $ 500 $ instances des serveurs DNS racines;
 	\begin{tcolorbox}
 		\textbf{DNS Anycast} est une solution   utilisée pour accélérer le fonctionnement  des serveurs DNS. Les serveurs DNS adoptant cette approche fournissent des temps de réponse plus courts, et ce partout dans le monde. Les requêtes en provenance de l'utilisateur sont redirigées vers un n\oe{}ud adéquat suivant un algorithme prédéfini. 
 	\end{tcolorbox}
@@ -45,25 +68,25 @@ Le travail de référence implique principalement les mesures de traceroutes, ai
 	\item \textit{anchoring} : ce sont les traceroutes effectués par environ $400$ sondes Atlas à destination de $189$ serveurs\footnote{Sondes Atlas ayant des fonctionnalités avancées.} et ce chaque $15$ minutes.
 \end{itemize}
 
-En ce qui concerne les traceroutes analysés, le tableau \ref{tab:dataset} reprend plus de détails.
+En ce qui concerne le nombre de  traceroutes analysés, le tableau \ref{tab:dataset} reprend plus de détails; le nombre de traceroutes ainsi que le nombre de sondes impliquées dans ces traceroutes, pour les deux types d'adressages (IPv4 et IPv6). 
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|l|l|}
 		\hline
 		& \textbf{Nombre de traceroute}s& \textbf{Nombre de sondes}\\ \hline
-		IPv4		&2.8 billion & 11,538\\ \hline
-		IPv6	&	1.2 billion & 4,30 \\ \hline
+		IPv4		&$ 2.8 $ billion & $ 11,538 $\\ \hline
+		IPv6	&	$ 1.2 $ billion & $ 4,30 $ \\ \hline
 	\end{tabular}
 	\caption{Récapitulatif des traceroutes utilisés dans le travail de référence }
 	\label{tab:dataset}
 \end{table}
 
 
-L'étude des délais ne concerne pas  les adresses privées, ainsi, le suivi des délais ne concerne pas les réseaux privés.  De plus, ce  suivi  se base sur les requêtes de type traceroute, et traceroute reprend une partie de la topologie de l'Internet. En effet, les liens considérés sont ceux topologiques et ne sont pas  les liens physiques. 
+Pour précision, l'étude des délais des liens ne concerne pas  les adresses privées, ainsi, le suivi des délais ne concerne pas les réseaux privés.  De plus, ce  suivi  se base sur les requêtes de type traceroute, et traceroute reprend une partie de la topologie de l'Internet. En effet, les liens considérés sont ceux topologiques et ne sont pas  les liens physiques. 
 
-\section{Définition du RTT différentiel d'un lien}
-\subsection{RTT différentiel }~
+\subsection{Le principe de la détection des changements des délais} \label{principe-de-detection}
+\paragraph{Définition du RTT différentiel }~
 
 Avant de définir le RTT différentiel, soit la définition du RTT :
 %Il est indispensable de présenter la définition du RTT  (Round Trip Time)  différentiel d'un lien avant de procéder à la description de l'algorithme de la détection des anomalies. 
@@ -71,7 +94,7 @@ Avant de définir le RTT différentiel, soit la définition du RTT :
 
 \begin{tcolorbox}
 	
-	\textbf{ICMP} :Internet Control Message Protocol est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.
+	\textbf{ICMP} (Internet Control Message Protocol) est un protocole utilisé pour véhiculer des messages de contrôle sur Internet.
 	
 	\textbf{RTT} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet sondé  et le timestamp associé à la réception de la réponse ICMP. C'est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies par les utilitaires traceroute et ping. En ce qui concerne traceroute,  ce dernier fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination.  RTT inclut le temps de transmission, du quering et  du traitement. 
 \end{tcolorbox}
@@ -90,13 +113,17 @@ où $\delta_{BC}$ est le délai du lien $BC$ et $\varepsilon_{PBC}$ est la diff�
 	\centering
 		\captionsetup{justification= centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/rtt-differ}
-	\caption{(a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les  chemins de retours depuis les routeurs B et C vers la sonde P. Source : \cite{DBLP:journals/corr/FontugneAPB16}}
+	\caption{(a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les  chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite{DBLP:journals/corr/FontugneAPB16}}
 	\label{fig:rtt-differ}
 \end{figure}
 
-\subsection{Le principe de la détection des changements des délais}
+\paragraph{Le principe de la détection des changements des délais}
 
-L'évolution du délai d'un lien est déduit de l'évolution de son RTT différentiel. Reprenons la formule du RTT différentiel du lien BC :  $\delta_{BC}$ + $\varepsilon_{PBC}$. Supposons qu'on dispose d'un nombre $n$ de sondes Atlas P$_i$, $i$ $\in$ [$1$, $n$], telles que toutes les sondes ont un chemin de retour différent depuis B et depuis C.  En effet, les RTTs différentiels pour chacune des sondes Atlas $\Delta_{P{_i}BC}$ partagent la même composante $\delta_{BC}$.
+L'évolution du délai d'un lien est déduit de l'évolution de son RTT différentiel. Reprenons d'abord la formule du RTT différentiel du lien BC : 
+
+ $\delta_{BC}$ + $\varepsilon_{PBC}$. 
+ 
+ Supposons qu'on dispose d'un nombre $n$ de sondes Atlas P$_i$, $i$ $\in$ [$1$, $n$], telles que toutes les sondes ont un chemin de retour différent depuis B et depuis C.  En effet, les RTTs différentiels pour chacune des sondes Atlas $\Delta_{P{_i}BC}$ partagent la même composante $\delta_{BC}$.
 
 On sait que les $n$ sondes Atlas sont indépendantes; le chemin de retour de chacune est indépendant, ainsi les valeurs des  $\varepsilon_{P_{i}BC}$ sont  indépendantes. L'indépendance de ces valeurs implique que la distribution $\Delta_{P_{i}BC}$ est estimé d'être stable au cours du temps si $\delta_{BC}$ est constant. Cependant, un changement significatif de la valeur de $\delta_{BC}$ influence les valeurs des RTTs différentiels. Dans ce cas, la distribution des RTTs différentiels changes. 
 
@@ -108,15 +135,19 @@ La détection des anomalies des délais repose sur un théorème très important
 
 
 
-\section{Description des paramètres de l'analyse des délais} \label{par:parametre-de-lanalyse}~
+\section{L'évolution du RTT différentiel des liens}
 
-La détection des changements des délais nécessite l'ajustement d'un nombre de paramètres. La valeur de chaque paramètre est relative au  fondement utilisé théorique ou bien empirique, qui a été  justifié par les auteurs du travail de référence.   Ci-dessous les paramètres à ajuster avant de lancer une analyse.  Chaque paramètre sera défini dans son contexte.
+L'évolution des RTTs différentiels est une des applications du principe décrit dans  \ref{principe-de-detection}. Pour un lien donné, le suivi est fait sur plusieurs  périodes. En plus du suivi du RTT différentiel, il y a aussi l'identification d'éventuelles anomalies pour ce lien.
 
-\subparagraph{start} : c'est la date de début de l'analyse. Ce sont les traceroutes effectués par les sondes Atlas à partir de cette date qui seront analysés.
+\subsection{Description des paramètres de l'analyse des délais} \label{par:parametre-de-lanalyse}~
 
-\subparagraph{end} : c'est la date marquant la fin de l'analyse. Comme le paramètre \textit{start}, c'est la date des derniers traceroutes capturés par les sondes Atlas à considérer dans la présente analyse.
+La détection des changements des délais nécessite l'ajustement d'un nombre de paramètres. La valeur de chaque paramètre est relative au  fondement utilisé théorique ou bien empirique, qui a été  justifié par les auteurs du travail de référence.   Ci-dessous les paramètres à ajuster afin d'obtenir l'évolution des RTTs différentiels d'un lien ainsi que les éventuelles anomalies.  
 
-\subparagraph{timeWindow} :  ce paramètre est exprimé en seconde. La durée de l'analyse, qui est le temps écoulé entre \textit{start} et \textit{end}, est divisée sur des périodes de même taille : \textit{timeWindow}, c'est qui est illustré dans la figure  \ref{fig:timing_tex}.
+\textbf{start} : c'est la date de début de l'analyse. Ce sont les traceroutes effectués par les sondes Atlas à partir de cette date qui sont analysés.
+
+\textbf{end} : c'est la date marquant la fin de l'analyse. Comme le paramètre \textit{start}, c'est la date des derniers traceroutes effectués par les sondes Atlas à considérer.
+
+\textbf{timeWindow} :  ce paramètre est exprimé en seconde. La durée de l'analyse, qui est le temps écoulé entre \textit{start} et \textit{end}, est divisée sur des périodes de même taille : \textit{timeWindow}, c'est qui est illustré dans la Figure  \ref{fig:timing_tex}.
 
 %illustre le contexte des trois paramètres \textit{start}, \textit{end} et \textit{timeWindow} avec les étapes principales.
 
@@ -138,35 +169,39 @@ La détection des changements des délais nécessite l'ajustement d'un nombre de
 %	\label{fig:timewindow}
 %\end{figure}
 
-\subparagraph{minSeen} : comme l'analyse est faite sur plusieurs périodes de durée \textit{timeWindow}, le paramètre \textit{minSeen} indique le nombre de fois où le lien doit avoir été identifié. Par exemple, un lien peut être identifié dans $3$ $d_i$, ou bien être identifié  une seule fois durant toute la période de l'analyse.
+\textbf{minSeen} : comme l'analyse est faite sur plusieurs périodes de durée \textit{timeWindow}, le paramètre \textit{minSeen} indique le nombre de fois où le lien doit avoir été identifié. Par exemple, un lien peut être identifié dans $3$ $d_i$, ou bien être identifié  une seule fois durant toute la période de l'analyse.
 
-\subparagraph{alpha}: c'est le paramètre de la  moyenne mobile exponentielle calculé.
+\textbf{alpha }: noté $\alpha$, c'est le paramètre de la  moyenne mobile exponentielle calculée.
 
-\guillemotleft \textit{ Les méthodes de lissage exponentiel  sont un ensemble de techniques empiriques de prévision qui accordent plus ou moins d'importance aux valeurs du passé d'une série temporelle.\footnote{Source : \url{https://perso.math.univ-toulouse.fr/lagnoux/files/2013/12/Chap6.pdf}, conseultée le $30/09/2018.$}} \guillemotright
+\guillemotleft \textit{ Les méthodes de lissage exponentiel  sont un ensemble de techniques empiriques de prévision qui accordent plus ou moins d'importance aux valeurs du passé d'une série temporelle.\footnote{Source : \url{https://perso.math.univ-toulouse.fr/lagnoux/files/2013/12/Chap6.pdf}, consultée le $30/09/2018.$}} \guillemotright
 
-Pour calculer la prochaine  valeur de la médiane des RTTs différentiels de référence $ \overline{m}_{t}$ du timeWindow  courant $ t $, soient: 
+ La  moyenne mobile exponentielle est utilisée pour calculer la médiane des RTTs différentiels durant une période $d_i$. Cette médiane constitue une référence  sur laquelle se base la détection des anomalies.
+Pour calculer la prochaine  valeur de la médiane des RTTs différentiels de référence $ \overline{m}_{t}$   courant la période $ t $ et pour le lien $l$, soient: 
 
-$m_t$ la médiane des RTTs différentiel observée pour un lien durant le timeWindow $t$. 
+$m_t$ la médiane des RTTs différentiels observée pour $l$ durant le \textit{timeWindow} $t$. 
 
-$ \overline{m}_{t-1}$  la médiane des  RTTs différentiels  de référence durant le timeWindow $ t-1 $,  la prochaine  valeur de la médiane de référence $ \overline{m}_{t}$ est obtenue par : 
+$ \overline{m}_{t-1}$  la médiane des  RTTs différentiels  de référence durant le \textit{timeWindow} $ t-1 $.  
+
+
+
+Pour précision, \{$m_t$\} et \{$ \overline{m}_{t}$\} désignent deux ensembles différents. Le premier est l'ensemble est la médiane des RTTs différentiels de chaque période $d_i$. Toutefois, le deuxième est l'ensemble des médianes des RTTs différentiels construites en utilisant la méthode de la moyenne mobile exponentielle. Le calcul de cette dernière prend en compte les médianes des RTTs différentiels précédentes ainsi que la médiane des RTTs différentiels courante. La participation de ces dernières dans le calcul de la référence est dirigé par le paramètre $\alpha$.
+
+La  valeur de la médiane de référence  $ \overline{m}_{t}$ de la période $t$ est obtenue par : 
 
 \begin{center}
 	$ \overline{m}_{t}$ =  $\alpha$ ${m}_{t}$ + (1-  $\alpha$) $ \overline{m}_{t-1}$
 \end{center}
-Pour précision, $m_t$ et $ \overline{m}_{t}$ désignent deux ensembles différents. Le premier est la médiane des RTTs différentiels de chaque période $d_i$. Toutefois, le deuxième est construit, à partir de \textit{minSeen} , en utilisant la méthode de la moyenne mobile exponentielle où le calcul de la médiane prend en compte les médianes des RTTs différentiels précédents suivant le paramètre $\alpha$.
 
-Le paramètre  $\alpha \in (0, 1)$ est le seul paramètre à définir dans le calcul du $ \overline{m}_{t}$.  Ce paramètre contrôle l'importance  des mesures précédentes par rapport aux mesures récentes.
+Le paramètre  $\alpha \in (0, 1)$  contrôle l'importance  des mesures précédentes par rapport aux mesures récentes. De ce fait, \guillemotleft \textit{plus $\alpha$ est proche de $ 1 $ plus les observations récentes influent sur la prévision, à l'inverse un $\alpha$ proche de $0$ conduit à une prévision très stable prenant en compte un passé lointain\footnote{Source : \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf}, consultée le $30/09/2018$.}}.\guillemotright.  Dans la présente étude, le paramètre $\alpha$ est préféré d'être petit, précisément, il prend par défaut $0.05$ comme valeur.
 
-\guillemotleft \textit{Plus $\alpha$ est proche de $ 1 $ plus les observations récentes influent sur la prévision, à l'inverse un $\alpha$ proche de $0$ conduit à une prévision très stable prenant en compte un passé lointain. \footnote{Source : \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf}, consultée le $30/09/2018$.}}\guillemotright.  Dans la présente étude, le paramètre $\alpha$ est préféré d'être petit, précisément, il prend par défaut $0.05$ comme valeur.
-
-
-\section{L'évolution du RTT différentiel d'un lien et  la détection des anomalies} \label{rttevolution}
+\subsection{L'évolution du RTT différentiel d'un lien et  la détection des anomalies} \label{rttevolution}
 
 
-L'entrée de l'algorithme de détection est un ensemble de traceroutes. Un traceroute  est un ensemble de sauts auxquels sont jointes l'identifiant de la sonde ayant effectué la requête traceroute et la destination de la requête. Chaque saut est décrit par un ensemble de signaux.  Chaque signal décrit le routeur ayant émis une réponse à la sonde parmi les routeurs traversés avant d'atteindre la destination finale.  Pour le saut $i$, on note trois signaux $S_{i, j}; j\in [1,3]$ dont le routeur émettant le signal est $from_{i,j}$ avec un RTT égal à $rtt_{i,j}$, avec $j \in [1,3]$ comme illustré dans la figure \ref{fig:traceroute}.
+L'entrée de l'algorithme de détection est un ensemble de traceroutes. Un traceroute  est un ensemble de sauts auxquels sont jointes l'identifiant de la sonde ayant effectué la requête traceroute et la destination de la requête. Chaque saut est décrit par un ensemble de signaux.  Chaque signal décrit le routeur ayant émis une réponse à la sonde parmi les routeurs traversés avant d'atteindre la destination finale.  Pour le saut $i$, on note trois signaux $S_{i, j}; j\in [1,3]$ dont le routeur émettant le signal est $from_{i,j}$ et le RTT est égal à $rtt_{i,j}$, avec $j \in [1,3]$. C'est ce que   illustre dans la Figure \ref{fig:traceroute}.
 
 \begin{figure}[H]
 	\centering
+	\captionsetup{justification=centering}
 	\resizebox{\textwidth}{!}{
 	\input{illustrations/traceroute.tex}
 }
@@ -193,15 +228,17 @@ Soient $ d_1 $,$  d_2 $, ..., $ d_N $ les périodes entre \textit{start} et \tex
  pour tout $ i $ et $ j $ dans$  [1,N] $
 \subsection{Processus de  détection des anomalies }\label{steps-rtt-analysis}
 
-Le processus de  détection des anomalies passe par plusieurs étapes dont les détails sont donnés à la Figure \ref{fig:process-rttanalysis_tex}. D'abord on  trie les traceroutes à analyser par période (étape 1). Ensuite, on prépare les traceroute en    appliquant sur les traceroutes d'une période un nombre d'opérations (étapes entre 2 et 6). A la fin de la préparation des traceroutes de toutes les périodes, on compare les le délai d'un lien avec les valeurs de référence (étape 7).
-\paragraph{1. Trier les traceroutes } à analyser par \textit{timeWindow}. En effet, chaque $d_i$ est associé à un ensemble de traceroutes ayant été effectués entre $d_i$ et $d_i + step$. 
+Le processus de  détection des anomalies passe par plusieurs étapes. Ces étapes sont reprises dans  la Figure \ref{fig:process-rttanalysis_tex}. D'abord on  trie les traceroutes à analyser par période $d_i$ (étape 1). Ensuite, on prépare les traceroutes en   appliquant sur les traceroutes d'une période $d_i$ un nombre d'opérations (étapes entre 2 et 6). A la fin de la préparation des traceroutes de toutes les périodes, on ne considère que les données qui concernent le lien à suivre. Ce sont les données qui servent à la comparaison  les  délais d'un lien avec les valeurs de référence (étape 7). Les étapes de détection sont les suivantes:
+
+\paragraph{1. Trie des traceroutes } par période $d_i$. En effet, chaque période $d_i$ est associée à un ensemble de traceroutes ayant été effectués entre $d_i$ et $d_i + step - 1$. 
 
 
 
 
 Les opérations  (2 à 6) concernent  les traceroutes par tout $d_i$.  
 
-\paragraph{2. Vérification de la validité de chaque traceroute} Ces vérifications reprennent les points suivants:
+\paragraph{2. Vérification de la validité de chaque traceroute} 
+Les traceroutes sont filtrés en prenant en considération  les points suivants:
 \begin{itemize}
 	\item élimination des traceroutes échoués complètement;
 	\item élimination des signaux contenant une adresse IP privée;
@@ -209,19 +246,17 @@ Les opérations  (2 à 6) concernent  les traceroutes par tout $d_i$.
 	\item  élimination des signaux échoués.
 \end{itemize}
 
-Il existe deux sortes d'échecs pour un traceroute : échec complet et échec partiel. Dans le premier,   la sonde ne réussit pas à atteindre la destination. Par conséquent, la liste des sauts est vide. Toutefois, dans le deuxième cas, l'échec peut concerner un ou plusieurs saut, ou bien il peut concerner un, deux ou trois signaux d'un saut.
+Il existe deux sortes d'échecs dans un traceroute : échec complet et échec partiel. Dans le premier,   la sonde ne réussit pas à atteindre la destination. Par conséquent, la liste des sauts est vide. Toutefois, dans le deuxième cas, l'échec peut concerner un ou plusieurs saut, ou bien il peut concerner un, deux ou trois signaux d'un saut.
 
 
-\paragraph{3. Calcul de la médiane des RTTs par saut.} Pour tout saut d'un traceroute,  on calcule la médiane des RTTs par adresse IP. Soit le saut $h =\{s_i \}$\footnote{La notation $\{ a\}$ désigne un ensemble de type $a$.} où $s$ est un  signal, mediane\_rtt ($h$) =  $\{median(\{s_i.rtt_{i, j}\})\}$\footnote{La notation $a.b$ désigne la valeur de l'attribut $b$ de l'objet $a$, ainsi $\{a.b\}$ est l'ensemble des $b$ obtenus à partir d'un ensemble de type $a$ .}  pour tout signal $s$ ayant la même adresse IP. Autrement dit, le nouveau saut du traceroute est reconstruit en regroupant les signaux par adresse IP et ensuite en calculant leurs RTTs. 
+\paragraph{3. Calcul de la médiane des RTTs par saut} Pour tout saut d'un traceroute,  on calcule la médiane des RTTs par adresse IP. Soit le saut $h =\{s_i \}$\footnote{La notation $\{ a\}$ désigne un ensemble d'éléments de type $a$.} où $s$ est un  signal. La médiane des RTTs d'un saut $h$ est  :
 
-
-
-
-\paragraph{4. Inférence des liens topologiques par traceroute.} Un lien topologique est formé par chaque paire de routeurs consécutifs dans un traceroute. De manière générale, la Figure \ref{fig:link-inference} illustre la constitution des liens possibles  dans un traceroute. Soient  RAi, avec $i \in {1,2, ...,N}$,  l'ensemble des routeurs pour le saut A et RBj, avec $j \in \{1,2, ..., M\}$, l'ensemble  des routeurs pour le saut B, avec N et M deux entiers.
+mediane\_rtt ($h$) =  $\{median(\{s_i.rtt_{i, j}\})\}$\footnote{La notation $a.b$ désigne la valeur de l'attribut $b$ de l'objet $a$, ainsi $\{a.b\}$ est l'ensemble des $b$ obtenus à partir d'un ensemble d'éléments de type $a$ .}  pour tout signal $s$ ayant la même adresse IP. Autrement dit, le nouveau saut du traceroute est reconstruit en regroupant les signaux par adresse IP ($ from_{i, j} $) et ensuite en calculant la médiane de leurs RTTs ($rtt_{i,j}$). 
 
 
 
-Ainsi, les liens  construits sont ceux partant de tout RAi vers tout RBj, où A et B sont deux sauts consécutifs. A l'issue de cette étape, pour tout traceroute, on obtient la liste des liens possibles tout en reprenant des informations générales de la requête traceroute.
+
+\paragraph{4. Inférence des liens topologiques par traceroute.} Un lien topologique est formé par chaque paire de routeurs consécutifs dans un traceroute. De manière générale, la Figure \ref{fig:link-inference} illustre la constitution des liens possibles  dans un traceroute. Soient  RAi, avec $i \in {1,2, ...,N}$,  l'ensemble de routeurs pour le saut A et RBj, avec $j \in \{1,2, ..., M\}$, l'ensemble  de routeurs pour le saut B, avec N et M deux entiers. Les liens  construits sont ceux partant de tout RAi vers tout RBj, où A et B sont deux sauts consécutifs. A l'issue de cette étape, pour tout traceroute, on obtient la liste des liens possibles tout en reprenant des informations générales de la requête traceroute.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
@@ -232,17 +267,45 @@ Ainsi, les liens  construits sont ceux partant de tout RAi vers tout RBj, où A 
 \end{figure}
 \paragraph{5. Caractérisation des liens} avec leurs RTTs différentiels. A cette étape, on calcule le RTT différentiel d'un lien en calculant la différence entre les RTTs des deux routeurs du lien en question. En plus du RTT différentiel, on note aussi la sonde Atlas ayant effectué la requête traceroute où le lien a été identifié. 
 
-\paragraph{6. Fusion des informations d'un lien. } Etant donné qu'un lien (IP1, IP2) peut être identifié plusieurs fois pendant une même période $d_i$ d'une part, et le lien (IP2, IP1) est similaire\footnote{La similarité est mesurée par le RTT différentiel.} au lien  (IP1, IP2) d'autre part, la fusion permet de construire une nouvelle distribution des RTTs différentiels caractérisant le lien (IP1, IP2) qui reprend les RTTs différentiels du (IP1, IP2) et du (IP2, IP1).
+\paragraph{6. Fusion des informations d'un lien} Etant donné qu'un lien (IP1, IP2) peut être identifié plusieurs fois pendant une même période $d_i$ d'une part, et le lien (IP2, IP1) est similaire\footnote{La similarité est mesurée par le RTT différentiel.} au lien  (IP1, IP2) d'autre part, la fusion permet de construire une nouvelle distribution des RTTs différentiels caractérisant le lien (IP1, IP2) qui reprend les RTTs différentiels du lien(IP1, IP2) ainsi que ceux du lien (IP2, IP1).
 
 
-A la fin de l'étape 6, tous les traceroutes sont analysés tout en identifiant leurs liens, et ce par $d_i$. A présent, l'objectif c'est d'identifier les dates pendant lesquelles des anomalies ont été détectées. Pour ce faire, l'idée du travail de référence c'est de conserver, pour un lien donné, une référence du RTT différentiel médian qui sera d'abord comparée avec la médiane courante du RTT différentiel et ensuite mettre à jour cette référence tout au long de la période d'analyse.
+A la fin de l'étape 6, tous les traceroutes sont préparés. A présent, l'objectif est d'identifier les dates pendant lesquelles des anomalies ont été détectées. Pour ce faire, l'idée du travail de référence est de conserver, pour un lien donné, une référence du RTT différentiel médian.  Cette référence est d'abord comparée avec la médiane courante du RTT différentiel,  puis,  mise à jour,   tout au long de la période d'analyse.
 
   
   \paragraph{7. Calcul de la médiane des RTTs différentiels et   l'intervalle de confiance courant} du lien analysé. Pour un lien donné, on calcule la médiane des RTTs différentiels d'une $d_i$, ensuite on calcule les deux bornes de l'intervalle de confiance pour $d_i$.
   
+ 
+  
+  
   \paragraph{8. Mise à jour de la médiane et de l'intervalle de  référence du lien analysé.} La médiane des RTTs différentiels de référence sont d'abords comparés avec ceux de la période $d_i$ courante. Ensuite, ces références sont mises à jour pour prendre en compte ces nouvelles valeurs. A l'issue de cette comparaison, la liste des dates des anomalies est mise à jour.
   
 
+ \paragraph{9. Comparaison des intervalles de confiance} 
+
+La comparaison de l'état courant du lien avec celui de référence est effectuée en analysant le chevauchement d'intervalles de confiance  courant et de référence. Le délai d'un lien est jugé anormal si son intervalle de confiance courant est inclus dans l'intervalle de confiance de référence. C'est le cas 1 dans la Figure 	\ref{fig:intervals-comparaison},  \textit{referenceLow} et \textit{referenceHight} sont les bornes de l'intervalle de confiance de référence.  \textit{currentLow} et \textit{currentHight} sont les bornes de l'intervalle de confiance courant.
+
+D'après le travail de référence, on distingue quatre cas possibles  illustrés dans la Figure 	\ref{fig:intervals-comparaison}:
+
+\textbf{Cas 1 :} le délai du lien est normal.
+
+\textbf{Cas 2 :} le délai du lien est anormal.
+
+\textbf{Cas 3 :} le délai du lien est anormal.
+
+\textbf{Cas 4 :} le délai du lien est anormal.
+
+Dans le cas où le délai est jugé anormal, on introduit ce qu'on appelle la \textit{déviation}. Cette métrique caractérise l'anomalie détectée. Elle est calculée différemment dans le cas où le délai est anormal.
+
+\begin{figure}[h]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{!}{
+		\input{illustrations/intervals-comparaison.tex}
+	}
+	\caption{La comparaison des deux intervalles de confiance : courant et référence }
+	\label{fig:intervals-comparaison}
+\end{figure}
 
 \subsection{Vue globale des étapes de la détection des anomalies à travers l'évolution des RTTs différentiels}
 La figure 	\ref{fig:process-rttanalysis_tex} présente la succession des étapes de la détection des anomalies dans les délais d'un lien donné. 
