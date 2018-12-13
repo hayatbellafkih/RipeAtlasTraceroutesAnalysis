@@ -1,20 +1,25 @@
 \chapter{Introduction au Big Data}
 	
 	\section{Introduction}
-	
-	Big Data est un terme associé aux données massives, rapidement générées, ayant une grande diversité où les  outils traditionnels sont incapables de gérer ces données. La complexité du Big Data vient du fait que tout type de données peut être utilisé, en vue de livrer la bonne information à la bonne personne et au bon moment afin d'aider à prendre les bonnes décisions.
-	
-	
+		Big Data est un terme associé aux données massives, rapidement générées, ayant une grande diversité où les  outils traditionnels sont incapables de gérer ces données. La complexité du Big Data vient du fait que tout type de données peut être utilisé, en vue de livrer la bonne information à la bonne personne et au bon moment afin d'aider à prendre les bonnes décisions.
+			
+	\section{Le processus de l'analyse de données massives}
+L'analyse de données massives 	est un processus impliquant plusieurs concepts. Ce processus inclut le besoin au stockage de données massives, au traitement de données massives et le besoin de la visualisation des résultats des traitements appliqués. Le choix du traitement à appliquer sur les données est dirigé par les objectifs de  l'analyse menée. Par exemple, une analyse peut envisager la création d'un système de recommandations dans les sites Internet, la conception d'un outil de prédiction basé sur les données historiées, etc.  Ces applications appuient sur des algorithmes basés sur les mathématiques, en particulier les mathématiques statistiques et probabilistes. Afin d'assurer l'efficacité de l'analyse des données massives, la coopération de plusieurs ressources accélère les étapes du processus, on parle de l'informatique distribuée.  
+
+
 	\section{Quelques concepts associés au Big Data}
+
+La liste des concepts présentés dans cette section est non exhaustive. 
+
 		\subsection{Définition du Big Data : Volume, Vélocité, Variété et Véracité}
 		
 		IBM définit Big Data suivant les quatre dimensions suivants : volume, variété, vélocité et véracité. 
 		\paragraph{Volume de données}~
-		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de Gigaoctets (GB) et de Téraoctets (TB). Toutefois, le Big Data est mesuré en Pétaoctets (PB) et Exaoctets (EB). Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1 ZB = 1000000000000 GB $} par  entreprise en $2020$ .
+		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de Gigaoctets (GB) et de Téraoctets (TB). Toutefois, le Big Data est mesuré en Pétaoctets (PB) et Exaoctets (EB). Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1$ ZB = $1000000000000$ GB } par  entreprise en $2020$ .
 		
 		\paragraph{Vélocité de données} ~
-		le Big Data est généré à travers des milliards
-		d'appareils, ces données générées sont communiquées avec la vitesse de la lumière à travers l'Internet. L'augmentation de la vitesse de l'Internet est une  des raisons ayant favorisé l'augmentation de la vitesse de la génération des données.	
+		le Big Data est généré par des milliards
+		d'appareils, les données générées sont communiquées avec la vitesse de la lumière via Internet. L'augmentation de la vitesse de l'Internet est une  des raisons ayant contribué à l'augmentation de la vitesse de la génération de données.	
 		%la vitesse décrit la fréquence de la génération et du partage des données. Autrement dit, les données sont générées rapidement et doivent être traitées rapidement pour extraire les informations  pertinentes.
 		Par exemple, Wallmart (international discount retail chain) génère environ   $2.5$ Pétaoctets de données chaque  heure via les transactions de ses consommateurs\footnote{Source : \url{https://www.bernardmarr.com/default.asp?contentID=690}, consultée le $ 30/06/2018 $.}.
 		
@@ -24,52 +29,52 @@
 		
 		\paragraph{Variété de données} \label{variete-data}
 		
-		Le Big Data inclut toutes les formes des données, des fonctions diversifiés des données et des sources multiples des données.
+		Le Big Data inclut toutes les formes des données, des fonctions diversifiés des données et des sources variées des données.
 		
-		Le premier aspect de la variété  des données massives est la \textbf{forme} de celles-ci, les données manipulées incluent du texte, des graphes, des cartes, des vidéos, des photos, etc.
+		Le premier aspect de la variété  des données massives est la \textbf{forme} de celles-ci. Les données manipulées incluent du texte, des graphes, des cartes, des vidéos, des photos, etc.
 		
 		Le deuxième aspect de la variété des données massives concerne les \textbf{fonctions} assurées par ces données. Des données sont issues des conversations humaines, d'autres des transactions des consommateurs, ou bien des données archivées, etc.
 		
-		La source du Big Data est le troisième aspect de la variété. Des données sont en provenance des téléphones mobiles, des tablettes ou des ordinateurs portables, des fichiers journaux, du réseau de capteurs, etc. Les sources du Big Data peuvent être classées en trois grandes catégories : communications \textbf{\textit{human to human}} comme les conversations échangées dans les réseaux sociaux, communications \textbf{\textit{ human to machine}} comme l'accès des utilisateurs aux données dans le web et enfin communications \textbf{\textit{machine to machine}} comme les données issues de la communication entre les capteurs dans un réseau de capteurs.
+		La source du Big Data est le troisième aspect de  variété. Des données sont en provenance des téléphones mobiles, des tablettes ou des ordinateurs portables, des fichiers journaux, du réseau de capteurs, etc. Les sources du Big Data peuvent être classées en trois grandes catégories : communications \textbf{\textit{human to human}} comme les conversations échangées dans les réseaux sociaux, communications \textbf{\textit{ human to machine}} comme l'accès des utilisateurs aux données dans le web et enfin communications \textbf{\textit{machine to machine}} comme les données issues de la communication entre les capteurs dans un réseau de capteurs.
 		%au-delà des données des transactions habituelles des consommateurs, les données manipulées sont en provenance de sources différentes et de formats différents. Par exemple: des vidéos, des documents, des commentaires, des données géospatiales, des journaux, etc. Les grands ensembles de données sont constitués de données structurées et non structurées, publiques ou privées, locales ou distantes, partagées ou confidentielles, complètes ou incomplètes, etc.
 		
 		
 		
 		\paragraph{Véracité de données}
 		
-		La véracité concerne la crédibilité et la qualité des données. La mauvaise qualité de données est due à de nombreuses raisons telles que les pannes techniques comme le dysfonctionnement des appareils comme les capteurs, les erreurs humaines,  etc. De plus, les données peuvent être intentionnellement erronées pour des raisons de concurrence ou des raisons stratégiques.
+		La véracité concerne la crédibilité et la qualité des données. La mauvaise qualité de données est due à de nombreuses raisons, telles que les pannes techniques comme le dysfonctionnement des appareils comme les capteurs, les erreurs humaines,  etc. De plus, les données peuvent être intentionnellement erronées pour des raisons de concurrence ou des raisons stratégiques.
 	
-		\subsection{Une architecture du Big Data}
+		\subsection{L'architecture standard du Big Data}
 		
-		L'architecture présentée dans ce qui suit est celle proposée dans  \cite{anil-big-data}, elle est illustrée dans la figure \ref{fig:bigdata-architecture}.
+		L'architecture présentée dans ce qui suit est celle proposée dans  \cite{anil-big-data}. Elle est constituée par les couches suivantes :  \textit{Data sources}, \textit{Data Ingest}, \textit{Batch processing}, \textit{Stream Processing}, \textit{Data organizing}, \textit{Infrastructure}, \textit{Distributed File System} et enfin la couche \textit{Data consuption}. 
+		%Pour  chaque couche, il existe au moins une technologie.
+		 La Figure \ref{fig:bigdata-architecture} reprend l'organisation des différentes couches de cette architecture.
 		
-		Il existe plusieurs sources de données. Ces données  passent ensuite par \textit{ingest system}. Ensuite, les données peuvent passer par deux systèmes : un \textit{stream processing } et un \textit{batch processing}.  Les résultats de ce traitement peuvent être envoyées vers les bases de données NoSQL pour une utilisation ultérieure, ou bien  utiliser ces résultats comme entrées pour d'autres applications. Ainsi, une solution Big Data comprend typiquement  ces  couches logiques. Chacune des couches peut être représentée par une ou plusieurs technologies disponibles. Reprenant chacune des composantes logiques:
-		
-		
-		
-		\paragraph{Big Data sources layer} Le choix des sources de donnés pour une application donnée dépend des objectifs qui dirigent l'analyse en question. Les sources avec leurs différents aspects sont détaillées dans la section \ref{variete-data}.
-		
-		\paragraph{Data Ingest layer} Cette couche permet de récupérer les données depuis les différentes sources de données. Ainsi, les données sont accueillies à travers des points d'entrées multiples. Ces points  sont capables d'acquérir ces données ayant une vélocité variable ainsi qu'une quantité aussi variable.  Après avoir traversé  \textit{Data Ingest layer}, les données sont envoyées au \textit{batch processing system}, au \textit{realtime processing system}, ou bien à un système de stockage particulier.
-		
-		\paragraph{Batch processing layer} Les données reçues sont celles en provenance du \textit{Data Ingest} ou bien d'une des bases de données NoSQL. Ces données sont ensuite traitées en utilisant les techniques de la programmation parallèle, en vue de fournir les résultats souhaités. La présente couche doit avoir connaissance des sources de données, les types de données, les algorithmes qui vont travailler sur ces données et enfin les résultats souhaités. Les résultats des traitements peuvent être utilisées par une des applications ou bien sauvegarder ces données dans une des bases de données adaptées.
+		Dans un premier temps, les données sont   attrapées   via la couche  \textit{ingest system} par diverses sources de données. Ensuite, les données sont traitées dans deux modes différents:  \textit{stream processing } et  \textit{batch processing}.  Les résultats de ce traitement peuvent être envoyées vers les bases de données NoSQL (\ref{sec:nosql}) pour une utilisation ultérieure, ou bien  utiliser ces résultats comme entrées pour d'autres applications.  Une solution Big Data comprend typiquement  ces  couches logiques. Chaque  couche peut être représentée par une ou plusieurs technologies disponibles. Reprenons chaque couche logique:
 		
 		
-		\paragraph{Stream Processing layer} Cette couche approvisionne les données directement d'une des entrées du \textit{Data Ingest layer}. Pareillement  à  \textit{Batch processing layer} en matière  des techniques de la programmation parallèle utilisées ainsi que la nécessité d'avoir les détails sur les sources des données, les types de données et les résultats souhaités.
+		\begin{description}
+			\item[Data sources layer] Le choix des sources de donnés pour une application donnée dépend des objectifs qui dirigent l'analyse en question. Les sources avec leurs différents aspects sont détaillées dans la section \ref{variete-data}.
+		
+			
+		\item[Data Ingest layer] Cette couche permet de récupérer les données depuis les différentes sources de données. Les données sont accueillies à travers des points d'entrées multiples. Ces points  sont capables de recevoir  ces données ayant une vélocité variable ainsi qu'une quantité aussi variable.  Après avoir traversé  la couche \textit{Data Ingest}, les données sont envoyées au \textit{batch processing system}, au \textit{realtime processing system}, ou bien à un système de stockage particulier.
+		
+		\item[Batch processing layer] Les données reçues sur cette couche sont celles en provenance du \textit{Data Ingest} ou bien d'une des bases de données NoSQL. Ces données sont ensuite traitées en utilisant les techniques de la programmation parallèle en vue de fournir les résultats souhaités. La présente couche doit avoir connaissance des sources de données, les types de données, les algorithmes qui vont travailler sur ces données et enfin les résultats souhaités. Les résultats des traitements peuvent être utilisés par une des applications ou bien sauvegarder ces données dans une des bases de données adaptées.
 		
 		
-		\paragraph{Data organizing layer} Le rôle de cette couche est d'organiser les données afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part de la  couche  \textit{Stream Processing} ainsi que la couche \textit{Batch processing}. Cette couche est représentée par les bases de données NoSQL. Il existe plusieurs catégories de bases de données NoSQL.
+		\item[Stream Processing layer] Cette couche approvisionne les données directement d'une des entrées du \textit{Data Ingest layer}. Pareillement  à  \textit{Batch processing layer} en matière  des techniques de la programmation parallèle utilisées ainsi que la nécessité d'avoir les détails sur les sources des données, les types de données et les résultats souhaités.
 		
-		\paragraph{Infrastructure layer} Cette composante est responsable de la gestion des ressources de stockage, les ressources du calcul et la gestion de la communication. 
+		
+		\item[Data organizing layer] Le rôle de cette couche est d'organiser les données afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part de la  couche  \textit{Stream Processing} ainsi que la couche \textit{Batch processing}. Cette couche est représentée par les bases de données NoSQL. Il existe plusieurs catégories de bases de données NoSQL.
+		
+		\item[Infrastructure layer] Cette composante est responsable de la gestion des ressources de stockage, les ressources du calcul et la gestion de la communication. 
 		Les fonctionnalités de cette couche sont fournies à travers le cloud computing.
 		
-		\paragraph{Distributed File System Layer} Cette couche assure le stockage d'une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toute les couches qui forment un système du Big Data. C'est ce que assure Hadoop Distributed File System (HDFS).
+		\item[Distributed File System layer] Cette couche permet de stocker une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toute les couches qui forment un système du Big Data. C'est ce que assure Hadoop Distributed File System (HDFS).
 		
-		\paragraph{Data consumption} Cette dernière couche utilise les sorties produits par les couches de l'analyse. Les résultats fournis peuvent être sous format de rapport, des dashboards, des visualisations, un moteur de recommandation ou tout autre format.
+		\item[Data consumption layer] Cette dernière couche utilise les résultats obtenus par les couches de l'analyse. Les résultats fournis peuvent être exprimés avec des rapports, des dashboards, des visualisations, un moteur de recommandation ou tout autre format.
 		
-		
-		
-		
-		
+	\end{description}
 	
 		\begin{figure}[H]
 			\captionsetup{justification = centering}
