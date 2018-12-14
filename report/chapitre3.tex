@@ -91,7 +91,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	
 	\paragraph{Introduction } ~
 	
-    Au cours de ces dernières années, on constate une révolution dans le stockage de données non structurées ayant une taille importante.  Car les objets à sauvegarder sont complexes; ils sont issus de sources hétérogènes.  Cette complexité a mis en question les performances des bases de données relationnelles. 
+    Au cours de ces dernières années, on constate une révolution dans le stockage de données non structurées ayant une taille importante.  De plus,  les objets à sauvegarder sont complexes; ils sont issus de sources hétérogènes.  Cette complexité a mis en question les performances des bases de données relationnelles. 
 	
 	Le terme NoSQL est apparu pour la première fois en $ 1998 $. Carlo Strozzi  a parlé des bases de données relationnelles qui n'utilisent pas le SQL comme langage d'interrogation des tables. Des années plus tard, des solutions  open source basées sur ce concept ont vu le jour. 
 	
@@ -104,19 +104,17 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	
 	\paragraph{Types de base de données NoSQL} \label{sec:nosql-database}  ~
 	
-	Il existe quatre catégories distinctes de bases de données NoSQL. Chaque catégorie répond  à des besoins particuliers. Ainsi, on distingue les bases de données clé-valeur, document, graphe et colonne.
+	Il existe quatre catégories distinctes de bases de données NoSQL. Chaque catégorie répond  à des besoins particuliers. Notamment, on distingue les bases de données clé-valeur, document, graphe et colonne.
 	
 	
-
-
 	\subparagraph {Clé-valeur} Une base de données de type clé-valeur repose sur le paradigme clé-valeur; chaque donnée, que ce soit un nombre, du texte ou tout autre élément est associé à une clé unique. Cette clé est le seul moyen d'accéder aux données stockées.
-	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La figure \ref{fig:key-value-nosql} reprend un exemple d'une base de données NoSQL de type clé-valeur.
+	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La Figure \ref{fig:key-value-nosql} reprend un exemple d'une base de données NoSQL de type clé-valeur.
 
 	
 	\begin{figure}[H]
 		\captionsetup{justification=centering}
 		\centering
-		\resizebox{!}{!}{
+		\resizebox{.4\textwidth}{!}{
 			\input{illustrations/key-value-nosql-.tex}
 	    }
 		\caption{Illustration d'une base de données NoSQL de type clé-valeur}
@@ -124,7 +122,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	\end{figure}
 	
 
-		\subparagraph{Document} Une base de données NoSQL de type document permet de stocker les données en reposant sur le paradigme clé-valeur. Toutefois, les valeur stockées sont complexes, il s'agit de documents de type JSON, XML, etc. L'accès aux données d'un enregistrement peut se faire de manière hiérarchique. La possibilité de stocker des objets complexes et hétérogènes  est un des points forts des bases de données NoSQL de type  document. Un exemple est fourni dans la figure \ref{fig:document-nosql}.
+		\subparagraph{Document} Une base de données NoSQL de type document permet de stocker les données en reposant sur le paradigme clé-valeur. Toutefois, les valeur stockées sont complexes, il s'agit de documents de type JSON, XML, etc. L'accès aux données d'un enregistrement peut se faire de manière hiérarchique. La possibilité de stocker des objets complexes et hétérogènes  est un des points forts des bases de données NoSQL de type  document. Un exemple est fourni dans la Figure \ref{fig:document-nosql}.
 		
 		\begin{figure}[H]
 			\centering
@@ -134,7 +132,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		\end{figure}
 	
 
-		\subparagraph{Colonnes} Dans les bases de données traditionnelles, les données sont stockées sur des lignes. Dans le cas d'une base NoSQL orientée colonne, les données sont stockées par colonne. L'interrogation de ce type de bases travaille sur une colonne particulière sans devoir passer par les autres colonnes comme dans les bases de données relationnelles classiques. Une base de données de type colonne, illustrée dans la figure  	\ref{fig:comomn-nosql}, est adaptée pour les requêtes analytiques comme les requêtes d'agrégation (moyennes, maximum, etc).
+		\subparagraph{Colonnes} Dans les bases de données traditionnelles, les données sont stockées sur des lignes. Dans le cas d'une base NoSQL orientée colonne, les données sont stockées par colonne. L'interrogation de ce type de bases travaille sur une colonne particulière sans devoir passer par les autres colonnes comme dans les bases de données relationnelles classiques. Une base de données de type colonne, illustrée dans la Figure  	\ref{fig:comomn-nosql}, est adaptée pour les requêtes analytiques comme les requêtes d'agrégation (moyennes, maximum, etc).
 
 	
 	\begin{figure}[H]
@@ -145,7 +143,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	\end{figure}
 	
 
-	\subparagraph{Graphe} Dans une base de données de type graphe, les données stockées sont les n\oe{}uds, les liens et les propriétés sur les n\oe{}uds et sur les liens. Un exemple concret des bases de données NoSQL de type graphe est le réseau social; chaque entité représente une personne et les relations entre ces personnes peuvent prendre plusieurs formes. Comme il est illustré dans la figure  	\ref{fig:graphe-nosql}.
+	\subparagraph{Graphe} Dans une base de données de type graphe, les données stockées sont les n\oe{}uds, les liens et les propriétés sur les n\oe{}uds et sur les liens. Un exemple  de base de données NoSQL de type graphe est le réseau social; chaque entité représente une personne et les relations entre ces personnes peuvent prendre plusieurs formes. Comme il est illustré dans la Figure  	\ref{fig:graphe-nosql}.
 
 	
 	\begin{figure}[H]
@@ -166,7 +164,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		une base de données ne peut pas garantir les trois attributs suivants: \textit{Consistency}, \textit{Availability}, et \textit{Partition Tolerence}  en même temps. 
 		
 		
-			\subparagraph{ Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. Ainsi, une lecture faite après une écriture doit renvoyer la donnée précédemment écrite;
+			\subparagraph{ Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite;
 			
 			\subparagraph{ Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client; 
 			
@@ -185,7 +183,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 			
 		\end{itemize}
 		
-		La figure \ref{fig:cap} présente des implémentations des différents types de bases de données NoSQL pour chaque couple CA, CP et AP.
+		La Figure \ref{fig:cap} présente des implémentations des différents types de bases de données NoSQL pour chaque couple CA, CP et AP.
 		
 		\begin{figure}[H]
 			\centering
@@ -198,7 +196,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		
 		
 		
-		Le choix d'une base de données relationnelle ou NoSQL dépend des besoins des entreprises. En terme de tendances, la figure \ref{fig:ranking-db} reprend un classement des SGBDs au $1$ août $ 2018 $. La suite de la liste ainsi que  la méthode qui dirige ce classement sont    disponibles sur le site  web \textit{DB-Engines Ranking}\footnote{Source : \url{https://db-engines.com/},  consultée le $01/08/2018$.}. Parmi les critères de classement, on trouve le nombre de références du SGBD sur les sites Internet. 
+		Le choix d'une base de données relationnelle ou NoSQL dépend des besoins des entreprises. En terme de tendances, la Figure \ref{fig:ranking-db} reprend un classement des SGBDs au $1$ août $ 2018 $. La suite de la liste ainsi que  la méthode qui dirige ce classement sont    disponibles sur le site  web \textit{DB-Engines Ranking}\footnote{Source : \url{https://db-engines.com/},  consultée le $01/08/2018$.}. Parmi les critères du classement, on trouve le nombre de références du SGBD sur les sites Internet. 
 		
 		%Ce nombre de référence est quantifiable à partir du  nombre lui-même de résultats obtenus des différents moteurs de recherche comme Google, Bing, etc. 
 		
@@ -215,14 +213,14 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		
 		\subsection{Schema on Write VS Schema on Read} \label{sec:schema-read-write}
 		
-		Lors du chargement des données depuis leurs sources de stockage pour tout type de manipulation, on distingue deux approches : \textit{ Schema on Write} et \textit{Schema on Read}.
+		Lors du chargement des données depuis leurs sources de stockage, on distingue deux approches : \textit{ Schema on Write} et \textit{Schema on Read}.
 		% L'approche \textit{Schema on Read } est celle utilisée par l'outil Amazon Athena présenté dans la section \ref{par:allservices}.
 		
 		Dans la première, il faut définir les colonnes, le format de données, les types, etc. La lecture des données est rapide et moins coûteuse étant donné l'effort entreprit pour définir la structure. C'est le cas des bases de données relationnelles.
 		
-		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, mais le type de la donnée qui diffère.
+		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, mais le type de la donnée qui diffère. C'est l'approche utilisée par Amazon Athena (voir \ref{aws:athena}).
 		
-		 Les figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
+		 Les Figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.8\linewidth]{illustrations/on-write}
@@ -238,7 +236,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 			\source{ \url{https://blogs.oracle.com/datawarehousing/big-data-sql-quick-start-schema-on-read-and-schema-on-write-part11}, consultée le $05/08/2018$.}
 		\end{figure}
 		
-		La meilleure approche dépend des besoins de l'analyse. La première approche est meilleure en performances, cependant, la deuxième est tolérante aux erreurs  humaines.
+		La meilleure approche dépend des besoins de l'analyse. La première approche est meilleure en performances, en revanche, la deuxième est tolérante aux erreurs  humaines.
 		
 		
 		\subsection{L'informatique distribuée et l'analyse de données massives} \label{sec:distruted-camput}
@@ -248,15 +246,18 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		\begin{itemize}
 			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
 			
-			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. De plus, cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
+			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. D'ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
 		\end{itemize}
 	\section{Parcours de quelques technologies du Big Data}
-	\subsection{MongoDB}
+	
+La liste des technologies dans le domaine du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du RIPE Atlas.
+	
+	\subsection{MongoDB} \label{subsubsection:mongodb}
 	
 	
-	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
+%	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
 	
-	MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBD adoptant le couple CP (Consistency-Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}.
+	MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBDs adoptant le couple CP (Consistency et Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}.
 	
 	En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépend du stockage, de la  RAM allouées et des options choisies.
 	
@@ -265,7 +266,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	
 	% \paragraph{Amazon DynamoDB :}\label{aws:dynmo}~
 	
-	Amazon DynamoDB\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/}, consultée le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est simple et facile à utiliser,  elle ne nécessite aucune configuration préalable. 
+	Amazon DynamoDB\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/}, consultée le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est un service  simple et facile à utiliser,  il ne nécessite aucune configuration préalable. 
 	
 	Amazon DynamoDB  est une base de données évolutive de façon abstraite pour l'utilisateur final. Elle offre des performances constantes à une échelle essentiellement infinie, limitée uniquement par la taille physique du cloud AWS. Elle est flexible. Aucun schéma n'est requis pour stocker les données. Les frais d'utilisation de ce service dépendent de trois éléments\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/pricing/}, consultée $02/05/2018$.}:
 	\begin{itemize}
@@ -274,9 +275,9 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		\item[--]  la capacité en écriture par seconde ($ 0,090 $ USD par unité de capacité de lecture par mois);
 	\end{itemize}
 
-\subsection{Amazon S3, Amazon Athena et Amazon Glue }
+\subsection{Amazon S3, Amazon Glue et Amazon Athena }
 
-Il existe un ensemble de services web proposés par Amazon  adaptés à la manipulation des données massives. Le deuxième choix a été dirigé vers une combinaison de services d'Amazon, il s'agit d'Amazon S3, Amazon Glue et Amazon Athena.
+La combinaison d'Amazon S3, Amazon Glue et Amazon Athena permet de créer un environnement Big Data capable d'assurer le stockage de données, le chargement de données  et l'interrogation de données. 
 
 %\paragraph{Introduction aux services Amazon S3, Amazon Athena et Amazon Glue }
 
@@ -301,9 +302,9 @@ Les fichiers des données sont organisés dans ce qu'on appelle un compartiment,
 
 
 \paragraph{Amazon  Glue} \label{aws:glue}
-\footnote{Source : \url{https://aws.amazon.com/fr/glue/}, consultée le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rendre accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  des données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisables. 
+\footnote{Source : \url{https://aws.amazon.com/fr/glue/}, consultée le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rendre accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  de données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisables. 
 
-Les frais de ce service dépendent du temps écoulé lors de l'analyse des données par les robots d'analyse durant la découverte du schéma. A ces frais, ils s'ajoutent les frais du catalogue de données qui va être peuplé par les résultats fournis par les robots d'analyse. Par exemple, on paye $ 0,44 $ USD par heure par DPU\footnote{DPU : unité de traitement des données.}, il est facturé à la seconde avec un minimum de $ 10 $ minutes par robot d'analyse exécuté. Plus de détails sont disponibles sur Amazon Glue\footnote{Source : \url{https://aws.amazon.com/fr/glue/pricing/}, consultée le $05/08/2018$.}.
+Les frais de ce service dépendent du temps écoulé lors de l'analyse des données par les robots d'analyse durant la découverte du schéma. A ces frais, ils s'ajoutent les frais du catalogue de données qui va être peuplé par les résultats fournis par les robots de l'analyse. Par exemple, on paye $ 0,44 $ USD par heure par DPU\footnote{DPU : unité de traitement des données.}, il est facturé à la seconde avec un minimum de $ 10 $ minutes par robot d'analyse exécuté. Plus de détails sont disponibles sur Amazon Glue\footnote{Source : \url{https://aws.amazon.com/fr/glue/pricing/}, consultée le $05/08/2018$.}.
 
 \paragraph{Amazon Athena}\label{aws:athena}\footnote{Source : \url{https://aws.amazon.com/fr/athena/}, consultée le $06/07/2018$.} est un service de requêtes  interactif. Il permet d'interroger les données présentes dans Amazon S3 avec des requêtes SQL plus avancées. Le service Amazon Athena est considéré comme \textit{serverless}. Amazon Athena utilise l'approche \textbf{\textit{schema-on-read}} (voir la section \ref{sec:schema-read-write}) afin de projeter le schéma donné en entrée sur les données au moment de l'exécution de la requête SQL demandée. Le schéma sur lequel les données peuvent être projetées peut être créé manuellement ou bien utiliser le catalogue créé dans Amazon Glue.
 Le service Amazon Athena est facturé suivant la quantité de données analysée. Précisément, $ 5 $ USD par To de données analysées.
@@ -332,19 +333,20 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
 \end{tcolorbox}
 
-\subsection{Spark Apache avec Scala}
+\subsection{Spark Apache}
 
 %\subsection{Introduction à Apache Sprk}
 
-Apache Spark est un moteur de traitement distribué des données. Spark est conçu pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité.
+Apache Spark\footnote{Source : \url{https://spark.apache.org/}, consultée le $14/12/2018$} est un moteur de traitement distribué des données. Spark est conçu pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité dans l'analyse des données à grande échelle. Plusieurs APIs sont disponibles pour appliquer les transformations sur les données à analyser. On note qu'il existe un API en Scala avec lequel Spark est écrit, un API en Java et enfin un API en python.
+
 
 \paragraph{Spark Core Concepts et architecture}
 
 \subparagraph{Spark Clusters et Resource Management System}
 
-Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'onappelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable, il existe un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
+Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable, il existe un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
-Le \textit{cluster manager} a une vue globale de l'emplacement des workers, la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. La Figure \ref{fig:cluster-overview} montre l'interaction entre le cluster manager et les workers.
+Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}, la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
 
 
 \begin{figure}[H]
@@ -359,13 +361,13 @@ Le \textit{cluster manager} a une vue globale de l'emplacement des workers, la m
 
 
 \subparagraph{Spark Application}
-Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite à travers les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du le driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision, le point d'entrée vers une application Spark est la class \textit{SparkSession}.
+Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du le driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
 
 \subparagraph{Spark driver et executor}
 
-Chaque Spark executor est alloué exclusivement à une application Spark spécifique et la durée de vie d'un executor est celle de l'application Spark. 
+Chaque Spark \textit{executor} est alloué exclusivement à une application Spark spécifique et la durée de vie d'un \textit{executor} est celle de l'application Spark. 
 
-Spark utilise l'architecture master-slave. Spark driver est le master et Spark executor est le slave. De ce fait, une application Spark n'a qu'un seul Spark driver et plusieurs Spark executors. Chaque Spark executor s'occupe d'un traitement  sur une partie de données. Ainsi Spark permet de traiter  les données de manière parallèle. La Figure \ref{fig:small-cluster-3} illustre un exemple d'un cluster. Ce dernier est composé de trois executors.
+Spark utilise l'architecture master-slave. Spark \textit{driver} est le master et Spark \textit{executor} est le slave. De ce fait, une application Spark n'a qu'un seul Spark driver et plusieurs Spark \textit{executors}. Chaque Spark \textit{executor} s'occupe d'un traitement  sur une partie de la totalité des données à analyser. De cette manière,  Spark est capable de traiter  les données de façon parallèle. La Figure \ref{fig:small-cluster-3} illustre un exemple d'un cluster. Ce dernier est composé de trois \textit{executors}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{illustrations/small-cluster-3}
@@ -374,17 +376,17 @@ Spark utilise l'architecture master-slave. Spark driver est le master et Spark e
 \end{figure}
 
 
-\subparagraph{Spark Uniffied Stack} Spark offre ce qu'on appelle Spark Stack. C'est un ensemble de composantes construites dessus la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
+\subparagraph{Spark Uniffied Stack} Spark offre ce qu'on appelle Spark \textit{Stack}. C'est un ensemble de composantes construites dessus la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
 \begin{itemize}
 	\item Spark SQL  est conçu pour le traitement interactive;
 	\item Spark Streaming est utilisé pour les traitements en temps réel;
 	\item  GraphX est destiné au traitement de graphe;
 	\item MLib est conçu pour le machine learning;
-	\item SparkR est consacré au traitement lié au machine learning en utilisant l shell R.
+	\item SparkR est consacré au traitement lié au machine learning en utilisant  R.
 	
 \end{itemize}
 
-\subparagraph{Spark Core} est la base du moteur Spark pour e traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérant au pannes et en lecture seule. 
+\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérant au pannes et en lecture seule. 
 La Figure \ref{fig:unified-stack} 
 
 \begin{figure}[H]
