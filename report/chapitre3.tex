@@ -7,6 +7,32 @@
 L'analyse de données massives 	est un processus impliquant plusieurs concepts. Ce processus inclut le besoin au stockage de données massives, au traitement de données massives et le besoin de la visualisation des résultats des traitements appliqués. Le choix du traitement à appliquer sur les données est dirigé par les objectifs de  l'analyse menée. Par exemple, une analyse peut envisager la création d'un système de recommandations dans les sites Internet, la conception d'un outil de prédiction basé sur les données historiées, etc.  Ces applications appuient sur des algorithmes basés sur les mathématiques, en particulier les mathématiques statistiques et probabilistes. Afin d'assurer l'efficacité de l'analyse des données massives, la coopération de plusieurs ressources accélère les étapes du processus, on parle de l'informatique distribuée.  
 
 
+\paragraph{Le processus d'analyse de données} \label{sec:process-data-analysis}
+
+Le processus d'analyse de données passe généralement par des étapes classiques. A ces étapes peuvent s'ajouter d'autres étapes intermédiaires ou supplémentaires. 
+Pour précision, ces étapes peuvent s'appliquer dans un contexte où les données très volumineuses  mais aussi dans le cas des données manipulées par des outils traditionnels.
+
+
+IBM Knowledge Center \footnote{Source : \url{https://www.ibm.com/support/knowledgecenter/fr/SSEPGG_9.5.0/com.ibm.im.easy.doc/c_dm_process.html}, consultée le $06/08/2018$.} a résumé le processus de l'analyse de données dans les étapes suivantes :
+
+
+
+\subparagraph{Définition de problème.} c'est le point d'entrée vers tout projet d'analyse de données. Les objectifs doivent être clairs. A la fin de cette étape, on sait les objectifs d l'analyse, mais pas forcément comment 
+cette analyse va être faite (par exemple, les technologies et les méthodes statistiques).
+
+\subparagraph{Exploration de données. } ce que caractérise cette étape, c'est la découverte de la nature  des données, les sources des données, la qualité des données, etc. 
+
+\subparagraph{Préparation de données} \label{par:step-preparedata}: c'est durant cette phase que se passent les opérations d'ETL présentés dans la section \ref{sec:etl}, ce qui inclut le chargement, le nettoyage et la transformation des données. En parallèle, des tentatives sont faites pour créer le schéma des données avec la possibilité de revoir des sources complémentaires de données ou bien de nouvelles transformations des données. Le schéma comporte les différentes tables, les attributs pertinents et autres.
+
+\subparagraph{Modélisation} : à l'issue de cette phase, un modèle de qualité est créé. Un modèle qui devrait  répondre aux objectifs précédemment établis. Cette étape implique des principes en statistiques, probabilités, \textit{machine learning} ou bien autres fondements.
+
+\subparagraph{Evaluation} : c'est à cette étape qu'on valide le modèle créé à l'étape de  Modélisation. L'évaluation et la validation du modèle prend en compte les objectifs prédéfinis; si le modèle répond aux attentes.
+
+\subparagraph{Déploiement} : c'est l'utilisation  des outils existants ou  la mise place d'une solution qui convient aux  besoins spécifiques en terme de visualisation des résultats de l'analyse.
+
+
+
+
 	\section{Quelques concepts associés au Big Data}
 
 La liste des concepts présentés dans cette section est non exhaustive. 
@@ -386,13 +412,44 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 	
 \end{itemize}
 
-\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérant au pannes et en lecture seule. 
-La Figure \ref{fig:unified-stack} 
+\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante au pannes et en lecture seule. 
+La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark Unified Stack avec Spark Core.
 
 \begin{figure}[H]
 	\centering
+	\captionsetup{justification=centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/unified-stack}
 	\caption{ Spark Unified Stack. Source : \cite{eginning-Apache-Spark-2-unified-stack}}
 	\label{fig:unified-stack}
 \end{figure}
+
+\paragraph{Resilient Distributed Datasets}~
+
+
+Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster de sorte à être traités en parallèle. Un RDD peut être persisté dans la mémoire pour éventuelle réutilisation.   D'ailleurs de cette façon, on constate l'amélioration des performances. En outre, un RDD peut être persisté sur un disque. 
+
+Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Toutefois, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD. La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. 
+
+\begin{figure}
+	\centering
+	\captionsetup{justification= centering}
+	\includegraphics[width=0.7\linewidth]{illustrations/global_view_rdd}
+	\caption{Exemple d'un flux de données avec Spark}
+	\label{fig:globalviewrdd}
+	\source{ \url{https://www.duchess-france.org/starting-with-spark-in-practice/}, consultée le $15/12/2018$.}
+\end{figure}
+
+input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spak. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
+Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions sont partagées sur les n\oe{}uds du cluster qu'à suite à l'appel d'une action. Une fois une partition est localisé sur un n\oe{}ud donné, les transformations ainsi que les actions peut s'enchaîner.
+
+En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
+
+\section{Conclusion}
+ma conclusion.
+
+
+
+
+
+
 

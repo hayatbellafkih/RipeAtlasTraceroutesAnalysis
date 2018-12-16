@@ -1,20 +1,32 @@
-\chapter{Implementation}
+\chapter{Application de quelques technologies Big Data sur l'analyse des traceroutes}
+
+
+\section{Introduction}
 
 Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons utilisé pour analyser les traceroutes disponibles dans le dépôt de RIPE Atlas. Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
 
+Le présent chapitre reprend l'application de quelques technologies du Big Data manipulées en vue d'analyser le délai des liens. On ne peut pas comparer ces technologies entre elles car elles ne se trouvent pas dans la même catégorie. En revanche, ce sont des technologies permettant d'analyser les données massives telles qu'elles représentent une ou plusieurs étape d'un processus d'analyse de données (voir un exemple du processus d'analyse de données dans \ref{sec:process-data-analysis}). 
+
+L'évaluation des performances de chacune des technologies est faite sur une machine ayant les caractéristiques reprises dans le tableau.
+
+\section{MongoDB}
+\paragraph{ Présentation de MongoDB}~
 
 
-\paragraph{Application sur les  traceroutes }~
-
-Les données relatives aux mesures traceroutes peuvent être récupérées de différentes manières. Par exemple,  les traceroutes à destination des instances du serveur DNS K-root. En ce qui concerne le travail de référence, les traceroutes sont récupérés à la fois par type d'adressage : IPv4 et IPv6 en se basant sur  l'identifiant  de la mesure : $ 5001 $, $ 6006 $, etc et par date.  Ainsi les traceroutes sont organisés, dans MongoDB, dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. $V$ est vide en cas d'adressage IPv4 et $V$ égal à $6$ s'il s'agit de l'adressage IPv6. La nomination structurée permet de ne récupérer que les traceroutes concernés. Chaque collection contient un ensemble de traceroutes formatés en format BSON. Ainsi, le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
+%Les données relatives aux mesures traceroutes peuvent être récupérées de différentes manières. Par exemple,  les traceroutes à destination des instances du serveur DNS K-root. En ce qui concerne le travail de référence, les traceroutes sont récupérés à la fois par type d'adressage : IPv4 et IPv6 en se basant sur  l'identifiant  de la mesure : $ 5001 $, $ 6006 $, etc et par date.  Ainsi les
+MongoDB est la technologie Big Data utilisé par R. Fontugne dans l'implémentation de l'outil de détection. Les traceroutes sont organisés, dans MongoDB, dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. $V$ est vide en cas d'adressage IPv4 et $V$ prend la valeur $6$ s'il s'agit de l'adressage IPv6. La nomination structurée permet de ne récupérer que les traceroutes concernés. Chaque collection contient un ensemble de traceroutes formatés en format BSON. Ainsi, le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
+ 
+ 
+ MongoDB est une technologie pour le stockage de données non structurées. C'est une technologies adaptée non seulement aux projets visant la lecture de données massives mais aussi au projets où on envisage la mise à jour d'un objet (modification ou suppression). Malgré la convenance de MongoDB aux données non structurées et massives, l'utilisation de telle base de données, en version locale, nécessite l'ajustement de la machine locale où MongoDB tourne. 
 
 \begin{tcolorbox}
 BSON (ou Binary JSON) est un format utilisé pour stocker et transférer les données dans la base de données MongoDB. BSON facilite la représentation des structures de données simples et des tableaux associatifs\footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
 \end{tcolorbox}
-\paragraph{Les limitations du MongoDB}
+\paragraph{Les limitations de MongoDB}
 
 L'implémentation proposée de l'outil de détection utilise la version locale de la base de données MongoDB pour le stockage des données.  La quantité de données dont MongoDB peut stocker dépend de l'espace mémoire de stockage disponible dans la machine dans laquelle MongoDB est installé. De plus, les performances d'une détection lancée concernant une période donnée dépendent de l'espace mémoire vive libre dans la machine en question. Pour conclure, l'utilisation la version locale du MongoDB pour analyser les traceroutes à travers l'outil de détection dépend typiquement de la machine locale.
 
+\paragraph{Les performances de MongoDB}
 
 \section{DynamoDB}
 
@@ -84,9 +96,6 @@ Pour une $d_i$ d'une heure, le nombre de traceroutes est de l'ordre des milliers
 \section{Spark Apache avec Scala}
 
 
-
-
-
 \subsection{Application sur traceroutes}
 %\subsection{Complément d'information du processus de la détection avec le langage Scala}
 Comme complément aux étapes décrites dans \ref{steps-rtt-analysis}, on présente les différentes classes permettant de modéliser les données tout au long du processus de l'analyse. La définition de ces classes est liée au langage \textit{Scala}. 
@@ -96,17 +105,17 @@ Soient les classes suivantes utilisées :
 \paragraph{La classe Signal} modélise un signal \footnote{Un signal dans le contexte d'un traceroute.}. Ainsi, \textit{from} est l'adresse IP du routeur émettant ce signal, \textit{rtt} est le Round Trip Time entre la sonde Atlas et ce routeur et enfin \textit{x} est un indicateur de l'échec du signal.
 \begin{lstlisting}[language=scala, caption={La classe Signal en Scala }]
 case class Signal(
-rtt:  Option[Double],
-x:    Option[String],
-from: Option[String])
+	rtt:  Option[Double],
+	x:    Option[String],
+	from: Option[String])
 
 \end{lstlisting}
 
 \paragraph{La classe Hop} modélise un saut dans un traceroute. On caractérise un saut par son identifiant noté \textit{hop}. Celui-ci   prend comme valeur un entier commençant à $1$ et la liste des signaux relatifs à ce saut notée par \textit{result}. Généralement un saut est représenté par $3$ signaux.
 \begin{lstlisting}[language=scala, caption={La classe Hop en Scala }]
 case class Hop(
-var result: Seq[Signal],
-hop:        Int)
+	var result: Seq[Signal],
+	hop:        Int)
 \end{lstlisting}
 \paragraph{La classe Traceroutes} modélise le résultat d'une requête traceroute effectuée par une sonde Atlas. Cette modélisation se limite aux données qui nous intéressent dans la présente analyse. 
 
@@ -114,12 +123,12 @@ hop:        Int)
 
 \begin{lstlisting}[language=scala, caption={La classe Traceroute en Scala }]
 case class Traceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-result:    Seq[Hop])
+	dst_name:  String,
+	from:      String,
+	prb_id:    BigInt,
+	msm_id:    BigInt,
+	timestamp: BigInt,
+	result:    Seq[Hop])
 \end{lstlisting}
 \paragraph{La classe TraceroutesPerPeriod} permet de présenter les traceroutes après les avoir trié   suivant la période pendant laquelle ils ont été effectués.   \textit{timeWindow} est le temps unix marquant le début de la période \footnote{Pour précision, la fin de la période peut être inférée en prenant deux débuts de deux périodes car la durée d'une période est fixe tout au long de l'analyse.} et  \textit{traceroutes} est la liste des traceroutes effectués pendant cette période. 
 
@@ -129,47 +138,47 @@ A l'étape 2, l'objectif était d'agréger  les signaux par routeur source et en
 \paragraph{La classe PreparedSignal }  est une agrégation de tous les signaux, d'un saut donné, par le routeur \textit{from},  la médiane des RTTs calculée est présentée par \textit{medianRtt}.
 \begin{lstlisting}[language=scala, caption={La classe PreparedSignal en Scala }]
 case class PreparedSignal(
-medianRtt: Double,
-from:      String)
+	medianRtt: Double,
+	from:      String)
 \end{lstlisting}
 \paragraph{La classe PreparedHop } modélise un saut après avoir agrégé ses signaux. 
 \begin{lstlisting}[language=scala, caption={La classe PreparedHop en Scala }]
 case class PreparedHop(
-var result: Seq[PreparedSignal],
-hop:        Int)
+	var result: Seq[PreparedSignal],
+	hop:        Int)
 \end{lstlisting}
 
 
 \paragraph{La classe MedianByHopTraceroute } modélise un traceroute après avoir agrégé ses sauts. Par rapport au traceroute d'avant l'agrégation, seule la liste des sauts  a subi un changement. 
 \begin{lstlisting}[language=scala, caption={La classe MedianByHopTraceroute en Scala }]
 case class MedianByHopTraceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-result:    Seq[PreparedHop])
+	dst_name:  String,
+	from:      String,
+	prb_id:    BigInt,
+	msm_id:    BigInt,
+	timestamp: BigInt,
+	result:    Seq[PreparedHop])
 \end{lstlisting}
 
 
 \paragraph{La classe Link} modélise un lien topologique. Ce dernier est défini par deux adresses IP  \textit{ip1} et \textit{ip2} et par son RTT différentiel calculé \textit{rttDiff}.
 \begin{lstlisting}[language=scala, caption={La classe Link en Scala }]
 case class Link(
-ip1:     String,
-ip2:     String,
-rttDiff: Double)
+	ip1:     String,
+	ip2:     String,
+	rttDiff: Double)
 \end{lstlisting}
 
 \paragraph{La classe LinksTraceroute} permet de modéliser un traceroute après avoir inféré tous les liens de ce dernier. Ainsi, la liste des sauts est remplacée par la liste des liens (\textit{links}). 
 
 \begin{lstlisting}[language=scala, caption={La classe LinksTraceroute en Scala }]
 case class LinksTraceroute(
-dst_name:  String,
-from:      String,
-prb_id:    BigInt,
-msm_id:    BigInt,
-timestamp: BigInt,
-links:     Seq[Link])
+	dst_name:  String,
+	from:      String,
+	prb_id:    BigInt,
+	msm_id:    BigInt,
+	timestamp: BigInt,
+	links:     Seq[Link])
 \end{lstlisting}
 
 
@@ -177,27 +186,27 @@ A l'étape 5, l'objectif était de passer d'un traceroute à une liste de liens 
 \paragraph{La classe LinkIPs} permet représenter un lien par seulement ses deux adresses IP \textit{ip1} et \textit{ip2}.
 \begin{lstlisting}[language=scala, caption={La classe LinkIPs en Scala }]
 case class LinkIPs(
-ip1: String,
-ip2: String)
+	ip1: String,
+	ip2: String)
 \end{lstlisting}
 
 \paragraph{La classe DiffRtt} est une représentation plus détaillée d'un lien, en plus de son RTT différentiel, on ajoute d'autres informations.  Les adresses IP d'un lien sont modélisées par la classe \textit{LinkIPs}.
 
 \begin{lstlisting}[language=scala, caption={La classe DiffRtt en Scala }]
 case class DiffRtt(
-rtt:      Double,
-var link: LinkIPs,
-probe:    BigInt)
+	rtt:      Double,
+	var link: LinkIPs,
+	probe:    BigInt)
 \end{lstlisting}
 
 A l'étape 6.3, on souhaite normaliser les dates de chaque lien; peu importe le moment pendant lequel le traceroute a été effectué durant une période $d_i$, on note seulement le début de cette période. Ainsi,  la classe  \textit{DiffRTTPeriod}  reprend un \textit{lien} donné, les différentes sondes Atlas ayant identifié ce lien (\textit{probes}), les RTTs différentiels de ce lien tout au long de la période et enfin les dates associées à chaque RTT différentiel.
 \paragraph{La classe DiffRTTPeriod } ~
 \begin{lstlisting}[language=scala, caption={La classe DiffRTTPeriod en Scala }]
 case class DiffRTTPeriod(
-link:      LinkIPs,
-probes:    Seq[BigInt],
-rtts:      Seq[Double],
-var dates: Seq[Int])
+	link:      LinkIPs,
+	probes:    Seq[BigInt],
+	rtts:      Seq[Double],
+	var dates: Seq[Int])
 \end{lstlisting}
 
 A la fin des opérations de l'étape 6, on reprend pour chaque période, pour un lien donné, les RTTs différentiels ainsi que leurs dates. Ensuite, on construit les bornes de l'intervalle de confiance courants pour ce lien et les bornes de l'intervalle de confiance de référence, et ce afin de comparer ces deux intervalles en vue d'inférer les anomalies possibles du délais de ce lien.
@@ -215,3 +224,7 @@ var valueHi:     Seq[Double],
 var valueLow:    Seq[Double],
 var valueMean:   Seq[Double])
 \end{lstlisting}
+
+
+\section{Conclusion}
+ma conclusion.
