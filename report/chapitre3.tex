@@ -1,51 +1,49 @@
 \chapter{Introduction au Big Data}
 	
 	\section{Introduction}
-		Big Data est un terme associé aux données massives, rapidement générées, ayant une grande diversité où les  outils traditionnels sont incapables de gérer ces données. La complexité du Big Data vient du fait que tout type de données peut être utilisé, en vue de livrer la bonne information à la bonne personne et au bon moment afin d'aider à prendre les bonnes décisions.
+		Big Data est un terme associé aux données massives, rapidement générées, ayant une grande diversité où les  outils traditionnels sont incapables de gérer ces données. La complexité du Big Data est dû au  fait que tout type de données peut être utilisé, et ce en vue de livrer la bonne information à la bonne personne et au bon moment dans le but d'aider à prendre les bonnes décisions. Dans ce chapitre, nous  présentons brièvement un des processus d'analyse de données. Ensuite, nous décrivons quelques concepts impliqués dans un processus d'analyse des données massives. Enfin, nous parcourons un ensemble de technologies utilisées dans l'analyse des données à grande échelle.
 			
-	\section{Le processus de l'analyse de données massives}
-L'analyse de données massives 	est un processus impliquant plusieurs concepts. Ce processus inclut le besoin au stockage de données massives, au traitement de données massives et le besoin de la visualisation des résultats des traitements appliqués. Le choix du traitement à appliquer sur les données est dirigé par les objectifs de  l'analyse menée. Par exemple, une analyse peut envisager la création d'un système de recommandations dans les sites Internet, la conception d'un outil de prédiction basé sur les données historiées, etc.  Ces applications appuient sur des algorithmes basés sur les mathématiques, en particulier les mathématiques statistiques et probabilistes. Afin d'assurer l'efficacité de l'analyse des données massives, la coopération de plusieurs ressources accélère les étapes du processus, on parle de l'informatique distribuée.  
+	\section{Processus d'analyse de données massives}
+	%668
+	
+Les étapes d'un processus d'analyse de données, à grande échelle ou non, sont différentes selon le processus adopté.  Ce dernier peut impliquer plusieurs besoins et concepts. En particulier, on note le besoin au stockage de données massives, au traitement de données massives et le besoin à la visualisation des résultats des traitements appliqués. Le choix du traitement à appliquer sur les données est dirigé par les objectifs de  l'analyse menée. Par exemple, une analyse peut envisager la création d'un système de recommandations dans les sites Internet, la conception d'un outil de prédiction basé sur les données historiées, un système de suivi en temps réel, etc.  Ces applications appuient sur des algorithmes basés sur les mathématiques, en particulier les mathématiques statistiques et probabilistes. Afin d'assurer l'efficacité de l'analyse de données massives, la coopération de plusieurs ressources accélère considérablement les étapes de l'analyse, c'est ce que l'informatique distribuée a apporté.
 
 
-\paragraph{Le processus d'analyse de données} \label{sec:process-data-analysis}
+\paragraph{Exemple d'un  processus d'analyse de données} \label{sec:process-data-analysis}~
 
 Le processus d'analyse de données passe généralement par des étapes classiques. A ces étapes peuvent s'ajouter d'autres étapes intermédiaires ou supplémentaires. 
-Pour précision, ces étapes peuvent s'appliquer dans un contexte où les données très volumineuses  mais aussi dans le cas des données manipulées par des outils traditionnels.
+Pour précision, non seulement  ces étapes peuvent s'appliquer dans le cas  où les données sont volumineuses,  mais aussi dans le cas des données manipulées par des outils traditionnels comme les bases de données relationnelles. IBM Knowledge Center \footnote{Source : \url{https://www.ibm.com/support/knowledgecenter/fr/SSEPGG_9.5.0/com.ibm.im.easy.doc/c_dm_process.html}, consultée le $06/08/2018$.} a résumé le processus de l'analyse de données dans les étapes suivantes :
+définition de problème, exploration de données, préparation de données, modélisation, évaluation et enfin l'étape de déploiement.
 
 
-IBM Knowledge Center \footnote{Source : \url{https://www.ibm.com/support/knowledgecenter/fr/SSEPGG_9.5.0/com.ibm.im.easy.doc/c_dm_process.html}, consultée le $06/08/2018$.} a résumé le processus de l'analyse de données dans les étapes suivantes :
+\textbf{Définition de problème} C'est le point d'entrée vers tout projet d'analyse de données. Les objectifs doivent être clairs. A la fin de cette étape, on connait les objectifs de l'analyse, mais pas forcément comment cette analyse va être menée en terme de technologies utilisées,  les méthodes statistiques, etc. \par
 
+\textbf{Exploration de données } Ce que caractérise cette étape, c'est la découverte de la nature  des données, les sources des données, la qualité des données, etc. \par
 
+\textbf{Préparation de données} \label{par:step-preparedata} C'est durant cette phase que se passent les opérations d'ETL (Extract-transform-load), ce sont les opérations de chargement,  nettoyage et de la transformation des données. Durant cette étape aussi que  des tentatives sont faites pour créer le schéma de données.  Dans certains cas, cela amène  à chercher des sources complémentaires de données ou bien de nouvelles transformations à appliquer sur les données. Tel qu'un  schéma comporte les différentes tables, les attributs pertinents et autres. \par
 
-\subparagraph{Définition de problème.} c'est le point d'entrée vers tout projet d'analyse de données. Les objectifs doivent être clairs. A la fin de cette étape, on sait les objectifs d l'analyse, mais pas forcément comment 
-cette analyse va être faite (par exemple, les technologies et les méthodes statistiques).
+\textbf{Modélisation} A l'issue de cette phase, un modèle de qualité est créé. Un modèle qui doit  répondre aux objectifs précédemment établis. Cette étape implique des principes en statistiques, probabilités, \textit{machine learning}, etc. \par
 
-\subparagraph{Exploration de données. } ce que caractérise cette étape, c'est la découverte de la nature  des données, les sources des données, la qualité des données, etc. 
+\textbf{Evaluation} C'est à cette étape qu'on valide le modèle créé à l'étape de  Modélisation. L'évaluation et la validation du modèle prend en compte les objectifs prédéfinis; si le modèle répond aux attentes précédemment exprimées. \par
 
-\subparagraph{Préparation de données} \label{par:step-preparedata}: c'est durant cette phase que se passent les opérations d'ETL présentés dans la section \ref{sec:etl}, ce qui inclut le chargement, le nettoyage et la transformation des données. En parallèle, des tentatives sont faites pour créer le schéma des données avec la possibilité de revoir des sources complémentaires de données ou bien de nouvelles transformations des données. Le schéma comporte les différentes tables, les attributs pertinents et autres.
-
-\subparagraph{Modélisation} : à l'issue de cette phase, un modèle de qualité est créé. Un modèle qui devrait  répondre aux objectifs précédemment établis. Cette étape implique des principes en statistiques, probabilités, \textit{machine learning} ou bien autres fondements.
-
-\subparagraph{Evaluation} : c'est à cette étape qu'on valide le modèle créé à l'étape de  Modélisation. L'évaluation et la validation du modèle prend en compte les objectifs prédéfinis; si le modèle répond aux attentes.
-
-\subparagraph{Déploiement} : c'est l'utilisation  des outils existants ou  la mise place d'une solution qui convient aux  besoins spécifiques en terme de visualisation des résultats de l'analyse.
+\textbf{Déploiement}  C'est l'utilisation  des outils existants ou  la mise place d'une solution qui convient aux  besoins spécifiques en terme de visualisation des résultats de l'analyse. \par
 
 
 
 
 	\section{Quelques concepts associés au Big Data}
 
-La liste des concepts présentés dans cette section est non exhaustive. 
+Etant donné que le domaine du Big Data implique plusieurs concepts, nous présentons une liste de concepts  non exhaustive. 
 
 		\subsection{Définition du Big Data : Volume, Vélocité, Variété et Véracité}
 		
-		IBM définit Big Data suivant les quatre dimensions suivants : volume, variété, vélocité et véracité. 
+		IBM définit le Big Data suivant les quatre dimensions suivants : volume, variété, vélocité et véracité. 
 		\paragraph{Volume de données}~
-		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de Gigaoctets (GB) et de Téraoctets (TB). Toutefois, le Big Data est mesuré en Pétaoctets (PB) et Exaoctets (EB). Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1$ ZB = $1000000000000$ GB } par  entreprise en $2020$ .
+		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de Gigaoctets (GB) et de Téraoctets (TB). Toutefois, le Big Data est mesuré en Pétaoctets (PB), Exaoctets (EB), voire plus. Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1$ ZB = $1000000000000$ GB } par  entreprise en $2020$ .
 		
 		\paragraph{Vélocité de données} ~
 		le Big Data est généré par des milliards
-		d'appareils, les données générées sont communiquées avec la vitesse de la lumière via Internet. L'augmentation de la vitesse de l'Internet est une  des raisons ayant contribué à l'augmentation de la vitesse de la génération de données.	
+		d'appareils, les données générées sont communiquées avec la vitesse de la lumière via l'Internet. L'augmentation de la vitesse de l'Internet est une  des raisons ayant contribué à l'augmentation de la vitesse de la génération de données.	
 		%la vitesse décrit la fréquence de la génération et du partage des données. Autrement dit, les données sont générées rapidement et doivent être traitées rapidement pour extraire les informations  pertinentes.
 		Par exemple, Wallmart (international discount retail chain) génère environ   $2.5$ Pétaoctets de données chaque  heure via les transactions de ses consommateurs\footnote{Source : \url{https://www.bernardmarr.com/default.asp?contentID=690}, consultée le $ 30/06/2018 $.}.
 		
@@ -61,22 +59,30 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		
 		Le deuxième aspect de la variété des données massives concerne les \textbf{fonctions} assurées par ces données. Des données sont issues des conversations humaines, d'autres des transactions des consommateurs, ou bien des données archivées, etc.
 		
-		La source du Big Data est le troisième aspect de  variété. Des données sont en provenance des téléphones mobiles, des tablettes ou des ordinateurs portables, des fichiers journaux, du réseau de capteurs, etc. Les sources du Big Data peuvent être classées en trois grandes catégories : communications \textbf{\textit{human to human}} comme les conversations échangées dans les réseaux sociaux, communications \textbf{\textit{ human to machine}} comme l'accès des utilisateurs aux données dans le web et enfin communications \textbf{\textit{machine to machine}} comme les données issues de la communication entre les capteurs dans un réseau de capteurs.
+		Les \textbf{sources} du Big Data est le troisième aspect de  variété. Des données sont en provenance des téléphones mobiles, des tablettes ou des ordinateurs portables, des fichiers journaux, du réseau de capteurs, etc. Les sources du Big Data peuvent être classées en trois grandes catégories : communications \textbf{\textit{human to human}} comme les conversations échangées dans les réseaux sociaux, communications \textbf{\textit{ human to machine}} comme l'accès des utilisateurs aux données dans le web et enfin communications \textbf{\textit{machine to machine}} comme les données issues de la communication entre les capteurs dans un réseau de capteurs.
 		%au-delà des données des transactions habituelles des consommateurs, les données manipulées sont en provenance de sources différentes et de formats différents. Par exemple: des vidéos, des documents, des commentaires, des données géospatiales, des journaux, etc. Les grands ensembles de données sont constitués de données structurées et non structurées, publiques ou privées, locales ou distantes, partagées ou confidentielles, complètes ou incomplètes, etc.
 		
 		
 		
 		\paragraph{Véracité de données}
 		
-		La véracité concerne la crédibilité et la qualité des données. La mauvaise qualité de données est due à de nombreuses raisons, telles que les pannes techniques comme le dysfonctionnement des appareils comme les capteurs, les erreurs humaines,  etc. De plus, les données peuvent être intentionnellement erronées pour des raisons de concurrence ou des raisons stratégiques.
+		La véracité concerne la crédibilité et la qualité de données. La mauvaise qualité de données est due à de nombreuses raisons, telles que les pannes techniques comme le dysfonctionnement des appareils comme les capteurs, les erreurs humaines,  etc. De plus, les données peuvent être intentionnellement erronées pour des raisons de concurrence ou des raisons stratégiques.
 	
 		\subsection{L'architecture standard du Big Data}
 		
-		L'architecture présentée dans ce qui suit est celle proposée dans  \cite{anil-big-data}. Elle est constituée par les couches suivantes :  \textit{Data sources}, \textit{Data Ingest}, \textit{Batch processing}, \textit{Stream Processing}, \textit{Data organizing}, \textit{Infrastructure}, \textit{Distributed File System} et enfin la couche \textit{Data consuption}. 
+		L'architecture standard du Big Data présentée dans ce qui suit est celle proposée dans  \cite{anil-big-data}. Cette architecture  est composée des couches suivantes :  \textit{Data sources}, \textit{Data Ingest}, \textit{Batch processing}, \textit{Stream Processing}, \textit{Data organizing}, \textit{Infrastructure}, \textit{Distributed File System} et enfin la couche \textit{Data consuption}. 
 		%Pour  chaque couche, il existe au moins une technologie.
 		 La Figure \ref{fig:bigdata-architecture} reprend l'organisation des différentes couches de cette architecture.
+		 		\begin{figure}[h]
+		 	\captionsetup{justification = centering}
+		 	\centering
+		 	\includegraphics[width=1\linewidth]{illustrations/bigdata-architecture}
+		 	\caption{Architecture standard du Big Data \cite{anil-big-data}}
+		 	\label{fig:bigdata-architecture}
+		 	
+		 \end{figure}
 		
-		Dans un premier temps, les données sont   attrapées   via la couche  \textit{ingest system} par diverses sources de données. Ensuite, les données sont traitées dans deux modes différents:  \textit{stream processing } et  \textit{batch processing}.  Les résultats de ce traitement peuvent être envoyées vers les bases de données NoSQL (\ref{sec:nosql}) pour une utilisation ultérieure, ou bien  utiliser ces résultats comme entrées pour d'autres applications.  Une solution Big Data comprend typiquement  ces  couches logiques. Chaque  couche peut être représentée par une ou plusieurs technologies disponibles. Reprenons chaque couche logique:
+		Dans un premier temps, les données sont   accueillies   via la couche  \textit{ingest system} par diverses sources de données. Ensuite, les données sont traitées dans deux modes différents:  \textit{stream processing } et  \textit{batch processing}.  Les résultats de ce traitement peuvent être envoyées vers les bases de données NoSQL (\ref{sec:nosql}) pour une utilisation ultérieure, ou bien  utiliser ces résultats comme entrées pour d'autres applications.  Une solution Big Data comprend typiquement  ces  couches logiques. Chaque  couche peut être représentée par une ou plusieurs technologies disponibles. Reprenons chaque couche logique:
 		
 		
 		\begin{description}
@@ -85,31 +91,24 @@ La liste des concepts présentés dans cette section est non exhaustive.
 			
 		\item[Data Ingest layer] Cette couche permet de récupérer les données depuis les différentes sources de données. Les données sont accueillies à travers des points d'entrées multiples. Ces points  sont capables de recevoir  ces données ayant une vélocité variable ainsi qu'une quantité aussi variable.  Après avoir traversé  la couche \textit{Data Ingest}, les données sont envoyées au \textit{batch processing system}, au \textit{realtime processing system}, ou bien à un système de stockage particulier.
 		
-		\item[Batch processing layer] Les données reçues sur cette couche sont celles en provenance du \textit{Data Ingest} ou bien d'une des bases de données NoSQL. Ces données sont ensuite traitées en utilisant les techniques de la programmation parallèle en vue de fournir les résultats souhaités. La présente couche doit avoir connaissance des sources de données, les types de données, les algorithmes qui vont travailler sur ces données et enfin les résultats souhaités. Les résultats des traitements peuvent être utilisés par une des applications ou bien sauvegarder ces données dans une des bases de données adaptées.
+		\item[Batch processing layer] Les données reçues sur cette couche sont celles en provenance du \textit{Data Ingest} ou bien d'une des bases de données NoSQL. Ces données sont ensuite traitées, par exemple, en utilisant les techniques de la programmation parallèle en vue de fournir les résultats souhaités dans un temps raisonnable. La présente couche doit avoir connaissance des sources de données, les types de données, les algorithmes qui vont travailler sur ces données et enfin les résultats souhaités. Les résultats des traitements peuvent être utilisés par une des applications ou bien sauvegarder ces données dans une des bases de données adaptées.
 		
 		
-		\item[Stream Processing layer] Cette couche approvisionne les données directement d'une des entrées du \textit{Data Ingest layer}. Pareillement  à  \textit{Batch processing layer} en matière  des techniques de la programmation parallèle utilisées ainsi que la nécessité d'avoir les détails sur les sources des données, les types de données et les résultats souhaités.
+		\item[Stream Processing layer] Cette couche approvisionne les données directement d'une des entrées du \textit{Data Ingest layer}; c'est ce que différencie cette couche de la couche Batch processing layer. En revanche, \textit{Stream Processing} est similaire à la couche   \textit{Batch processing} en matière  des techniques de la programmation parallèle utilisées ainsi que la nécessité d'avoir les détails sur les sources des données, les types de données et les résultats souhaités.
 		
 		
-		\item[Data organizing layer] Le rôle de cette couche est d'organiser les données afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part de la  couche  \textit{Stream Processing} ainsi que la couche \textit{Batch processing}. Cette couche est représentée par les bases de données NoSQL. Il existe plusieurs catégories de bases de données NoSQL.
+		\item[Data organizing layer] Le rôle de cette couche est d'organiser les données afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part de la  couche  \textit{Stream Processing} ainsi que la couche \textit{Batch processing}. Cette couche est représentée par les bases de données NoSQL. 
 		
 		\item[Infrastructure layer] Cette composante est responsable de la gestion des ressources de stockage, les ressources du calcul et la gestion de la communication. 
-		Les fonctionnalités de cette couche sont fournies à travers le cloud computing.
+		Par exemple, les fonctionnalités de cette couche sont fournies à travers le cloud computing.
 		
-		\item[Distributed File System layer] Cette couche permet de stocker une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toute les couches qui forment un système du Big Data. C'est ce que assure Hadoop Distributed File System (HDFS).
+		\item[Distributed File System layer] Cette couche permet de stocker une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toute les couches qui forment un système du Big Data. C'est ce que assure, par exemple, Hadoop Distributed File System (HDFS).
 		
 		\item[Data consumption layer] Cette dernière couche utilise les résultats obtenus par les couches de l'analyse. Les résultats fournis peuvent être exprimés avec des rapports, des dashboards, des visualisations, un moteur de recommandation ou tout autre format.
 		
 	\end{description}
 	
-		\begin{figure}[H]
-			\captionsetup{justification = centering}
-			\centering
-			\includegraphics[width=1\linewidth]{illustrations/bigdata-architecture}
-			\caption{Architecture générique du Big Data \cite{anil-big-data}}
-			\label{fig:bigdata-architecture}
-			
-		\end{figure}
+
 
 	
 	\subsection{Les bases de données NoSQL (Not Only SQL) } \label{sec:nosql}
@@ -121,11 +120,11 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	
 	Le terme NoSQL est apparu pour la première fois en $ 1998 $. Carlo Strozzi  a parlé des bases de données relationnelles qui n'utilisent pas le SQL comme langage d'interrogation des tables. Des années plus tard, des solutions  open source basées sur ce concept ont vu le jour. 
 	
-	Les bases de données relationnelles sont utilisées par la majorité des entreprises pour plusieurs raisons :   la facilité d'utilisation, la disponibilité de plusieurs produits et développeurs, etc. Ces dernières années, avec l'augmentation exponentielle de la quantité de données générées par certaines entreprises, ces dernières ont constaté l'insuffisance des Systèmes de Gestion de Bases de Données Relationnelles (SGBDR) pour répondre à leurs besoins.
+	Les bases de données relationnelles sont conçues pour gérer les données structurées, optimisées pour offrir la précision et la cohérence de données. De plus, elles sont utilisées par la majorité des entreprises pour plusieurs raisons comme   la facilité d'utilisation, la disponibilité de plusieurs produits et développeurs, etc. Ces dernières années, avec l'augmentation exponentielle de la quantité de données générées par certaines entreprises, ces dernières ont constaté l'insuffisance des Systèmes de Gestion de Bases de Données Relationnelles (SGBDR) pour répondre à leurs besoins.
 	
     %	\paragraph{ Les besoins auxquels répondent NoSQL}  ~
 	
-	Les bases de données NoSQL sont conçues pour gérer des  volumes de données importants. L'idée de base de ces bases, c'est d'abord assurer la capacité de stocker des données de grande échelle dont leur  quantité  évolue rapidement, voire exponentiellement.  En deuxième lieu, les données stockées  doivent être interrogées  avec efficacité. Les données stockées dans  les bases de données NoSQL n'obéissent pas à un modèle prédéfini comme le cas des bases de données relationnelles. Cette flexibilité est une des caractéristiques des bases de données NoSQL.
+	Les bases de données NoSQL sont conçues pour gérer des  volumes de données importants. Le flux ainsi que la structure de  ces données sont imprévisibles. C'est pourquoi les bases de données relationnelles ne sont pas convenables. L'idée  de des bases de données NoSQL, c'est d'abord assurer la capacité de stocker des données à grande échelle dont leur  quantité  évolue rapidement, voire exponentiellement.  En deuxième lieu, les données stockées  doivent être interrogées  avec efficacité. Les données stockées dans  les bases de données NoSQL n'obéissent pas à un modèle prédéfini comme le cas des bases de données relationnelles. Cette flexibilité est une des caractéristiques des bases de données NoSQL.
 	
 	
 	\paragraph{Types de base de données NoSQL} \label{sec:nosql-database}  ~
@@ -133,7 +132,7 @@ La liste des concepts présentés dans cette section est non exhaustive.
 	Il existe quatre catégories distinctes de bases de données NoSQL. Chaque catégorie répond  à des besoins particuliers. Notamment, on distingue les bases de données clé-valeur, document, graphe et colonne.
 	
 	
-	\subparagraph {Clé-valeur} Une base de données de type clé-valeur repose sur le paradigme clé-valeur; chaque donnée, que ce soit un nombre, du texte ou tout autre élément est associé à une clé unique. Cette clé est le seul moyen d'accéder aux données stockées.
+	\subparagraph {Clé-valeur} Une base de données de type clé-valeur repose sur le paradigme clé-valeur; chaque donnée, que ce soit un nombre, du texte ou tout autre type est associé à une clé unique. Cette clé est le seul moyen d'accéder aux données stockées.
 	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La Figure \ref{fig:key-value-nosql} reprend un exemple d'une base de données NoSQL de type clé-valeur.
 
 	
@@ -181,18 +180,18 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		\label{fig:graphe-nosql}
 	\end{figure}
 	
-	Il existe plusieurs implémentations des quatre types de bases de données. Chaque implémentation favorise un ou plus des éléments suivants : la disponibilité des données, la cohérence des données et la tolérance au partitionnement.  C'est ce qu'explique le théorème CAP.	
+	Il existe plusieurs implémentations des quatre types de bases de données NoSQL. Chaque implémentation favorise un ou plus des éléments suivants : la disponibilité des données, la cohérence des données et la tolérance au partitionnement.  C'est ce qu'explique le théorème CAP.	
 		
 		\paragraph{Big Data et le théorème  CAP} \label{par:cap-theorem}:
 		
-		Le théorème CAP annonce que dans le cadre d'un système distribué où les données sont réparties sur plusieurs machines (ou n\oe{}uds),
+		Dans le but d'assurer un traitement rapide de données à grande échelle, ces dernières sont répartie sur un nombre de machines  (ou n\oe{}uds). Le théorème CAP annonce que dans le cadre d'un système distribué où les données sont réparties sur plusieurs machines,
 		%(ou n\oe{}uds) (voir \ref{sec:distruted-camput}),  
 		une base de données ne peut pas garantir les trois attributs suivants: \textit{Consistency}, \textit{Availability}, et \textit{Partition Tolerence}  en même temps. 
 		
 		
-			\subparagraph{ Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite;
+			\subparagraph{ Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite.
 			
-			\subparagraph{ Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client; 
+			\subparagraph{ Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client.
 			
 			%En cas d'une panne technique sur un des serveurs qui hébergent  la base de données, il faut s'assurer de desservir  des clients.  Généralement, cela est assuré à travers la réplication des données
 			
@@ -244,13 +243,11 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		
 		Dans la première, il faut définir les colonnes, le format de données, les types, etc. La lecture des données est rapide et moins coûteuse étant donné l'effort entreprit pour définir la structure. C'est le cas des bases de données relationnelles.
 		
-		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, mais le type de la donnée qui diffère. C'est l'approche utilisée par Amazon Athena (voir \ref{aws:athena}).
-		
-		 Les Figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
+		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, mais le type de la donnée qui diffère. C'est l'approche utilisée par Amazon Athena (voir \ref{aws:athena}). Les Figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.8\linewidth]{illustrations/on-write}
-			\caption{Schema on Write (Traditionnelle)}
+			\caption{Schema on Write (SGBDR)}
 			\label{fig:on-write}
 		\end{figure}
 		\begin{figure}[H]
@@ -272,8 +269,12 @@ La liste des concepts présentés dans cette section est non exhaustive.
 		\begin{itemize}
 			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
 			
-			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. D'ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
+			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. D'ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
 		\end{itemize}
+	
+	\begin{tcolorbox}
+	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
+	\end{tcolorbox}
 	\section{Parcours de quelques technologies du Big Data}
 	
 La liste des technologies dans le domaine du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du RIPE Atlas.
@@ -283,7 +284,7 @@ La liste des technologies dans le domaine du Big Data est en expansion continue 
 	
 %	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
 	
-	MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBDs adoptant le couple CP (Consistency et Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections\footnote{Une collection dans MongoDB est équivalente à une table dans un SGBDR.}.
+	MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBDs adoptant le couple CP (Consistency et Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections. Une collection dans MongoDB est équivalente à une table dans un SGBDR.
 	
 	En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépend du stockage, de la  RAM allouées et des options choisies.
 	
@@ -311,7 +312,7 @@ La combinaison d'Amazon S3, Amazon Glue et Amazon Athena permet de créer un env
 \footnote{Source : \url{https://aws.amazon.com/fr/s3/}, consultée le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
 
 
-Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, le tableau   	\ref{tab:pricing-s3-standard} illustre les tarifs de la formule standard.
+Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, le tableau   	\ref{tab:pricing-s3-standard} décrit les tarifs de la formule standard.
 \begin{table}[H]
 	\centering
 	\captionsetup{justification=centering}
@@ -359,20 +360,21 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
 \end{tcolorbox}
 
-\subsection{Spark Apache}
+\subsection{Apache Spark }
 
 %\subsection{Introduction à Apache Sprk}
 
-Apache Spark\footnote{Source : \url{https://spark.apache.org/}, consultée le $14/12/2018$} est un moteur de traitement distribué des données. Spark est conçu pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité dans l'analyse des données à grande échelle. Plusieurs APIs sont disponibles pour appliquer les transformations sur les données à analyser. On note qu'il existe un API en Scala avec lequel Spark est écrit, un API en Java et enfin un API en python.
+Apache Spark\footnote{Source : \url{https://spark.apache.org/}, consultée le $14/12/2018$} 
+est un framework de calcul distribué. C'est un ensemble de composantes conçues pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité dans l'analyse des données à grande échelle. Plusieurs APIs sont disponibles pour interagir avec Spark et 
+ appliquer les transformations sur les données à analyser. 
 
-
-\paragraph{Spark Core Concepts et architecture}
+\paragraph{ Core Concepts et architecture de Spark}
 
 \subparagraph{Spark Clusters et Resource Management System}
 
 Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable, il existe un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
-Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}, la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
+Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
 
 
 \begin{figure}[H]
@@ -386,8 +388,8 @@ Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{worke
 
 
 
-\subparagraph{Spark Application}
-Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du le driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
+\subparagraph{ Application Spark}
+Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du  driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision , dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
 
 \subparagraph{Spark driver et executor}
 
@@ -407,12 +409,12 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 	\item Spark SQL  est conçu pour le traitement interactive;
 	\item Spark Streaming est utilisé pour les traitements en temps réel;
 	\item  GraphX est destiné au traitement de graphe;
-	\item MLib est conçu pour le machine learning;
+	\item MLib est conçu pour  machine learning;
 	\item SparkR est consacré au traitement lié au machine learning en utilisant  R.
 	
 \end{itemize}
 
-\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donnée et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante au pannes et en lecture seule. 
+\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribué du calcul. Cette dernière est responsable de la distribution, la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donné et le transfert de donnés entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante au pannes et en lecture seule. 
 La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark Unified Stack avec Spark Core.
 
 \begin{figure}[H]
@@ -426,11 +428,11 @@ La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark 
 \paragraph{Resilient Distributed Datasets}~
 
 
-Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster de sorte à être traités en parallèle. Un RDD peut être persisté dans la mémoire pour éventuelle réutilisation.   D'ailleurs de cette façon, on constate l'amélioration des performances. En outre, un RDD peut être persisté sur un disque. 
+Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster afin d' être traités en parallèle. Un RDD peut être persisté dans la mémoire pour éventuelle réutilisation.   D'ailleurs de cette façon, on constate l'amélioration des performances. En outre, un RDD peut être persisté sur un disque. 
 
 Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Toutefois, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD. La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. 
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification= centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/global_view_rdd}
@@ -439,13 +441,16 @@ Les RDDs supportent deux types d'opérations sur les objets stockés : les trans
 	\source{ \url{https://www.duchess-france.org/starting-with-spark-in-practice/}, consultée le $15/12/2018$.}
 \end{figure}
 
-input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spak. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
-Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions sont partagées sur les n\oe{}uds du cluster qu'à suite à l'appel d'une action. Une fois une partition est localisé sur un n\oe{}ud donné, les transformations ainsi que les actions peut s'enchaîner.
+input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
+Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions sont partagées sur les n\oe{}uds du cluster qu'à suite à l'appel d'une action. Une fois une partition est localisé sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
 
 En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
 
 \section{Conclusion}
-ma conclusion.
+
+Dans ce chapitre,  nous avons décrit brièvement  quelques technologies du Big Data, car la liste de toutes les technologies est très longue. Afin de découvrir ces technologies en pratique, nous allons aborder dans le chapitre \ref{chap:application-on-traceroutes} l'utilisation de ces technologies dans le cas de l'analyse des délais d'un lien décrite dans la chapitre \ref{chap:algorith-detection}.    
+
+
 
 
 
