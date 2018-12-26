@@ -73,6 +73,7 @@
 \usepackage{tikz}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage[flushleft]{threeparttable}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 \lstset{
@@ -115,7 +116,7 @@
 }
 
 
-\definecolor{lstcolor}{HTML}{CCCCFF}
+\definecolor{lstcolor}{HTML}{F5F5F5}
 \definecolor{orange}{HTML}{F8F9F9}
 \definecolor{ligntrose}{HTML}{FFF8DC}
 \tcbset{colback= orange,fonttitle=\bfseries, colframe=white }
@@ -126,6 +127,43 @@
 \newcommand{\source}[1]{\caption*{Source: {#1}} }
 \definecolor{lightgray}{gray}{0.9}
 \renewcommand{\cleardoublepage}{}
+
+%%%%%%%%% like and dislike icons
+\usepackage{graphicx}
+\newcommand*{\RightThumbsUpAux}[1]{%
+	\begingroup
+	\sbox0{Ag}%
+	\raisebox{-\dp0}{%
+		\includegraphics[{%
+			height=\dimexpr\dp0+\ht0\relax,
+			#1%
+		}]{Symbol_thumbs_up-crop.pdf}%
+	}%
+	\endgroup
+}
+\newcommand*{\RightThumbsDownAux}[1]{%
+	\begingroup
+	\sbox0{Ag}%
+	\raisebox{-\dp0}{%
+		\includegraphics[{%
+			height=\dimexpr\dp0+\ht0\relax,
+			#1%
+		}]{Symbol_thumbs_down-crop.pdf}%
+	}%
+	\endgroup
+}
+\newcommand*{\RightThumbsUp}{%
+	\RightThumbsUpAux{}%
+}
+\newcommand*{\RightThumbsDown}{%
+	\RightThumbsUpAux{origin=c,angle=180}%
+}
+\newcommand*{\LeftThumbsUp}{%
+	\scalebox{-1}[1]{\RightThumbsUp}%
+}
+\newcommand*{\LeftThumbsDown}{%
+	\scalebox{-1}[1]{\RightThumbsDown}%
+}
 %\renewcommand{\clearpage}{}
 %#####################################################################################################
 %\usepackage{hyperref}% hyperliens dans le PDF, pas pour impression
@@ -157,7 +195,8 @@
 % numérotation des pages en chiffres romains.
 \tableofcontents
 
-\include{introduction}
+%\include{introduction}
+\include{introductionII}
 \include{chapitre1}
 %\include{chapi2}
 %\include{chapitre_algo_detection}

@@ -1,26 +1,25 @@
-\chapter{Application de quelques technologies Big Data sur l'analyse des traceroutes}
+\chapter{Application de quelques technologies Big Data sur l'analyse des traceroutes} \label{chap:application-on-traceroutes}
 
 
-\section{Introduction}
+\section{Introduction (to adapt)}
 
-Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons utilisé pour analyser les traceroutes disponibles dans le dépôt de RIPE Atlas. Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
-
-Le présent chapitre reprend l'application de quelques technologies du Big Data manipulées en vue d'analyser le délai des liens. On ne peut pas comparer ces technologies entre elles car elles ne se trouvent pas dans la même catégorie. En revanche, ce sont des technologies permettant d'analyser les données massives telles qu'elles représentent une ou plusieurs étape d'un processus d'analyse de données (voir un exemple du processus d'analyse de données dans \ref{sec:process-data-analysis}). 
-
-L'évaluation des performances de chacune des technologies est faite sur une machine ayant les caractéristiques reprises dans le tableau.
+Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons expérimenté pour analyser les traceroutes disponibles dans le dépôt de RIPE Atlas.
+% Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
+%Le présent chapitre reprend l'application de quelques technologies du Big Data manipulées en vue d'analyser le délai des liens. 
+On ne peut pas comparer ces technologies entre elles car elles ne se trouvent pas dans la même catégorie; quelques technologies n'assurent que le stockage, une autre technologie gère l'analyse ainsi que le stockage.  En revanche, ce sont des technologies permettant d'analyser les données massives telles qu'elles représentent une ou plusieurs étapes d'un processus d'analyse de données (voir un exemple du processus d'analyse de données dans \ref{sec:process-data-analysis}). L'évaluation des performances de chacune des technologies est faite sur une machine ayant les caractéristiques reprises dans le tableau[!].
 
 \section{Critères d'évaluation des technologies du Big Data}
 
 Les critères d'évaluation d'une technologies par rapport à une autre dépend de plusieurs entrées. En ce qui concerne les critères sur lesquels nous allons évaluer les différents technologies du Big Data sont les suivants:
 \begin{description}
-
-
-\item[Les frais d'utilisation] d'un technologie.
-\item[Le temps d'exécution] nécessaire pour fournir les résultats finaux.
-\item[L'adaptation aux données non structurées]
+\item[Frais d'utilisation] d'un technologie.
+\item[Temps d'exécution] nécessaire pour fournir les résultats finaux.
+\item[Flexibilité du schéma de  données]
 \item[L'évolutivité] de l'environnement Big Data mis en place pour les nouvelles données.
-\item[Sécurité de données] est important notamment pour les données sensibles.
-
+\item [Configuration de l'environement]
+\item [Limitations en stockage de données]
+\item[Analyse temps réel ]
+\item [Networking et bande passante]
 \end{description}
 
 \section{MongoDB}
@@ -28,13 +27,13 @@ Les critères d'évaluation d'une technologies par rapport à une autre dépend 
 
 
 %Les données relatives aux mesures traceroutes peuvent être récupérées de différentes manières. Par exemple,  les traceroutes à destination des instances du serveur DNS K-root. En ce qui concerne le travail de référence, les traceroutes sont récupérés à la fois par type d'adressage : IPv4 et IPv6 en se basant sur  l'identifiant  de la mesure : $ 5001 $, $ 6006 $, etc et par date.  Ainsi les
-MongoDB est la technologie Big Data utilisé par R. Fontugne dans l'implémentation de l'outil de détection. Les traceroutes sont organisés, dans MongoDB, dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. $V$ est vide en cas d'adressage IPv4 et $V$ prend la valeur $6$ s'il s'agit de l'adressage IPv6. Ces traceroutes formatés en format BSON. La nomination structurée permet de ne récupérer que les traceroutes concernés. Ainsi, le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
+MongoDB est la technologie Big Data utilisé par R. Fontugne dans l'implémentation de l'outil de détection. Les traceroutes sont organisés, dans MongoDB, dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. Dans le  cas de l'adressage IPv4, $V$  ne prend aucune valeur,  or, $V$ prend la valeur $6$ s'il s'agit de l'adressage IPv6.  La nomination structurée des collections permet de ne récupérer que les traceroutes concernés par une analyse lancée. Ainsi, le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
  
- \begin{tcolorbox}
- 	BSON (ou Binary JSON) est un format utilisé pour stocker et transférer les données dans la base de données MongoDB. BSON facilite la représentation des structures de données simples et des tableaux associatifs\footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
- \end{tcolorbox}
+
  
- MongoDB est une technologie conçue pour le stockage de données non structurées. C'est une technologies adaptée non seulement aux projets visant la lecture de données massives mais aussi au projets où on envisage la mise à jour d'un objet (modification ou suppression). Malgré la convenance de MongoDB aux données non structurées et massives, l'utilisation de telle base de données, en version locale, nécessite l'ajustement de la machine locale où MongoDB tourne. 
+ MongoDB est une technologie conçue pour assurer  le stockage de données dans un processus d'analyse de données. En particulier, MongoDB supporte les données non structurées. Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination, dans ce cas le contenu d'un traceroute est différent de celui réussi. De plus, MongoDB est adapté non seulement aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet (modification ou suppression). Généralement l'analyse de données à grande échelle se limitent qu'au mode lecture.
+ 
+ Malgré la convenance de MongoDB aux données non structurées et massives, l'utilisation de telle base de données, en version locale, nécessite l'ajustement de la machine locale où MongoDB tourne. 
 
 
 \paragraph{Les limitations de MongoDB}
@@ -247,6 +246,84 @@ var valueLow:    Seq[Double],
 var valueMean:   Seq[Double])
 \end{lstlisting}
 
+\section{Comparatif des perfermances}
 
+Les sections suivantes décrivent les performances obtenues en terme de temps écoulé durant à la fin d'une analyse.  Nous allons aborder les performances pour les trois implémentations: MongoDB, Les trois services d'Amazon et  Spark Apache.
+
+
+\subsection{Caractéristique de l'environnement de test}
+
+Le tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
+\begin{table}
+	\begin{tabular}{cc}
+		Type& OpenVZ container\\
+		RAM (MB)& 32768 \\
+		CPU & 64 (The logical CPU number of a CPU as used by the Linux kernel) \\
+	\end{tabular}
+	\caption{Caractéristiques de la machine de test}
+	\label{tab:test-machine}
+\end{table}
+
+\subsection{Spark Apache}
+
+
+
+\begin{table}
+\begin{threeparttable}
+	\begin{tabular}{cccc}
+Durée (début - fin) & Taille (MB) & Nb traceroutes & Temps \\
+5 min&&&\\
+15 min&&&\\
+30 min&&&\\
+1h min&&&\\
+2h min&&&\\
+6h min&&&\\
+12h min&&&\\
+1 jour&&&\\
+2 jour&&&\\
+3 jour&&&\\
+4 jour&&&\\
+	\end{tabular}
+    \begin{tablenotes}
+	\small
+	\item This is where authors provide additional information about
+	the data, including whatever notes are needed.
+\end{tablenotes}
+\end{threeparttable}
+\caption{}
+\label{}
+\end{table}
+
+
+
+\section{Récapitulatif des technologies Big Data}
+
+\begin{landscape}
+	\begin{table}
+		\centering
+\begin{tabularx}{24cm}{ X X X XXX}
+	
+	
+	
+	MongoDB&DynamoDB &AWS (S3) &AWS ( Glue) &AWS ( Athena) &Apache Spark\\
+	
+	\textbf{Technologies}&&&&&\\
+	
+	 %\textbf{collecte de données} &&&&&\\
+	 \textbf{Stockage} &&&&&\\
+	 \textbf{traitement}&&&&&\\
+	 \textbf{visualisation}&	  \LeftThumbsUp  flexible (schema-less database)
+	 
+	   \RightThumbsDown&&&&\\
+  
+\end{tabularx}
+\caption{Récaputilatif des technologies Big Data expérimentées dans l'analyse des délais}
+	\end{table}
+\end{landscape}
+
+\subsection{Notes sur les données}
+\begin{itemize}
+	\item Champs manquants : timestamp
+\end{itemize}
 \section{Conclusion}
 ma conclusion.
