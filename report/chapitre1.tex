@@ -7,8 +7,7 @@
 
 
 
-Le présent chapitre commence par une présentation détaillée du projet RIPE Atlas mené par l'organisme RIPE NCC.  Ce projet  a introduit l'utilisation des sondes pour  effectuer des mesures des réseaux dans le monde.
-Ensuite, ce chapitre reprend une liste non exhaustive  de quelques outils similaires aux sondes Atlas en matière d'objectifs. Enfin, expose quelques limites du système RIPE Atlas. La dernière section reprend brièvement quelques travaux basés sur le projet RIPE Atlas.
+Le présent chapitre est une présentation détaillée du projet RIPE Atlas créé par l'organisme RIPE NCC.  RIPE Atlas  a introduit l'utilisation des dispositifs pour  effectuer des mesures des réseaux informatiques dans le monde. Ce chapitre présente dans un premier temps les caractéristiques des sondes Atlas, ensuite, il  reprend une liste non exhaustive  de quelques outils similaires aux sondes Atlas en matière d'objectifs. Dans la suite, ce chapitre expose quelques limites du système RIPE Atlas. Enfin, ce chapitre  liste  brièvement quelques travaux basés sur le projet RIPE Atlas illustrant les cas d'usage de ce projet.
 
 
 \section{A propos RIPE NCC}
@@ -18,7 +17,7 @@ Le RIPE NCC  est un organisme qui alloue les blocs d'adresses IP et des numéros
 	Un\textit{ \textbf{Système Autonome}}, appelé AS, est un ensemble de réseaux et de routeurs sous la responsabilité d'une même autorité administrative. Chaque Système Autonome est identifié par un code sur 16 bits uniques. Les protocoles qui tournent au sein d'un Système Autonome peuvent être différents.
 \end{tcolorbox}
 
-RIPE NCC assure différents services relatifs à la gestion des réseaux informatiques. Il maintient multiples projets  pour un nombre de protocoles comme DNS (DNSMON), BGP (Routing Information Service ou RIS) et d'autres projets et services. En particulier, nous sommes intéressés  par projet RIPE Atlas géré aussi par RIPE NCC. L'objectif du projet RIPE Atlas est de déployer des dispositifs dans le monde, capables de collecter des données réseaux. Nous allons le détailler dans la section \ref{ripeatlassection}. 
+RIPE NCC assure différents services relatifs à la gestion des réseaux informatiques. Il maintient multiples projets  pour un nombre de protocoles comme DNS (DNSMON\footnote{Source : \url{https://atlas.ripe.net/dnsmon/}, consultée le $27/12/2018$.}), BGP (Routing Information Service ou RIS\footnote{Source : \url{https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris}, consultée le $27/12/2018$.}) et d'autres projets et services. En particulier, nous sommes intéressés  par projet RIPE Atlas géré aussi par RIPE NCC. L'objectif du projet RIPE Atlas est de déployer des dispositifs dans le monde qui sont capables de collecter des données relatives aux réseaux informatiques. %Nous allons le détailler dans la section \ref{ripeatlassection}. 
 
 
 \section{Présentation du projet RIPE Atlas } \label{ripeatlassection}
@@ -27,9 +26,9 @@ RIPE NCC a créé le projet RIPE Atlas en $2010$. Le nombre de sondes déployée
 
 \subsection{Les mesures  actives et passives de l'Internet}
 
-Il existe plusieurs approches pour analyser l'état  d'un réseau. Les deux approches les plus répandues sont~:  active et  passive. L'approche passive fait référence au processus de mesure d'un réseau, sans créer ou modifier le trafic sur ce réseau.   L'approche active  repose sur l'injection des paquets  sur le réseau et surveiller le flux de ce trafic. Cette injection a pour objectif la collecte  des données relatives aux performances du réseau en question. Par exemple, la mesure du temps de réponse, le suivi du chemin des paquets, etc. 
+Il existe plusieurs approches pour analyser l'état  d'un réseau informatique. Les deux approches les plus répandues sont~:   passive et active. L'approche passive fait référence au processus de mesure d'un réseau, sans créer ou modifier le trafic sur ce réseau.   L'approche active  repose sur l'injection des paquets  sur le réseau et surveiller le flux de ce trafic. Cette injection a pour objectif la collecte  des données relatives aux performances du réseau en question. Par exemple, la mesure du temps de réponse, le suivi du chemin des paquets, etc. 
 
-Les données collectées permettent de surveiller les réseaux pour ensuite  proposer des améliorations de l'Internet. Le projet RIPE Atlas est un des outils s'inscrivant dans l'approche active. Ce sont  des dispositifs, appelés sondes, hébergés par des volontaires, ils sont distribués et maintenus par  RIPE NCC. Les données collectées par ces dispositifs sont disponibles au public \cite{ripe-atlas-data}.
+Les données collectées permettent de surveiller les réseaux pour ensuite  proposer des améliorations de l'Internet. Le projet RIPE Atlas est un des outils s'inscrivant dans l'approche active. Ce sont  des dispositifs, appelés sondes, hébergés par des volontaires, ils sont distribués et maintenus par  RIPE NCC. Les données collectées par ces dispositifs sont disponibles au public sur le depôt de RIPE Atlas \cite{ripe-atlas-data}.
 
 Actuellement,  plus de $10,000$ sondes Atlas sont actives, ces dernières produisent environ $450$ millions de mesures par jour, ce qui correspond à  $5,000$ résultats par seconde \cite{WinNT}.
 
@@ -44,13 +43,13 @@ Actuellement,  plus de $10,000$ sondes Atlas sont actives, ces dernières produi
 	
 	\item[--] Les sondes Atlas sont déployées volontairement dans une maison, un bureau,  un entrepôt de données, etc.
 	
-	\item[--] Les mesures peuvent être lancées à tout moment et pour n'importe quelle période\footnote{Si le nombre de crédits (voir la section des crédits \ref{credits-atlas} ) disponibles le permet et qu'il n'y a pas de dépassement du nombre de mesures autorisé.}.
+	\item[--] Les mesures peuvent être lancées à tout moment et pour n'importe quelle période\footnote{Si le nombre de crédits (voir la section des crédits \ref{credits-atlas}) disponibles le permet et qu'il n'y a pas de dépassement du nombre de mesures autorisé.}.
 	
 	\item[--] La participation au projet RIPE Atlas est ouverte à toute personne qui s'y intéresse, cela inclut  les résultats de mesures, les outils d'analyse, l'hébergement des sondes elles-mêmes, les travaux, etc.
 	
 	\item[--] RIPE Atlas simule le comportement de la couche IP. Par exemple, avec RIPE Atlas, il est possible  de~:
 	\begin{itemize}
-		\item Suivre l'accessibilité d'une destination \footnote{Une destination représente une adresse IP dans le présent contexte.} depuis différents emplacements dans le monde et  depuis différents réseaux. Car les sondes Atlas sont réparties dans plusieurs pays et déployées dans différents réseaux.
+		\item Suivre l'accessibilité d'une destination \footnote{Une destination représente une adresse IP.} depuis différents emplacements dans le monde et  depuis différents réseaux. Car les sondes Atlas sont réparties dans plusieurs pays et déployées dans différents réseaux.
 		
 		\item Étudier des problèmes du réseau remontés en effectuant des vérifications de connectivité ad-hoc via les mesures effectuées par les sondes  Atlas.
 		
@@ -59,19 +58,19 @@ Actuellement,  plus de $10,000$ sondes Atlas sont actives, ces dernières produi
 		\item Vérifier l'infrastructure DNS.
 	\end{itemize}
 	
-	La section  \ref{use-cases-atlas} reprend quelques cas d'utilisation du système RIPE Atlas et les sujets qu'on peut étudier. 
+	La section  \ref{use-cases-atlas} reprend quelques cas d'utilisation  et les sujets qu'on peut étudier en se basant sur le projet  RIPE Atlas. 
 \end{itemize}
 
 \subsection{Les générations des sondes  Atlas }
 
-Depuis leur création   en $2010$, les sondes Atlas ont connu   trois générations du matériel. Le tableau   \ref{tab:differents-generations-probes} reprend quelques  caractérisations de ces trois générations des sondes  Atlas et  la figure 	\ref{fig:genarations} montre le matériel utilisé  dans chaque génération.
+Depuis leur création   en $2010$, les sondes Atlas ont connu   trois générations du matériel : \textit{v1}, \textit{v2} et \textit{v3}. Le tableau   \ref{tab:differents-generations-probes} reprend quelques  caractérisations de ces trois générations  et  la figure 	\ref{fig:genarations} montre le matériel utilisé  dans chaque génération.
 
 
 \begin{table}[H]
 	\begin{tabularx}{\textwidth}{|X|X|X|X|}
 		\hline
-		&\textbf{ v$ 1 $}&\textbf{v$ 2 $}&\textbf{v$ 3 $} \\ \hline
-		\textbf{ Matériel informatique}  & Lantronix XPort Pro \cite{LantronixXPortPro} &Lantronix XPort Pro \cite{LantronixXPortPro}&tp-link tl-mr$ 3020  $  \\ \hline
+		&\textbf{v$ 1 $}&\textbf{v$ 2 $}&\textbf{v$ 3 $} \\ \hline
+		\textbf{Matériel informatique}  & Lantronix XPort Pro \cite{LantronixXPortPro} &Lantronix XPort Pro \cite{LantronixXPortPro}&tp-link tl-mr$ 3020  $  \\ \hline
 		\textbf{Début d'utilisation}  &$2010$&$2011$&$2013$ \\ \hline
 		\textbf{Mémoire RAM} & $8$ Mo&$16$ Mo& $32$ Mo\\ \hline
 		\textbf{Mémoire Flash} & $16$ Mo&$16$ Mo&$4$ Mo \\ \hline
@@ -81,7 +80,7 @@ Depuis leur création   en $2010$, les sondes Atlas ont connu   trois générati
 		\textbf{Vitesses supportées} &$ 10 $ Mbit/s et $ 100 $ Mbit/s&$ 10 $ Mbit/s et $ 100 $ Mbit/s&$ 10 $ Mbit/s et $ 100 $ Mbit/s \\ \hline
 		
 	\end{tabularx}
-	\caption{Les caractéristiques des trois générations des sondes  Atlas }
+	\caption{Les caractéristiques du matériel  des trois générations des sondes  Atlas }
 	\label{tab:differents-generations-probes}
 \end{table}
 
@@ -105,14 +104,30 @@ Pour précision, les générations $1$ et $2$ présentent une très faible conso
 %Pour la génération $3$, même si elle est conçue en utilisant tp-link tl-mr3020,  la sonde v3 ne sert pas comme un routeur Wi-Fi.
 %, pourtant, elle a les mêmes fonctionnalités que les sondes v1 et v2.
 
-En $2015$, plusieurs utilisateurs des sondes  Atlas ont montré un intérêt aux sondes virtuelles. Ces sondes virtuelles présentent des avantages et aussi des inconvénients. Parmi les avantages, la conception des sondes virtuelles permet d'explorer des emplacements qui sont difficilement accessibles. En effet, cela permet d'étendre le réseau des sondes  Atlas. D'autre part, les sondes virtuelles peuvent être installées sans contraintes physiques ou organisationnelles. Parmi les inconvénients, une complexité sera ajoutée au système RIPE Atlas, plus de ressources seront demandées. Ensuite, il y a le problème de la qualité des données; le manque de données peut faire référence à une perte de paquets ou bien la machine qui héberge la sonde n'est plus disponible pour continuer les mesures. 
+En $2015$, plusieurs utilisateurs des sondes  Atlas ont montré un intérêt aux sondes virtuelles. Les sondes virtuelles présentent des avantages et aussi des inconvénients. Parmi les avantages, la conception des sondes virtuelles permet d'explorer des emplacements qui sont difficilement accessibles. En effet, cela permet d'étendre le réseau des sondes  Atlas. D'autre part, les sondes virtuelles peuvent être installées sans contraintes physiques ou organisationnelles. Parmi les inconvénients, une complexité sera ajoutée au système RIPE Atlas, plus de ressources seront demandées. De plus, il peut y avoir le problème de la qualité de données; le manque de données peut faire référence à une perte de paquets ou bien la machine qui héberge la sonde n'est plus disponible pour continuer les mesures. 
 
 
+\subsection{Les versions du firmware des sondes Atlas} \label{subsec:firmwareversion}
+En principe, toutes les sondes Atlas collectent la même information, indépendamment de leur version du firmware. On trouve les mêmes attributs\footnote{Attribut dans le sens du JSON : chaque résultat de mesure est enregistré comme étant un objet JSON.}  dans toutes les versions sauf de léger changements : ajout d'un ou de plusieurs attributs, la modification des noms des attributs, etc. Pour la simplification, nous donnons un identifiant entier pour chaque version, entre les parenthèses. Cet identifiant sera utilisé dans la suite de ce document. 
 
+%Les résultats de mesures  sont sauvegardés dans des fichiers JSON. Chaque mesure est un tableau d'éléments. chaque élément est un tableau associative. La structure des tableau associatifs dépend de la version du firmware. \par
+
+
+Il existe plusieurs versions du firmware:
+\begin{itemize}
+	\setlength\itemsep{0.1 cm}
+	\item[--] version $1$ est identifié par  $1$ (1);
+	\item[--] version $4400$  est identifiée par une valeur entre  $4400$ et $4459$ (2);
+	\item[--] version $4460$ est identifiée par une valeur entre $4460$ et $4539$ (3);
+	\item[--] version $4540$  est identifiée par une valeur entre  $4540$ et $4569$ (4);
+	\item[--]  version $4570$  est identifiée par une valeur entre $4570$ et $4609$ (5);
+	\item[--] dernière version du firmeware \footnote{A la date de consultation $ 25/01/2018 $.} est $4610$ (6). 
+\end{itemize}
 
 \subsection{La connexion des sondes Atlas à Internet}
 
-Les génération $1$ et $2$ des sondes  Atlas ont une interface Ethernet (RJ-45). La génération $3$ dispose techniquement des capacités Wi-Fi. Cependant, ces sondes ne sont pas suffisamment prêtes au niveau logiciel pour supporter le Wi-Fi. L'objectif était de garder l'indépendance des sondes Atlas du trafic de celui qui les héberge.
+Les génération $1$ et $2$ des sondes  Atlas ont une interface Ethernet (RJ-45). La génération $3$ dispose techniquement des capacités Wi-Fi. Cependant, ces sondes ne sont pas suffisamment prêtes au niveau logiciel pour supporter le Wi-Fi.
+% L'objectif était de garder l'indépendance des sondes Atlas du trafic de celui qui les héberge.
 
 Une fois la sonde se connecte au port d'Ethernet, elle acquiert  une adresse IPv4, un résolveur DNS  en utilisant DHCP et la configuration IPv6 via \textit{Router Advertisement}. Ensuite, elle essaie de rejoindre l'infrastructure du RIPE Atlas. Pour ce faire, elle utilise le résolveur DNS et se connecte à l'infrastructure à travers SSH sur le port TCP de sortie $443$ comme il est illustré dans la figure \ref{fig:ssh-atlas-probe}. L'architecture du système RIPE Atlas est détaillée dans la section \ref{subsec:archi-probes}.
 
@@ -135,20 +150,19 @@ La figure  \ref{fig:archi-ripe-atlas} montre une vue d'ensemble de l'architectur
 
 \begin{figure}[H]
 	\centering
-	\resizebox{\textwidth}{8 cm}{
+	\resizebox{\textwidth}{!}{
 		\input{illustrations/tex/artchitecture-ripeatlas.tex} 
 	}
-	\caption{Architecture du système  RIPE Atlas \cite{WinNT}}
+	\caption{L'architecture du système  RIPE Atlas  }
+	\source{Schéma repris du travail de Kisteleki \cite{WinNT}}
 	\label{fig:archi-ripe-atlas}
-	
-	
 \end{figure}
-On distingue les composantes suivantes:
+
+L'architecture du système  RIPE Atlas est constituée par  les composantes suivantes:
 \begin{description}
-	
 	\item [Registration server] (Reg.server) : c'est le seul point d'entrée de confiance pour les sondes Atlas. Son rôle est de recevoir toutes les sondes désirant se connecter au système RIPE Atlas. Ensuite, il redirige chaque sonde vers le contrôleur adéquat, celui le plus proche de la sonde et que ce contrôleur  soit suffisamment non occupé.  Le serveur d'enregistrement  a un aperçu de haut niveau du système.
 	
-	\item [Controller] : les contrôleurs acceptent d'établir une connexion avec une sonde parmi les sondes dont ils ont reçu leurs clés du serveur d'enregistrement (Reg.server). Une fois la connexion est établie entre une sonde et un contrôleur, ce dernier garde cette connexion active pour recevoir les résultats et prévenir la sonde des mesures à effectuer.  Le rôle du contrôleur est de communiquer avec les sondes,  associer les mesures aux sondes en se basant sur la disponibilité de la sonde et autres critères, enfin, collecter les résultats intermédiaires des mesures.
+	\item [Controller]: un contrôleur accepte d'établir une connexion avec une sonde parmi celles dont il a reçu leurs clés du serveur d'enregistrement (Reg.server). Une fois la connexion est établie entre une sonde et un contrôleur, ce dernier garde cette connexion active pour recevoir les résultats et prévenir la sonde des mesures à effectuer.  Le rôle du contrôleur est de communiquer avec les sondes,  associer les mesures aux sondes en se basant sur la disponibilité de la sonde et sur autres critères, enfin, collecter les résultats intermédiaires des mesures.
 	
 	\item [Message Queue (MQ)] : Tout d'abord définissons MQ:
 	
@@ -167,7 +181,7 @@ On distingue les composantes suivantes:
 	
 	\item [DB] : c'est une base de données SQL contenant toutes les informations du système RIPE Atlas : les informations sur les sondes et leurs propriétés, les meta-data des mesures, les utilisateurs, les crédits, etc. 
 	
-	\item [Data Storage] : c'est un cluster Hadoop/HBase pour le stockage à long terme de tous les résultats . Cette technologie permet aussi d'effectuer des calculs d'agrégation périodiques et  d'autres tâches. 
+	\item [Data Storage] : c'est un cluster Hadoop/HBase pour le stockage à long terme de tous les résultats. Cette technologie permet aussi d'effectuer des calculs d'agrégation périodiques et  d'autres tâches. 
 	
 	
 	\begin{tcolorbox}
@@ -179,13 +193,13 @@ On distingue les composantes suivantes:
 \end{description}
 
 
-La figure \ref{fig:deroulement-connexion-ripe-atlas} présente les étapes d'établissement de la connexion entre une sonde Atlas  et  l'infrastructure RIPE Atlas.
+La figure \ref{fig:deroulement-connexion-ripe-atlas} illustre les étapes d'établissement de la connexion entre une sonde Atlas  et  l'infrastructure RIPE Atlas.
 
 \begin{figure}[H]
 	\captionsetup{justification=centering}
 	\centering
-	\resizebox{\textwidth}{7 cm}{
-		\input{illustrations/tex/deroulement-connexion-ripe-atlas.tex} 
+	\resizebox{\textwidth}{!}{
+		\input{illustrations/tex/deroulement-connexion-ripe-atlas_.tex} 
 	}
 	\caption{Les étapes d'établissent d'une connexion entre la sonde Atlas et l'architecture  RIPE Atlas}
 	\label{fig:deroulement-connexion-ripe-atlas}
@@ -279,7 +293,7 @@ Les ancres sont configurées avec un certificat SSL auto-signé en utilisant une
 
 \subsection{Les mesures intégrées : Built-in } \label{par:whatmesureripeatlas}
 
-Une fois une sonde  Atlas connectée, elle lance automatiquement un ensemble de mesures prédéfinies, appelées \textit{Built-in Measurements}. Les mesures personnalisées sont détaillées dans la section \ref{par:udm}. Le choix du mode  IPv4,  IPv6 ou les deux, dépend de la capacité du réseau qui héberge la sonde  Atlas.  
+Une fois une sonde  Atlas connectée, elle lance automatiquement un ensemble de mesures prédéfinies, appelées \textit{Built-in Measurements}. Les mesures personnalisées sont détaillées dans la section \ref{par:udm}. Les mesures peuvent être effectuées selon l'adressage IPv4 ou bien IPv6. Le choix du mode  IPv4,  IPv6 ou les deux, dépend de la capacité du réseau qui héberge la sonde  Atlas.  
 
 Il existe deux types de mesures : les mesures \textit{One-Off}, ce sont les mesures qui s'exécutent une seule fois. Pour le deuxièmes type, ce sont les mesures qui s'exécutent   périodiquement, à chaque intervalle de temps. 
 
@@ -296,7 +310,7 @@ De base, les sondes Atlas assurent les mesures intégrées  suivantes:
 	\item[--] Les requêtes NTP (Network Time Protocol).
 \end{itemize}
 
-Chaque mesure a un identifiant ID unique. Cet identifiant indique le type de la mesure, s'il s'agit du ping, traceroute ou autres. Plus de détails sur la signification des identifiants des mesures sont disponibles dans la section  \ref{sec:builtin} dans l'annexe A.
+Chaque mesure a un identifiant ID unique. Cet identifiant indique le type de la mesure, s'il s'agit du ping, traceroute ou autres. Plus de détails sur la signification des identifiants des mesures sont disponibles sur RIPE Atlas \footnote{Source : \url{https://atlas.ripe.net/docs/built-in/}, consultée le $10/08/2018$.}.
 
 En plus des mesures intégrées, les sondes Atlas peuvent effectuer des mesures personnalisées. Ces mesures peuvent être lancées via l'interface web \cite{create-UDM} ou bien via  HTTP REST API. Toutefois, la planification des  mesures personnalisées nécessite l'acquisition de ce qu'on appelle les "crédits" au sens RIPE Atlas.  
 
@@ -384,11 +398,11 @@ Tel que :
 
 \subsection{Les mesures personnalisées : User Defined mesurement} \label{par:udm}
 
-En plus des mesures intégrées, par défaut, dans une sonde Atlas, il est possible de planifier des mesures personnalisées. Ce sont les m\^{e}mes~  types de mesures: ping, traceroute,  HTTP Get, SSLCert , DNS, NTP et TLS. Cette planification coûte des crédits, en effet, il faut avoir assez de crédits pour lancer des mesures. L'interface web dédiée à la création d'une nouvelle mesure offre toute les possibilités comme la précision des éléments suivants :
+En plus des mesures intégrées, par défaut, dans une sonde Atlas, il est possible de planifier des mesures personnalisées. Ce sont les m\^{e}mes~  types de mesures: ping, traceroute,  HTTP Get, SSLCert , DNS, NTP et TLS. Cette planification coûte des crédits, en effet, il faut avoir assez de crédits pour lancer des mesures. L'interface web dédiée à la création d'une nouvelle mesure offre toute les possibilités comme la personnalisation des éléments suivants :
 \begin{itemize}
-	\item[--] Le type de la mesure.
-	\item[--] La sélection des sondes Atlas réalisant la mesure.
-	\item[--] La fréquence de la mesure et sa durée.
+	\item[--] le type de la mesure;
+	\item[--] la sélection des sondes Atlas réalisant la mesure;
+	\item[--] la fréquence de la mesure et sa durée.
 \end{itemize}
 
 Chaque mesure est suivie via son état. Plusieurs états à distinguer: \textit{specified}, \textit{scheduled}, \textit{ongoing}, \textit{stopped},  \textit{Forced to stop},  \textit{no suitale probes} et enfin  \textit{failed}.
@@ -399,17 +413,18 @@ Chaque mesure est suivie via son état. Plusieurs états à distinguer: \textit{
 
 La sélection des sondes  Atlas pour effectuer une des mesures repose un des critères suivants~: 
 \begin{itemize}
-	\item[--] Numéro d'AS.
-	\item[--] Zone géographique via  l'attitude et la longitude.
-	\item[--] Pays (ou zone géographique comme  Europe).
-	\item[--] Préfixe IP. % (en pratique, ne marche pas).
-	\item[--] Manuellement, avec les identifiants des sondes Atlas.
-	\item[--] Reprendre celles d'une  mesure précédente.
+	\item[--] numéro d'AS;
+	\item[--] zone géographique via  l'attitude et la longitude;
+	\item[--] pays (ou zone géographique comme  Europe);
+	\item[--] préfixe IP; % (en pratique, ne marche pas)
+	\item[--] manuellement, avec les identifiants des sondes Atlas;
+	\item[--] reprendre celles d'une  mesure précédente.
 \end{itemize}
 
-Il existe une autre manière de regrouper les sondes  avec des étiquettes.  Le système d'étiquettes sert comme indicateur des propriétés, des capacités, de la topologie du réseau ou d'autres classifications. On distingue les étiquettes système  et utilisateur. Chaque nom d'étiquette est lisible par un humain. 
+Il existe une autre manière de regrouper les sondes~:  avec des étiquettes.  Le système d'étiquettes sert comme indicateur des propriétés, des capacités, de la topologie du réseau et d'autres classifications des sondes. On distingue les étiquettes système  et utilisateur. Chaque nom d'étiquette est lisible par un humain. 
 
-Les étiquettes utilisateurs sont  associées à une sonde librement par son hébergeur. Les étiquettes système sont attribuées uniquement par l'équipe RIPE Atlas et sont mises à jour périodiquement, à priori chaque $4$ heures. Des exemples d'étiquettes système sont présentés dans la section \ref{sec:rags} de l'annexe A.
+Les étiquettes utilisateurs sont  associées à une sonde librement par son hébergeur. Les étiquettes système sont attribuées uniquement par l'équipe RIPE Atlas et sont mises à jour périodiquement, à priori chaque $4$ heures. Des exemples d'étiquettes système sont disponibles sur RIPE Atlas\footnote{Source: \url{https://atlas.ripe.net/docs/probe-tags/}, consultée le $23/01/2018$.}.
+%présentés dans la section \ref{sec:rags} de l'annexe A.
 
 
 \subsection{Les sources de données Atlas} \label{subsec:sources-data}
@@ -417,7 +432,9 @@ Les étiquettes utilisateurs sont  associées à une sonde librement par son hé
 
 Les sondes  Atlas génèrent trois types de données : leurs détails de connexions d'un jour donné, leurs résultats des mesures intégrées et personnalisées et les descriptions des mesures effectuées (meta-data). 
 
-Premièrement on trouve les données sur les sondes  Atlas par jour. Les détails sur les sondes reprennent les informations des connexions, des réseaux et autres. A priori, les détails des connexions des sondes sont disponibles pour la période du  $13$ mars $2014$ jusqu'à ce jour\footnote{$15/08/2018$.}, un fichier JSON par jour (voir un exemple dans la section \ref{data-probes} de l'annexe A). Les données de certains jours sont manquantes.  La totalité des archives se trouve dans \cite{probes-data}. La taille d'une seule archive est entre $120 $ Ko et $921$ Ko. 
+Premièrement on trouve les données sur les sondes  Atlas par jour. Les détails sur les sondes reprennent les informations des connexions, des réseaux et autres. A priori, les détails des connexions des sondes sont disponibles pour la période du  $13$ mars $2014$ jusqu'à ce jour\footnote{$15/08/2018$.}, un fichier JSON par jour.
+% (voir un exemple dans la section \ref{data-probes} de l'annexe A). 
+Les données de certains jours sont manquantes.  La totalité des archives se trouve dans \cite{probes-data}. La taille d'une seule archive est entre $120 $ KB et $921$ KB. 
 
 Deuxièmement, les résultats des mesures sont aussi archivés dans un serveur FTP. Seules les données des derniers $30$ jours  sont conservées en archives \footnote{Source : \url{https://data-store.ripe.net/datasets/atlas-daily-dumps/}, consultée le $05/04/2018$.}. Les fichiers ont été nommés jusqu'au  $ 15 $ mars $ 2018 $ de façon structurée comme suit: 
 
@@ -430,39 +447,24 @@ Deuxièmement, les résultats des mesures sont aussi archivés dans un serveur F
 \begin{itemize}
 	\item[--] \$TYPE peut être {traceroute, ping, dns, ntp, http, sslcert}.
 	\item[--] \$IPV version du protocole IP v4 ou v6.
-	\item[--] \$DATE date au format  YEAR-MONTH-DAY. (etc. 2017-06-13)
+	\item[--] \$DATE date au format  YEAR-MONTH-DAY. (exemple: 2017-06-13)
 	\item[--] \$SUBTYPE type de mesure builtin ou udm.
 \end{itemize}
 
 En considérant toutes les possibilités des types, la quantité de données générées quotidiennement est environ $25$ Go \footnote{Source :  \url{https://ftp.ripe.net/ripe/atlas/data/README}, consultée le $26/03/2018$.}    et la taille des  archives est entre $281$M et $3.2$G.
 
-Depuis $15$ mars $2018$, les résultats des mesures ont été regroupés différemment. $24$ archives par jour,  une seule archive pour chaque heure et  type de mesure. L'archive ne distingue pas entre mesures IPv4 et IPv6,  entre mesures intégrées et  personnalisées. Il existe un attribut \textbf{"af"} qui distingue entre IPv4 et IPv6 et l'identifiant de la mesure pour distinguer les  mesures intégrées et celles personnalisées (identifiant > $1,000,000$). 
+Depuis $15$ mars $2018$, les résultats des mesures sont  regroupés différemment. $24$ archives par jour,  une seule archive pour chaque heure et  type de mesure. L'archive ne distingue pas entre mesures IPv4 et IPv6,  entre mesures intégrées et  personnalisées. Il existe un attribut \textbf{"af"} qui distingue entre IPv4 et IPv6 et l'identifiant de la mesure pour distinguer les  mesures intégrées et celles personnalisées (identifiant > $1,000,000$). 
 
 Streaming API propose un service de récupération des résultats de mesures en temps réel, depuis les sondes publiques. Ainsi, elle  fournit continuellement de nouveaux résultats en temps réel, obtenus par les sondes  Atlas publiques,  via une connexion de type HTTPS web-socket active tout le temps.
 
-Troisièmement, on trouve des archives sauvegardées chaque semaine, elles décrivent les  méta-datas des mesures. Une ligne objet JSON pour chaque mesure publique. Au moment de la consultation, la taille de chaque archive était entre $124$ Mo et $1.5$ Go. L'accès à ce jeu de données se fait de deux façons, via le téléchargement direct depuis un serveur  FTP ou bien via streaming API. Les noms des archives sont bien structurés.
-
-\subsection{Les versions du firmware des sondes Atlas} \label{subsec:firmwareversion}
-En principe, toutes les sondes Atlas collectent la même information, indépendamment de leur version du firmware. On trouve les mêmes attributs\footnote{Attribut dans le sens du JSON : chaque résultat de mesure est enregistré comme étant un objet JSON.}  dans toutes les versions sauf de léger changements : ajout d'un ou de plusieurs attributs, la modification des noms des attributs, etc. Pour la simplification, nous donnons un identifiant entier pour chaque version, entre les parenthèses. Cet identifiant sera utilisé dans la suite de ce document. 
-
-%Les résultats de mesures  sont sauvegardés dans des fichiers JSON. Chaque mesure est un tableau d'éléments. chaque élément est un tableau associative. La structure des tableau associatifs dépend de la version du firmware. \par
+Troisièmement, on trouve des archives sauvegardées chaque semaine, elles décrivent les  méta-datas des mesures. Une ligne objet JSON pour chaque mesure publique. Au moment de la consultation, la taille de chaque archive était entre $124$ Mo et $1.5$ Go. L'accès à ces   données se fait de deux façons, via le téléchargement direct depuis un serveur  FTP ou bien via streaming API. Les noms des archives sont bien structurés.
 
 
-Il existe plusieurs versions du firmware:
-\begin{itemize}
-	\setlength\itemsep{0.1 cm}
-	\item[--] La version $1$ est identifié par  $1$ (1). 
-	\item[--] La version $4400$  est identifiée par une valeur entre  $4400$ et $4459$ (2).
-	\item[--]  La version $4460$ est identifiée par une valeur entre $4460$ et $4539$ (3).
-	\item[--]  La version $4540$  est identifiée par une valeur entre  $4540$ et $4569$ (4).
-	\item[--]  La version $4570$  est identifiée par une valeur entre $4570$ et $4609$ (5).
-	\item[--] La dernière version du firmeware \footnote{A la date de consultation $ 25/01/2018 $.} est $4610$ (6). 
-\end{itemize}
 
 \subsection{Les limitations du RIPE Atlas}
 
 
-De nombreux travaux ayant exploité les données générées par les sondes Atlas. Néanmoins, ce système connaît des bugs et des limitations. Les membres de la communauté RIPE Atlas s'engagent à remonter les bogues liées aux sondes Atlas. Tous les bogues sont répertoriés sous une rubrique dédiée  \cite{bugs-ripe-atlas}.
+De nombreux travaux ayant exploité les données générées par les sondes Atlas. Néanmoins, ce système connaît des bugs et des limitations. Les membres de la communauté RIPE Atlas s'engagent à remonter les bogues liées aux sondes Atlas. Tous les bogues sont répertoriés dans une rubrique dédiée  \cite{bugs-ripe-atlas}.
 
 RIPE Atlas connaît des limitations  liées à la visualisation. Actuellement, RIPE Atlas supporte la visualisation des mesures de type ping ayant utilisé au maximum $20$  sondes. Cette limitation concerne aussi le type traceroute, en effet,  il est possible de visualiser seulement les mesures IPv6 built-in.
 
@@ -471,26 +473,26 @@ Afin d'éviter la surcharge  des sondes et de l'infrastructure, RIPE Atlas a lim
 Pour les mesures one-off (non périodiques), une sonde peut effectuer au plus $10$ mesures en parallèle. RIPE Atlas limite aussi la fréquence des mesures personnalisées. Un hébergeur d'une sonde peut effectuer:
 
 \begin{itemize}
-	\item[--] Ping chaque $60$ secondes (par défaut  $240$ secondes).
-	\item[--] Traceroute chaque $60$ secondes (par défaut  $900$ secondes).
-	\item[--] SSL chaque $60$ secondes (par défaut  $900$ secondes).
+	\item[--] Ping chaque $60$ secondes (par défaut  $240$ secondes);
+	\item[--] Traceroute chaque $60$ secondes (par défaut  $900$ secondes);
+	\item[--] SSL chaque $60$ secondes (par défaut  $900$ secondes);
 	\item[--] DNS chaque $60$ secondes (par défaut $240$ secondes).
 	
 \end{itemize}
 
 Dans le cas d'une déconnexion, la sonde continue à effectuer les mesures. Pour la version $1$ et $2$, la sonde est capable de sauvegarder les  $6$ dernières heures de données. Tandis qu'avec  la  version $3$, une sonde est capable de sauvegarder les résultats de plusieurs mois. Une fois la sonde est connectée, elle envoie les  données à l'infrastructure centrale.
 
-Concernant la consommation des crédits, RIPE Atlas limite cette consommation à  $1,000,000$ crédits par jour.
+Concernant la consommation des crédits par jour, RIPE Atlas limite cette consommation à  $1,000,000$ crédits.
 
 
 \subsection{Confiance aux données Atlas}
 
-De nombreux travaux ont exploité les données Atlas, cependant, peut-on faire confiance à la qualité des données? les données sont-elles complètes?
+De nombreux travaux ont exploité les données Atlas, cependant, peut-on faire confiance à la qualité de ces données? les données sont-elles complètes?
 
-La question de la complétude des données est plus présente pour les mesures périodiques, celles qui se déroulent pendant une durée $d$ et à un intervalle $i$. W. Shao et al.  \cite{DBLP:journals/corr/ShaoRDV17} ont traité les mesures manquantes.  L'approche qu'ils ont adopté repose sur la corrélation entre  l'absence de certaines mesures et les périodes durant lesquelles les sondes Atlas sont déconnectées. Pour précision, RIPE Atlas maintient les détails des connexions/déconnexions des sondes Atlas. Ils ont étudié les mesures en provenance des  sondes v$3$, effectuées entre le $01/06/2016/$ et  le $01/07/2016/$ (UTC). Ils ont combiné les informations relatives à la connexion/déconnexion des sondes et leurs mesures planifiées, leur approche se base sur l'attribut $timestamp$ qui est présent dans chaque résultat de mesure et dans les états de connexions.
+La question de la complétude des données est plus présente pour les mesures périodiques, celles qui se déroulent pendant une durée $d$ et à un intervalle $i$. W. Shao et al.  \cite{DBLP:journals/corr/ShaoRDV17} ont traité les mesures manquantes.  L'approche qu'ils ont adopté repose sur la corrélation entre  l'absence de certaines mesures et les périodes durant lesquelles les sondes Atlas ont été déconnectées. Pour précision, RIPE Atlas maintient les détails des connexions/déconnexions des sondes Atlas. W. Shao et al.  \cite{DBLP:journals/corr/ShaoRDV17}  ont étudié les mesures en provenance des  sondes v$3$, effectuées entre le $01/06/2016$ et  le $01/07/2016$ (UTC). Les auteurs ont combiné les informations relatives à la connexion/déconnexion des sondes et leurs mesures planifiées, leur approche se base sur l'attribut $timestamp$ qui est présent dans chaque résultat de mesure et dans les états de connexions.
 
 
-Nous avons discuté des limitations du RIPE Atlas en terme de mesures autorisées par jour. Cela n'empêche qu'il est possible qu'un nombre important de mesures  soit effectué. De plus, plus d'un utilisateur peut s'intéresser à la même sonde Atlas. C'est la question traitée dans le travail de T. Holterbach et al. dans \cite{Holterbach:2015:QIM:2815675.2815710}, si les mesures lancées par les autres utilisateurs affectent les résultats obtenus par un autre utilisateur, si c'est le cas, comment s'y entreprendre. Les expériences réalisées ont montré la présence de l'interférence entre les mesures à destination des sondes et cela de deux manières. Premièrement, les mesures depuis et à destination des sondes Atlas augmentent le temps reporté par la sonde et ils ont conclu que l'amélioration du CPU a permis de limiter les interférences sur le temps mesuré par les sondes Atlas. Deuxièmement,  ils ont conclu que les mesures perdent la synchronisation avec l'infrastructure d'Atlas, pendant plus d'une heure, à cause de la charge concurrentielle que subit le système d'Atlas. Dans ce cas, l'amélioration du matériel ne peut pas résoudre le problème.
+Nous avons discuté des limitations du RIPE Atlas en terme de mesures autorisées par jour. Cela n'empêche qu'il est possible qu'un nombre important de mesures  soit effectué. De plus, plus d'un utilisateur peut s'intéresser à la même sonde Atlas. C'est la question traitée dans le travail de T. Holterbach et al. dans \cite{Holterbach:2015:QIM:2815675.2815710}: si les mesures lancées par les autres utilisateurs affectent les résultats obtenus par un autre utilisateur, et si c'est le cas, comment s'y entreprendre. Les expériences réalisées ont montré la présence de l'interférence entre les mesures à destination des sondes et cela de deux manières. Premièrement, les mesures depuis et à destination des sondes Atlas augmentent le temps reporté par la sonde et ils ont conclu que l'amélioration du CPU a permis de limiter les interférences sur le temps mesuré par les sondes Atlas. Deuxièmement,  ils ont conclu que les mesures perdent la synchronisation avec l'infrastructure d'Atlas, pendant plus d'une heure, à cause de la charge concurrentielle que subit le système d'Atlas. Dans ce cas, l'amélioration du matériel ne peut pas résoudre le problème.
 
 %http://pages.cs.wisc.edu/~pb/hotplanet13a\_final.pdf
 %http://pages.cs.wisc.edu/~pb/hotplanet13a_final.pdf
@@ -498,7 +500,7 @@ Nous avons discuté des limitations du RIPE Atlas en terme de mesures autorisée
 
 \section{Projets existants de mesures d'Internet}
 
-Dans les sections précédentes, on a développé  le projet RIPE Atlas comme étant une plateforme pour la collecte des données des réseaux.  Toutefois, il existe d'autres projets similaires à RIPE Atlas. Les sections suivantes reprennent une liste non exhaustive des projets similaires  à RIPE Atlas.
+Dans les sections précédentes, nous avons développé  le projet RIPE Atlas comme étant une plateforme pour la collecte de données des réseaux informatiques.  Toutefois, il existe d'autres projets similaires à RIPE Atlas. Les sections suivantes reprennent une liste non exhaustive des projets similaires  à RIPE Atlas.
 
 \subsection{Test Traffic Measurement Service}
 
@@ -511,7 +513,7 @@ Ce service a été assuré et géré, pendant une période de $6$ ans, par une �
 
 \subsection{ProbeAPI}
 
-\textit{ProbeAPI} \cite{PROBEAPI} est  une plateforme de mesure d'état  du réseau, cette plateforme couvre $170$ pays et des milliers d'ISPs. \textit{ProbeAPI} est utilisée par les développeurs, les administrateurs des réseaux et les chercheurs, ils peuvent lancer des mesures d'un réseau depuis différents réseaux.
+\textit{ProbeAPI} \cite{PROBEAPI} est  une plateforme de mesure de l'état  d'un réseau, cette plateforme couvre $170$ pays et des milliers d'ISPs. \textit{ProbeAPI} est utilisée par les développeurs, les administrateurs des réseaux et les chercheurs, ils peuvent lancer des mesures d'un réseau depuis différents réseaux.
 
 Le logiciel \textit{ProbeAPI}  s'exécute dans plusieurs systèmes: dans des ordinateurs (Win$32$/$64$), Android via une installation dans les mobiles et les tablettes et   dans des routeurs au sein du DD-WRT.
 
@@ -520,7 +522,7 @@ Le logiciel \textit{ProbeAPI}  s'exécute dans plusieurs systèmes: dans des ord
 \end{tcolorbox}
 
 
-ProbeAPI s'agit d'un logiciel qui tourne dans la machine de l'hébergeur. En conséquence, le suivi des réseaux dépend de la disponibilité de la machine qui le fait  tourner. Cette dépendance  affecte la disponibilité de la sonde logicielle, sa configuration et aussi les résultats de mesures.
+ProbeAPI s'agit d'un logiciel qui tourne dans la machine de l'hébergeur. C'est pourquoi le suivi des réseaux dépend de la disponibilité de la machine qui le fait  tourner. Cette dépendance  affecte la disponibilité de la sonde logicielle, sa configuration et aussi les résultats de mesures.
 
 Une étude comparative \cite{COMPARE-ATLAS-PROBEAPI}  entre les sondes  Atlas et les sondes \textit{ProbeAPI} est résumée dans le tableau \ref{tab:compare-ripeatlas-probapi}. 
 %Ce dernier reprend une comparaison entre les deux plateformes. 
@@ -568,14 +570,11 @@ SamKnows \cite{SamKnows}  est une plateforme globale des performances d'Internet
 \section{Quelques cas d'utilisation des données collectées par les sondes Atlas} \label{use-cases-atlas}
 
 
-Plusieurs travaux ont exploités les données collectées par les sondes Atlas. Ces travaux peuvent être classés de plusieurs manières, par exemple  par thème,  par  type de mesures utilisé, etc. Nous distinguons les travaux ayant exploité les données collectées par les sondes Atlas à travers les mesures \textit{built-in} ou bien ceux ayant utilisé les données des mesures personnalisées.  Pour les premiers, ils permettent d'exploiter au mieux ces données sans surcharger le réseau des sondes Atlas, car ces données sont collectées quotidiennement. Cependant, les autres peuvent introduire une charge sur ces sondes. D'autre part, certains auteurs se sont intéressés  aux données traceroute, d'autres aux données ping ou HTTP, etc. Nous allons présenter brièvement quelques travaux par thème.
+Plusieurs travaux ont exploités les données collectées par les sondes Atlas. Ces travaux peuvent être classés de plusieurs manières, par exemple  par thème,  par  type de mesures utilisé, etc. Nous distinguons les travaux ayant exploité les données collectées par les sondes Atlas à travers les mesures \textit{built-in} ou bien ceux ayant utilisé les données des mesures personnalisées.  Pour les premiers, ils permettent d'exploiter au mieux ces données sans surcharger le système RIPE Atlas, car ces données sont collectées, par défaut, quotidiennement. Tandis que les autres peuvent introduire une charge supplémentaire sur ces sondes. D'autre part, certains travaux  ont manipulés  aux données par  type de mesure : traceroute, ping,  HTTP, etc. Nous allons présenter brièvement quelques travaux par thème.
 
 \subsection{Détection des coupures d'Internet}
 
-Les données collectées par les sondes Atlas ont permis de valider certaines coupures d'Internet, par exemple la coupure concernant le point d'échange AMS-IX (Amsterdam Internet Exchange). En $2015$, Robert Kisteleki  et al. \cite{Robert-Kisteleki}  ont évalué l'état des pings en provenance des sondes Atlas à destination de trois ancres Atlas qui se trouvent dans AMS-IX. En effet, peu de pings ont réussi d'atteindre leurs destinations, cependant, certains pings n'ont pas réussi à le faire. Ils ont conclu qu'il existe un problème du réseau, et le problème concerne  les ancres plutôt que les sondes ayant lancé le ping. De même pour DNS, ils ont constaté l'absence des données DNS sensées être collectées par les ancres Atlas à destination du K-root.
-
-
-
+Les données collectées par les sondes Atlas ont permis de valider certaines coupures d'Internet. Par exemple, la coupure concernant le point d'échange AMS-IX (Amsterdam Internet Exchange). En $2015$, R. Kisteleki  et al. \cite{Robert-Kisteleki}  ont évalué l'état des pings en provenance des sondes Atlas à destination de trois ancres Atlas qui se trouvent dans AMS-IX. En effet, peu de pings ont réussi à atteindre leurs destinations, cependant, certains pings n'ont pas réussi à le faire. Ils ont conclu qu'il existe un problème du réseau, et le problème concerne  les ancres plutôt que les sondes ayant lancé le ping. De même pour DNS, ils ont constaté l'absence des données DNS sensées être collectées par les ancres Atlas à destination du K-root pendant la période de la coupure.
 
 
 
@@ -624,9 +623,9 @@ $208.93.0.190$  correspond au contenu  non-blacklisted, alors que  $ 208.93.0.15
 \paragraph{Les ancres  Atlas}~
 
 Les ancres  Atlas ont des capacités avancées que les sondes  Atlas. Les ancres servent comme cibles aux mesures des sondes. De plus, elles sont capables de fournir des détails sur l'état du réseau dans lequel elles sont déployées.  S. Gasmi, un hébergeur d'une ancre  Atlas, a développé un outil  disponible au public \footnote{Source : \url{http://ripeanchor.sdv.fr/}, consultée le $08/08/2018$.}. 
-A partir des données collectées par les ancres Atlas, cet outil permet d'analyser  la qualité de la connectivité d'un réseau (ou d'un AS) et permet de suivre les changements relatifs à la topologie des réseaux
+A partir des données collectées par les ancres Atlas, cet outil permet d'analyser  la qualité de la connectivité d'un réseau (ou d'un AS) et permet de suivre les changements relatifs à la topologie des réseaux.
 
-Par exemple, il a constaté que la vérification du BGP Prepending et des communautés BGP peut être faite en  considérant les éléments suivants: adresse IP source, AS source, pays, le RTT du ping, les chemins du traceroute. En particulier, S. Gasmi a évalué deux corrélations. Dans un premier temps, il a visualisé la corrélation entre l'AS path et Round Trip Time (RTT). Il a regroupé des sondes par pays, ensuite, il a calculé, par ce pays, la moyenne du nombre de sauts et la moyenne du RTT des requêtes à destination de l'ancre depuis ces sondes Atlas.
+Par exemple, il a constaté que la vérification du BGP Prepending et des communautés BGP peut être faite en  considérant les éléments suivants: adresse IP source, AS source, pays, le RTT du ping et les chemins du traceroute. En particulier, S. Gasmi a évalué deux corrélations. Dans un premier temps, il a visualisé la corrélation entre l'AS path et Round Trip Time (RTT). Il a regroupé des sondes par pays, ensuite, il a calculé, par ce pays, la moyenne du nombre de sauts et la moyenne du RTT des requêtes à destination de l'ancre depuis ces sondes Atlas.
 La figure \ref{fig:1-AS-Path-Time-correlationv} reprend les résultats obtenus. Aucun renseignement sur la période des données. Pour les sondes en provenance de la France,  le nombre de sauts et le RTT entre les sondes déployées en France sont faibles car l'ancre (la cible) se trouve aussi en France.
 \begin{figure}[H]
 	\centering
@@ -646,7 +645,7 @@ Les chemins parcourus par traceroute pour aller d'une source $s$ vers une destin
 
 \textit{Traceroute Consistency Check} peut reprendre les chemins obtenus via traceroute au cours du temps . L'objectif est de suivre les  n\oe{}uds apparaissant dans le chemin allant de  $s$ à $d$ aux instants $t$, $t+1$, $t+2$, etc, et cela afin de voir les n\oe{}uds traversés plus fréquemment au cours du temps. Le chemin est mis à jour via Atlas streaming API. 
 
-L'outil proposé dessine les chemins traceroute comme étant un graphe dirigé, chaque n\oe{}ud est coloré suivant sa cohérence. Le code source du projet est disponible sur GitHub \cite{Traceroute-consistency-check}. La figure \ref{fig:Traceroute-consistency-check} présente un exemple de la visualisation proposée. Ce résultat concerne la mesure $1663314$ \footnote{Source : \url{https://atlas.ripe.net/measurements/1663314/}, consultée le $05/08/2018$.}. Ce sont des traceroutes à destination de l'adresse $213.171.160.1$ entre $02/05/2014$ $13:00$ et $03/05/2014$ $15:00$.
+L'outil proposé dessine les chemins traceroute comme étant un graphe dirigé, chaque n\oe{}ud est coloré suivant sa cohérence. Le code source du projet est disponible sur GitHub \cite{Traceroute-consistency-check}. La figure \ref{fig:Traceroute-consistency-check} présente un exemple de la visualisation proposée. Ce résultat concerne la mesure $1663314$ \footnote{Source : \url{https://atlas.ripe.net/measurements/1663314/}, consultée le $05/08/2018$.}. Ce sont des traceroutes à destination de l'adresse $213.171.160.1$, effectués entre le $02/05/2014$ $13:00$ et le $03/05/2014$ $15:00$.
 
 \begin{figure}[H]
 	\centering
@@ -657,25 +656,25 @@ L'outil proposé dessine les chemins traceroute comme étant un graphe dirigé, 
 
 \paragraph{BGP+traceroute} ~
 
-C'est une combinaison des données BGP (RIPE RIS) et traceroute (RIPE Atlas). L'objectif de ce projet était de partir d'un AS path pour enfin géolocaliser les ASs. 
+C'est une combinaison des données BGP (RIPE RIS) et traceroute (RIPE Atlas). L'objectif de ce projet est de partir d'un AS path pour enfin géolocaliser les ASs. 
 L'idée est de prendre un AS path des données RIPE RIS, puis, récupérer le préfixe (bloc d'adresses IP) annoncé via cet AS path, ensuite, lancer un traceroute vers une des adresses du bloc. Enfin, géolocaliser les ASs via les données du traceroute. 
 Le code source et la présentation de ce projet sont disponibles GitHub \cite{bgp-traceroutes,pres-bgp-traceroute}. 
 
 
-\paragraph{BGP Atlas Monitor "BAM!"} ~
+\paragraph{BGP Atlas Monitor (BAM)} ~
 
-Le projet \textit{BAM} vise la visualisation , en temps réel,  des informations utiles pour les opérateurs des réseaux. Par exemple, BAM montre  la visibilité des préfixes obtenus par RIPE RIS. De plus,  il est possible de voir  le délai du \textit{ping} obtenu via les sondes   Atlas. Le code source est disponible sur  GitHub \cite{bam}. En fournissant un ASN (identifiant d'un AS), \textit{BAM} récupère les préfixes IPv4 et IPv6 et leur visibilité et il montre aussi les sondes dans cet AS. L'outil offre  les  fonctionnalités suivantes:
+Le projet \textit{BAM} vise la visualisation , en temps réel,  des informations utiles pour les opérateurs des réseaux. Par exemple, BAM montre  la visibilité des préfixes obtenus par RIPE RIS. De plus,  il est possible de voir  le délai du \textit{ping} obtenu via les sondes   Atlas. Le code source est disponible sur  GitHub \cite{bam}. En fournissant un ASN (identifiant d'un AS), \textit{BAM} récupère les préfixes IPv4 et IPv6 et leur visibilité et il montre aussi les sondes dans cet AS. L'outil offre  les  fonctionnalités suivantes :
 \begin{itemize}
-	\item[--] Les préfixes annoncés par un ASN.
-	\item[--] La visibilité d'un ASN.
-	\item[--] La visibilité d'un préfixe.
-	\item[--] La liste des sondes par AS.
-	\item[--] Les objets  route des préfixes.
+	\item[--] les préfixes annoncés par un ASN;
+	\item[--] la visibilité d'un ASN;
+	\item[--] la visibilité d'un préfixe;
+	\item[--] la liste des sondes par AS;
+	\item[--] les objets  route des préfixes.
 \end{itemize}
 
 \paragraph{Prédiction des routeurs provoquant la perte des paquets }~
 
-Dans l'étude \cite{DBLP:journals/corr/FontugneAPB16}, Romain Fontugne et al. ont modélisé le comportement  des routeurs, ils ont développé un modèle qui permet d'estimer l'endroit de la  perte des paquets. A partir des traceroutes passant par un routeur \textit{r} à une destination \textit{d}, ils ont construit un modèle de forwarding pour ce routeur. Ce modèle reprend les prochains sauts (routeurs) et la fréquence de passage par ces derniers. Si le routeur \textit{r} change le prochain saut qui a eu "l'habitude" de traverser  pour atteindre \textit{d}, alors, il est possible d'estimer l'origine  de la perte de paquets.
+Dans l'étude \cite{DBLP:journals/corr/FontugneAPB16}, R. Fontugne et al. ont modélisé le comportement  des routeurs, ils ont développé un modèle qui permet d'estimer l'endroit de la  perte des paquets. A partir des traceroutes passant par un routeur \textit{r} à une destination \textit{d}, ils ont construit un modèle de forwarding pour ce routeur. Ce modèle reprend les prochains sauts (routeurs) et la fréquence de passage par ces derniers. Si le routeur \textit{r} change le prochain saut qui a eu "l'habitude" de traverser  pour atteindre \textit{d}, alors cela pour être un indicateur de l'origine  de la perte des paquets.
 
 \subsection{Le suivi des détours dans un trafic local}
 
@@ -684,7 +683,7 @@ Dans leur travail \cite{Emile-Aben-IXP-countries}, E. Aben et al. avaient l'obje
 
 France-IX est un point d'échange Internet (IXP) français créé en juin 2010. Afin d'apprendre la topologie de routage, un RIS route collector (RRC21) a été installé au sein du France-IX. Actuellement, la France compte $755$ sondes  Atlas et $9$ ancres. Une ancre sur les $9$ est installée au sein de France-IX.
 
-Une des questions posées c'était si le trafic local de la France reste local, les sondes  Atlas ne permettent pas de mesurer le trafic entre deux points, cependant, elles permettent de calculer le chemin entre deux points, adresses IP, ce qui permet d'inférer les sauts par lesquels  le trafic passe le trafic. Le travail \cite{France-IX} s'intéresse au trafic depuis et vers une sonde en France en se basant sur l'étude dans \cite{Emile-Aben-IXP-countries}.
+Une des questions posées c'est de savoir si le trafic local de la France reste localement.  Les sondes  Atlas ne permettent pas de mesurer le trafic entre deux points, alors qu' elles permettent de calculer le chemin entre deux points, adresses IP, ce qui permet d'inférer les sauts par lesquels il passe le trafic. Le travail \cite{France-IX} s'intéresse au trafic depuis et vers une sonde en France en se basant sur l'étude \cite{Emile-Aben-IXP-countries}.
 
 
 Les résultats obtenus de l'analyse des détours peuvent être intéressants pour les opérateurs des réseaux afin d'améliorer leurs services, ainsi intéressants pour les IXPs tels qu'ils peuvent  proposer des services de peering dans les endroits où il le faut.
@@ -692,15 +691,19 @@ Les résultats obtenus de l'analyse des détours peuvent être intéressants pou
 
 \subsection{Visualisation : indicateurs et dashboard}
 
-L'objectif de certains travaux était d'exploiter les données collectées par les sondes Atlas pour concevoir des tableaux des indicateurs. Par exemple, à partir des données de connexion/déconnexion des sondes Atlas, visualiser les sondes connectées, déconnectées, abandonnées. Un autre projet avait comme objectif la reconstruction d'un graphe reprenant les routeurs (n\oe{}uds) impliqués dans certains traceroutes, ainsi, identifier les n\oe{}uds les plus traversés. D'autres travaux ont repris les détails de la latence, essentiellement, sont les valeurs des RTT dans les pings et les traceroutes qui permettent de visualiser ce type d'information. 
+L'objectif de certains travaux est  d'exploiter les données collectées par les sondes Atlas pour concevoir des tableaux des indicateurs. Par exemple, à partir des données de connexion/déconnexion des sondes Atlas, on peut visualiser les sondes connectées, déconnectées, abandonnées. Un autre projet avait comme objectif la reconstruction d'un graphe reprenant les routeurs (n\oe{}uds) impliqués dans certains traceroutes, ainsi, identifier les n\oe{}uds les plus traversés. D'autres travaux ont repris les détails de la latence, essentiellement, sont les valeurs des RTTs dans les pings et les traceroutes qui permettent de visualiser ce type d'information. 
 
 
 La liste des travaux basés sur le projet RIPE Atlas est très longue. Nous avons essayé d'énumérer quelques projets, les classer par thèmes, toutefois, ce n'est pas un classement unique, tel qu'on peut retrouver un travail dans plus d'une catégorie, ou bien les classer par un autre classement.
 
 \section{Conclusion}
 
-Dans ce chapitre, nous avons présenté les sondes Atlas et leur fonctionnement, ainsi que quelques travaux qui ont impliqué les données collectées par ces sondes dans plusieurs domaines tels que la prise de décision, le suivi des censures, la conception des tableaux de visualisation, etc. Ces données sont cruciales pour mener à toute analyse. Cependant, ces données sont massives, elles sont  dans l'ordre d'une dizaine de Go pour une heure de mesures du type traceroute par exemple, y incluent toutes les destinations, d'où la nécessité d'impliquer des outils
-du Big Data pour une meilleure extraction d'informations utiles. En effet, le chapitre 2 aborde le sujet du Big Data dans ses différentes dimensions. 
+Dans ce chapitre, nous avons présenté les sondes Atlas et leur fonctionnement, ainsi que quelques travaux ayant impliqué des données collectées par ces sondes.  Ces travaux ont visé différents thèmes, tels que la prise de décision, le suivi des censures, la conception des tableaux de visualisation, etc. Dans le reste de ce document, le choix a été porté sur un sujet lié aux performances des réseaux informatiques. Il s'agit d'un outil de détection des anomalies dans les délais des liens dans les réseaux informatiques, en se basant sur les mesures de traceroute. Une présentation détaillée de l'algorithme de détection est donnée dans le chapitre \ref{chap:algorith-detection}.
+
+%Cet outil donne de meilleure résultat si les données utilisées sont assez grande.  Toutefois, lCependant, ces données sont massives, elles sont  dans l'ordre d'une dizaine de GB rien que pour pour une heure de mesures du type traceroute par exemple, y incluent toutes les destinations.
+%C'est pourquoi il faut considérer des outils adaptés. 
+
+%En effet, le chapitre 2 aborde le sujet du Big Data dans ses différentes dimensions. 
 
 %Dans  ce chapitre, nous avons découvert le fonctionnement des sondes Atlas  ainsi que les travaux ayant impliqué les données collectées par ces sondes.  Nous avons appris aussi la nature des données que les sondes Atlas collectent, c'est  crucial pour mener à toute analyse. Vu l'ordre de grandeur de la  quantité de données collectées, les outils traditionnels ne peuvent pas traiter ces données de façon efficace.
 
