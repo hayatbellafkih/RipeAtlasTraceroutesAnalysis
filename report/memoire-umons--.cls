@@ -23,6 +23,8 @@
 % \addtolength{\textheight}{2cm}
 % \setlength{\parindent}{0pt}
 
+
+
 \RequirePackage{graphics}
 % For the logos (use `xcolor' to avoid warnings if `xcolor' is used in
 % the document, e.g. with Tikz).  `xcolor' is not present in all distrib.
@@ -110,8 +112,8 @@
     \def\memoire@rapporteurs{Examiners}
     \def\memoire@service{Team}
     \def\memoire@services{Teams}
-    \def\@discipline{hematics}
-    \def\@institut{Department of Mathematics}
+    \def\@discipline{Sciences Informatiques}
+    \def\@institut{D\'epartement d\'\Informatique}
     \def\memoire@realise{%
       Master's Thesis submitted by \@author\\
       With a view of getting the degree of
@@ -126,11 +128,11 @@
     \def\memoire@rapporteurs{Rapporteurs}
     \def\memoire@service{Service}
     \def\memoire@services{Services}
-    \def\@discipline{Informatiques}
-    \def\@institut{D\'epartement de l'Informatique}
+    \def\@discipline{Sciences Informatiques}
+    \def\@institut{D\'epartement d'Informatique}
     \def\memoire@realise{%
-      M\'emoire r\'ealis\'e par \@author\\
-      pour l'obtention du dipl\^ome de Master en Sciences \@discipline\\[2ex]
+      Projet informatique de master 1 r\'ealis\'e par \@author\\
+    %  pour l'obtention du dipl\^ome de Master en sciences \@discipline\\[2ex]
       Ann\'ee acad\'emique \@date}
     \def\memoire@faculte{Facult\'e des Sciences}
     \def\memoire@universite{Universit\'e de Mons}
@@ -228,9 +230,9 @@
     \begin{center}
       \vspace{-5mm}
       {\bfseries\sffamily
-        \fontsize{30}{40}\fontfamily{phv}\selectfont % Helvetica
+        \fontsize{14}{16}\fontfamily{phv}\selectfont % Helvetica
         \@title
-        \\[1.5ex]}%
+        \\[3ex]}%
       \fontsize{12}{14}\fontfamily{ptm}\selectfont %
       \memoire@realise
       
@@ -290,7 +292,6 @@
 
 % Redefine the numering of content lines because the Roman numbering
 % may go into the text.
-
 \renewcommand{\numberline}[1]{%
   % \@tempdima contains the width of the box for the number.
   \settowidth{\@tempdimb}{#1\hspace{0.8ex}}%

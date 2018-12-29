@@ -1,16 +1,34 @@
 This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: memoire.aux
-A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: introductionII.aux
 A level-1 auxiliary file: chapitre1.aux
 A level-1 auxiliary file: chapitre2.aux
 A level-1 auxiliary file: chapitre3.aux
 A level-1 auxiliary file: chapitre4.aux
+A level-1 auxiliary file: conclusion.aux
+A level-1 auxiliary file: annexes.aux
+A level-1 auxiliary file: annexe_machine.aux
 The style file: acm.bst
 Database file #1: references.bib
-You're missing a field part---line 164 of file references.bib
+You're missing a field part---line 176 of file references.bib
  :   year         = 
  :                  ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 850 of file references.bib
+ :  
+ :  chapter = {1}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 863 of file references.bib
+ :  
+ :  chapter = {1}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 875 of file references.bib
+ :  
+ :  chapter = {1}
+(Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in ripe-atlas-data
 Warning--to sort, need author or key in LantronixXPortPro
@@ -20,47 +38,48 @@ Warning--to sort, need author or key in bugs-ripe-atlas
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
+Warning--to sort, need author or key in Lissages-Exponentiels
+Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
-Warning--empty year in anil-big-data
-You've used 30 entries,
+You've used 36 entries,
             2253 wiz_defined-function locations,
-            693 strings with 9020 characters,
-and the built_in function-call counts, 7085 in all, are:
-= -- 682
-> -- 232
+            725 strings with 9925 characters,
+and the built_in function-call counts, 8796 in all, are:
+= -- 849
+> -- 278
 < -- 0
-+ -- 102
-- -- 72
-* -- 349
-:= -- 1093
-add.period$ -- 104
-call.type$ -- 30
-change.case$ -- 125
++ -- 122
+- -- 86
+* -- 432
+:= -- 1343
+add.period$ -- 123
+call.type$ -- 36
+change.case$ -- 150
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 278
-empty$ -- 726
-format.name$ -- 72
-if$ -- 1572
+cite$ -- 47
+duplicate$ -- 375
+empty$ -- 895
+format.name$ -- 86
+if$ -- 1975
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 8
-newline$ -- 167
-num.names$ -- 44
-pop$ -- 258
+int.to.str$ -- 36
+missing$ -- 15
+newline$ -- 198
+num.names$ -- 54
+pop$ -- 308
 preamble$ -- 1
-purify$ -- 96
+purify$ -- 115
 quote$ -- 0
-skip$ -- 187
+skip$ -- 258
 stack$ -- 0
-substring$ -- 221
-swap$ -- 66
+substring$ -- 275
+swap$ -- 102
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 118
-warning$ -- 10
-while$ -- 51
-width$ -- 32
-write$ -- 319
-(There was 1 error message)
+type$ -- 136
+warning$ -- 11
+while$ -- 65
+width$ -- 38
+write$ -- 387
+(There were 4 error messages)

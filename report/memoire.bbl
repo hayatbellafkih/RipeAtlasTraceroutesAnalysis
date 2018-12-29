@@ -40,6 +40,13 @@ Xport pro.
 \newblock URL: \url{https://www.lantronix.com/products/xport-pro/}.
 \newblock (consulté le $08/08/2018/$).
 
+\bibitem{Lissages-Exponentiels}
+Lissages exponentiels.
+\newblock URL:
+  \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf},
+  2017.
+\newblock (consulté le $30/09/2018$).
+
 \bibitem{Wikipedia}
 {\sc Aben, E.}
 \newblock {How RIPE Atlas Helped Wikipedia Users}.
@@ -75,7 +82,13 @@ Xport pro.
 \newblock {Traceroute Consistency Check}.
 \newblock URL~:
   \url{https://github.com/vdidonato/Traceroute-consistency-check}, 2015.
-\newblock (Consulté le $08/08/2018$).
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{InternetHealthReport}
+{\sc Fontugne, R.}
+\newblock {InternetHealthReport - tartiflette}.
+\newblock URL~:
+  \url{https://github.com/InternetHealthReport/tartiflette/tree/master/dataManipulation}.
 
 \bibitem{DBLP:journals/corr/FontugneAPB16}
 {\sc Fontugne, R., Aben, E., Pelsser, C., and Bush, R.}
@@ -142,9 +155,25 @@ Xport pro.
   2017.
 \newblock (consulté le $ 21/12/2017 $).
 
+\bibitem{eginning-Apache-Spark-2-cluster-overwiew}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~4.
+
+\bibitem{eginning-Apache-Spark-2-cluster-example}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~6.
+
+\bibitem{eginning-Apache-Spark-2-unified-stack}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~7.
+
 \bibitem{anil-big-data}
 {\sc Maheshwari, A.}
 \newblock {\em Big Data}.
+\newblock 2017.
 
 \bibitem{TTM}
 {\sc {RIPE NCC}}.
@@ -165,6 +194,12 @@ Xport pro.
 \newblock Big data: A review.
 \newblock In {\em 2013 International Conference on Collaboration Technologies
   and Systems (CTS)\/} (May 2013), pp.~42--47.
+
+\bibitem{anant-shah}
+{\sc Shah, A., Fontugne, R., and Papadopoulos, C.}
+\newblock Towards characterizing international routing detours.
+\newblock In {\em Proceedings of the 12th Asian Internet Engineering Conference
+  (AINTEC)\/} (Bangkok, Thailand, Nov. 2016), ACM, p.~to appear.
 
 \bibitem{DBLP:journals/corr/ShaoRDV17}
 {\sc Shao, W., Rougier, J., Devienne, F., and Viste, M.}

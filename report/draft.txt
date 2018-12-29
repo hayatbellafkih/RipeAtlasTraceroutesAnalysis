@@ -1,0 +1,55 @@
+draft:
+
+Apache Spark  est un  système de traitement de données évolutif, il devient  un des composantes critiques en Big Data vue la facilité d'utilisation, la rapidité et la flexibilité qu'il offre.
+
+Apache Spark est un système distribué conçu pour traiter un volume important de données avec efficacité. Ce système distribué est déployé sur une collection de machines, ce qu'on appelle un cluster dans Spark. La taille du cluster, en nombre de machines, peut être petite ou bien grande. Par exemple, un cluster a été annoncé comme étant le plus grand cluster public dans le monde contenait $8000$ machines. La gestion des machines d'un cluster est gérée par un système de de gestion de ressources.
+
+On distingue deux abstractions dans Spark~: RDD (Resilient Distributed Dataset) et DAG  (Direct Acyclic Graph).
+
+\paragraph{RDD (Resilient Distributed Dataset)} est une collection d'enregistrements de données organisées dans des partitions stockées en mémoire, précisément sur les \textit{worker nodes} du cluster.
+Il existe deux types d'opérations applicables sur un RDD : les transformations et actions.
+
+\paragraph{Spark Cluster}
+
+
+\subparagraph{Driver Node} C'est le point d'entrée vers une application Spark. C'est au niveau de ce neuod que SparkContext est créé. Ensuite, \textit{Driver Node} s'occupe de créer le RDD et le flux des opérations à appliquer sur un RDD.
+
+\subparagraph{Worker Node}
+
+\subparagraph{Executor} 
+
+Une vue d'ensemble\footnote{Source : \url{https://spark.apache.org/docs/2.4.0/cluster-overview.html}, consultée le $09/12/2018$.} est illustrée dans la figure \ref{fig:cluster-overview}.
+Les applications Spark sont exécutées comme étant un ensemble de processus indépendants. Ces processus sont coordonnées par l'objet \textit{SparkContext} dans le programme principale dans une application Spark. 
+
+
+
+Le \textit{SparkContext} peut se connecter à plusieurs types de \textit{cluster managers} afin qu'il puisse allouer les ressources nécessaires à l'application.   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ref{fig:cluster-overview}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\linewidth]{illustrations/cluster-overview}
+	\caption{}
+	\label{fig:cluster-overview}
+\end{figure}
