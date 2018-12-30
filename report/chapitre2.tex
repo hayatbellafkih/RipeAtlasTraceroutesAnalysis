@@ -106,7 +106,7 @@ Avant de définir le RTT différentiel, soit la définition du RTT :
 	\textbf{RTT} est obtenu en calculant la différence entre le timestamp associé à l'envoi du paquet vers une destination  et le timestamp associé à la réception de la réponse ICMP de cette destination. C'est une métrique pour évaluer les performances d'un réseau en matière de temps de réponse. Les mesures du RTT sont fournies par les utilitaires traceroute et ping. En ce qui concerne traceroute,  il fournit les sauts impliqués dans le  chemin de forwarding, c'est le chemin parcouru par le trafic entre la source et la destination.  Le RTT inclut le temps de transmission, du quering et  du traitement. 
 \end{tcolorbox}
 
-La figure 	\ref{fig:rtt-differ} (a)  illustre le RTT entre la sonde P et deux routeurs B et C. Le RTT différentiel  du lien entre  $B$ et $C$ adjacents, noté $\Delta_{PBC}$, est la différence du RTT entre la sonde $P$ et $B$ (bleu) d'une part, et du RTT entre la sonde $P$ et $C$  (rouge) d'autre part, comme est  illustré dans la figure	\ref{fig:rtt-differ} (b). 
+La Figure 	\ref{fig:rtt-differ} (a)  illustre le RTT entre la sonde P et deux routeurs B et C. Le RTT différentiel  du lien entre  $B$ et $C$ adjacents, noté $\Delta_{PBC}$, est la différence du RTT entre la sonde $P$ et $B$ (bleu) d'une part, et du RTT entre la sonde $P$ et $C$  (rouge) d'autre part, comme est  illustré dans la Figure	\ref{fig:rtt-differ} (b). 
 
 \begin{align*}
 \Delta_{PBC} &= RTT_{PC} - RTT_{PB} \\
@@ -394,10 +394,31 @@ Dans le cas où le délai est jugé anormal, on introduit ce qu'on appelle la \t
 \subsection{Vue globale des étapes de la détection des anomalies à travers l'évolution des RTTs différentiels}
 La figure 	\ref{fig:process-rttanalysis_tex} présente la succession des étapes de la détection des anomalies dans les délais d'un lien donné. 
 
+
+Afin de mieux comprendre le processus décrit dans la Figure \ref{fig:process-rttanalysis_tex}, on note que :
+
+\begin{itemize}
+	\item \textit{periode} est une des périodes $d_k$ entre \textit{start} et \textit{end}. 
+	
+	\item \textit{traceroute} est un objet JSON reprenant tous les détails d'une réponse à une requête traceroute effectuée par une sonde Atlas. La liste complète des attributs d'une réponse est disponible sur la documentation du RIPE Atlas\footnote{Source : \url{https://atlas.ripe.net/docs/data_struct/\#v4750_traceroute}, consultée le $05/01/2018$.}.
+	
+	\item  \textit{medianByHopTraceroute} est un traceroute avec des sauts  agrégés; au sein d'un saut, regrouper les signaux d'un même routeur et calculer la médiane de leur RTT.
+	
+	\item  \textit{link}  représente les deux adresses IP d'un lien donné ainsi que leur RTT différentiel, ainsi  $ link : \{ip1, ip2, rttDiff\} $.
+	
+	\item En plus du RTT différentiel et les adresses IP, \textit{detailedLink} caractérise un lien en reprenant sa trace; la sonde l'ayant identifié, la destination finale pour  laquelle ce lien a été identifié, etc. $ detailedLink :\{prb\_id, msm\_id, from, timestamp, linkIPs\} $, où $ linkIPs: \{ip1, ip2\} $.
+	
+	\item L'état courant, à la période $d_k$, d'un lien est donné par la médiane des  RTTs différentiels (\textit{currentMedian}) enregistrés par ce lien durant $d_k$ et  son intervalle de confiance : la borne inférieur (\textit{currentLow}) et  le borne supérieure (\textit{currentHight}).  
+	
+	\item L'état référence d'un lien à la période $d_k$ est  obtenu par la médiane des RTTs différentiels (\textit{referenceMedian}) enregistrés depuis $d_1$ jusqu'à la période courante $d_k$. Par contre, cette médiane est calculée en utilisant la moyenne mobile exponentielle. De plus, l'état référence d'un lien est caractérisé par l'intervalle de référence : une borne inférieure (\textit{referenceLow}) et une borne supérieure (\textit{referenceHight})
+	
+	\item Les anomalies dans les délais du lien analysé, si elles existent, sont caractérisées par la période pendant laquelle elles étaient identifiées et la médiane des RTTs différentiels ayant donné cette anomalie.
+\end{itemize} 
+
 \begin{figure}[h]
 	\centering
 	\resizebox{\textwidth}{\textheight}{
-		\input{../dia/process-rttanalysis.tex}
+		\input{../dia/process-rttanalysisUpdated.tex}
 	}
 	\caption{Le processus de la détection des anomalies dans les délais des liens}
 	\label{fig:process-rttanalysis_tex}

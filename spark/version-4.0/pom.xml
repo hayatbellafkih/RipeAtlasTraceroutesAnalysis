@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.test.spark</groupId>
+ <artifactId>SparkExample</artifactId>
+ <version>0.0.4-SNAPSHOT</version>
+ <pluginRepositories>
+ <pluginRepository>
+ <id>scala-tools.org</id>
+ <name>Scala-tools Maven2 Repository</name>
+ <url>http://scala-tools.org/repo-releases</url>
+ </pluginRepository>
+ </pluginRepositories>
+ <dependencies>
+ <dependency>
+ <groupId>org.apache.spark</groupId>
+ <artifactId>spark-core_2.10</artifactId>
+ <version>1.4.0</version>
+ </dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-mllib_2.11</artifactId>
+    <version>2.4.0</version>
+    <scope>runtime</scope>
+</dependency>
+
+    <!-- https://mvnrepository.com/artifact/net.liftweb/lift-json -->
+<dependency>
+    <groupId>net.liftweb</groupId>
+    <artifactId>lift-json_2.11</artifactId>
+    <version>3.3.0-RC1</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
+<!-- 
+<dependency>
+    <groupId>com.typesafe.play</groupId>
+    <artifactId>play-json_sjs0.6_2.11</artifactId>
+    <version>2.7.0-RC2</version>
+</dependency>
+-->
+<!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
+<dependency>
+    <groupId>com.typesafe.play</groupId>
+    <artifactId>play-json_sjs0.6_2.11</artifactId>
+    <version>2.6.0</version>
+</dependency>
+
+ 
+ <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-sql_2.11</artifactId>
+    <version>2.4.0</version>
+</dependency>
+ 
+ </dependencies>
+ <build>
+  <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>ripeatlasanalysis.AnalyseTraceroute</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+		<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+  </plugins>
+</build>
+
+</project>

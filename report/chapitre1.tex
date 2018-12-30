@@ -63,7 +63,7 @@ Actuellement,  plus de $10,000$ sondes Atlas sont actives, ces dernières produi
 
 \subsection{Les générations des sondes  Atlas }
 
-Depuis leur création   en $2010$, les sondes Atlas ont connu   trois générations du matériel : \textit{v1}, \textit{v2} et \textit{v3}. Le tableau   \ref{tab:differents-generations-probes} reprend quelques  caractérisations de ces trois générations  et  la figure 	\ref{fig:genarations} montre le matériel utilisé  dans chaque génération.
+Depuis leur création   en $2010$, les sondes Atlas ont connu   trois générations du matériel : \textit{v1}, \textit{v2} et \textit{v3}. Le Tableau   \ref{tab:differents-generations-probes} reprend quelques  caractérisations de ces trois générations  et  la Figure 	\ref{fig:genarations} montre le matériel utilisé  dans chaque génération.
 
 
 \begin{table}[H]
@@ -129,7 +129,7 @@ Il existe plusieurs versions du firmware:
 Les génération $1$ et $2$ des sondes  Atlas ont une interface Ethernet (RJ-45). La génération $3$ dispose techniquement des capacités Wi-Fi. Cependant, ces sondes ne sont pas suffisamment prêtes au niveau logiciel pour supporter le Wi-Fi.
 % L'objectif était de garder l'indépendance des sondes Atlas du trafic de celui qui les héberge.
 
-Une fois la sonde se connecte au port d'Ethernet, elle acquiert  une adresse IPv4, un résolveur DNS  en utilisant DHCP et la configuration IPv6 via \textit{Router Advertisement}. Ensuite, elle essaie de rejoindre l'infrastructure du RIPE Atlas. Pour ce faire, elle utilise le résolveur DNS et se connecte à l'infrastructure à travers SSH sur le port TCP de sortie $443$ comme il est illustré dans la figure \ref{fig:ssh-atlas-probe}. L'architecture du système RIPE Atlas est détaillée dans la section \ref{subsec:archi-probes}.
+Une fois la sonde se connecte au port d'Ethernet, elle acquiert  une adresse IPv4, un résolveur DNS  en utilisant DHCP et la configuration IPv6 via \textit{Router Advertisement}. Ensuite, elle essaie de rejoindre l'infrastructure du RIPE Atlas. Pour ce faire, elle utilise le résolveur DNS et se connecte à l'infrastructure à travers SSH sur le port TCP de sortie $443$ comme il est illustré dans la Figure \ref{fig:ssh-atlas-probe}. L'architecture du système RIPE Atlas est détaillée dans la section \ref{subsec:archi-probes}.
 
 \begin{figure}[H]
 	\centering
@@ -146,7 +146,7 @@ Il existe deux catégories d'outils de surveillance du réseau: des outils maté
 Le système RIPE Atlas est conçu pour qu'il soit opérationnel de façon distribuée. La plupart des composantes ont assez de connaissances pour remplir leurs rôles, sans nécessairement avoir besoin de connaître les états des autres composantes du système. Cela assure que le système soit capable d'assurer la plupart des fonctionnalités en cas  d'un problème temporaire. Par exemple, si une sonde est déconnectée de l'infrastructure, elle continue les mesures planifiées et les données sont renvoyées dès sa reconnexion au système.
 
 
-La figure  \ref{fig:archi-ripe-atlas} montre une vue d'ensemble de l'architecture du RIPE Atlas.
+La Figure  \ref{fig:archi-ripe-atlas} montre une vue d'ensemble de l'architecture du RIPE Atlas.
 
 \begin{figure}[H]
 	\centering
@@ -193,7 +193,7 @@ L'architecture du système  RIPE Atlas est constituée par  les composantes suiv
 \end{description}
 
 
-La figure \ref{fig:deroulement-connexion-ripe-atlas} illustre les étapes d'établissement de la connexion entre une sonde Atlas  et  l'infrastructure RIPE Atlas.
+La Figure \ref{fig:deroulement-connexion-ripe-atlas} illustre les étapes d'établissement de la connexion entre une sonde Atlas  et  l'infrastructure RIPE Atlas.
 
 \begin{figure}[H]
 	\captionsetup{justification=centering}
@@ -263,7 +263,7 @@ Les ancres  Atlas sont des dispositifs agissant comme cibles aux différentes me
 		\end{tcolorbox}
 	\end{center}
 \end{itemize}
-Les ancres sont configurées avec un certificat SSL auto-signé en utilisant une clé de $2048$ bit et un temps d'expiration de $100$ ans. Le tableau \ref{tab:comparaison-sonde-ancre} reprend une comparaison de certaines caractéristiques communes entre les sondes et les ancres  Atlas.
+Les ancres sont configurées avec un certificat SSL auto-signé en utilisant une clé de $2048$ bit et un temps d'expiration de $100$ ans. Le Tableau \ref{tab:comparaison-sonde-ancre} reprend une comparaison de certaines caractéristiques communes entre les sondes et les ancres  Atlas.
 
 \begin{table}[H]
 	\centering
@@ -524,7 +524,7 @@ Le logiciel \textit{ProbeAPI}  s'exécute dans plusieurs systèmes: dans des ord
 
 ProbeAPI s'agit d'un logiciel qui tourne dans la machine de l'hébergeur. C'est pourquoi le suivi des réseaux dépend de la disponibilité de la machine qui le fait  tourner. Cette dépendance  affecte la disponibilité de la sonde logicielle, sa configuration et aussi les résultats de mesures.
 
-Une étude comparative \cite{COMPARE-ATLAS-PROBEAPI}  entre les sondes  Atlas et les sondes \textit{ProbeAPI} est résumée dans le tableau \ref{tab:compare-ripeatlas-probapi}. 
+Une étude comparative \cite{COMPARE-ATLAS-PROBEAPI}  entre les sondes  Atlas et les sondes \textit{ProbeAPI} est résumée dans le Tableau \ref{tab:compare-ripeatlas-probapi}. 
 %Ce dernier reprend une comparaison entre les deux plateformes. 
 En fin de cette étude, ils concluent qu'en comparant les résultats des mesures ICMP effectuées par les deux plateformes, des contrastes intéressantes ont été constatées.  Les sondes Atlas ont montré un comportement stable lors de la réalisation  des mesures, les résultats sont peu variables car les sondes sont indépendantes de l'utilisateur. Cependant, il était constaté qu'une forte variabilité au cours du temps pour les sondes logicielles (ProbeAPI), car elles dépendent fortement de l'hébergeur; sa configuration réseau, sa disponibilité, etc.
 
@@ -593,7 +593,7 @@ En $2014$, des chercheurs ont examiné les incidents de type content-blocking en
 
 Il existe plusieurs pratiques pour appliquer la censure. Ces pratiques dépendent des objectifs de cette censure; bloquer un site web, rediriger le trafic, filtrer l'accès à travers des mots clés, etc.
 
-En mars $2014$, des utilisateurs turcs ont été interdits d'accéder au réseau social  \textit{Twitter}.  Ce filtrage a été fait en utilisant \textit{DNS Tampering} et \textit{IP Blocking}. Comme ces deux pratiques sont évaluables avec les sondes  Atlas, ils ont planifié des mesures vers plusieurs destinations et depuis un nombre de  sondes. Ces mesures sont  reprises en détail dans le tableau  \ref{ta:censorship-colin}.
+En mars $2014$, des utilisateurs turcs ont été interdits d'accéder au réseau social  \textit{Twitter}.  Ce filtrage a été fait en utilisant \textit{DNS Tampering} et \textit{IP Blocking}. Comme ces deux pratiques sont évaluables avec les sondes  Atlas, ils ont planifié des mesures vers plusieurs destinations et depuis un nombre de  sondes. Ces mesures sont  reprises en détail dans le Tableau  \ref{ta:censorship-colin}.
 
 \begin{table}[H]
 	\centering
@@ -626,7 +626,7 @@ Les ancres  Atlas ont des capacités avancées que les sondes  Atlas. Les ancres
 A partir des données collectées par les ancres Atlas, cet outil permet d'analyser  la qualité de la connectivité d'un réseau (ou d'un AS) et permet de suivre les changements relatifs à la topologie des réseaux.
 
 Par exemple, il a constaté que la vérification du BGP Prepending et des communautés BGP peut être faite en  considérant les éléments suivants: adresse IP source, AS source, pays, le RTT du ping et les chemins du traceroute. En particulier, S. Gasmi a évalué deux corrélations. Dans un premier temps, il a visualisé la corrélation entre l'AS path et Round Trip Time (RTT). Il a regroupé des sondes par pays, ensuite, il a calculé, par ce pays, la moyenne du nombre de sauts et la moyenne du RTT des requêtes à destination de l'ancre depuis ces sondes Atlas.
-La figure \ref{fig:1-AS-Path-Time-correlationv} reprend les résultats obtenus. Aucun renseignement sur la période des données. Pour les sondes en provenance de la France,  le nombre de sauts et le RTT entre les sondes déployées en France sont faibles car l'ancre (la cible) se trouve aussi en France.
+La Figure \ref{fig:1-AS-Path-Time-correlationv} reprend les résultats obtenus. Aucun renseignement sur la période des données. Pour les sondes en provenance de la France,  le nombre de sauts et le RTT entre les sondes déployées en France sont faibles car l'ancre (la cible) se trouve aussi en France.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
@@ -645,7 +645,7 @@ Les chemins parcourus par traceroute pour aller d'une source $s$ vers une destin
 
 \textit{Traceroute Consistency Check} peut reprendre les chemins obtenus via traceroute au cours du temps . L'objectif est de suivre les  n\oe{}uds apparaissant dans le chemin allant de  $s$ à $d$ aux instants $t$, $t+1$, $t+2$, etc, et cela afin de voir les n\oe{}uds traversés plus fréquemment au cours du temps. Le chemin est mis à jour via Atlas streaming API. 
 
-L'outil proposé dessine les chemins traceroute comme étant un graphe dirigé, chaque n\oe{}ud est coloré suivant sa cohérence. Le code source du projet est disponible sur GitHub \cite{Traceroute-consistency-check}. La figure \ref{fig:Traceroute-consistency-check} présente un exemple de la visualisation proposée. Ce résultat concerne la mesure $1663314$ \footnote{Source : \url{https://atlas.ripe.net/measurements/1663314/}, consultée le $05/08/2018$.}. Ce sont des traceroutes à destination de l'adresse $213.171.160.1$, effectués entre le $02/05/2014$ $13:00$ et le $03/05/2014$ $15:00$.
+L'outil proposé dessine les chemins traceroute comme étant un graphe dirigé, chaque n\oe{}ud est coloré suivant sa cohérence. Le code source du projet est disponible sur GitHub \cite{Traceroute-consistency-check}. La Figure \ref{fig:Traceroute-consistency-check} présente un exemple de la visualisation proposée. Ce résultat concerne la mesure $1663314$ \footnote{Source : \url{https://atlas.ripe.net/measurements/1663314/}, consultée le $05/08/2018$.}. Ce sont des traceroutes à destination de l'adresse $213.171.160.1$, effectués entre le $02/05/2014$ $13:00$ et le $03/05/2014$ $15:00$.
 
 \begin{figure}[H]
 	\centering
