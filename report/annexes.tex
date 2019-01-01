@@ -11,7 +11,7 @@ La création d'une table reprend plusieurs parties :
 	\item PARTITIONED BY : elle définit la manière dont les données sont organisées dans le compartiment de données; 
 	\item WITH serdeproperties : elle définit les options de la sérialisation/désérialisation.
 \end{itemize}
-\begin{lstlisting}[language=SQL, basicstyle=\footnotesize, label=createAthenaTable]
+\begin{lstlisting}[language=SQL, basicstyle=\footnotesize, label=createAthenaTable, caption={Création de la table des traceroutes dans Amazon Athena }]
 CREATE EXTERNAL TABLE traceroutes_api(
 	af int,
 	bundle int,
@@ -51,7 +51,7 @@ WITH serdeproperties ('paths'='af,bundle,dst_addr, dst_name,fw, endtime, from, l
 LOCATION 's3://ripeatlasdata/traceroute/source=api/'
 \end{lstlisting}
 
-\section{Partitionnement de données dans un compartiment AWS S3} \label{subsubsection:partitionnement}~
+\section{Partitionnement de données dans un compartiment Amazon S3} \label{subsubsection:partitionnement}~
 
 \subsection{Présentation du partitionnement}
 Le partitionnement  de données présentes dans un compartiment Amazon S3 permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore  les performances d'Amazon Athena. D'une part, on obtient une réponse rapidement, d'autre part, on réduit les coûts engendrés  suite à l'utilisation du service car on est facturé selon la quantité de données analysées.  

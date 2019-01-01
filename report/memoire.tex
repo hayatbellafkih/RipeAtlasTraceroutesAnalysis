@@ -73,6 +73,7 @@
 \usepackage{tikz}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\setlist{itemsep=0pt}
 \usepackage[flushleft]{threeparttable}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
@@ -197,6 +198,8 @@
 \tableofcontents
 
 %\include{introduction}
+\include{remerciements}
+\include{resume}
 \include{introductionII}
 \include{chapitre1}
 %\include{chapi2}
@@ -207,6 +210,7 @@
 \include{conclusion}
 \include{annexes}
 \include{annexe_machine}
+\include{annexe_spark_scala_implementation}
 %\include{annex-rappel-de-notions}
 
 \newpage
@@ -242,3 +246,26 @@
 %%% TeX-PDF-mode: t
 %%% End: 
 
+
+\begin{landscape}
+	\begin{table}
+		\centering
+		\begin{tabularx}{24cm}{ X X X XXX}
+			
+			
+			
+			MongoDB&DynamoDB &AWS (S3) &AWS ( Glue) &AWS ( Athena) &Apache Spark\\
+			
+			\textbf{Technologies}&&&&&\\
+			
+			%\textbf{collecte de données} &&&&&\\
+			\textbf{Stockage} &&&&&\\
+			\textbf{traitement}&&&&&\\
+			\textbf{visualisation}&	  \LeftThumbsUp  flexible (schema-less database)
+			
+			\RightThumbsDown&&&&\\
+			
+		\end{tabularx}
+		\caption{Récaputilatif des technologies Big Data expérimentées dans l'analyse des délais}
+	\end{table}
+\end{landscape}

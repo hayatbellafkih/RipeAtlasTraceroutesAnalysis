@@ -61,22 +61,19 @@
 \BOOKMARK [2][-]{subsection.3.4.4}{Apache\040Spark\040}{section.3.4}% 61
 \BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 62
 \BOOKMARK [0][-]{chapter.4}{Application\040de\040quelques\040technologies\040Big\040Data\040sur\040l'analyse\040des\040traceroutes}{}% 63
-\BOOKMARK [1][-]{section.4.1}{Introduction\040\(to\040adapt\)}{chapter.4}% 64
-\BOOKMARK [1][-]{section.4.2}{Critères d'évaluation des technologies du Big Data}{chapter.4}% 65
-\BOOKMARK [1][-]{section.4.3}{MongoDB}{chapter.4}% 66
-\BOOKMARK [1][-]{section.4.4}{Amazon\040DynamoDB}{chapter.4}% 67
-\BOOKMARK [1][-]{section.4.5}{Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{chapter.4}% 68
-\BOOKMARK [1][-]{section.4.6}{Spark\040Apache\040avec\040Scala}{chapter.4}% 69
-\BOOKMARK [2][-]{subsection.4.6.1}{Application\040sur\040traceroutes}{section.4.6}% 70
-\BOOKMARK [1][-]{section.4.7}{Comparatif\040des\040perfermances}{chapter.4}% 71
-\BOOKMARK [2][-]{subsection.4.7.1}{Caractéristique de l'environnement de test}{section.4.7}% 72
-\BOOKMARK [2][-]{subsection.4.7.2}{Spark\040Apache}{section.4.7}% 73
-\BOOKMARK [1][-]{section.4.8}{Récapitulatif des technologies Big Data}{chapter.4}% 74
-\BOOKMARK [2][-]{subsection.4.8.1}{Notes sur les données}{section.4.8}% 75
-\BOOKMARK [1][-]{section.4.9}{Conclusion}{chapter.4}% 76
-\BOOKMARK [0][-]{appendix.A}{Amazon\040Athena\040}{}% 77
-\BOOKMARK [1][-]{section.A.1}{Création de la table traceroutes }{appendix.A}% 78
-\BOOKMARK [1][-]{section.A.2}{Partitionnement de données dans un compartiment AWS S3}{appendix.A}% 79
-\BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 80
-\BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 81
-\BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 82
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 64
+\BOOKMARK [1][-]{section.4.2}{Critères d'évaluation des technologies Big Data}{chapter.4}% 65
+\BOOKMARK [1][-]{section.4.3}{Caractéristique de l'environnement de test}{chapter.4}% 66
+\BOOKMARK [1][-]{section.4.4}{Application\0401\040:\040MongoDB}{chapter.4}% 67
+\BOOKMARK [1][-]{section.4.5}{Application\0402\040:\040Amazon\040DynamoDB}{chapter.4}% 68
+\BOOKMARK [1][-]{section.4.6}{Application\0403\040:\040Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{chapter.4}% 69
+\BOOKMARK [1][-]{section.4.7}{Application\0404\040:\040Spark\040Apache\040avec\040Scala}{chapter.4}% 70
+\BOOKMARK [1][-]{section.4.8}{Récapitulatif des technologies Big Data}{chapter.4}% 71
+\BOOKMARK [1][-]{section.4.9}{Conclusion}{chapter.4}% 72
+\BOOKMARK [0][-]{appendix.A}{Amazon\040Athena\040}{}% 73
+\BOOKMARK [1][-]{section.A.1}{Création de la table traceroutes }{appendix.A}% 74
+\BOOKMARK [1][-]{section.A.2}{Partitionnement de données dans un compartiment Amazon S3}{appendix.A}% 75
+\BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 76
+\BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 77
+\BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 78
+\BOOKMARK [0][-]{appendix.B}{Application\040sur\040traceroutes}{}% 79
