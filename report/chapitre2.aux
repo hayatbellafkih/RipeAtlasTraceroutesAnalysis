@@ -9,6 +9,7 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{chap:algorith-detection}{{II}{28}{La détection des anomalies dans les délais d'un lien}{chapter.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {II.1}Présentation générale }{28}{section.2.1}}
+\citation{DBLP:journals/corr/FontugneAPB16}
 \citation{anant-shah}
 \citation{DBLP:journals/corr/FontugneAPB16}
 \citation{InternetHealthReport}
@@ -27,18 +28,18 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {II.3.2}Le principe de la détection des changements des délais}{31}{subsection.2.3.2}}
 \newlabel{principe-de-detection}{{II.3.2}{31}{Le principe de la détection des changements des délais}{subsection.2.3.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Définition du RTT différentiel }{31}{section*.25}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.1}{\ignorespaces (a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite  {DBLP:journals/corr/FontugneAPB16}\relax }}{31}{figure.caption.26}}
-\newlabel{fig:rtt-differ}{{II.1}{31}{(a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite {DBLP:journals/corr/FontugneAPB16}\relax }{figure.caption.26}{}}
+\newlabel{eq:rttdiff}{{II.1}{31}{Définition du RTT différentiel}{equation.2.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.1}{\ignorespaces (a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite  {DBLP:journals/corr/FontugneAPB16}\relax }}{32}{figure.caption.26}}
+\newlabel{fig:rtt-differ}{{II.1}{32}{(a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite {DBLP:journals/corr/FontugneAPB16}\relax }{figure.caption.26}{}}
 \@writefile{toc}{\contentsline {paragraph}{Le principe de la détection des changements des délais}{32}{section*.27}}
 \@writefile{toc}{\contentsline {section}{\numberline {II.4}L'étude des délais des liens en pratique : l'évolution du RTT différentiel des liens}{32}{section.2.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.4.1}Les étapes principales de détection}{32}{subsection.2.4.1}}
-\newlabel{steps:detection}{{II.4.1}{32}{Les étapes principales de détection}{subsection.2.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.4.1}Les étapes principales de détection}{33}{subsection.2.4.1}}
+\newlabel{steps:detection}{{II.4.1}{33}{Les étapes principales de détection}{subsection.2.4.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {II.4.2}Description des paramètres de l'analyse des délais}{33}{subsection.2.4.2}}
 \newlabel{par:parametre-de-lanalyse}{{II.4.2}{33}{Description des paramètres de l'analyse des délais}{subsection.2.4.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.2}{\ignorespaces Illustration des périodes de l'analyse entre la date de début et la date de fin\relax }}{33}{figure.caption.28}}
 \newlabel{fig:timing_tex}{{II.2}{33}{Illustration des périodes de l'analyse entre la date de début et la date de fin\relax }{figure.caption.28}{}}
 \citation{Lissages-Exponentiels}
-\citation{DBLP:journals/corr/FontugneAPB16}
 \@writefile{toc}{\contentsline {subsection}{\numberline {II.4.3}L'évolution du RTT différentiel d'un lien et la détection des anomalies}{34}{subsection.2.4.3}}
 \newlabel{rttevolution}{{II.4.3}{34}{L'évolution du RTT différentiel d'un lien et la détection des anomalies}{subsection.2.4.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{35}{figure.caption.29}}
@@ -47,29 +48,29 @@
 \newlabel{steps-rtt-analysis}{{II.4.4}{35}{Processus de détection des anomalies}{subsection.2.4.4}{}}
 \@writefile{toc}{\contentsline {paragraph}{1. Regroupement des traceroutes }{35}{section*.30}}
 \@writefile{toc}{\contentsline {paragraph}{2. Vérification de la validité de chaque traceroute.}{35}{section*.31}}
-\@writefile{toc}{\contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut}{35}{section*.32}}
+\@writefile{toc}{\contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut.}{36}{section*.32}}
 \@writefile{toc}{\contentsline {paragraph}{4. Inférence des liens topologiques par traceroute.}{36}{section*.33}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.4}{\ignorespaces Inférence des liens possibles entre les routeurs des deux sauts consécutifs $R_{a,i}$ et $R_{b,j}$\relax }}{36}{figure.caption.34}}
 \newlabel{fig:link-inference}{{II.4}{36}{Inférence des liens possibles entre les routeurs des deux sauts consécutifs $R_{a,i}$ et $R_{b,j}$\relax }{figure.caption.34}{}}
 \@writefile{toc}{\contentsline {paragraph}{5. Caractérisation des liens}{36}{section*.35}}
 \@writefile{toc}{\contentsline {paragraph}{6. Fusion des informations d'un lien}{36}{section*.36}}
-\@writefile{toc}{\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et l'intervalle de confiance courant}{36}{section*.37}}
-\@writefile{toc}{\contentsline {paragraph}{8. Mise à jour de la médiane et de l'intervalle de référence du lien analysé.}{36}{section*.38}}
+\@writefile{toc}{\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et l'intervalle de confiance courant}{37}{section*.37}}
+\@writefile{toc}{\contentsline {paragraph}{8. Mise à jour de la médiane et de l'intervalle de confiance de référence du lien analysé.}{37}{section*.38}}
 \@writefile{toc}{\contentsline {paragraph}{9. Comparaison des intervalles de confiance}{37}{section*.39}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{37}{figure.caption.40}}
-\newlabel{fig:intervals-comparaison}{{II.5}{37}{La comparaison des deux intervalles de confiance : courant et référence \relax }{figure.caption.40}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.4.5}Vue globale des étapes de la détection des anomalies à travers l'évolution des RTTs différentiels}{37}{subsection.2.4.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {II.5}Conclusion}{38}{section.2.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{38}{figure.caption.40}}
+\newlabel{fig:intervals-comparaison}{{II.5}{38}{La comparaison des deux intervalles de confiance : courant et référence \relax }{figure.caption.40}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.4.5}Vue globale des étapes de détection}{38}{subsection.2.4.5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.6}{\ignorespaces Le processus de la détection des anomalies dans les délais des liens\relax }}{39}{figure.caption.41}}
 \newlabel{fig:process-rttanalysis_tex}{{II.6}{39}{Le processus de la détection des anomalies dans les délais des liens\relax }{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II.5}Conclusion}{39}{section.2.5}}
 \@setckpt{chapitre2}{
-\setcounter{page}{40}
-\setcounter{equation}{0}
-\setcounter{enumi}{4}
+\setcounter{page}{41}
+\setcounter{equation}{1}
+\setcounter{enumi}{5}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
-\setcounter{footnote}{8}
+\setcounter{footnote}{7}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{2}
@@ -97,8 +98,8 @@
 \setcounter{csvcol}{0}
 \setcounter{r@tfl@t}{0}
 \setcounter{ContinuedFloat}{0}
-\setcounter{Item}{7}
-\setcounter{Hfootnote}{28}
+\setcounter{Item}{8}
+\setcounter{Hfootnote}{27}
 \setcounter{Hy@AnnotLevel}{0}
 \setcounter{bookmark@seq@number}{47}
 \setcounter{blindtext}{1}

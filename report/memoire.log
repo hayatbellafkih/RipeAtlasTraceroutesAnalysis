@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  1 JAN 2019 02:04
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  2 JAN 2019 01:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1413,30 +1413,31 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <30> not available
  [1
 
 ] [2]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 198.
-
-(./memoire.toc [1])
-\tf@toc=\write9
-\openout9 = `memoire.toc'.
-
- [2]
 \openout2 = `remerciements.aux'.
 
- (./remerciements.tex) [3
+
+(./remerciements.tex
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
+) [1
 
 ]
 \openout2 = `resume.aux'.
 
- (./resume.tex) [4
+ (./resume.tex) [2
 
 
-]
+] (./memoire.toc [3
+
+])
+\tf@toc=\write9
+\openout9 = `memoire.toc'.
+
+ [4]
 \openout2 = `introductionII.aux'.
 
 
 (./introductionII.tex) [5
-
 
 ]
 \openout2 = `chapitre1.aux'.
@@ -1553,26 +1554,22 @@ Chapitre II.
 ] [29] [30]
 File: illustrations/rtt-differ.png Graphic file (type bmp)
 <illustrations/rtt-differ.png>
- [31] [32] (./illustrations/timing.tex) [33]
-(./illustrations/traceroute_.tex)
-Underfull \vbox (badness 2142) has occurred while \output is active []
 
- [34]
-(./illustrations/link-inference.tex) [35] [36]
-(./illustrations/intervals-comparaison.tex) [37]
-(../dia/process-rttanalysisUpdated.tex)
+Underfull \vbox (badness 3907) has occurred while \output is active []
 
-LaTeX Warning: Float too large for page by 24.49677pt on input line 425.
+ [31]
+[32] (./illustrations/timing.tex) [33] [34] (./illustrations/traceroute_.tex)
+[35] (./illustrations/link-inference.tex) [36]
+(./illustrations/intervals-comparaison.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [38] [39]
+ [37]
+[38] (../dia/process-rttanalysisUpdated.tex) [39]) [40]
 \openout2 = `chapitre3.aux'.
 
  (./chapitre3.tex
 Chapitre III.
-[40
+[41
 
 
 ]
@@ -1582,23 +1579,23 @@ dmarr . com / default . asp ? contentID = 690$[][]\T1/ptm/m/n/10 , consul-tée l
 e
  []
 
-[41]
+[42]
 File: illustrations/bigdata-architecture.png Graphic file (type bmp)
 <illustrations/bigdata-architecture.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[42] [43] (./illustrations/key-value-nosql-.tex)
+[43] [44] (./illustrations/key-value-nosql-.tex)
 Underfull \vbox (badness 6284) has occurred while \output is active []
 
- [44]
+ [45]
 File: illustrations/document-nosql.png Graphic file (type bmp)
 <illustrations/document-nosql.png>
 File: illustrations/colomn-nosql.png Graphic file (type bmp)
 <illustrations/colomn-nosql.png>
 
-[45] (./illustrations/graphe-nosql.tex) [46]
+[46] (./illustrations/graphe-nosql.tex) [47]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 File: illustrations/ranking-db.png Graphic file (type bmp)
@@ -1606,7 +1603,7 @@ File: illustrations/ranking-db.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47]
+ [48]
 File: illustrations/on-write.png Graphic file (type bmp)
 <illustrations/on-write.png>
 File: illustrations/on-read.png Graphic file (type bmp)
@@ -1614,18 +1611,18 @@ File: illustrations/on-read.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
-[49] [50] [51]
+ [49]
+[50] [51] [52]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [52]
+ [53]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
 
-[53]
+[54]
 File: illustrations/small-cluster-3.jpg Graphic file (type bmp)
 <illustrations/small-cluster-3.jpg>
- [54]
+ [55]
 File: illustrations/unified-stack.jpg Graphic file (type bmp)
 <illustrations/unified-stack.jpg>
 File: illustrations/global_view_rdd.png Graphic file (type bmp)
@@ -1633,39 +1630,39 @@ File: illustrations/global_view_rdd.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55])
-[56]
+ [56])
+[57]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
 Chapitre IV.
-[57
+[58
 
 
 ]
 Underfull \vbox (badness 3690) has occurred while \output is active []
 
- [58]
+ [59]
 File: illustrations/glue_crawler.png Graphic file (type bmp)
 <illustrations/glue_crawler.png>
 
-[59]
+[60]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 167.
- [60]
+ [61]
 LaTeX Font Info:    Try loading font information for TS1+ptm on input line 179.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [61]
-[62]
+) [62]
+[63]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [63])
-[64]
+ [64]
+[65]) [66]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex) [65
+ (./conclusion.tex) [67
 
 
 ]
@@ -1678,7 +1675,7 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 15.
- [66
+ [68
 
 
 ]
@@ -1688,10 +1685,10 @@ Overfull \hbox (4.41718pt too wide) in paragraph at lines 54--54
 
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
-[67] [68]
+[69] [70]
 File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena.png>
-) [69]
+) [71]
 \openout2 = `annexe_machine.aux'.
 
  (./annexe_machine.tex)
@@ -1714,27 +1711,27 @@ i-na-tion de la re-quête tra-ce-route, \T1/ptm/m/it/12 from \T1/ptm/m/n/12 est
 l'adresse|
  []
 
-[70
+[72
 
 
 
 
-] [71] [72]) [73] (./memoire.lof)
+] [73] [74]) [75] (./memoire.lof)
 \tf@lof=\write10
 \openout10 = `memoire.lof'.
 
- [74
+ [76
 
 ] (./memoire.lot)
 \tf@lot=\write11
 \openout11 = `memoire.lot'.
 
- [75] (./memoire.lol)
+ [77] (./memoire.lol)
 \tf@lol=\write12
 \openout12 = `memoire.lol'.
 
 
-[76] (./memoire.bbl
+[78] (./memoire.bbl
 Underfull \hbox (badness 4084) in paragraph at lines 44--49
 []\T1/ptm/m/n/12 Lissages ex-po-nen-tiels.  URL : [][]$\T1/pcr/m/n/12 https : /
  / www . math . u -[] psud . fr / ~goude /
@@ -1782,7 +1779,7 @@ Underfull \hbox (badness 4328) in paragraph at lines 81--86
 tm/m/n/12 , 2015.  (consulté le
  []
 
-[77]
+[79]
 Underfull \hbox (badness 10000) in paragraph at lines 88--92
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
@@ -1866,7 +1863,7 @@ Underfull \hbox (badness 3758) in paragraph at lines 185--191
 ][]\T1/ptm/m/n/12 , 2015.  (consulté le
  []
 
-[78]
+[80]
 Underfull \hbox (badness 10000) in paragraph at lines 221--227
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / cristian _ varas 
 / a -[] practical -[]
@@ -1878,23 +1875,23 @@ Underfull \hbox (badness 3758) in paragraph at lines 221--227
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-) [79]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 242.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 242.
+) [81]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 246.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 246.
  (./memoire.aux (./remerciements.aux) (./resume.aux)
 (./introductionII.aux) (./chapitre1.aux) (./chapitre2.aux) (./chapitre3.aux)
 (./chapitre4.aux) (./conclusion.aux) (./annexes.aux) (./annexe_machine.aux)
 (./annexe_spark_scala_implementation.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 242.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 242.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 246.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 246.
  ) 
 Here is how much of TeX's memory you used:
- 31948 strings out of 493007
- 560312 string characters out of 6136719
- 737894 words of memory out of 5000000
- 35143 multiletter control sequences out of 15000+600000
+ 31951 strings out of 493007
+ 560380 string characters out of 6136719
+ 737969 words of memory out of 5000000
+ 35146 multiletter control sequences out of 15000+600000
  60292 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,21n,96p,1226b,2084s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (81 pages).
+Output written on memoire.pdf (83 pages).
