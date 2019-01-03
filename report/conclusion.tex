@@ -2,23 +2,21 @@
 
 %Rappel de la problématique.
 
-L'objectif du présent travail est d'évaluer un ensemble de technologies Big Data sur des données réelles. 
-Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, nous avons cadré cette évaluation en précisant les directives de l'évaluation.
+L'objectif du présent travail est d'évaluer quelques technologies Big Data sur des données massives et réelles. Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, nous avons 
+limité cette évaluation à la mise en place de la technologie ainsi qu'au temps d'exécution.
+%L'évaluation de la convenance d'une technologie Big Data nécessite de disposer de données assez suffisantes pour couvrir  le plus des  cas possibles. 
+Nous avons choisi des données dans le domaine des réseaux informatiques,  disponibles sur le dépôt de RIPE Atlas,  d'où l'intérêt  de bien détailler ce projet.
 
+
+Notre premier objectif est de montrer les limites des outils traditionnels à manipuler les données à grande échelle, et la force des technologies Big Data à répondre aux besoins liés au passage à l'échelle. Pour ce faire, nous avons choisi de réutiliser un travail dans lequel un outil de détection d'anomalies a été conçu,  basé sur les données du RIPE Atlas.  
 
 %Résultats de recherche et réponses aux questions de recherche.
 
-L'évaluation de la convenance d'une technologie Big Data nécessite de disposer de données assez suffusantes pour élaborer tout les cas d'utilisation. Nous avons choisi des données ayant un sens, en provenance de sources sûres et réelles, traitant le domaine des réseaux informatiques. Il est possible de générer des données avec la quantité et la structure souhaitées, toutefois, nous avons choisi de traiter des données réelles et a de sens. D'où notre intérêt  à maîtriser le projet RIPE Atlas depuis lequel nous avons récupéré les données utilisé dans l'analyse.
-
-
-Nous premier objectif est de montrer les limites des outils traditionnels en ce qui concerne les données à grande échelle, et la capacité des technologies Big Data à répondre aux besoins. Pour ce faire, nous avons choisi de réutiliser un travail dans lequel un outil de détection d'anomalies a été conçu, qui est basé sur les données en provenance du RIPE Atlas.  
-
-
-
+D'après les quelques technologies expérimentées, il est très important d'avoir à l'avance les informations utiles à la prise de décision concernant une technologie proposée.  Comme la fréquence de l'analyse, la fréquence de la génération de données, l'évolution de la quantité des nouvelles données générées dont la solution proposée doit en prendre en compte, les frais générés  à d'utilisation de la technologie, le temps écoulé pour avoir les résultats finaux d'une analyse lancée, l'évolutivité de la solution mise en place, la disponibilité des outils de la visualisation des résultats et d'autres éléments. Ces critères reflètent les questions posées lors de la  manipulation des technologies évaluées.  Enfin, malgré que les  évaluations des technologies Big Data ont été effectuées en mode local, nous avons pu découvrir, en pratique, les défis de la manipulation des données massives, comme la présence des données manquantes, les données incomplètes,  la limite des outils traditionnels pour lancer le premier test impliquant des données massives, etc. 
 
 %Ouverture.
-En deuxième lieu, nous avions un deuxième objectif qui concerne l'outil de détection et son fonctionnement. Les approches utilisés dans la conception de cet outil se base sur des fondements statistiques. De plus cet outil est personnalisable. Nous aurions aimé évalué les performances de cet outil en pratique, sur des ensembles de données plus récentes. Comme les résultats de la détection dépendent des paramètres de l'outil, serait intéressant d'évaluer ces paramètres,  
-
+La disponibilité des outils informatiques permettant de stocker et de traiter des données à grande échelle, avec efficacité,  est important. Toutefois,  le modèle qui dirige l'ensemble de données est aussi de même degré d'importance dans un processus d'analyse de données, comme le cas  du modèle créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16} pour la détection des anomalies.  Nous avons compris le fonctionnement ainsi que le paramétrage du modèle. Comme continuité du présent travail, on note quelques possibilités. Par exemple, il est possible de réévaluer la précision  de ce modèle avec de nouvelles données, varier les paramètres du modèle de la détection comme la méthode adoptée au calcul des intervalles de confiance, etc. Du fait que RIPE Atlas dispose du mode Streaming dans lequel les données peuvent être récupérée en temps réel, il est intéressant d'évaluer l'intégration de l'extension \textit{Spark streaming} pour analyser les données RIPE Atlas en temps réel.  
+ 
 
 
 

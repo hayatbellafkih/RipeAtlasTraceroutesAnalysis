@@ -1,4 +1,4 @@
-\chapter{Application de quelques technologies Big Data sur l'analyse des traceroutes} \label{chap:application-on-traceroutes}
+\chapter{Application de quelques technologies Big Data sur l'analyse des  traceroutes} \label{chap:application-on-traceroutes}
 
 
 \section{Introduction}
@@ -81,6 +81,28 @@ MongoDB est la technologie Big Data utilisé par  Fontugne  dans l'implémentati
 
 Nous évaluons les temps d'exécution lors de l'analyse des délais des liens présents dans un ensemble de traceroutes, en utilisant MongoDB comme technologie de stockage de données massives.  Dans le Tableau \ref{tab:mongotiming-timing}, nous varions la quantité de données analysées pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés. 
 La Figure 	\ref{fig:mongodbtiming} illustre la médiane  des temps d'exécution de la détection en fonction de  la taille de données analysées avec MongoDB. 
+
+
+\begin{table}[H]
+	\captionsetup{justification=centering}
+	\resizebox{1\textwidth}{!}{
+	\begin{tabular}{ccccc}
+Période&Taille (GB)&Essai 1 (secondes)&Essai 2 (secondes) &Essai 3 (secondes) \\ \hline
+07/02/18&1&752,03&750&755,24
+\\ \hline 
+07/02/2018 – 08/02/2018&2&1499,28&1504,98&1503,62
+\\ \hline 
+07/02/2018 – 09/02/2018&3&2275,89&2265,96&2284,98
+\\ \hline 
+07/02/2018 – 10/02/2018&4&3035,19&3043,21&3057,45
+\\ \hline 
+07/02/2018 – 11/02/2018&5&3871&3889,57&3894,5  \\ \hline 
+
+	\end{tabular}
+}
+\caption{Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB}
+\label{tab:mongotiming-timing}
+\end{table}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
@@ -181,35 +203,35 @@ En ce qui concerne l'évolutivité d'une application basée sur ces trois servic
 %Avec une autre technologie qui travaille en mémoire, les résultats sont données plus rapidement. 
 
 
-\paragraph{Performances des services Amazon S3 et Athena dans l'analyse des délais }~
-
-
-Nous évaluons les temps d'exécution de plusieurs  analyses de délais lancées en variant la taille de données. Rappelons qu'il s'agit de la première possibilité: Amazon S3 pour le stockage de traceroutes et Amazon Athena pour récupérer les traceroutes valides, le reste de traitements sont effectués au sein de la machine locale.  Le Tableau	\ref{tab:awstiming-timing} reprend plus de détails. 
-\begin{table}[H]
-	%\begin{threeparttable}
-	
-	\captionsetup{justification=centering}
-	\begin{tabular}{ccccc}
-		\textbf{Début - fin} &\textbf{Durée (jours)}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
-		
-		07/02/2018             &1 &1 GB&& 3870\\ \hline
-		07/02/2018 - 08/02/2018&2 &1 GB&& 2942\\ \hline
-		07/02/2018 - 09/02/2018&3 & 1 GB&& 2991\\ \hline
-		07/02/2018 - 10/02/2018&4 & 3 GB&& 20955\\ \hline
-		07/02/2018 - 11/02/2018&5& && \\ \hline
-		07/02/2018 - 12/02/2018&6& && \\ \hline
-		07/02/2018 - 13/02/2018&7& && \\ \hline
-		07/02/2018 - 14/02/2018&8& && \\ \hline
-		07/02/2018 - 15/02/2018&9& && \\ \hline
-		07/02/2018 - 16/02/2018&10& && \\ \hline
-		07/02/2018 - 17/02/2018&11& && \\ \hline
-		07/02/2018 - 18/02/2018&12& && \\ \hline
-		07/02/2018 - 19/02/2018&13& && \\ \hline
-		07/02/2018 - 20/02/2018&14& && \\ \hline
-	\end{tabular}
-	\caption{La moyenne des temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec Amazon S3 et Amazon Athena }
-	\label{tab:awstiming-timing}
-\end{table}
+%\paragraph{Performances des services Amazon S3 et Athena dans l'analyse des délais }~
+%
+%
+%Nous évaluons les temps d'exécution de plusieurs  analyses de délais lancées en variant la taille de données. Rappelons qu'il s'agit de la première possibilité: Amazon S3 pour le stockage de traceroutes et Amazon Athena pour récupérer les traceroutes valides, le reste de traitements sont effectués au sein de la machine locale.  Le Tableau	\ref{tab:awstiming-timing} reprend plus de détails. 
+%\begin{table}[H]
+%	%\begin{threeparttable}
+%	
+%	\captionsetup{justification=centering}
+%	\begin{tabular}{ccccc}
+%		\textbf{Début - fin} &\textbf{Durée (jours)}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
+%		
+%		07/02/2018             &1 &1 GB&& 3870\\ \hline
+%		07/02/2018 - 08/02/2018&2 &1 GB&& 2942\\ \hline
+%		07/02/2018 - 09/02/2018&3 & 1 GB&& 2991\\ \hline
+%		07/02/2018 - 10/02/2018&4 & 3 GB&& 20955\\ \hline
+%		07/02/2018 - 11/02/2018&5& && \\ \hline
+%		07/02/2018 - 12/02/2018&6& && \\ \hline
+%		07/02/2018 - 13/02/2018&7& && \\ \hline
+%		07/02/2018 - 14/02/2018&8& && \\ \hline
+%		07/02/2018 - 15/02/2018&9& && \\ \hline
+%		07/02/2018 - 16/02/2018&10& && \\ \hline
+%		07/02/2018 - 17/02/2018&11& && \\ \hline
+%		07/02/2018 - 18/02/2018&12& && \\ \hline
+%		07/02/2018 - 19/02/2018&13& && \\ \hline
+%		07/02/2018 - 20/02/2018&14& && \\ \hline
+%	\end{tabular}
+%	\caption{La moyenne des temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec Amazon S3 et Amazon Athena }
+%	\label{tab:awstiming-timing}
+%\end{table}
 
 
 \section{Application 4 : Spark Apache avec Scala}
@@ -292,7 +314,7 @@ Nous avons reproduit l'outil de détection en utilisant Spark avec l'API Scala c
 		$ 4 $&$ 07/02/2018 - 09/02/2018 $&$ 3 $ jour& $ 3 $ GB& $ 20955 $\\ \hline
 		$ 5 $&$ 07/02/2018 - 10/02/2018 $&$ 4 $ jour& $ 4 $ GB & échec \\ \hline
 	\end{tabular}
-	\caption{}
+	\caption{Les temps d'exécution des analyses lancées sur des traceroutes (approche $1$)}
 	\label{tab:spark-timing}
 \end{table}
 
@@ -348,22 +370,41 @@ Soient $d_k$ une période dans l'ensemble de périodes $D$  entre $ start $ et $
 	\label{algo:grouper-traceroutes_2}
 \end{algorithm}
 
- Le Tableau 	\ref{tab:spark-timing-reajustedcode} reprend des indications sur les résultats obtenus, avec \textit{driver-memory} configuré sur  $ 30 $ GB. 
+ Le Tableau 	\ref{tab:spark-timing-reajustedcode} reprend des indications sur les résultats obtenus, avec \textit{driver-memory} configuré sur  $ 30 $ GB.  Ce sont les temps d'exécution obtenus lors de deux tests pour les tailles de données : $1$ GB, $2$ GB, $3$ GB, $4$ GB et $5$ GB, il reprend aussi les périodes correspondantes à ces données et le nombre de traceroutes présents dans chaque échantillon.
+
+%\begin{table}[H]
+%	\centering
+%	\captionsetup{justification=centering}
+%	%\begin{threeparttable}
+%	\begin{tabular}{cccccc}
+%		\textbf{Test} & \textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
+%		
+%	1&	07/02/2018&1 jour&1 GB&& 752.03\\ \hline
+%	2&	08/02/2018&1 jour&1 GB&&  \\ \hline
+%	3&	09/02/2018&1 jour& 1 GB&&  \\ \hline
+%	\end{tabular}
+%	\caption{}
+%	\label{tab:spark-timing-reajustedcode}
+%\end{table}
 
 \begin{table}[H]
 	\centering
 	\captionsetup{justification=centering}
 	%\begin{threeparttable}
-	\begin{tabular}{cccccc}
-		\textbf{Test} & \textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
-		
-	1&	07/02/2018&1 jour&1 GB&& 752.03\\ \hline
-	2&	08/02/2018&1 jour&1 GB&&  \\ \hline
-	3&	09/02/2018&1 jour& 1 GB&&  \\ \hline
+	\resizebox{1\textwidth}{!}{
+	\begin{tabular}{ccccc}
+\textbf{Période}&\textbf{Taille (GB) }&\textbf{Nb de traceroutes}&\textbf{Essai 1 (secondes)}&\textbf{Essai 2 (secondes)}\\  \hline
+07/02/18&1&494158&838&1137 \\  \hline
+07/02/2018 à 08/02/2018&2&987995&936&1034 \\  \hline
+07/02/2018 à 09/02/2018&3&1481942&1449&1930 \\  \hline
+07/02/2018 à 10/02/2018&4&1976010&2139&1714 \\  \hline
+07/02/2018 à 11/02/2018&5&2470027&3116&3030 \\  \hline
 	\end{tabular}
-	\caption{}
+}
+	\caption{Les temps d'exécution lors de la détection des anomalies en utilisant Spark (approche $2$)}
 	\label{tab:spark-timing-reajustedcode}
 \end{table}
+
 %    \begin{tablenotes}
 %	\small
 %	\item This is where authors provide additional information about
@@ -372,20 +413,28 @@ Soient $d_k$ une période dans l'ensemble de périodes $D$  entre $ start $ et $
 %\end{threeparttable}
 
 
- 
+La Figure \ref{fig:mongodbvsspark} illustre la moyenne des temps d'exécution pour MongoDB et Spark. Ces résultats concernent les même échantillons de données.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../testPerformances/mongodbvsspark}
+	\caption{La moyenne des temps d'exécution pour MongoDB et Spark}
+	\label{fig:mongodbvsspark}
+\end{figure}
+
 
 
 \section{Conclusion}
 %A travers ce travail, nous souhaitions évaluer des technologies Big Data pour l'analyse de données en provenance du dépôt RIPE Atlas. 
 
-Nous avons évalué la convenance des technologies Big Data  que nous avons à disposition à l'analyse souhaité des traceroutes. Dans un premier temps, nous avons utilisé deux technologies conçues pour le stockage de données à grande échelle : MongoDB et DynamoDB. Ensuite, nous avons expérimenté trois services d'Amazon, le premier pour le stockage de données, le deuxième  pour la découverte de données et le troisième service  est conçu pour l'interrogation  de données. Enfin, nous avons utilisé un framework qui gère le traitement distribué de données dans un cluster de machines.
+Nous avons évalué la convenance des technologies Big Data à disposition à l'analyse souhaitée des traceroutes. Dans un premier temps, nous avons utilisé deux technologies conçues pour le stockage de données à grande échelle : MongoDB et DynamoDB. Ensuite, nous avons expérimenté trois services d'Amazon, le premier pour le stockage de données, le deuxième  pour la découverte de données et le troisième service  est conçu pour l'interrogation  de données. Enfin, nous avons utilisé un framework qui gère le traitement distribué de données dans un cluster de machines.
 
 %le choix de données
 Nous avons à disposition une variété de données,   à titre indicatif, nous pouvons récupérer des années  de mesures effectuées par toutes les sondes Atlas. Notre premier objectif  est d'évaluer la convenance des technologies choisies à l'analyse de données souhaitée. Précisément, pouvoir utiliser l'outil de détection avec ces technologies. C'est pourquoi nous n'avons pas défini des critères pour choisir l'ensemble de données de test. 
 %evaluation des technologies
-Nous avons évalué  les performances des technologies en terme de temps écoulé tout au long de l'analyse de différents échantillons.
-Les performances de MongoDB dépendent de ... 
-Toutefois, les performances des trois services d'Amazon dépendent de 
-Tandis que Apache Spark dépend de .
+Nous avons évalué  les performances des technologies en terme de temps écoulé tout au long de l'analyse de différents échantillons en fonction de la taille de données.
+%Les performances de MongoDB dépendent de ... 
+%Toutefois, les performances des trois services d'Amazon dépendent de 
+%Tandis que Apache Spark dépend de .
 
 

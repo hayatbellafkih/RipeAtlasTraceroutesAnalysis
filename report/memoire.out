@@ -75,6 +75,4 @@
 \BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 75
 \BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 76
 \BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 77
-\BOOKMARK [0][-]{appendix.B}{Application\040sur\040traceroutes}{}% 78
-\BOOKMARK [0][-]{appendix.C}{Les résultats de test de performances}{}% 79
-\BOOKMARK [1][-]{section.C.1}{MongoDB}{appendix.C}% 80
+\BOOKMARK [0][-]{appendix.B}{La détection d'anomalies en Scala}{}% 78
