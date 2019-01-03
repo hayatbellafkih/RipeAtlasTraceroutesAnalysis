@@ -315,7 +315,7 @@ Un traceroute  est un ensemble de sauts $h_i$ dans l'ensemble  $H$ auxquels sont
 % pour tout $ i $ et $ j $ dans$  [1,N] $
 \subsection{Processus de  détection des anomalies }\label{steps-rtt-analysis}
 
- Soient $ d_1 $,$  d_2 $, $d_k$, ... $ d_N $ les $N$ périodes entre \textit{start} et \textit{end} avec $k \in [1,N]$. La différence entre le début de la période $ d_{k+1} $ et le début de la période $ d_k $ est égale à $timeWindow$ pour tout $k+1 \leq N $.  
+ Soient $ d_1 $,$  d_2 $, $d_k$, ... $ d_N $ l'ensemble $D$ de $N$ périodes entre \textit{start} et \textit{end} avec $k \in [1,N]$. La différence entre le début de la période $ d_{k+1} $ et le début de la période $ d_k $ est égale à $timeWindow$ pour tout $k+1 \leq N $.  
 
   Le processus de la détection des anomalies passe par plusieurs étapes. D'abord on  regroupe les traceroutes à analyser par période $d_k$ (étape $ 1 $). Ensuite, on prépare les traceroutes de toute  période $d_k$ en y appliquant un nombre d'opérations (étapes  $ 2 $ à $ 6 $). A la fin de la préparation des traceroutes de toutes les périodes, on ne considère que les données qui concernent le lien à suivre. Ce sont les données qui servent à la comparaison  des  délais d'un lien avec les valeurs de référence (étapes $ 7 $ à $9$). Les étapes de détection sont les suivantes:
 

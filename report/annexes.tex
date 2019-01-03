@@ -51,8 +51,7 @@ WITH serdeproperties ('paths'='af,bundle,dst_addr, dst_name,fw, endtime, from, l
 LOCATION 's3://ripeatlasdata/traceroute/source=api/'
 \end{lstlisting}
 
-\section{Partitionnement de données dans un compartiment Amazon S3} \label{subsubsection:partitionnement}~
-
+\section{Partitionnement de données sur Amazon Athena } \label{subsubsection:partitionnement}~
 \subsection{Présentation du partitionnement}
 Le partitionnement  de données présentes dans un compartiment Amazon S3 permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore  les performances d'Amazon Athena. D'une part, on obtient une réponse rapidement, d'autre part, on réduit les coûts engendrés  suite à l'utilisation du service car on est facturé selon la quantité de données analysées.  
 
@@ -73,9 +72,9 @@ Sans l'utilisation du partitionnement et si on souhaite récupérer que les trac
 
 Les traceroutes en provenance des sondes Atlas sont organisés comme est illustré dans la Figure :
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{illustrations/partitionnement-athena}
+	\includegraphics[width=0.6\linewidth]{illustrations/partitionnement-athena}
 	\caption{L'organisation des traceroutes dans un compartiment Amazon S3}
 	\label{fig:partitionnement-athena}
 \end{figure}
@@ -84,10 +83,12 @@ Les traceroutes en provenance des sondes Atlas sont organisés comme est illustr
 \subsection{L'interrogation de données sur Amazon Athena}
 
 L'interrogation de données présentes sur Amazon S3 via Amazon Athena est effectué avec une requête SQL. On peut décomposer une requête SQL en trois parties principales:
-\paragraph{Les données sollicitées} Ça peut être une colonne ou bien bien une colonne transformée suite à l'application d'une ou de plusieurs fonctions de Presto.
-\paragraph{Les partitions de données concernées} La requête SQL est paramétrée de sorte à limiter les données à analyser sur Amazon S3. 
-\paragraph{Les paramètres appliqués sur les colonnes} La requête SQL doit filtrer les données suivant les conditions sur les colonnes de la table.
 
+\begin{description}
+\item[Les données sollicitées] Ça peut être une colonne ou bien bien une colonne transformée suite à l'application d'une ou de plusieurs fonctions de Presto.
+\item[Les partitions de données concernées] La requête SQL est paramétrée de sorte à limiter les données à analyser sur Amazon S3. 
+\item[Les paramètres appliqués sur les colonnes] La requête SQL doit filtrer les données suivant les conditions sur les colonnes de la table.
+\end{description}
 En pratique, nous avons créé la requête SQL reprise dans la Figure \ref{fig:sqlrequestathena}. 
 
 

@@ -1,0 +1,24 @@
+"
+Essai",,,1,2,3,4,5,6,7,8,9,10,mean,mean (min),
+07/02/18,1,494158,838,1137,971,646,617,467,905,421,422,437,686.1,11.435,
+07/02/2018 – 08/02/2018,2,987995,936,1034,1005,954,874,852,855,951,924,864,924.9,15.415," bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518134400 3600 
+"
+07/02/2018 à 09/02/2018,3,1481942,1449,1930,1704,,,,,,,,1694.33333333333,28.2388888888889,bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518220800 3600 
+07/02/2018 – 10/02/2018,4,1976010,2139,,,,,,,,,,2139,35.65,bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518307200 3600
+07/02/2018 – 11/02/2018,5,2470027,3116,,,,,,,,,,3116,51.9333333333333,bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518393600 3600 
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+07/02/2018 – 12/02/2018 ,,2965041,,,,,,,,,,,,,bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518480000 3600 
+07/02/2018 – 13/02/2018 ,,3460005,5400,5268,4307,,,,,,,,"
+",,--class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518566400 3600 
+07/02/2018 – 14/02/2018,,,,,,,,,,,,,,,
+07/02/2018 – 15/02/2018,,,,,,,,,,,,,,,
+07/02/2018 – 16/02/2018,,,,,,,,,,,,,,,
+07/02/2018 – 17/02/2018,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+07/02/2018 – 09/02/2018,3,1482063,1853,2017,1793,2060,2004,2637,1932,1555,2871,2061,2078.3,34.6383333333333,bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518220800 3600 
+07/02/2018 – 10/02/2018,4,1976080,2115,2092,2369,3072,2498,2581,2249,,,,2425.14285714286,40.4190476190476,"bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  /home/162558/SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518393600 3600
+"

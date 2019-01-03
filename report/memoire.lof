@@ -31,8 +31,10 @@
 \contentsline {figure}{\numberline {III.12}{\ignorespaces Spark Unified Stack. Source : \cite {eginning-Apache-Spark-2-unified-stack}\relax }}{56}{figure.caption.78}
 \contentsline {figure}{\numberline {III.13}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{57}{figure.caption.80}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {IV.1}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{61}{figure.caption.83}
+\contentsline {figure}{\numberline {IV.1}{\ignorespaces Les temps d'exécution en fonction de la taille de traceroutes analysés\relax }}{60}{figure.caption.82}
+\contentsline {figure}{\numberline {IV.2}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{61}{figure.caption.83}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{70}{figure.caption.92}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{71}{figure.caption.96}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{70}{figure.caption.93}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{71}{figure.caption.94}
+\addvspace {10\p@ }
 \addvspace {10\p@ }

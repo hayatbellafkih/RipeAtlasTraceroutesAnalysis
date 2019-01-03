@@ -3,7 +3,7 @@
 
 \section{Introduction}
 
-Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons expérimenté pour analyser des traceroutes disponibles dans le dépôt de RIPE Atlas. Précisément, ce sont les traceroutes permettant de tracer l'évolution du délai d'un lien comme il décrit le chapitre \ref{chap:big-data-intro}.
+Ce chapitre reprend un ensemble de   technologies destinées  à la manipulation des données massives. Ce sont les technologies que nous avons expérimenté pour analyser des traceroutes disponibles dans le dépôt de RIPE Atlas. Précisément, ce sont les traceroutes permettant de tracer l'évolution du délai d'un lien comme c'est détaillé dans le chapitre \ref{chap:big-data-intro}.
 % Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
 %Le présent chapitre reprend l'application de quelques technologies du Big Data manipulées en vue d'analyser le délai des liens. 
 %On ne peut pas comparer ces technologies entre elles car elles ne se trouvent pas dans la même catégorie; quelques technologies n'assurent que le stockage, une autre technologie gère l'analyse ainsi que le stockage.  En revanche,
@@ -14,19 +14,19 @@ Les technologies que nous présentons  couvrent les besoins d'une ou de plusieur
 
 \section{Critères d'évaluation des technologies  Big Data}
 
-Les critères d'évaluation d'une technologie Big Data par rapport à une autre dépendent de plusieurs entrées.  En générale, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data entre elles est très longue.  En ce qui concerne les critères sur lesquels nous  évaluons  les différentes technologies  Big Data sont les suivants:
+Les critères d'évaluation d'une technologie Big Data par rapport à une autre varient  suivant plusieurs entrées.  En générale, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data entre elles est très longue.  En ce qui concerne les critères sur lesquels nous  évaluons  les différentes technologies  Big Data expérimentées sont les suivants:
 \begin{itemize}
-\item configuration de l'environnement de la technologie Big Data;
+\item la mise en route et la configuration de l'environnement de la technologie Big Data;
 \item flexibilité liée à la définition du  schéma de  données présentes dans les fichiers de données;
 \item temps d'exécution nécessaire pour fournir les résultats finaux d'une analyse de traceroutes lancée;
 \item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
 
 \end{itemize}
-En pratique, nous n'avons pas pris en compte d'autres critères dans notre cas, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Nous avons donné des indications sur les frais d'utilisation de deux technologies dédiées au stockage de données massives : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}), alors que les frais d'utilisation de MongoDB Atlas dépend de plusieurs paramètres. 
+En pratique, nous n'avons pas pris en compte d'autres critères dans notre cas, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Nous avons donné des indications théoriques sur les frais d'utilisation de deux technologies dédiées au stockage de données massives : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}) et MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.}. 
 
-\section{Caractéristique de l'environnement de test}
+\section{Caractéristiques de l'environnement de test}
 
-Les différents tests ont été réalisés sur un conteneur de type OpenVZ ayant les caractéristiques suivantes : conteneur OpenVZ, système Debian GNU/Linux 7.11 (wheezy),  32768 MB de  RAM,  CPU  modèle $6$, CPU MHz $ 2294.331 $.
+Les différents tests ont été réalisés sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32768 MB de  RAM,  CPU  modèle $6$, CPU MHz $ 2294.331 $.
 
 %Le Tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
 %\begin{table}[H]
@@ -46,6 +46,8 @@ Les différents tests ont été réalisés sur un conteneur de type OpenVZ ayant
 \end{tcolorbox}
 
 
+En ce qui concerne les paramètres de détection, nous avons utilisé les valeurs par défaut : \textit{timeWindow} est de $ 3600 $ secondes, l'intervalle de confiance est de $0,05$, \textit{alpha} est de $ 0,01 $ et \textit{minSeen} est de $3$. Pour la date de début et la date de fin sont variées suivant les données utilisées.
+
 \section{Application 1 : MongoDB}
 %\paragraph{ Application sur  MongoDB}~
 
@@ -60,7 +62,7 @@ MongoDB est la technologie Big Data utilisé par  Fontugne  dans l'implémentati
     
     Généralement l'analyse de données à grande échelle se limite qu'au mode lecture de données pour en tirer les connaissances. MongoDB est adapté non seulement aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet dans une collection (modification ou suppression). 
  
- En cas de la  mise à jour de la structure de données des objets traceroutes par RIPE Atlas,  cela n'affecte pas la solution mise en place avec MongoDB. 
+ En cas de la  mise à jour de la structure de nouveaux  objets traceroutes par RIPE Atlas,  cela n'affecte pas les données précédemment  stockées  dans MongoDB.
  
  %Malgré la convenance de MongoDB aux données non structurées et massives, l'utilisation de telle base de données, en version locale, nécessite l'ajustement de la machine locale où MongoDB tourne. 
 
@@ -77,33 +79,17 @@ MongoDB est la technologie Big Data utilisé par  Fontugne  dans l'implémentati
 
 \paragraph{Performances de la base de données MongoDB dans l'analyse des délais }~
 
-Nous évaluons les temps d'exécution lors de l'analyse des délais en utilisant MongoDB comme technologie de stockage de données massives.  Dans le Tableau \ref{tab:mongotiming-timing}, nous varions la quantité de données analysées pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés. 
-
-\begin{table}[H]
-	%\begin{threeparttable}
-	
+Nous évaluons les temps d'exécution lors de l'analyse des délais des liens présents dans un ensemble de traceroutes, en utilisant MongoDB comme technologie de stockage de données massives.  Dans le Tableau \ref{tab:mongotiming-timing}, nous varions la quantité de données analysées pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés. 
+La Figure 	\ref{fig:mongodbtiming} illustre la médiane  des temps d'exécution de la détection en fonction de  la taille de données analysées avec MongoDB. 
+\begin{figure}[H]
+	\centering
 	\captionsetup{justification=centering}
-	\begin{tabular}{ccccc}
-		\textbf{Début - fin} &\textbf{Durée (jours)}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
-		
-		07/02/2018             &1 &1 GB&& 3870\\ \hline
-		07/02/2018 - 08/02/2018&2 &1 GB&& 2942\\ \hline
-		07/02/2018 - 09/02/2018&3 & 1 GB&& 2991\\ \hline
-		07/02/2018 - 10/02/2018&4 & 3 GB&& 20955\\ \hline
-		07/02/2018 - 11/02/2018&5& && \\ \hline
-		07/02/2018 - 12/02/2018&6& && \\ \hline
-		07/02/2018 - 13/02/2018&7& && \\ \hline
-		07/02/2018 - 14/02/2018&8& && \\ \hline
-	    07/02/2018 - 15/02/2018&9& && \\ \hline
-	    07/02/2018 - 16/02/2018&10& && \\ \hline
-	    07/02/2018 - 17/02/2018&11& && \\ \hline
-	    07/02/2018 - 18/02/2018&12& && \\ \hline
-	    07/02/2018 - 19/02/2018&13& && \\ \hline
-	    07/02/2018 - 20/02/2018&14& && \\ \hline
-	\end{tabular}
-	\caption{La moyenne des temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB}
-	\label{tab:mongotiming-timing}
-\end{table}
+	\includegraphics[width=0.9\linewidth]{illustrations/mongoDBtiming_0}
+	\caption{Les temps d'exécution en fonction de la taille de traceroutes analysés}
+	\label{fig:mongodbtiming}
+\end{figure}
+
+
 
 
 \section{Application 2 : Amazon DynamoDB}
@@ -112,9 +98,9 @@ Nous évaluons les temps d'exécution lors de l'analyse des délais en utilisant
 %\paragraph{Application sur les traceroutes}~
 
 
-L'élasticité est une des caractéristiques attirantes des services web d'Amazon. En particulier, c'est le cas d'Amazon DynamoDB. Une implémentation basée sur Amazon DynamoDB  n'a pas à se soucier de la capacité  de stockage de données.
+L'élasticité est une des caractéristiques attirantes des services web d'Amazon. En particulier, c'est le cas d'Amazon DynamoDB. Ainsi, une implémentation basée sur Amazon DynamoDB  n'a pas à se soucier de la capacité  de stockage de données si la quantité de données évolue rapidement. 
 
- Amazon DynamoDB  n'assure que le stockage de données dans un processus d'analyse de données. La récupération et le traitement  des données stockées nécessite l'ajustement des ressources de la machine qui reçoive ces données, pareillement à MongoDB. La différence se situe à l'évolutivité implicite du stockage de données, qui ne se limite que par la capacité de stockage physique d'AWS. Tandis qu'une installation locale de MongoDB est liée aux ressources de la machine hébergeant ce dernier.  Nous n'avons pas expérimenté Amazon DynamoDB pour analyser les traceroutes, étant donné que notre évaluation des temps d'exécution est effectuée sur une machine locale, nous aurons les même remarques que dans le cas de MongoDB en ce qui concerne l'ajustement des ressources de la machine qui reçoive les données.  
+ Amazon DynamoDB  n'assure que le stockage de données dans un processus d'analyse de données. La récupération et le traitement  des données stockées nécessite l'ajustement des ressources de la machine qui reçoive ces données, pareillement à MongoDB. La différence se situe à l'évolutivité implicite du stockage de données, qui ne se limite que par la capacité de stockage physique d'AWS. Tandis qu'une installation locale de MongoDB est liée aux ressources de la machine hébergeant ce dernier.  Nous n'avons pas expérimenté Amazon DynamoDB pour analyser les traceroutes, étant donné que notre évaluation des temps d'exécution est effectuée sur une machine locale, nous aurons les mêmes remarques que dans le cas de MongoDB en ce qui concerne l'ajustement des ressources de la machine qui reçoive les données.  
  
  A titre indicatif, une heure de tous les traceroutes effectués par toutes les sondes Atlas fait une taille moyenne de  $620$ MB en format compressé, ce que représente une quantité d'environ $9$ GB en format texte.
 
@@ -129,7 +115,7 @@ L'élasticité est une des caractéristiques attirantes des services web d'Amazo
 
 %\paragraph{Application sur les traceroutes}~
 
-Nous avons combiné les trois services d'Amazon (Amazon S3, Amazon Glue  et Amazon Athena)  afin de créer un environnement d'analyse de données massives. Une vue globale du  processus de l'analyse  est illustré dans la Figure \ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. 
+Nous avons combiné les trois services d'Amazon (Amazon S3, Amazon Glue  et Amazon Athena)  afin de créer un environnement d'analyse de données massives. Une vue globale du  processus de l'analyse  est illustré dans la Figure \ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. 
 
 \begin{figure}[H]
 	\centering
@@ -230,15 +216,16 @@ Nous évaluons les temps d'exécution de plusieurs  analyses de délais lancées
 
 Les fonctionnalités de Spark sont accessibles avec les  APIs en Scala, Java et Python. Nous avons choisi l'utilisation de l'API en Scala parce que Scala est le langage natif de Spark. De plus, Scala est interopérable avec Java.  
 
-Avec Spark, on travaille sur les collections d'objets, sur lesquelles on applique des fonctions. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données. De plus, nous avons besoin de définir les fonctions à appliquer tout au long des étapes de cette analyse. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes dans l'annexe \ref{application:spark} en vue de tracer l'évolution des RTTs différentiels des délais au cours du temps. 
+Avec Spark, on travaille sur des collections d'objets, sur lesquelles on applique des traitements. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données, appelées \textit{case class}. De plus, nous avons besoin de définir les fonctions à appliquer  sur ces objets. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes, dans l'annexe \ref{application:spark}, en vue de tracer l'évolution des RTTs différentiels des liens au cours du temps. 
 
-A la base Spark est conçu pour être utilisé dans un cluster de machines, sur le lequel l'analyse est distribue. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, il y a le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au processus initié par le \textit{driver}. 
-
+A la base Spark est conçu pour être utilisé dans un cluster de machines, sur  lequel l'analyse est distribue. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, on trouve le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au processus initié par le \textit{driver}. 
 Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GB pour le $ driver $ et $ 1 $ GB pour chaque \textit{executor}. 
-Nous avons utilisé la version locale de Spark. Nous avons défini l'ensemble de traitements dans des fonctions ainsi que les classes permettant de modéliser les données tout au long de l'analyse. Ensuite, nous avons créé une archive (.jar) que nous soumettons à Spark, cette archive contient la fonction \textit{main} qui s'agit du point d'entrée vers tous les traitements. De plus, nous avons paramétré la mémoire  réservée au \textit{driver} vu que la valeur par défaut ($1$ GB) ne convient pas à la quantité de données que nous souhaitons analyser.
 
 
-Spark donne la possibilité  de projeter les objets lus  dans  fichiers suivant le besoin de l'analyse, on parle du principe \textit{ Schema on Read} décrit dans la section \ref{sec:schema-read-write}. Ce que représente une flexibilité faisant face aux données manquantes.  De plus, on ne lut que les données qui nous intéresse. 
+Nous avons utilisé la version locale de Spark. Nous avons reproduit l'ensemble des étapes de détection en Scala. Ainsi,  nous avons défini l'ensemble des traitements dans des fonctions ainsi que les classes permettant de modéliser les données tout au long de l'analyse. Ensuite, nous avons créé une archive (.jar) que nous soumettons à Spark, cette archive contient la fonction \textit{main} qui s'agit du point d'entrée vers tous les traitements. De plus, nous avons paramétré la mémoire  réservée au \textit{driver} vu que la valeur par défaut ($1$ GB) ne convient pas à la quantité de données que nous souhaitons analyser.
+
+
+Spark donne la possibilité  de projeter les objets lus  depuis des  fichiers textes suivant le besoin de l'analyse, on parle du principe \textit{ Schema on Read} décrit dans la section \ref{sec:schema-read-write}. Ce que représente une flexibilité faisant face au problème de données manquantes.  De plus, on ne lut que les données qui nous intéressent. 
  
 
 Nous avons utilisé Spark avec Scala comme API, il s'agit de la programmation fonctionnelle. Ce paradigme de programmation permet de décrire les traitements de façon élégante et claire, ce que facilite la mise à jour des traitements sur les données. 
@@ -251,54 +238,128 @@ Le temps qu'on note est celui écoulé durant l'analyse des traceroutes donnés 
  %CPU, sur  les  diff ́ erents  ensembles  de  donn ́ ees. Ces tests ont ́ et ́ e effectu ́ es sur une machine ayant  les  caract ́ eristiques  suivantes  :  Dell Dual Core, 2.66 GHz, 2 Gb RAM, syst ` eme SuSE Linux 10.0 (kernel 2.4.2), java 1.5.0, etc. Pour calculer le temps CPU, la classe ThreadMXBean a ́ et ́ e utilis ́ ee.
  
 
+\paragraph{Performances d'Apache Spark dans l'analyse des délais }~
+
+Nous avons évalué le temps d'exécution de l'implémentation de la détection en utilisant Spark en variant le nombre de traceroutes à analyser. On note que nous avons aussi évalué la mémoire allouée au driver. Etant donné que la mémoire allouée par défaut au driver est de $1$ GB, l'analyse  d'un $1$ GB de données  a échoué pour l'insuffisance de mémoire pour traiter ce nombre important de traceroutes. C'est pourquoi nous avons paramétré l'analyse en précisant $30$ GB comme taille de mémoire réservée au \textit{driver}.
 
 
-\paragraph{Variant la taille de données}
+\subparagraph{Variant la mémoire allouée au driver}
 
-Nous avons reproduit l'outil de détection en utilisant Spark avec l'API Scala comme c'est décrit dans la section \ref{application:spark}. L'application Spark lit les traceroutes présentes dans les fichiers donnés en entrée. Ensuite, pour chaque période, il faut parcourir ces traceroutes afin de trouver les traceroutes effectués durant la période en question. C'est ce que reprend le Tableau \ref{tab:spark-timing}. 
+Nous avons varié la mémoire réservée au driver afin d'évaluer l'effet de la configuration de Spark sur le temps de l'analyse. Le Tableau 	\ref{tab:spark-timing-driver} présente les temps d'exécution nécessaires pour analyser un nombre de traceroutes équivalent à une taille de $ 1 $ GB en utilisant différentes configurations. 
+
+\begin{table}[H]
+	%\begin{threeparttable}
+	\captionsetup{justification=centering}
+	\begin{tabular}{cccccc}
+		\textbf{driver-memory}&	\textbf{période} &\textbf{durée}  & \textbf{taille}  & \textbf{Nombre traceroutes} & \textbf{Temps (secondes)}  \\ \hline
+		$ 1 $ GB&	$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB& échec& échec \\ \hline 
+		$ 10 $ GB&	$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB&$ 494158 $& $ 2498 $ %(41.63 min)
+		\\ \hline 
+		$ 25 $ GB&	$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB&   $ 494158 $   & $ 2483 $ %
+		%(41.38 min)
+		\\ \hline
+		
+		$ 30 $ GB&	$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB&   $ 494158 $   & $ 2403 $ 
+		%(40.05 min)
+		\\ \hline
+	
+	\end{tabular}
+	\caption{Les temps d'exécution en fonction de la mémoire allouée au driver }
+	\label{tab:spark-timing-driver}
+\end{table}
+
+
+Il est possible  d'ajuster   la mémoire allouée aux \textit{executors}, mais comme l'utilisation de Spark est en mode local, l'ajustement de la mémoire des \textit{executors} n'a aucun effet. 
+
+%En ce qui concerne la mémoire allouée au driver, dans un premier temps,  nous avons utilisé la mémoire allouée par défaut (\textit{1} GB), mais l'analyse est arrêtée suite au manque de la mémoire.  C'est pourquoi nous avons ajusté la mémoire au driver. Le Tableau 
+%\ref{tab:spark-timing-driver} reprend les résultats des analyses. On constate qu'avec la configuration donné, en variant  la mémoire du driver, le temps d'exécution est relativement le même.
+
+\subparagraph{Variant la taille de données}
+
+Nous avons reproduit l'outil de détection en utilisant Spark avec l'API Scala comme c'est décrit dans la section \ref{application:spark}. L'application Spark lit d'abord les traceroutes présents dans les fichiers donnés en entrée, ensuite, pour chaque période $d_k$, il faut parcourir tous les  traceroutes afin de trouver les traceroutes effectués durant $d_k$, appelée approche 1.  Le Tableau \ref{tab:spark-timing} contient les résultats de $5$ analyses. Les trois premiers tests correspondent à l'analyse de $1$ GB de traceroutes. Dans le quatrième test, nous avons analyser les données des trois premiers tests. Durant le cinquième test, l'analyse a échoué. 
 
 \begin{table}[H]
 %\begin{threeparttable}
-	\begin{tabular}{lcccc}
-		\textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
+\centering
+\captionsetup{justification=centering}
+	\begin{tabular}{c lccc}
 		
-		07/02/2018&1 jour&1 GB&& 2498\\ \hline
-		08/02/2018&1 jour&1 GB&& 2942\\ \hline
-		09/02/2018&1 jour& 1 GB&& 2991\\ \hline
-		07/02/2018 - 09/02/2018&3 jour& 3 GB&& 20955\\ \hline
-		07/02/2018 - 10/02/2018&4 jour& 4 GB& & --- \\ \hline
+		\textbf{Test}&\textbf{Période} &\textbf{Durée}  & \textbf{Taille}   & \textbf{Temps (secondes)} \\ \hline
+		
+		$ 1 $&$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB& $ 2498 $\\ \hline
+		$ 2 $&$ 08/02/2018 $&$ 1 $ jour&$ 1 $ GB& $ 2942 $\\ \hline
+	$ 	3 $&$ 09/02/2018 $&$ 1  $jour& $ 1 $ GB& $ 2991 $\\ \hline
+		$ 4 $&$ 07/02/2018 - 09/02/2018 $&$ 3 $ jour& $ 3 $ GB& $ 20955 $\\ \hline
+		$ 5 $&$ 07/02/2018 - 10/02/2018 $&$ 4 $ jour& $ 4 $ GB & échec \\ \hline
 	\end{tabular}
 	\caption{}
 	\label{tab:spark-timing}
 \end{table}
 
-Le temps total nécessaire pour analyser les trois échantillons du 07, 08 et 09 février 2018 est de $ 8431 $. Tandis que le temps nécessaire à l'analyse des traceroutes correspondants au 3 échantillons est de $20955$. Ce que correspond à $ 2.4 $ fois de plus.
+Le temps total nécessaire pour analyser les trois échantillons correspondants aux  $ 07 $, $ 08 $ et $ 09 $ février $ 2018 $, chacun à part,  est de $ 8431 $. Tandis que le temps nécessaire à l'analyse des traceroutes correspondants au 3 échantillons en une seule fois est de $20955$, ce que correspond à $ 2.4 $ fois du temps de plus.
 En ce qui concerne l'analyse des traceroutes correspondants aux $ 4 $ jours,  l'analyse a échouée. 
 
-En revenant à l'implémentation, pour chaque période, il faut consulter tous les traceroutes. Par exemple, 3 GB de données doivent être consultées $ 3 * 24 $ fois.
+En revenant à l'implémentation, pour chaque période $d_k$, il faut consulter tous les traceroutes et ne récupérer que ceux effectués durant $d_k$. Par exemple, 3 GB de données doivent être consultées $ 3 * 24 $ fois. 
 
 
-Nous avons modifié l'implémentation afin de réduire le temps de l'analyse:
+Nous avons modifié l'implémentation afin de réduire le temps de l'analyse. Au lieu de chercher les traceroutes à chaque période $d_k$,  on attribue chaque traceroute à une des périodes de l'analyse si le timestamp correspond; le tiemestamp du traceroute $t_{j}$ appartient à la période $d_k$, appelée approche 2.
 
-Le Tableau 	\ref{tab:spark-timing-reajustedcode}
 
-avec driver-memory égale à 30 GB.
+Soient $d_k$ une période dans l'ensemble de périodes $D$  entre $ start $ et $ end $ et $t_{j}$ est un traceroute dans l'ensemble de traceroutes $T$ donnés en entrée, $j$ $\in$ $[1, n]$ où $n$ est le nombre total de traceroutes à analyser. Nous illustrons la différence entre l'approche $ 1 $ et $ 2 $ avec les deux pseudo-code \ref{algo:grouper-traceroutes_1} et 	\ref{algo:grouper-traceroutes_2}. Avec :
+
+\begin{itemize}
+	\item $ findAllPeriods(start, end, timeWindow)  $ : crée la liste des périodes entre la date  \textit{start} et la date \textit{end}, chaque période a la durée \textit{timeWindow};
+	
+	\item  $ loadTraceroutesFromInputFiles(dataPath)  $: lit les traceroutes qui se trouvent dans le répertoire  \textit{dataPath};
+	
+	\item   $ checkTracerouteInPeriod (d_k, t_{j}$ : vérifie si le traceroute $ t_{j}  $ a été effectué durant la période $d_k$.
+\end{itemize}
+
+
+\begin{algorithm}[H]
+	\hspace*{\algorithmicindent} \textbf{Inputs :} \textit{dataPath} chemin vers les fichiers de données, \textit{start}, \textit{end}, \textit{timeWindow}\\
+	\hspace*{\algorithmicindent} \textbf{Outputs :} regroupement des traceroutes par périodes
+	\begin{algorithmic}[1]
+	\State $D$ $\leftarrow$ $ findAllPeriods(start, end, timeWindow) $
+	\ForAll{ $d_k$ $\in$ $D$} \
+	\State $T$ $\leftarrow$ \textit{$ loadTraceroutesFromInputFiles(dataPath) $}
+	\ForAll{$t_{j}$ $\in$ $T$}
+	\State $ checkTracerouteInPeriod $($d_k$, $t_{j}$) 
+	\EndFor
+	\EndFor
+\end{algorithmic}
+	\caption{Regroupement des traceroutes par période $d_k$ (étape 1) : approche $ 1 $}
+	\label{algo:grouper-traceroutes_1}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\hspace*{\algorithmicindent} \textbf{Inputs :} \textit{dataPath} chemin vers les fichiers de données, \textit{start}, \textit{end}, \textit{timeWindow}\\
+	\hspace*{\algorithmicindent} \textbf{Outputs :} regroupement des traceroutes par périodes
+	\begin{algorithmic}[1]
+		\State $D$ $\leftarrow$ $ findAllPeriods(start, end, timeWindow) $
+		\State $T$ $\leftarrow$ $ loadTraceroutesFromInputFiles( dataPath) $
+		\ForAll{$t_{j}$ $\in$ $T$}
+		\ForAll{ $d_k$ $\in$ $D$} \
+		\State $ checkTracerouteInPeriod $($d_k$, $t_{j}$) 
+		\EndFor
+		\EndFor
+	\end{algorithmic}
+	\caption{  Regroupement des traceroutes par période $d_k$ (étape $ 1 $) : approche $ 2 $}
+	\label{algo:grouper-traceroutes_2}
+\end{algorithm}
+
+ Le Tableau 	\ref{tab:spark-timing-reajustedcode} reprend des indications sur les résultats obtenus, avec \textit{driver-memory} configuré sur  $ 30 $ GB. 
 
 \begin{table}[H]
+	\centering
+	\captionsetup{justification=centering}
 	%\begin{threeparttable}
-	\begin{tabular}{lcccc}
-		\textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
+	\begin{tabular}{cccccc}
+		\textbf{Test} & \textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
 		
-		07/02/2018&1 jour&1 GB&& 1491\\ \hline
-		08/02/2018&1 jour&1 GB&& 1496 \\ \hline
-		09/02/2018&1 jour& 1 GB&& 1457 \\ \hline
-		07/02/2018 - 09/02/2018&3 jour& 3 GB&& 1512 \\ \hline
-		07/02/2018 - 10/02/2018&4 jour& 4 GB& & 1597  \\ \hline
-	    07/02/2018 - 11/02/2018&4 jour& 5 GB& & 1703  \\ \hline
-			    07/02/2018 - 12/02/2018&4 jour& 6 GB& & 1486  \\ \hline
-		
-					    07/02/2018 - 13/02/2018&4 jour& 7 GB& & 1486  \\ \hline
-		
+	1&	07/02/2018&1 jour&1 GB&& 752.03\\ \hline
+	2&	08/02/2018&1 jour&1 GB&&  \\ \hline
+	3&	09/02/2018&1 jour& 1 GB&&  \\ \hline
 	\end{tabular}
 	\caption{}
 	\label{tab:spark-timing-reajustedcode}
@@ -311,38 +372,8 @@ avec driver-memory égale à 30 GB.
 %\end{threeparttable}
 
 
-\paragraph{Variant la mémoire allouée au driver}~
+ 
 
-Nous allons varier la mémoire réservée au driver afin d'évaluer l'effet de la configuration de Spark sur le temps de l'analyse. Le Tableau 	\ref{tab:spark-timing-driver} présente les temps d'exécution nécessaires pour analyser un nombre de traceroutes équivalent à une taille de $ 1 $ GB. 
-
-\begin{table}[H]
-	%\begin{threeparttable}
-	\begin{tabular}{cccccc}
-	 \textbf{driver-memory}&	\textbf{début - fin} &\textbf{durée}  & \textbf{taille}  & \textbf{Nombre traceroutes} & \textbf{Temps (secondes)}  \\ \hline
-			1 GB&	07/02/2018&1 jour&1 GB& --& -- \\ \hline 
-	10 GB&	07/02/2018&1 jour&1 GB&494158& 2498 %(41.63 min)
-	 \\ \hline 
-	25 GB&	07/02/2018&1 jour&1 GB&   494158   & 2483 %
-	%(41.38 min)
-	\\ \hline
-	
-
-	30 GB&	07/02/2018&1 jour&1 GB&   494158   & 2403 
-	%(40.05 min)
-	\\ \hline
-	
-	
-	\end{tabular}
-	\caption{Les temps d'exécution en fonction de la mémoire allouée au driver }
-	\label{tab:spark-timing-driver}
-\end{table}
-
-
-Il est possible d'ajuster la mémoire allouée aux \textit{executors}. Mais étant donné que l'utilisation de Spark est en mode local, l'ajustement de la mémoire des \textit{executors} n'a aucun effet. En ce qui concerne la mémoire allouée au driver, dans un premier temps,  nous avons utilisé la mémoire allouée par défaut (\textit{1} GB), mais l'analyse est arrêtée suite au manque de la mémoire.  C'est pourquoi nous avons ajusté la mémoire au driver. Le Tableau 
-\ref{tab:spark-timing-driver} reprend les résultats des analyses. On constate qu'avec la configuration donné, en variant  la mémoire du driver, le temps d'exécution est relativement le même. 
-
-
-\section{Récapitulatif des technologies Big Data}
 
 \section{Conclusion}
 %A travers ce travail, nous souhaitions évaluer des technologies Big Data pour l'analyse de données en provenance du dépôt RIPE Atlas. 

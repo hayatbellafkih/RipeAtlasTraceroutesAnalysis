@@ -109,37 +109,36 @@
 \contentsline {chapter}{\numberline {IV}Application de quelques technologies Big Data sur l'analyse des traceroutes}{58}{chapter.4}
 \contentsline {section}{\numberline {IV.1}Introduction}{58}{section.4.1}
 \contentsline {section}{\numberline {IV.2}Critères d'évaluation des technologies Big Data}{58}{section.4.2}
-\contentsline {section}{\numberline {IV.3}Caractéristique de l'environnement de test}{59}{section.4.3}
+\contentsline {section}{\numberline {IV.3}Caractéristiques de l'environnement de test}{59}{section.4.3}
 \contentsline {section}{\numberline {IV.4}Application 1 : MongoDB}{59}{section.4.4}
 \contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{59}{section*.81}
 \contentsline {section}{\numberline {IV.5}Application 2 : Amazon DynamoDB}{60}{section.4.5}
 \contentsline {section}{\numberline {IV.6}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{60}{section.4.6}
 \contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{63}{section*.84}
 \contentsline {section}{\numberline {IV.7}Application 4 : Spark Apache avec Scala}{63}{section.4.7}
-\contentsline {paragraph}{Variant la taille de données}{64}{section*.86}
-\contentsline {paragraph}{Variant la mémoire allouée au driver}{65}{section*.89}
-\contentsline {section}{\numberline {IV.8}Récapitulatif des technologies Big Data}{65}{section.4.8}
-\contentsline {section}{\numberline {IV.9}Conclusion}{65}{section.4.9}
+\contentsline {paragraph}{Performances d'Apache Spark dans l'analyse des délais }{64}{section*.86}
+\contentsline {subparagraph}{Variant la mémoire allouée au driver}{64}{section*.87}
+\contentsline {subparagraph}{Variant la taille de données}{64}{section*.89}
+\contentsline {section}{\numberline {IV.8}Conclusion}{66}{section.4.8}
 \contentsline {chapter}{\numberline {A}Amazon Athena }{68}{appendix.A}
 \contentsline {section}{\numberline {A.1}Création de la table traceroutes }{68}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données dans un compartiment Amazon S3}{69}{section.A.2}
+\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{69}{section.A.2}
 \contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{69}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{70}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{69}{subsection.A.2.2}
 \contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{70}{subsection.A.2.3}
-\contentsline {paragraph}{Les données sollicitées}{70}{section*.93}
-\contentsline {paragraph}{Les partitions de données concernées}{70}{section*.94}
-\contentsline {paragraph}{Les paramètres appliqués sur les colonnes}{70}{section*.95}
 \contentsline {chapter}{\numberline {B}Application sur traceroutes}{72}{appendix.B}
-\contentsline {paragraph}{La classe Signal}{72}{section*.97}
-\contentsline {paragraph}{La classe Hop}{72}{section*.98}
-\contentsline {paragraph}{La classe Traceroutes}{72}{section*.99}
-\contentsline {paragraph}{La classe TraceroutesPerPeriod}{73}{section*.100}
-\contentsline {paragraph}{La classe PreparedSignal }{73}{section*.101}
-\contentsline {paragraph}{La classe PreparedHop }{73}{section*.102}
-\contentsline {paragraph}{La classe MedianByHopTraceroute }{73}{section*.103}
-\contentsline {paragraph}{La classe Link}{74}{section*.104}
-\contentsline {paragraph}{La classe LinksTraceroute}{74}{section*.105}
-\contentsline {paragraph}{La classe LinkIPs}{74}{section*.106}
-\contentsline {paragraph}{La classe DiffRtt}{74}{section*.107}
-\contentsline {paragraph}{La classe DiffRTTPeriod }{75}{section*.108}
-\contentsline {paragraph}{La classe LinkState }{75}{section*.109}
+\contentsline {paragraph}{La classe Signal}{72}{section*.95}
+\contentsline {paragraph}{La classe Hop}{72}{section*.96}
+\contentsline {paragraph}{La classe Traceroutes}{72}{section*.97}
+\contentsline {paragraph}{La classe TraceroutesPerPeriod}{73}{section*.98}
+\contentsline {paragraph}{La classe PreparedSignal }{73}{section*.99}
+\contentsline {paragraph}{La classe PreparedHop }{73}{section*.100}
+\contentsline {paragraph}{La classe MedianByHopTraceroute }{73}{section*.101}
+\contentsline {paragraph}{La classe Link}{74}{section*.102}
+\contentsline {paragraph}{La classe LinksTraceroute}{74}{section*.103}
+\contentsline {paragraph}{La classe LinkIPs}{74}{section*.104}
+\contentsline {paragraph}{La classe DiffRtt}{74}{section*.105}
+\contentsline {paragraph}{La classe DiffRTTPeriod }{75}{section*.106}
+\contentsline {paragraph}{La classe LinkState }{75}{section*.107}
+\contentsline {chapter}{\numberline {C}Les résultats de test de performances}{76}{appendix.C}
+\contentsline {section}{\numberline {C.1}MongoDB}{76}{section.C.1}
