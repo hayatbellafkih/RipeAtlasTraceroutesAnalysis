@@ -1,0 +1,37 @@
+%introduction
+\chapter*{Introduction générale}
+\addcontentsline{toc}{chapter}{Introcuction générale}
+
+%\section{Faits}
+%Les sondes RIPE Atlas génère quotidiennement une quantité importante de données, environ $200$ Go par jour rien que pour des mesures de traceroute. Les systèmes de gestion des bases de données basés sur le modèle relationnel montrent certaines limitations.  En vue d'une bonne exploitation des données durant une période de quelques jours, les SGBD relationnels classiques sont incapables de gérer de grands volumes de données.  De plus, le modèle relationnel est peu adapté au stockage et à l'interrogation de certains types de données comme les données hiérarchiques. C'est le cas des données traceroutes générées par les sondes Atlas. Ce sont des données en format JSON. 
+
+
+%accroche
+Actuellement, plus de $ 10,300 $ \footnote{A la date de l'accès à la source \url{https://atlas.ripe.net/results/maps/network-coverage/}, le $14/08/2018$.} sondes Atlas sont déployées dans le monde pour effectuer des mesures réseaux comme le DNS, Ping, Traceroute, etc. Ces sondes sont maintenues par le RIPE NCC (Réseaux IP Européens - Network Coordination Centre).  Les données collectées par ces mesures sont  stockées et sont disponibles en accès libre \footnote{Les données des derniers $30$ jours, les données des autres périodes sont accessibles avec une API REST.}. Quotidiennement, plus de $ 18732 $ mesures sont planifiées au départ de ces sondes vers de multiples  autres destinations. En moyenne, $33$ Go de données \footnote{Au format compressé.} sont  collectées chaque jour pour tous les types de mesures.
+
+
+Le besoin en stockage des données est en croissance continue avec la quantité de données générées par les transactions des clients, les réseaux sociaux, l'Internet des objets qui collectent constamment les données, etc.  Les solutions traditionnelles en terme de stockage, de calcul et de visualisation ne répondent pas aux besoins, surtout des grandes organisations. Ce qui les a encouragé  à  créer des solutions permettant de répondre aux nouveaux besoins, c'est le Big Data.
+
+
+L'objectif du présent mémoire est de montrer la capacité des nouvelles technologies du Big Data à fournir des solutions efficaces capables d'assurer le stockage des données massives et d'effectuer des tâches de traitement sur ces quantités de données. Dans notre cas, ce sont des données 
+collectées par les sondes Atlas. Ces  données apportant des informations utiles et pertinentes que nous recueillons sur l'état du réseau.
+
+
+
+Les articles, les travaux publiés par RIPE Atlas et les présentations durant les rencontres organisées par RIPE NCC permettent d'avoir une idée générale sur les sujets à traiter en vue d'exploiter les données collectées par les sondes Atlas. Plus généralement,  les sujets abordés sont : la visualisation de certains indicateurs sur les performances d'un réseau, l'analyse des censures appliquées au niveau de certains pays, l'analyse des détours que subit un trafic local et l'étude des performances d'un réseau, par exemple :  le temps de la latence, la perte des paquets, l'asymétrie du trafic et la congestion des routeurs.
+
+
+
+
+Les utilitaires ping et traceroute font partie des outils d'analyse de l'état du réseau et de résolution des problèmes dans les réseaux fortement utilisés. En particulier, l'utilitaire traceroute fournit des informations de l'aller et du retour entre une adresse IP source et une adresse IP destination sur un réseau. Il fournit les sauts impliqués tout au long du chemin entre la  source et la destination  ainsi que le temps requis pour les atteindre. Les détails fournis par traceroute permettent d'avoir des informations sur les réseaux traversés, la latence, etc.
+%problematique
+
+
+Les traceroutes effectués par toutes les sondes, durant une heure, génèrent des données dont la taille est d'environ $ 8 $ Go. La manipulation de cette quantité de données nécessite des ressources de hautes performances. On ne peut pas compter sur   les ressources traditionnelles comme les bases de données relationnelles pour le stockage, les processeurs des  machines ordinaires \footnote{Machines avec une mémoire RAM de $ 4 $ ou de $ 8 $ Go.} pour traiter les données  après la récupération de celles-ci.
+
+L'analyse des données collectées par les sondes Atlas a prouvé l'utilité de ces données. Plusieurs cas d'utilisation sont régulièrement publiés. Nous nous intéresserons au sujet du délai d'un lien réseau (lien topologique), car traceroute fournit les sauts impliqués dans un chemin, entre une adresse IP source et une adresse IP destination, avec les informations de la latence. Nous allons étudier la capacité des technologies Big Data à gérer la quantité de données générées par les sondes Atlas. La gestion des données porte sur le stockage, le traitement et la visualisation.
+
+
+
+Ce document est structuré comme suit : le premier chapitre reprend une présentation du projet RIPE Atlas où nous allons présenter les sondes Atlas, leur fonctionnement  et quelques cas d'utilisation spécifiques. Le deuxième chapitre introduit  le terme  Big Data, puis, il reprend les disciplines impliquées dans le Big Data, pour ensuite parcourir un ensemble d'outils Big Data. Pour conclure le deuxième chapitre, un choix sera énoncé concernant les outils à utiliser dans l'analyse des traceroutes. 
+En ce qui concerne le troisième chapitre, il reprendra les étapes de l'analyse de données des traceroutes suivant un processus particulier. Depuis la collecte des données Atlas jusqu'à la génération des résultats de l'analyse. 

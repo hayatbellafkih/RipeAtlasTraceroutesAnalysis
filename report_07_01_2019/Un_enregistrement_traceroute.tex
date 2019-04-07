@@ -1,0 +1,74 @@
+\chapter{Exemple d'une réponse  traceroute} \label{exemple-traceroute}
+
+Nous présentons ci-après un exemple d'une réponse d'une requête traceroute à destination de l'adresse IP $ 192.5.5.241 $. 
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Exemple d'une réponse  traceroute}]
+{
+	"lts":38,
+	"size":40,
+	"from":"80.64.105.210",
+	"dst_name":"192.5.5.241",
+	"fw":4900,
+	"proto":"UDP",
+	"af":4,
+	"msm_name":"Traceroute",
+	"stored_timestamp":1517965930,
+	"prb_id":30070,
+	"result":[
+	{
+		"result":[
+		{
+			"rtt":0.688,
+			"ttl":64,
+			"from":"172.19.19.5",
+			"size":68
+		},
+		{
+			"rtt":0.452,
+			"ttl":64,
+			"from":"172.19.19.5",
+			"size":68
+		},
+		{
+			"rtt":0.447,
+			"ttl":64,
+			"from":"172.19.19.5",
+			"size":68
+		}
+		],
+		"hop":1
+	},
+	{
+		"result":[
+		{
+			"rtt":1.601,
+			"ttl":254,
+			"from":"80.64.105.193",
+			"size":68
+		},
+		{
+			"rtt":1.214,
+			"ttl":254,
+			"from":"80.64.105.193",
+			"size":68
+		},
+		{
+			"rtt":0.987,
+			"ttl":254,
+			"from":"80.64.105.193",
+			"size":68
+		}
+		],
+		"hop":2
+	}
+	],
+	"timestamp":1517965878,
+	"src_addr":"172.19.19.200",
+	"paris_id":8,
+	"endtime":1517965878,
+	"type":"traceroute",
+	"dst_addr":"192.5.5.241",
+	"msm_id":5004
+}
+
+\end{lstlisting}

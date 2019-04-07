@@ -1,0 +1,228 @@
+\begin{thebibliography}{10}
+
+\bibitem{Archipelago}
+{Archipelago (Ark) Measurement Infrastructure}.
+\newblock URL~: \url{http://www.caida.org/projects/ark/}.
+\newblock (consulté le $19/01/2018$).
+
+\bibitem{CAIDA}
+{Center for Applied Internet Data Analysis (CAIDA)}.
+\newblock URL~: \url{http://www.caida.org/}.
+\newblock (consulté le $ 06/04/2018$).
+
+\bibitem{create-UDM}
+{Create a New Measurement - RIPE Atlas}.
+\newblock URL~: \url{https://atlas.ripe.net/measurements/form/}.
+\newblock consulté le $05/08/2018$.
+
+\bibitem{ripe-atlas-data}
+Le dépôt des données {RIPE} {A}tlas.
+\newblock URL : \url{https://data-store.ripe.net/datasets/atlas-daily-dumps/}.
+\newblock (consulté le $ 26/07/2018 $).
+
+\bibitem{probes-data}
+Les archives des détails des sondes atlas.
+\newblock URL~: \url{https://ftp.ripe.net/ripe/atlas/probes/archive/}.
+\newblock (consulté le $ 28/01/2018 $).
+
+\bibitem{bugs-ripe-atlas}
+{RIPE} {A}tlas - {K}nown {B}ugs and {L}imitations.
+\newblock URL~: \url{https://atlas.ripe.net/docs/bugs/}.
+\newblock (consulté le $ 05/04/2018 $).
+
+\bibitem{SamKnows}
+Samknows.
+\newblock URL~: \url{https://www.samknows.com/global-platform}.
+\newblock (consulté le $23/01/2018$).
+
+\bibitem{LantronixXPortPro}
+Xport pro.
+\newblock URL: \url{https://www.lantronix.com/products/xport-pro/}.
+\newblock (consulté le $08/08/2018/$).
+
+\bibitem{Lissages-Exponentiels}
+Lissages exponentiels.
+\newblock URL:
+  \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf},
+  2017.
+\newblock (consulté le $30/09/2018$).
+
+\bibitem{Wikipedia}
+{\sc Aben, E.}
+\newblock {How RIPE Atlas Helped Wikipedia Users}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/emileaben/how-ripe-atlas-helped-wikipedia-users},
+  2014.
+\newblock (consulté le $ 18/08/2018 $).
+
+\bibitem{France-IX}
+{\sc Aben, E.}
+\newblock {Looking at France-IX with RIPE Atlas and RIS}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/emileaben/looking-at-france-ix-with-ripe-atlas-and-ris},
+  2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{Emile-Aben-IXP-countries}
+{\sc Aben, E.}
+\newblock {Measuring Countries and IXPs with RIPE Atlas}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/emileaben/measuring-ixps-with-ripe-atlas},
+  2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{Collin-Anderson}
+{\sc Anderson, C., Winter, P., and Roya}.
+\newblock Global network interference detection over the {RIPE} atlas network.
+\newblock In {\em 4th {USENIX} Workshop on Free and Open Communications on the
+  Internet ({FOCI} 14)\/} (San Diego, CA, 2014), {USENIX} Association.
+
+\bibitem{Traceroute-consistency-check}
+{\sc Donato, V.~D.}
+\newblock {Traceroute Consistency Check}.
+\newblock URL~:
+  \url{https://github.com/vdidonato/Traceroute-consistency-check}, 2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{InternetHealthReport}
+{\sc Fontugne, R.}
+\newblock {InternetHealthReport - tartiflette}.
+\newblock URL~:
+  \url{https://github.com/InternetHealthReport/tartiflette/tree/master/dataManipulation}.
+
+\bibitem{DBLP:journals/corr/FontugneAPB16}
+{\sc Fontugne, R., Aben, E., Pelsser, C., and Bush, R.}
+\newblock Pinpointing delay and forwarding anomalies using large-scale
+  traceroute measurements.
+\newblock {\em CoRR abs/1605.04784\/} (2016).
+
+\bibitem{Salim-Gasmi}
+{\sc Gasmi, S.}
+\newblock {Visualising RIPE Atlas Anchor Measurements}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/salim_gasmi/visualising-ripe-atlas-anchor-measurements},
+  2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{bam}
+{\sc Guillaume~Valadon, Francois~Contat, M.~H., and Holterbach, T.}
+\newblock {BGP Atlas Monito (BAM)}.
+\newblock URL~: \url{https://github.com/guedou/bam}, 2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{pres-bgp-traceroute}
+{\sc Herold, J.}
+\newblock Bgp + traceroute presentation.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/becha/ripe-atlas-hackathon-presentations/bgp-traceroute},
+  2015.
+\newblock (consulté le $08/08/2018$).
+
+\bibitem{bgp-traceroutes}
+{\sc Herold, J.}
+\newblock {BGP + Traceroute using RIPE NCC Atlas}.
+\newblock URL~: \url{https://github.com/wires/bgp-traceroutes}, 2015.
+\newblock consulté le $08/08/2018$.
+
+\bibitem{Holterbach:2015:QIM:2815675.2815710}
+{\sc Holterbach, T., Pelsser, C., Bush, R., and Vanbever, L.}
+\newblock Quantifying interference between measurements on the ripe atlas
+  platform.
+\newblock In {\em Proceedings of the 2015 Internet Measurement Conference\/}
+  (New York, NY, USA, 2015), IMC '15, ACM, pp.~437--443.
+
+\bibitem{Robert-Kisteleki}
+{\sc Kisteleki, R.}
+\newblock {The AMS-IX Outage as Seen with RIPE Atlas}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/kistel/the-ams-ix-outage-as-seen-with-ripe-atlas},
+  2015.
+\newblock (consulté le $23/01/2018$).
+
+\bibitem{how-we-manage-our-probe}
+{\sc Kisteleki, R.}
+\newblock {RIPE} {A}tlas {A}rchitecture - how we manage our probes.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/kistel/ripe-atlas-architecture-how-we-manage-our-probes},
+  2017.
+\newblock consulté le ($08/08/2018$).
+
+\bibitem{WinNT}
+{\sc Kisteleki, R.}
+\newblock {RIPE} {A}tlas probes as {I}o{T} devices.
+\newblock URL:
+  \url{https://labs.ripe.net/Members/kistel/ripe-atlas-probes-as-iot-devices},
+  2017.
+\newblock (consulté le $ 21/12/2017 $).
+
+\bibitem{eginning-Apache-Spark-2-cluster-overwiew}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~4.
+
+\bibitem{eginning-Apache-Spark-2-cluster-example}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~6.
+
+\bibitem{eginning-Apache-Spark-2-unified-stack}
+{\sc Luu, H.}
+\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
+\newblock Apress, 2018, p.~7.
+
+\bibitem{anil-big-data}
+{\sc Maheshwari, A.}
+\newblock {\em Big Data}.
+\newblock 2017.
+
+\bibitem{TTM}
+{\sc {RIPE NCC}}.
+\newblock {T}est {T}raffic {M}easurement {S}ervice ({TTM}).
+\newblock URL~: \url{https://www.ripe.net/analyse/archived-projects/ttm}.
+\newblock (consulté le $14/01/2018$).
+
+\bibitem{FANOU-Roderick}
+{\sc Roderick, F.}
+\newblock {On the Diversity of Interdomain Routing in Africa}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/fanou\_roderick/on-the-diversity-of-interdomain-routing-in-africa},
+  2015.
+\newblock (consulté le $11/01/2018$).
+
+\bibitem{6567202}
+{\sc Sagiroglu, S., and Sinanc, D.}
+\newblock Big data: A review.
+\newblock In {\em 2013 International Conference on Collaboration Technologies
+  and Systems (CTS)\/} (May 2013), pp.~42--47.
+
+\bibitem{anant-shah}
+{\sc Shah, A., Fontugne, R., and Papadopoulos, C.}
+\newblock Towards characterizing international routing detours.
+\newblock In {\em Proceedings of the 12th Asian Internet Engineering Conference
+  (AINTEC)\/} (Bangkok, Thailand, Nov. 2016), ACM, p.~to appear.
+
+\bibitem{DBLP:journals/corr/ShaoRDV17}
+{\sc Shao, W., Rougier, J., Devienne, F., and Viste, M.}
+\newblock Missing measurements on {RIPE} atlas.
+\newblock {\em CoRR abs/1701.00938\/} (2017).
+
+\bibitem{Shavitt:2005:DLI:1096536.1096546}
+{\sc Shavitt, Y., and Shir, E.}
+\newblock Dimes: Let the internet measure itself.
+\newblock {\em SIGCOMM Comput. Commun. Rev. 35}, 5 (Oct. 2005), 71--74.
+
+\bibitem{PROBEAPI}
+{\sc {S}peed {C}hecker}.
+\newblock {G}lobal {I}nternet testing - {P}robe{API}.
+\newblock URL~: \url{http://probeapi.speedchecker.xyz/}.
+\newblock (consulté le $06/08/2018$).
+
+\bibitem{COMPARE-ATLAS-PROBEAPI}
+{\sc Varas, C.}
+\newblock {A Practical Comparison Between RIPE Atlas and ProbeAPI}.
+\newblock URL~:
+  \url{https://labs.ripe.net/Members/cristian_varas/a-practical-comparison-between-ripe-atlas-and-probeapi},
+  2016.
+\newblock (consulté le $ 19/01/2018 $).
+
+\end{thebibliography}
