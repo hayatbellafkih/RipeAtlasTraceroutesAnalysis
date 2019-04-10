@@ -117,17 +117,44 @@
 }
 
 
+
 \definecolor{lstcolor}{HTML}{F5F5F5}
 \definecolor{orange}{HTML}{F8F9F9}
 \definecolor{ligntrose}{HTML}{FFF8DC}
 \tcbset{colback= orange,fonttitle=\bfseries, colframe=white }
 
 
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{myScalastyle}{
+	frame=tb,
+	language=scala,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+}
 %%%%%%%%%%%%%%%%%%%
 \renewcommand\labelitemi{--}
 \newcommand{\source}[1]{\caption*{Source: {#1}} }
 \definecolor{lightgray}{gray}{0.9}
 \renewcommand{\cleardoublepage}{}
+
+\input{scalamacros.tex}
 
 %%%%%%%%% like and dislike icons
 \usepackage{graphicx}

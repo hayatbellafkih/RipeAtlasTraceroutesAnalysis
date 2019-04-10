@@ -21,13 +21,6 @@ Les premières expériences ont montré que les valeurs "bruits" peuvent affecte
 
 \section{Rappel}
 La programmation fonctionnelle est parmi les paradigmes de programmation.  Ce paradigme se base sur les fonctions au sens mathématique du terme.
-
-
-
-
-\section{Implémentation Spark/Scala}
-Nous avons reproduit le processus de la détection des anomalies avec l'outil Spark avec Scala comme API. Le processus de détection est décrite dans la section \ref{anomalies-process}.
- 
  
  \section{Processus de détection des anomalies}
  \subsection{Les phases de la détection }
@@ -129,21 +122,27 @@ Nous avons reproduit le processus de la détection des anomalies avec l'outil Sp
 	
 	\item Une fois la référence est représentable (cas 3), nous mettons à jour cette dernière comme suit :
 	
-		referenceMedian =  0.99*referenceMedian[-1]+0.01*currentMedian
+		referenceMedian = $  0.99*referenceMedian[-1]+0.01*currentMedian $
 	
-		 referenceCiLow =	0.99*referenceLow[-1]+0.01*rttDiffL
+		 referenceCiLow =	$ 0.99*referenceLow[-1]+0.01*rttDiffL $
 		 
-	referenceCiHight = 0.99*referenceHight[-1]+0.01*rttDiffH
+	referenceCiHight = $ 0.99*referenceHight[-1]+0.01*rttDiffH $
 	
 
 	   
 	
 
 \end{enumerate}
- \item \textbf{ alarmsDetection (II.6) }: Après avoir calculé l'état courant et avoir mis à jour l'état de
- référence, nous pouvons déclencher la détection des anomalies si l’état référence est assez
- représentable. Si c'est le cas, nous mettons à jour la liste des alarmes  {\color{gray}(alarmsValues)} et la
- liste des dates  {\color{gray}(alarmsDates)} correspondantes au alarmes.
+ \item \textbf{ alarmsDetection (II.6) }:   la détection des anomalies est déclenché à partir du cas 3. Si une anomalie est détectée, nous mettons à jour la liste des alarmes  {\color{gray}(alarmsValues)} avec le RTT différentiel médian (currentMedian) ainsi que la
+ liste des dates  {\color{gray}(alarmsDates)} qui correspondent à ces anomalies. Les anomalies sont détecté en évaluant le chevauchement entre l'intervalle de confiance courant et celui de référence. La période courante présente une anomalie si la condition suivante est vraie\footnote{Nous notons par [-1] l'élément précédent d'une mesure. Par exemple, currentMedian[-1] est la médiane des RTTs différentiels de la période qui précède la période courante.}:
+ \begin{lstlisting}[language=json,firstnumber=1, caption={Illustration},
+ basicstyle =\footnotesize]
+currentMedian[-1]-currentCiLow[-1] > referenceHi[-1] or
+currentMedian[-1]+currentCiHigh[-1] < referenceCiLow[-1]) and
+np.abs(currentMedian[-1]-reference[-1])>1
+ \end{lstlisting}
+
+ 
  
   \end{itemize}
 
@@ -458,12 +457,12 @@ alarmesValues& []	\\ \hline
 		currentCiLow& 25.0 	\\ \hline
 		currentCiHi& 28.0	\\ \hline
 		cas 1? 2? 3?& cas 3 (car la référence est assez représentable )  \\ \hline
-		referenceMedian& 13.67572 (car 0.99×2.991 + 0.01×1071.463 = 13.67572 ) 	\\ \hline
-		referenceCiLow& 12.83469  (car 0.99×2.394+ 0.01×1046.463 = 12.83469 )	\\ \hline
-		referenceCiHi& 15.352609999999999 (car 0.99×4.402 + 0.01×1099.463 = 15.35261)	\\ \hline
+		referenceMedian& 13.67572 (car $ 0.99×2.991 + 0.01×1071.463 = 13.67572 $ ) 	\\ \hline
+		referenceCiLow& 12.83469  (car $ 0.99×2.394+ 0.01×1046.463 = 12.83469  $)	\\ \hline
+		referenceCiHi& 15.352609999999999 (car $ 0.99×4.402 + 0.01×1099.463 = 15.35261 $)	\\ \hline
 		détection des alarmes ?& oui (car : cas 3)	\\ \hline
-		alarmesDates& []	\\ \hline
-		alarmesValues& []	\\ \hline
+		alarmesDates& [1514784200]	\\ \hline
+		alarmesValues& [1071.463]	\\ \hline
 		
 	\end{tabularx}
 	%	}
@@ -471,13 +470,58 @@ alarmesValues& []	\\ \hline
 
 
 
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		itération & 6	\\ \hline
+		bin & $1514787800$ \\ \hline
+		lien & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		dist& [2.701, 2.924, 3.841, 4.463]	\\ \hline
+		(low, hight)& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		(lo, hi)&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		(l, h) & (0, 3) 	\\ \hline
+		rttDiffL& dist[0] = 2.701	\\ \hline
+		rttDiffH& dist[3]= 4.463	\\ \hline
+		currentMedian&  3.3825000000000003	\\ \hline
+		currentCiLow& 0.6815000000000003 	\\ \hline
+		currentCiHi& 15.243713899999998	\\ \hline
+		cas 1? 2? 3?& cas 3 (car la référence est assez représentable )  \\ \hline
+		referenceMedian& 13.5727878 	\\ \hline
+		referenceCiLow&  12.7333531	\\ \hline
+		referenceCiHi& 15.352609999999999 	\\ \hline
+		détection des alarmes ?& oui (car : cas 3)	\\ \hline
+		alarmesDates& [1514784200, 1514787800]	\\ \hline
+		alarmesValues& [1071.463, 3.3825000000000003]	\\ \hline
+		
+	\end{tabularx}
+	%	}
+\end{table}
 
 
 
+\section{Implémentation Spark/Scala} \label{implementation-scala}
 
 
+Nous avons reproduit le processus de la détection des anomalies avec l'outil Spark avec Scala comme API. Le processus de détection est décrite dans la section \ref{anomalies-process}.
 
+Nous avons implémenté l'outil de détection en utilisant le framework Spark présenté dans la section \ref{apache-spark}. Afin d'accéder aux différentes fonctionnalités, nous avons utilisé l'API Scala.
 
+\begin{comment}
+vérifeir la description du driver dans la présentation du Spark
+\end{comment}
+En pratique, nous avons utilisé le mode standalone du Spark (voir les modes du Spark dans \ref{modes-sparks}). L'implémentation Spark/Scala reprend des éléments suivants:
+
+\paragraph{Le programme driver}
+
+\paragraph{La création des case class}
+Les cases class sont utilisée pour modéliser les données immuable.  Nous avons utilisé plusieurs classe de ce type afin de modéliser les données tout au long de l'analyse.
+
+\paragraph{La création  RDDs}
+
+\paragraph{La création des transformations}
 
 
 %\end{landscape}

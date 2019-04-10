@@ -105,6 +105,8 @@
 \contentsline {subparagraph}{Spark Uniffied Stack}{55}{section*.75}
 \contentsline {subparagraph}{Spark Core}{56}{section*.76}
 \contentsline {paragraph}{Resilient Distributed Datasets}{56}{section*.78}
+\contentsline {paragraph}{Les modes d'exécution du framework Spark}{57}{section*.80}
+\contentsline {paragraph}{Les APIs du framework Spark}{57}{section*.81}
 \contentsline {section}{\numberline {III.5}Conclusion}{57}{section.3.5}
 \contentsline {chapter}{\numberline {IV}Implémentation}{58}{chapter.4}
 \contentsline {section}{\numberline {IV.1}Algorithme de détection }{58}{section.4.1}
@@ -113,19 +115,19 @@
 \contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{59}{section.5.2}
 \contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{60}{section.5.3}
 \contentsline {section}{\numberline {V.4}Application 1 : MongoDB}{60}{section.5.4}
-\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{60}{section*.80}
+\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{60}{section*.82}
 \contentsline {section}{\numberline {V.5}Application 2 : Amazon DynamoDB}{62}{section.5.5}
 \contentsline {section}{\numberline {V.6}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{62}{section.5.6}
-\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{64}{section*.85}
+\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{64}{section*.87}
 \contentsline {section}{\numberline {V.7}Application 4 : Spark Apache avec Scala}{65}{section.5.7}
-\contentsline {paragraph}{Performances d'Apache Spark dans l'analyse des délais }{66}{section*.88}
-\contentsline {subparagraph}{Variant la mémoire allouée au driver}{66}{section*.89}
-\contentsline {subparagraph}{Variant la taille de données}{67}{section*.91}
+\contentsline {paragraph}{Performances d'Apache Spark dans l'analyse des délais }{66}{section*.90}
+\contentsline {subparagraph}{Variant la mémoire allouée au driver}{66}{section*.91}
+\contentsline {subparagraph}{Variant la taille de données}{67}{section*.93}
 \contentsline {section}{\numberline {V.8}Récapitulatif}{69}{section.5.8}
-\contentsline {paragraph}{Quelques chiffres sur les liens et les anomalies identifiés }{70}{section*.96}
-\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3}{70}{section*.98}
-\contentsline {paragraph}{Apache Spark vs MongoDB}{71}{section*.100}
-\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3 vs Apache Spark }{71}{section*.102}
+\contentsline {paragraph}{Quelques chiffres sur les liens et les anomalies identifiés }{70}{section*.98}
+\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3}{70}{section*.100}
+\contentsline {paragraph}{Apache Spark vs MongoDB}{71}{section*.102}
+\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3 vs Apache Spark }{71}{section*.104}
 \contentsline {section}{\numberline {V.9}Conclusion}{72}{section.5.9}
 \contentsline {chapter}{\numberline {A}Amazon Athena }{74}{appendix.A}
 \contentsline {section}{\numberline {A.1}Création de la table traceroutes }{74}{section.A.1}
@@ -133,30 +135,41 @@
 \contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{75}{subsection.A.2.1}
 \contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{75}{subsection.A.2.2}
 \contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{76}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}La détection d'anomalies en Scala}{78}{appendix.B}
-\contentsline {paragraph}{La classe Signal}{78}{section*.107}
-\contentsline {paragraph}{La classe Hop}{78}{section*.108}
-\contentsline {paragraph}{La classe Traceroutes}{78}{section*.109}
-\contentsline {paragraph}{La classe TraceroutesPerPeriod}{79}{section*.110}
-\contentsline {paragraph}{La classe PreparedSignal }{79}{section*.111}
-\contentsline {paragraph}{La classe PreparedHop }{79}{section*.112}
-\contentsline {paragraph}{La classe MedianByHopTraceroute }{79}{section*.113}
-\contentsline {paragraph}{La classe Link}{80}{section*.114}
-\contentsline {paragraph}{La classe LinksTraceroute}{80}{section*.115}
-\contentsline {paragraph}{La classe LinkIPs}{80}{section*.116}
-\contentsline {paragraph}{La classe DiffRtt}{80}{section*.117}
-\contentsline {paragraph}{La classe DiffRTTPeriod }{81}{section*.118}
-\contentsline {paragraph}{La classe LinkState }{81}{section*.119}
-\contentsline {chapter}{\numberline {C} Central Limit Theorem (CLT}{82}{appendix.C}
-\contentsline {chapter}{\numberline {D}Important à savoir}{83}{appendix.D}
-\contentsline {section}{\numberline {D.1}Pourquoi à partir des temps RTTs bruts on arrive à détecter les anomalies?}{83}{section.D.1}
-\contentsline {section}{\numberline {D.2}Rappel}{83}{section.D.2}
-\contentsline {section}{\numberline {D.3}Implémentation Spark/Scala}{83}{section.D.3}
-\contentsline {section}{\numberline {D.4}Processus de détection des anomalies}{84}{section.D.4}
-\contentsline {subsection}{\numberline {D.4.1}Les phases de la détection }{84}{subsection.D.4.1}
-\contentsline {paragraph}{Phase I : préparation des données}{84}{section*.120}
-\contentsline {paragraph}{ Phase II : détection des anomalies}{84}{section*.121}
-\contentsline {paragraph}{ Illustrations des deux phases de détection}{86}{section*.122}
-\contentsline {subsection}{\numberline {D.4.2}Exemple illustratif }{89}{subsection.D.4.2}
-\contentsline {paragraph}{Description de l'échantillon}{89}{section*.125}
-\contentsline {chapter}{\numberline {E}Exemple d'une réponse traceroute}{95}{appendix.E}
+\contentsline {chapter}{\numberline {B}La détection d'anomalies en Spark/Scala}{78}{appendix.B}
+\contentsline {section}{\numberline {B.1}Les case class }{78}{section.B.1}
+\contentsline {paragraph}{La classe Signal}{78}{section*.109}
+\contentsline {paragraph}{La classe Hop}{78}{section*.110}
+\contentsline {paragraph}{La classe Traceroutes}{78}{section*.111}
+\contentsline {paragraph}{La classe TraceroutesPerPeriod}{79}{section*.112}
+\contentsline {paragraph}{La classe PreparedSignal }{79}{section*.113}
+\contentsline {paragraph}{La classe PreparedHop }{79}{section*.114}
+\contentsline {paragraph}{La classe MedianByHopTraceroute }{79}{section*.115}
+\contentsline {paragraph}{La classe Link}{80}{section*.116}
+\contentsline {paragraph}{La classe LinksTraceroute}{80}{section*.117}
+\contentsline {paragraph}{La classe LinkIPs}{80}{section*.118}
+\contentsline {paragraph}{La classe DiffRtt}{80}{section*.119}
+\contentsline {paragraph}{La classe DiffRTTPeriod }{81}{section*.120}
+\contentsline {paragraph}{La classe LinkState }{81}{section*.121}
+\contentsline {section}{\numberline {B.2}Processus}{81}{section.B.2}
+\contentsline {paragraph}{Exécution d'une application Spark}{81}{section*.122}
+\contentsline {paragraph}{Configuration d'une application Spark}{82}{section*.123}
+\contentsline {paragraph}{Point d'entrée vers les fonctionnalités du Spark}{82}{section*.124}
+\contentsline {paragraph}{Les paramètres de l'analyse}{82}{section*.125}
+\contentsline {paragraph}{La lecture des données}{82}{section*.126}
+\contentsline {chapter}{\numberline {C} Central Limit Theorem (CLT}{85}{appendix.C}
+\contentsline {chapter}{\numberline {D}Important à savoir}{86}{appendix.D}
+\contentsline {section}{\numberline {D.1}Pourquoi à partir des temps RTTs bruts on arrive à détecter les anomalies?}{86}{section.D.1}
+\contentsline {section}{\numberline {D.2}Rappel}{86}{section.D.2}
+\contentsline {section}{\numberline {D.3}Processus de détection des anomalies}{86}{section.D.3}
+\contentsline {subsection}{\numberline {D.3.1}Les phases de la détection }{86}{subsection.D.3.1}
+\contentsline {paragraph}{Phase I : préparation des données}{86}{section*.127}
+\contentsline {paragraph}{ Phase II : détection des anomalies}{87}{section*.128}
+\contentsline {paragraph}{ Illustrations des deux phases de détection}{89}{section*.129}
+\contentsline {subsection}{\numberline {D.3.2}Exemple illustratif }{92}{subsection.D.3.2}
+\contentsline {paragraph}{Description de l'échantillon}{92}{section*.132}
+\contentsline {section}{\numberline {D.4}Implémentation Spark/Scala}{97}{section.D.4}
+\contentsline {paragraph}{Le programme driver}{98}{section*.140}
+\contentsline {paragraph}{La création des case class}{98}{section*.141}
+\contentsline {paragraph}{La création RDDs}{98}{section*.142}
+\contentsline {paragraph}{La création des transformations}{98}{section*.143}
+\contentsline {chapter}{\numberline {E}Exemple d'une réponse traceroute}{99}{appendix.E}

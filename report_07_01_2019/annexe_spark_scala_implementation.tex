@@ -1,9 +1,10 @@
-\chapter{La détection d'anomalies en Scala} \label{application:spark}
+\chapter{La détection d'anomalies en Spark/Scala} \label{application:spark}
 
-%\subsection{Complément d'information du processus de la détection avec le langage Scala}
-Comme complément aux étapes ($1$ à $9$) décrites dans la section \ref{steps-rtt-analysis}, on présente les différentes classes permettant de modéliser les données tout au long du processus de l'analyse. La définition de ces classes est effectuée en langage \textit{Scala}. 
+Nous avons utilisé plusieurs classes, notées case class en langage Scala. Ces classes permettent de modéliser les données tout au long du processus de l'analyse des traceroutes. 
+Nous présentons les différentes case class créées au fur et au mesure de leur utilisation.
 
-Soient les classes suivantes utilisées : 
+
+\section{Les case class }
 
 \paragraph{La classe Signal} modélise un signal \footnote{Un signal dans le contexte d'un traceroute.}. Ainsi, \textit{from} est l'adresse IP du routeur émettant ce signal, \textit{rtt} est le Round Trip Time entre la sonde Atlas et ce routeur et enfin \textit{x} est un indicateur de l'échec du signal.
 \begin{lstlisting}[language=scala, caption={La classe Signal en Scala }]
@@ -128,3 +129,113 @@ case class LinkState(
 \end{lstlisting}
 
 Nous avons décrit les différentes classes utilisées. En ce qui concerne les traitements à appliquer sur les données, ce sont les fonctions permettant de répondre aux détails des étapes décrites dans la section  \ref{steps-rtt-analysis}.
+
+
+\section{Processus}
+
+\paragraph{Exécution d'une application Spark} Afin de pouvoir exécuter une application Spark, il faut qu'elle soit packagée dans un fichier de type JAR. Ce dernier doit reprendre une classe contenant une méthode \textit{main} et doit reprendre toutes les dépendances nécessaires à l'exécution de l'application. Nous avons utilisé \textit{Maven}\footnote{\url{https://maven.apache.org/}, consultée le $09/04/2019$.} pour automatiser la gestion du fichier JAR. Enfin, l'application Spark  est soumise avec la commande \textit{bin/spark-submit}. Un exemple d'une soumission est donné dans \ref{lst:submit}.
+
+\begin{lstlisting}[language=bash,firstnumber=1, caption={Exemple de la soumissions d'un traitement sur Spark},label={lst:submit}, basicstyle = \small,escapechar=|,numbers=left,
+stepnumber=1]
+~$ bin/spark-submit --class ripeatlasanalysis.AnalyseTraceroute     --master local --driver-memory 30G  --conf "spark.network.timeout=10000000" SparkExample-lowprints-0.0.5-SNAPSHOT-jar-with-dependencies.jar  1517961600  1518134400 3600 
+\end{lstlisting}
+La commande \textit{bin/spark-submit} prend plusieurs paramètres, nous présentons quelques paramètres utilisés :
+\begin{itemize}
+	\item \textit{class} est un objet Scala contenant la fonction \textit{main};
+	\item  \textit{master} est l'URL du cluster. Par exemple la valeur \textit{local} indique que Spark est exécuté localement avec un seul worker thread (aucun parallélisme), alors que \textit{local[K]} lance le traitement sur Spark en utilisant $K$ worker sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine;
+	\item \textit{driver-memory} est la mémoire dont le processus du driver peut utiliser;
+	
+	\item  \textit{--conf} "key = value" est une manière de configurer l'application Spark. Dans l'exemple, "spark.network.timeout=10000000", $ 10000000 $ est le temps durant lequel le driver doit recevoir  des mises à jour de la part des différents workers; après ce temps, le worker n'est plus considéré comme actif.
+\end{itemize}
+
+\paragraph{Configuration d'une application  Spark}
+
+Une application Spark nécessite l'ajustement de quelques paramètres, qu'il s'agit d'une application qui tourne en mode local ou bien en mode cluster. Il est possible de passer certains paramètres selon trois possibilités. D'abord, dans l'objet \textit{SparkConf} comme illustré dans l'exemple ci-dessous où nous donnons un nom à l'application Spark (ligne \ref{line:app-name} Listing \ref{lst:label}) et nous précisons le nombre de threads à créer (ligne \ref{line:app-thread} Listing \ref{lst:label}). 
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple de configuration avec SparkConf},label={lst:label}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+//imports
+import org.apache.spark.SparkConf
+
+// Spark configuration : create configuration
+val conf = new SparkConf().setAppName("RTT delays analysis") |\label{line:app-name}|
+                          .setMaster("local"),  |\label{line:app-thread}|
+\end{lstlisting}
+
+Certains paramètres peuvent être précisés 
+
+%en ligne de commande ou bien dans le fichier de configuration \footnote{Plus de détails sont disponibles.}. 
+%La configuration de l'application s'effectue à travers un . Il existe un nombre de  paramètres à  ajuster comme le nombre de threads à utiliser au cas où l'application Spark s'exécute en mode local.
+
+
+
+\paragraph{Point d'entrée vers les fonctionnalités du Spark}
+
+Le point d'entrée vers les fonctionnalités du Spark se fait par la création du  \textit{SparkContext}. Toutefois, il existe d'autre points d'entrée plus spécifique aux composantes du \textit{Spark Uniffied Stack}. Par exemple,  \textit{SparkSession} est le point d'entrée vers Spark SQL, StreamingContext est le point d'entrée vers Spark Streaming, etc.
+
+
+\paragraph{Les paramètres de l'analyse}
+
+Afin de tracer l'évolution du délai des liens, nous avons besoin des traceroutes stockés dans objets JSON, la date du début de l'analyse ($ 1517961600 $), la date de fin ($ 1518134400 $) et enfin la durée de la période ($3600$s). En ce qui concerne les fichiers de données, ils sont stockés localement et le chemin vers ces derniers est configuré dans un fichier de configuration.
+
+
+\paragraph{La lecture des données}
+
+L'outil de détection proposé par R. Fontugne et al. n'exploite qu'une partie des données d'une réponse traceroute \footnote{Voir un exemple d'une réponse  traceroute  dans \ref{exemple-traceroute}.}. 
+En particulier, Spark offre la possibilité de ne lire que les données qui nous intéressent\footnote{C'est le principe du Schema-On-Read décrit dans \ref{sec:schema-read-write}.}. 
+
+Chaque réponse traceroute est structurée dans un objet JSON et par ligne. Afin de lire chaque ligne, nous avons créé une case class qui a pour objectif de faire l'association entre l'objet JSON  et un objet Traceroute. Une classe \textit{Traceroute} reprend le nom de la destination de la requête traceroute (\textit{dst\_name}), l'adresse IP de la sonde effectuant la requête traceroute (\textit{from}), l'identifiant de la sonde (\textit{prb\_id}), le temps de la requête (\textit{timestamp}) et enfin la liste des sauts(\textit{Seq[Hop]}).
+
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Description du case class Traceroute},label={lst:case-class-Traceroute}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+case class Traceroute(
+	dst_name:  String,
+	from:      String,
+	prb_id:    BigInt,
+	msm_id:    BigInt,
+	timestamp: BigInt,
+	result:    Seq[Hop])
+\end{lstlisting}
+
+Un saut (\textit{Hop})  est défini par son rang (\textit{hop}), ce dernier indique l'ordre du saut en question. Etant donné que la sonde reçoit trois\footnote{Dans certains cas, le nombre de signaux dépasse trois.} signaux de chaque saut, un saut est donc défini par un ensemble de signaux (\textit{Seq[Signal]}).
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Description du case class Hop},label={lst:case-class-hop}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+case class Hop(
+	var result: Seq[Signal],
+	hop:        Int)
+\end{lstlisting}
+
+Un signal \textit{Signal} est émit par  un routeur  dont l'adresse IP est \textit{from}. Le temps nécessaire à la réception du signal est de  \textit{rtt}. Enfin, \textit{x} est un indicateur de la validité du signal, il se peut que la sonde ne reçoive pas une réponse d'un ou de plusieurs routeurs. 
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Description du case class Signal}, label={lst:case-class-hop}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+case class Signal(
+	rtt:  Option[Double],
+	x:    Option[String],
+	from: Option[String])
+\end{lstlisting}
+
+Maintenant que la classe Traceroute est conçu, nous pouvons passer l'étape de lecture des données. Pour ce faire, utilisons la fonction \textit{read()} via l'objet spark de type SparkSession. Nous spécifions à la méthode le schéma de lecture à travers la classe Traceroute, le chemin vers les fichiers de données (\textit{dataPath}) et comment elles sont structurées les données (\textit{json})
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Le mapping entre données et cas class},label={lst:mapping}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+val rawtraceroutes = spark.read
+	.schema(Encoders.product[Traceroute].schema)
+	.json(dataPath)
+	.as[Traceroute]
+import spark.implicits._ |\label{lst:implicits}|
+ \end{lstlisting}
+
+A la ligne \ref{lst:implicits} du Listing \ref{lst:mapping}, nous appelons certaines fonctionnalités nécessaire à la lecture des données. Il est important de noter que Apache Spark adopte ce qu'on appelle \textit{lazy evaluation}. Ainsi, l'évaluation des différentes transformations ne s'effectuent qu'au moment du déclenchement d'une action sur le résultat de cette transformation.
+
+Tous d'abord, nous devons trouver les périodes entre la date de début et la date de fin (étape FindBins()  (I.1)).  Ensuite, nous cherchons les traceroutes capturés durant ces périodes. 
+Dans le travail de référence, et comme les données sont stockées sur des collections MongoDB, le groupement des traceroutes par période se base sur la structuration des noms des collections\footnote{Voir la section \ref{mongodb-impleme}.}. 
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={étape FindBins()  (I.1)},label={lst:findbins}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+// Find the start time of all the bins 
+val rangeDates = generateDateSample(start, end, timewindow)
+
+// Find the start and the end of each bin
+val rangeDatesTimewindows = rangeDates.map(f => (f, f + timewindow))
+\end{lstlisting}

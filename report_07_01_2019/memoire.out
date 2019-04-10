@@ -78,13 +78,15 @@
 \BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 78
 \BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 79
 \BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 80
-\BOOKMARK [0][-]{appendix.B}{La détection d'anomalies en Scala}{}% 81
-\BOOKMARK [0][-]{appendix.C}{\040Central\040Limit\040Theorem\040\(CLT}{}% 82
-\BOOKMARK [0][-]{appendix.D}{Important à savoir}{}% 83
-\BOOKMARK [1][-]{section.D.1}{Pourquoi à partir des temps RTTs bruts on arrive à détecter les anomalies?}{appendix.D}% 84
-\BOOKMARK [1][-]{section.D.2}{Rappel}{appendix.D}% 85
-\BOOKMARK [1][-]{section.D.3}{Implémentation Spark/Scala}{appendix.D}% 86
-\BOOKMARK [1][-]{section.D.4}{Processus de détection des anomalies}{appendix.D}% 87
-\BOOKMARK [2][-]{subsection.D.4.1}{Les phases de la détection }{section.D.4}% 88
-\BOOKMARK [2][-]{subsection.D.4.2}{Exemple\040illustratif\040}{section.D.4}% 89
-\BOOKMARK [0][-]{appendix.E}{Exemple d'une réponse traceroute}{}% 90
+\BOOKMARK [0][-]{appendix.B}{La détection d'anomalies en Spark/Scala}{}% 81
+\BOOKMARK [1][-]{section.B.1}{Les\040case\040class\040}{appendix.B}% 82
+\BOOKMARK [1][-]{section.B.2}{Processus}{appendix.B}% 83
+\BOOKMARK [0][-]{appendix.C}{\040Central\040Limit\040Theorem\040\(CLT}{}% 84
+\BOOKMARK [0][-]{appendix.D}{Important à savoir}{}% 85
+\BOOKMARK [1][-]{section.D.1}{Pourquoi à partir des temps RTTs bruts on arrive à détecter les anomalies?}{appendix.D}% 86
+\BOOKMARK [1][-]{section.D.2}{Rappel}{appendix.D}% 87
+\BOOKMARK [1][-]{section.D.3}{Processus de détection des anomalies}{appendix.D}% 88
+\BOOKMARK [2][-]{subsection.D.3.1}{Les phases de la détection }{section.D.3}% 89
+\BOOKMARK [2][-]{subsection.D.3.2}{Exemple\040illustratif\040}{section.D.3}% 90
+\BOOKMARK [1][-]{section.D.4}{Implémentation Spark/Scala}{appendix.D}% 91
+\BOOKMARK [0][-]{appendix.E}{Exemple d'une réponse traceroute}{}% 92

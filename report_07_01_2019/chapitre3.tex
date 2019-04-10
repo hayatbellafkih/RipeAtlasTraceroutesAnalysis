@@ -363,7 +363,7 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
 \end{tcolorbox}
 
-\subsection{Apache Spark }
+\subsection{Apache Spark } \label{apache-spark}
 
 %\subsection{Introduction à Apache Sprk}
 
@@ -448,6 +448,18 @@ input data sont les données à analyser en utilisant Spark. Ces données sont r
 Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions sont partagées sur les n\oe{}uds du cluster qu'à suite à l'appel d'une action. Une fois une partition est localisé sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
 
 En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
+
+
+\paragraph{Les modes d'exécution du framework Spark}\label{modes-sparks}
+[!]
+\begin{description}
+	\item [Standalone]
+	
+\end{description}
+
+\paragraph{Les APIs du framework Spark}
+
+Il existe de nombreuses API permettant d'utiliser les fonctionnalités du Spark. A savoir, il y a Java, Python, Scala et R. Nous avons utilisé Scala  dans l'implémentation exposée dans la section \ref{implementation-scala}. 
 
 \section{Conclusion}
 
