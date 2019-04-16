@@ -1,14 +1,19 @@
 This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: memoire.aux
+A level-1 auxiliary file: resume.aux
 A level-1 auxiliary file: introductionII.aux
 A level-1 auxiliary file: chapitre1.aux
 A level-1 auxiliary file: chapitre2.aux
 A level-1 auxiliary file: chapitre3.aux
+A level-1 auxiliary file: chapitre5.aux
 A level-1 auxiliary file: chapitre4.aux
 A level-1 auxiliary file: conclusion.aux
 A level-1 auxiliary file: annexes.aux
-A level-1 auxiliary file: annexe_machine.aux
+A level-1 auxiliary file: annexe_spark_scala_implementation.aux
+A level-1 auxiliary file: score_wilson.aux
+A level-1 auxiliary file: implementation_spark_scala.aux
+A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 The style file: acm.bst
 Database file #1: references.bib
 You're missing a field part---line 176 of file references.bib
@@ -43,7 +48,7 @@ Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
 You've used 36 entries,
             2253 wiz_defined-function locations,
-            725 strings with 9925 characters,
+            730 strings with 10045 characters,
 and the built_in function-call counts, 8796 in all, are:
 = -- 849
 > -- 278

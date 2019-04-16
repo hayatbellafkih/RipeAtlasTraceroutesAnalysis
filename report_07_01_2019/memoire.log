@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  10 APR 2019 23:44
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  14 APR 2019 12:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1276,14 +1276,17 @@ Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box64
 )
 (./scalamacros.tex) (./memoire.aux (./resume.aux) (./introductionII.aux)
-(./chapitre1.aux) (./chapitre2.aux) (./chapitre3.aux) (./chapitre5.aux)
-(./chapitre4.aux) (./conclusion.aux) (./annexes.aux)
-(./annexe_spark_scala_implementation.aux
+(./chapitre1.aux) (./chapitre2.aux) (./chapitre3.aux) (./chapter5.aux
 
 LaTeX Warning: Label `lst:case-class-hop' multiply defined.
 
-) (./score_wilson.aux) (./implementation_spark_scala.aux)
-(./Un_enregistrement_traceroute.aux))
+
+LaTeX Warning: Label `lst:classTraceroutesPerPeriod' multiply defined.
+
+
+LaTeX Warning: Label `lst:rddcollecte' multiply defined.
+
+) (./chapitre4.aux) (./conclusion.aux) (./annexes.aux))
 \openout1 = `memoire.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 222.
@@ -1428,14 +1431,14 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 
 ] (./memoire.toc [2
 
-] [3])
+])
 \tf@toc=\write9
 \openout9 = `memoire.toc'.
 
- [4]
+ [3]
 \openout2 = `introductionII.aux'.
 
- (./introductionII.tex) [5
+ (./introductionII.tex) [4
 
 ]
 \openout2 = `chapitre1.aux'.
@@ -1459,14 +1462,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 20--20
 
 Underfull \vbox (badness 3623) has occurred while \output is active []
 
- [6
+ [5
 
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 27.
 
-[7]
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 82--82
 []|\T1/ptm/b/n/12 Matériel in-for-ma-
  []
@@ -1492,19 +1495,19 @@ File: illustrations/v2.jpg Graphic file (type bmp)
 <illustrations/v2.jpg>
 File: illustrations/v3.jpg Graphic file (type bmp)
 <illustrations/v3.jpg>
-[8]
+[7]
 File: illustrations/ssh-atlas-probe.png Graphic file (type bmp)
 <illustrations/ssh-atlas-probe.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9]
+ [8]
 (./illustrations/tex/artchitecture-ripeatlas.tex
 \du=\skip117
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10]
+ [9]
 Underfull \hbox (badness 10000) in paragraph at lines 170--170
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / fr . wikiped
 ia . org / wiki / File _ d '[] attente _ de _
@@ -1513,15 +1516,15 @@ ia . org / wiki / File _ d '[] attente _ de _
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-(./illustrations/tex/deroulement-connexion-ripe-atlas_.tex) [12] [13] [14]
+ [10]
+(./illustrations/tex/deroulement-connexion-ripe-atlas_.tex) [11] [12] [13]
 Underfull \hbox (badness 10000) in paragraph at lines 284--284
 [][][]\T1/ptm/m/n/10 .[][]Exemple de \T1/ptm/m/it/10 de-mai-as2857.anchors.atla
 s.ripe.net \T1/ptm/m/n/10 avec la struc-ture sui-vante : \T1/ptm/m/it/10 pays-v
 ille-
  []
 
-[15] [16] [17] [18] [19] [20]
+[14] [15] [16] [17] [18] [19]
 Underfull \hbox (badness 10000) in paragraph at lines 534--534
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / www . skymin
 ds . net / calculer -[] le -[] time -[] to -[] first -[] byte -[]
@@ -1535,40 +1538,40 @@ Underfull \hbox (badness 1072) in paragraph at lines 549--549
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [21]
-[22] [23]
+ [20]
+[21] [22]
 File: illustrations/1-AS-Path-Time-correlation.png Graphic file (type bmp)
 <illustrations/1-AS-Path-Time-correlation.png>
- [24]
+ [23]
 File: illustrations/traceroute-consitance.png Graphic file (type bmp)
 <illustrations/traceroute-consitance.png>
- [25] [26]) [27]
+ [24] [25]) [26]
 \openout2 = `chapitre2.aux'.
 
  (./chapitre2.tex
 Chapitre II.
-[28
+[27
 
 
-] [29] [30]
+] [28] [29]
 File: illustrations/rtt-differ.png Graphic file (type bmp)
 <illustrations/rtt-differ.png>
 
 Underfull \vbox (badness 3907) has occurred while \output is active []
 
- [31]
-[32] (./illustrations/timing.tex) [33] [34] (./illustrations/traceroute_.tex)
-[35] (./illustrations/link-inference.tex) [36]
+ [30]
+[31] (./illustrations/timing.tex) [32] [33] (./illustrations/traceroute_.tex)
+[34] (./illustrations/link-inference.tex) [35]
 (./illustrations/intervals-comparaison.tex)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37]
-[38] (../dia/process-rttanalysisUpdated.tex) [39]) [40]
+ [36]
+[37] (../dia/process-rttanalysisUpdated.tex) [38]) [39]
 \openout2 = `chapitre3.aux'.
 
  (./chapitre3.tex
 Chapitre III.
-[41
+[40
 
 
 ]
@@ -1578,23 +1581,23 @@ dmarr . com / default . asp ? contentID = 690$[][]\T1/ptm/m/n/10 , consul-tée l
 e
  []
 
-[42]
+[41]
 File: illustrations/bigdata-architecture.png Graphic file (type bmp)
 <illustrations/bigdata-architecture.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[43] [44] (./illustrations/key-value-nosql-.tex)
+[42] [43] (./illustrations/key-value-nosql-.tex)
 Underfull \vbox (badness 6284) has occurred while \output is active []
 
- [45]
+ [44]
 File: illustrations/document-nosql.png Graphic file (type bmp)
 <illustrations/document-nosql.png>
 File: illustrations/colomn-nosql.png Graphic file (type bmp)
 <illustrations/colomn-nosql.png>
 
-[46] (./illustrations/graphe-nosql.tex) [47]
+[45] (./illustrations/graphe-nosql.tex) [46]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 File: illustrations/ranking-db.png Graphic file (type bmp)
@@ -1602,7 +1605,7 @@ File: illustrations/ranking-db.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48]
+ [47]
 File: illustrations/on-write.png Graphic file (type bmp)
 <illustrations/on-write.png>
 File: illustrations/on-read.png Graphic file (type bmp)
@@ -1610,18 +1613,18 @@ File: illustrations/on-read.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49]
-[50] [51] [52]
+ [48]
+[49] [50] [51]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [53]
+ [52]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
 
-[54]
+[53]
 File: illustrations/small-cluster-3.jpg Graphic file (type bmp)
 <illustrations/small-cluster-3.jpg>
- [55]
+ [54]
 File: illustrations/unified-stack.jpg Graphic file (type bmp)
 <illustrations/unified-stack.jpg>
 File: illustrations/global_view_rdd.png Graphic file (type bmp)
@@ -1629,24 +1632,55 @@ File: illustrations/global_view_rdd.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [56])
-[57]
-\openout2 = `chapitre5.aux'.
+ [55]
 
- (./chapitre5.tex
+LaTeX Warning: Reference `implementation-scala' on page 56 undefined on input l
+ine 462.
+
+) [56]
+\openout2 = `chapter5.aux'.
+
+ (./chapter5.tex
 Chapitre IV.
-) [58
+[57
 
 
-]
+] [58] [59] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 140.
+ [60]
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 158.
+Missing character: There is no   in font ptmr8t!
+
+
+LaTeX Warning: Reference `exemple-traceroute' on page 61 undefined on input lin
+e 184.
+
+[61] [62] (./illustrations/read-data-from-mongodb.tex) [63] [64] [65] [66]
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 417.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+) [67]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [68])
+[69]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
 Chapitre V.
-[59
+[70
 
 
-] [60]
+] [71]
 Missing character: There is no – in font cmr12!
 Missing character: There is no – in font cmr12!
 Missing character: There is no – in font cmr12!
@@ -1655,18 +1689,13 @@ File: illustrations/mongoDBtiming_0.png Graphic file (type bmp)
 <illustrations/mongoDBtiming_0.png>
 File: illustrations/moustacheMongodb_0.png Graphic file (type bmp)
 <illustrations/moustacheMongodb_0.png>
- [61]
+ [72]
 File: illustrations/glue_crawler.png Graphic file (type bmp)
 <illustrations/glue_crawler.png>
- [62]
+ [73]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 192.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 204.
-
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-[63]
+ [74]
 Missing character: There is no – in font cmr12!
 Missing character: There is no – in font cmr12!
 Missing character: There is no – in font cmr12!
@@ -1674,32 +1703,32 @@ Missing character: There is no – in font cmr12!
 
 Underfull \vbox (badness 5105) has occurred while \output is active []
 
- [64]
+ [75]
 File: illustrations/temps-avec-aws_1.png Graphic file (type bmp)
 <illustrations/temps-avec-aws_1.png>
 
-[65] [66]
+[76] [77]
 Underfull \vbox (badness 1205) has occurred while \output is active []
 
- [67]
+ [78]
 File: illustrations/moustacheSpark.png Graphic file (type bmp)
 <illustrations/moustacheSpark.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [68]
+ [79]
 File: illustrations/traceroutes-par-sauts.png Graphic file (type bmp)
 <illustrations/traceroutes-par-sauts.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [69]
+ [80]
 File: illustrations/tous-vs-anomalies-liens.png Graphic file (type bmp)
 <illustrations/tous-vs-anomalies-liens.png>
 File: illustrations/mondb-vs-athena.png Graphic file (type bmp)
 <illustrations/mondb-vs-athena.png>
 
-[70]
+[81]
 File: ../testPerformances/mongodbvsspark.png Graphic file (type bmp)
 <../testPerformances/mongodbvsspark.png>
 File: illustrations/mondb-vs-spark-vs-athena.png Graphic file (type bmp)
@@ -1707,11 +1736,11 @@ File: illustrations/mondb-vs-spark-vs-athena.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [71])
-[72]
+ [82])
+[83]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex) [73
+ (./conclusion.tex) [84
 
 
 ]
@@ -1721,142 +1750,35 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Annexe A.
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 15.
- [74
+) [85
 
 
 ]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [75]
+ [86]
 File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena.png>
 
 Underfull \vbox (badness 5741) has occurred while \output is active []
 
- [76])
-[77]
-\openout2 = `annexe_spark_scala_implementation.aux'.
-
- (./annexe_spark_scala_implementation.tex
-Annexe B.
-[78
-
-
-] [79] [80] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 140.
- [81]
-Missing character: There is no   in font ptmr8t!
- [82]
-
-LaTeX Warning: Reference `mongodb-impleme' on page 83 undefined on input line 2
-32.
-
-[83]) [84]
-\openout2 = `score_wilson.aux'.
-
- (./score_wilson.tex
-Annexe C.
-) [85
-
-
-]
-\openout2 = `implementation_spark_scala.aux'.
-
- (./implementation_spark_scala.tex
-Annexe D.
-Missing character: There is no ’ in font ptmr8t!
-Missing character: There is no ’ in font ptmr8t!
-[86
-
-
-]
-Missing character: There is no ’ in font ptmr8t!
-Missing character: There is no ’ in font ptmr8t!
-Missing character: There is no ’ in font ptmr8t!
-Missing character: There is no ’ in font ptmr8t!
-Missing character: There is no ’ in font ptmr8t!
-
-Overfull \hbox (4.85611pt too wide) in paragraph at lines 76--77
-[]\T1/ptm/m/n/12 nous par-cou-rons la dis-tri-bu-tion []dist[] pour trou-ver le
-s RTTs dif-fé-ren-tiels qui se trouvent|
- []
-
-[87] [88] [89] (./illustrations/step-preparing-data.tex)
-Overfull \vbox (24.53622pt too high) has occurred while \output is active []
-
-
-[90] (./illustrations/step-detection-anomalies.tex)
-Overfull \vbox (24.52914pt too high) has occurred while \output is active []
-
-
-[91]
-Underfull \hbox (badness 10000) in alignment at lines 209--209
-[][] 
- []
-
-[92] [93] [94]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [95]
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-Missing character: There is no × in font cmr12!
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [96]
-
-LaTeX Warning: Reference `anomalies-process' on page 97 undefined on input line
- 508.
-
-Excluding 'comment' comment. [97]) [98]
-\openout2 = `Un_enregistrement_traceroute.aux'.
-
- (./Un_enregistrement_traceroute.tex
-Annexe E.
-[99
-
-
-]) [100] (./memoire.lof [101
+ [87])
+[88] (./memoire.lof [89
 
 ])
 \tf@lof=\write10
 \openout10 = `memoire.lof'.
 
- [102] (./memoire.lot)
+ [90] (./memoire.lot)
 \tf@lot=\write11
 \openout11 = `memoire.lot'.
 
- [103] (./memoire.lol)
+ [91] (./memoire.lol)
 \tf@lol=\write12
 \openout12 = `memoire.lol'.
 
-
-[104] (./memoire.bbl
+ [92]
+(./memoire.bbl
 Underfull \hbox (badness 4084) in paragraph at lines 44--49
 []\T1/ptm/m/n/12 Lissages ex-po-nen-tiels.  URL : [][]$\T1/pcr/m/n/12 https : /
  / www . math . u -[] psud . fr / ~goude /
@@ -1904,7 +1826,7 @@ Underfull \hbox (badness 4328) in paragraph at lines 81--86
 tm/m/n/12 , 2015.  (consulté le
  []
 
-[105]
+[93]
 Underfull \hbox (badness 10000) in paragraph at lines 88--92
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
@@ -1988,7 +1910,7 @@ Underfull \hbox (badness 3758) in paragraph at lines 185--191
 ][]\T1/ptm/m/n/12 , 2015.  (consulté le
  []
 
-[106]
+[94]
 Underfull \hbox (badness 10000) in paragraph at lines 221--227
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / cristian _ varas 
 / a -[] practical -[]
@@ -2000,14 +1922,12 @@ Underfull \hbox (badness 3758) in paragraph at lines 221--227
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-) [107]
+) [95]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
  (./memoire.aux (./resume.aux) (./introductionII.aux) (./chapitre1.aux)
-(./chapitre2.aux) (./chapitre3.aux) (./chapitre5.aux) (./chapitre4.aux)
-(./conclusion.aux) (./annexes.aux) (./annexe_spark_scala_implementation.aux)
-(./score_wilson.aux) (./implementation_spark_scala.aux)
-(./Un_enregistrement_traceroute.aux))
+(./chapitre2.aux) (./chapitre3.aux) (./chapter5.aux) (./chapitre4.aux)
+(./conclusion.aux) (./annexes.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 279.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 279.
 
@@ -2019,12 +1939,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32156 strings out of 493007
- 563785 string characters out of 6136719
- 983961 words of memory out of 5000000
- 35322 multiletter control sequences out of 15000+600000
- 65180 words of font info for 86 fonts, out of 8000000 for 9000
+ 32200 strings out of 493007
+ 564627 string characters out of 6136719
+ 820697 words of memory out of 5000000
+ 35397 multiletter control sequences out of 15000+600000
+ 65494 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,21n,97p,1226b,2092s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,21n,97p,1226b,2089s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (109 pages).
+Output written on memoire.pdf (97 pages).
