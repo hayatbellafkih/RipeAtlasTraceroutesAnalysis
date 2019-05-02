@@ -1,0 +1,172 @@
+\babel@toc {french}{}
+\contentsline {chapter}{\numberline {I}RIPE Atlas}{6}{chapter.1}
+\contentsline {section}{\numberline {I.1}Introduction}{6}{section.1.1}
+\contentsline {section}{\numberline {I.2}A propos RIPE NCC}{6}{section.1.2}
+\contentsline {section}{\numberline {I.3}Pr\IeC {\'e}sentation du projet RIPE Atlas }{7}{section.1.3}
+\contentsline {subsection}{\numberline {I.3.1}Les mesures actives et passives de l'Internet}{7}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {I.3.2}G\IeC {\'e}n\IeC {\'e}ralit\IeC {\'e}s sur les sondes Atlas}{7}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {I.3.3}Les g\IeC {\'e}n\IeC {\'e}rations des sondes Atlas }{8}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {I.3.4}Les versions du firmware des sondes Atlas}{9}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {I.3.5}La connexion des sondes Atlas \IeC {\`a} Internet}{9}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {I.3.6}Architecture du syst\IeC {\`e}me RIPE Atlas}{10}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {I.3.7}Les sondes Atlas et la vie priv\IeC {\'e}e}{14}{subsection.1.3.7}
+\contentsline {subsection}{\numberline {I.3.8}La s\IeC {\'e}curit\IeC {\'e} dans RIPE Atlas}{14}{subsection.1.3.8}
+\contentsline {subsection}{\numberline {I.3.9}Les ancres VS sondes Atlas}{14}{subsection.1.3.9}
+\contentsline {subsection}{\numberline {I.3.10}Les mesures int\IeC {\'e}gr\IeC {\'e}es : Built-in }{15}{subsection.1.3.10}
+\contentsline {subsection}{\numberline {I.3.11}Le syst\IeC {\`e}me de cr\IeC {\'e}dits Atlas}{16}{subsection.1.3.11}
+\contentsline {subsection}{\numberline {I.3.12}Les mesures personnalis\IeC {\'e}es : User Defined mesurement}{17}{subsection.1.3.12}
+\contentsline {subsection}{\numberline {I.3.13}La s\IeC {\'e}lection des sondes Atlas}{18}{subsection.1.3.13}
+\contentsline {subsection}{\numberline {I.3.14}Les sources de donn\IeC {\'e}es Atlas}{18}{subsection.1.3.14}
+\contentsline {subsection}{\numberline {I.3.15}Les limitations du RIPE Atlas}{19}{subsection.1.3.15}
+\contentsline {subsection}{\numberline {I.3.16}Confiance aux donn\IeC {\'e}es Atlas}{20}{subsection.1.3.16}
+\contentsline {section}{\numberline {I.4}Projets existants de mesures d'Internet}{20}{section.1.4}
+\contentsline {subsection}{\numberline {I.4.1}Test Traffic Measurement Service}{20}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {I.4.2}ProbeAPI}{21}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {I.4.3}Archipelago}{22}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {I.4.4}DIMES}{22}{subsection.1.4.4}
+\contentsline {subsection}{\numberline {I.4.5}SamKnows}{22}{subsection.1.4.5}
+\contentsline {section}{\numberline {I.5}Quelques cas d'utilisation des donn\IeC {\'e}es collect\IeC {\'e}es par les sondes Atlas}{23}{section.1.5}
+\contentsline {subsection}{\numberline {I.5.1}D\IeC {\'e}tection des coupures d'Internet}{23}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {I.5.2}Aide \IeC {\`a} la prise de d\IeC {\'e}cision}{23}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {I.5.3}Le suivi des censures}{23}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {I.5.4}Le suivi des performances d'un r\IeC {\'e}seau}{24}{subsection.1.5.4}
+\contentsline {paragraph}{Les ancres Atlas}{24}{section*.12}
+\contentsline {paragraph}{La v\IeC {\'e}rification de la coh\IeC {\'e}rence du Traceroute}{25}{section*.14}
+\contentsline {paragraph}{BGP+traceroute}{26}{section*.16}
+\contentsline {paragraph}{BGP Atlas Monitor (BAM)}{26}{section*.17}
+\contentsline {paragraph}{Pr\IeC {\'e}diction des routeurs provoquant la perte des paquets }{26}{section*.18}
+\contentsline {subsection}{\numberline {I.5.5}Le suivi des d\IeC {\'e}tours dans un trafic local}{27}{subsection.1.5.5}
+\contentsline {subsection}{\numberline {I.5.6}Visualisation : indicateurs et dashboard}{27}{subsection.1.5.6}
+\contentsline {section}{\numberline {I.6}Conclusion}{27}{section.1.6}
+\contentsline {chapter}{\numberline {II}La d\IeC {\'e}tection des anomalies dans les d\IeC {\'e}lais d'un lien}{28}{chapter.2}
+\contentsline {section}{\numberline {II.1}Pr\IeC {\'e}sentation g\IeC {\'e}n\IeC {\'e}rale }{28}{section.2.1}
+\contentsline {section}{\numberline {II.2}Pourquoi analyser les d\IeC {\'e}lais des liens r\IeC {\'e}seaux}{29}{section.2.2}
+\contentsline {paragraph}{Les donn\IeC {\'e}es utilis\IeC {\'e}es}{29}{section*.19}
+\contentsline {paragraph}{La clart\IeC {\'e} du travail}{29}{section*.20}
+\contentsline {paragraph}{La disponibilit\IeC {\'e} du code source}{30}{section*.21}
+\contentsline {paragraph}{La possibilit\IeC {\'e} de la validation des r\IeC {\'e}sultats}{30}{section*.22}
+\contentsline {section}{\numberline {II.3}L'\IeC {\'e}tude des d\IeC {\'e}lais des liens }{30}{section.2.3}
+\contentsline {subsection}{\numberline {II.3.1}Les donn\IeC {\'e}es utilis\IeC {\'e}es dans l'analyse des d\IeC {\'e}lais}{30}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {II.3.2}Le principe de la d\IeC {\'e}tection des changements des d\IeC {\'e}lais}{31}{subsection.2.3.2}
+\contentsline {paragraph}{D\IeC {\'e}finition du RTT diff\IeC {\'e}rentiel }{31}{section*.24}
+\contentsline {paragraph}{Le principe de la d\IeC {\'e}tection des changements des d\IeC {\'e}lais}{32}{section*.26}
+\contentsline {section}{\numberline {II.4}L'\IeC {\'e}tude des d\IeC {\'e}lais des liens en pratique : l'\IeC {\'e}volution du RTT diff\IeC {\'e}rentiel des liens}{32}{section.2.4}
+\contentsline {subsection}{\numberline {II.4.1}Les \IeC {\'e}tapes principales de d\IeC {\'e}tection}{33}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {II.4.2}Description des param\IeC {\`e}tres de l'analyse des d\IeC {\'e}lais}{33}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {II.4.3}L'\IeC {\'e}volution du RTT diff\IeC {\'e}rentiel d'un lien et la d\IeC {\'e}tection des anomalies}{34}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {II.4.4}Processus de d\IeC {\'e}tection des anomalies }{35}{subsection.2.4.4}
+\contentsline {paragraph}{1. Regroupement des traceroutes }{35}{section*.29}
+\contentsline {paragraph}{2. V\IeC {\'e}rification de la validit\IeC {\'e} de chaque traceroute.}{35}{section*.30}
+\contentsline {paragraph}{3. Calcul de la m\IeC {\'e}diane des RTTs par saut.}{36}{section*.31}
+\contentsline {paragraph}{4. Inf\IeC {\'e}rence des liens topologiques par traceroute.}{36}{section*.32}
+\contentsline {paragraph}{5. Caract\IeC {\'e}risation des liens}{36}{section*.34}
+\contentsline {paragraph}{6. Fusion des informations d'un lien}{36}{section*.35}
+\contentsline {paragraph}{7. Calcul de la m\IeC {\'e}diane des RTTs diff\IeC {\'e}rentiels et l'intervalle de confiance courant}{37}{section*.36}
+\contentsline {paragraph}{8. Mise \IeC {\`a} jour de la m\IeC {\'e}diane et de l'intervalle de confiance de r\IeC {\'e}f\IeC {\'e}rence du lien analys\IeC {\'e}.}{37}{section*.37}
+\contentsline {paragraph}{9. Comparaison des intervalles de confiance}{37}{section*.38}
+\contentsline {subsection}{\numberline {II.4.5}Vue globale des \IeC {\'e}tapes de d\IeC {\'e}tection}{38}{subsection.2.4.5}
+\contentsline {section}{\numberline {II.5}Conclusion}{39}{section.2.5}
+\contentsline {chapter}{\numberline {III}Compl\IeC {\'e}ment du chapitre II}{41}{chapter.3}
+\contentsline {section}{\numberline {III.1}Pourquoi \IeC {\`a} partir des temps RTTs bruts on arrive \IeC {\`a} d\IeC {\'e}tecter les anomalies?}{41}{section.3.1}
+\contentsline {section}{\numberline {III.2}Rappel}{41}{section.3.2}
+\contentsline {section}{\numberline {III.3}Processus de d\IeC {\'e}tection des anomalies}{42}{section.3.3}
+\contentsline {subsection}{\numberline {III.3.1}Les phases de la d\IeC {\'e}tection }{42}{subsection.3.3.1}
+\contentsline {paragraph}{Phase I : pr\IeC {\'e}paration des donn\IeC {\'e}es}{42}{section*.41}
+\contentsline {paragraph}{ Phase II : d\IeC {\'e}tection des anomalies}{42}{section*.42}
+\contentsline {paragraph}{ Illustrations des deux phases de d\IeC {\'e}tection}{44}{section*.43}
+\contentsline {subsection}{\numberline {III.3.2}Exemple illustratif }{47}{subsection.3.3.2}
+\contentsline {paragraph}{Description de l'\IeC {\'e}chantillon}{47}{section*.46}
+\contentsline {section}{\numberline {III.4}Impl\IeC {\'e}mentation Spark/Scala}{52}{section.3.4}
+\contentsline {paragraph}{Le programme driver}{53}{section*.54}
+\contentsline {paragraph}{La cr\IeC {\'e}ation des case class}{53}{section*.55}
+\contentsline {paragraph}{La cr\IeC {\'e}ation RDDs}{53}{section*.56}
+\contentsline {paragraph}{La cr\IeC {\'e}ation des transformations}{53}{section*.57}
+\contentsline {chapter}{\numberline {IV}Introduction au Big Data}{54}{chapter.4}
+\contentsline {section}{\numberline {IV.1}Introduction}{54}{section.4.1}
+\contentsline {section}{\numberline {IV.2}Processus d'analyse de donn\IeC {\'e}es massives}{54}{section.4.2}
+\contentsline {paragraph}{Exemple d'un processus d'analyse de donn\IeC {\'e}es}{54}{section*.58}
+\contentsline {section}{\numberline {IV.3}Quelques concepts associ\IeC {\'e}s au Big Data}{55}{section.4.3}
+\contentsline {subsection}{\numberline {IV.3.1}D\IeC {\'e}finition du Big Data : Volume, V\IeC {\'e}locit\IeC {\'e}, Vari\IeC {\'e}t\IeC {\'e} et V\IeC {\'e}racit\IeC {\'e}}{55}{subsection.4.3.1}
+\contentsline {paragraph}{Volume de donn\IeC {\'e}es}{55}{section*.59}
+\contentsline {paragraph}{V\IeC {\'e}locit\IeC {\'e} de donn\IeC {\'e}es}{55}{section*.60}
+\contentsline {paragraph}{Vari\IeC {\'e}t\IeC {\'e} de donn\IeC {\'e}es}{56}{section*.61}
+\contentsline {paragraph}{V\IeC {\'e}racit\IeC {\'e} de donn\IeC {\'e}es}{56}{section*.62}
+\contentsline {subsection}{\numberline {IV.3.2}L'architecture standard du Big Data}{56}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {IV.3.3}Les bases de donn\IeC {\'e}es NoSQL (Not Only SQL) }{58}{subsection.4.3.3}
+\contentsline {paragraph}{Introduction }{58}{section*.64}
+\contentsline {paragraph}{Types de base de donn\IeC {\'e}es NoSQL}{58}{section*.65}
+\contentsline {subparagraph}{Cl\IeC {\'e}-valeur}{58}{section*.66}
+\contentsline {subparagraph}{Document}{59}{section*.68}
+\contentsline {subparagraph}{Colonnes}{59}{section*.70}
+\contentsline {subparagraph}{Graphe}{60}{section*.72}
+\contentsline {paragraph}{Big Data et le th\IeC {\'e}or\IeC {\`e}me CAP}{60}{section*.74}
+\contentsline {subparagraph}{ Consistency (ou int\IeC {\'e}grit\IeC {\'e})}{60}{section*.75}
+\contentsline {subparagraph}{ Availability (ou disponibilit\IeC {\'e})}{60}{section*.76}
+\contentsline {subparagraph}{Partition tolerance (ou la tol\IeC {\'e}rance au partitionnement) }{60}{section*.77}
+\contentsline {subsection}{\numberline {IV.3.4}Schema on Write VS Schema on Read}{62}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {IV.3.5}L'informatique distribu\IeC {\'e}e et l'analyse de donn\IeC {\'e}es massives}{63}{subsection.4.3.5}
+\contentsline {section}{\numberline {IV.4}Parcours de quelques technologies du Big Data}{64}{section.4.4}
+\contentsline {subsection}{\numberline {IV.4.1}MongoDB}{64}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {IV.4.2}Amazon DynamoDB}{64}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {IV.4.3}Amazon S3, Amazon Glue et Amazon Athena }{65}{subsection.4.4.3}
+\contentsline {paragraph}{Amazon S3}{65}{section*.82}
+\contentsline {paragraph}{Amazon Glue}{65}{section*.84}
+\contentsline {paragraph}{Amazon Athena}{66}{section*.85}
+\contentsline {subsection}{\numberline {IV.4.4}Apache Spark }{67}{subsection.4.4.4}
+\contentsline {paragraph}{Core Concepts et architecture de Spark}{67}{section*.86}
+\contentsline {subparagraph}{Spark Clusters et Resource Management System}{67}{section*.87}
+\contentsline {subparagraph}{Application Spark}{68}{section*.89}
+\contentsline {subparagraph}{Spark driver et executor}{68}{section*.90}
+\contentsline {subparagraph}{Spark Uniffied Stack}{68}{section*.92}
+\contentsline {subparagraph}{Spark Core}{69}{section*.93}
+\contentsline {paragraph}{Resilient Distributed Datasets}{69}{section*.95}
+\contentsline {paragraph}{Les modes d'ex\IeC {\'e}cution du framework Spark}{70}{section*.97}
+\contentsline {paragraph}{Les APIs du framework Spark}{70}{section*.98}
+\contentsline {paragraph}{A propos lazy evaluation}{70}{section*.99}
+\contentsline {section}{\numberline {IV.5}Conclusion}{70}{section.4.5}
+\contentsline {chapter}{\numberline {V}Impl\IeC {\'e}mentation de la d\IeC {\'e}tection des anomalies dans les d\IeC {\'e}lais en Spark/Scala}{71}{chapter.5}
+\contentsline {section}{\numberline {V.1}Introduction}{71}{section.5.1}
+\contentsline {section}{\numberline {V.2}Impl\IeC {\'e}mentation}{71}{section.5.2}
+\contentsline {subsection}{\numberline {V.2.1}Description de l'environnement}{71}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {V.2.2}El\IeC {\'e}ments de l'impl\IeC {\'e}mentation}{71}{subsection.5.2.2}
+\contentsline {paragraph}{Configuration d'une application Spark}{71}{section*.100}
+\contentsline {paragraph}{Point d'entr\IeC {\'e}e vers les fonctionnalit\IeC {\'e}s du Spark}{72}{section*.101}
+\contentsline {paragraph}{Les param\IeC {\`e}tres de l'analyse}{72}{section*.102}
+\contentsline {paragraph}{Notation relatives au langage Scala}{72}{section*.103}
+\contentsline {paragraph}{La lecture des donn\IeC {\'e}es}{72}{section*.104}
+\contentsline {paragraph}{Trouver les p\IeC {\'e}riodes de l'analyse}{74}{section*.105}
+\contentsline {paragraph}{Le groupement des traceroutes}{74}{section*.106}
+\contentsline {subparagraph}{MongoDB}{74}{section*.107}
+\contentsline {subparagraph}{Spark/Scala}{75}{section*.109}
+\contentsline {paragraph}{Elimination des traceroutes invalides}{76}{section*.110}
+\contentsline {paragraph}{D\IeC {\'e}duction des liens}{76}{section*.111}
+\contentsline {paragraph}{Caract\IeC {\'e}risation des liens de toutes les p\IeC {\'e}riodes de l'analyse}{78}{section*.112}
+\contentsline {paragraph}{D\IeC {\'e}tection des anomalies}{78}{section*.113}
+\contentsline {subsection}{\numberline {V.2.3}Ex\IeC {\'e}cution d'une application Spark}{82}{subsection.5.2.3}
+\contentsline {section}{\numberline {V.3}Conclusion}{82}{section.5.3}
+\contentsline {chapter}{\numberline {VI}Application de quelques technologies Big Data sur l'analyse des traceroutes}{83}{chapter.6}
+\contentsline {section}{\numberline {VI.1}Introduction}{83}{section.6.1}
+\contentsline {section}{\numberline {VI.2}Crit\IeC {\`e}res d'\IeC {\'e}valuation des technologies Big Data}{83}{section.6.2}
+\contentsline {section}{\numberline {VI.3}Caract\IeC {\'e}ristiques de l'environnement de test}{84}{section.6.3}
+\contentsline {section}{\numberline {VI.4}Application 1 : MongoDB}{84}{section.6.4}
+\contentsline {paragraph}{Performances de la base de donn\IeC {\'e}es MongoDB dans l'analyse des d\IeC {\'e}lais }{84}{section*.114}
+\contentsline {section}{\numberline {VI.5}Application 2 : Amazon DynamoDB}{86}{section.6.5}
+\contentsline {section}{\numberline {VI.6}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{86}{section.6.6}
+\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des d\IeC {\'e}lais }{88}{section*.119}
+\contentsline {section}{\numberline {VI.7}Application 4 : Spark Apache avec Scala}{89}{section.6.7}
+\contentsline {paragraph}{Performances d'Apache Spark dans l'analyse des d\IeC {\'e}lais }{90}{section*.122}
+\contentsline {subparagraph}{Variant la m\IeC {\'e}moire allou\IeC {\'e}e au driver}{90}{section*.123}
+\contentsline {subparagraph}{Variant la taille de donn\IeC {\'e}es}{91}{section*.125}
+\contentsline {section}{\numberline {VI.8}R\IeC {\'e}capitulatif}{93}{section.6.8}
+\contentsline {paragraph}{Quelques chiffres sur les liens et les anomalies identifi\IeC {\'e}s }{94}{section*.130}
+\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3}{94}{section*.132}
+\contentsline {paragraph}{Apache Spark vs MongoDB}{95}{section*.134}
+\contentsline {paragraph}{MongoDB vs Amazon Athena et Amazon S3 vs Apache Spark }{95}{section*.136}
+\contentsline {section}{\numberline {VI.9}Conclusion}{96}{section.6.9}
+\contentsline {chapter}{\numberline {A}Amazon Athena }{98}{appendix.A}
+\contentsline {section}{\numberline {A.1}Cr\IeC {\'e}ation de la table traceroutes }{98}{section.A.1}
+\contentsline {section}{\numberline {A.2}Partitionnement de donn\IeC {\'e}es sur Amazon Athena }{99}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Pr\IeC {\'e}sentation du partitionnement}{99}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{99}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}L'interrogation de donn\IeC {\'e}es sur Amazon Athena}{100}{subsection.A.2.3}
+\contentsline {chapter}{\numberline {B}Exemple d'une r\IeC {\'e}ponse traceroute}{102}{appendix.B}

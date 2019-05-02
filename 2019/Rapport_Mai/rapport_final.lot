@@ -1,0 +1,23 @@
+\babel@toc {french}{}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Les caractéristiques du matériel des trois générations des sondes Atlas \relax }}{8}{table.caption.3}
+\contentsline {table}{\numberline {I.2}{\ignorespaces Comparaison entre sondes et ancres RIPE Atlas\relax }}{15}{table.caption.8}
+\contentsline {table}{\numberline {I.3}{\ignorespaces Comparaison entre sondes Atlas et ProbeAPI\relax }}{22}{table.caption.10}
+\contentsline {table}{\numberline {I.4}{\ignorespaces Les détails des mesures effectuées dans le travail de C. Anderson \cite {Collin-Anderson} \relax }}{24}{table.caption.11}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {II.1}{\ignorespaces Récapitulatif des traceroutes utilisés dans le travail de référence \relax }}{30}{table.caption.23}
+\contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{43}{table.caption.45}
+\contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }}{46}{table.caption.46}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {IV.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{71}{table.caption.88}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {VI.1}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{93}{table.caption.122}
+\contentsline {table}{\numberline {VI.2}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{97}{table.caption.127}
+\contentsline {table}{\numberline {VI.3}{\ignorespaces Les temps d'exécution en fonction de la mémoire allouée au driver \relax }}{98}{table.caption.131}
+\contentsline {table}{\numberline {VI.4}{\ignorespaces Les temps d'exécution des analyses lancées sur des traceroutes (approche $1$)\relax }}{99}{table.caption.133}
+\contentsline {table}{\numberline {VI.5}{\ignorespaces Les temps d'exécution lors de la détection des anomalies en utilisant Spark (approche $2$)\relax }}{100}{table.caption.134}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,0 +1,20 @@
+\babel@toc {french}{}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {I.1}{\ignorespaces Les caract\IeC {\'e}ristiques du mat\IeC {\'e}riel des trois g\IeC {\'e}n\IeC {\'e}rations des sondes Atlas \relax }}{8}{table.caption.3}
+\contentsline {table}{\numberline {I.2}{\ignorespaces Comparaison entre sondes et ancres RIPE Atlas\relax }}{15}{table.caption.8}
+\contentsline {table}{\numberline {I.3}{\ignorespaces Comparaison entre sondes Atlas et ProbeAPI\relax }}{22}{table.caption.10}
+\contentsline {table}{\numberline {I.4}{\ignorespaces Les d\IeC {\'e}tails des mesures effectu\IeC {\'e}es dans le travail de C. Anderson \cite {Collin-Anderson} \relax }}{24}{table.caption.11}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {II.1}{\ignorespaces R\IeC {\'e}capitulatif des traceroutes utilis\IeC {\'e}s dans le travail de r\IeC {\'e}f\IeC {\'e}rence \relax }}{30}{table.caption.23}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {IV.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{65}{table.caption.83}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {VI.1}{\ignorespaces Les temps d'ex\IeC {\'e}cution d'analyse de traceroutes en fonction de la taille de donn\IeC {\'e}es avec MongoDB\relax }}{85}{table.caption.115}
+\contentsline {table}{\numberline {VI.2}{\ignorespaces Les temps d'ex\IeC {\'e}cution par taille de l'ensemble de donn\IeC {\'e}es (Amazon Athena et Amazon S3)\relax }}{89}{table.caption.120}
+\contentsline {table}{\numberline {VI.3}{\ignorespaces Les temps d'ex\IeC {\'e}cution en fonction de la m\IeC {\'e}moire allou\IeC {\'e}e au driver \relax }}{90}{table.caption.124}
+\contentsline {table}{\numberline {VI.4}{\ignorespaces Les temps d'ex\IeC {\'e}cution des analyses lanc\IeC {\'e}es sur des traceroutes (approche $1$)\relax }}{91}{table.caption.126}
+\contentsline {table}{\numberline {VI.5}{\ignorespaces Les temps d'ex\IeC {\'e}cution lors de la d\IeC {\'e}tection des anomalies en utilisant Spark (approche $2$)\relax }}{92}{table.caption.127}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,0 +1,526 @@
+
+\chapter{Complément du chapitre II}
+\section{Pourquoi à partir des temps RTTs bruts on arrive à détecter les anomalies?}
+
+
+La détection des anomalies se base sur la caractérisation de la distribution des RTTs différentiels. Tel que dans un premier temps, on construise une référence et ensuite identifier les déviation par rapport à cette référence.
+
+
+En pratique, la détection des anomalies repose sur une variante du théorème central limite (CLT).
+
+Dans notre cas, la distribution des moyennes d'un nombre assez large d'échantillons des RTTs différentiels sont distribuées normalement. En cas de changement du délai entre les deux routeurs X et Y, la moyenne résultante dévie de la distribution normale ainsi une anomalie est détectée.
+
+
+Les premières expériences ont montré que les valeurs "bruits" peuvent affecter largement les valeurs des moyennes calculées d'où la nécessité d'avoir un nombre très important d'échantillons, ce qui est n'est pas praticable. Afin de résoudre ce besoin, les autres du travail ont utilisé la médiane à la place de la moyenne car :
+
+\begin{itemize}
+	\item elle est robuste aux valeurs bruits des RTTs;
+	\item la convergence des médianes vers la distribution normale nécessite moins d'échantillons. 
+\end{itemize}
+
+\newpage
+ \section{Processus de détection des anomalies en deux phases} \label{processus-de-detection}
+ La détection des anomalies dans les délais des liens peut être organisée en deux phases: la préparation de données et la détection des alarmes.
+ \paragraph{Phase I : préparation de données.}
+
+ \begin{itemize}
+ 	\item \textbf{findAllBins (I.1)} : nous cherchons la liste des périodes {\color{gray}([bin])} entre  {\color{gray}start} et  {\color{gray}end} dont leur
+ durée est de  {\color{gray}timeWindow}.
+ \item \textbf{findTraceroutesByBin (I.2)} : pour toute période  ({\color{gray}bin}), nous récupérons les traceroutes
+ capturés durant cette dernière. Le nombre de traceroutes associés à chaque {\color{gray}bin} dépend
+ des traceroutes disponibles à l'analyse  ({\color{gray}[traceroute]}).
+ \item \textbf{aggregateRttsByHop (I.3)} : certains traceroutes ne réussissent pas à atteindre la destination prévue, dans ce cas, ces traceroutes sont ignorés. De même, les sauts ayant des RTTs invalides
+ sont aussi ignorés.
+ \item \textbf{aggregateRttsByHop (I.4)} : étant donné que chaque saut  ({\color{gray}hop}) est décrit par plus d'un RTT, nous calculons la médiane de ces RTTs  ({\color{gray}rttAgg}), et ce par source de signal.
+ \item \textbf{linkInference (I.5)} : chaque deux sauts consécutifs d'un traceroute forment un lien. Pour
+ tout traceroute d'un  {\color{gray}bin} donné, nous déduisons les liens possibles, ensuite, nous caractérisons tout lien  {\color{gray}(ip1, ip2)} avec son RTT différentiel  ({\color{gray}rttDiff}).
+\item \textbf{sortLinks (I.6)}: nous ordonnons les couples d'adresses IP  {\color{gray}(ip1, ip2)} de chaque lien suivant l'ordre alphanumérique. 
+%Par exemple, 
+ \item \textbf{mergeLinks (I.7)} : nous fusionnons les liens avec leurs caractéristiques. En résultat, les
+ liens (ip1, ip2) et (ip2, ip1) sont fusionnés et sont représentés par le lien (ip1, ip2) si (ip1,
+ ip2) < (ip2, ip1).
+ \item \textbf{resumeData (1.8)} : jusqu'à cette étape, les liens sont organisés par  {\color{gray}bin}.
+ Nous réorganisons chaque lien de toutes les périodes de sorte que chaque RTT différentiel soit associé à la période correspondante; la période pendant laquelle il a été identifié. C'est pourquoi les deux listes  {\color{gray}[rttDiff]} et  {\color{gray}[bin]} ont la même longueur.
+ 
+  %Vu qu'un lien peut être identifié durant plusieurs périodes, nous résumons un lien en fusionnant leurs
+ %RTTs différentiels. Toutefois, chaque RTT différentiel doit garder le  {\color{gray}bin} pendant lequel il a été identifié, ainsi 
+ 
+ 
+ 
+\end{itemize}
+
+\paragraph{ Phase II : détection des alarmes.}
+
+ A la fin de la phase I, nous avons tous les liens identifiés avec leurs
+ RTTs différentiels. 
+ 
+ \begin{itemize}
+
+ \item \textbf{ findAllBins (II.1)} : nous générons les mêmes périodes  ({\color{gray}[bin]}) que celles générées à
+ l'étape (I.1).
+ \item \textbf{ findRTTDiffByBin (II.2)} : nous reprenons les périodes générées dans l'ordre chronologique et
+ pour chaque {\color{gray}bin} nous cherchons les RTTs différentiels correspondants. Nous
+ notons  {\color{gray}dist} l'ensemble des RTTs différentiels correspondants à la période courante.
+ Seules les périodes ayant enregistré au moins  quatre RTTs différentiels qui  seront considérées.
+\item \textbf{ wilsonScoreProcess (II.3)} : le calcul de l'intervalle de confiance à partir du score de Wilson nécessite d'avoir le nombre total des expériences, le nombre d'expérience réussies et  le risque d'erreur. Nous calculons les deux valeurs du score de Wilson suivant les étapes suivantes :
+
+\begin{enumerate}
+	\item Soit $n$ la taille de la distribution, nous calculons le score de Wilson et cela donne le couple de valeurs ($ low $, $ hight $);
+	\item nous multiplions $ low $ et $ hight $ par  $n$, ainsi nous avons ($ lo $, $ hi $)=  ($ n*low $, $ n*hight $);
+	\item nous récupérons la partie entière du  $ lo $ et $ hi $ et  nous obtenons
+	
+	 ($l$, $h$) = ($ int $($ lo $), $ int $($ hi $))\footnote{La fonction $  int() $ est utilisée pour avoir la partie entière d'un nombre réel.};
+	\item  nous trions  {\color{gray}{dist}}  et nous parcourons cette dernière pour trouver les RTTs différentiels  se trouvant au rang $  l $ et $ h $ dans {\color{gray}dist}, respectivement sont $ rttDiffL $, $ rttDiffH $. Ainsi :
+	
+	 $ rttDiffL  = dist[l]$  et $ rttDiffH = dist[h]$, avec $l$, $h$ $\in$ $[0,n[$. 
+	
+\end{enumerate}
+
+
+ \item \textbf{updateCurrentLinkState (II.4)} :  {\color{gray}current}  est l'objet encapsulant  l'état courant du lien à une période donnée, il a
+    les éléments suivants:
+ 
+ \begin{itemize}[label=$\square$]
+ 	\item le RTT différentiel médian ({\color{gray}median}),
+ 	{\color{gray}currentMedian} = median(dist) 
+ 	
+ 	\item  la borne inférieure de l'intervalle de confiance ({\color{gray}ciLow}),
+ 	
+ 	{\color{gray}currentCiLow} = {\color{gray}median} --  $ rttDiffL $
+ 	
+ 	\item   la borne supérieure de l'intervalle de confiance ({\color{gray}ciHight}),
+ 	
+ 	{\color{gray}currentCiHight} =  $ rttDiffH$ --  {\color{gray}median}
+ 	
+ \end{itemize}
+
+\item \textbf{ updateReferenceLinkState (II.5)} :  {\color{gray}reference}  est l'état de référence du lien à une période donnée. Il reprend les mêmes éléments que  l'objet {\color{gray}current}.  L'état référence est décrit par la médiane du RTT différentiel, la borne inférieure de l'intervalle de confiance de référence et enfin la borne supérieure de l'intervalle de confiance de référence.
+L'état courant décrit un lien à une période donnée, alors que l'état référence décrit l'état d'un lien à une période donnée en prenant en compte aussi les périodes qui précédent la période courante. La mise à jour de {\color{gray}reference}  est réalisée selon trois cas. Nous distinguons ces cas tel que:
+
+\begin{enumerate}
+	\item Cas $1$: tant que nous n'avons pas construit une référence assez représentable de l'état du lien,  nous mettons à jour la référence ({\color{gray}reference}) comme suit: 
+	\begin{align}
+	referenceMedian &= median(dist)\\
+	referenceCiLow &= rttDiffL\\
+	referenceCiHight& = rttDiffH
+	\end{align}
+	\item Cas $2$ : une fois nous atteignons le nombre nécessaire de  mise à jour de la référence assurant la représentativité de la référence, nous mettons à jour l'état référence en remplaçant, pour chaque période, la médiane par \textit{ aggr\_median}, la borne inférieure  par  \textit{aggr\_ciLow} et la borne sépérieure par \textit{aggr\_ciHigh}.
+	\begin{itemize}
+		
+\item  soit \textit{aggr\_median} la médiane de tous les RTTs différentiels médians de référence calculés pour toutes les périodes précédentes. 
+	
+\item 	soit \textit{aggr\_ciLow} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
+	
+\item 	soit \textit{aggr\_ciHigh} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
+
+\end{itemize}
+
+	
+	\item Cas $3$ : une fois la référence est assez représentable, nous mettons à jour cette dernière comme suit \footnote{Nous précisons que $ var[-1] $ dénote la dernière valeur que $ var $  avait. }:
+	\begin{align}
+		referenceMedian &=  0.99*referenceMedian[-1]+0.01*currentMedian \\
+		 referenceCiLow &=	 0.99*referenceLow[-1]+0.01*rttDiffL \\
+	referenceCiHight &=  0.99*referenceHight[-1]+0.01*rttDiffH
+	\end{align}
+
+	   
+	
+
+\end{enumerate}
+ \item \textbf{ alarmsDetection (II.6) }:   la détection des anomalies est déclenchée à partir du cas $3$. Si une anomalie est détectée, nous mettons à jour la liste des alarmes  {\color{gray}(alarmsValues)} avec le RTT différentiel médian (currentMedian) ainsi que la
+ liste des dates  {\color{gray}(alarmsDates)} qui correspondent à ces anomalies. Les anomalies sont détectées en évaluant le chevauchement entre l'intervalle de confiance courant et celui de référence. La période courante présente une anomalie si la condition suivante est vraie\footnote{Nous notons par [-1] l'élément précédent d'une mesure. Par exemple, currentMedian[-1] est la médiane des RTTs différentiels de la période qui précède la période courante.}:
+ \begin{lstlisting}[language=json,firstnumber=1, caption={Conditions de présence d'une anomalie pour un lien},
+ basicstyle =\footnotesize]
+currentMedian[-1]-currentCiLow[-1] > referenceHi[-1] or
+currentMedian[-1]+currentCiHigh[-1] < referenceCiLow[-1]) and
+np.abs(currentMedian[-1]-reference[-1])>1
+ \end{lstlisting}
+
+ 
+ 
+  \end{itemize}
+
+\paragraph{ Illustrations des deux phases de détection}~
+ La Figure  \ref{fig:step-preparing-data} reprend les étapes de la phase I. Chaque étape est définie par ses entrées et
+ses sorties ainsi que sont objectif et
+la Figure \ref{fig:step-detection-anomalies} illustre aussi les principales étapes  de la phase II.
+\newpage
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{!}{\textheight}{
+		\input{illustrations/step-preparing-data.tex}
+	}
+	\caption{Phase I : préparation de données }
+	\label{fig:step-preparing-data}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{\textheight}{
+		\input{illustrations/step-detection-anomalies.tex}
+	}
+	\caption{Phase II : détection des alarmes }
+	\label{fig:step-detection-anomalies}
+\end{figure}
+
+\subsection{Exemple illustratif des étapes de la détections des alarmes}
+
+\paragraph{Description de  l'échantillon} :
+
+L'échantillon des traceroutes qui va nous permettre d'illustrer l'algorithme de la détection des alarmes est définie comme suit :
+
+\begin{itemize}
+	\item le nombre total de traceroutes est de $25$;
+	\item le premier traceroute a été capturé à $1514769800$\footnote{Équivalent à GMT: Monday, January 1, 2018 1:23:20 suivant \url{https://www.epochconverter.com/}, consultée le $04/04/2019$.};
+	\item le dernier traceroute a été capturé à $1514787809$\footnote{Équivalent à GMT: Monday, January 1, 2018 6:23:29 suivant \url{https://www.epochconverter.com/}, consultée le $04/04/2019$.};
+	\item la durée d'une période est $1$ heure ($3600$);
+	\item les débuts des périodes entre $ 1514769800 $ et $ 1514789809 $ sont  $ 1514769800 $, $ 1514773400 $, $ 1514777000 $, $ 1514780600 $, $ 1514784200 $, $ 1514787800 $;
+	%\item la liste des traceroutes analysés est disponible sur[!].
+\end{itemize} 
+
+
+
+%\begin{landscape}
+
+\begin{table}[H]
+	\centering
+	%\resizebox{\textwidth}{!}{
+	\begin{tabular}{c|c}
+	\textbf{étape} &  \textbf{résultats}	\\ \hline
+	(I.1) &   $ 1514769800 $, $ 1514773400 $, $ 1514777000 $,
+	
+	 $ 1514780600 $, $ 1514784200 $, $ 1514787800 $\\ \hline
+(I.2)& 
+				\begin{tabular}{ccc}
+	\textbf{id}&	\textbf{période}&\textbf{nombre de traceroutes} \\ \hline
+	1&	[1514769800, 1514769800+3600] & 5\\ \hline
+	2&	[1514773400, 1514773400+3600] & 4\\ \hline
+	3&	[1514777000, 1514777000+3600] & 4\\ \hline
+	4&	[1514780600, 1514780600+3600] &4 \\ \hline
+	5&	[1514784200, 1514784200+3600] &4 \\ \hline
+	6&	[1514787800, 1514787800+3600] & 4 \\ \hline
+				\end{tabular}\\ \hline
+\end{tabular}
+%}
+\end{table}
+
+Une fois les traceroutes sont groupés par période, nous parcourons chaque traceroute afin d'éliminer ceux invalides (étape  I.3). 
+Ensuite, nous agrégeons chaque saut par source de signal en calculant leur médiane. Nous donnons un exemple d'un traceroute qui illustre cette agrégation (voir les Listings \ref{beforemedianagg} et \ref{aftermedianagg}). Le même traitement est appliqué sur les autres traceroutes. 
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Les sauts du traceroute T7 (sans agrégation)}, basicstyle=\footnotesize, label=beforemedianagg]
+hop_id : 1, hops : [(from : 89.105.200.57, rtt : 1.955,  x : None),(from : 89.105.200.57, rtt : 1.7, x : None),(from : 89.105.200.57, rtt : 1.709,  x : None)]
+hop_id : 2, hops : [(from : 185.147.12.31, rtt : 8.543,  x : None),(from : 185.147.12.31, rtt : 4.103, x : None),(from : 185.147.12.31, rtt : 4.41, x : None)]
+hop_id : 3, hops : [(from : 185.147.12.19, rtt : 4.347,  x : None),(from : 185.147.12.19, rtt : 2.876, x : None),(from : 185.147.12.19, rtt : 3.143, x : None )]
+\end{lstlisting}
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Les sauts du traceroute T7 (après l'agrégation)}, basicstyle=\footnotesize, label=aftermedianagg]
+hop_id : 1, hops : [(from : 89.105.200.57, rttAgg : 1.709)]
+hop_id : 2, hops : [(from : 185.147.12.31, rttAgg : 4.41)] 
+hop_id : 3, hops : [(from : 185.147.12.19, rttAgg : 3.143)]
+\end{lstlisting}
+
+L'inférence  des liens du traceroute T7 (étape I.5) fournit les liens suivants: 
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Exemple des liens inférés du traceroute T7}, basicstyle = \footnotesize]
+lien 1 : (link : (185.147.12.31, 89.105.200.57), rttDiff : 2.701)
+lien 2 : (link : (185.147.12.19,185.147.12.31), rttDiff : -1.267)
+\end{lstlisting}
+
+
+A l'étape (I.6), nous ordonnons les adresses IP de chaque lien  comme c'est illustré dans le Listing \ref{sortLinks} avec la fonction \textit{sort()}. 
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Illustration de l'ordre des liens}, basicstyle = \footnotesize, label=sortLinks]
+sort(("185.147.12.31","89.105.200.57")) = ("185.147.12.31","89.105.200.57")
+sort(("89.105.200.57","185.147.12.31"))= ("185.147.12.31","89.105.200.57")   
+\end{lstlisting}
+
+L'ordonnancement à l'étape  I.6 est une préparation à la fusion. Nous fusionnons les liens ayant impliqué les mêmes routeurs. Prenons les liens inférés à partir des $5$ traceroutes  comme c'est montré dans le Listing \ref{linksofsometraceroutes}.
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Liste des liens possibles inférés via  les traceroutes T1, T2, T3, T4 et T5}, basicstyle = \footnotesize, label=linksofsometraceroutes]
+T1 (link : (185.147.12.31,89.105.200.57), rttDiff : 2.463)
+   (link : (185.147.12.19,185.147.12.31), rttDiff : -1.029)
+
+T2 (link : (185.147.12.31,89.105.200.57), rttDiff : 3.463) 
+   (link : (185.147.12.19,185.147.12.31), rttDiff : -2.029)
+
+T3 (link : (185.147.12.31,89.105.200.57), rttDiff : 2.991) 
+   (link : (185.147.12.19,185.147.12.31), rttDiff : -1.557)
+
+T4 (link : (185.147.12.31,89.105.200.57), rttDiff : 4.631) 
+   (link : (185.147.12.19,185.147.12.31), rttDiff : -3.197)
+
+T5 (link : (89.105.200.57,185.147.12.31), rttDiff : -7.75) 
+   (link : (185.147.12.19,89.105.200.57), rttDiff : 3.803)
+\end{lstlisting}
+
+La fusion de ces liens nous donne les trois liens présentés dans le Listing \ref{morelinks}. Chaque lien est caractérisé par les sondes l'ayant capturé, leurs  RTTs Différentiels et la période dupliquée, pendant laquelle il a été identifié, en nombre de RTTs différentiels. 
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Caractérisation des liens identifiés lors  de la période 1514769800 avec les traceroutes T1, T2, T3, T4 et T5}, basicstyle = \footnotesize, label =morelinks]
+[(link :(185.147.12.19,89.105.200.57),
+probes : [4247],
+rttDiffs :[3.803],
+bins :[1514769800]),
+
+(link : (185.147.12.19,185.147.12.31),
+probes : [4247, 4247, 4247, 4247],
+rttDiffs :[-1.029, -2.029, -1.557, -3.197],
+bins : [1514769800, 1514769800, 1514769800, 1514769800]),
+
+(link : (185.147.12.31,89.105.200.57),
+probes : [4247, 4247, 4247, 4247, 4247],
+rttDiffs :[2.463, 3.463, 2.991, 4.631, -7.75],
+bins : [1514769800, 1514769800, 1514769800, 1514769800, 1514769800]) ]
+\end{lstlisting}
+
+Après avoir analysé  toutes les périodes, nous résumons les liens en fusionnant les données relatives à toutes les périodes, c'est l'objectif de l'étape I.8.
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Illustration de l'ordre des liens}, basicstyle = \footnotesize]
+[(link   : (185.147.12.19,89.105.200.57), 
+    probes : (4247), 
+    rttDiffs : (3.803), 
+    bins : (1514769800)),  
+
+ link : (185.147.12.19,185.147.12.31), 
+    probes : (4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247), 
+    rttDiffs : (-1.267, -2.407, -1.49, -3.029, -1060.029, -1045.029, -1098.029, -1080.029, -680.029, -845.029, -998.029, -800.029, -1.029, -2.029, -1.557, -3.197, -1.277, -2.017, -1.257, -2.968, -0.96, -1.967, -0.987, -3.201), 
+    bins : (1514787800, 1514787800, 1514787800, 1514787800, 1514784200, 1514784200, 1514784200, 1514784200, 1514780600, 1514780600, 1514780600, 1514780600, 1514769800, 1514769800, 1514769800, 1514769800, 1514773400, 1514773400, 1514773400, 1514773400, 1514777000, 1514777000, 1514777000, 1514777000)),  
+
+ link : (185.147.12.31,89.105.200.57),
+    probes : (4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247, 4247),
+    rttDiffs : (2.701, 3.841, 2.924, 4.463, 1061.463, 1046.463, 1099.463, 1081.463, 681.463, 846.463, 999.463, 801.463, 2.463, 3.463, 2.991, 4.631, -7.75, 2.711, 3.451, 2.691, 4.402, 2.394, 3.401, 2.421, 4.635),
+    bins : (1514787800, 1514787800, 1514787800, 1514787800, 1514784200, 1514784200, 1514784200, 1514784200, 1514780600, 1514780600, 1514780600, 1514780600, 1514769800, 1514769800, 1514769800, 1514769800, 1514769800, 1514773400, 1514773400, 1514773400, 1514773400, 1514777000, 1514777000, 1514777000, 1514777000))]
+\end{lstlisting}
+
+
+A la fin de l'étape I.8, nous disposons de tous les liens possibles caractérisés avec leurs RTTs différentiels. Ainsi, nous pouvons entamer la phase II du processus de la détection.
+
+Dans un premier temps, nous générons les mêmes  périodes générées à  l'étape I.1. Pour chaque période,  nous récupérons les RTTs différentiels identifiés durant celle-ci, et nous obtenons {\color{gray} dist}, cette dernière représente l'ensemble des RTTs différentiels de la période courante, c'est l'objectif de l'étape II.2.
+
+Dans notre exemple,  et pour la clarté de ce dernier, une référence est assez représentable après avoir calculé 3 intervalles de confiances.  
+
+Les tableaux suivants reprennent les différentes itérations permettant d'analyser notre ensemble de traceroutes ($25$). Chaque tableau illustre les résultats de l'analyse d'une période, dans l'ordre chronologique de ces périodes.
+\newpage
+%\begin{landscape}
+	\begin{table}[H]
+		\centering
+
+	%	\resizebox{24.7cm}{!}{
+		\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+\textbf{itération} & 1	\\ \hline
+\textbf{bin} & $1514769800$ \\ \hline
+\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+\textbf{dist}& [-7.75, 2.463, 2.991, 3.463, 4.631]	\\ \hline
+\textbf{(low, hight)}& (0.11762077423264793, 0.7692757187239873) 	\\ \hline
+\textbf{(lo, hi)}&(0.5881038711632396, 3.8463785936199364)  \\ \hline
+\textbf{(l, h)} & (0, 3) 	\\ \hline
+\textbf{rttDiffL}& dist[0] = -7.75	\\ \hline
+\textbf{rttDiffH}& dist[3]= 3.463	\\ \hline
+\textbf{currentMedian}& 2.991	\\ \hline
+\textbf{currentCiLow}&  2.991 - (-7.75) = 10.741 	\\ \hline
+\textbf{currentCiHi}& 3.463 - 2.991 =  0.472	\\ \hline
+\textbf{cas 1? 2? 3?}& cas 1 (aucun intervalle de confiance calculé)  \\ \hline
+\textbf{referenceMedian}& 2.991	\\ \hline
+\textbf{referenceCiLow}& -7.75	\\ \hline
+\textbf{referenceCiHi}&3.463	\\ \hline
+\textbf{détection des alarmes ?}& non (car cas 3 pas  encore atteint)	\\ \hline
+\textbf{alarmesDates}& []	\\ \hline
+\textbf{alarmesValues}& []	\\ \hline
+		
+			
+		\end{tabularx}
+	%	}
+	\end{table}
+
+
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		\textbf{itération} & 2	\\ \hline
+		\textbf{bin} & $1514773400$ \\ \hline
+		\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		\textbf{dist}& [2.691, 2.711, 3.451, 4.402]	\\ \hline
+		\textbf{(low, hight)}& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		\textbf{(lo, hi)}&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		\textbf{(l, h)} & (0, 3) 	\\ \hline
+		\textbf{rttDiffL}& dist[0] = 2.691	\\ \hline
+		\textbf{rttDiffH}& dist[3]= 4.402	\\ \hline
+		\textbf{currentMedian}& 3.081	\\ \hline
+		\textbf{currentCiLow}&  0.39 	\\ \hline
+		\textbf{currentCiHi}& 1.321	\\ \hline
+	\textbf{	cas 1? 2? 3?}& cas 1 (1 intervalle de confiance calculé)  \\ \hline
+		\textbf{referenceMedian}& 3.081	\\ \hline
+		\textbf{referenceCiLow}& 2.691	\\ \hline
+		\textbf{referenceCiHi}&4.402	\\ \hline
+		\textbf{détection des alarmes} ?& non (car cas 3 pas  encore atteint)	\\ \hline
+		\textbf{alarmesDates}& []	\\ \hline
+		\textbf{alarmesValues}& []	\\ \hline
+		
+		
+	\end{tabularx}
+	%	}
+\end{table}
+
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		\textbf{itération} & 3	\\ \hline
+		\textbf{bin} & $1514777000$ \\ \hline
+		\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		\textbf{dist}& [2.394, 2.421, 3.401, 4.635]	\\ \hline
+		\textbf{(low, hight)}& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		\textbf{(lo, hi)}&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		\textbf{(l, h)} & (0, 3) 	\\ \hline
+		\textbf{rttDiffL}& dist[0] = 2.394	\\ \hline
+		\textbf{rttDiffH}& dist[3]= 4.635	\\ \hline
+		\textbf{currentMedian}& 2.9109999999999996	\\ \hline
+		\textbf{currentCiLow}& 0.5169999999999996 	\\ \hline
+		\textbf{currentCiHi}& 1.7240000000000004	\\ \hline
+		\textbf{cas 1? 2? 3?}& cas 1 (2 intervalle de confiance calculé)  \\ \hline
+		\textbf{referenceMedian}& 2.9109999999999996	\\ \hline
+		\textbf{referenceCiLow}& 2.394	\\ \hline
+		\textbf{referenceCiHi}& 4.635	\\ \hline
+		\textbf{détection des alarmes ?}& (car cas 3 pas  encore atteint)	\\ \hline
+		\textbf{alarmesDates}& []	\\ \hline
+		\textbf{alarmesValues}& []	\\ \hline
+		
+		
+	\end{tabularx}
+	%	}
+\end{table}
+
+
+
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		\textbf{itération} & 4	\\ \hline
+		\textbf{bin} & $1514780600$ \\ \hline
+		\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		\textbf{dist}& [681.463, 801.463, 846.463, 999.463]	\\ \hline
+		\textbf{(low, hight)}& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		\textbf{(lo, hi)}&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		\textbf{(l, h)} & (0, 3) 	\\ \hline
+		\textbf{rttDiffL}& dist[0] = 681.463	\\ \hline
+		\textbf{rttDiffH}& dist[3]= 999.463	\\ \hline
+		\textbf{currentMedian}& 823.963	\\ \hline
+		\textbf{currentCiLow}& 142.5 	\\ \hline
+		\textbf{currentCiHi}& 175.5	\\ \hline
+		\textbf{cas 1? 2? 3?}& cas 2 (3 intervalle de confiance calculé)  \\ \hline
+		\textbf{referenceMedian}& 2.991 (car median([2.991, 3.081, 2.9109999999999996])= 2.991)	\\ \hline
+		\textbf{referenceCiLow}& 2.394 (car median ([-7.75, 2.691, 2.394])= 2.394)	\\ \hline
+		\textbf{referenceCiHi}& 4.402 (car median([3.463, 4.402, 4.635])=4.402)	\\ \hline
+		\textbf{détection des alarmes ?}& non (car cas 3 pas  encore atteint)	\\ \hline
+		\textbf{alarmesDates}& []	\\ \hline
+		\textbf{alarmesValues}& []	\\ \hline
+		
+	\end{tabularx}
+	%	}
+\end{table}
+
+
+
+
+
+
+
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		\textbf{itération} & 5	\\ \hline
+		\textbf{bin} & $1514784200$ \\ \hline
+		\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		\textbf{dist}& [1046.463, 1061.463, 1081.463, 1099.463]	\\ \hline
+		\textbf{(low, hight)}& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		\textbf{(lo, hi)}&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		\textbf{(l, h)} & (0, 3) 	\\ \hline
+		\textbf{rttDiffL}& dist[0] = 1046.463	\\ \hline
+		\textbf{rttDiffH}& dist[3]= 1099.463	\\ \hline
+		\textbf{currentMedian}& 1071.463	\\ \hline
+		\textbf{currentCiLow}& 25.0 	\\ \hline
+		\textbf{currentCiHi}& 28.0	\\ \hline
+	\textbf{cas 1? 2? 3?}& cas 3 (car la référence est assez représentable )  \\ \hline
+		\textbf{referenceMedian}& 13.67572 (car $ 0.99×2.991 + 0.01×1071.463 = 13.67572 $ ) 	\\ \hline
+		\textbf{referenceCiLow}& 12.83469  (car $ 0.99×2.394+ 0.01×1046.463 = 12.83469  $)	\\ \hline
+		\textbf{referenceCiHi}& 15.352609999999999 (car $ 0.99×4.402 + 0.01×1099.463 = 15.35261 $)	\\ \hline
+		\textbf{détection des alarmes ?}& oui (car : cas 3)	\\ \hline
+		\textbf{alarmesDates}& [1514784200]	\\ \hline
+		\textbf{alarmesValues}& [1071.463]	\\ \hline
+		
+	\end{tabularx}
+	%	}
+\end{table}
+
+
+
+	\begin{table}[H]
+	\centering
+	
+	%	\resizebox{24.7cm}{!}{
+	\begin{tabularx}{\linewidth}{|l|X| }
+		\hline
+		\textbf{itération} & 6	\\ \hline
+		\textbf{bin} & $1514787800$ \\ \hline
+		\textbf{lien} & $(185.147.12.31, 89.105.200.57)$  \\ \hline
+		\textbf{dist}& [2.701, 2.924, 3.841, 4.463]	\\ \hline
+		\textbf{(low, hight)}& (0.15003898915214947, 0.8499610108478506) 	\\ \hline
+		\textbf{(lo, hi)}&(0.6001559566085979, 3.3998440433914023)  \\ \hline
+		\textbf{(l, h)} & (0, 3) 	\\ \hline
+		\textbf{rttDiffL}& dist[0] = 2.701	\\ \hline
+		\textbf{rttDiffH}& dist[3]= 4.463	\\ \hline
+		\textbf{currentMedian}&  3.3825000000000003	\\ \hline
+		\textbf{currentCiLow}& 0.6815000000000003 	\\ \hline
+		\textbf{currentCiHi}& 15.243713899999998	\\ \hline
+		\textbf{cas 1? 2? 3?}& cas 3 (car la référence est assez représentable)  \\ \hline
+		\textbf{referenceMedian}& 13.5727878 	\\ \hline
+		\textbf{referenceCiLow}&  12.7333531	\\ \hline
+		\textbf{referenceCiHi}& 15.352609999999999 	\\ \hline
+		\textbf{détection des alarmes ?}& oui (car : cas 3)	\\ \hline
+		\textbf{alarmesDates}& [1514784200, 1514787800]	\\ \hline
+		\textbf{alarmesValues}& [1071.463, 3.3825000000000003]	\\ \hline
+	\end{tabularx}
+	%	}
+\end{table}
+
+
+
+%\section{Implémentation Spark/Scala} \label{implementation-scala}
+%Nous avons reproduit le processus de la détection des anomalies avec l'outil Spark avec Scala comme API. Le processus de détection est décrite dans la section \ref{anomalies-process}.
+
+%Nous avons implémenté l'outil de détection en utilisant le framework Spark présenté dans la section \ref{apache-spark}. Afin d'accéder aux différentes fonctionnalités, nous avons utilisé l'API Scala.
+
+\begin{comment}
+vérifeir la description du driver dans la présentation du Spark
+\end{comment}
+%En pratique, nous avons utilisé le mode standalone du Spark (voir les modes du Spark dans \ref{modes-sparks}). L'implémentation Spark/Scala reprend des éléments suivants:
+
+%\paragraph{Le programme driver}
+
+%\paragraph{La création des case class}
+%Les cases class sont utilisée pour modéliser les données immuable.  Nous avons utilisé plusieurs classe de ce type afin de modéliser les données tout au long de l'analyse.
+
+%\paragraph{La création  RDDs}
+
+%\paragraph{La création des transformations}
+
+
+%\end{landscape}
+
+%\end{landscape}
+
+%Les périodes obtenues sont présentées dans le tableau \ref{tab:allBins}, c'est ce qu'on obtient à la fin de l'étape   findTraceroutesByBin (I.2).

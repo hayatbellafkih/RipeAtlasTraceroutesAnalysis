@@ -1,0 +1,79 @@
+draft :
+
+%$ \left( \frac{a+b}{c-d} \right)$ 
+
+\begin{comment}
+Maintenant, nous discutons la provenance de la probabilité $ p = 0.5 $ et les formules \ref{align:formule-j} et \ref{align:formule-k}. Pour ce faire, nous utilisons le jeu pile ou face. En lançant un dé non truqué $10$ fois, nous souhaitons être sûr de gagner, avoir pile, entre $j$ et $k-1$ fois avec une probabilité de $95\%$. Nous calculons cette intervalle en utilisant une distribution binomiale.
+Par exemple si :
+n= 10 : à $95\%$ nous sommes sûrs de gagner entre 2 et 8 fois
+n= 100:  à $95\%$ nous sommes sûrs de gagner entre $ 40 $ et $ 61 $ fois
+
+Supposons que le lancement de dé est fait $10$ fois, à chaque fois nous obtenons ($ X_i $) : $X_1$,  $X_2$,  $X_3$, ...,  $X_{10}$. Pour tout  $X_i$, je gagne si $X_i < {\mu}$ sinon c'est un échec. Il s'agit de $10$ résultats, dans ce cas si :
+
+je gagne 2 fois :  2 valeurs sont au dessous \textmu et 8 valeurs sont au dessus  \textmu
+$ X_{2}\leq  \mu < X_{3}$
+
+je gagne 3 fois :  3 valeurs sont au dessous \textmu et 7 valeurs sont au dessus  \textmu
+$ X_{3}\leq  \mu < X_{4}$
+je gagne 4 fois :  4 valeurs sont au dessous \textmu et 6 valeurs sont au dessus  \textmu
+$ X_{4}\leq  \mu < X_{5}$
+
+je gagne 5 fois :  5 valeurs sont au dessous \textmu et 5 valeurs sont au dessus  \textmu
+$ X_{5}\leq  \mu < X_{6}$
+
+je gagne 6 fois :  6 valeurs sont au dessous \textmu et 4 valeurs sont au dessus  \textmu
+$ X_{6}\leq  \mu < X_{7}$
+je gagne 7 fois :  7 valeurs sont au dessous \textmu et 3 valeurs sont au dessus  \textmu
+$ X_{7}\leq  \mu < X_{8}$
+je gagne 8 fois :  8 valeurs sont au dessous \textmu et 2 valeurs sont au dessus  \textmu
+$ X_{8}\leq  \mu < X_{9}$
+%------------------------------------------
+\end{comment}
+
+
+
+\paragraph{Pourquoi Wilson?}
+
+\paragraph{Pourquoi un calcul binomial des intervalles de confiance?}
+
+
+
+\subparagraph{La distribution des intervalles de confiance : bornes inférieures et bornes supérieures est de type \textit{distribution free}.} Dans ce cas, les différentes bornes calculées pour chaque médiane ne suivent pas une loi de probabilité.
+
+
+
+\begin{comment}
+
+https://ellistat.com/guide-dutilisateur/statistique-inferentielle/tests-parametriques-vs-non-parametriques/
+http://cerim.univ-lille2.fr/fileadmin/user_upload/statistiques/michael_genin/Cours/Tests_statistiques/Tests_parametriques_printable.pdf
+\end{comment}
+
+\begin{comment}
+Afin de comprendre le calcul de l'intervalle de confiance d'une médiane $m$ nous reprenons l'exemple donné dans le cours 47\footnote{https://newonlinecourses.science.psu.edu/stat414/node/316/}.
+Soit l'ordre  statistique des éléments d'un échantillon de taille $5$ donné : $Y_1 < Y_2 <Y_3 < Y_4 < Y_5$. Supposons que l'intervalle formé par le premier et le cinquième élément, ($Y_1$, $Y_5$), peut servir comme étant un bon intervalle de confiance. Sachant qu'un bon intervalle de confiance est celui qui inclut toute médiane. La question qui se pose est à quel niveau de confiance cet intervalle contiendra les valeurs inconnues de la médiane de la population.
+
+Afin de répondre à cette question, nous devons calculer la probabilité suivante:
+$P(Y_1 < m < Y_5) $
+
+Le calcul de ce
+
+
+\begin{tabular}{cccccccccc}
+7.68& 7.76& 7.76& 7.92& 7.92& 8.08& 8.16& 8.24& 8.32& 8.72\\
+\end{tabular}
+\end{comment}
+
+
+Il existe deux grandes familles de tests pour comparer une population à une valeur théorique : les tests paramétriques et  les tests non paramétriques.
+
+\section{Définitions}
+
+\paragraph{Test statistique}
+Un test statistique est une procédure de décision entre deux hypothèse concernant un ou plusieurs  ́échantillons\footnote{\url{http://helios.mi.parisdescartes.fr/~ebirmele/depots/Enseignements/Tests/Tests.pdf}, consultée le $26/04/2019$.}.
+
+
+\subparagraph{Tests paramétriques} Dans le cas des tests paramétriques, nous supposons que les données que nous avons à notre disposition suivent un type de loi de distribution connu. Par conséquent, le calcul du risque alpha se base sur cette loi. C'est pourquoi il est important de vérifier la loi de la distribution. 
+
+\subparagraph{Tests non paramétriques} Ce sont des tests qui ne font aucune hypothèse sur le type de la loi dont les données suivent. Ils se basent uniquement sur les propriétés numériques des échantillons.
+
+es tests non paramétriques n'ont pas besoin de supposer un type de distribution particulière pour calculer le risque alpha du test. Ils sont très élégants et se basent sur des propriétés numériques. De plus, ils sont très peu sensibles aux valeurs aberrantes et sont donc conseillés dans ce cas. [copier/coller]

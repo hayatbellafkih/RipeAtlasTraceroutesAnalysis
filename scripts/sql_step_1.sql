@@ -1,1 +1,0 @@
-with dataset AS (SELECT de, msm_id, prb_id,mydata.hop, test."from",test.rtt FROM (SELECT "from" AS de, msm_id, prb_id ,mydata  FROM traceroutes CROSS JOIN unnest(result) AS t(mydata)) AS tab CROSS JOIN unnest(mydata.result) AS tt(test)) SELECT approx_percentile(rtt,0.5) AS med , "from", cast(hop AS integer) as hop FROM dataset GROUP BY  "from", hop

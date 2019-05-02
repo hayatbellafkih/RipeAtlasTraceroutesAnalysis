@@ -1,0 +1,60 @@
+\babel@toc {french}{}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {I.1}{\ignorespaces Génération 1\relax }}{8}{figure.caption.4}
+\contentsline {figure}{\numberline {I.2}{\ignorespaces Génération 2\relax }}{8}{figure.caption.4}
+\contentsline {figure}{\numberline {I.3}{\ignorespaces Génération 3\relax }}{8}{figure.caption.4}
+\contentsline {figure}{\numberline {I.4}{\ignorespaces Les trois générations des sondes Atlas\relax }}{8}{figure.caption.4}
+\contentsline {figure}{\numberline {I.5}{\ignorespaces La connexion des sondes Atlas à l'infrastructure RIPE Atlas \cite {how-we-manage-our-probe}\relax }}{10}{figure.caption.5}
+\contentsline {figure}{\numberline {I.6}{\ignorespaces L'architecture du système RIPE Atlas \relax }}{11}{figure.caption.6}
+\contentsline {figure}{\numberline {I.7}{\ignorespaces Les étapes d'établissement d'une connexion entre la sonde Atlas et l'architecture RIPE Atlas\relax }}{13}{figure.caption.7}
+\contentsline {figure}{\numberline {I.8}{\ignorespaces La corrélation entre la moyenne des AS paths et la moyenne des RTTs \cite {Salim-Gasmi}\relax }}{25}{figure.caption.13}
+\contentsline {figure}{\numberline {I.9}{\ignorespaces Visualisation des changements des chemins traceroute \cite {Traceroute-consistency-check}\relax }}{26}{figure.caption.15}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {II.1}{\ignorespaces (a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite {DBLP:journals/corr/FontugneAPB16}\relax }}{32}{figure.caption.25}
+\contentsline {figure}{\numberline {II.2}{\ignorespaces Illustration des périodes de l'analyse entre la date de début et la date de fin\relax }}{33}{figure.caption.27}
+\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{35}{figure.caption.28}
+\contentsline {figure}{\numberline {II.4}{\ignorespaces Inférence des liens possibles entre les routeurs des deux sauts consécutifs $R_{a,i}$ et $R_{b,j}$\relax }}{36}{figure.caption.33}
+\contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{38}{figure.caption.39}
+\contentsline {figure}{\numberline {II.6}{\ignorespaces Le processus de la détection des anomalies dans les délais des liens\relax }}{39}{figure.caption.40}
+\contentsline {figure}{\numberline {II.7}{\ignorespaces Théorème 2.1 : Confidence Interval for the Median and other Quantiles\cite {leboudec2010performance}\relax }}{42}{figure.caption.41}
+\contentsline {figure}{\numberline {II.8}{\ignorespaces Illustration de la médiane\relax }}{42}{figure.caption.43}
+\contentsline {figure}{\numberline {II.9}{\ignorespaces Table d'intervalles de confiance à $95\%$ \cite {leboudec2010performance}\relax }}{43}{figure.caption.44}
+\contentsline {figure}{\numberline {II.10}{\ignorespaces Nomination utilisée\relax }}{46}{figure.caption.47}
+\contentsline {figure}{\numberline {II.11}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{47}{figure.caption.48}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {III.1}{\ignorespaces Phase I : préparation de données \relax }}{52}{figure.caption.53}
+\contentsline {figure}{\numberline {III.2}{\ignorespaces Phase II : détection des alarmes \relax }}{53}{figure.caption.54}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {IV.1}{\ignorespaces Architecture standard du Big Data \cite {anil-big-data}\relax }}{63}{figure.caption.68}
+\contentsline {figure}{\numberline {IV.2}{\ignorespaces Illustration d'une base de données NoSQL de type clé-valeur\relax }}{65}{figure.caption.72}
+\contentsline {figure}{\numberline {IV.3}{\ignorespaces Illustration d'une base de données NoSQL de type document\relax }}{65}{figure.caption.74}
+\contentsline {figure}{\numberline {IV.4}{\ignorespaces Illustration d'une base de données NoSQL de type colonne\relax }}{65}{figure.caption.76}
+\contentsline {figure}{\numberline {IV.5}{\ignorespaces Illustration d'une base de données NoSQL de type graphe\relax }}{66}{figure.caption.78}
+\contentsline {figure}{\numberline {IV.6}{\ignorespaces Bases de données NoSQL suivant le théorème de CAP \relax }}{67}{figure.caption.83}
+\contentsline {figure}{\numberline {IV.7}{\ignorespaces Un classement des SGBDs sur \textit {DB-Engines Ranking} du $1$ août $2018$ \relax }}{68}{figure.caption.84}
+\contentsline {figure}{\numberline {IV.8}{\ignorespaces Schema on Write (SGBDR)\relax }}{69}{figure.caption.85}
+\contentsline {figure}{\numberline {IV.9}{\ignorespaces Schema on Read (Big Data)\relax }}{69}{figure.caption.86}
+\contentsline {figure}{\numberline {IV.10}{\ignorespaces Interaction entre une application Spark et le cluster manager. Source : \cite {eginning-Apache-Spark-2-cluster-overwiew}\relax }}{74}{figure.caption.93}
+\contentsline {figure}{\numberline {IV.11}{\ignorespaces Un exemple d'un cluster formé de trois executors. Source : \cite {eginning-Apache-Spark-2-cluster-example}\relax }}{74}{figure.caption.96}
+\contentsline {figure}{\numberline {IV.12}{\ignorespaces Spark Unified Stack. Source : \cite {eginning-Apache-Spark-2-unified-stack}\relax }}{75}{figure.caption.99}
+\contentsline {figure}{\numberline {IV.13}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{76}{figure.caption.101}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {V.1}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{81}{figure.caption.114}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {VI.1}{\ignorespaces La médiane des temps d'exécution en fonction de la taille de traceroutes analysés (MongoDB)\relax }}{93}{figure.caption.123}
+\contentsline {figure}{\numberline {VI.2}{\ignorespaces Les temps d'exécution en fonction de la taille de traceroutes analysés (MongoDB)\relax }}{93}{figure.caption.124}
+\contentsline {figure}{\numberline {VI.3}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{94}{figure.caption.125}
+\contentsline {figure}{\numberline {VI.4}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{97}{figure.caption.128}
+\contentsline {figure}{\numberline {VI.5}{\ignorespaces \relax }}{101}{figure.caption.135}
+\contentsline {figure}{\numberline {VI.6}{\ignorespaces Regroupement des traceroutes d'une journée par leurs nombre de sauts\relax }}{102}{figure.caption.136}
+\contentsline {figure}{\numberline {VI.7}{\ignorespaces Les liens et les anomalies identifiés par ensemble de traceroutes\relax }}{102}{figure.caption.138}
+\contentsline {figure}{\numberline {VI.8}{\ignorespaces Comparaison de l'évolution des temps d'exécution entre MongoDB et Amazon Athena avec Amazon S3\relax }}{103}{figure.caption.140}
+\contentsline {figure}{\numberline {VI.9}{\ignorespaces La moyenne des temps d'exécution pour MongoDB et Spark\relax }}{103}{figure.caption.142}
+\contentsline {figure}{\numberline {VI.10}{\ignorespaces Comparaison des temps d'exécution entre MongoDB, AWS et Apache Spark\relax }}{104}{figure.caption.144}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{108}{figure.caption.146}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{109}{figure.caption.147}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Phase I : préparation des données \relax }}{114}{figure.caption.151}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Phase II : détection des changements \relax }}{115}{figure.caption.152}
+\addvspace {10\p@ }
