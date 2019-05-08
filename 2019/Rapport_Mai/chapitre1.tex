@@ -193,18 +193,18 @@ La Figure \ref{fig:deroulement-connexion-ripe-atlas} illustre les étapes d'éta
 
 Les étapes suivantes décrivent le déroulement de la connexion d'une sonde  $s$ à l'infrastructure  d'Atlas. 
 \begin{itemize}
-	\item[--] La sonde  se connecte à Internet via  le câble Ethernet $RJ45$ \circled{1}.
-	\item[--] La sonde  acquiert différentes informations : une adresse IPv4, une adresse IPv6 via Router Advertisement et les informations du résolveur DNS via DHCP \circled{2}. 
+	\item[--] \circled{1} La sonde  se connecte à Internet via  le câble Ethernet $RJ45$.
+	\item[--]  \circled{2} La sonde  acquiert différentes informations : une adresse IPv4, une adresse IPv6 via Router Advertisement et les informations du résolveur DNS via DHCP. 
 	
-	\item[--] Les informations précédemment acquises permettent à la sonde  de se connecter  au serveur d'enregistrement (Reg.server). C'est la première entrée vers l'infrastructure \circled{3}.
+	\item[--] \circled{3} Les informations précédemment acquises permettent à la sonde  de se connecter  au serveur d'enregistrement (Reg.server). C'est la première entrée vers l'infrastructure.
 	
-	\item[--] En se basant sur la géolocalisation de la sonde, la charge des différents contrôleurs et d'autres options,  le serveur d'enregistrement décide le contrôleur qui va  être associé à la sonde  \circled{4}. 
+	\item[--] \circled{4} En se basant sur la géolocalisation de la sonde, la charge des différents contrôleurs et d'autres options,  le serveur d'enregistrement décide le contrôleur qui va  être associé à la sonde. 
 	
-	\item[--] Suite à la décision du serveur d'enregistrement, le contrôleur reçoit l'identifiant de la sonde  à gérer et la sonde  reçoit l'identifiant du contrôleur  à qui elle sera associée \circled{5}.
+	\item[--] \circled{5} Suite à la décision du serveur d'enregistrement, le contrôleur reçoit l'identifiant de la sonde  à gérer et la sonde  reçoit l'identifiant du contrôleur  à qui elle sera associée.
 	
-	\item[--]  Une fois l'association entre la sonde  et le contrôleur est faite,  la sonde  se déconnecte du serveur d'enregistrement \circled{6}.
+	\item[--] \circled{6} Une fois l'association entre la sonde  et le contrôleur est faite,  la sonde  se déconnecte du serveur d'enregistrement.
 	
-	\item[--] La connexion entre la sonde  et le contrôleur est  maintenue le plus longtemps possible. Les contrôleurs gardent le contact avec les autres composantes via Message Queue. Dans le cas où  une des composantes se déconnecte du système, les événements sont conservés jusqu'au moment où la connexion est restaurée \circled{7}.
+	\item[--] \circled{7} La connexion entre la sonde  et le contrôleur est  maintenue le plus longtemps possible. Les contrôleurs gardent le contact avec les autres composantes via Message Queue. Dans le cas où  une des composantes se déconnecte du système, les événements sont conservés jusqu'au moment où la connexion est restaurée.
 	
 \end{itemize}
 
@@ -528,6 +528,8 @@ SamKnows \cite{SamKnows}  est une plateforme globale de mesure des performances 
 \section{Quelques cas d'utilisation des données collectées par les sondes} \label{use-cases-atlas}
 Plusieurs travaux ont exploité les données collectées par les sondes. Ces travaux peuvent être classés de plusieurs manières, par exemple,  par thème,  par  type de mesures utilisé, etc. Nous distinguons les travaux ayant exploité les données collectées par les sondes  à travers les mesures \textit{built-in} ou bien ceux ayant utilisé les données des mesures personnalisées.  Pour les premiers, ils permettent d'exploiter au mieux ces données sans surcharger le système Atlas, car ces données sont collectées, par défaut, quotidiennement. Tandis que les autres peuvent introduire une charge supplémentaire sur ces sondes. D'autre part, certains travaux  ont manipulé  les données d'un  type de mesure en particulier: traceroute, ping,  HTTP, etc. Dans ce qui suit, nous allons présenter brièvement quelques travaux par thème.
 
+La liste des travaux basés sur le projet  Atlas est très longue. Nous avons essayé d'énumérer quelques projets, les classer par thèmes, toutefois, ce n'est pas un classement unique, tel qu'on peut retrouver un travail dans plus d'une catégorie, ou bien les classer par un autre classement. 
+
 \subsection{Détection des coupures d'Internet}
 
 Les données collectées par les sondes  ont permis de valider certaines coupures d'Internet. Par exemple, la coupure affectant le point d'échange AMS-IX (Amsterdam Internet Exchange). En $2015$, R. Kisteleki  et al. \cite{Robert-Kisteleki}  ont évalué l'état des pings en provenance des sondes  à destination de trois ancres  qui se trouvent dans AMS-IX. En effet, peu de pings ont réussi à atteindre leurs destinations, cependant, certains pings n'ont pas réussi à le faire. 
@@ -644,7 +646,7 @@ Les résultats obtenus de l'analyse des détours peuvent être intéressants pou
 L'objectif de certains travaux est  d'exploiter les données collectées par les sondes  pour concevoir des tableaux des indicateurs. Par exemple, à partir des données de connexion/déconnexion des sondes, on peut visualiser les sondes connectées, déconnectées, abandonnées. Un autre projet avait comme objectif la reconstruction d'un graphe reprenant les routeurs (n\oe{}uds) impliqués dans certains traceroutes, ainsi, identifier les n\oe{}uds les plus traversés. D'autres travaux ont repris les détails de la latence, essentiellement, sont les valeurs des RTTs dans les pings et les traceroutes qui permettent de visualiser ce type d'information. 
 
 
-La liste des travaux basés sur le projet  Atlas est très longue. Nous avons essayé d'énumérer quelques projets, les classer par thèmes, toutefois, ce n'est pas un classement unique, tel qu'on peut retrouver un travail dans plus d'une catégorie, ou bien les classer par un autre classement.
+
 
 \section{Conclusion}
 
