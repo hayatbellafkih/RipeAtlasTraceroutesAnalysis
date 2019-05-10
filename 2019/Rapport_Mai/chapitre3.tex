@@ -391,7 +391,7 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 %\end{figure}
 
 
-\subparagraph{Spark Uniffied Stack} \label{Spark Uniffied-Stack}Spark offre ce qu'on appelle Spark \textit{Stack}. C'est un ensemble de composantes construites au dessus de la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
+\subparagraph{Spark Unified Stack} \label{Spark Uniffied-Stack}Spark offre ce qu'on appelle Spark \textit{Stack}. C'est un ensemble de composantes construites au dessus de la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
 \begin{itemize}
 	\item Spark SQL  est conçu pour le traitement interactif;
 	\item Spark Streaming est utilisé pour les traitements en temps réel;
@@ -414,7 +414,17 @@ La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark 
 
 Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster afin d'être traités en parallèle. Un RDD peut être conservé  pour une éventuelle réutilisation. On distingue deux manières de persistance. La conservation du RDD dans la mémoire (in-memory) ce que garantit l'amélioration des performances. En outre, un RDD peut être aussi conservé dans un disque. 
 
-Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD. La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. 
+Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD.
+
+Input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
+Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois qu'une partition est localisée sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
+
+En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
+\paragraph{A propos lazy evaluation} \label{lazy-evaluation}
+Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrés dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
+
+ La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. Dans cette figure, \textit{input data} représente les données qu'on souhaite analyser. Ces dernières sont en provenance de sources de stockage externes. Le framework Spark crée le RDD représenté par le premier rectangle orange à gauche. Ce dernier  comprend  des petits rectangles chacun représente une partition du RDD.  Les transformations  peuvent être enchaînées sur le RDD créé sans être exécutées. Les partitions seront envoyées à travers les n\oe{}ds dés que le \textit{driver} appelle une action sur ce RDD. Un n\oe{}d est une machine avec des ressources de stockage (\textit{disk}), de calcul (\textit{CPU}), etc. Enfin, le reste des opérations peuvent s'enchaîner  sur chaque n\oe{}d où se trouvent les données.
+ 
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification= centering}
@@ -424,13 +434,25 @@ Les RDDs supportent deux types d'opérations sur les objets stockés : les trans
 	\source{ \url{https://www.duchess-france.org/starting-with-spark-in-practice/}, consultée le $15/12/2018$.}
 \end{figure}
 
-Input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
-Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois une partition est localisé sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
 
-En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
-\paragraph{A propos lazy evaluation} \label{lazy-evaluation}
-Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrés dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
 
+\paragraph{Les APIs de Spark}
+
+Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utiliser les fonctionnalités fournies par ce framework : Scala, Python, Java et R. Il n'est pas évident de choisir entre ces quatre langages, car ce choix dépend du contexte de l'analyse. 
+
+
+%Nous allons comparer ces langages dans le contexte du Big Data.
+
+
+
+\paragraph{Présentation de Scala} \label{scala-presentation}
+
+%Nous allons présenter le langage Scala\footnote{Présentation basée sur \url{http://igm.univ-mlv.fr/~dr/XPOSE2011/le_langage_scala/}, consultée le $09/04/2019$}. 
+
+Le première version du langage Scala date de l'année $2003$. Scala  est un terme venant du \textit{ Scalable language }. C'est un langage basé sur le langage Java, ainsi, sur sa machine virtuelle. La particularité de ce langage est le fait de proposer à la fois les concepts suivants : scalability, programmation multi-paradigme et compatibilité.  
+Scala est un langage à la fois orienté objet, un paradigme qui a prouvé ses performances depuis des années. De plus, Scala supporte la programmation fonctionnelle. En terme de compatibilité, Scala est interopérable avec le code Java, car ce dernier est compilé en bytecode Java. Ce que permet d'utiliser du code Java avec le code Scala et garantit l'indépendance des systèmes d'exploitation du moment qu'ils disposent d'une machine virtuelle Java.
+
+L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
 \section{Conclusion}
 
