@@ -344,6 +344,23 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 \end{tcolorbox} 
 
 
+\subsection{Hadoop ecosystem}
+
+Hadoop est un écosystème destiné au Big Data et il regroupe plusieurs projets. \par 
+\textbf{Apache Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
+\textbf{Hadoop Yarn (Yet Another Resource Negotiator)} est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  Yarn  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
+
+\textbf{Hadoop MapReduce}  représente la couche destinée aux traitement en parallèle  dans l'écosystème Hadoop. En particulier, ce sont les traitement qui concernent des volumes de données importants.
+MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. Hadoop MapReduce est considéré comme étant moins rapide en le comparant au framework Apache Spark présenté dans la section \ref{apache-spark}.
+
+
+
+% est un modèle de programmation faisant partie de l'écosystème Hadoop. 
+
+
+
+% conçu pour créer des applications  qui traitent des données massives en parallèle et sur un cluster de machines. Ce framework apporte la facilité de gérer le traitement de gros volumes de données en distribuant le travail sur un ensemble de machine, en gérant le balancement des charges, en prenant en compte la synchronisation entre les éléments du cluster, etc. Ces tâches sont effectuées automatiquement.
+
 
 
 \subsection{Apache Spark } \label{apache-spark}
@@ -374,7 +391,7 @@ Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{worke
 
 
 
-\subparagraph{Application Spark}
+\subparagraph{Application Spark} \label{sparkpresentationsection}
 Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du  driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision , dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
 
 \subparagraph{Spark driver et executor}

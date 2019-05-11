@@ -322,7 +322,7 @@ illustre les étapes de la déduction des liens par groupe de traceroutes, ces �
 	\item construction d'une liste reprenant les listes de l'étape $4$.
 	\item tri alphanumérique des adresses IP de chaque lien;
 	\item groupement des liens ayant les mêmes adresses IP;
-	\item résumer chaque lien; chaque lien est associé à une liste des RTTs différentiels ainsi que la liste des périodes. La liste des périodes contient la période courante dupliquée en nombre de RTTs différentiels de ce lien durant cette période. 
+	\item création d'un récapitulatif de chaque lien; chaque lien est associé à une liste des RTTs différentiels ainsi que la liste des périodes. La liste des périodes contient la période courante dupliquée en nombre de RTTs différentiels de ce lien durant cette période. 
 \end{enumerate}
 
 %Les étapes énumérées ci-dessus sont illustrées par le Listing \ref{lst:DeductionLinks}.
@@ -348,18 +348,18 @@ stepnumber=1]
 	val detailedLinks = tracerouteLinks.map(summarizeLinksTraceroute) |\label{liens-par-périodeline}|
 	
 	//Flatten the list of lists to have one liste of DetailedLink objects
-	val allDetailedLinks = detailedLinks.flatten
+	val allDetailedLinks = detailedLinks.flatten |\label{allDetailedLinksFlattenline}|
 	
 	//Sort the links
-	val sortAllDetailedLinks = allDetailedLinks.map(l => sortLinks(l))
+	val sortAllDetailedLinks = allDetailedLinks.map(l => sortLinks(l)) |\label{sortAllDetailedLinksline}|
 	
 	//Merge the links from all traceroutes in the current bin
-	val mergedLinks = sortAllDetailedLinks.groupBy(_.link)
+	val mergedLinks = sortAllDetailedLinks.groupBy(_.link) |\label{mergedLinksline}|
 	
-	//Resume the link 
-	val resumeData = mergedLinks.map(f => ResumedLink(f._1, f._2.map(_.probe), f._2.map(_.rttDiff), generateDatesSample(f._2.size, rawtraceroutes.timeWindow)))
+	//Summarize the link 
+	val summarizeLink = mergedLinks.map(f => ResumedLink(f._1, f._2.map(_.probe), f._2.map(_.rttDiff), generateDatesSample(f._2.size, rawtraceroutes.timeWindow)))  |\label{summarizeLinkline}|
 	
-	resumeData.toSeq    
+	summarizeLink.toSeq    
 }
 \end{lstlisting}
 
@@ -518,39 +518,82 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-Et la définition de la classe \textit{ResumedLink} est donnée dans le Listing \ref{lst:ResumedLinkClasscase}. Cette définition reprend les deux  adresses IP du lien (\textit{link}), la liste des sondes ayant identifié ce lien (\textit{probes}), la liste des RTTs différentiels de ce lien (\textit{rttDiffs}) et enfin les \textit{bins} qui  représentent les périodes  pendant lesquelles les \textit{rttDiffs} ont été identifiés.
+La classe \textit{DetailedLink}, définie dans le Listing \ref{lst:DetailedLinkclass}, permet  modéliser un seul lien. 
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe DetailedLink},label={lst:DetailedLinkclass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1] 
+case class DetailedLink(
+	rttDiff:  Double,
+	var link: LinkIPs,
+	probe:    BigInt)
+\end{lstlisting}
+
+La fonction \textit{linksInference} est appliqué sur chaque groupe de traceroutes. Dans ce cas, pour chaque groupe de traceroutes, on associe une liste des liens encapsulés chacun dans une instance de \textit{DetailedLink}. Maintenant que chaque lien reprend l'information de la période pendant laquelle il a été identifié, nous pouvons créer une liste d'instance de \textit{DetailedLink} concernant toutes les périodes. C'est ce que fait la ligne \ref{allDetailedLinksFlattenline} dans la fonction dans le Listing \ref{lst:DeductionLinks}.
+
+\subparagraph{Tri alphanumérique des adresses IP de chaque lien} (Ligne \ref{sortAllDetailedLinksline} dans le Listing \ref{lst:DeductionLinks}). La méthode \textit{sortLinks}, définie dans le Listing \ref{lst:sortLinksfunction}, permet de trier les deux adresses IP du lien donné en paramètre et renvoi un nouveau lien.
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la fonction sortLinks},label={lst:sortLinksfunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1] 
+def sortLinks(linkToSort: DetailedLink): DetailedLink = {
+	val link = Seq(linkToSort.link.ip1, linkToSort.link.ip2)
+	val sortedLink = link.sorted
+	linkToSort.link = LinkIPs(sortedLink(0), sortedLink(1))
+	linkToSort
+}
+\end{lstlisting}
+
+
+\subparagraph{Groupement des liens ayant les mêmes adresses IP} (Ligne \ref{mergedLinksline} dans le Listing \ref{lst:DeductionLinks})
+Nous regroupons les liens par leurs adresses IP en utilisant la fonction GroupBy de Scala.
+
+\subparagraph{Création d'un récapitulatif de chaque lien} (Ligne \ref{summarizeLinkline} dans le Listing \ref{lst:DeductionLinks})
+C'est la dernière étape de la phase de la préparation de données.  L'objectif de cette étape est de regrouper les même lien dans une seule entité, représentée par une instance de la classe \textit{ResumedLink} définie dans le Listing \ref{lst:ResumedLinkClasscase}.
+ Cette classe reprend les deux  adresses IP du lien (\textit{link}), la liste des sondes ayant identifié ce lien (\textit{probes}), la liste des RTTs différentiels de ce lien (\textit{rttDiffs}) et enfin les \textit{periods} qui  représentent les périodes  pendant lesquelles les \textit{rttDiffs} ont été identifiés. 
+
+
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe ResumedLink},label={lst:ResumedLinkClasscase}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-case class ResumedLink(
+case class SummarizedLink(
 	link:     LinkIPs,
 	probes:   Seq[BigInt],
 	rttDiffs: Seq[Double],
-	var bins: Seq[Int])
+	var periods: Seq[Int])
 \end{lstlisting}
 
 
 \paragraph{Caractérisation des liens de toutes les périodes de l'analyse}~
 
-Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.ResumedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un cluster de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  La collecte des résultats est illustré par le Listing \ref{lst:rddcollecte}.
+Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.ResumedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un cluster de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  
+Le code illustrant la collecte des résultats est illustrée par le Listing \ref{lst:rddcollecte}. Autrement dit, le \textit{driver}  reçoit les résultats des traitements appliqués sur les données et effectués par les \textit{workers}\footnote{Voir le principe de la distribution des traitements en Spark dans la section \ref{sparkpresentationsection}.}.
 
-\begin{lstlisting}[language=scala,firstnumber=1, caption={Deduction des liens par groupe de traceroutes},label={lst:rddcollecte}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Collecte des résultats intermédiares },label={lst:rddcollecte}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-val collectedRTTDiff = allLinksRttDiffsPeriods.collect().toSeq.flatten
+val finalLinksDetailsList = allLinksRttDiffsPeriods.collect().toSeq.flatten
 \end{lstlisting}
 
-
-Après avoir collecté les résultats intermédiaires, nous fusionnons les données des liens en provenance de toutes les périodes. C'est ce que illustre le Listing \ref{lst:rddmergeLinks}.
+Après avoir collecté les résultats intermédiaires, nous fusionnons les données des liens en provenance de toutes les périodes. C'est ce que illustre le Listing \ref{lst:rddmergeLinks}. La différence entre cette collecte et la collecte précédente (Ligne \ref{allDetailedLinksFlattenline} dans le Listing \ref{lst:DeductionLinks}), c'est que la première a été faite au niveau d'un \textit{worker}, or, la collecte précédente est fait au niveau du \textit{driver}.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Fusion des liens de toute la période de l'analyse},label={lst:rddmergeLinks}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 
 // Merge all links from all periods
 val finalResult = collectedRTTDiff.groupBy(_.link)
-val finalRawRttDiff = finalResult.map(f => ResumedLink(f._1, (f._2.map(_.probes)).flatten, (f._2.map(_.rttDiffs)).flatten, (f._2.map(_.bins)).flatten))
+val finalRawRttDiff = finalResult.map(f => ResumedLink(
+                                            f._1, 
+                                            (f._2.map(_.probes)).flatten, 
+                                            (f._2.map(_.rttDiffs)).flatten, 
+                                            (f._2.map(_.periods)).flatten)
+                                     )
 \end{lstlisting}
 
+Commentaires  du Listing \ref{lst:rddmergeLinks} :
 
-A cette étape, nous avons une liste de type \textit{ResumedLink} qui concerne toute la période de l'analyse. 
+\noindent \textit{finalResult} est de type Map  : la clé est de type \textit{LinkIPs} et la valeur est de type
+
+\noindent \textit{Seq[classes.SummarizedLink]} (\textit{Map[classes.LinkIPs, Seq[classes.SummarizedLink]]}).
+
+\noindent En parcourons  \textit{finalResult}, l'élément courant parcouru $f$ contient deux partie, vu qu'il appartient à une Map, la première, $ f\_1 $, représente la clé (de type \textit{LinkIPs})  et la deuxième,  $ f\_2 $, représente la valeur (de type  \textit{Seq[classes.SummarizedLink]}).  Ainsi, le rôle de \textit{f.\_2.map(\_.periods)).flatten} est parcourir (via la fonction map) la liste des liens, et de récupérer en particulier la liste des période stockée dans \textit{periods} enfin regrouper toute les période en une seule liste (via flatten).
+
+
+A cette étape, nous avons une liste de type \textit{ResumedLink} qui concerne  la période entière de l'analyse. 
 %Ce dernier est définie dans le Listing \ref{lst:ResumedLinkClasscase}. 
 
 %\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe ResumedLink},label={lst:ResumedLinkClass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
@@ -567,10 +610,15 @@ A cette étape, nous avons une liste de type \textit{ResumedLink} qui concerne t
 
 Nous présentons dans ce qui suit la phase II de l'analyse des délais. A travers la méthode \textit{listAlarms()} nous analysons un lien et nous identifions les anomalies de ce dernier. Dans le Listing \ref{lst:paralelizeAndDtectAnomalies}, d'abord nous convertissons la liste des liens en un RDD afin de distribuer le traitement de ces liens. Ensuite, nous appliquons la méthode \textit{listAlarms} sur tout lien. 
 
+Nous notons que si on continue la détection à la suite de la préparation des données, nous n'avons pas besoin de créer à nouveau le RDD reprenant les liens (Ligne \ref{parallelizefinalRawRttDiff} du Listing \ref{lst:paralelizeAndDtectAnomalies}). Car dans certains cas, on peut enregistrer les résultats intermédieras pour une utilisation ultérieure. 
+
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Détection des alarmes des liens},label={lst:paralelizeAndDtectAnomalies}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-val rawDataLinkFiltred = spark.sparkContext.parallelize(finalRawRttDiff.toSeq)
-.map(p => listAlarms(spark, p, timewindow, rangeDates))
+// Create a RDD having the ResumedLink elements from stage I
+val finalRawRttDiffRdd = spark.sparkContext.parallelize(finalRawRttDiff.toSeq) |\label{parallelizefinalRawRttDiff}|
+
+// Alarms detection by link
+val linkAnalysisResult = finalRawRttDiffRdd.map(p => listAlarms(spark, p, timewindow, rangeDates))
 \end{lstlisting}
 
 La méthode \textit{listAlarms} est détaillée dans le Listing \ref{lst:findAnalomalies}. Dans cette dernière, nous assurons:
@@ -627,7 +675,7 @@ stepnumber=1]
 \end{lstlisting}
 
 La définition de la fonction \textit{findAlarms} est donnée dans le Listing \ref{lst:findAlarmsFunction}. Cette méthode s'applique sur les données d'un lien,
-son objectif  est de comparer l'état courant du lien en question avec la référence suivant les trois cas détaillées dans l'étape II.5 du processus décrit dans la section \ref{processus-de-detection}.
+son objectif  est de comparer l'état courant du lien en question avec la référence suivant les trois cas détaillés dans l'étape II.5 du processus décrit dans la section \ref{processus-de-detection}.
 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la méthode findAlarms},label={lst:findAlarmsFunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
