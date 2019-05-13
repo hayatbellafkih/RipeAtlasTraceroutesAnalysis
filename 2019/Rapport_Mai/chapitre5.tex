@@ -13,20 +13,19 @@ Les technologies que nous présentons  couvrent les besoins d'une ou de plusieur
  %L'évaluation des performances  des technologies choisies est faite sur une machine ayant les caractéristiques reprises dans le tableau[!].
 
 \section{Critères d'évaluation des technologies  Big Data}
-
-Les critères d'évaluation d'une technologie Big Data par rapport à une autre varient  suivant plusieurs entrées.  En générale, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data entre elles est très longue.  En ce qui concerne les critères sur lesquels nous  évaluons  les différentes technologies  Big Data expérimentées sont les suivants:
+Les critères d'évaluation d'une technologie Big Data  varient  suivant son objectif : stockage, calcul, etc.  En générale, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data est très longue.  Les critères sur lesquels nous  évaluons  les différentes technologies  Big Data expérimentées sont les suivants:
 \begin{itemize}
-\item la mise en route et la configuration de l'environnement de la technologie Big Data;
-\item flexibilité liée à la définition du  schéma de  données présentes dans les fichiers de données;
-\item temps d'exécution nécessaire pour fournir les résultats finaux d'une analyse de traceroutes lancée;
-\item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
-
+	\item facilité de la mise en route et de la configuration de l'environnement de la technologie;
+	\item flexibilité liée à la définition du  schéma de  données présentes dans les fichiers;
+	\item temps d'exécution nécessaire pour fournir les résultats finaux d'une analyse de traceroutes;
+	\item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
 \end{itemize}
-En pratique, nous n'avons pas pris en compte d'autres critères dans notre cas, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Nous avons donné des indications théoriques sur les frais d'utilisation de deux technologies dédiées au stockage de données massives : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}) et MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.}. 
+
+Dans la présente évaluation de quelques technologies Big Data, nous n'avons pas pris en compte d'autres critères. Car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Nous avons donné des indications théoriques concernant les frais d'utilisation de deux technologies dédiées au stockage de données massives : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}) et MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.}. 
 
 \section{Caractéristiques de l'environnement de test}
 
-Les différents tests ont été réalisés sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32768 MB de  RAM,  CPU  modèle $6$, CPU MHz $ 2294.331 $.
+\paragraph{La machine de test} L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisé sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32768 MB de  RAM, CPU MHz $ 2294.331 $.
 
 %Le Tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
 %\begin{table}[H]
@@ -38,33 +37,36 @@ Les différents tests ont été réalisés sur un conteneur de type OpenVZ ayant
 %	\caption{Caractéristiques de la machine de test}
 %	\label{tab:test-machine}
 %\end{table}
-
-
 \begin{tcolorbox}
-	
-	Il existe différentes catégories de virtualisation, \textbf{OpenVZ} s'inscrit dans la catégorie Isolateur. Un isolateur est un logiciel permettant d'isoler l'exécution des applications dans des contextes ou zones d'exécution. Un conteneur OpenVZ s'agit d'un partitionnement logique au niveau des ressources systèmes : processus, réseau et système de fichier\footnote{Source : \url{http://cesar.resinfo.org/IMG/pdf/jtsiars-openvz_1_.pdf}, consultée le $29/12/2018$.}.
+	Il existe différentes catégories de virtualisation. \textbf{OpenVZ} s'inscrit dans la catégorie Isolateur. Un isolateur est un logiciel permettant d'isoler l'exécution des applications dans des contextes ou zones d'exécution. Un conteneur OpenVZ  adopte un partitionnement logique au niveau des ressources systèmes : processus, réseau et système de fichier\footnote{Source : \url{http://cesar.resinfo.org/IMG/pdf/jtsiars-openvz_1_.pdf}, consultée le $29/12/2018$.}.
 \end{tcolorbox}
 
+Les différents tests effectués, présentés dans le présent chapitre, ont été effectués  au sein de cette machine. Nous notons qu'un seul test est lancé à un moment donné dans la machine.
+\paragraph{Paramètres de l'analyse} Pour les paramètres de détection, nous avons utilisé les valeurs suivantes : \textit{timeWindow} est de $ 3600 $ secondes, l'intervalle de confiance est de $0,05$, \textit{alpha} est de $ 0,01 $ et \textit{minSeen} est de $3$. Les dates de début et de fin  varient suivant les traceroutes analysés.
 
-En ce qui concerne les paramètres de détection, nous avons utilisé les valeurs par défaut : \textit{timeWindow} est de $ 3600 $ secondes, l'intervalle de confiance est de $0,05$, \textit{alpha} est de $ 0,01 $ et \textit{minSeen} est de $3$. Pour la date de début et la date de fin sont variées suivant les données utilisées.
 
-Les différents tests effectués, présentés dans la suite de ce document, ont été effectués  au sein de la machine dont les caractéristiques sont décrites ci-dessous. De plus, un seul test est lancé à un moment donné.
 
 \section{Application 1 : MongoDB} \label{mongodb-impleme}
 %\paragraph{ Application sur  MongoDB}~
 
 %Les données relatives aux mesures traceroutes peuvent être récupérées de différentes manières. Par exemple,  les traceroutes à destination des instances du serveur DNS K-root. En ce qui concerne le travail de référence, les traceroutes sont récupérés à la fois par type d'adressage : IPv4 et IPv6 en se basant sur  l'identifiant  de la mesure : $ 5001 $, $ 6006 $, etc et par date.  Ainsi les
-MongoDB est la technologie Big Data utilisé par  Fontugne  dans l'implémentation de l'outil de détection \cite{InternetHealthReport}. Dans MongoDB, les traceroutes sont organisés  dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. Dans le  cas de l'adressage IPv4, $V$  ne prend aucune valeur,  or, $V$ prend la valeur $6$ s'il s'agit de l'adressage IPv6.  La nomination structurée des collections permet de ne récupérer que les traceroutes concernés par l'analyse lancée. Le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
+
+\paragraph{Evaluation des critères de sélection}~
+
+MongoDB est la technologie Big Data utilisée par  Fontugne et al.  dans l'implémentation de l'outil de détection \cite{InternetHealthReport}. Dans MongoDB, les traceroutes sont organisés  dans des collections.  Chaque collection stocke les traceroutes effectués lors de la journée $YYYY\_MM\_DD$ et en adressage $V$. Par convention,  $V$  vaut $6$ s'il s'agit de l'adressage IPv6 et est vide.  La nomenclature  des collections permet de ne récupérer que les traceroutes concernés par l'analyse lancée. Le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$.
  
 
  
- MongoDB est une technologie conçue pour assurer  le stockage de données dans un processus d'analyse de données. Nous avons utilisé la version locale de MongoDB, la quantité de données que nous pouvons stocker ainsi que le traitement de données récupérées dépend principalement des ressources de la machine dans laquelle MongoDB est installé.
+MongoDB est une technologie conçue pour assurer  le stockage de données dans un processus d'analyse de données. Nous avons utilisé la version locale de MongoDB, la quantité de données que nous pouvons stocker ainsi que le traitement appliqué sur les données récupérées dépendent principalement des ressources de la machine dans laquelle MongoDB est installé.
  
-    MongoDB est flexible en terme de définition du schéma de données; aucun schéma n'est requis.   Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination, dans ce cas le contenu d'un traceroute est différent de celui réussi. 
-    
-    Généralement l'analyse de données à grande échelle se limite qu'au mode lecture de données pour en tirer les connaissances. MongoDB est adapté non seulement aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet dans une collection (modification ou suppression). 
+MongoDB est flexible en terme de définition du schéma de données; aucun schéma n'est requis.   Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination, dans ce cas, la structure de ces  traceroutes est différente  de la structure des traceroutes réussis. Les deux types de traceroutes sont stockés sans contrainte.
+
+Les données stockées dans une collection MongoDB peuvent être manipulées en mode lecture et en mode écriture. Dans le premier, on cherche à lire des données en provenance de différentes sources. C'est le plus répandu dans les projets Big Data. Pour le deuxième mode, on peut mettre à jour un enregistrement dans une collection MongoDB. Ceci est moins fréquent dans les projets Big Data.
+
+%Généralement l'analyse de données à grande échelle se limite qu'au mode lecture de données pour en tirer les connaissances. 
+%MongoDB est adapté  aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet dans une collection (modification ou suppression). 
  
- En cas de la  mise à jour de la structure de nouveaux  objets traceroutes par RIPE Atlas,  cela n'affecte pas les données précédemment  stockées  dans MongoDB.
+ MongoDB est évolutif; en cas de   mise à jour de la structure de nouveaux  objets traceroutes par Atlas,  cela n'affecte pas les données précédemment  stockées  dans MongoDB.
  
  %Malgré la convenance de MongoDB aux données non structurées et massives, l'utilisation de telle base de données, en version locale, nécessite l'ajustement de la machine locale où MongoDB tourne. 
 
@@ -73,64 +75,77 @@ MongoDB est la technologie Big Data utilisé par  Fontugne  dans l'implémentati
 %\paragraph{Les limitations de MongoDB}
 
 %L'implémentation proposée de l'outil de détection utilise la version locale de la base de données MongoDB pour le stockage des données.  La quantité de données dont MongoDB peut stocker dépend de l'espace mémoire de stockage disponible dans la machine dans laquelle MongoDB est installé. De plus, les performances d'une détection lancée concernant une période donnée dépendent de la RAM de la machine en question. Pour conclure, l'utilisation de la version locale d MongoDB pour analyser les traceroutes à travers l'outil de détection dépend typiquement de la machine locale.
-
 %\paragraph{Les performances de MongoDB}
-
-
-
-
 \paragraph{Performances de la base de données MongoDB dans l'analyse des délais }~
 
-Nous évaluons les temps d'exécution lors de l'analyse des délais des liens présents dans un ensemble de traceroutes, en utilisant MongoDB comme technologie de stockage de données massives.   
 
-%On distingue deux types de variations : la taille de l'ensemble de données en terme de stockage et la taille en nombre de traceroutes présents dans l'ensemble de données.
+Nous mesurons le temps écoulé durant l'analyse des traceroutes, stockés dans une base de données MongoDB,  en vue de détecter les anomalies dans le délai des liens. C'est le temps nécessaire à l'accomplissement des étapes de la phase I, de la phase II et de l'écriture des résultats dans un fichier. Chaque ligne de ce dernier  décrit un lien comme l'exemple donné dans le Listing \ref{resultLink}.  
 
-Dans le Tableau \ref{tab:mongotiming-timing}, nous varions l'ensemble de traceroutes en terme de stockage pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés, nous ne présentons que les premier trois essais. 
+Dans le Tableau \ref{tab:mongotiming-timing}, nous varions l'ensemble de traceroutes. Pour Chaque période, nous mesurons le temps nécessaire pour analyser les traceroutes capturés durant cette période pour plusieurs reprises. L'analyse de chaque période est fait $5$ fois, ce qu'on appelle ici des essais : Essai 1, Essai 2, etc.  Les traceroutes analysés sont ceux à destination des instances du f.root-servers.net\footnote{Voir les détails de la mesure 5004 sur \url{https://atlas.ripe.net/measurements/5004/}, consultée le $12/12/2018$}.
+
+%en terme de stockage pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés, nous ne présentons que les premier trois essais. 
 
 
-\begin{table}[H]
+\begin{table}[h]
 	\captionsetup{justification=centering}
 	\resizebox{1\textwidth}{!}{
-	\begin{tabular}{ccccc}
-\textbf{Période}&\textbf{Taille (GB)}&\textbf{Essai 1 (secondes)}&\textbf{Essai 2 (secondes)} &\textbf{Essai 3 (secondes)} \\ \hline
-$ 07/02/18 $&$  1$&$ 752,03 $&$ 750 $&$ 755,24 $\\ \hline 
-$ 07/02/2018 – 08/02/2018 $&$ 2 $&$ 1499,28 $&$ 1504,98 $&$ 1503,62 $\\ \hline 
-$ 07/02/2018 – 09/02/2018 $&$ 3 $&$ 2275,89 $&$2265,96 $&$ 2284,98 $\\ \hline 
-$ 07/02/2018 – 10/02/2018 $&$ 4 $&$ 3035,19 $&$ 3043,21 $&$ 3057,45 $\\ \hline 
-$ 07/02/2018 – 11/02/2018 $&$ 5 $&$ 3871 $&$ 3889,57 $&$ 3894,5 $  \\ \hline 
-
+	\begin{tabular}{cccccccc}
+\textbf{Période}&\textbf{Taille (bytes)}&\textbf{Essai 1 (s)}&\textbf{Essai 2 (s)} &\textbf{Essai 3 (s)}&\textbf{Essai 4 (s)}&\textbf{Essai 5 (s)}&\textbf{Médiane (s)} \\ \hline
+$ 07/02/18 - 07/02/18 $&$  1,028,343,572 $&$  $&$  $&$  $ &&&\\ \hline 
+$ 07/02/2018 - 08/02/2018 $&$  $&$  $&$  $&$  $ &&&\\ \hline 
+$ 07/02/2018 - 09/02/2018 $&$  $&$  $&$  $&$  $ &&&\\ \hline 
+$ 07/02/2018 - 10/02/2018 $&$  $&$  $&$  $&$  $&&&\\ \hline 
+$ 07/02/2018 - 11/02/2018 $&$  $&$  $&$  $&$  $&&&  \\ \hline 
 	\end{tabular}
 }
 \caption{Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB}
 \label{tab:mongotiming-timing}
 \end{table}
 
-Tandis que la  Figure \ref{fig:mongodbtiming}	 reprend la médiane  des temps d'exécution de la détection en fonction de  la taille de données analysées en utilisant MongoDB. 
-La Figure 	 \ref{fig:moustachemongodb} illustre la variation de la distribution des temps d'exécution. La Figure 	 \ref{fig:moustachemongodb} ainsi que la Figure \ref{fig:mongodbtiming} ont été obtenues en considérant les temps d'exécution de $10$ essais pour chaque taille de données.
+Nous reprenons les informations du Tableau \ref{tab:mongotiming-timing} dans la Figure \ref{fig:mongodbtiming}. L'axe  des abscisses représente la taille des fichiers contenant les traceroutes  analysés, appelée  $q$. L'axe  des ordonnées  représente le temps nécessaire à l'analyse d'une quantité  de traceroutes. Nous agrégeons les temps des différents essais et nous calculons  leur valeur minimale, maximale et la médiane.
+Pour précision, le temps calculé est la différence entre l'instant  qui précède le lancement de l'analyse et l'instant qui suit la fin de l'analyse.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/mongoDBtiming_0}
-	\caption{La médiane des temps d'exécution en fonction de la taille de traceroutes analysés (MongoDB)}
+	\caption{}
 	\label{fig:mongodbtiming}
 \end{figure}
 
+%Tandis que la  Figure \ref{fig:mongodbtiming}	 reprend la médiane  des temps d'exécution de la détection en fonction de  la taille de données analysées en utilisant MongoDB. 
+%La Figure 	 \ref{fig:moustachemongodb} illustre la variation de la distribution des temps d'exécution. La Figure 	 \ref{fig:moustachemongodb} ainsi que la Figure \ref{fig:mongodbtiming} ont été obtenues en considérant les temps d'exécution de $10$ essais pour chaque taille de données.
 
-\begin{figure}[H]
-	\centering
-		\captionsetup{justification=centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/moustacheMongodb_0}
-	\caption{Les temps d'exécution en fonction de la taille de traceroutes analysés (MongoDB)}
-	\label{fig:moustachemongodb}
-\end{figure}
+
+
+
+%\begin{figure}[h]
+%	\centering
+%		\captionsetup{justification=centering}
+%	\includegraphics[width=0.7\linewidth]{illustrations/moustacheMongodb_0}
+%	\caption{Les temps d'exécution en fonction de la taille de traceroutes analysés (MongoDB)}
+%	\label{fig:moustachemongodb}
+%\end{figure}
 
 %La variation des temps d'exécution en fonction du nombre de traceroutes 
 
 
+%Nous évaluons les temps d'exécution lors de l'analyse des délais des liens présents dans un ensemble de traceroutes, en utilisant MongoDB comme technologie de stockage de données massives.   
 
+%On distingue deux types de variations : la taille de l'ensemble de données en terme de stockage et la taille en nombre de traceroutes présents dans l'ensemble de données.
 
-
+%\begin{table}[h]
+%	\captionsetup{justification=centering}
+%	\resizebox{1\textwidth}{!}{
+%		\begin{tabular}{cccccccc}
+%			\textbf{Période}&\textbf{Taille (bytes)}&\textbf{Essai 1 (s)}&\textbf{Essai 2 (s)} %&\textbf{Essai 3 (s)}&\textbf{Essai 4 (s)}&\textbf{Essai 5 (s)}&\textbf{Médiane (s)} \\ %\hline
+%			$ 07/02/18 - 07/02/18 $&$  1,028,343,572 $&$ 752,03 $&$ 750 $&$ 755,24 $ &&&\\ \hline 
+%			$ 07/02/2018 - 08/02/2018 $&$ 2 $&$ 1499,28 $&$ 1504,98 $&$ 1503,62 $ &&&\\ \hline 
+%			$ 07/02/2018 - 09/02/2018 $&$ 3 $&$ 2275,89 $&$2265,96 $&$ 2284,98 $ &&&\\ \hline 
+%			$ 07/02/2018 - 10/02/2018 $&$ 4 $&$ 3035,19 $&$ 3043,21 $&$ 3057,45 $&&&\\ \hline 
+%			$ 07/02/2018 - 11/02/2018 $&$ 5 $&$ 3871 $&$ 3889,57 $&$ 3894,5 $&&&  \\ \hline 
+%		\end{tabular}
+%	}
 \section{Application 2 : Amazon DynamoDB}
 
 
@@ -139,38 +154,75 @@ La Figure 	 \ref{fig:moustachemongodb} illustre la variation de la distribution 
 
 L'élasticité est une des caractéristiques attirantes des services web d'Amazon. En particulier, c'est le cas d'Amazon DynamoDB. Ainsi, une implémentation basée sur Amazon DynamoDB  n'a pas à se soucier de la capacité  de stockage de données si la quantité de données évolue rapidement. 
 
- Amazon DynamoDB  n'assure que le stockage de données dans un processus d'analyse de données. La récupération et le traitement  des données stockées nécessite l'ajustement des ressources de la machine qui reçoive ces données, pareillement à MongoDB. La différence se situe à l'évolutivité implicite du stockage de données, qui ne se limite que par la capacité de stockage physique d'AWS. Tandis qu'une installation locale de MongoDB est liée aux ressources de la machine hébergeant ce dernier.  Nous n'avons pas expérimenté Amazon DynamoDB pour analyser les traceroutes, étant donné que notre évaluation des temps d'exécution est effectuée sur une machine locale, nous aurons les mêmes remarques que dans le cas de MongoDB en ce qui concerne l'ajustement des ressources de la machine qui reçoive les données.  
+ Amazon DynamoDB  n'assure que le stockage de données dans un processus d'analyse de données. La récupération et le traitement  des données stockées nécessitent l'ajustement des ressources de la machine qui reçoivent ces données, pareillement à MongoDB. La différence se situe à l'évolutivité implicite du stockage de données, qui ne se limite que par la capacité de stockage physique d'AWS. Tandis qu'une installation locale de MongoDB est liée aux ressources de la machine hébergeant ce dernier.  Nous n'avons pas expérimenté Amazon DynamoDB pour analyser les traceroutes, étant donné que notre évaluation des temps d'exécution est effectuée sur une machine locale, nous aurons les mêmes remarques que dans le cas de MongoDB en ce qui concerne l'ajustement des ressources de la machine qui reçoive les données.  
  
- A titre indicatif, une heure de tous les traceroutes effectués par toutes les sondes Atlas fait une taille moyenne de  $620$ MB en format compressé, ce que représente une quantité d'environ $9$ GB en format texte.
-
-
+ A titre indicatif, une heure de tous les traceroutes effectués par toutes les sondes Atlas, concernant tous les identifiants de mesure,  fait une taille moyenne de  $620$ MB en format compressé, ce que représente une quantité d'environ $9$ GB en format texte.
 %Toutefois,  au moment de de la récupération et de la manipulation de ces données, il faut ajuster les ressources pour pouvoir récupérer et traiter une quantité importante de données.
-
-
-
 
 \section{Application 3 : Amazon S3, Amazon Glue  et Amazon Athena }
 
-
 %\paragraph{Application sur les traceroutes}~
+\paragraph{Vue générale}~
 
-Nous avons combiné les trois services d'Amazon (Amazon S3, Amazon Glue  et Amazon Athena)  afin de créer un environnement d'analyse de données massives. Une vue globale du  processus de l'analyse  est illustré dans la Figure \ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. 
+Nous avons combiné les trois services d'Amazon (Amazon S3, Amazon Glue  et Amazon Athena)  afin de créer un environnement d'analyse de données massives. 
+Un des scénarios possibles mettant en pratique ensemble ces trois services est illustré dans la Figure
+\ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. Nous détaillons chaque services dans les sections suivantes.
 
-\begin{figure}[H]
+Afin d'utiliser Amazon Athena pour l'interrogations des traceroutes stockés dans des fichiers, nous avons besoin d'abord de stocker les fichiers dans Amazon S3. De plus, nous avons besoin de créer un  schéma de données. Il s'agit de créer une table comme les tables dans un SGBDR. Chaque enregistrement dans cette table correspond à une ligne dans les fichiers de données censés être lus par cette table. Il existe deux manières pour créer une table dans Athena : en utilisant Amazon Glue ou création manuelle. \textit{traceroutes\_api} désigne le nom de la table reprenant tous les traceroutes.
+%Une vue globale du  processus de l'analyse  est illustré dans la Figure  
+
+\begin{figure}[h]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=1\linewidth]{illustrations/glue_crawler}
 	\caption{Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight  et Amazon Redshift}
 	\label{fig:gluecrawler}
-	\source{\url{https://docs.aws.amazon.com/fr_fr/athena/latest/ug/glue-best-practices.html}, consultée le $16/12/2018$.}
+	\source{\url{https://docs.aws.amazon.com/fr_fr/athena/latest/ug/glue-best-practices.html}, consultée le $16/05/2018$.}
 \end{figure}
 
 
-Afin d'utiliser Amazon Athena, nous avons besoin du schéma de données. Il s'agit d'une table comme les tables dans un SGBDR. Pour ce faire, 
-nous avons lancé  avec Amazon Glue  la détection automatique du schéma d'un ensemble de  traceroutes enregistrés dans un fichier faisant une taille de $500$ MB. Toutefois, la détection a échoué. Autrement dit, Amazon Glue n'a pas pu inférer le schéma d'une seule table capable de lire tout traceroute dans ce fichier.  L'échec de l'inférence est dû au fait que le fichier contient des traceroutes différents en terme de structure, car la structure dépend du firmware de la sonde ayant effectué le traceroute.
- %L'origine de cette différence  est le fait que ces traceroutes ont été effectués par des sondes ayant un firmware différent. Car le contenu des résultats d'une requête traceroute  et son organisation dans un objet JSON dépend partiellement du firmware de la sonde. 
- Pour finir, le schéma des traceroutes a été créé manuellement (voir la section \ref{creer-table-traceroute} dans l'annexe \ref{athena-appendix}). La table a été créée en utilisant le partitionnement des données dans un compartiment S3. Plus de détails sur le partitionnement sont données dans la section \ref{subsubsection:partitionnement} dans l'annexe \ref{athena-appendix}.
+\paragraph{Création de la table traceroutes avec Amazon Glue}~
 
+Nous avons lancé    la détection automatique du schéma, avec Amazon Glue, d'un ensemble de  traceroutes enregistrés dans un fichier faisant une taille de $500$ MB. Toutefois, la détection a échoué. Autrement dit, Amazon Glue n'a pas pu inférer le schéma d'une seule table capable de lire tout traceroute dans ce fichier.  L'échec de l'inférence est dû au fait que le fichier contient des traceroutes différents en terme de structure, car la structure dépend de la version du firmware de la sonde ayant effectué le traceroute. Les différentes versions du firmware  pour chaque type de mesure sont détaillées dans le site Web d'Atlas\footnote{\url{https://atlas.ripe.net/docs/data_struct/}, consultée le $16/01/2018$.}.
+ %L'origine de cette différence  est le fait que ces traceroutes ont été effectués par des sondes ayant un firmware différent. Car le contenu des résultats d'une requête traceroute  et son organisation dans un objet JSON dépend partiellement du firmware de la sonde. 
+ 
+\paragraph{Création manuelle de la table \textit{traceroutes\_api}}~
+
+Nous avons créé la structure de la table \textit{traceroutes\_api}  manuellement en se basant sur la structure détaillée d'une réponse traceroute pour chaque version du firmware. Les différentes structures de réponses d'une requête traceroute n'a posé aucun problème dans la création manuelle de la table. Dans notre cas, la réussite de la création manuelle est due au fait que les attributs dont l'outil de détection a besoin sont présents dans toutes les versions du firmware d'une part. D'autre part, Amazon Athena est flexible en ce qui concerne l'association entre un objet JSON et un enregistrement dans une table. Autrement dit, si un attribut existe dans l'objet JSON, la colonne correspondante prend sa valeur et vide dans le cas échéant.  
+
+\paragraph{Partitionnement des données stockés dans Amazon S3}~
+
+La table a été créée en utilisant le partitionnement des données dans un compartiment S3. 
+%Plus de détails sur le partitionnement sont données dans la section \ref{subsubsection:partitionnement} dans l'annexe \ref{athena-appendix}.
+
+
+Le partitionnement  de données présentes dans un compartiment Amazon S3 permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore  les performances d'Amazon Athena. D'une part, on obtient une réponse rapidement, d'autre part, on réduit les coûts engendrés  suite à l'utilisation du service car on est facturé selon la quantité de données analysées.  
+
+Les partitions créées joue un rôle similaire à celui d'un colonne durant l'interrogation d'une table dans Athena. 
+
+Prenons un exemple, nous avons des traceroutes ayant comme adressage IP la version  4 et d'autres traceroutes ont l'adressage IPv6 :
+
+\begin{lstlisting}
+s3://ripeatlasdata/traceroute/
+type=4/
+type=6/
+\end{lstlisting}
+
+Sans l'utilisation du partitionnement et si on souhaite récupérer que les traceroutes ayant comme adressage IPv4, toutes les données (type = 4 et type = 6) sont analysées. Toutefois, en partitionnant les données suivant le type d'adressage, seuls les fichiers dans le dossier type = 4 qui sont analysés. Par conséquent, le partitionnement permet de réduire les coûts d'utilisation du service Amazon Athena, surtout si la quantité de données est très importante. 
+
+
+\subsection{Application du partitionnement sur les traceroutes Atlas}
+
+Les traceroutes en provenance des sondes Atlas sont organisés comme est illustré dans la Figure :
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{illustrations/partitionnement-athena}
+	\caption{L'organisation des traceroutes dans un compartiment Amazon S3}
+	\label{fig:partitionnement-athenaa}
+\end{figure}
+
+\paragraph{Interrogation des données}
 
 Une fois les fichiers de données sont synchronisés vers le compartiment AWS S3 et le schéma  de données est créé, on passe à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  
 
@@ -287,6 +339,11 @@ La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tail
 
 
 \section{Application 4 : Spark Apache avec Scala}
+
+\subsection{Mode Standalone}
+
+
+\subsection{EMR Cluster}
 
 Les fonctionnalités de Spark sont accessibles avec les  APIs en Scala, Java et Python. Nous avons choisi l'utilisation de l'API en Scala parce que Scala est le langage natif de Spark. De plus, Scala est interopérable avec Java.  
 
