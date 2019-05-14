@@ -192,46 +192,85 @@ Nous avons créé la structure de la table \textit{traceroutes\_api}  manuelleme
 
 \paragraph{Partitionnement des données stockés dans Amazon S3}~
 
-La table a été créée en utilisant le partitionnement des données dans un compartiment S3. 
-%Plus de détails sur le partitionnement sont données dans la section \ref{subsubsection:partitionnement} dans l'annexe \ref{athena-appendix}.
+Nous avons   pris en compte  le partitionnement de données dans un compartiment S3 dans la création de la table \textit{traceroutes\_api}.  L'utilisation du partitionnement est optionnel. 
+Le partitionnement  de données présentes dans un compartiment Amazon S3 permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore  les performances d'Amazon Athena. D'une part, la requête s'exécute rapidement. D'autre part, le partitionnement réduit les coûts engendrés  suite à l'utilisation d'Amazon Athena, car ce dernier est facturé selon la quantité de données analysées. En pratique,  une partition créée joue un rôle similaire à celui d'une colonne durant l'interrogation d'une table dans Athena. 
+
+Prenons un exemple illustrant l'apport du partitionnement. Nous avons des traceroutes effectué en adressage IP la version  $ 4 $ et $ 6 $.
 
 
-Le partitionnement  de données présentes dans un compartiment Amazon S3 permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore  les performances d'Amazon Athena. D'une part, on obtient une réponse rapidement, d'autre part, on réduit les coûts engendrés  suite à l'utilisation du service car on est facturé selon la quantité de données analysées.  
+\textit{af\_} désigne le type d'adressage : \textit{af\_} vaut $4$ en cas d'adressage IPv4 et $6$ en cas d'adressage IPv6. Sans l'utilisation du partitionnement et si on ne souhaite récupérer que  les traceroutes ayant comme adressage IPv4, tous les traceroutes présents dans le compartiment S3 (appelé \textit{s3://ripeatlasdata}), dédié au stockage des traceroutes récupérés depuis le dépôt d'Atlas, sont évalués\footnote{L'évaluation du type  d'adressage est effectué selon la valeur de l'attribut \textit{af} d'un traceroute, il vaut \textit{4} ou \textit{6}.}.
 
-Les partitions créées joue un rôle similaire à celui d'un colonne durant l'interrogation d'une table dans Athena. 
-
-Prenons un exemple, nous avons des traceroutes ayant comme adressage IP la version  4 et d'autres traceroutes ont l'adressage IPv6 :
-
-\begin{lstlisting}
-s3://ripeatlasdata/traceroute/
-type=4/
-type=6/
-\end{lstlisting}
-
-Sans l'utilisation du partitionnement et si on souhaite récupérer que les traceroutes ayant comme adressage IPv4, toutes les données (type = 4 et type = 6) sont analysées. Toutefois, en partitionnant les données suivant le type d'adressage, seuls les fichiers dans le dossier type = 4 qui sont analysés. Par conséquent, le partitionnement permet de réduire les coûts d'utilisation du service Amazon Athena, surtout si la quantité de données est très importante. 
+Toutefois, en partitionnant les données suivant par exemple le type d'adressage, seuls les fichiers dans la partition\footnote{Partition dans le sens d'Amazon Athena.} af\_ = 4 qui sont analysés. Par conséquent, le partitionnement permet de réduire les coûts d'utilisation du service Amazon Athena, surtout si la quantité de données est très importante. 
 
 
-\subsection{Application du partitionnement sur les traceroutes Atlas}
-
-Les traceroutes en provenance des sondes Atlas sont organisés comme est illustré dans la Figure :
+Les partitions   créées sont illustrées  dans la Figure 	\ref{fig:partitionnement-athenaa}. Nous détaillons les différentes partitions dans le Tableau \ref{tab:partition-description}. Nous donnons le nom de la partition dans la première colonne, quelques valeurs de chaque partition dans la deuxième colonne et la troisième colonne de ce tableau reprend une description de la partition.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{illustrations/partitionnement-athena}
-	\caption{L'organisation des traceroutes dans un compartiment Amazon S3}
+	\captionsetup{justification=centering}
+	\includegraphics[width=1\linewidth]{illustrations/partitionnement-athena}
+	\caption{L'organisation des traceroutes dans le compartiment Amazon S3 \textit{s3://ripeatlasdata}}
 	\label{fig:partitionnement-athenaa}
 \end{figure}
 
-\paragraph{Interrogation des données}
+\begin{table}
+		\centering
+		\captionsetup{justification=centering}
+\begin{tabular}{|c|c|l|}
+	\hline 
+\textbf{partition}	& \textbf{Valeurs} & \multicolumn{1}{c|}{\textbf{Commentaires} }\\ 
+	\hline 
+ source& api & Les  traceroutes récupérés depuis le dépôt  d'Atlas via l'API \\ 
+	\cline{2-3}
+	 &typeanddate& Les  traceroutes récupérés depuis la page Web\\
+	\hline 
+	af\_& 4  & Les traceroutes en adressage IPv4 \\ 
+	\cline{2-3} &6& Les traceroutes en adressage IPv6\\	\hline 
+	type& builtin  & Les traceroutes en provenances des mesures intégrées \\ 
+	\cline{2-3} 
+ &anchor& Les traceroutes à destinations des ancres\\ \hline
+	msm& 5001 & Les traceroutes ayant msm\_id = 5001 \\ 
+	\cline{2-3}  &5004& Les traceroutes ayant msm\_id = 5001 \\
+	\hline 
+	year& 2016 & Les traceroutes effectués en $2016$ \\ 
+	\hline 
+	month& 10 & Les traceroutes effectués en octobre \\ 
+	\hline 
+	day& 1 & Les traceroutes effectué le premier du mois \\ 
+	\hline 
+\end{tabular}
+\caption{Exemple des partitions créées dans un compartiment Amazon S3} 
+\label{tab:partition-description}
+\end{table}
 
-Une fois les fichiers de données sont synchronisés vers le compartiment AWS S3 et le schéma  de données est créé, on passe à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  
+ Les   partitions \textit{af\_} et \textit{type\_} sont nommée de cette manière, au lieu de \textit{af} et \textit{type} car  la table \textit{traceroutes\_api} contient des colonnes avec ces noms et comme les partitions agissent comme des colonnes  lors de l'évaluation d'une requêtes avec Amazon Athena, les noms de ces partitions ont été adaptés.
 
-Pour intégrer Amazon Athena dans l'outil de détection \cite{InternetHealthReport}, on distingue deux possibilités. La première possibilité n'utilise Athena que pour récupérer, dans la machine locale,  les traceroutes vérifiés en terme de validité; c'est l'objectif des étapes $1$ et $2$ dans le processus de la création de l'évolution des RTTs différentiels des liens (voir la section \ref{steps-rtt-analysis}).  Les traitements qui suivent (étapes  à partir de $3$) sont effectués dans la machine locale. Dans ce cas, l'utilisation des technologies  Big Data est limité qu'au niveau stockage de données massives. 
+Par exemple, les traceroutes qui se trouvent dans  le fichier
 
-Tandis que  la deuxième possibilité vise la maximisation des traitements au sein de l'infrastructure  d'Athena. De ce fait, la machine locale n'a qu'à recevoir les derniers résultats de la détection, voire les résultats finaux. Pour cette deuxième possibilité, les données doivent être manipulées de sorte à maximiser,  	au niveau d'Amazon Athena,  les traitements relatives à toutes les étapes décrites dans la section \ref{steps-rtt-analysis}. 
+ \textit{2016-10-01 00:00:00\_msmId5001.json.gz} sont analysés par toute requête Athena  
+impliquant les partitions d'une des manières suivantes : 
+(source = api) ou (source = api et af\_ = 4) ou (source = api et af\_ = 4 et type = builtin) ou (source = api et af\_ = 4 et type = builtin et msm = 5001) ou 
+(source = api et af\_ = 4 et type = builtin et msm = 5001 et year = 2016) ou (source = api et af\_ = 4 et type = builtin et msm = 5001 et year = 2016 et month = 10) ou
+ (source = api et af\_ = 4 et type = builtin et msm = 5001 et year = 2016 et month = 10 et day = 1).
+
+\paragraph{Interrogation des données Avec Amazon Athena}~
+
+Une fois les fichiers de données  synchronisés vers le compartiment AWS S3 et le schéma  de données  créé, on passe à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  
+Nous donnons un exemple d'une requête Athena dans la section \ref{sql-athena-request} de l'annexe \ref{athena-appendix}.
+
+\paragraph{Intégration d'Amazon Athena dans l'outil de détection}~ \label{integration-aws-possibilite-une}
+ 
+
+Pour intégrer Amazon Athena dans l'outil de détection \cite{InternetHealthReport}, on distingue deux possibilités. La première possibilité n'utilise Athena que pour récupérer  les traceroutes stockés dans Amazon S3 vers  la machine locale. Ensuite, cette dernière poursuit les traitements  décrits dans la phase I et II. Dans ce cas, nous ne profitons pas  des performances d'Amazon Athena vu que les traitements complexes sont effectués dans la machine locale.
+%vérifiés en terme de validité; c'est l'objectif des étapes $1$ et $2$ dans le processus de la création de l'évolution des RTTs différentiels des liens (voir la section \ref{steps-rtt-analysis}).  
+ %Les traitements qui suivent (étapes  à partir de $3$) sont effectués dans la machine locale. Dans ce cas, l'utilisation des technologies  Big Data est limité qu'au niveau stockage de données massives. 
+
+Tandis que  la deuxième possibilité vise la maximisation des traitements des deux phases I et II au sein de l'infrastructure  d'Athena. De ce fait, la machine locale n'a qu'à recevoir les derniers résultats de la détection, voire les résultats finaux. Pour cette deuxième possibilité, les données doivent être manipulées de sorte à maximiser,  	au niveau d'Amazon Athena,  les traitements relatifs à toutes les étapes des deux phases I et II. 
 
 Pour la deuxième possibilité, le défi est de trouver la requête ou bien l'ensemble de requêtes SQL à exécuter sur Athena en vue d'avoir l'évolution du RTT différentiel des liens. 
-Vue la complexité des  étapes $1$ à $9$, on ne peut pas trouver une seule requête SQL assurant toutes les étapes. Supposons qu'il existe une requête SQL capable de trouver les liens possibles avec leurs RTTs différentiels : à l'étape $ 4 $ dans \ref{steps-rtt-analysis}, on construit la distribution des RTTs différentiels pour tout lien $l$ identifié dans les traceroutes de la période $d_k$. Cette distribution est mise à jour à chaque fois $l$ est identifié dans un des traceroutes  de la période $d_k$. Soient  $T_k$ = \{$t_{k, j}$\}  l'ensemble de traceroutes effectués durant $d_k$, avec $j \in [1, R]$ et R est le nombre de traceroutes effectués durant $d_k$. Nous décrivons le parcours des traceroutes d'une période $d_k$ brièvement dans le pseudo-code \ref{alo-inference-link}, sachant que les détails ne sont données, l'objectif est d'évaluer la convenance d'Athena au traitement souhaité.
+Vu la complexité des  étapes des phases I et II, on ne peut pas trouver une seule requête SQL assurant toutes ces étapes à la fois. Supposons qu'il existe une requête SQL capable de trouver les liens possibles avec leurs RTTs différentiels : à l'étape $ 4 $ dans \ref{steps-rtt-analysis}, on construit la distribution des RTTs différentiels pour tout lien $l$ identifié dans les traceroutes de la période $d_k$. Cette distribution est mise à jour à chaque fois $l$ est identifié dans un des traceroutes  de la période $d_k$. 
+
+Soient  $T_k$ = \{$t_{k, j}$\}  l'ensemble de traceroutes effectués durant $d_k$, avec $j \in [1, R_k]$ et $R_k$ est le nombre de traceroutes effectués durant $d_k$. Nous décrivons le parcours des traceroutes d'une période $d_k$ brièvement dans le pseudo-code \ref{alo-inference-link}. Nous n'avons pas donné  tous les détails, car l'objectif est d'évaluer la convenance d'Athena au traitement souhaité.
 \begin{algorithm}[H]
 \begin{algorithmic}[1]
 	 \ForAll{ $t_{k, j}$ $\in$ $T_k$} \
@@ -253,30 +292,28 @@ Avec :
 \end{itemize}
 
 
-Le service Athena est conçu pour la lecture de données, toute mise à jour de données n'est pas possible avec ce service. C'est pourquoi la distribution des RTTs différentiels de chaque  lien identifié doit être sauvegardée dans un endroit accessible en lecture et en écriture, par exemple dans un compartiment AWS S3. Que ce soit un fichier reprenant la distribution des RTTs différentiels  par un seul lien ou bien un fichier pour tous les liens,   à la ligne  \ref{update-link} du pseudo-code \ref{alo-inference-link}, un fichier doit être lu et mise à jour avec de nouvelle valeur. Pour une période $d_k$ d'une heure, le nombre de traceroutes est de l'ordre de milliers. Chaque traceroute peut inclure $L$ liens. Dans ce cas, le nombre total, d'une période $d_k$, de mise à jour de la distribution des RTTs différentiels est de l'ordre $R$\texttimes$L$ de fois.  Cette estimation est à titre indicatif, de plus elle ne concerne que l'étape $4$, le nombre de lectures et/ou d'écritures dépend des requêtes SQL créées pour les autres étapes. 
+Le service Athena est conçu pour la lecture de données, toute mise à jour de données n'est pas possible avec ce service. C'est pourquoi la distribution des RTTs différentiels de chaque  lien identifié doit être sauvegardée dans un endroit accessible en lecture et en écriture, par exemple dans un compartiment AWS S3. Que ce soit un fichier reprenant la distribution des RTTs différentiels  par un seul lien ou bien un fichier pour tous les liens,   à la ligne  \ref{update-link} du pseudo-code \ref{alo-inference-link}, un fichier doit être lu et mise à jour avec de nouvelle valeur. Pour une période $d_k$ d'une heure, le nombre de traceroutes est de l'ordre de milliers. Chaque traceroute $t_{k,j}$ peut inclure $L_{k,j}$ liens. Dans ce cas, le nombre total, d'une période $d_k$, de mise à jour de la distribution des RTTs différentiels est    $ \sum_{m=1}^{R_k}  L_{k,m}$. $ L_{k,j} $ dépend du nombre de saut du  traceroute $t_{k,j}$.
 
-En plus du nombre de lectures et d'écritures, la détection des anomalies repose sur une comparaison d'intervalles de confiances calculés par le score  Wilson. La fonction permettant de calculer les deux bornes de l'intervalle de confiance de Wilson ne fait pas partie des fonctions disponibles sur Amazon Athena. D'autre part, Amazon Athena ne permet pas la création des fonctions personnalisées pour répondre à des besoins non couverts par Amazon Athena.
+ %de l'ordre $R_k$\texttimes$L$ de fois.  Cette estimation est à titre indicatif, de plus elle ne concerne que l'étape $4$, le nombre de lectures et/ou d'écritures dépend des requêtes SQL créées pour les autres étapes. 
+
+En plus du nombre de lectures et d'écritures, relatives à la phase I, que nous venons de décrire, à la phase II, la détection des anomalies s'effectue en  comparant les intervalles de confiances : un intervalle de confiance courant du lien avec celui de référence. Cette comparaison révèle deux contraintes. La première contrainte concerne  la fonction permettant de calculer les deux bornes de l'intervalle de confiance de Wilson ne fait pas partie des fonctions disponibles sur Amazon Athena. D'autre part, Amazon Athena ne permet pas la création des fonctions personnalisées pour répondre à des besoins non couverts par Amazon Athena. La deuxième contrainte concerne la mise à jour de l'intervalle de confiance de référence qui doit être faite à chaque nouvelle période.
 
 
+\paragraph{Evaluation des critères pour Amazon S3 et Amazon Athena  }~
 
-Afin d'utiliser le service Amazon Athena à moindre coût, il est conseillé d'utiliser le partitionnement. Ce dernier permet d'analyser seulement les données concernées en ciblant ces dernières. De ce fait, moins de frais sont appliqués. Si un partitionnement particulier est adopté, le schéma de données est basé sur ce partitionnement ainsi que les requêtes SQL.
+Afin d'utiliser le service Amazon Athena à moindre coût, il est conseillé d'utiliser le partitionnement, car moins de frais sont appliqués. Si un partitionnement particulier est adopté, la création du schéma de données est basé sur ce partitionnement ainsi que les requêtes SQL destinés à l'interrogation de la table de données.
 
-En ce qui concerne l'évolutivité d'une application basée sur ces trois services d'Amazon, on note que toute mise à jour de la structure de données des objets traceroutes peut affecter l'entièreté de la configuration initiale. A savoir, l'organisation des fichiers de données via le partitionnement, le schéma de données et les requêtes SQL.
+En ce qui concerne l'évolutivité d'une application basée sur ces deux services d'Amazon, on note que toute mise à jour de la structure de données des objets traceroutes peut affecter l'entièreté de la configuration initiale. A savoir, l'organisation des fichiers de données via le partitionnement, le schéma de données et les requêtes SQL.
 
- Quant à la flexibilité du schéma de données, le service  Amazon Athena est tolérant au données manquantes. Etant donné que la structure d'un objet traceroute dépend de la version du firmware de la sonde, nous avons créé trois schémas de tables. La première table  modélise tout objet traceroute de  version $5$, la deuxième modélise tout objet traceroute de version $6$ et enfin la troisième table modélise ceux ayant la version $7$. En expérimentant différentes requêtes, nous avons conclu  que Amazon Athena a pu récupéré les données de la version récente ($7$) via le schéma de la version $5$ malgré que la version $7$ a plus d'attributs par rapport à la version $5$.
+ Quant à la flexibilité du schéma de données, le service  Amazon Athena est tolérant au données manquantes. Etant donné que la structure d'un objet traceroute dépend de la version du firmware de la sonde, nous avons créé trois schémas de tables. La première table  modélise tout objet traceroute de  version $5$, la deuxième modélise tout objet traceroute de version $6$ et enfin la troisième table modélise ceux ayant la version $7$. En expérimentant différentes requêtes, nous avons conclu  que Amazon Athena a pu récupérer les données de la version récente ($7$) via le schéma de la version $5$ malgré que la version $7$ a plus d'attributs par rapport à la version $5$.
  
- 
- 
-
-
 %Avec une autre technologie qui travaille en mémoire, les résultats sont données plus rapidement. 
-
 
 \paragraph{Performances des services Amazon S3 et Athena dans l'analyse des délais }~ \label{aws-perforsm}
 
-Nous avons utilisé Amazon Athena et Amazon S3 pour effectuer le même traitement que celui fait avec MongoDB. Au lieu de récupérer les traceroutes depuis MongoDB, nous l'avons récupéré depuis Amazon S3 via Amazon Athena, c'est ce que nous l'avons appelé approche $1$. 
+Nous avons utilisé Amazon Athena et Amazon S3 pour analyser les traceroutes et détecter les anomalies des délais. Nous précisons que nous avons évalué la première possibilité décrite dans la section \ref{integration-aws-possibilite-une}. Nous avons bénéficié de la  possibilité  de lancer des requêtes destinées à Amazon Athena à travers l'API REST, précisément en Python. Et comme l'implémentation proposée par les auteurs du travail de référence est écrite en Python, nous avons adapté cette implémentation de sorte  de récupérer les traceroutes depuis   depuis Amazon S3 via Amazon Athena au   lieu de le faire depuis la base de données locale MongoDB.  
 
-Etant donné que nous avons utilisé le partitionnement de données, une analyse des délais nécessite d'autres paramètres à ajuster en plus de ceux relatifs à la détection. Ce sont les paramètres permettant de sélectionner les traceroutes présents sur Amazon S3. Du fait que le partitionnement de données (voir une partie de l'arborescence dans la Figure 	\ref{fig:partitionnement-athena}) est réalisé sur base du type de traceroute (\textit{builtin} ou \textit{anchor}) et de l'identifiant de la mesure ($ 5004 $, $6001$, etc) qui a enregistré un traceroute, il est possible de personnaliser les traceroutes à récupérer depuis Amazon S3.
+Etant donné que nous avons utilisé le partitionnement de données, une analyse des délais nécessite d'autres paramètres à ajuster en plus de ceux relatifs à la détection. Ce sont les paramètres permettant de sélectionner les traceroutes présents sur Amazon S3. Du fait que le partitionnement de données (voir une partie de l'arborescence dans la Figure 	\ref{fig:partitionnement-athena}) est réalisé sur base du type de traceroute (\textit{builtin} ou \textit{anchor}) et de l'identifiant de la mesure ($ 5004 $, $6001$, etc) qui a enregistré un traceroute, nous devons personnaliser  la requête visant la   récupération des traceroutes  depuis Amazon S3 pour qu'elle prennent en compte aussi les partitions.
 
 Le Tableau \ref{tab:athena-data} contient les temps d'exécution suivant la taille de l'ensemble de données donné en entrée de la détection.
 
@@ -285,18 +322,17 @@ Le Tableau \ref{tab:athena-data} contient les temps d'exécution suivant la tail
 	\captionsetup{justification=centering}
 \begin{tabular}{c c c}
 	\textbf{Période} & \textbf{Taille(GB)} & \textbf{Temps (secondes) } \\ 	\hline 
-$ 07/02/18 $	&$ 1 $&	$ 1898.31 $ \\ 	\hline 
-$ 07/02/2018 – 08/02/2018 $	&$ 2 $&	$ 3533.6562171 $ \\ 	\hline 
-$ 07/02/2018 – 09/02/2018 $&	$ 3 $&	$ 5284.91494989  $ \\ 	\hline 
-$ 07/02/2018 – 10/02/2018 $	&$ 4 $&$ 	7228.88 $  \\ 	\hline 
-$ 07/02/2018 – 11/02/2018 $	&$ 5 $& $ 8984.873281	 $ \\ 	\hline 
+$ 07/02/18 - 07/02/18 $	&$ 1 $&	$ 1898.31 $ \\ 	\hline 
+$ 07/02/2018 - 08/02/2018 $	&$ 2 $&	$ 3533.6562171 $ \\ 	\hline 
+$ 07/02/2018 - 09/02/2018 $&	$ 3 $&	$ 5284.91494989  $ \\ 	\hline 
+$ 07/02/2018 - 10/02/2018 $	&$ 4 $&$ 	7228.88 $  \\ 	\hline 
+$ 07/02/2018 - 11/02/2018 $	&$ 5 $& $ 8984.873281	 $ \\ 	\hline 
 \end{tabular} 
 \caption{Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)}
 \label{tab:athena-data}
 \end{table}
 
 Nous distinguons trois phases dans cette approche (approche 1). Premièrement,  les données sont récupérées depuis Amazon S3. Plusieurs facteurs affectent cette étapes, par exemple,  les conditions du réseau, les ressources allouées par Amazon pour répondre à chaque requête  Athena à destination des données disponibles sur Amazon S3, l'optimalité de la requête SQL, etc.  En deuxième lieu, les résultats de la requête doivent être désérialisés pour pouvoir les utiliser localement. Enfin, sur base des données récupérées, la détection des anomalies peut être déclenchée.
-
 %
 %
 %Nous évaluons les temps d'exécution de plusieurs  analyses de délais lancées en variant la taille de données. Rappelons qu'il s'agit de la première possibilité: Amazon S3 pour le stockage de traceroutes et Amazon Athena pour récupérer les traceroutes valides, le reste de traitements sont effectués au sein de la machine locale.  Le Tableau	\ref{tab:awstiming-timing} reprend plus de détails. 
@@ -325,9 +361,7 @@ Nous distinguons trois phases dans cette approche (approche 1). Premièrement,  
 %	\caption{La moyenne des temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec Amazon S3 et Amazon Athena }
 %	\label{tab:awstiming-timing}
 %\end{table}
-
-
-La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tailles utilisées auparavant avec MongoDB. 
+La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tailles utilisées auparavant avec MongoDB.  Le temps de chaque essai comprend l'étape de la récupération des traceroutes depuis Amazon S3, le temps de préparation des traceroute et enfin le temps de la détection des anomalies. Autrement dit, le temps nécessaire à la réalisation des phases I, II et celui nécessaire pour sauvegarder les résultats par lien.
 
 \begin{figure}[H]
 	\centering
@@ -339,6 +373,7 @@ La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tail
 
 
 \section{Application 4 : Spark Apache avec Scala}
+Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans le chapitre \ref{application:spark}. 
 
 \subsection{Mode Standalone}
 
