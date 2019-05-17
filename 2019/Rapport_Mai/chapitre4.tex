@@ -4,6 +4,9 @@
 Ce chapitre  décrit  l'implémentation de l'outil de détection en utilisant le framework Spark, décrit dans la section \ref{apache-spark}, en utilisant l'API Scala (voir la présentation de Scala dans \ref{scala-presentation}). 
 %L'outil implémenté est décrit dans le chapitre \ref{chap:algorith-detection}. 
 
+
+%[!] Avec Spark, on travaille sur des collections d'objets, sur lesquelles on applique des traitements. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données, appelées \textit{case class}. De plus, nous avons besoin de définir les fonctions à appliquer  sur ces objets. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes, dans l'annexe \ref{application:spark}, en vue de tracer l'évolution des RTTs différentiels des liens au cours du temps. 
+
 \section{Implémentation}
 \subsection{Description de l'environnement}
 %Spark est destiné aux traitements distribués sur un cluster de machines, toutefois,n
@@ -610,7 +613,10 @@ A cette étape, nous avons une liste de type \textit{ResumedLink} qui concerne  
 
 Nous présentons dans ce qui suit la phase II de l'analyse des délais. A travers la méthode \textit{listAlarms()} nous analysons un lien et nous identifions les anomalies de ce dernier. Dans le Listing \ref{lst:paralelizeAndDtectAnomalies}, d'abord nous convertissons la liste des liens en un RDD afin de distribuer le traitement de ces liens. Ensuite, nous appliquons la méthode \textit{listAlarms} sur tout lien. 
 
-Nous notons que si on continue la détection à la suite de la préparation des données, nous n'avons pas besoin de créer à nouveau le RDD reprenant les liens (Ligne \ref{parallelizefinalRawRttDiff} du Listing \ref{lst:paralelizeAndDtectAnomalies}). Car dans certains cas, on peut enregistrer les résultats intermédieras pour une utilisation ultérieure. 
+
+A la fin de la phase I, nous obtenons une liste des liens de type \textit{Iterable}  
+
+(Iterable[classes.SummarizedLink]). Comme chaque lien peut être traité indépendamment des autres liens, nous créons un RDD à partir de cette liste (Ligne \ref{parallelizefinalRawRttDiff} du Listing \ref{lst:paralelizeAndDtectAnomalies}), ensuite, nous appliquons la méthode sur chaque lien (Ligne \ref{listAlarmscall} du Listing \ref{lst:paralelizeAndDtectAnomalies}).  
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Détection des alarmes des liens},label={lst:paralelizeAndDtectAnomalies}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -618,7 +624,7 @@ stepnumber=1]
 val finalRawRttDiffRdd = spark.sparkContext.parallelize(finalRawRttDiff.toSeq) |\label{parallelizefinalRawRttDiff}|
 
 // Alarms detection by link
-val linkAnalysisResult = finalRawRttDiffRdd.map(p => listAlarms(spark, p, timewindow, rangeDates))
+val linkAnalysisResult = finalRawRttDiffRdd.map(p => listAlarms(spark, p, timewindow, rangeDates)) |\label{listAlarmscall}|
 \end{lstlisting}
 
 La méthode \textit{listAlarms} est détaillée dans le Listing \ref{lst:findAnalomalies}. Dans cette dernière, nous assurons:
@@ -782,7 +788,7 @@ stepnumber=1]
 La commande \textit{bin/spark-submit} prend plusieurs paramètres, nous présentons quelques paramètres utilisés :
 \begin{itemize}
 	\item \textit{class} est un objet Scala contenant la fonction \textit{main};
-	\item  \textit{master} est l'URL du cluster. Par exemple la valeur \textit{local} indique que Spark est exécuté localement avec un seul worker thread (aucun parallélisme), alors que \textit{local[K]} lance le traitement sur Spark en utilisant $K$ worker sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine;
+	\item  \textit{master} est l'URL du cluster (voir les différents modes dans la section \ref{spark-master-modes});
 	\item \textit{driver-memory} est la mémoire dont le processus du driver peut utiliser;
 	
 	\item  \textit{--conf} "key = value" est une manière de configurer l'application Spark. Dans l'exemple, "spark.network.timeout=10000000", $ 10000000 $ est le temps durant lequel le driver doit recevoir  des mises à jour de la part des différents workers; après ce temps, le worker n'est plus considéré comme actif.
