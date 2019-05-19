@@ -1,0 +1,10 @@
+https://stackoverflow.com/questions/15980682/why-is-functional-language-good-for-big-data
+https://docs.google.com/viewerng/viewer?url=http://glennengstrand.info/media/fpbd.pdf
+https://pt.slideshare.net/Hadoop_Summit/functional-programming-and-big-data?smtNoRedir=1
+2
+
+Zdravko is right about immutable state making concurrency easier and less prone to race condition style bugs. However, that helps only with multi-threaded concurrency. When you talk about big data, you are talking about horizontally scaled cluster computing. Not much support for that in Functional Programming languages.
+
+There is something about FP that has captured the imagination of developers with Big Data dreams. Maybe it has something to do with FP's stream oriented higher order functions which let you think in terms of processing data streams. With FP, you solve problems with languaging such as union, intersection, difference, map, flatmap, and reduce.
+
+But FP alone won't work in a distributed computing environment. At OSCON 2014, I learned about some open source projects that integrate FP languages with Hadoop. See Functional Programming and Big Data for a comparative evaluation of three such projects getting traction there days; Netflix Pig Pen, Cascalog, and Apache Spark.

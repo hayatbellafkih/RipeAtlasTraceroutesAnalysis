@@ -4,33 +4,31 @@ The top-level auxiliary file: rapport_final.aux
 A level-1 auxiliary file: resume.aux
 A level-1 auxiliary file: introductionII.aux
 A level-1 auxiliary file: chapitre1.aux
-A level-1 auxiliary file: chapitre2.aux
-A level-1 auxiliary file: intervalle_de_confiance.aux
-A level-1 auxiliary file: chapitre21.aux
+A level-1 auxiliary file: chapter2.aux
 A level-1 auxiliary file: chapitre3.aux
 A level-1 auxiliary file: chapitre4.aux
 A level-1 auxiliary file: chapitre5.aux
 A level-1 auxiliary file: conclusion.aux
 A level-1 auxiliary file: annexes.aux
-A level-1 auxiliary file: implementation_spark_scala.aux
 A level-1 auxiliary file: Un_enregistrement_traceroute.aux
+A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
 Database file #1: references.bib.bib
-You're missing a field part---line 224 of file references.bib.bib
+You're missing a field part---line 231 of file references.bib.bib
  :   year         = 
  :                  ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 898 of file references.bib.bib
+I was expecting a `,' or a `}'---line 905 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 911 of file references.bib.bib
+I was expecting a `,' or a `}'---line 918 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 923 of file references.bib.bib
+I was expecting a `,' or a `}'---line 930 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
@@ -46,48 +44,47 @@ Warning--to sort, need author or key in bugs-ripe-atlas
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
-Warning--to sort, need author or key in Lissages-Exponentiels
 Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
-You've used 41 entries,
+You've used 40 entries,
             2253 wiz_defined-function locations,
-            759 strings with 11058 characters,
-and the built_in function-call counts, 10274 in all, are:
-= -- 989
-> -- 323
+            755 strings with 10961 characters,
+and the built_in function-call counts, 10049 in all, are:
+= -- 967
+> -- 322
 < -- 0
-+ -- 142
++ -- 141
 - -- 100
-* -- 521
-:= -- 1572
-add.period$ -- 138
-call.type$ -- 41
-change.case$ -- 169
+* -- 508
+:= -- 1544
+add.period$ -- 136
+call.type$ -- 40
+change.case$ -- 166
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 449
-empty$ -- 1038
+cite$ -- 50
+duplicate$ -- 434
+empty$ -- 1010
 format.name$ -- 100
-if$ -- 2299
+if$ -- 2241
 int.to.chr$ -- 0
-int.to.str$ -- 41
-missing$ -- 23
-newline$ -- 223
+int.to.str$ -- 40
+missing$ -- 21
+newline$ -- 219
 num.names$ -- 64
-pop$ -- 344
+pop$ -- 337
 preamble$ -- 1
-purify$ -- 132
+purify$ -- 130
 quote$ -- 0
-skip$ -- 303
+skip$ -- 294
 stack$ -- 0
-substring$ -- 368
-swap$ -- 122
+substring$ -- 361
+swap$ -- 119
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 150
-warning$ -- 11
-while$ -- 79
-width$ -- 43
-write$ -- 437
+type$ -- 148
+warning$ -- 10
+while$ -- 78
+width$ -- 42
+write$ -- 426
 (There were 5 error messages)

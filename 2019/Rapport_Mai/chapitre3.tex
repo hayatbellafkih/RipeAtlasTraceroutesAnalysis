@@ -375,7 +375,7 @@ est un framework de calcul distribué. C'est un ensemble de composantes conçues
 
 \subparagraph{Spark Clusters et Resource Management System}
 
-Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
+Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
 Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
 
@@ -471,15 +471,30 @@ Scala est un langage à la fois orienté objet, un paradigme qui a prouvé ses p
 
 L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
-\paragraph{Modes d'utilisation de Spark} 
+\paragraph{Lancement d'une application avec de Spark} \label{spark-master-modes}~
 
-On distingue deux modes d'exécution d'une application écrite en Spark : cluster et standalone. 
-\begin{enumerate}
-	\item Standalone Cluster Manager : c'est un gestionnaire de ressources incorporé en Spark. Ce mode est disponible sur Linux, Wndows et Mac OSX.
-	\item Hadoop YARN
-	\item Apache Mesos
-\end{enumerate}
+On distingue deux modes d'exécution d'une application écrite en Spark : cluster et local. En  mode local, l'application  peut être exécuté au sein d'une machine locale. Par exemple,  avec un seul worker thread (aucun parallélisme),  en précisant $K$ worker sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine sur laquelle Spark est installé, etc. 
+ Pour le mode cluster, on distingue plusieurs types de clusters. Ces derniers  varient suivant le gestionnaire de ressources qui assure la communication entre les différentes entités du cluster selon le principe master-slave. Par exemple Hadoop YARN\footnote{Source : \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consultée  le $14/05/2019$ }, Apache Mesos\footnote{Source : \url{https://mesos.apache.org/}, consultée le $14/05/2019$.}. La liste détaillée des alternatives pour chaque mode est donnée dans le site Web de Spark\footnote{\url{https://spark.apache.org/docs/latest/submitting-applications.html\#master-urls}, consultée le $14/05/2019$.}. 
+ 
+Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{Source : \url{https://aws.amazon.com/fr/emr/}, consultée le $08/05/2019$}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
 
+
+\subsection{Amazon Elastic MapReduce}
+
+Amazon Elastic MapReduce (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
+Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{Source : \url{https://aws.amazon.com/ec2/}, consultée le $14/05/2019$.}.
+Il existe plusieurs variantes d'instances EC2. Elles se varient suivant leurs caractéristiques techniques comme la RAM, le nombre de CPUs, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques et de la région où se trouvent ces instances. Au moment de la création du cluster EMR. La création d'un cluster EMR destiné à une application Spark nécessite de  :
+\begin{itemize}
+	\item choisir le nom du cluster;
+	\item le nombre des n\oe{}uds (instances EC2) dans le cluster;
+	\item les caractéristiques techniques des n\oe{}uds du cluster;
+	\item la classe représentant le driver;
+	\item transférer l'application sous format jar vers un compartiment Amazon S3;
+	\item transférer les données à analyser, par l'application Spark, vers un compartiment Amazon S3;
+	\item spécifier les paramètres d'entrée de l'application.
+\end{itemize}
+
+Avec Amazon EMR, il est possible de lancer une analyse sur le cluster et choisir l'action à appliquer à la fin de cette analyse, par exemple arrêter le cluster. Les coûts appliqués suite à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{Source : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
 
 
 

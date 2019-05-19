@@ -222,7 +222,7 @@ La connexion précédemment établie permet aux sondes  d'envoyer leurs  rapport
 
 \section{Les mesures des sondes}
 Les sondes ont la capacité d'effectuer plusieurs requêtes  réseaux. On distingue deux catégories de mesures. La première catégorie reprend les mesures à effectuer, par défaut, par toutes les sondes, appelées  mesures intégrées. Tandis que la deuxième catégorie, concerne les mesures personnalisées suivant des besoins spécifiques. Ces dernières nécessitent la possession des crédits.
-\subsection{Les mesures intégrées : Built-in } \label{par:whatmesureripeatlas}
+\subsection{Les mesures intégrées : Built-in mesurement } \label{par:whatmesureripeatlas}
 Une fois une sonde  connectée, elle lance automatiquement un ensemble de mesures prédéfinies, appelées \textit{Built-in Measurements}. Les mesures peuvent être effectuées selon l'adressage IPv4 ou bien IPv6. Le choix du mode  IPv4,  IPv6 ou les deux, dépend de la capacité du réseau qui héberge la sonde.  Il existe deux types de mesures :  celles qui   s'exécutent une seule fois, appelée  \textit{One-Off}, et celles qui s'exécutent   périodiquement, à chaque intervalle fixe de temps. 
 
 Par défaut, les sondes  assurent les mesures intégrées  suivantes: 
@@ -335,41 +335,7 @@ Il existe une autre manière de grouper les sondes, il s'agit d'un groupement  p
 Les étiquettes utilisateurs sont  associées à une sonde librement par son hébergeur. Or, les étiquettes système sont attribuées uniquement par l'équipe  Atlas et sont mises à jour périodiquement, à priori chaque $4$ heures. Des exemples d'étiquettes système sont disponibles sur RIPE Atlas\footnote{Source: \url{https://atlas.ripe.net/docs/probe-tags/}, consultée le $23/01/2018$.}.
 %présentés dans la section \ref{sec:rags} de l'annexe A.
 
-
-\subsection{Les ancres VS sondes} \label{subsec:ancre}
-%Les ancres  Atlas, appelées seulement ancres dans la suite du présent document,  sont des
-Les ancres Atlas, auxquelles je référerais dans la suite du document seulement par le terme <<ancres>>, sont des dispositifs agissant comme cibles aux différentes mesures lancées par les sondes. Il est possible de planifier des mesures entre les ancres, ces mesures permettent de vérifier l'état des réseaux qui hébergent ces ancres. De plus, les ancres  peuvent être considérées comme  cibles aux mesures suivantes:
-\begin{itemize}
-	\item Ping.
-	\item Traceroute.
-	\item DNS : les ancres ont été configurées avec BIND pour qu'elles agissent en tant que serveur DNS faisant autorité.
-	\item HTTP et HTTPS : l'ancre fait tourner un serveur Web, ce dernier utilise un gestionnaire  personnalisé de réponses aux requêtes HTTP(S) ayant comme seule option la taille du payload. 	 Cette taille peut prendre une valeur maximale de $4096$ et la réponse est fournie sous format JSON. L'exemple d'une requête HTTP avec une taille de $536$ depuis une sonde  vers une ancre  est: 
-	%\begin{center}
-	\begin{tcolorbox}
-		\textit{http://nl-ams-as3333.anchors.atlas.ripe.net/536}
-	\end{tcolorbox}
-	%\end{center}
-\end{itemize}
-Les ancres sont configurées avec un certificat SSL auto-signé en utilisant une clé de $2048$ bit et un temps d'expiration de $100$ ans. Le Tableau \ref{tab:comparaison-sonde-ancre} reprend une comparaison de certaines caractéristiques communes entre les sondes et les ancres.
-
-\begin{table}[H]
-	\centering
-	\resizebox{\textwidth}{!}{
-		\begin{tabular}{l c c}
-			& \textbf{Sonde} & \textbf{Ancre}  \\ \hline
-			\textbf{Mesures originaires de}	    &oui& oui \\ \hline
-			\textbf{Mesures à destination de}	    & --- \tablefootnote{--- : Non disponible.} & ping, traceroute, DNS, HTTP(S). \\ \hline
-			\textbf{Nomination}                   & --- & structurée
-			\tablefootnote{Exemple de \textit{de-mai-as2857.anchors.atlas.ripe.net} avec la structure suivante : \textit{pays-ville-ASN.anchors.atlas.ripe.net}.} \\ \hline
-			\textbf{Crédit  gagnés  }              & $N$ & $10$ $*$ $N$ \\ \hline
-			
-			\textbf{Besoin en bande passante }                  & léger & important \\ \hline
-			\textbf{Coût : gratuite }                   & oui &  non \tablefootnote{Le matériel est au frais de l'hébergeur.} \\ \hline
-	\end{tabular}}
-	\caption{Comparaison entre les sondes et les ancres}
-	\label{tab:comparaison-sonde-ancre}
-\end{table}
-\subsection{Les sources de données Atlas} \label{subsec:sources-data}
+\section{Les sources de données Atlas} \label{subsec:sources-data}
 
 Le projet Atlas donne accès à trois catégories de données : les détails de connexion des sondes, la description des mesures effectuées par les sondes (meta-data) et enfin
 les résultats des mesures intégrées et personnalisées.
@@ -404,6 +370,41 @@ En considérant toutes les possibilités des types, la quantité de données gé
 Depuis $15$ mars $2018$, les résultats des mesures sont  regroupés différemment. $24$ archives par jour,  une seule archive pour chaque heure et  type de mesure. L'archive ne distingue pas entre mesures IPv4 et IPv6,  entre mesures intégrées et  personnalisées. Il existe un attribut \textbf{"af"} qui distingue entre IPv4 et IPv6 et l'identifiant de la mesure pour distinguer les  mesures intégrées et celles personnalisées. Par exemple, les mesures personnalisées ont un identifiant $ > 1,000,000$. 
 
 Streaming API permet de récupérer les résultats de mesures en temps réel en provenance des sondes publiques. Ainsi, elle  fournit continuellement de nouveaux résultats en temps réel, et ce  via une connexion de type HTTPS web-socket active tout le temps.
+
+\section{Les ancres VS sondes} \label{subsec:ancre}
+%Les ancres  Atlas, appelées seulement ancres dans la suite du présent document,  sont des
+Les ancres Atlas, auxquelles je référerais dans la suite du document seulement par le terme <<ancres>>, sont des dispositifs agissant comme cibles aux différentes mesures lancées par les sondes. Il est possible de planifier des mesures entre les ancres, ces mesures permettent de vérifier l'état des réseaux qui hébergent ces ancres. De plus, les ancres  peuvent être considérées comme  cibles aux mesures suivantes:
+\begin{itemize}
+	\item Ping.
+	\item Traceroute.
+	\item DNS : les ancres ont été configurées avec BIND pour qu'elles agissent en tant que serveur DNS faisant autorité.
+	\item HTTP et HTTPS : l'ancre fait tourner un serveur Web, ce dernier utilise un gestionnaire  personnalisé de réponses aux requêtes HTTP(S) ayant comme seule option la taille du payload. 	 Cette taille peut prendre une valeur maximale de $4096$ et la réponse est fournie sous format JSON. L'exemple d'une requête HTTP avec une taille de $536$ depuis une sonde  vers une ancre  est: 
+	%\begin{center}
+	\begin{tcolorbox}
+		\textit{http://nl-ams-as3333.anchors.atlas.ripe.net/536}
+	\end{tcolorbox}
+	%\end{center}
+\end{itemize}
+Les ancres sont configurées avec un certificat SSL auto-signé en utilisant une clé de $2048$ bit et un temps d'expiration de $100$ ans. Le Tableau \ref{tab:comparaison-sonde-ancre} reprend une comparaison de certaines caractéristiques communes entre les sondes et les ancres.
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{l c c}
+			& \textbf{Sonde} & \textbf{Ancre}  \\ \hline
+			\textbf{Mesures originaires de}	    &oui& oui \\ \hline
+			\textbf{Mesures à destination de}	    & --- \tablefootnote{--- : Non disponible.} & ping, traceroute, DNS, HTTP(S). \\ \hline
+			\textbf{Nomination}                   & --- & structurée
+			\tablefootnote{Exemple de \textit{de-mai-as2857.anchors.atlas.ripe.net} avec la structure suivante : \textit{pays-ville-ASN.anchors.atlas.ripe.net}.} \\ \hline
+			\textbf{Crédit  gagnés  }              & $N$ & $10$ $*$ $N$ \\ \hline
+			
+			\textbf{Besoin en bande passante }                  & léger & important \\ \hline
+			\textbf{Coût : gratuite }                   & oui &  non \tablefootnote{Le matériel est au frais de l'hébergeur.} \\ \hline
+	\end{tabular}}
+	\caption{Comparaison entre les sondes et les ancres}
+	\label{tab:comparaison-sonde-ancre}
+\end{table}
+
 \section{Limitations du projet Atlas}
 \subsection{Les sondes  et la vie privée}
 La sonde   n'a pas l'accès au trafic de son hébergeur. Elle maintient sa connexion avec l'infrastructure centrale et elle exécute les mesures planifiées vers les destinations publiques sur Internet. 

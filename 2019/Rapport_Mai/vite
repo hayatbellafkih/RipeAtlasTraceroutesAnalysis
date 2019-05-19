@@ -1,0 +1,13 @@
+#fonction
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la fonction},label={lst:function}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1] 
+
+\end{lstlisting}
+
+#classe :
+
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe},label={lst:class}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1] 
+
+\end{lstlisting}

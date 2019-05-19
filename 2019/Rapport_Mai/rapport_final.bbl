@@ -40,13 +40,6 @@ Xport pro.
 \newblock URL: \url{https://www.lantronix.com/products/xport-pro/}.
 \newblock (consulté le $08/08/2018/$).
 
-\bibitem{Lissages-Exponentiels}
-Lissages exponentiels.
-\newblock URL:
-  \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf},
-  2017.
-\newblock (consulté le $30/09/2018$).
-
 \bibitem{Wikipedia}
 {\sc Aben, E.}
 \newblock {How RIPE Atlas Helped Wikipedia Users}.
@@ -76,6 +69,13 @@ Lissages exponentiels.
 \newblock Global network interference detection over the {RIPE} atlas network.
 \newblock In {\em 4th {USENIX} Workshop on Free and Open Communications on the
   Internet ({FOCI} 14)\/} (San Diego, CA, 2014), {USENIX} Association.
+
+\bibitem{CarloStrozziNosql}
+{\sc {Carlo Strozzi}}.
+\newblock Nosql: A relational database management system.
+\newblock URL~:
+  \url{http://www.strozzi.it/cgi-bin/CSA/tw7/I/en_US/nosql/Home%20Page}.
+\newblock (consulté le $04/05/2019$).
 
 \bibitem{Traceroute-consistency-check}
 {\sc Donato, V.~D.}
@@ -188,11 +188,6 @@ Lissages exponentiels.
 {\sc Luu, H.}
 \newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
 \newblock Apress, 2018, p.~4.
-
-\bibitem{eginning-Apache-Spark-2-cluster-example}
-{\sc Luu, H.}
-\newblock {\em Beginning Apache Spark 2 - 2018}, 1~ed.
-\newblock Apress, 2018, p.~6.
 
 \bibitem{eginning-Apache-Spark-2-unified-stack}
 {\sc Luu, H.}

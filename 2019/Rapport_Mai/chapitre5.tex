@@ -25,7 +25,8 @@ Dans la présente évaluation de quelques technologies Big Data, nous n'avons pa
 
 \section{Caractéristiques de l'environnement de test} \label{machine-openvz-caracteritics}
 
-\paragraph{La machine de test} L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisé sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32768 MB de  RAM, CPU MHz $ 2294.331 $.
+\paragraph{La machine de test} L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisé sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32,768 MB de  RAM, CPU MHz $ 2294.331 $.
+%, nombre de CPUs $64$.
 
 %Le Tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
 %\begin{table}[H]
@@ -45,6 +46,9 @@ Les différents tests effectués, présentés dans le présent chapitre, ont ét
 \paragraph{Paramètres de l'analyse} Pour les paramètres de détection, nous avons utilisé les valeurs suivantes : \textit{timeWindow} est de $ 3600 $ secondes, l'intervalle de confiance est de $0,05$, \textit{alpha} est de $ 0,01 $ et \textit{minSeen} est de $3$. Les dates de début et de fin  varient suivant les traceroutes analysés.
 
 
+\section{Collecte des traceroutes depuis le dépôt d'Atlas }
+Nous avons utilisé l'API d'Atlas  comme source pour récupérer les traceroutes depuis le dépôt d'Atlas. L'API permet de collecter des traceroutes depuis le dépôt d'Atlas en ajustant quelques paramètres comme  l'identifiant de la mesure, la période souhaitée, etc. Toutefois, les données collectés doivent être réorganisées. Précisément, il faut passer d'un fichier d'une seule ligne qui contient une liste de traceroute à un fichier contenant plusieurs lignes et chaque ligne représente un traceroute. Nous avons manipulé des échantillons de traceroutes dont la taille entre $ 1 $ et $ 10 $ GO, ce sont des volumes  adaptés pour que la machine de test prenne en charge la récupération de ces volumes  et ensuite  réorganisation de ces traceroutes. 
+La réorganisation des traceroute n'est pas nécessaire  MongoDB; l'import des traceroutes vers une base de données MongoDB peut être fait soit  via la liste des traceroutes ou bien via des lignes dans un fichier. Pour Amazon Athena et Spark, chaque traceroute doit occuper une  ligne dans les fichiers dans lesquels ils sont stockés. 
 
 \section{Application 1 : MongoDB} \label{mongodb-impleme}
 %\paragraph{ Application sur  MongoDB}~
@@ -375,22 +379,18 @@ La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tail
 \section{Application 4 : Spark Apache avec Scala}
 Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans le chapitre \ref{application:spark}.  Nous avons évalué le temps d'exécution de l'outil de détection en analysant différents échantillons de traceroutes  en mode local et en mode cluster. Pour le mode local, nous avons lancer l'application Spark sur la machine ayant les caractéristiques  reprises dans la section \ref{machine-openvz-caracteritics}. Pour le mode cluster, nous avons utilisé le cluster EMR.
 
-Les fonctionnalités de Spark sont accessibles avec les  APIs en Scala, Java et Python. Nous avons choisi l'utilisation de l'API en Scala parce que Scala est le langage natif de Spark. De plus, Scala est interopérable avec Java. 
 
-\subsection{Mode Standalone}
+\subsection{Mode local}
 
-A la base Spark est conçu pour être utilisé dans un cluster de machines, sur  lequel l'analyse est distribuée. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, on trouve le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au processus initié par le \textit{driver}. 
-Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GB pour le $ driver $ et $ 1 $ GB pour chaque \textit{executor}. 
+A la base Spark est conçu pour être utilisé dans un cluster de machines sur  lequel l'analyse de données est distribuée. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, on trouve le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au même processus initié par le \textit{driver}. 
 
 
-
-
-\paragraph{Performances d'Apache Spark dans l'analyse des délais }~
-
-
+%\paragraph{Performances d'Apache Spark dans l'analyse des délais }~
 Nous avons évalué le temps d'exécution de l'implémentation de l'outil de détection en utilisant Spark en variant le nombre de traceroutes à analyser. Nous avons aussi varié certains paramètres relatifs à la soumission de l'application au Spark. Nous avons varié la taille de la mémoire allouée au driver afin de choisir celle la plus adaptée. Ensuite nous avons mesuré le temps d'exécution dans le cas de local, local[K] et local[*].
-\newpage
-\subparagraph{Variant la mémoire allouée au driver}~
+
+\paragraph{Variant la mémoire allouée au driver}~
+
+Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GB pour le $ driver $ et $ 1 $ GB pour chaque \textit{executor}. 
 
 En mode local (--master local), le \textit{driver} et le \textit{worker} sont liés au même processus.  Nous avons mesuré le temps d'exécution de l'application Spark en varaint la taille mémoire allouée au \textit{driver} via le paramètre \textit{driver-memory}. Par défaut, la mémoire allouée au driver est de 1 Go. Avec cette valeur, il n'est pas possible  d'analyser un ensemble de traceroutes qui fait $ 1,028,343,572 $ octets. Afin de voir l'effet de la mémoire allouée au \textit{driver}, en mode d'exécution local, nous avons utilisé deux échantillons de traceroutes. La première comprend les traceroutes capturés pendant le $ 07/02/2018 $ dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 1,028,343,572 $ octets (\textit{data\_1go}). Pour le deuxième échantillon, il reprend les traceroutes effectués  entre le $ 07/02/2018 $ et le $ 08/02/2018 $ effectués aussi dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 2,055,167,238 $ (\textit{ data\_2go}) octets.
 
@@ -406,209 +406,101 @@ Pour les valeurs nulles relatives au temps d'exécution, l'exécution de la l'ap
 
 D'après la Figure 	\ref{fig:variantdrivermemory}, nous remarquons qu'à partir d'une taille mémoire allouée au driver, le temps écoulé durant l'exécution de l'application Spark est relativement stable. De plus, nous constatons qu'il faut prévoir une taille mémoire minimal pour assurer l'exécution de l'application Spark. Les tailles mémoire supérieures à cette valeur minimale affectent faiblement le temps d'exécution.  Cette valeur minimale dépend fortement de la quantité de données à analyser. Enfin, malgré que la machine sur laquelle nous lançons l'application Spark ne dispose que de $ 32 $ Go de RAM, le fait d'allouer au driver $ 35 $ Go, $ 40$ Go, $ 45 $ Go n'a pas généré une erreur lors de l'exécution.
 
-\newpage
-\subparagraph{Variant le mode de cluster local : local[*] vs local}
-\newpage
-\subparagraph{Variant la taille de données}
+\paragraph{Variant le mode local : local vs local[N]}~
 
- %L'application Spark lit d'abord les traceroutes présents dans les fichiers donnés en entrée, ensuite, pour chaque période $d_k$, il faut parcourir tous les  traceroutes afin de trouver les traceroutes effectués durant $d_k$, appelée approche 1.  
- 
- Le Tableau \ref{tab:spark-timing} contient les résultats de $5$ analyses. Les trois premiers tests correspondent à l'analyse de $1$ GB de traceroutes. Dans le quatrième test, nous avons analyser les données des trois premiers tests. Durant le cinquième test, l'analyse a échoué. 
+local[*] Run Spark locally with as many worker threads as logical cores on your machine.
+local [*] Exécutez Spark localement avec autant de threads de travail que de c\oe{}urs logiques sur votre ordinateur.
 
-\begin{table}[H]
-%\begin{threeparttable}
-\centering
-\captionsetup{justification=centering}
-	\begin{tabular}{c cccc}
-		
-		\textbf{Test}&\textbf{Période} &\textbf{Durée}  & \textbf{Taille}   & \textbf{Temps (secondes)} \\ \hline
-		
-		$ 1 $&$ 07/02/2018 $&$ 1 $ jour&$ 1 $ GB& $ 2498 $\\ \hline
-		$ 2 $&$ 08/02/2018 $&$ 1 $ jour&$ 1 $ GB& $ 2942 $\\ \hline
-	$ 	3 $&$ 09/02/2018 $&$ 1  $jour& $ 1 $ GB& $ 2991 $\\ \hline
-		$ 4 $&$ 07/02/2018 - 09/02/2018 $&$ 3 $ jour& $ 3 $ GB& $ 20955 $\\ \hline
-		$ 5 $&$ 07/02/2018 - 10/02/2018 $&$ 4 $ jour& $ 4 $ GB & échec \\ \hline
-	\end{tabular}
-	\caption{Les temps d'exécution des analyses lancées sur des traceroutes (approche $1$)}
-	\label{tab:spark-timing}
-\end{table}
+\paragraph{Notes concernant le mode local}~
 
-Le temps total nécessaire pour analyser les trois échantillons correspondants aux  $ 07 $, $ 08 $ et $ 09 $ février $ 2018 $, chacun à part,  est de $ 8431 $. Tandis que le temps nécessaire à l'analyse des traceroutes correspondants au 3 échantillons en une seule fois est de $20955$, ce que correspond à $ 2.4 $ fois du temps de plus.
-En ce qui concerne l'analyse des traceroutes correspondants aux $ 4 $ jours,  l'analyse a échouée. 
+Le mode local d'exécution d'une application Spark est typiquement utilisé pour tester le code sur une petite quantité de données dans un environnement local. Cependant, ce mode  ne fournit pas les avantages de l'environnement distribué. 
 
-En revenant à l'implémentation, pour chaque période $d_k$, il faut consulter tous les traceroutes et ne récupérer que ceux effectués durant $d_k$. Par exemple, 3 GB de données doivent être consultées $ 3 * 24 $ fois. 
+\subsection{Cluster Amazon EMR}
+
+Nous avons utilisé l'infrastructure d'Amazon pour lancer la détection des anomalies. Ce sont les mêmes traitements lancés dans le mode local. Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille du cluster créé pour lancer la détection. Dans ce cas, nous utilisons différents nombre d'\textit{executors}. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
+\paragraph{Variant la taille du cluster}
 
 
-Nous avons modifié l'implémentation afin de réduire le temps de l'analyse. Au lieu de chercher les traceroutes à chaque période $d_k$,  on attribue chaque traceroute à une des périodes de l'analyse si le timestamp correspond; le tiemestamp du traceroute $t_{j}$ appartient à la période $d_k$, appelée approche 2.
-
-
-Soient $d_k$ une période dans l'ensemble de périodes $D$  entre $ start $ et $ end $ et $t_{j}$ est un traceroute dans l'ensemble de traceroutes $T$ donnés en entrée, $j$ $\in$ $[1, n]$ où $n$ est le nombre total de traceroutes à analyser. Nous illustrons la différence entre l'approche $ 1 $ et $ 2 $ avec les deux pseudo-code \ref{algo:grouper-traceroutes_1} et 	\ref{algo:grouper-traceroutes_2}. Avec :
-
-\begin{itemize}
-	\item $ findAllPeriods(start, end, timeWindow)  $ : crée la liste des périodes entre la date  \textit{start} et la date \textit{end}, chaque période a la durée \textit{timeWindow};
-	
-	\item  $ loadTraceroutesFromInputFiles(dataPath)  $: lit les traceroutes qui se trouvent dans le répertoire  \textit{dataPath};
-	
-	\item   $ checkTracerouteInPeriod (d_k, t_{j}$ : vérifie si le traceroute $ t_{j}  $ a été effectué durant la période $d_k$.
-\end{itemize}
-
-
-\begin{algorithm}[H]
-	\hspace*{\algorithmicindent} \textbf{Inputs :} \textit{dataPath} chemin vers les fichiers de données, \textit{start}, \textit{end}, \textit{timeWindow}\\
-	\hspace*{\algorithmicindent} \textbf{Outputs :} regroupement des traceroutes par périodes
-	\begin{algorithmic}[1]
-	\State $D$ $\leftarrow$ $ findAllPeriods(start, end, timeWindow) $
-	\ForAll{ $d_k$ $\in$ $D$} \
-	\State $T$ $\leftarrow$ \textit{$ loadTraceroutesFromInputFiles(dataPath) $}
-	\ForAll{$t_{j}$ $\in$ $T$}
-	\State $ checkTracerouteInPeriod $($d_k$, $t_{j}$) 
-	\EndFor
-	\EndFor
-\end{algorithmic}
-	\caption{Regroupement des traceroutes par période $d_k$ (étape 1) : approche $ 1 $}
-	\label{algo:grouper-traceroutes_1}
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\hspace*{\algorithmicindent} \textbf{Inputs :} \textit{dataPath} chemin vers les fichiers de données, \textit{start}, \textit{end}, \textit{timeWindow}\\
-	\hspace*{\algorithmicindent} \textbf{Outputs :} regroupement des traceroutes par périodes
-	\begin{algorithmic}[1]
-		\State $D$ $\leftarrow$ $ findAllPeriods(start, end, timeWindow) $
-		\State $T$ $\leftarrow$ $ loadTraceroutesFromInputFiles( dataPath) $
-		\ForAll{$t_{j}$ $\in$ $T$}
-		\ForAll{ $d_k$ $\in$ $D$} \
-		\State $ checkTracerouteInPeriod $($d_k$, $t_{j}$) 
-		\EndFor
-		\EndFor
-	\end{algorithmic}
-	\caption{  Regroupement des traceroutes par période $d_k$ (étape $ 1 $) : approche $ 2 $}
-	\label{algo:grouper-traceroutes_2}
-\end{algorithm}
-
- Le Tableau 	\ref{tab:spark-timing-reajustedcode} reprend des indications sur les résultats obtenus, avec \textit{driver-memory} configuré sur  $ 30 $ GB.  Ce sont les temps d'exécution obtenus lors de deux tests pour les tailles de données : $1$ GB, $2$ GB, $3$ GB, $4$ GB et $5$ GB, ce tableau reprend aussi les périodes correspondantes à ces données et le nombre de traceroutes présents dans chaque échantillon.
-
-%\begin{table}[H]
-%	\centering
-%	\captionsetup{justification=centering}
-%	%\begin{threeparttable}
-%	\begin{tabular}{cccccc}
-%		\textbf{Test} & \textbf{Début - fin} &\textbf{Durée}  & \textbf{Taille}  & \textbf{Nb traceroutes} & \textbf{Temps (secondes)} \\ \hline
-%		
-%	1&	07/02/2018&1 jour&1 GB&& 752.03\\ \hline
-%	2&	08/02/2018&1 jour&1 GB&&  \\ \hline
-%	3&	09/02/2018&1 jour& 1 GB&&  \\ \hline
-%	\end{tabular}
-%	\caption{}
-%	\label{tab:spark-timing-reajustedcode}
-%\end{table}
+\subparagraph{Description de l'ensemble de données}
 
 \begin{table}[H]
 	\centering
-	\captionsetup{justification=centering}
-	%\begin{threeparttable}
-	\resizebox{1\textwidth}{!}{
-	\begin{tabular}{ccccc}
-\textbf{Période}&\textbf{Taille (GB) }&\textbf{Nb de traceroutes}&\textbf{Essai 1 (secondes)}&\textbf{Essai 2 (secondes)}\\  \hline
-07/02/18&1&494158&838&1137 \\  \hline
-07/02/2018 à 08/02/2018&2&987995&936&1034 \\  \hline
-07/02/2018 à 09/02/2018&3&1481942&1449&1930 \\  \hline
-07/02/2018 à 10/02/2018&4&1976010&2139&1714 \\  \hline
-07/02/2018 à 11/02/2018&5&2470027&3116&3030 \\  \hline
-	\end{tabular}
-}
-	\caption{Les temps d'exécution lors de la détection des anomalies en utilisant Spark (approche $2$)}
-	\label{tab:spark-timing-reajustedcode}
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline 
+Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
+	\hline 
+\end{tabular} 
+\caption{text}
+\label{key}
 \end{table}
 
-%    \begin{tablenotes}
-%	\small
-%	\item This is where authors provide additional information about
-%	the data, including whatever notes are needed.
-%\end{tablenotes}
-%\end{threeparttable}
 
-La Figure 	\ref{fig:moustachespark} permet de présenter les temps d'exécution pendant plusieurs essais et pour plusieurs ensembles de données.
-\begin{figure}[H]
+
+\subparagraph{Description des clusters}~
+
+Le tableau \ref{clusters-description} décrit les clusters créés, il reprend le nom du cluster, le nombre d'instances formant le cluster en plus de l'instance représentant le \textit{driver}. 
+
+\begin{table}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{illustrations/moustacheSpark}
-	\caption{}
-	\label{fig:moustachespark}
-\end{figure}
+	\begin{tabular}{|c|c|c|}
+	\hline 
+\textbf{Nom du cluster}	&\textbf{Nombre d'instances}	&  \textbf{Types d'instances}   \\ 
+	\hline 
+C1	&   0 &  m4.large  \\ 
+	\hline 
+C2	&  &  \\ 
+	\hline 
+C3	&  &  \\ 
+	\hline 
+C4	&  &  \\ 
+	\hline 
+\end{tabular} 
+\caption{}
+\label{clusters-description}
+\end{table}
 
-\subsection{EMR Cluster}
+Où x4.large a les caractéristiques suivantes : (vCPU : 2, Mém. (GiB) : 8, Stockage : EBS uniquement, Bande passante dédiée à EBS (Mbit/s) : 450, Performances réseau : Modéré).
 
-Nous avons choisi un cluster EMR pour  lancer la détection des anomalies. En créant un cluster, nous pouvons choisir le nombre de \textit{workers}. De plus, nous pouvons passer des arguments à notre application comme dans le mode local. Nous avons adapté la version destinée au cluster EMR pour qu'elle prennent en compte les fichiers contenant les traceroutes stockés cette fois dans Amazon S3 au lieu de chercher ces fichiers dans l'arborescence de la machine locale. 
+\begin{comment}
+DelayAnalysis-one-instance : C1
+\end{comment}
 
-\section{Récapitulatif}
+\paragraph{Variant la taille de données}
 
-Nous avons discuté l'évaluation des technologies Big Data en terme du temps d'exécution. L'objectif de l'analyse des traceroutes est de détecter les changements anormaux dans les délais des liens à travers les changements de leurs RTTs différentiels. Nous avons évalué les temps d'exécution en fonction de la quantité de données, alors qu'on peut aussi évaluer les temps d'exécution en fonction du nombre de traceroutes. Du fait que l'outil de détection se base sur la liste des sauts par traceroute, et sachant que le nombre de saut varie d'un traceroute à un autre, une évaluation de la détection en fonction du nombre de traceroute peut être moins représentable. 
-%\paragraph{Le temps d'exécution en fonction du nombre de traceroutes dans l'ensemble de données}~
-On ne peut pas traiter un ensemble de $n$ traceroutes de la même manière étant donné que la détection des anomalies se base sur le nombre de sauts, les traceroutes n'ont pas tous un nombre de sauts équitable. C'est que illustre 
-la Figure 	\ref{fig:traceroutes-par-sauts}\footnote{Les résultats concernent les traceroutes de la journée $07/02/2018$.}. Ainsi, le temps nécessaire à évaluer un traceroute ayant, par exemple, $10$ saut est différent de celui nécessaire à l'évaluation d'un traceroute ayant $2$ sauts. 
-\begin{figure}[H]
+\subparagraph{Description de l'ensemble de données}
+\begin{table}[H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{illustrations/traceroutes-par-sauts}
-	\caption{Regroupement des traceroutes d'une journée  par leurs nombre de sauts}
-	\label{fig:traceroutes-par-sauts}
-\end{figure}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline 
+		Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
+		\hline 
+		&  &  &  & & \\ 
+		\hline 
+		&  &  &  & & \\ 
+		\hline 
+		&  &  &  & & \\ 
+		\hline 
+	\end{tabular} 
+\caption{text}
+\label{key}
+\end{table}
 
-\paragraph{Quelques chiffres sur les liens et les anomalies identifiés }~
-Notre évaluation des technologies Big Data a concerné, en premier lieu, les temps d'exécution. Nous donnons à travers la Figure 	\ref{fig:tous-vs-anomalies-liens} une idée sur le nombre de liens identifiés ainsi que les liens, parmi ceux identifiés, ceux ayant enregistré un moins une anomalie. La Figure 	\ref{fig:tous-vs-anomalies-liens} présente ces liens par taille de données. Nous précisons que les traceroutes présents dans l'échantillon de $3$ GB sont aussi repris dans l'échantillon de $4$ GB. 
-\begin{figure}[H]
-	\centering
-		\captionsetup{justification=centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/tous-vs-anomalies-liens}
-	\caption{Les liens et les anomalies identifiés par ensemble de traceroutes}
-	\label{fig:tous-vs-anomalies-liens}
-\end{figure}
+\section{Programmation fonctionnelle et Big Data}
 
+ Quand il s'agit des traitements appliqués sur des données massives dépassant la capacité d'une seule machine, la distribution de ces traitements sur plus d'une machine  est nécessaire. La programmation fonctionnelle est une  des solutions possibles. La programmation fonctionnelle offre de nombreux avantages dans un contexte Big Data.
+On distingue deux sous-catégories de langages de programmation fonctionnelle. Des langages qui sont purement fonctionnels et les autres hybrides.
 
+Les avantages de la  programmation fonctionnelle. L'absence des fonctions à effet de bord et les fonction first-class. Nous décrivons ces deux éléments :
+\begin{tcolorbox}
+	\textbf{Fonction à effet de bord}, en anglais traduit par \textit{Side effect} . Une fonction a l'effet de bord quand cette fonction modifie une variable en dehors de son environnement local. Par exemple, les fonctions qui modifient l'état d'une variable passé à cette fonction par référence.
+	
+	\textbf{First-class functions}: on dit qu'un langage de programmation a des fonctions first-class s'il traite les fonctions comme first-class citizens.  Function first-class citizens ou fonction de première classe dans un langage de programmation est une entité qui peut être utilisée sans restriction, et elle supporte les opérations suivantes : être affectée à des variables ou  à des structures de données, être passée comme paramètre à une autre fonction, être retournée par une fonction, etc\footnote{Source : \url{https://fr.wikipedia.org/wiki/Objet\_de\_premi\%C3\%A8re_classe}, consultée le $15/05/2019$.}.
+	entité de première classe
+\end{tcolorbox}
 
-\paragraph{MongoDB vs Amazon Athena et Amazon S3}~
+L'absence d'effet de bord pour les fonction est un élément clé pour faciliter la parallélisation, gérer les opérations concurrentielles, appliquer des optimisations.
 
-L'évolution du temps d'exécution écoulé en utilisant Amazon Athena est différents de celui avec de MongoDB. Cela peut être dû aux facteurs discutés dans la section \ref{aws-perforsm}. Nous précisons que l'implémentation de l'outil de détection nécessite de chercher les traceroutes à chaque période $d_k$. Nous avons considéré les résultats d'un seul identifiant (5004), le nombre de traceroutes récupérés à chaque $d_k$ est plus de $20.000$ (par requête avec un timeWindow égale à $3600$ secondes). 
+L'immutabilité : c'est le fait d'éviter de changer un été et la création des données mutables.
 
-
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification=centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/mondb-vs-athena}
-	\caption{Comparaison de l'évolution des temps d'exécution entre MongoDB et Amazon Athena avec Amazon S3}
-	\label{fig:mondb-vs-athena}
-\end{figure}
-
-\paragraph{Apache Spark vs MongoDB}~
-
-La Figure \ref{fig:mongodbvsspark} illustre la moyenne des temps d'exécution pour MongoDB et Spark. Ces résultats concernent les mêmes ensembles de données.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{testPerformances/mongodbvsspark}
-	\caption{La moyenne des temps d'exécution pour MongoDB et Spark}
-	\label{fig:mongodbvsspark}
-\end{figure}
-
-\paragraph{MongoDB vs Amazon Athena et Amazon S3 vs Apache Spark }~
-A présent, nous comparons les temps d'exécution pour les trois implémentations : MongoDB, AWS, et Apache Spark comme illustré dans la Figure 	\ref{fig:mondb-vs-spark-vs-athena}. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{illustrations/mondb-vs-spark-vs-athena}
-	\caption{Comparaison des temps d'exécution entre MongoDB, AWS et Apache Spark}
-	\label{fig:mondb-vs-spark-vs-athena}
-\end{figure}
-
-
+Déclaratif vs impératif : 
 \section{Conclusion}
-%A travers ce travail, nous souhaitions évaluer des technologies Big Data pour l'analyse de données en provenance du dépôt RIPE Atlas. 
-
-Nous avons évalué la convenance des technologies Big Data  à l'analyse souhaitée des traceroutes. Dans un premier temps, nous avons utilisé deux technologies conçues pour le stockage de données à grande échelle : MongoDB et DynamoDB, ensuite, nous avons expérimenté trois services d'Amazon, le premier pour le stockage de données, le deuxième  pour la découverte de données et le troisième service  est conçu pour l'interrogation  de données. Enfin, nous avons utilisé un framework qui gère le traitement distribué de données dans un cluster de machines.
-
-%le choix de données
-Nous avons à disposition une variété de données,   à titre indicatif, nous pouvons récupérer des années  de mesures effectuées par toutes les sondes Atlas. Notre premier objectif  est d'évaluer la convenance des technologies choisies à l'analyse de données souhaitée. Précisément, pouvoir utiliser l'outil de détection avec ces technologies. C'est pourquoi nous n'avons pas défini des critères pour choisir l'ensemble de données de test. 
-%evaluation des technologies
-Nous avons évalué  les performances des technologies en terme de temps écoulé tout au long de l'analyse de différents échantillons en fonction de la taille de données. On peut conclure que les performances de MongoDB en terme de temps d'exécution, version locale, dépendent des ressources de la machine dans laquelle MongoDB tourne. Sachant qu'il existe une version disponible sur le cloud, les performances de celle-ci dépendent, à priori,  des options choisies.
-Toutefois, les performances des trois services d'Amazon dépendent du nombre de requêtes destinées vers Amazon Athena, la complexité des traitements assurés par la requête Athena et aussi du partitionnement adopté. 
-Tandis que Apache Spark, version local,  dépendent de la taille de  mémoire allouée pour le \textit{driver} ainsi que d'autres configurations comme le \textit{timeout} du \textit{driver} et  autres. 
-
-

@@ -77,3 +77,20 @@ Un test statistique est une procédure de décision entre deux hypothèse concer
 \subparagraph{Tests non paramétriques} Ce sont des tests qui ne font aucune hypothèse sur le type de la loi dont les données suivent. Ils se basent uniquement sur les propriétés numériques des échantillons.
 
 es tests non paramétriques n'ont pas besoin de supposer un type de distribution particulière pour calculer le risque alpha du test. Ils sont très élégants et se basent sur des propriétés numériques. De plus, ils sont très peu sensibles aux valeurs aberrantes et sont donc conseillés dans ce cas. [copier/coller]
+
+################################
+		Les Figures \ref{fig:on-write} et \ref{fig:on-read} illustrent la différence entre ces deux approches.
+		\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{illustrations/on-write}
+\caption{Schema on Write (SGBDR)}
+\label{fig:on-write}
+\end{figure}
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.8\linewidth]{illustrations/on-read}
+\caption{Schema on Read (Big Data)}
+\label{fig:on-read}
+\source{ \url{https://blogs.oracle.com/datawarehousing/big-data-sql-quick-start-schema-on-read-and-schema-on-write-part11}, consultée le $05/08/2018$.}
+\end{figure}
