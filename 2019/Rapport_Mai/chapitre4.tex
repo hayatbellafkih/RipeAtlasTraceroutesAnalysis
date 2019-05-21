@@ -10,6 +10,26 @@ Ce chapitre  décrit  l'implémentation de l'outil de détection en utilisant le
 
 %[!] Avec Spark, on travaille sur des collections d'objets, sur lesquelles on applique des traitements. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données, appelées \textit{case class}. De plus, nous avons besoin de définir les fonctions à appliquer  sur ces objets. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes, dans l'annexe \ref{application:spark}, en vue de tracer l'évolution des RTTs différentiels des liens au cours du temps. 
 
+\section{La programmation fonctionnelle et Big Data}
+\subsection{Les apports de la programmation fonctionnelle}
+
+\paragraph{Fonctions d'ordre supérieur.} ou  higher-order functions en anglais. Dans un langage, si une fonction est traitée comme first-class value, elle est considérée comme fonction d'ordre supérieur \cite{DBLP:journals/csur/Hudak89}.  
+
+\begin{tcolorbox}
+	\textbf{First-class functions}: ou fonctions de première classe dans un langage de programmation sont des fonctions qui peuvent être stockées dans des structures de données, peuvent être passées comme arguments aux fonctions et être retournées comme résultats.
+\end{tcolorbox}
+\paragraph{Structures de données immuables.} Un objet est immuable est celui qu'on ne peut pas changer son état après sa création. 
+
+\paragraph{Stateless.} Une fonction est dite ayant effet de bord, \textit{side effect} en anglais, quand cette fonction modifie une variable en dehors de son environnement local. Par exemple, les fonctions qui modifient l'état d'une variable passé à cette fonction par référence.
+
+\subsection{La programmation fonctionnelle au service du Big Data }
+
+Quand il s'agit des traitements appliqués sur des données massives dépassant la capacité d'une seule machine, la distribution de ces traitements sur plus d'une machine  est nécessaire. La programmation fonctionnelle peut apporter des facilités aux projets Big Data. On distingue deux sous-catégories de langages de programmation fonctionnelle. Des langages qui sont purement fonctionnels et les autres hybrides.
+
+
+La programmation fonctionnelle offre de nombreux avantages dans un contexte Big Data. 
+L'absence d'effet de bord pour les fonction est un élément clé pour faciliter la parallélisation des traitements appliqués sur des volumes importants de données. Cela permet aussi de mieux gérer les opérations concurrentielles. 
+La manipulations des structures de données immuables permet d'écrire un code lisible grâce au nombre réduit de dépendances sur ces structures. De plus, les structures de données immuables facilitent la parallélisation, car elles supportent seulement le mode lecture-seule.
 \section{Implémentation}
 \subsection{Description de l'environnement}
 %Spark est destiné aux traitements distribués sur un cluster de machines, toutefois,n

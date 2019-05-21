@@ -2,44 +2,44 @@
 \contentsline {chapter}{\numberline {I}RIPE Atlas}{6}{chapter.1}
 \contentsline {section}{\numberline {I.1}Introduction}{6}{section.1.1}
 \contentsline {section}{\numberline {I.2}RIPE NCC}{6}{section.1.2}
-\contentsline {section}{\numberline {I.3}Présentation du projet Atlas}{6}{section.1.3}
+\contentsline {section}{\numberline {I.3}Présentation du projet Atlas}{7}{section.1.3}
 \contentsline {subsection}{\numberline {I.3.1}Les mesures actives et passives de l'Internet}{7}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {I.3.2}Généralités sur les sondes}{7}{subsection.1.3.2}
 \contentsline {subsection}{\numberline {I.3.3}Les générations des sondes}{8}{subsection.1.3.3}
 \contentsline {subsection}{\numberline {I.3.4}Les versions du firmware des sondes}{9}{subsection.1.3.4}
 \contentsline {subsection}{\numberline {I.3.5}Connexion des sondes à Internet}{9}{subsection.1.3.5}
-\contentsline {subsection}{\numberline {I.3.6}Architecture du système Atlas}{10}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {I.3.6}Architecture du système Atlas}{9}{subsection.1.3.6}
 \contentsline {section}{\numberline {I.4}Les mesures des sondes}{13}{section.1.4}
 \contentsline {subsection}{\numberline {I.4.1}Les mesures intégrées : Built-in mesurement }{13}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {I.4.2}Les crédits d'Atlas}{13}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {I.4.3}Les mesures personnalisées : User Defined mesurement}{15}{subsection.1.4.3}
-\contentsline {subsection}{\numberline {I.4.4}La sélection des sondes}{15}{subsection.1.4.4}
+\contentsline {subsection}{\numberline {I.4.2}Les crédits d'Atlas}{14}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {I.4.3}Les mesures personnalisées : User Defined Mesurement }{15}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {I.4.4}Sélection des sondes}{15}{subsection.1.4.4}
 \contentsline {section}{\numberline {I.5}Les sources de données Atlas}{16}{section.1.5}
 \contentsline {section}{\numberline {I.6}Les ancres VS sondes}{17}{section.1.6}
-\contentsline {section}{\numberline {I.7}Limitations du projet Atlas}{17}{section.1.7}
-\contentsline {subsection}{\numberline {I.7.1}Les sondes et la vie privée}{17}{subsection.1.7.1}
+\contentsline {section}{\numberline {I.7}Limitations du projet Atlas}{18}{section.1.7}
+\contentsline {subsection}{\numberline {I.7.1}Les sondes et la vie privée}{18}{subsection.1.7.1}
 \contentsline {subsection}{\numberline {I.7.2}La sécurité dans Atlas}{18}{subsection.1.7.2}
-\contentsline {subsection}{\numberline {I.7.3}Les limitations d'Atlas}{18}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {I.7.3}Quelques limitations des mesures des sondes}{19}{subsection.1.7.3}
 \contentsline {subsection}{\numberline {I.7.4}Confiance aux données Atlas}{19}{subsection.1.7.4}
-\contentsline {section}{\numberline {I.8}Projets existants de mesures d'Internet}{19}{section.1.8}
+\contentsline {section}{\numberline {I.8}Projets existants de mesures d'Internet}{20}{section.1.8}
 \contentsline {subsection}{\numberline {I.8.1}Test Traffic Measurement Service}{20}{subsection.1.8.1}
 \contentsline {subsection}{\numberline {I.8.2}ProbeAPI}{20}{subsection.1.8.2}
-\contentsline {subsection}{\numberline {I.8.3}Archipelago}{21}{subsection.1.8.3}
-\contentsline {subsection}{\numberline {I.8.4}DIMES}{21}{subsection.1.8.4}
+\contentsline {subsection}{\numberline {I.8.3}Archipelago}{22}{subsection.1.8.3}
+\contentsline {subsection}{\numberline {I.8.4}DIMES}{22}{subsection.1.8.4}
 \contentsline {subsection}{\numberline {I.8.5}SamKnows}{22}{subsection.1.8.5}
 \contentsline {section}{\numberline {I.9}Quelques cas d'utilisation des données collectées par les sondes}{22}{section.1.9}
 \contentsline {subsection}{\numberline {I.9.1}Détection des coupures d'Internet}{22}{subsection.1.9.1}
-\contentsline {subsection}{\numberline {I.9.2}Aide à la prise de décision}{22}{subsection.1.9.2}
+\contentsline {subsection}{\numberline {I.9.2}Aide à la prise de décision}{23}{subsection.1.9.2}
 \contentsline {subsection}{\numberline {I.9.3}Le suivi des censures}{23}{subsection.1.9.3}
-\contentsline {subsection}{\numberline {I.9.4}Le suivi des performances d'un réseau}{23}{subsection.1.9.4}
-\contentsline {paragraph}{Les ancres}{23}{section*.12}
+\contentsline {subsection}{\numberline {I.9.4}Le suivi des performances d'un réseau}{24}{subsection.1.9.4}
+\contentsline {paragraph}{Les ancres}{24}{section*.12}
 \contentsline {paragraph}{La vérification de la cohérence du Traceroute}{24}{section*.14}
 \contentsline {paragraph}{BGP+traceroute}{25}{section*.16}
 \contentsline {paragraph}{BGP Atlas Monitor (BAM)}{25}{section*.17}
 \contentsline {paragraph}{Prédiction des routeurs provoquant la perte des paquets }{26}{section*.18}
 \contentsline {subsection}{\numberline {I.9.5}Le suivi des détours dans un trafic local}{26}{subsection.1.9.5}
-\contentsline {subsection}{\numberline {I.9.6}Visualisation : indicateurs et dashboard}{26}{subsection.1.9.6}
-\contentsline {section}{\numberline {I.10}Conclusion}{26}{section.1.10}
+\contentsline {subsection}{\numberline {I.9.6}Visualisation : indicateurs et dashboard}{27}{subsection.1.9.6}
+\contentsline {section}{\numberline {I.10}Conclusion}{27}{section.1.10}
 \contentsline {chapter}{\numberline {II}Détection des anomalies dans les délais d'un lien}{28}{chapter.2}
 \contentsline {section}{\numberline {II.1}Introduction}{28}{section.2.1}
 \contentsline {section}{\numberline {II.2}Présentation générale}{28}{section.2.2}
@@ -113,98 +113,104 @@
 \contentsline {subsection}{\numberline {III.3.4}Extraction, Transformation, Loading (ETL)}{61}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {III.3.5}Schema on Write VS Schema on Read}{63}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {III.3.6}L'informatique distribuée et l'analyse de données massives}{64}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {III.3.7}MapReduce}{64}{subsection.3.3.7}
 \contentsline {section}{\numberline {III.4}Parcours de quelques technologies du Big Data}{65}{section.3.4}
 \contentsline {subsection}{\numberline {III.4.1}MongoDB}{65}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {III.4.2}Amazon DynamoDB}{65}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {III.4.2}Amazon DynamoDB}{66}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {III.4.3}Amazon S3, Amazon Glue et Amazon Athena }{66}{subsection.3.4.3}
-\contentsline {paragraph}{Amazon S3}{66}{section*.93}
-\contentsline {paragraph}{Amazon Glue}{66}{section*.95}
-\contentsline {paragraph}{Amazon Athena}{67}{section*.96}
+\contentsline {paragraph}{Amazon S3}{66}{section*.94}
+\contentsline {paragraph}{Amazon Glue}{67}{section*.96}
+\contentsline {paragraph}{Amazon Athena}{67}{section*.97}
 \contentsline {subsection}{\numberline {III.4.4}Hadoop ecosystem}{68}{subsection.3.4.4}
-\contentsline {subsection}{\numberline {III.4.5}Apache Spark }{68}{subsection.3.4.5}
-\contentsline {paragraph}{Core Concepts et architecture de Spark}{68}{section*.97}
-\contentsline {subparagraph}{Spark Clusters et Resource Management System}{68}{section*.98}
-\contentsline {subparagraph}{Application Spark}{69}{section*.100}
-\contentsline {subparagraph}{Spark driver et executor}{69}{section*.101}
-\contentsline {subparagraph}{Spark Unified Stack}{69}{section*.102}
-\contentsline {subparagraph}{Spark Core}{69}{section*.103}
-\contentsline {paragraph}{Resilient Distributed Datasets}{70}{section*.105}
-\contentsline {paragraph}{A propos lazy evaluation}{70}{section*.106}
-\contentsline {paragraph}{Les APIs de Spark}{71}{section*.108}
-\contentsline {paragraph}{Présentation de Scala}{71}{section*.109}
-\contentsline {paragraph}{Lancement d'une application avec de Spark}{71}{section*.110}
-\contentsline {subsection}{\numberline {III.4.6}Amazon Elastic MapReduce}{72}{subsection.3.4.6}
-\contentsline {section}{\numberline {III.5}Conclusion}{72}{section.3.5}
-\contentsline {chapter}{\numberline {IV}Implémentation en Spark/Scala}{73}{chapter.4}
-\contentsline {section}{\numberline {IV.1}Introduction}{73}{section.4.1}
-\contentsline {section}{\numberline {IV.2}Implémentation}{73}{section.4.2}
-\contentsline {subsection}{\numberline {IV.2.1}Description de l'environnement}{73}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {IV.2.2}Brève présentation de l'implémentation}{73}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {IV.2.3}Création d'une application Spark/Scala}{74}{subsection.4.2.3}
-\contentsline {paragraph}{Gestion des dépendances}{74}{section*.111}
-\contentsline {paragraph}{Notation relatives au langage Scala}{74}{section*.112}
-\contentsline {paragraph}{Paramètres de l'analyse}{74}{section*.113}
-\contentsline {paragraph}{Configuration d'une application Spark}{74}{section*.114}
-\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{75}{section*.115}
-\contentsline {paragraph}{Lecture de données}{75}{section*.116}
-\contentsline {paragraph}{Trouver les périodes de l'analyse}{76}{section*.117}
-\contentsline {paragraph}{Groupement des traceroutes}{77}{section*.118}
-\contentsline {subparagraph}{MongoDB}{77}{section*.119}
-\contentsline {subparagraph}{Spark/Scala}{78}{section*.121}
-\contentsline {subparagraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{79}{section*.122}
-\contentsline {paragraph}{Déduction des liens}{79}{section*.123}
-\contentsline {subparagraph}{Elimination des traceroutes échoués}{80}{section*.124}
-\contentsline {subparagraph}{Elimination des sauts non valides}{81}{section*.125}
-\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{81}{section*.126}
-\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{82}{section*.127}
-\contentsline {subparagraph}{Construction de la liste des liens par période }{83}{section*.128}
-\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{84}{section*.129}
-\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{84}{section*.130}
-\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{84}{section*.131}
-\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{85}{section*.132}
-\contentsline {paragraph}{Détection des anomalies}{85}{section*.133}
-\contentsline {subsection}{\numberline {IV.2.4}Exécution d'une application Spark}{89}{subsection.4.2.4}
-\contentsline {paragraph}{Résultats finaux}{90}{section*.134}
-\contentsline {section}{\numberline {IV.3}Conclusion}{91}{section.4.3}
-\contentsline {chapter}{\numberline {V}Application de quelques technologies Big Data sur l'analyse des traceroutes}{92}{chapter.5}
-\contentsline {section}{\numberline {V.1}Introduction}{92}{section.5.1}
-\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{92}{section.5.2}
-\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{93}{section.5.3}
-\contentsline {paragraph}{La machine de test}{93}{section*.135}
-\contentsline {paragraph}{Paramètres de l'analyse}{93}{section*.136}
-\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{93}{section.5.4}
-\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{93}{section.5.5}
-\contentsline {paragraph}{Evaluation des critères de sélection}{93}{section*.137}
-\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{94}{section*.138}
-\contentsline {section}{\numberline {V.6}Application 2 : Amazon DynamoDB}{94}{section.5.6}
-\contentsline {section}{\numberline {V.7}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{95}{section.5.7}
-\contentsline {paragraph}{Vue générale}{95}{section*.141}
-\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{96}{section*.143}
-\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{96}{section*.144}
-\contentsline {paragraph}{Partitionnement des données stockés dans Amazon S3}{96}{section*.145}
-\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{98}{section*.148}
-\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{98}{section*.149}
-\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{99}{section*.150}
-\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{100}{section*.151}
-\contentsline {section}{\numberline {V.8}Application 4 : Spark Apache avec Scala}{101}{section.5.8}
-\contentsline {subsection}{\numberline {V.8.1}Mode local}{101}{subsection.5.8.1}
-\contentsline {paragraph}{Variant la mémoire allouée au driver}{101}{section*.154}
-\contentsline {paragraph}{Variant le mode local : local vs local[N]}{102}{section*.156}
-\contentsline {paragraph}{Notes concernant le mode local}{103}{section*.157}
-\contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{103}{subsection.5.8.2}
-\contentsline {paragraph}{Variant la taille du cluster}{103}{section*.158}
-\contentsline {subparagraph}{Description de l'ensemble de données}{103}{table.caption.160}
-\contentsline {subparagraph}{Description des clusters}{103}{section*.161}
-\contentsline {paragraph}{Variant la taille de données}{103}{section*.163}
-\contentsline {subparagraph}{Description de l'ensemble de données}{103}{table.caption.165}
-\contentsline {section}{\numberline {V.9}Programmation fonctionnelle et Big Data}{104}{section.5.9}
-\contentsline {section}{\numberline {V.10}Conclusion}{104}{section.5.10}
-\contentsline {section}{\numberline {V.11}Récapitulatif}{105}{section.5.11}
-\contentsline {chapter}{\numberline {A}Amazon Athena }{108}{appendix.A}
-\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{108}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{109}{section.A.2}
-\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{109}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{109}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{110}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{112}{appendix.B}
-\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{114}{appendix.C}
+\contentsline {subsection}{\numberline {III.4.5}Apache Spark }{69}{subsection.3.4.5}
+\contentsline {paragraph}{Core Concepts et architecture de Spark}{69}{section*.98}
+\contentsline {subparagraph}{Spark Clusters et Resource Management System}{69}{section*.99}
+\contentsline {subparagraph}{Application Spark}{69}{section*.101}
+\contentsline {subparagraph}{Spark driver et executor}{70}{section*.102}
+\contentsline {subparagraph}{Spark Unified Stack}{70}{section*.103}
+\contentsline {subparagraph}{Spark Core}{70}{section*.104}
+\contentsline {paragraph}{Resilient Distributed Datasets}{71}{section*.106}
+\contentsline {paragraph}{A propos lazy evaluation}{71}{section*.107}
+\contentsline {paragraph}{Les APIs de Spark}{72}{section*.109}
+\contentsline {paragraph}{Présentation de Scala}{72}{section*.110}
+\contentsline {paragraph}{Lancement d'une application avec de Spark}{72}{section*.111}
+\contentsline {subsection}{\numberline {III.4.6}Amazon Elastic MapReduce}{73}{subsection.3.4.6}
+\contentsline {section}{\numberline {III.5}Conclusion}{73}{section.3.5}
+\contentsline {chapter}{\numberline {IV}Implémentation en Spark/Scala}{74}{chapter.4}
+\contentsline {section}{\numberline {IV.1}Introduction}{74}{section.4.1}
+\contentsline {section}{\numberline {IV.2}La programmation fonctionnelle et Big Data}{74}{section.4.2}
+\contentsline {subsection}{\numberline {IV.2.1}Les apports de la programmation fonctionnelle}{74}{subsection.4.2.1}
+\contentsline {paragraph}{Fonctions d'ordre supérieur.}{74}{section*.112}
+\contentsline {paragraph}{Structures de données immuables.}{74}{section*.113}
+\contentsline {paragraph}{Stateless.}{74}{section*.114}
+\contentsline {subsection}{\numberline {IV.2.2}La programmation fonctionnelle au service du Big Data }{74}{subsection.4.2.2}
+\contentsline {section}{\numberline {IV.3}Implémentation}{75}{section.4.3}
+\contentsline {subsection}{\numberline {IV.3.1}Description de l'environnement}{75}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {IV.3.2}Brève présentation de l'implémentation}{75}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {IV.3.3}Création d'une application Spark/Scala}{75}{subsection.4.3.3}
+\contentsline {paragraph}{Gestion des dépendances}{75}{section*.115}
+\contentsline {paragraph}{Notation relatives au langage Scala}{76}{section*.116}
+\contentsline {paragraph}{Paramètres de l'analyse}{76}{section*.117}
+\contentsline {paragraph}{Configuration d'une application Spark}{76}{section*.118}
+\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{77}{section*.119}
+\contentsline {paragraph}{Lecture de données}{77}{section*.120}
+\contentsline {paragraph}{Trouver les périodes de l'analyse}{78}{section*.121}
+\contentsline {paragraph}{Groupement des traceroutes}{79}{section*.122}
+\contentsline {subparagraph}{MongoDB}{79}{section*.123}
+\contentsline {subparagraph}{Spark/Scala}{79}{section*.125}
+\contentsline {subparagraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{81}{section*.126}
+\contentsline {paragraph}{Déduction des liens}{81}{section*.127}
+\contentsline {subparagraph}{Elimination des traceroutes échoués}{82}{section*.128}
+\contentsline {subparagraph}{Elimination des sauts non valides}{82}{section*.129}
+\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{83}{section*.130}
+\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{84}{section*.131}
+\contentsline {subparagraph}{Construction de la liste des liens par période }{85}{section*.132}
+\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{86}{section*.133}
+\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{86}{section*.134}
+\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{86}{section*.135}
+\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{86}{section*.136}
+\contentsline {paragraph}{Détection des anomalies}{87}{section*.137}
+\contentsline {subsection}{\numberline {IV.3.4}Exécution d'une application Spark}{91}{subsection.4.3.4}
+\contentsline {paragraph}{Résultats finaux}{92}{section*.138}
+\contentsline {section}{\numberline {IV.4}Conclusion}{93}{section.4.4}
+\contentsline {chapter}{\numberline {V}Application de quelques technologies Big Data sur l'analyse des traceroutes}{94}{chapter.5}
+\contentsline {section}{\numberline {V.1}Introduction}{94}{section.5.1}
+\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{94}{section.5.2}
+\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{95}{section.5.3}
+\contentsline {paragraph}{La machine de test}{95}{section*.139}
+\contentsline {paragraph}{Paramètres de l'analyse}{95}{section*.140}
+\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{95}{section.5.4}
+\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{95}{section.5.5}
+\contentsline {paragraph}{Evaluation des critères de sélection}{95}{section*.141}
+\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{96}{section*.142}
+\contentsline {section}{\numberline {V.6}Application 2 : Amazon DynamoDB}{96}{section.5.6}
+\contentsline {section}{\numberline {V.7}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{97}{section.5.7}
+\contentsline {paragraph}{Vue générale}{97}{section*.145}
+\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{98}{section*.147}
+\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{98}{section*.148}
+\contentsline {paragraph}{Partitionnement des données stockés dans Amazon S3}{98}{section*.149}
+\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{100}{section*.152}
+\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{100}{section*.153}
+\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{101}{section*.154}
+\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{102}{section*.155}
+\contentsline {section}{\numberline {V.8}Application 4 : Spark Apache avec Scala}{103}{section.5.8}
+\contentsline {subsection}{\numberline {V.8.1}Mode local}{103}{subsection.5.8.1}
+\contentsline {paragraph}{Variant la mémoire allouée au driver}{103}{section*.158}
+\contentsline {paragraph}{Variant le mode local : local vs local[N]}{104}{section*.160}
+\contentsline {paragraph}{Notes concernant le mode local}{105}{section*.161}
+\contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{105}{subsection.5.8.2}
+\contentsline {paragraph}{Variant la taille du cluster}{105}{section*.162}
+\contentsline {subparagraph}{Description de l'ensemble de données}{105}{table.caption.164}
+\contentsline {subparagraph}{Description des clusters}{105}{section*.165}
+\contentsline {paragraph}{Variant la taille de données}{105}{section*.167}
+\contentsline {subparagraph}{Description de l'ensemble de données}{105}{table.caption.169}
+\contentsline {section}{\numberline {V.9}Conclusion}{106}{section.5.9}
+\contentsline {section}{\numberline {V.10}Récapitulatif}{107}{section.5.10}
+\contentsline {chapter}{\numberline {A}Amazon Athena }{110}{appendix.A}
+\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{110}{section.A.1}
+\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{111}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{111}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{111}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{112}{subsection.A.2.3}
+\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{114}{appendix.B}
+\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{116}{appendix.C}

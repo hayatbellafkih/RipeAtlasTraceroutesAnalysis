@@ -1,6 +1,8 @@
 https://stackoverflow.com/questions/15980682/why-is-functional-language-good-for-big-data
 https://docs.google.com/viewerng/viewer?url=http://glennengstrand.info/media/fpbd.pdf
 https://pt.slideshare.net/Hadoop_Summit/functional-programming-and-big-data?smtNoRedir=1
+
+https://pt.slideshare.net/Hadoop_Summit/functional-programming-and-big-data?smtNoRedir=1
 2
 
 Zdravko is right about immutable state making concurrency easier and less prone to race condition style bugs. However, that helps only with multi-threaded concurrency. When you talk about big data, you are talking about horizontally scaled cluster computing. Not much support for that in Functional Programming languages.

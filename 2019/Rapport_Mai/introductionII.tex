@@ -26,12 +26,14 @@ L'objectif du présent mémoire est de montrer la capacité des nouvelles techno
 %La présentation de votre démarche ou méthodologie de recherche
 
 %Notre démarche est comme suit. 
-Dans un premier temps, nous avons étudié le projet RIPE  Atlas (Réseaux IP Européens Atlas) afin de maîtriser le contexte général de données  d'une part, et d'autre part de bien choisir les données de travail. Le choix a été fait sur les données générées par l'utilitaire Traceroute, en particulier, nous allons réutiliser un outil conçue dans le cadre d'un travail basé aussi sur les données collectées par les sondes Atlas. Cet outil permettant de détecter les anomalies dans les délais des liens dans les réseaux informatiques. Ensuite, nous avons passé en revue les technologies du Big Data disponibles afin de sélectionner celles qu'on puisse  évaluer leurs performances et convenances pour les données choisies. A l'issue de cette étape, nous avons abordé l'évaluation des technologies Big Data sélectionnées  pour réutiliser l'outil de la détection des anomalies.
+Dans un premier temps, nous avons étudié le projet RIPE  Atlas (Réseaux IP Européens Atlas) afin de maîtriser le contexte général de données  d'une part, et d'autre part de bien choisir les données de travail. Nous avons choisi de réutiliser un outil conçue dans le cadre d'un travail basé aussi sur les données collectées par les sondes Atlas. Cet outil permet de détecter les anomalies dans les délais des liens dans les réseaux informatiques en se basant sur les réponses de requêtes de type traceroute. 
+ Ensuite, nous avons passé en revue quelques concepts  et   technologies du Big Data, certains de ces derniers ont été impliqué dans l'analyse des traceroutes. A l'issue de cette étape, nous avons abordé l'évaluation des technologies Big Data expérimentées  pour réutiliser l'outil de  détection des anomalies.
 
 
 
 %L’annonce du plan
-Le présent document est organisé en quatre chapitres. Le premier chapitre présente le projet RIPE Atlas: la présentation des caractéristiques techniques et fonctionnelles des sondes Atlas ainsi qu'une liste non exhaustive des cas d'usage de ces sondes. Le deuxième chapitre reprend l'algorithme de la détection à évaluer par les technologies Big Data.
-Le troisième chapitre énumère quelques concepts liés au Big Data ainsi qu'une liste non exhaustive des technologies Big Data. Pour finir, le quatrième chapitre aborde l'application de l'outil de détection en pratique pour les technologies sélectionnées.
+Le présent document est organisé en cinq chapitres. Le premier chapitre présente le projet RIPE Atlas: la présentation des caractéristiques techniques et fonctionnelles des sondes Atlas ainsi qu'une liste non exhaustive des cas d'usage de ces sondes. Le deuxième chapitre reprend l'algorithme de  détection des anomalies  à évaluer par des technologies Big Data.
+Le troisième chapitre énumère quelques concepts liés au Big Data ainsi qu'une liste non exhaustive des technologies Big Data.
+Le quatrième chapitre reprend l'implémentation détaillées de l'outil de détection en utilisant  Spark/Scala. Enfin, le cinquième  chapitre est consacré à la discussion de l'utilisation des technologies Big Data choisies pour implémenter l'outil de détection.
 
 

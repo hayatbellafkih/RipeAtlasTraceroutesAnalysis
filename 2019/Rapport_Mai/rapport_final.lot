@@ -1,24 +1,24 @@
 \babel@toc {french}{}
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {I.1}{\ignorespaces Les caractéristiques du matériel des trois générations des sondes\relax }}{8}{table.caption.3}
-\contentsline {table}{\numberline {I.2}{\ignorespaces Comparaison entre les sondes et les ancres\relax }}{17}{table.caption.9}
+\contentsline {table}{\numberline {I.2}{\ignorespaces Une comparaison entre les sondes et les ancres\relax }}{18}{table.caption.9}
 \contentsline {table}{\numberline {I.3}{\ignorespaces Comparaison entre sondes Atlas et ProbeAPI\relax }}{21}{table.caption.10}
-\contentsline {table}{\numberline {I.4}{\ignorespaces Les détails des mesures effectuées dans le travail de C. Anderson \cite {Collin-Anderson} \relax }}{23}{table.caption.11}
+\contentsline {table}{\numberline {I.4}{\ignorespaces Les détails des mesures effectuées dans le travail de C. Anderson \cite {Collin-Anderson} (Turquie) \relax }}{23}{table.caption.11}
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {II.1}{\ignorespaces Récapitulatif des traceroutes utilisés dans le travail de référence \relax }}{30}{table.caption.23}
 \contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{43}{table.caption.50}
 \contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }}{46}{table.caption.51}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {III.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{66}{table.caption.94}
+\contentsline {table}{\numberline {III.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{67}{table.caption.95}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {V.1}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{94}{table.caption.139}
-\contentsline {table}{\numberline {V.2}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{98}{table.caption.147}
-\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{100}{table.caption.152}
-\contentsline {table}{\numberline {V.4}{\ignorespaces text\relax }}{103}{table.caption.160}
-\contentsline {table}{\numberline {V.5}{\ignorespaces \relax }}{103}{table.caption.162}
-\contentsline {table}{\numberline {V.6}{\ignorespaces text\relax }}{103}{table.caption.165}
+\contentsline {table}{\numberline {V.1}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{96}{table.caption.143}
+\contentsline {table}{\numberline {V.2}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{100}{table.caption.151}
+\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{102}{table.caption.156}
+\contentsline {table}{\numberline {V.4}{\ignorespaces text\relax }}{105}{table.caption.164}
+\contentsline {table}{\numberline {V.5}{\ignorespaces \relax }}{105}{table.caption.166}
+\contentsline {table}{\numberline {V.6}{\ignorespaces text\relax }}{105}{table.caption.169}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{115}{table.caption.169}
+\contentsline {table}{\numberline {C.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{117}{table.caption.173}

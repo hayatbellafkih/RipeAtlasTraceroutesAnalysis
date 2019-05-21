@@ -1,11 +1,11 @@
 \babel@toc {french}{}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {I.1}{\ignorespaces Les trois générations des sondes\relax }}{8}{figure.caption.4}
-\contentsline {figure}{\numberline {I.2}{\ignorespaces La connexion des sondes à l'infrastructure RIPE Atlas \cite {how-we-manage-our-probe}\relax }}{9}{figure.caption.5}
-\contentsline {figure}{\numberline {I.3}{\ignorespaces L'architecture du système Atlas\relax }}{10}{figure.caption.6}
-\contentsline {figure}{\numberline {I.4}{\ignorespaces Les étapes d'établissement d'une connexion entre une sonde et l'architecture Atlas\relax }}{12}{figure.caption.7}
-\contentsline {figure}{\numberline {I.5}{\ignorespaces La corrélation entre la moyenne des AS paths et la moyenne des RTTs \cite {Salim-Gasmi}\relax }}{24}{figure.caption.13}
-\contentsline {figure}{\numberline {I.6}{\ignorespaces Visualisation des changements des chemins traceroute \cite {Traceroute-consistency-check}\relax }}{25}{figure.caption.15}
+\contentsline {figure}{\numberline {I.2}{\ignorespaces La connexion d'une sonde à l'infrastructure Atlas \cite {how-we-manage-our-probe}\relax }}{10}{figure.caption.5}
+\contentsline {figure}{\numberline {I.3}{\ignorespaces L'architecture du système Atlas\relax }}{12}{figure.caption.6}
+\contentsline {figure}{\numberline {I.4}{\ignorespaces Les étapes d'établissement d'une connexion entre une sonde et l'architecture Atlas\relax }}{13}{figure.caption.7}
+\contentsline {figure}{\numberline {I.5}{\ignorespaces La corrélation entre la moyenne des AS paths et la moyenne des RTTs \cite {Salim-Gasmi}\relax }}{25}{figure.caption.13}
+\contentsline {figure}{\numberline {I.6}{\ignorespaces Visualisation des changements des chemins traceroute \cite {Traceroute-consistency-check}\relax }}{26}{figure.caption.15}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {II.1}{\ignorespaces (a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite {DBLP:journals/corr/FontugneAPB16}\relax }}{30}{figure.caption.25}
 \contentsline {figure}{\numberline {II.2}{\ignorespaces Illustration des périodes de l'analyse entre la date de début et la date de fin.\relax }}{33}{figure.caption.28}
@@ -26,19 +26,20 @@
 \contentsline {figure}{\numberline {III.5}{\ignorespaces Illustration d'une base de données NoSQL de type graphe\relax }}{61}{figure.caption.86}
 \contentsline {figure}{\numberline {III.6}{\ignorespaces Bases de données NoSQL suivant le théorème de CAP \relax }}{62}{figure.caption.91}
 \contentsline {figure}{\numberline {III.7}{\ignorespaces Un classement des SGBDs sur \textit {DB-Engines Ranking} du $1$ août $2018$ \relax }}{63}{figure.caption.92}
-\contentsline {figure}{\numberline {III.8}{\ignorespaces Interaction entre une application Spark et le cluster manager. Source : \cite {eginning-Apache-Spark-2-cluster-overwiew}\relax }}{69}{figure.caption.99}
-\contentsline {figure}{\numberline {III.9}{\ignorespaces Spark Unified Stack. Source : \cite {eginning-Apache-Spark-2-unified-stack}\relax }}{70}{figure.caption.104}
-\contentsline {figure}{\numberline {III.10}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{71}{figure.caption.107}
+\contentsline {figure}{\numberline {III.8}{\ignorespaces Vue d'ensemble du modèle MapReduce. Source : \cite {6427487}\relax }}{65}{figure.caption.93}
+\contentsline {figure}{\numberline {III.9}{\ignorespaces Interaction entre une application Spark et le cluster manager. Source : \cite {eginning-Apache-Spark-2-cluster-overwiew}\relax }}{69}{figure.caption.100}
+\contentsline {figure}{\numberline {III.10}{\ignorespaces Spark Unified Stack. Source : \cite {eginning-Apache-Spark-2-unified-stack}\relax }}{70}{figure.caption.105}
+\contentsline {figure}{\numberline {III.11}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{72}{figure.caption.108}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {IV.1}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{77}{figure.caption.120}
+\contentsline {figure}{\numberline {IV.1}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{79}{figure.caption.124}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {V.1}{\ignorespaces \relax }}{95}{figure.caption.140}
-\contentsline {figure}{\numberline {V.2}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{96}{figure.caption.142}
-\contentsline {figure}{\numberline {V.3}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }}{97}{figure.caption.146}
-\contentsline {figure}{\numberline {V.4}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{101}{figure.caption.153}
-\contentsline {figure}{\numberline {V.5}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{102}{figure.caption.155}
+\contentsline {figure}{\numberline {V.1}{\ignorespaces \relax }}{97}{figure.caption.144}
+\contentsline {figure}{\numberline {V.2}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{98}{figure.caption.146}
+\contentsline {figure}{\numberline {V.3}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }}{99}{figure.caption.150}
+\contentsline {figure}{\numberline {V.4}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{103}{figure.caption.157}
+\contentsline {figure}{\numberline {V.5}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{104}{figure.caption.159}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{110}{figure.caption.167}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{111}{figure.caption.168}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{112}{figure.caption.171}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{113}{figure.caption.172}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

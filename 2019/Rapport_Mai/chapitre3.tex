@@ -256,11 +256,27 @@ La meilleure approche dépend des besoins de l'analyse. La première approche es
 		\begin{itemize}
 			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
 			
-			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. Par ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce. 
+			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. Par ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce,  présenté dans la section  \ref{mapreducesection}. 
 		\end{itemize}
-	\begin{tcolorbox}
+\subsection{MapReduce} \label{mapreducesection}
+%https://softwareengineering.stackexchange.com/questions/220605/why-big-data-needs-to-be-functional
+
+MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un cluster de machines. Un programme MapReduce est composé de deux principales phases  \textit{Map} et  \textit{Reduce}.
+\begin{tcolorbox}
 	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
-	\end{tcolorbox}
+\end{tcolorbox}
+La Figure 	\ref{fig:2-figure1-1-map-reduce-workflow} représente une vue d'ensemble du modèle de programmation MapReduce. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{illustrations/2-Figure1-1-map-reduce-workflow}
+	\caption{Vue d'ensemble du modèle MapReduce. Source : \cite{6427487}}
+	\label{fig:2-figure1-1-map-reduce-workflow}
+\end{figure}
+
+
+Le modèle de données dans MapReduce est la paire clé/valeur. Pendant la phase de \textit{Map}, la fonction  associée  au Map est exécutée sur chaque paire clé/valeur (K1,V1) des données d'entrée (\textit{data split}), ce que produit   des paires clé/valeur (List(K2,V2)) intermédiaires. Il existe une autre phase entre  \textit{Map} et de \textit{Reduce}, c'est la phase de \textit{Shffling}. Durant cette dernière,  les paires clé/valeur (List(K2,V2))  intermédiaire sont triées et regroupées par la clé. Il en résulte un ensemble de paires clé/valeur (K2, List(V2)) où chaque paire contient toutes les valeurs associées à une clé particulière (K2). Ces paires clé/valeur sont ensuite partitionnées et regroupées sur la clé, puis passée à la phase Reduce au cours de laquelle la fonction de réduction est appliquée individuellement à chaque clé et aux valeurs associées pour cette clé (K2,List(V2)). La phase \textit{Reduce} peut produire une valeur nulle ou une sortie (List(K3,V3)).
+
 	\section{Parcours de quelques technologies du Big Data}
 La liste des technologies dans le domaine du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du RIPE Atlas.
 	

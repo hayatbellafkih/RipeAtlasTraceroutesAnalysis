@@ -2,33 +2,36 @@ This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: rapport_final.aux
 A level-1 auxiliary file: resume.aux
+A level-1 auxiliary file: Remerciéments.aux
 A level-1 auxiliary file: introductionII.aux
 A level-1 auxiliary file: chapitre1.aux
-A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: chapitre2.aux
 A level-1 auxiliary file: chapitre3.aux
 A level-1 auxiliary file: chapitre4.aux
 A level-1 auxiliary file: chapitre5.aux
+A level-1 auxiliary file: lecons-apprises.aux
+A level-1 auxiliary file: Conclusion_new.aux
 A level-1 auxiliary file: conclusion.aux
 A level-1 auxiliary file: annexes.aux
 A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
 Database file #1: references.bib.bib
-You're missing a field part---line 231 of file references.bib.bib
+You're missing a field part---line 261 of file references.bib.bib
  :   year         = 
  :                  ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 905 of file references.bib.bib
+I was expecting a `,' or a `}'---line 935 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 918 of file references.bib.bib
+I was expecting a `,' or a `}'---line 948 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 930 of file references.bib.bib
+I was expecting a `,' or a `}'---line 960 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
@@ -46,45 +49,45 @@ Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
 Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
-You've used 40 entries,
+You've used 42 entries,
             2253 wiz_defined-function locations,
-            755 strings with 10961 characters,
-and the built_in function-call counts, 10049 in all, are:
-= -- 967
-> -- 322
+            772 strings with 11427 characters,
+and the built_in function-call counts, 10839 in all, are:
+= -- 1045
+> -- 351
 < -- 0
-+ -- 141
-- -- 100
-* -- 508
-:= -- 1544
-add.period$ -- 136
-call.type$ -- 40
-change.case$ -- 166
++ -- 153
+- -- 110
+* -- 569
+:= -- 1660
+add.period$ -- 142
+call.type$ -- 42
+change.case$ -- 177
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 434
-empty$ -- 1010
-format.name$ -- 100
-if$ -- 2241
+cite$ -- 52
+duplicate$ -- 467
+empty$ -- 1079
+format.name$ -- 110
+if$ -- 2415
 int.to.chr$ -- 0
-int.to.str$ -- 40
-missing$ -- 21
-newline$ -- 219
-num.names$ -- 64
-pop$ -- 337
+int.to.str$ -- 42
+missing$ -- 23
+newline$ -- 229
+num.names$ -- 68
+pop$ -- 350
 preamble$ -- 1
-purify$ -- 130
+purify$ -- 139
 quote$ -- 0
-skip$ -- 294
+skip$ -- 318
 stack$ -- 0
-substring$ -- 361
-swap$ -- 119
+substring$ -- 424
+swap$ -- 131
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 148
+type$ -- 156
 warning$ -- 10
-while$ -- 78
-width$ -- 42
-write$ -- 426
+while$ -- 86
+width$ -- 44
+write$ -- 446
 (There were 5 error messages)

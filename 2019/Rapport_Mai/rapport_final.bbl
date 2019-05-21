@@ -137,6 +137,12 @@ Xport pro.
 \newblock In {\em Proceedings of the 2015 Internet Measurement Conference\/}
   (New York, NY, USA, 2015), IMC '15, ACM, pp.~437--443.
 
+\bibitem{DBLP:journals/csur/Hudak89}
+{\sc Hudak, P.}
+\newblock Conception, evolution, and application of functional programming
+  languages.
+\newblock {\em {ACM} Comput. Surv. 21}, 3 (1989), 359--411.
+
 \bibitem{elementdestatistiques}
 {\sc Jean-Jacques~Droesbeke, Catherine~Vermandele, C.~D.}
 \newblock {\em Eléments de statistique}.
@@ -240,6 +246,13 @@ Xport pro.
 \newblock {G}lobal {I}nternet testing - {P}robe{API}.
 \newblock URL~: \url{http://probeapi.speedchecker.xyz/}.
 \newblock (consulté le $06/08/2018$).
+
+\bibitem{6427487}
+{\sc {Tran}, N., {Skhiri}, S., {Lesuisse}, A., and {Zimányi}, E.}
+\newblock Arom: Processing big data with data flow graphs and functional
+  programming.
+\newblock In {\em 4th IEEE International Conference on Cloud Computing
+  Technology and Science Proceedings\/} (Dec 2012), pp.~875--882.
 
 \bibitem{COMPARE-ATLAS-PROBEAPI}
 {\sc Varas, C.}
