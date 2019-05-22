@@ -420,43 +420,50 @@ Le mode local d'exécution d'une application Spark est typiquement utilisé pour
 Nous avons utilisé l'infrastructure d'Amazon pour lancer la détection des anomalies. Ce sont les mêmes traitements lancés dans le mode local. Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille du cluster créé pour lancer la détection. Dans ce cas, nous utilisons différents nombre d'\textit{executors}. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
 \paragraph{Variant la taille du cluster}
 
+\subparagraph{Description des clusters}~
+
+Le Tableau \ref{clusters-description} décrit les clusters créés au sein .  Il reprend l'ID du cluster, le nombre d'instances formant le cluster; le \textit{driver} et zéro ou plusieurs \textit{executors}, le type de l'instance et enfin le temps total de l'analyse. Le temps de l'analyse est calculé de la même façon  que le mode local. 
+
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|c|c|c|c|}
+	\hline 
+\textbf{Nom du cluster}	&\textbf{Taille du cluster}	&  \textbf{Types d'instances (master, executor)}  &\textbf{Temps total (s)} \\ 
+	\hline 
+C1	&   1 &  (m4.2xlarge, --- ) &  N/A\\ 
+	\hline 
+C2	& 2 & (m4.2xlarge, m3.xlarge)  &240   \\ 
+	\hline 
+C3	& 3 &(m4.2xlarge, m3.xlarge) &225 \\ 
+	\hline 
+C4	& 4 & (m4.2xlarge, m3.xlarge)&217 \\ 
+	\hline 
+C5	& 5 & (m4.2xlarge, m3.xlarge)&134 \\ 
+\hline 
+C6	& 5 & (m4.large, m4.large)&  212\\ 
+\hline
+\end{tabular} 
+}
+\caption{}
+\label{clusters-description}
+
+\end{table}
+
+
 
 \subparagraph{Description de l'ensemble de données}
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
-	\hline 
-Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
-	\hline 
-\end{tabular} 
-\caption{text}
-\label{key}
-\end{table}
-
-
-
-\subparagraph{Description des clusters}~
-
-Le tableau \ref{clusters-description} décrit les clusters créés, il reprend le nom du cluster, le nombre d'instances formant le cluster en plus de l'instance représentant le \textit{driver}. 
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|}
-	\hline 
-\textbf{Nom du cluster}	&\textbf{Nombre d'instances}	&  \textbf{Types d'instances}   \\ 
-	\hline 
-C1	&   0 &  m4.large  \\ 
-	\hline 
-C2	&  &  \\ 
-	\hline 
-C3	&  &  \\ 
-	\hline 
-C4	&  &  \\ 
-	\hline 
-\end{tabular} 
-\caption{}
-\label{clusters-description}
+		\hline 
+		Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
+		\hline 
+	\end{tabular} 
+	\caption{text}
+	\label{key}
 \end{table}
 
 Où x4.large a les caractéristiques suivantes : (vCPU : 2, Mém. (GiB) : 8, Stockage : EBS uniquement, Bande passante dédiée à EBS (Mbit/s) : 450, Performances réseau : Modéré).
@@ -465,6 +472,7 @@ Où x4.large a les caractéristiques suivantes : (vCPU : 2, Mém. (GiB) : 8, Sto
 DelayAnalysis-one-instance : C1
 \end{comment}
 
+%C1%https://aws-logs-847444427255-eu-west-1.s3-eu-west-1.amazonaws.com/elasticmapreduce/j-2YU5Q88TKMGBK/steps/s-H0VT3FD9TJLO/stderr.gz?
 \paragraph{Variant la taille de données}
 
 \subparagraph{Description de l'ensemble de données}

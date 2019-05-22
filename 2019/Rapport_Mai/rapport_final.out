@@ -44,9 +44,9 @@
 \BOOKMARK [2][-]{subsection.2.6.1}{Les étapes principales de détection}{section.2.6}% 44
 \BOOKMARK [2][-]{subsection.2.6.2}{Description des paramètres de l'analyse des délais}{section.2.6}% 45
 \BOOKMARK [2][-]{subsection.2.6.3}{Processus de détection des anomalies : notation formelle}{section.2.6}% 46
-\BOOKMARK [2][-]{subsection.2.6.4}{Processus de détection des anomalies : notation entrées et sorties}{section.2.6}% 47
+\BOOKMARK [2][-]{subsection.2.6.4}{Processus de détection des anomalies : notation par fonctions}{section.2.6}% 47
 \BOOKMARK [1][-]{section.2.7}{Exemples illustratifs de la détection des anomalies}{chapter.2}% 48
-\BOOKMARK [2][-]{subsection.2.7.1}{Calcul\040de\040l'intervalle\040de\040confiance}{section.2.7}% 49
+\BOOKMARK [2][-]{subsection.2.7.1}{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{section.2.7}% 49
 \BOOKMARK [2][-]{subsection.2.7.2}{Calcul de la référence}{section.2.7}% 50
 \BOOKMARK [2][-]{subsection.2.7.3}{Etapes détaillées du processus de détection}{section.2.7}% 51
 \BOOKMARK [1][-]{section.2.8}{Conclusion}{chapter.2}% 52

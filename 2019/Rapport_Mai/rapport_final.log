@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  21 MAY 2019 02:56
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  22 MAY 2019 04:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1600,26 +1600,24 @@ File: illustrations/rtt-differ.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[32]
-Underfull \hbox (badness 1377) in paragraph at lines 214--214
-[][][]\T1/ptm/m/n/10 .[][]Voir le Lis-sages Ex-po-nen-tiels dans [][]$\T1/pcr/m
-/n/10 https : / / www . math . u -[] psud . fr / ~goude / Materials /
- []
-
-[33] (./illustrations/traceroute_.tex) [34] (./illustrations/link-inference.tex
-) [35] (./illustrations/intervals-comparaison.tex)
+[32] [33] (./illustrations/traceroute_.tex) [34]
+(./illustrations/link-inference.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[36] [37] [38] [39] (./illustrations/step-preparing-data.tex)
+[35] (./illustrations/intervals-comparaison_v2.tex)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[36] [37] [38] [39] [40] (./illustrations/step-preparing-data.tex)
 Overfull \vbox (24.53622pt too high) has occurred while \output is active []
 
 
-[40] (./illustrations/step-detection-anomalies.tex)
+[41] (./illustrations/step-detection-anomalies.tex)
 Overfull \vbox (24.52914pt too high) has occurred while \output is active []
 
 
-[41]
+[42]
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
@@ -1628,52 +1626,41 @@ Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no ≥ in font cmr12!
- (./illustrations/medianeIllustra.tex) [42]
-
-Package wrapfig Warning: Collision between wrapping environments on input line 
-545.
-
-File: illustrations/Table-CI-bis.png Graphic file (type bmp)
-<illustrations/Table-CI-bis.png>
-
-Package wrapfig Warning: Stationary wrapfigure forced to float on input line 55
-4.
-
-[43] [44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 644--644
+ (./illustrations/medianeIllustra.tex) [43] [44] [45] [46]
+Underfull \hbox (badness 10000) in paragraph at lines 649--649
 [][][]\T1/ptm/m/n/10 .[][][][]$\T1/pcr/m/n/10 https : / / github . com / hayatb
 ellafkih / SparkSalacaTraceroutesAnalysis / blob /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--644
+Underfull \hbox (badness 10000) in paragraph at lines 649--649
 \T1/pcr/m/n/10 master / rttDelaysSparkScala / src / main / resources / test / r
 esult _ modified . json$[][]\T1/ptm/m/n/10 ,
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 659.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 664.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 659.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 664.
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--693
+Underfull \hbox (badness 10000) in paragraph at lines 658--698
 []$[]$$[]$$[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--693
+Underfull \hbox (badness 10000) in paragraph at lines 658--698
 
  []
 
 (./illustrations/explainCis.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 698--708
+Underfull \hbox (badness 10000) in paragraph at lines 703--713
 [][]\T1/ptm/m/n/12 II.7.2[][].
  []
 
-[46] (./illustrations/casesAnomalies.tex) [47] [48] [49] [50]
+[47] (./illustrations/casesAnomalies.tex) [48] [49] [50] [51]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]
+ [52]
 Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
@@ -1693,7 +1680,7 @@ Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 1044--1044
+Underfull \hbox (badness 10000) in paragraph at lines 1049--1049
 []|\T1/ptm/m/n/12 15.352609999999999 (car $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\
 OT1/cmr/m/n/12 994\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 402 + 0\OML/cmm/m/it/12 :\O
 T1/cmr/m/n/12 011099\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 463 =
@@ -1702,13 +1689,13 @@ T1/cmr/m/n/12 011099\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 463 =
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [52])
-[53]
+ [53])
+[54]
 \openout2 = `chapitre3.aux'.
 
  (./chapitre3.tex
 Chapitre III.
-[54
+[55
 
 
 ]
@@ -1718,18 +1705,18 @@ dmarr . com / default . asp ? contentID = 690$[][]\T1/ptm/m/n/10 , consul-tée l
 e
  []
 
-[55]
+[56]
 File: illustrations/bigdata-architecture.png Graphic file (type bmp)
 <illustrations/bigdata-architecture.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[56] [57] (./illustrations/key-value-nosql-4.tex)
+[57] [58] (./illustrations/key-value-nosql-4.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./illustrations/document-nosql-3.tex) [58]
+(./illustrations/document-nosql-3.tex) [59]
 File: illustrations/colomn-db-1.png Graphic file (type bmp)
 <illustrations/colomn-db-1.png>
 
@@ -1741,7 +1728,7 @@ File: illustrations/GraphDatabase_PropertyGraph.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[59] [60]
+[60] [61]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 
@@ -1753,29 +1740,29 @@ File: illustrations/ranking-db.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[61] [62] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[62] [63] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 223.
 
-[63] [64]
+[64] [65]
 File: illustrations/2-Figure1-1-map-reduce-workflow.png Graphic file (type bmp)
 
 <illustrations/2-Figure1-1-map-reduce-workflow.png>
- [65] [66] [67] [68]
+ [66] [67] [68] [69]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
- [69]
+ [70]
 File: illustrations/unified-stack.jpg Graphic file (type bmp)
 <illustrations/unified-stack.jpg>
- [70]
+ [71]
 File: illustrations/global_view_rdd.png Graphic file (type bmp)
 <illustrations/global_view_rdd.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [71]
+ [72]
 Underfull \hbox (badness 2846) in paragraph at lines 493--493
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / hadoop . apa
 che . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
@@ -1787,19 +1774,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 493--493
 / docs / latest / submitting -[] applications . html #
  []
 
-[72]
+[73]
 Underfull \hbox (badness 6526) in paragraph at lines 513--513
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / calculator .
  s3 . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée 
 le
  []
 
-) [73]
+) [74]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
 Chapitre IV.
-[74
+[75
 
 
 ]
@@ -1808,7 +1795,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 60--60
 ellafkih / SparkSalacaTraceroutesAnalysis / blob /
  []
 
-[75]
+[76]
 Underfull \hbox (badness 2573) in paragraph at lines 90--90
 [][][]\T1/ptm/m/n/10 .[][]Voir la liste des tra-ce-routes uti-li-sés dans l'exe
 mple illus-tra-tif dis-po-nible sur Gi-tHub [][]$\T1/pcr/m/n/10 https :
@@ -1826,9 +1813,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--90
 odified . json$[][]\T1/ptm/m/n/10 , consul-tée le
  []
 
-[76]
+[77]
 Missing character: There is no   in font ptmr8t!
- [77] [78] (./illustrations/read-data-from-mongodb.tex)
+ [78] [79] (./illustrations/read-data-from-mongodb.tex)
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 227.
 
@@ -1837,73 +1824,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 235--236
 aceroutes stockés dans $\OML/cmm/m/it/12 collection$ \T1/pcr/m/n/12 et
  []
 
-[79] [80] [81] [82] [83]
+[80] [81] [82] [83] [84]
 
-LaTeX Warning: Reference `fig:link-inference' on page 84 undefined on input lin
+LaTeX Warning: Reference `fig:link-inference' on page 85 undefined on input lin
 e 475.
 
-[84] [85] [86] [87] [88]
+[85] [86] [87] [88] [89]
 Underfull \vbox (badness 1286) has occurred while \output is active []
 
- [89]
-[90] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [90]
+[91] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) [91] [92])
-[93]
+) [92] [93])
+[94]
 \openout2 = `chapitre5.aux'.
 
  (./chapitre5.tex
 Chapitre V.
-[94
+[95
 
 
-] [95]
+] [96]
 File: illustrations/mongoDBtiming_0.png Graphic file (type bmp)
 <illustrations/mongoDBtiming_0.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[96]
+[97]
 File: illustrations/glue_crawler.png Graphic file (type bmp)
 <illustrations/glue_crawler.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[97] [98]
+[98] [99]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [99] [100] [101]
+ [100] [101] [102]
 File: illustrations/temps-avec-aws_1.png Graphic file (type bmp)
 <illustrations/temps-avec-aws_1.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [102]
-[103]
+ [103]
+[104]
 File: illustrations/variant_driver_memory.png Graphic file (type bmp)
 <illustrations/variant_driver_memory.png>
- [104] Excluding 'comment' comment.) [105] [106]
+ [105] Excluding 'comment' comment. [106]) [107]
 \openout2 = `lecons-apprises.aux'.
 
  (./lecons-apprises.tex)
-[107
+[108
 
 
 ]
 \openout2 = `Conclusion_new.aux'.
 
- (./Conclusion_new.tex) [108
+ (./Conclusion_new.tex) [109
 
 
 ]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex) [109
+ (./conclusion.tex) [110
 
 
 ]
@@ -1911,42 +1898,46 @@ File: illustrations/variant_driver_memory.png Graphic file (type bmp)
 
  (./annexes.tex
 Annexe A.
-[110
+[111
 
 
 ]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [111]
+ [112]
 File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena.png>
 
 Underfull \vbox (badness 5741) has occurred while \output is active []
 
- [112])
-[113]
+ [113])
+[114]
 \openout2 = `Un_enregistrement_traceroute.aux'.
 
  (./Un_enregistrement_traceroute.tex
 Annexe B.
-[114
+[115
 
 
-]) [115]
+]) [116]
 \openout2 = `table-theoreme21-formattex_annexe.aux'.
 
  (./table-theoreme21-formattex_annexe.tex
 Annexe C.
-) [116
+) [117
 
 
-] [117] (./rapport_final.lof [118
+] [118] (./rapport_final.lof
+Underfull \vbox (badness 3343) has occurred while \output is active []
+
+ [119
 
 ])
 \tf@lof=\write10
 \openout10 = `rapport_final.lof'.
 
- [119] (./rapport_final.lot
+
+[120] (./rapport_final.lot
 Overfull \hbox (5.33357pt too wide) in paragraph at lines 10--10
  [][] [][][]\T1/ptm/m/n/12 Exemple de cal-cul et mise à jour de la borne in-fé-
 rieure de l'in-ter-valle de confiance |
@@ -1956,11 +1947,11 @@ rieure de l'in-ter-valle de confiance |
 \tf@lot=\write11
 \openout11 = `rapport_final.lot'.
 
- [120] (./rapport_final.lol [121])
+ [121] (./rapport_final.lol [122])
 \tf@lol=\write12
 \openout12 = `rapport_final.lol'.
 
- [122] (./rapport_final.bbl
+ [123] (./rapport_final.bbl
 Underfull \hbox (badness 4441) in paragraph at lines 44--50
 []\T1/ptm/m/sc/12 Aben, E.  \T1/ptm/m/n/12 How RIPE At-las Hel-ped Wi-ki-pe-dia
  Users.  URL : [][]$\T1/pcr/m/n/12 https :
@@ -2008,7 +1999,7 @@ Underfull \hbox (badness 4328) in paragraph at lines 81--86
 tm/m/n/12 , 2015.  (consulté le
  []
 
-[123]
+[124]
 Underfull \hbox (badness 10000) in paragraph at lines 88--92
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
@@ -2075,7 +2066,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 175--181
 t -[] devices$[][]\T1/ptm/m/n/12 , 2017.
  []
 
-[124]
+[125]
 Underfull \hbox (badness 1895) in paragraph at lines 215--221
 []\T1/ptm/m/sc/12 Roderick, F.  \T1/ptm/m/n/12 On the Di-ver-sity of In-ter-do-
 main Rou-ting in Africa.  URL :
@@ -2105,7 +2096,7 @@ Underfull \hbox (badness 3758) in paragraph at lines 258--264
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-) [125]
+) [126]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./rapport_final.aux (./resume.aux) (./Remerciéments.aux)
@@ -2123,12 +2114,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32640 strings out of 493007
- 570783 string characters out of 6136719
- 1077831 words of memory out of 5000000
- 35787 multiletter control sequences out of 15000+600000
+ 32637 strings out of 493007
+ 570708 string characters out of 6136719
+ 1138899 words of memory out of 5000000
+ 35785 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,21n,97p,1104b,1894s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,21n,97p,1104b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on rapport_final.pdf (127 pages).
+Output written on rapport_final.pdf (128 pages).

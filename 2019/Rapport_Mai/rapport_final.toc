@@ -59,158 +59,158 @@
 \contentsline {subsection}{\numberline {II.6.3}Processus de détection des anomalies : notation formelle}{34}{subsection.2.6.3}
 \contentsline {subparagraph}{Notations}{34}{section*.29}
 \contentsline {paragraph}{1. Regroupement des traceroutes par période $d_k$.}{34}{section*.31}
-\contentsline {paragraph}{2. Vérification de la validité de chaque traceroute.}{34}{section*.32}
+\contentsline {paragraph}{2. Vérification de la validité de chaque traceroute.}{35}{section*.32}
 \contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut.}{35}{section*.33}
 \contentsline {paragraph}{4. Inférence des liens topologiques par traceroute.}{35}{section*.34}
 \contentsline {paragraph}{5. Calcul des RTTs différentiels des liens.}{35}{section*.36}
 \contentsline {paragraph}{6. Fusion des informations d'un lien.}{35}{section*.37}
-\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et de l'intervalle de confiance courant.}{36}{section*.38}
-\contentsline {paragraph}{8. Mise à jour de la médiane et de l'intervalle de confiance de référence du lien analysé.}{36}{section*.39}
-\contentsline {paragraph}{9. Comparaison des intervalles de confiance.}{36}{section*.40}
-\contentsline {subsection}{\numberline {II.6.4}Processus de détection des anomalies : notation entrées et sorties}{36}{subsection.2.6.4}
-\contentsline {paragraph}{Phase I : préparation de données.}{36}{section*.42}
-\contentsline {paragraph}{ Phase II : détection des alarmes.}{37}{section*.43}
-\contentsline {paragraph}{ Illustrations des deux phases de détection}{39}{section*.44}
-\contentsline {section}{\numberline {II.7}Exemples illustratifs de la détection des anomalies}{42}{section.2.7}
-\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance}{42}{subsection.2.7.1}
-\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{42}{subsubsection.2.7.1.1}
+\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et de son intervalle de confiance courants.}{36}{section*.38}
+\contentsline {paragraph}{8. Mise à jour de la médiane des RTTs différentiels et de son intervalle de confiance de référence.}{36}{section*.39}
+\contentsline {paragraph}{9. Comparaison des intervalles de confiance des RTTs différentiels : courant et référence.}{36}{section*.40}
+\contentsline {subsection}{\numberline {II.6.4}Processus de détection des anomalies : notation par fonctions}{37}{subsection.2.6.4}
+\contentsline {paragraph}{Phase I : préparation de données.}{37}{section*.42}
+\contentsline {paragraph}{ Phase II : détection des alarmes.}{38}{section*.43}
+\contentsline {paragraph}{ Illustrations des deux phases de détection}{40}{section*.44}
+\contentsline {section}{\numberline {II.7}Exemples illustratifs de la détection des anomalies}{43}{section.2.7}
+\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{43}{subsection.2.7.1}
+\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{43}{subsubsection.2.7.1.1}
 \contentsline {subsubsection}{\numberline {II.7.1.2}Méthode de score de Wilson}{44}{subsubsection.2.7.1.2}
-\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{44}{subsection.2.7.2}
-\contentsline {subsubsection}{\numberline {II.7.2.1}Détection des anomalies}{46}{subsubsection.2.7.2.1}
-\contentsline {subsection}{\numberline {II.7.3}Etapes détaillées du processus de détection}{47}{subsection.2.7.3}
-\contentsline {paragraph}{Description de l'échantillon}{47}{section*.55}
-\contentsline {section}{\numberline {II.8}Conclusion}{53}{section.2.8}
-\contentsline {chapter}{\numberline {III}Introduction au Big Data}{54}{chapter.3}
-\contentsline {section}{\numberline {III.1}Introduction}{54}{section.3.1}
-\contentsline {section}{\numberline {III.2}Processus d'analyse de données massives}{54}{section.3.2}
-\contentsline {paragraph}{Exemple d'un processus d'analyse de données}{54}{section*.63}
-\contentsline {section}{\numberline {III.3}Quelques concepts associés au Big Data}{55}{section.3.3}
-\contentsline {subsection}{\numberline {III.3.1}Définition du Big Data : Volume, Vélocité, Variété et Véracité}{55}{subsection.3.3.1}
-\contentsline {paragraph}{Volume de données}{55}{section*.64}
-\contentsline {paragraph}{Vélocité de données}{55}{section*.65}
-\contentsline {paragraph}{Variété de données}{56}{section*.66}
-\contentsline {paragraph}{Véracité de données}{56}{section*.67}
-\contentsline {subsection}{\numberline {III.3.2}L'architecture standard du Big Data}{56}{subsection.3.3.2}
-\contentsline {paragraph}{Data sources layer}{56}{section*.69}
-\contentsline {paragraph}{Data Ingest layer}{56}{section*.70}
-\contentsline {paragraph}{Batch processing layer}{57}{section*.71}
-\contentsline {paragraph}{Stream Processing layer}{57}{section*.72}
-\contentsline {paragraph}{Data organizing layer}{57}{section*.73}
-\contentsline {paragraph}{Infrastructure layer}{57}{section*.74}
-\contentsline {paragraph}{Distributed File System layer}{57}{section*.75}
-\contentsline {paragraph}{Data consumption layer}{58}{section*.76}
-\contentsline {subsection}{\numberline {III.3.3}Les bases de données NoSQL (Not Only SQL) }{58}{subsection.3.3.3}
-\contentsline {paragraph}{Introduction }{58}{section*.77}
-\contentsline {paragraph}{Types de base de données NoSQL}{58}{section*.78}
-\contentsline {subparagraph}{Clé-valeur}{58}{section*.79}
-\contentsline {subparagraph}{Document}{58}{section*.81}
-\contentsline {subparagraph}{Colonnes}{59}{section*.83}
-\contentsline {subparagraph}{Graphe}{59}{section*.85}
-\contentsline {paragraph}{Big Data et le théorème CAP}{60}{section*.87}
-\contentsline {subparagraph}{ Consistency (ou intégrité)}{60}{section*.88}
-\contentsline {subparagraph}{ Availability (ou disponibilité)}{60}{section*.89}
-\contentsline {subparagraph}{Partition tolerance (ou la tolérance au partitionnement) }{60}{section*.90}
-\contentsline {subsection}{\numberline {III.3.4}Extraction, Transformation, Loading (ETL)}{61}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {III.3.5}Schema on Write VS Schema on Read}{63}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {III.3.6}L'informatique distribuée et l'analyse de données massives}{64}{subsection.3.3.6}
-\contentsline {subsection}{\numberline {III.3.7}MapReduce}{64}{subsection.3.3.7}
-\contentsline {section}{\numberline {III.4}Parcours de quelques technologies du Big Data}{65}{section.3.4}
-\contentsline {subsection}{\numberline {III.4.1}MongoDB}{65}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {III.4.2}Amazon DynamoDB}{66}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {III.4.3}Amazon S3, Amazon Glue et Amazon Athena }{66}{subsection.3.4.3}
-\contentsline {paragraph}{Amazon S3}{66}{section*.94}
-\contentsline {paragraph}{Amazon Glue}{67}{section*.96}
-\contentsline {paragraph}{Amazon Athena}{67}{section*.97}
-\contentsline {subsection}{\numberline {III.4.4}Hadoop ecosystem}{68}{subsection.3.4.4}
-\contentsline {subsection}{\numberline {III.4.5}Apache Spark }{69}{subsection.3.4.5}
-\contentsline {paragraph}{Core Concepts et architecture de Spark}{69}{section*.98}
-\contentsline {subparagraph}{Spark Clusters et Resource Management System}{69}{section*.99}
-\contentsline {subparagraph}{Application Spark}{69}{section*.101}
-\contentsline {subparagraph}{Spark driver et executor}{70}{section*.102}
-\contentsline {subparagraph}{Spark Unified Stack}{70}{section*.103}
-\contentsline {subparagraph}{Spark Core}{70}{section*.104}
-\contentsline {paragraph}{Resilient Distributed Datasets}{71}{section*.106}
-\contentsline {paragraph}{A propos lazy evaluation}{71}{section*.107}
-\contentsline {paragraph}{Les APIs de Spark}{72}{section*.109}
-\contentsline {paragraph}{Présentation de Scala}{72}{section*.110}
-\contentsline {paragraph}{Lancement d'une application avec de Spark}{72}{section*.111}
-\contentsline {subsection}{\numberline {III.4.6}Amazon Elastic MapReduce}{73}{subsection.3.4.6}
-\contentsline {section}{\numberline {III.5}Conclusion}{73}{section.3.5}
-\contentsline {chapter}{\numberline {IV}Implémentation en Spark/Scala}{74}{chapter.4}
-\contentsline {section}{\numberline {IV.1}Introduction}{74}{section.4.1}
-\contentsline {section}{\numberline {IV.2}La programmation fonctionnelle et Big Data}{74}{section.4.2}
-\contentsline {subsection}{\numberline {IV.2.1}Les apports de la programmation fonctionnelle}{74}{subsection.4.2.1}
-\contentsline {paragraph}{Fonctions d'ordre supérieur.}{74}{section*.112}
-\contentsline {paragraph}{Structures de données immuables.}{74}{section*.113}
-\contentsline {paragraph}{Stateless.}{74}{section*.114}
-\contentsline {subsection}{\numberline {IV.2.2}La programmation fonctionnelle au service du Big Data }{74}{subsection.4.2.2}
-\contentsline {section}{\numberline {IV.3}Implémentation}{75}{section.4.3}
-\contentsline {subsection}{\numberline {IV.3.1}Description de l'environnement}{75}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {IV.3.2}Brève présentation de l'implémentation}{75}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {IV.3.3}Création d'une application Spark/Scala}{75}{subsection.4.3.3}
-\contentsline {paragraph}{Gestion des dépendances}{75}{section*.115}
-\contentsline {paragraph}{Notation relatives au langage Scala}{76}{section*.116}
-\contentsline {paragraph}{Paramètres de l'analyse}{76}{section*.117}
-\contentsline {paragraph}{Configuration d'une application Spark}{76}{section*.118}
-\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{77}{section*.119}
-\contentsline {paragraph}{Lecture de données}{77}{section*.120}
-\contentsline {paragraph}{Trouver les périodes de l'analyse}{78}{section*.121}
-\contentsline {paragraph}{Groupement des traceroutes}{79}{section*.122}
-\contentsline {subparagraph}{MongoDB}{79}{section*.123}
-\contentsline {subparagraph}{Spark/Scala}{79}{section*.125}
-\contentsline {subparagraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{81}{section*.126}
-\contentsline {paragraph}{Déduction des liens}{81}{section*.127}
-\contentsline {subparagraph}{Elimination des traceroutes échoués}{82}{section*.128}
-\contentsline {subparagraph}{Elimination des sauts non valides}{82}{section*.129}
-\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{83}{section*.130}
-\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{84}{section*.131}
-\contentsline {subparagraph}{Construction de la liste des liens par période }{85}{section*.132}
-\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{86}{section*.133}
-\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{86}{section*.134}
-\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{86}{section*.135}
-\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{86}{section*.136}
-\contentsline {paragraph}{Détection des anomalies}{87}{section*.137}
-\contentsline {subsection}{\numberline {IV.3.4}Exécution d'une application Spark}{91}{subsection.4.3.4}
-\contentsline {paragraph}{Résultats finaux}{92}{section*.138}
-\contentsline {section}{\numberline {IV.4}Conclusion}{93}{section.4.4}
-\contentsline {chapter}{\numberline {V}Application de quelques technologies Big Data sur l'analyse des traceroutes}{94}{chapter.5}
-\contentsline {section}{\numberline {V.1}Introduction}{94}{section.5.1}
-\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{94}{section.5.2}
-\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{95}{section.5.3}
-\contentsline {paragraph}{La machine de test}{95}{section*.139}
-\contentsline {paragraph}{Paramètres de l'analyse}{95}{section*.140}
-\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{95}{section.5.4}
-\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{95}{section.5.5}
-\contentsline {paragraph}{Evaluation des critères de sélection}{95}{section*.141}
-\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{96}{section*.142}
-\contentsline {section}{\numberline {V.6}Application 2 : Amazon DynamoDB}{96}{section.5.6}
-\contentsline {section}{\numberline {V.7}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{97}{section.5.7}
-\contentsline {paragraph}{Vue générale}{97}{section*.145}
-\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{98}{section*.147}
-\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{98}{section*.148}
-\contentsline {paragraph}{Partitionnement des données stockés dans Amazon S3}{98}{section*.149}
-\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{100}{section*.152}
-\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{100}{section*.153}
-\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{101}{section*.154}
-\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{102}{section*.155}
-\contentsline {section}{\numberline {V.8}Application 4 : Spark Apache avec Scala}{103}{section.5.8}
-\contentsline {subsection}{\numberline {V.8.1}Mode local}{103}{subsection.5.8.1}
-\contentsline {paragraph}{Variant la mémoire allouée au driver}{103}{section*.158}
-\contentsline {paragraph}{Variant le mode local : local vs local[N]}{104}{section*.160}
-\contentsline {paragraph}{Notes concernant le mode local}{105}{section*.161}
-\contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{105}{subsection.5.8.2}
-\contentsline {paragraph}{Variant la taille du cluster}{105}{section*.162}
-\contentsline {subparagraph}{Description de l'ensemble de données}{105}{table.caption.164}
-\contentsline {subparagraph}{Description des clusters}{105}{section*.165}
-\contentsline {paragraph}{Variant la taille de données}{105}{section*.167}
-\contentsline {subparagraph}{Description de l'ensemble de données}{105}{table.caption.169}
-\contentsline {section}{\numberline {V.9}Conclusion}{106}{section.5.9}
-\contentsline {section}{\numberline {V.10}Récapitulatif}{107}{section.5.10}
-\contentsline {chapter}{\numberline {A}Amazon Athena }{110}{appendix.A}
-\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{110}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{111}{section.A.2}
-\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{111}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{111}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{112}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{114}{appendix.B}
-\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{116}{appendix.C}
+\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{45}{subsection.2.7.2}
+\contentsline {subsubsection}{\numberline {II.7.2.1}Détection des anomalies}{47}{subsubsection.2.7.2.1}
+\contentsline {subsection}{\numberline {II.7.3}Etapes détaillées du processus de détection}{48}{subsection.2.7.3}
+\contentsline {paragraph}{Description de l'échantillon}{48}{section*.54}
+\contentsline {section}{\numberline {II.8}Conclusion}{54}{section.2.8}
+\contentsline {chapter}{\numberline {III}Introduction au Big Data}{55}{chapter.3}
+\contentsline {section}{\numberline {III.1}Introduction}{55}{section.3.1}
+\contentsline {section}{\numberline {III.2}Processus d'analyse de données massives}{55}{section.3.2}
+\contentsline {paragraph}{Exemple d'un processus d'analyse de données}{55}{section*.62}
+\contentsline {section}{\numberline {III.3}Quelques concepts associés au Big Data}{56}{section.3.3}
+\contentsline {subsection}{\numberline {III.3.1}Définition du Big Data : Volume, Vélocité, Variété et Véracité}{56}{subsection.3.3.1}
+\contentsline {paragraph}{Volume de données}{56}{section*.63}
+\contentsline {paragraph}{Vélocité de données}{56}{section*.64}
+\contentsline {paragraph}{Variété de données}{57}{section*.65}
+\contentsline {paragraph}{Véracité de données}{57}{section*.66}
+\contentsline {subsection}{\numberline {III.3.2}L'architecture standard du Big Data}{57}{subsection.3.3.2}
+\contentsline {paragraph}{Data sources layer}{57}{section*.68}
+\contentsline {paragraph}{Data Ingest layer}{57}{section*.69}
+\contentsline {paragraph}{Batch processing layer}{58}{section*.70}
+\contentsline {paragraph}{Stream Processing layer}{58}{section*.71}
+\contentsline {paragraph}{Data organizing layer}{58}{section*.72}
+\contentsline {paragraph}{Infrastructure layer}{58}{section*.73}
+\contentsline {paragraph}{Distributed File System layer}{58}{section*.74}
+\contentsline {paragraph}{Data consumption layer}{59}{section*.75}
+\contentsline {subsection}{\numberline {III.3.3}Les bases de données NoSQL (Not Only SQL) }{59}{subsection.3.3.3}
+\contentsline {paragraph}{Introduction }{59}{section*.76}
+\contentsline {paragraph}{Types de base de données NoSQL}{59}{section*.77}
+\contentsline {subparagraph}{Clé-valeur}{59}{section*.78}
+\contentsline {subparagraph}{Document}{59}{section*.80}
+\contentsline {subparagraph}{Colonnes}{60}{section*.82}
+\contentsline {subparagraph}{Graphe}{60}{section*.84}
+\contentsline {paragraph}{Big Data et le théorème CAP}{61}{section*.86}
+\contentsline {subparagraph}{ Consistency (ou intégrité)}{61}{section*.87}
+\contentsline {subparagraph}{ Availability (ou disponibilité)}{61}{section*.88}
+\contentsline {subparagraph}{Partition tolerance (ou la tolérance au partitionnement) }{61}{section*.89}
+\contentsline {subsection}{\numberline {III.3.4}Extraction, Transformation, Loading (ETL)}{62}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {III.3.5}Schema on Write VS Schema on Read}{64}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {III.3.6}L'informatique distribuée et l'analyse de données massives}{65}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {III.3.7}MapReduce}{65}{subsection.3.3.7}
+\contentsline {section}{\numberline {III.4}Parcours de quelques technologies du Big Data}{66}{section.3.4}
+\contentsline {subsection}{\numberline {III.4.1}MongoDB}{66}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {III.4.2}Amazon DynamoDB}{67}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {III.4.3}Amazon S3, Amazon Glue et Amazon Athena }{67}{subsection.3.4.3}
+\contentsline {paragraph}{Amazon S3}{67}{section*.93}
+\contentsline {paragraph}{Amazon Glue}{68}{section*.95}
+\contentsline {paragraph}{Amazon Athena}{68}{section*.96}
+\contentsline {subsection}{\numberline {III.4.4}Hadoop ecosystem}{69}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {III.4.5}Apache Spark }{70}{subsection.3.4.5}
+\contentsline {paragraph}{Core Concepts et architecture de Spark}{70}{section*.97}
+\contentsline {subparagraph}{Spark Clusters et Resource Management System}{70}{section*.98}
+\contentsline {subparagraph}{Application Spark}{70}{section*.100}
+\contentsline {subparagraph}{Spark driver et executor}{71}{section*.101}
+\contentsline {subparagraph}{Spark Unified Stack}{71}{section*.102}
+\contentsline {subparagraph}{Spark Core}{71}{section*.103}
+\contentsline {paragraph}{Resilient Distributed Datasets}{72}{section*.105}
+\contentsline {paragraph}{A propos lazy evaluation}{72}{section*.106}
+\contentsline {paragraph}{Les APIs de Spark}{73}{section*.108}
+\contentsline {paragraph}{Présentation de Scala}{73}{section*.109}
+\contentsline {paragraph}{Lancement d'une application avec de Spark}{73}{section*.110}
+\contentsline {subsection}{\numberline {III.4.6}Amazon Elastic MapReduce}{74}{subsection.3.4.6}
+\contentsline {section}{\numberline {III.5}Conclusion}{74}{section.3.5}
+\contentsline {chapter}{\numberline {IV}Implémentation en Spark/Scala}{75}{chapter.4}
+\contentsline {section}{\numberline {IV.1}Introduction}{75}{section.4.1}
+\contentsline {section}{\numberline {IV.2}La programmation fonctionnelle et Big Data}{75}{section.4.2}
+\contentsline {subsection}{\numberline {IV.2.1}Les apports de la programmation fonctionnelle}{75}{subsection.4.2.1}
+\contentsline {paragraph}{Fonctions d'ordre supérieur.}{75}{section*.111}
+\contentsline {paragraph}{Structures de données immuables.}{75}{section*.112}
+\contentsline {paragraph}{Stateless.}{75}{section*.113}
+\contentsline {subsection}{\numberline {IV.2.2}La programmation fonctionnelle au service du Big Data }{75}{subsection.4.2.2}
+\contentsline {section}{\numberline {IV.3}Implémentation}{76}{section.4.3}
+\contentsline {subsection}{\numberline {IV.3.1}Description de l'environnement}{76}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {IV.3.2}Brève présentation de l'implémentation}{76}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {IV.3.3}Création d'une application Spark/Scala}{76}{subsection.4.3.3}
+\contentsline {paragraph}{Gestion des dépendances}{76}{section*.114}
+\contentsline {paragraph}{Notation relatives au langage Scala}{77}{section*.115}
+\contentsline {paragraph}{Paramètres de l'analyse}{77}{section*.116}
+\contentsline {paragraph}{Configuration d'une application Spark}{77}{section*.117}
+\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{78}{section*.118}
+\contentsline {paragraph}{Lecture de données}{78}{section*.119}
+\contentsline {paragraph}{Trouver les périodes de l'analyse}{79}{section*.120}
+\contentsline {paragraph}{Groupement des traceroutes}{80}{section*.121}
+\contentsline {subparagraph}{MongoDB}{80}{section*.122}
+\contentsline {subparagraph}{Spark/Scala}{80}{section*.124}
+\contentsline {subparagraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{82}{section*.125}
+\contentsline {paragraph}{Déduction des liens}{82}{section*.126}
+\contentsline {subparagraph}{Elimination des traceroutes échoués}{83}{section*.127}
+\contentsline {subparagraph}{Elimination des sauts non valides}{83}{section*.128}
+\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{84}{section*.129}
+\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{85}{section*.130}
+\contentsline {subparagraph}{Construction de la liste des liens par période }{86}{section*.131}
+\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{87}{section*.132}
+\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{87}{section*.133}
+\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{87}{section*.134}
+\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{87}{section*.135}
+\contentsline {paragraph}{Détection des anomalies}{88}{section*.136}
+\contentsline {subsection}{\numberline {IV.3.4}Exécution d'une application Spark}{92}{subsection.4.3.4}
+\contentsline {paragraph}{Résultats finaux}{93}{section*.137}
+\contentsline {section}{\numberline {IV.4}Conclusion}{94}{section.4.4}
+\contentsline {chapter}{\numberline {V}Application de quelques technologies Big Data sur l'analyse des traceroutes}{95}{chapter.5}
+\contentsline {section}{\numberline {V.1}Introduction}{95}{section.5.1}
+\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{95}{section.5.2}
+\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{96}{section.5.3}
+\contentsline {paragraph}{La machine de test}{96}{section*.138}
+\contentsline {paragraph}{Paramètres de l'analyse}{96}{section*.139}
+\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{96}{section.5.4}
+\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{96}{section.5.5}
+\contentsline {paragraph}{Evaluation des critères de sélection}{96}{section*.140}
+\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{97}{section*.141}
+\contentsline {section}{\numberline {V.6}Application 2 : Amazon DynamoDB}{97}{section.5.6}
+\contentsline {section}{\numberline {V.7}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{98}{section.5.7}
+\contentsline {paragraph}{Vue générale}{98}{section*.144}
+\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{99}{section*.146}
+\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{99}{section*.147}
+\contentsline {paragraph}{Partitionnement des données stockés dans Amazon S3}{99}{section*.148}
+\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{101}{section*.151}
+\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{101}{section*.152}
+\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{102}{section*.153}
+\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{103}{section*.154}
+\contentsline {section}{\numberline {V.8}Application 4 : Spark Apache avec Scala}{104}{section.5.8}
+\contentsline {subsection}{\numberline {V.8.1}Mode local}{104}{subsection.5.8.1}
+\contentsline {paragraph}{Variant la mémoire allouée au driver}{104}{section*.157}
+\contentsline {paragraph}{Variant le mode local : local vs local[N]}{105}{section*.159}
+\contentsline {paragraph}{Notes concernant le mode local}{106}{section*.160}
+\contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{106}{subsection.5.8.2}
+\contentsline {paragraph}{Variant la taille du cluster}{106}{section*.161}
+\contentsline {subparagraph}{Description des clusters}{106}{section*.162}
+\contentsline {subparagraph}{Description de l'ensemble de données}{106}{table.caption.165}
+\contentsline {paragraph}{Variant la taille de données}{106}{section*.166}
+\contentsline {subparagraph}{Description de l'ensemble de données}{107}{table.caption.168}
+\contentsline {section}{\numberline {V.9}Conclusion}{107}{section.5.9}
+\contentsline {section}{\numberline {V.10}Récapitulatif}{108}{section.5.10}
+\contentsline {chapter}{\numberline {A}Amazon Athena }{111}{appendix.A}
+\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{111}{section.A.1}
+\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{112}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{112}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{112}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{113}{subsection.A.2.3}
+\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{115}{appendix.B}
+\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{117}{appendix.C}
