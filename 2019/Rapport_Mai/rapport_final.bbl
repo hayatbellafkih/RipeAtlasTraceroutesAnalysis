@@ -20,16 +20,6 @@ Le dépôt des données {RIPE} {A}tlas.
 \newblock URL : \url{https://data-store.ripe.net/datasets/atlas-daily-dumps/}.
 \newblock (consulté le $ 26/07/2018 $).
 
-\bibitem{probes-data}
-Les archives des détails des sondes atlas.
-\newblock URL~: \url{https://ftp.ripe.net/ripe/atlas/probes/archive/}.
-\newblock (consulté le $ 28/01/2018 $).
-
-\bibitem{bugs-ripe-atlas}
-{RIPE} {A}tlas - {K}nown {B}ugs and {L}imitations.
-\newblock URL~: \url{https://atlas.ripe.net/docs/bugs/}.
-\newblock (consulté le $ 05/04/2018 $).
-
 \bibitem{SamKnows}
 Samknows.
 \newblock URL~: \url{https://www.samknows.com/global-platform}.
@@ -39,6 +29,11 @@ Samknows.
 Xport pro.
 \newblock URL: \url{https://www.lantronix.com/products/xport-pro/}.
 \newblock (consulté le $08/08/2018/$).
+
+\bibitem{Global-Journals}
+{\sc Abdul Ghaffar~Shoro, T. R.~S.}
+\newblock Big data analysis: Apache spark perspective.
+\newblock {\em Global Journal of Computer Science and Technology\/} (2015).
 
 \bibitem{Wikipedia}
 {\sc Aben, E.}
@@ -241,12 +236,6 @@ Xport pro.
 \newblock Dimes: Let the internet measure itself.
 \newblock {\em SIGCOMM Comput. Commun. Rev. 35}, 5 (Oct. 2005), 71--74.
 
-\bibitem{PROBEAPI}
-{\sc {S}peed {C}hecker}.
-\newblock {G}lobal {I}nternet testing - {P}robe{API}.
-\newblock URL~: \url{http://probeapi.speedchecker.xyz/}.
-\newblock (consulté le $06/08/2018$).
-
 \bibitem{6427487}
 {\sc {Tran}, N., {Skhiri}, S., {Lesuisse}, A., and {Zimányi}, E.}
 \newblock Arom: Processing big data with data flow graphs and functional
@@ -261,5 +250,10 @@ Xport pro.
   \url{https://labs.ripe.net/Members/cristian_varas/a-practical-comparison-between-ripe-atlas-and-probeapi},
   2016.
 \newblock (consulté le $ 19/01/2018 $).
+
+\bibitem{article-comparaison-spark-hadoop}
+{\sc Verma, J., and Patel, A.}
+\newblock Comparison of mapreduce and spark programming frameworks for big data
+  analytics on hdfs.
 
 \end{thebibliography}

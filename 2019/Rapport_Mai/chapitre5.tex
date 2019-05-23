@@ -417,12 +417,48 @@ Le mode local d'exécution d'une application Spark est typiquement utilisé pour
 
 \subsection{Cluster Amazon EMR}
 
-Nous avons utilisé l'infrastructure d'Amazon pour lancer la détection des anomalies. Ce sont les mêmes traitements lancés dans le mode local. Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille du cluster créé pour lancer la détection. Dans ce cas, nous utilisons différents nombre d'\textit{executors}. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
-\paragraph{Variant la taille du cluster}
+\paragraph{Création d'un cluster EMR}~
 
-\subparagraph{Description des clusters}~
+La création d'un cluster EMR destiné à une application Spark nécessite de  :
+\begin{itemize}
+	\item choisir un nom au cluster;
+	\item créer la configuration du cluster;
+	\item définir le modèle du n\oe{}ud maître (\textit{master}) 
+	\item choisir le nombre des n\oe{}uds principaux  du cluster et leur modèle;
+	\item paramétrer l'application Spark comme la précision de classe Main. 
+	\item spécifier les paramètre de l'application  (.jar), l'archive se trouver dans  un compartiment Amazon S3;
+	\item indiquer le chemin du compartiment Amazon S3 contenant  les données à analyser.
+\end{itemize}
+L'interface avancée de la création du cluster propose d'autres options.  \\
 
-Le Tableau \ref{clusters-description} décrit les clusters créés au sein .  Il reprend l'ID du cluster, le nombre d'instances formant le cluster; le \textit{driver} et zéro ou plusieurs \textit{executors}, le type de l'instance et enfin le temps total de l'analyse. Le temps de l'analyse est calculé de la même façon  que le mode local. 
+On distingue le temps nécessaire à la mise en place du cluster et la configuration du cluster (\textit{Starting}). Une fois le cluster est prêt, l'état du cluster passe à (\textit{Waiting}).  A la soumission de l'application, le cluster passe à l'état (Running). Suivant la configuration du cluster de l'utilisateur, le cluster peut s'éteindre dés la fin de l'exécution de l'application ou rester actif à l'écoute de nouvelles tâches. Toutefois, la dernière option peut produire des frais élevés.  
+
+
+Avec Amazon EMR, il est possible de lancer une analyse sur le cluster et choisir l'action à appliquer à la fin de cette analyse, par exemple arrêter le cluster. Les coûts appliqués suite à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{Source : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
+
+Nous avons utilisé l'infrastructure d'Amazon pour lancer la détection des anomalies sur un cluster de machines. Ce sont les mêmes traitements lancés dans le mode local. Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille du cluster créé pour lancer la détection. Dans ce cas, nous utilisons différents nombre d'\textit{executors}. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
+Le Tableau \ref{instances-types-description} reprend les caractéristiques des instances Amazon EC2 utilisées durant nos tests. Pour chaque instance, nous avons le nombre de c\oe{}urs virtuels YARN et la taille de la mémoire.
+\begin{table}[H]
+	\centering
+\begin{tabular}{|c|c|c|}
+	\hline 
+\textbf{Modèle} &	\textbf{vCores} &\textbf{	Mém. (GiB)} \\ 
+	\hline 
+m4.large&	$ 4 $&	$ 8 $ \\
+	\hline 
+m3.xlarge&	$ 8 $&	$ 15 $\\
+\hline 
+m4.2xlarge&	$ 16 $&	$ 32 $ \\ 
+	\hline 
+\end{tabular}
+\caption{Description de quelques instances d'Amazon EC2}
+\label{instances-types-description}
+\end{table} 
+\paragraph{Variant la taille du cluster}~
+
+
+Le Tableau \ref{clusters-description} décrit les clusters créés au sein d'AWS EMR.  Chaque cluster reprend l'ID du cluster, le nombre d'instances formant le cluster; un \textit{driver} et  plusieurs ou aucun \textit{executor}, le type de l'instance et enfin le temps total de l'analyse. Le temps de l'analyse est calculé de la même façon  que le mode local. 
+
 
 
 \begin{table}[H]
@@ -448,55 +484,92 @@ C6	& 5 & (m4.large, m4.large)&  212\\
 }
 \caption{}
 \label{clusters-description}
-
 \end{table}
-
-
+De même que le mode local, on peut paramétrer le cluster avant  la soumission de l'application Spark. Etant donné que le cluster créé est destiné principalement au Spark, nous avons configuré le cluster pour utiliser toutes les ressources disponibles de mémoire, et ce à travers la propriété \textit{maximizeResourceAllocation} (voir le Listing \ref{configsparkemr}).
+\begin{lstlisting}[language=json, basicstyle=\small, label= configsparkemr, caption = Exemple de fichier de configuration d'un cluster Amazon EMR]
+[
+{"Classification": "spark","Properties": {"maximizeResourceAllocation": "true"} },
+{"Classification": "yarn-site", "Properties": {"yarn.nodemanager.vmem-check-enabled": "false"}}
+]
+\end{lstlisting}
 
 \subparagraph{Description de l'ensemble de données}
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|}
-		\hline 
-		Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
-		\hline 
-	\end{tabular} 
-	\caption{text}
-	\label{key}
-\end{table}
+%\begin{table}[H]
+%	\centering
+%	\begin{tabular}{|c|c|c|c|c|c|}
+%		\hline 
+%		Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
+%		\hline 
+%	\end{tabular} 
+%	\caption{text}
+%	\label{key}
+%\end{table}
 
-Où x4.large a les caractéristiques suivantes : (vCPU : 2, Mém. (GiB) : 8, Stockage : EBS uniquement, Bande passante dédiée à EBS (Mbit/s) : 450, Performances réseau : Modéré).
+%Où x4.large a les caractéristiques suivantes : (vCPU : 2, Mém. (GiB) : 8, Stockage : EBS uniquement, Bande passante dédiée à EBS (Mbit/s) : 450, Performances réseau : Modéré).
 
-\begin{comment}
-DelayAnalysis-one-instance : C1
-\end{comment}
+%\begin{comment}
+%DelayAnalysis-one-instance : C1
+%\end{comment}
 
 %C1%https://aws-logs-847444427255-eu-west-1.s3-eu-west-1.amazonaws.com/elasticmapreduce/j-2YU5Q88TKMGBK/steps/s-H0VT3FD9TJLO/stderr.gz?
-\paragraph{Variant la taille de données}
+\paragraph{Variant la taille de données}~
 
-\subparagraph{Description de l'ensemble de données}
+Nous avons choisi un cluster de $ 5 $ machines afin d'évaluer plusieurs ensembles de données. Ces ensembles sont décrits dans le Tableau \ref{variantlesdonnes-fixedcluster}.
+\subparagraph{Description de l'ensemble de données}~
+
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|c|c|c|c|c|c|}
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline 
-		Id	& Taille  & Nb. de traceroutes & Nb.liens analysé & Id. msm& période \\ 
+		\textbf{Id}	& \textbf{Taille (Octets)}  & \textbf{Nb. de traceroutes} & \textbf{Nb.liens } &\textbf{Id. msm}& \textbf{période}&\textbf{Temps total (s)} \\ 
 		\hline 
-		&  &  &  & & \\ 
+	$ S1 $	& $ 1,263,894,997 $ & $ 497,810 $ &  & $ 5008 $ & 01/05/2019 - 01/05/2019 &$ 221 $ \\ 
 		\hline 
-		&  &  &  & & \\ 
+	$ S2 $	&  &  &  & $ 5008 $&01/05/2019 - 02/05/2019&  $ 415 $\\ 
 		\hline 
-		&  &  &  & & \\ 
-		\hline 
+	$ S3 $	& $ 3,792,532,958 $  & $ 1,492,196 $ &  & $ 5008 $ & 01/05/2019 - 03/05/2019 & --\\ 
+
+\hline 
 	\end{tabular} 
+}
 \caption{text}
-\label{key}
+\label{variantlesdonnes-fixedcluster}
 \end{table}
 
 
+\paragraph{Notes sur l'utilisation d'un cluster Amazon EMR}
+
+Après avoir créé quelques clusters EMR et les évaluer sur quelques ensembles de données. Nous présentons quelques défis à soumettre. 
+
+Le premier défi est relatif au  choix des modèles des instances. Préférer un modèle par rapport à un autre dépend des coûts, le type des traitements à appliquer sur les données et le temps qu'on admet pour avoir les résultats finaux.
+
+La configuration du cluster est un élément clé afin d'éviter les échecs inattendus d'une analyse en cours. Cette configuration doit prendre en compte les ressources du cluster  et  la taille mémoire à allouer pour le \textit{driver}, les \textit{executors} et autres.
+Enfin, le cluster créé doit évoluer avec les nouvelles données à analyser comme le cas de l'ensemble $ S3 $. C'est pourquoi la configuration de Spark doit être personnalisée pour répondre au besoin de l'application.
+
+
+%https://www.knowru.com/blog/first-3-frustrations-you-will-encounter-when-migrating-spark-applications-aws-emr/
+%https://dzone.com/articles/introducing-the-data-vault-alliance
+
+\section{Récapitulatif}
+
+Nous avons eu l'occasion d'expérimenter plusieurs technologies Big Data destinées au traitement des données massives. Ce qu'on peut apprendre d'après la pratique, c'est qu'on ne peut comparer ces technologies car elles utilisent des approches différentes et pourtant elles partagent le même objectif; analyser les données massives.
+
+Dans la présente  discussion, nous supposons que la détection des anomalies ne se limite pas à un ensemble de données, ainsi, l'implémentation de l'outil de détection doit prendre en considération la réception de nouvelles données dans le future.
 
 
 
+	%\item facilité de la mise en route et de la configuration de l'environnement de la technologie;
+%\item flexibilité liée à la définition du  schéma de  données présentes dans les fichiers;
+%\item temps d'exécution nécessaire pour fournir les résultats finaux d'une analyse de traceroutes;
+%\item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
+%mongodb
+
+%athena
+%La mise en place d'une application basée sur le service Amazon Athena nécessite le stockage de données  
+
+%apache spark
 
 
 \section{Conclusion}

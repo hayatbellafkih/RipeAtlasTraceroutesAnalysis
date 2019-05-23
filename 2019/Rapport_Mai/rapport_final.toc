@@ -129,7 +129,7 @@
 \contentsline {subparagraph}{Spark driver et executor}{71}{section*.101}
 \contentsline {subparagraph}{Spark Unified Stack}{71}{section*.102}
 \contentsline {subparagraph}{Spark Core}{71}{section*.103}
-\contentsline {paragraph}{Resilient Distributed Datasets}{72}{section*.105}
+\contentsline {paragraph}{Resilient Distributed Datasets}{71}{section*.105}
 \contentsline {paragraph}{A propos lazy evaluation}{72}{section*.106}
 \contentsline {paragraph}{Les APIs de Spark}{73}{section*.108}
 \contentsline {paragraph}{Présentation de Scala}{73}{section*.109}
@@ -199,18 +199,20 @@
 \contentsline {paragraph}{Variant le mode local : local vs local[N]}{105}{section*.159}
 \contentsline {paragraph}{Notes concernant le mode local}{106}{section*.160}
 \contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{106}{subsection.5.8.2}
-\contentsline {paragraph}{Variant la taille du cluster}{106}{section*.161}
-\contentsline {subparagraph}{Description des clusters}{106}{section*.162}
-\contentsline {subparagraph}{Description de l'ensemble de données}{106}{table.caption.165}
-\contentsline {paragraph}{Variant la taille de données}{106}{section*.166}
+\contentsline {paragraph}{Création d'un cluster EMR}{106}{section*.161}
+\contentsline {paragraph}{Variant la taille du cluster}{107}{section*.163}
+\contentsline {subparagraph}{Description de l'ensemble de données}{107}{section*.165}
+\contentsline {paragraph}{Variant la taille de données}{107}{section*.166}
 \contentsline {subparagraph}{Description de l'ensemble de données}{107}{table.caption.168}
-\contentsline {section}{\numberline {V.9}Conclusion}{107}{section.5.9}
-\contentsline {section}{\numberline {V.10}Récapitulatif}{108}{section.5.10}
-\contentsline {chapter}{\numberline {A}Amazon Athena }{111}{appendix.A}
-\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{111}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{112}{section.A.2}
-\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{112}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{112}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{113}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{115}{appendix.B}
-\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{117}{appendix.C}
+\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{108}{section*.169}
+\contentsline {section}{\numberline {V.9}Récapitulatif}{108}{section.5.9}
+\contentsline {section}{\numberline {V.10}Conclusion}{108}{section.5.10}
+\contentsline {section}{\numberline {V.11}Récapitulatif}{109}{section.5.11}
+\contentsline {chapter}{\numberline {A}Amazon Athena }{112}{appendix.A}
+\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{112}{section.A.1}
+\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{113}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{113}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{113}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{114}{subsection.A.2.3}
+\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{116}{appendix.B}
+\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{118}{appendix.C}

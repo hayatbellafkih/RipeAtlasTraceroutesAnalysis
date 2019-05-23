@@ -17,21 +17,21 @@ A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
 Database file #1: references.bib.bib
-You're missing a field part---line 261 of file references.bib.bib
+You're missing a field part---line 287 of file references.bib.bib
  :   year         = 
  :                  ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 935 of file references.bib.bib
+I was expecting a `,' or a `}'---line 961 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 948 of file references.bib.bib
+I was expecting a `,' or a `}'---line 974 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 960 of file references.bib.bib
+I was expecting a `,' or a `}'---line 986 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
@@ -42,52 +42,51 @@ Warning--I didn't find a database entry for "DBLP:conf/infocom/2015"
 Warning--to sort, need author or key in ripe-atlas-data
 Warning--to sort, need author or key in LantronixXPortPro
 Warning--to sort, need author or key in create-UDM
-Warning--to sort, need author or key in probes-data
-Warning--to sort, need author or key in bugs-ripe-atlas
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
 Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
-You've used 42 entries,
+Warning--empty journal in article-comparaison-spark-hadoop
+You've used 41 entries,
             2253 wiz_defined-function locations,
-            772 strings with 11427 characters,
-and the built_in function-call counts, 10839 in all, are:
-= -- 1045
-> -- 351
+            767 strings with 11316 characters,
+and the built_in function-call counts, 10699 in all, are:
+= -- 1029
+> -- 361
 < -- 0
-+ -- 153
-- -- 110
-* -- 569
-:= -- 1660
-add.period$ -- 142
-call.type$ -- 42
-change.case$ -- 177
++ -- 156
+- -- 114
+* -- 576
+:= -- 1662
+add.period$ -- 137
+call.type$ -- 41
+change.case$ -- 176
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 467
-empty$ -- 1079
-format.name$ -- 110
-if$ -- 2415
+cite$ -- 50
+duplicate$ -- 462
+empty$ -- 1042
+format.name$ -- 114
+if$ -- 2365
 int.to.chr$ -- 0
-int.to.str$ -- 42
-missing$ -- 23
-newline$ -- 229
-num.names$ -- 68
-pop$ -- 350
+int.to.str$ -- 41
+missing$ -- 25
+newline$ -- 222
+num.names$ -- 70
+pop$ -- 328
 preamble$ -- 1
 purify$ -- 139
 quote$ -- 0
-skip$ -- 318
+skip$ -- 314
 stack$ -- 0
-substring$ -- 424
-swap$ -- 131
+substring$ -- 419
+swap$ -- 130
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 156
-warning$ -- 10
-while$ -- 86
-width$ -- 44
-write$ -- 446
+type$ -- 152
+warning$ -- 9
+while$ -- 88
+width$ -- 43
+write$ -- 433
 (There were 5 error messages)

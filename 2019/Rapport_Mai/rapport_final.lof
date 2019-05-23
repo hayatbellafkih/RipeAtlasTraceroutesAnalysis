@@ -38,7 +38,7 @@
 \contentsline {figure}{\numberline {V.4}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{104}{figure.caption.156}
 \contentsline {figure}{\numberline {V.5}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{105}{figure.caption.158}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{113}{figure.caption.170}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{114}{figure.caption.171}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces L'organisation des traceroutes dans un compartiment Amazon S3\relax }}{114}{figure.caption.171}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{115}{figure.caption.172}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

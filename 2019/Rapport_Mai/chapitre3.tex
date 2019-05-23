@@ -367,7 +367,9 @@ Hadoop est un écosystème destiné au Big Data et il regroupe plusieurs projets
 \textbf{Hadoop Yarn (Yet Another Resource Negotiator)} est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  Yarn  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
 
 \textbf{Hadoop MapReduce}  représente la couche destinée aux traitement en parallèle  dans l'écosystème Hadoop. En particulier, ce sont les traitement qui concernent des volumes de données importants.
-MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. Hadoop MapReduce est considéré comme étant moins rapide en le comparant au framework Apache Spark présenté dans la section \ref{apache-spark}.
+MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. 
+
+ %Apache Spark est présenté dans la section \ref{apache-spark}.
 
 
 
@@ -453,6 +455,12 @@ Input data sont les données à analyser en utilisant Spark. Ces données sont r
 Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois qu'une partition est localisée sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
 
 En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
+
+
+%Resilient Distributed Dataset (RDD) allows Spark to transparently store data on the memory, and send to disk only what’s important or needed. As a result, a lot of time that is spent on the disc read and write is saved.
+
+%Le RDD (Resilient Distributed Dataset) permet à Spark de stocker des données de manière transparente dans la mémoire et d’envoyer sur disque uniquement ce qui est important ou nécessaire. En conséquence, une grande partie du temps consacré à la lecture et à l'écriture du disque est enregistrée.[!]
+
 \paragraph{A propos lazy evaluation} \label{lazy-evaluation}
 Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrés dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
 
@@ -494,24 +502,17 @@ On distingue deux modes d'exécution d'une application écrite en Spark : cluste
  
 Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{Source : \url{https://aws.amazon.com/fr/emr/}, consultée le $08/05/2019$}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
 
+Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins rapide en le comparant au framework Apache Spark.  Une étude \cite{article-comparaison-spark-hadoop} comparative entre Hadoop MapReduce et Spark a montré que Spark est $ 3 $ à $ 4 $ fois rapide que Hadoop MapReduce.
 
+ Ceci est dû au fait que Spark traite les données suivant l'approche in-memory. Tandis que  les traitements basés sur l'écosystème Hadoop sont basés sur des lectures/écritures sur le disque.  
+%http://csjournals.com/IJCSC/PDF7-2/13.%20JP.pdf
 \subsection{Amazon Elastic MapReduce}
 
 Amazon Elastic MapReduce (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
 Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{Source : \url{https://aws.amazon.com/ec2/}, consultée le $14/05/2019$.}.
-Il existe plusieurs variantes d'instances EC2. Elles se varient suivant leurs caractéristiques techniques comme la RAM, le nombre de CPUs, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques et de la région où se trouvent ces instances. Au moment de la création du cluster EMR. La création d'un cluster EMR destiné à une application Spark nécessite de  :
-\begin{itemize}
-	\item choisir le nom du cluster;
-	\item le nombre des n\oe{}uds (instances EC2) dans le cluster;
-	\item les caractéristiques techniques des n\oe{}uds du cluster;
-	\item la classe représentant le driver;
-	\item transférer l'application sous format jar vers un compartiment Amazon S3;
-	\item transférer les données à analyser, par l'application Spark, vers un compartiment Amazon S3;
-	\item spécifier les paramètres d'entrée de l'application.
-\end{itemize}
-
-Avec Amazon EMR, il est possible de lancer une analyse sur le cluster et choisir l'action à appliquer à la fin de cette analyse, par exemple arrêter le cluster. Les coûts appliqués suite à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{Source : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
-
+Il existe plusieurs variantes d'instances EC2. Les instances est conçues pour répondre 
+aux besoins classés par AWS dans les catégories suivantes : usage général, calcul optimisé, calcul accéléré et stockage optimisé.
+Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Au moment de la création du cluster EMR. 
 
 
 \section{Conclusion}
