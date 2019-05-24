@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  23 MAY 2019 03:57
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  24 MAY 2019 03:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1759,18 +1759,25 @@ File: illustrations/global_view_rdd.png Graphic file (type bmp)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [72]
-Underfull \hbox (badness 2846) in paragraph at lines 495--495
+Underfull \hbox (badness 2846) in paragraph at lines 501--501
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / hadoop . apa
 che . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 495--495
+Underfull \hbox (badness 10000) in paragraph at lines 501--501
 [][][]\T1/ptm/m/n/10 .[][][][]$\T1/pcr/m/n/10 https : / / spark . apache . org 
 / docs / latest / submitting -[] applications . html #
  []
 
-[73]) [74]
+[73]
+Underfull \hbox (badness 6526) in paragraph at lines 524--524
+[][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / calculator .
+ s3 . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée 
+le
+ []
+
+) [74]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
@@ -1863,35 +1870,34 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [104]
 File: illustrations/variant_driver_memory.png Graphic file (type bmp)
 <illustrations/variant_driver_memory.png>
- [105]
-Underfull \hbox (badness 10000) in paragraph at lines 432--433
-
+ [105] [106] [107]
+Underfull \hbox (badness 10000) in paragraph at lines 568--568
+[][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / aws . amazon
+ . com / fr / premiumsupport / knowledge -[] center / emr -[]
  []
 
+File: illustrations/spark-executoronyarn.png Graphic file (type bmp)
+<illustrations/spark-executoronyarn.png>
 
-Underfull \hbox (badness 6526) in paragraph at lines 437--437
-[][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / calculator .
- s3 . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée 
-le
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[106] [107]) [108]
+) [108] [109]
 \openout2 = `lecons-apprises.aux'.
 
- (./lecons-apprises.tex) [109
+ (./lecons-apprises.tex) [110
 
 
 ]
 \openout2 = `Conclusion_new.aux'.
 
- (./Conclusion_new.tex)
-[110
+ (./Conclusion_new.tex) [111
 
 
 ]
 \openout2 = `conclusion.aux'.
 
- (./conclusion.tex) [111
+
+(./conclusion.tex) [112
 
 
 ]
@@ -1899,46 +1905,46 @@ le
 
  (./annexes.tex
 Annexe A.
-[112
+[113
 
 
 ]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [113]
+ [114]
 File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena.png>
 
 Underfull \vbox (badness 5741) has occurred while \output is active []
 
- [114])
-[115]
+ [115])
+[116]
 \openout2 = `Un_enregistrement_traceroute.aux'.
 
  (./Un_enregistrement_traceroute.tex
 Annexe B.
-[116
+[117
 
 
-]) [117]
+]) [118]
 \openout2 = `table-theoreme21-formattex_annexe.aux'.
 
  (./table-theoreme21-formattex_annexe.tex
 Annexe C.
-) [118
+) [119
 
 
-] [119] (./rapport_final.lof
+] [120] (./rapport_final.lof
 Underfull \vbox (badness 3343) has occurred while \output is active []
 
- [120
+ [121
 
 ])
 \tf@lof=\write10
 \openout10 = `rapport_final.lof'.
 
 
-[121] (./rapport_final.lot
+[122] (./rapport_final.lot
 Overfull \hbox (5.33357pt too wide) in paragraph at lines 10--10
  [][] [][][]\T1/ptm/m/n/12 Exemple de cal-cul et mise à jour de la borne in-fé-
 rieure de l'in-ter-valle de confiance |
@@ -1948,156 +1954,162 @@ rieure de l'in-ter-valle de confiance |
 \tf@lot=\write11
 \openout11 = `rapport_final.lot'.
 
- [122] (./rapport_final.lol [123])
+ [123] (./rapport_final.lol [124])
 \tf@lol=\write12
 \openout12 = `rapport_final.lol'.
 
- [124] (./rapport_final.bbl
-Underfull \hbox (badness 4441) in paragraph at lines 39--45
+ [125] (./rapport_final.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 34--39
+\T1/pcr/m/n/12 net / AmazonWebServices / best -[] practices -[] for -[] using -
+[] apache -[]
+ []
+
+
+Underfull \hbox (badness 4441) in paragraph at lines 46--52
 []\T1/ptm/m/sc/12 Aben, E.  \T1/ptm/m/n/12 How RIPE At-las Hel-ped Wi-ki-pe-dia
  Users.  URL : [][]$\T1/pcr/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--45
+Underfull \hbox (badness 10000) in paragraph at lines 46--52
 \T1/pcr/m/n/12 / / labs . ripe . net / Members / emileaben / how -[] ripe -[] a
 tlas -[] helped -[]
  []
 
 
-Underfull \hbox (badness 1033) in paragraph at lines 47--53
+Underfull \hbox (badness 1033) in paragraph at lines 54--60
 []\T1/ptm/m/sc/12 Aben, E.  \T1/ptm/m/n/12 Loo-king at France-IX with RIPE At-l
 as and RIS.  URL : [][]$\T1/pcr/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--53
+Underfull \hbox (badness 10000) in paragraph at lines 54--60
 \T1/pcr/m/n/12 / / labs . ripe . net / Members / emileaben / looking -[] at -[]
  france -[] ix -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--61
+Underfull \hbox (badness 10000) in paragraph at lines 62--68
 \T1/pcr/m/n/12 ripe . net / Members / emileaben / measuring -[] ixps -[] with -
 [] ripe -[] atlas$[][]\T1/ptm/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--74
+Underfull \hbox (badness 10000) in paragraph at lines 76--81
 \T1/pcr/m/n/12 / / www . strozzi . it / cgi -[] bin / CSA / tw7 / I / en _ US /
  nosql / Home % 20Page$[][]\T1/ptm/m/n/12 .
  []
 
 
-Underfull \hbox (badness 1226) in paragraph at lines 76--81
+Underfull \hbox (badness 1226) in paragraph at lines 83--88
 []\T1/ptm/m/sc/12 Donato, V. D.  \T1/ptm/m/n/12 Tra-ce-route Consis-tency Check
 .  URL : [][]$\T1/pcr/m/n/12 https : / / github .
  []
 
 
-Underfull \hbox (badness 4328) in paragraph at lines 76--81
+Underfull \hbox (badness 4328) in paragraph at lines 83--88
 \T1/pcr/m/n/12 com / vdidonato / Traceroute -[] consistency -[] check$[][]\T1/p
 tm/m/n/12 , 2015.  (consulté le
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--87
+[126]
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--87
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
 \T1/pcr/m/n/12 github . com / InternetHealthReport / tartiflette / tree / maste
 r /
  []
 
-[125]
-Underfull \hbox (badness 1924) in paragraph at lines 101--107
+
+Underfull \hbox (badness 1924) in paragraph at lines 108--114
 []\T1/ptm/m/sc/12 Gasmi, S.  \T1/ptm/m/n/12 Vi-sua-li-sing RIPE At-las An-chor 
 Mea-su-re-ments.  URL : [][]$\T1/pcr/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--107
+Underfull \hbox (badness 10000) in paragraph at lines 108--114
 \T1/pcr/m/n/12 / / labs . ripe . net / Members / salim _ gasmi / visualising -[
 ] ripe -[] atlas -[]
  []
 
 
-Underfull \hbox (badness 1331) in paragraph at lines 115--121
+Underfull \hbox (badness 1331) in paragraph at lines 122--128
 []\T1/ptm/m/sc/12 Herold, J.  \T1/ptm/m/n/12 Bgp + tra-ce-route pre-sen-ta-tion
 .  URL : [][]$\T1/pcr/m/n/12 https : / / labs . ripe .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--121
+Underfull \hbox (badness 10000) in paragraph at lines 122--128
 \T1/pcr/m/n/12 net / Members / becha / ripe -[] atlas -[] hackathon -[] present
 ations / bgp -[]
  []
 
 Missing character: There is no – in font ptmr8t!
 
-Underfull \hbox (badness 3343) in paragraph at lines 154--160
+Underfull \hbox (badness 3343) in paragraph at lines 161--167
 []\T1/ptm/m/sc/12 Kisteleki, R.  \T1/ptm/m/n/12 The AMS-IX Ou-tage as Seen with
  RIPE At-las.  URL :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--160
+Underfull \hbox (badness 10000) in paragraph at lines 161--167
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / kistel / the -[] 
 ams -[] ix -[] outage -[]
  []
 
 
-Underfull \hbox (badness 6428) in paragraph at lines 162--168
+Underfull \hbox (badness 6428) in paragraph at lines 169--175
 []\T1/ptm/m/sc/12 Kisteleki, R.  \T1/ptm/m/n/12 RIPE At-las Ar-chi-tec-ture - h
 ow we ma-nage our probes.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 162--168
+Underfull \hbox (badness 10000) in paragraph at lines 169--175
 \T1/ptm/m/n/12 URL : [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Member
 s / kistel / ripe -[] atlas -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--176
+Underfull \hbox (badness 10000) in paragraph at lines 177--183
 \T1/pcr/m/n/12 net / Members / kistel / ripe -[] atlas -[] probes -[] as -[] io
 t -[] devices$[][]\T1/ptm/m/n/12 , 2017.
  []
 
-[126]
-Underfull \hbox (badness 1895) in paragraph at lines 210--216
+[127]
+Underfull \hbox (badness 1895) in paragraph at lines 217--223
 []\T1/ptm/m/sc/12 Roderick, F.  \T1/ptm/m/n/12 On the Di-ver-sity of In-ter-do-
 main Rou-ting in Africa.  URL :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--216
+Underfull \hbox (badness 10000) in paragraph at lines 217--223
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / fanou _ roderick 
 / on -[] the -[]
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 210--216
+Underfull \hbox (badness 3758) in paragraph at lines 217--223
 \T1/pcr/m/n/12 diversity -[] of -[] interdomain -[] routing -[] in -[] africa$[
 ][]\T1/ptm/m/n/12 , 2015.  (consulté le
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--253
+Underfull \hbox (badness 10000) in paragraph at lines 254--260
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / cristian _ varas 
 / a -[] practical -[]
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 247--253
+Underfull \hbox (badness 3758) in paragraph at lines 254--260
 \T1/pcr/m/n/12 comparison -[] between -[] ripe -[] atlas -[] and -[] probeapi$[
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-) [127]
+) [128]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./rapport_final.aux (./resume.aux) (./Remerciéments.aux)
@@ -2115,12 +2127,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32647 strings out of 493007
- 570894 string characters out of 6136719
- 1139059 words of memory out of 5000000
- 35795 multiletter control sequences out of 15000+600000
+ 32649 strings out of 493007
+ 571102 string characters out of 6136719
+ 1139481 words of memory out of 5000000
+ 35796 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,21n,97p,1104b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on rapport_final.pdf (129 pages).
+Output written on rapport_final.pdf (130 pages).

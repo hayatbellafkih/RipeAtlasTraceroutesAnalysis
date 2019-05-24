@@ -201,18 +201,15 @@
 \contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{106}{subsection.5.8.2}
 \contentsline {paragraph}{Création d'un cluster EMR}{106}{section*.161}
 \contentsline {paragraph}{Variant la taille du cluster}{107}{section*.163}
-\contentsline {subparagraph}{Description de l'ensemble de données}{107}{section*.165}
 \contentsline {paragraph}{Variant la taille de données}{107}{section*.166}
-\contentsline {subparagraph}{Description de l'ensemble de données}{107}{table.caption.168}
-\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{108}{section*.169}
-\contentsline {section}{\numberline {V.9}Récapitulatif}{108}{section.5.9}
-\contentsline {section}{\numberline {V.10}Conclusion}{108}{section.5.10}
-\contentsline {section}{\numberline {V.11}Récapitulatif}{109}{section.5.11}
-\contentsline {chapter}{\numberline {A}Amazon Athena }{112}{appendix.A}
-\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{112}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{113}{section.A.2}
-\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{113}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{113}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{114}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{116}{appendix.B}
-\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{118}{appendix.C}
+\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{108}{section*.168}
+\contentsline {section}{\numberline {V.9}Conclusion}{108}{section.5.9}
+\contentsline {section}{\numberline {V.10}Récapitulatif}{110}{section.5.10}
+\contentsline {chapter}{\numberline {A}Amazon Athena }{113}{appendix.A}
+\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{113}{section.A.1}
+\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{114}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{114}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{114}{subsection.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{115}{subsection.A.2.3}
+\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{117}{appendix.B}
+\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{119}{appendix.C}

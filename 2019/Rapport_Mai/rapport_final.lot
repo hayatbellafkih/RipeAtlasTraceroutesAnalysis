@@ -16,9 +16,10 @@
 \contentsline {table}{\numberline {V.2}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{101}{table.caption.150}
 \contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{103}{table.caption.155}
 \contentsline {table}{\numberline {V.4}{\ignorespaces Description de quelques instances d'Amazon EC2\relax }}{107}{table.caption.162}
-\contentsline {table}{\numberline {V.5}{\ignorespaces \relax }}{107}{table.caption.164}
-\contentsline {table}{\numberline {V.6}{\ignorespaces text\relax }}{107}{table.caption.168}
+\contentsline {table}{\numberline {V.5}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{107}{table.caption.164}
+\contentsline {table}{\numberline {V.6}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{107}{table.caption.165}
+\contentsline {table}{\numberline {V.7}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{108}{table.caption.167}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{119}{table.caption.173}
+\contentsline {table}{\numberline {C.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{120}{table.caption.173}

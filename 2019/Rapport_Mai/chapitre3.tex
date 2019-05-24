@@ -506,13 +506,22 @@ Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins 
 
  Ceci est dû au fait que Spark traite les données suivant l'approche in-memory. Tandis que  les traitements basés sur l'écosystème Hadoop sont basés sur des lectures/écritures sur le disque.  
 %http://csjournals.com/IJCSC/PDF7-2/13.%20JP.pdf
-\subsection{Amazon Elastic MapReduce}
+\subsection{Amazon Elastic MapReduce} \label{emr-aws-presentation}
 
-Amazon Elastic MapReduce (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
+Amazon Elastic MapReduce\footnote{URL : \url{https://docs.aws.amazon.com/fr_fr/emr/}, onsulté le $10/05/2019$.} (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
 Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{Source : \url{https://aws.amazon.com/ec2/}, consultée le $14/05/2019$.}.
-Il existe plusieurs variantes d'instances EC2. Les instances est conçues pour répondre 
+Il existe plusieurs variantes d'instances EC2. Les instances sont conçues pour répondre 
 aux besoins classés par AWS dans les catégories suivantes : usage général, calcul optimisé, calcul accéléré et stockage optimisé.
-Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Au moment de la création du cluster EMR. 
+Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. 
+
+Par défaut, Amazon EMR utilise YARN pour gérer les ressources. On distingue trois types de n\oe{}ds dans Amazon EMR. 
+\begin{itemize}
+	\item N\oe{}ud principal (\textit{Master node}) : il gère le cluster.
+	\item N\oe{}ud de noyau (\textit{Core node}): exécute les tâches et stocke les données dans le système de fichier distribué Hadoop HDFS sur le cluster.
+	\item N\oe{}ud de  tâche (\textit{Task node}) : il exécute les tâches et ne stocke pas les données dans HDFS. Les n\oe{}uds de tâches sont facultatifs.
+\end{itemize}
+
+Les coûts appliqués  à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{Source : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
 
 
 \section{Conclusion}

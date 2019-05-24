@@ -17,21 +17,21 @@ A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
 Database file #1: references.bib.bib
-You're missing a field part---line 287 of file references.bib.bib
+You're missing a field part---line 296 of file references.bib.bib
  :   year         = 
  :                  ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 961 of file references.bib.bib
+I was expecting a `,' or a `}'---line 970 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 974 of file references.bib.bib
+I was expecting a `,' or a `}'---line 983 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 986 of file references.bib.bib
+I was expecting a `,' or a `}'---line 995 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
@@ -45,48 +45,49 @@ Warning--to sort, need author or key in create-UDM
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in CAIDA
 Warning--to sort, need author or key in SamKnows
+Warning--to sort, need author or key in best-practices-emr
 Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
 Warning--empty journal in article-comparaison-spark-hadoop
-You've used 41 entries,
+You've used 42 entries,
             2253 wiz_defined-function locations,
-            767 strings with 11316 characters,
-and the built_in function-call counts, 10699 in all, are:
-= -- 1029
-> -- 361
+            771 strings with 11515 characters,
+and the built_in function-call counts, 10871 in all, are:
+= -- 1047
+> -- 362
 < -- 0
-+ -- 156
++ -- 157
 - -- 114
-* -- 576
-:= -- 1662
-add.period$ -- 137
-call.type$ -- 41
-change.case$ -- 176
+* -- 582
+:= -- 1682
+add.period$ -- 140
+call.type$ -- 42
+change.case$ -- 179
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 462
-empty$ -- 1042
+cite$ -- 52
+duplicate$ -- 469
+empty$ -- 1065
 format.name$ -- 114
-if$ -- 2365
+if$ -- 2408
 int.to.chr$ -- 0
-int.to.str$ -- 41
+int.to.str$ -- 42
 missing$ -- 25
-newline$ -- 222
+newline$ -- 227
 num.names$ -- 70
-pop$ -- 328
+pop$ -- 336
 preamble$ -- 1
-purify$ -- 139
+purify$ -- 141
 quote$ -- 0
-skip$ -- 314
+skip$ -- 320
 stack$ -- 0
-substring$ -- 419
-swap$ -- 130
+substring$ -- 424
+swap$ -- 131
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 152
-warning$ -- 9
+type$ -- 156
+warning$ -- 10
 while$ -- 88
-width$ -- 43
-write$ -- 433
+width$ -- 44
+write$ -- 443
 (There were 5 error messages)
