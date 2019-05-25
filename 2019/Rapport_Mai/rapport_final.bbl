@@ -207,6 +207,14 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 \newblock {\em Big Data}.
 \newblock 2017.
 
+\bibitem{IDC-data}
+{\sc Reinsel, D., Gantz, J., and Rydning, J.}
+\newblock {The Digitization of the World From Edge to Core}.
+\newblock URL~:
+  \url{https://www.seagate.com/www-content/our-story/trends/files/idc-seagate-dataage-whitepaper.pdf},
+  2018.
+\newblock (consulté le $24/05/2019$).
+
 \bibitem{TTM}
 {\sc {RIPE NCC}}.
 \newblock {T}est {T}raffic {M}easurement {S}ervice ({TTM}).

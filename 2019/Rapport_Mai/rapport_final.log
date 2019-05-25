@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  24 MAY 2019 03:17
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  25 MAY 2019 03:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1695,7 +1695,7 @@ Chapitre III.
 
 
 ]
-Underfull \hbox (badness 2772) in paragraph at lines 37--37
+Underfull \hbox (badness 2772) in paragraph at lines 39--39
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / www . bernar
 dmarr . com / default . asp ? contentID = 690$[][]\T1/ptm/m/n/10 , consul-tée l
 e
@@ -1713,18 +1713,19 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 (./illustrations/document-nosql-3.tex) [59]
-File: illustrations/colomn-db-1.png Graphic file (type bmp)
-<illustrations/colomn-db-1.png>
+File: illustrations/colomn-db-2.png Graphic file (type bmp)
+<illustrations/colomn-db-2.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: illustrations/GraphDatabase_PropertyGraph.png Graphic file (type bmp)
 <illustrations/GraphDatabase_PropertyGraph.png>
+[60]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[60] [61]
+[61]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 
@@ -1736,53 +1737,58 @@ File: illustrations/ranking-db.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[62] [63] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[62] [63] [64] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 223.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 219.
 
-[64] [65]
+[65]
 File: illustrations/2-Figure1-1-map-reduce-workflow.png Graphic file (type bmp)
 
 <illustrations/2-Figure1-1-map-reduce-workflow.png>
- [66] [67] [68] [69]
+
+Underfull \vbox (badness 1281) has occurred while \output is active []
+
+ [66]
+[67] [68]
+Underfull \vbox (badness 2027) has occurred while \output is active []
+
+ [69]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
- [70]
+
+[70]
 File: illustrations/unified-stack.jpg Graphic file (type bmp)
 <illustrations/unified-stack.jpg>
- [71]
+ [71] [72]
 File: illustrations/global_view_rdd.png Graphic file (type bmp)
 <illustrations/global_view_rdd.png>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [72]
-Underfull \hbox (badness 2846) in paragraph at lines 501--501
+Underfull \hbox (badness 2846) in paragraph at lines 500--500
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / hadoop . apa
 che . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 501--501
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
 [][][]\T1/ptm/m/n/10 .[][][][]$\T1/pcr/m/n/10 https : / / spark . apache . org 
 / docs / latest / submitting -[] applications . html #
  []
 
 [73]
-Underfull \hbox (badness 6526) in paragraph at lines 524--524
+Underfull \hbox (badness 6526) in paragraph at lines 523--523
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / calculator .
  s3 . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée 
 le
  []
 
-) [74]
+[74]) [75]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
 Chapitre IV.
-[75
+[76
 
 
 ]
@@ -1791,7 +1797,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 60--60
 ellafkih / SparkSalacaTraceroutesAnalysis / blob /
  []
 
-[76]
+[77]
 Underfull \hbox (badness 2573) in paragraph at lines 90--90
 [][][]\T1/ptm/m/n/10 .[][]Voir la liste des tra-ce-routes uti-li-sés dans l'exe
 mple illus-tra-tif dis-po-nible sur Gi-tHub [][]$\T1/pcr/m/n/10 https :
@@ -1809,9 +1815,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--90
 odified . json$[][]\T1/ptm/m/n/10 , consul-tée le
  []
 
-[77]
+[78]
 Missing character: There is no   in font ptmr8t!
- [78] [79] (./illustrations/read-data-from-mongodb.tex)
+ [79] [80] (./illustrations/read-data-from-mongodb.tex)
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 227.
 
@@ -1820,57 +1826,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 235--236
 aceroutes stockés dans $\OML/cmm/m/it/12 collection$ \T1/pcr/m/n/12 et
  []
 
-[80] [81] [82] [83] [84]
+[81] [82] [83] [84] [85]
 
-LaTeX Warning: Reference `fig:link-inference' on page 85 undefined on input lin
+LaTeX Warning: Reference `fig:link-inference' on page 86 undefined on input lin
 e 475.
 
-[85] [86] [87] [88] [89]
+[86] [87] [88] [89] [90]
 Underfull \vbox (badness 1286) has occurred while \output is active []
 
- [90]
-[91] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [91]
+[92] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) [92] [93])
-[94]
+) [93] [94])
+[95]
 \openout2 = `chapitre5.aux'.
 
  (./chapitre5.tex
 Chapitre V.
-[95
+[96
 
 
-] [96]
+] [97]
 File: illustrations/mongoDBtiming_0.png Graphic file (type bmp)
 <illustrations/mongoDBtiming_0.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[97]
+[98]
 File: illustrations/glue_crawler.png Graphic file (type bmp)
 <illustrations/glue_crawler.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[98] [99]
+[99] [100]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [100] [101] [102]
+ [101] [102] [103]
 File: illustrations/temps-avec-aws_1.png Graphic file (type bmp)
 <illustrations/temps-avec-aws_1.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [103]
-[104]
+ [104]
+[105]
 File: illustrations/variant_driver_memory.png Graphic file (type bmp)
 <illustrations/variant_driver_memory.png>
- [105] [106] [107]
+ [106] [107] [108]
 Underfull \hbox (badness 10000) in paragraph at lines 568--568
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / aws . amazon
  . com / fr / premiumsupport / knowledge -[] center / emr -[]
@@ -1881,23 +1887,23 @@ File: illustrations/spark-executoronyarn.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [108] [109]
+) [109] [110]
 \openout2 = `lecons-apprises.aux'.
 
- (./lecons-apprises.tex) [110
+ (./lecons-apprises.tex) [111
 
 
 ]
 \openout2 = `Conclusion_new.aux'.
 
- (./Conclusion_new.tex) [111
+ (./Conclusion_new.tex) [112
 
 
 ]
 \openout2 = `conclusion.aux'.
 
 
-(./conclusion.tex) [112
+(./conclusion.tex) [113
 
 
 ]
@@ -1905,46 +1911,46 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
  (./annexes.tex
 Annexe A.
-[113
+[114
 
 
 ]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
- [114]
+ [115]
 File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena.png>
 
 Underfull \vbox (badness 5741) has occurred while \output is active []
 
- [115])
-[116]
+ [116])
+[117]
 \openout2 = `Un_enregistrement_traceroute.aux'.
 
  (./Un_enregistrement_traceroute.tex
 Annexe B.
-[117
+[118
 
 
-]) [118]
+]) [119]
 \openout2 = `table-theoreme21-formattex_annexe.aux'.
 
  (./table-theoreme21-formattex_annexe.tex
 Annexe C.
-) [119
+) [120
 
 
-] [120] (./rapport_final.lof
+] [121] (./rapport_final.lof
 Underfull \vbox (badness 3343) has occurred while \output is active []
 
- [121
+ [122
 
 ])
 \tf@lof=\write10
 \openout10 = `rapport_final.lof'.
 
 
-[122] (./rapport_final.lot
+[123] (./rapport_final.lot
 Overfull \hbox (5.33357pt too wide) in paragraph at lines 10--10
  [][] [][][]\T1/ptm/m/n/12 Exemple de cal-cul et mise à jour de la borne in-fé-
 rieure de l'in-ter-valle de confiance |
@@ -1954,11 +1960,11 @@ rieure de l'in-ter-valle de confiance |
 \tf@lot=\write11
 \openout11 = `rapport_final.lot'.
 
- [123] (./rapport_final.lol [124])
+ [124] (./rapport_final.lol [125])
 \tf@lol=\write12
 \openout12 = `rapport_final.lol'.
 
- [125] (./rapport_final.bbl
+ [126] (./rapport_final.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 34--39
 \T1/pcr/m/n/12 net / AmazonWebServices / best -[] practices -[] for -[] using -
 [] apache -[]
@@ -2012,7 +2018,7 @@ Underfull \hbox (badness 4328) in paragraph at lines 83--88
 tm/m/n/12 , 2015.  (consulté le
  []
 
-[126]
+[127]
 Underfull \hbox (badness 10000) in paragraph at lines 90--94
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
@@ -2079,37 +2085,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--183
 t -[] devices$[][]\T1/ptm/m/n/12 , 2017.
  []
 
-[127]
-Underfull \hbox (badness 1895) in paragraph at lines 217--223
+[128]
+Underfull \hbox (badness 1895) in paragraph at lines 225--231
 []\T1/ptm/m/sc/12 Roderick, F.  \T1/ptm/m/n/12 On the Di-ver-sity of In-ter-do-
 main Rou-ting in Africa.  URL :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--223
+Underfull \hbox (badness 10000) in paragraph at lines 225--231
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / fanou _ roderick 
 / on -[] the -[]
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 217--223
+Underfull \hbox (badness 3758) in paragraph at lines 225--231
 \T1/pcr/m/n/12 diversity -[] of -[] interdomain -[] routing -[] in -[] africa$[
 ][]\T1/ptm/m/n/12 , 2015.  (consulté le
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--260
+Underfull \hbox (badness 10000) in paragraph at lines 262--268
 [][]$\T1/pcr/m/n/12 https : / / labs . ripe . net / Members / cristian _ varas 
 / a -[] practical -[]
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 254--260
+Underfull \hbox (badness 3758) in paragraph at lines 262--268
 \T1/pcr/m/n/12 comparison -[] between -[] ripe -[] atlas -[] and -[] probeapi$[
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-) [128]
+) [129]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./rapport_final.aux (./resume.aux) (./Remerciéments.aux)
@@ -2127,12 +2133,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32649 strings out of 493007
- 571102 string characters out of 6136719
- 1139481 words of memory out of 5000000
- 35796 multiletter control sequences out of 15000+600000
+ 32650 strings out of 493007
+ 571112 string characters out of 6136719
+ 1139524 words of memory out of 5000000
+ 35797 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,21n,97p,1104b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on rapport_final.pdf (130 pages).
+Output written on rapport_final.pdf (131 pages).
