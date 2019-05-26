@@ -37,21 +37,27 @@ val positives = List(1,2,3,4,5).filter(_ > 0)
 %L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
 \paragraph{Notation relatives au langage Scala}~
+Il existe plusieurs manières pour définir une fonction en Scala. Nous présentons celle utilisée dans les Listings du présent chapitre. Dans le Listing \ref{lst:generalFunction}, on crée une fonction appelée  \textit{functionName}, ayant deux paramètres : \textit{x} de type \textit{Int} et \textit{y} de type \textit{Int}, elle renvoie \textit{result} de type \textit{String}, le mot-clé \textit{return} est optionnel.  
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple d'une fonction en  Scala}, label={lst:generalFunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1,numberstyle=\scriptsize]
+def functionName(x: Type, y Int): String = {
+	// some  code that uses x and y and return result
+	return result 
+}
+\end{lstlisting} \par
 
-Nous présentons  des notations   propres au langage Scala. Ce  sont les mots clés utilisés  dans les Listings du présent chapitre. \\
-\textbf{\textit{case class}} (mot-clé): définir une  classe.\\
-\textit{\textbf{Seq}} (type): créer une séquence, équivalent à créer une liste. Par exemple Seq[String] représente le type d'une liste dont ses éléments sont de type String.  \\
-\textbf{\textit{Dataset}} (type):  est une collection distribuée de données. Elle est similaire à un RDD (voir la section \ref{rdd-presentation}) et plus récente que les RDDs. \\
-\textit{\textbf{map}} (fonction): permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoi une liste transformée. \\
-\textit{\textbf{Option}} (type) : représente une valeur optionnelle.  \\
-\textit{\textbf{groupBy}} (fonction): groupBy est une fonction utile pour regrouper les éléments d'une liste ayant une clé en commun.
-%Sa définition est : def groupBy[K](f : (A) => K) : Map[K, This] 
-\\
+Nous présentons  des notations   propres au langage Scala. Ce  sont les mots clés utilisés  dans les Listings du présent chapitre. \par
+\textbf{\textit{case class}} (mot-clé): définir une  classe.\par
+\textit{\textbf{Seq}} (type): créer une séquence, équivalent à créer une liste. Par exemple Seq[String] représente le type d'une liste dont ses éléments sont de type String. Lors du parcours d'une séquence  l'élément courant est accessible via " \_".  \par
+\textbf{\textit{Dataset}} (type):  est une collection distribuée de données. Elle est similaire à un RDD (voir la section \ref{rdd-presentation}) et plus récente que les RDDs. \par
+\textit{\textbf{map}} (fonction): permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoi une liste transformée. \par
+\textit{\textbf{Option}} (type) : représente une valeur optionnelle.  \par
+\textit{\textbf{groupBy}} (fonction):  est une fonction utilisée pour regrouper les éléments d'une liste (\textit{l\_0}) ayant une clé en commun (\textit{key}). Cette fonction renvoie une liste de tuples. Chaque tuple (\textit{tup})  contient deux éléments. Le premier représente la clé (\textit{key})  du groupement, son contenu est accessible via \textit{tup.\_1}. Le deuxième élément est une liste d'éléments de \textit{l\_0} ayant la même clé, son contenu est accessible via \textit{tup.\_2}.\par
 \textbf{\textit{List}} (type): créer une liste d'un type donné. La liste \textit{l\_1} de deux chaînes de caractères est créée comme suit:
 \begin{lstlisting}[language=scala,firstnumber=1,label={lst:case-class-hop}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 l_1: List[Int] = List("aa", "bb")
-\end{lstlisting} 
+\end{lstlisting} \par
 \noindent \textbf{\textit{filter}} (fonction): cette fonction permet de filtrer les éléments d'une collection pour créer une nouvelle collection contenant uniquement les éléments de la collection   vérifiant une condition. Prenons un  exemple : 
 \begin{lstlisting}[language=scala,firstnumber=1, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -59,7 +65,12 @@ stepnumber=1]
 val l_2 = List.range(1, 10)   
 // filter les éléments de l_2 afin de ne garder que ceux paires, evens vaut List(2, 4, 6, 8)
 val evens = l_2.filter(_ % 2 == 0)  
-\end{lstlisting}
+\end{lstlisting} \par
+
+\textit{\textbf{collect}} (fonction): c'est une fonction liée au fonctionnement de Spark plutôt qu'au Scala, précisément, elle est appelée à partir d'un RDD.    La fonction \textit{collect} ramène la totalité des données traitées par les \textit{workers} vers le driver.\par
+
+\textit{\textbf{flatten}} (fonction): la méthode \textit{flatten}  prend une liste de listes et concatène toutes les listes d'éléments de la liste principale afin de retourner une seule liste reprenant tous les éléments. 
+%Autrement dit, la fonction \textit{flatten} prend A[A[T]] et retourne A[T], T est type de données et A peut être List, Seq, etc.
 
 \section{La programmation fonctionnelle et le Big Data}
 %\subsection{Les apports de la programmation fonctionnelle}
@@ -122,7 +133,7 @@ Afin de tracer l'évolution du délai des liens, nous avons besoin des fichiers 
 Une application Spark nécessite l'ajustement de quelques paramètres, qu'il s'agisse d'une application qui tourne en mode local ou bien en mode cluster. 
  On peut ajuster ces paramètres selon trois possibilités. La première possibilité est à travers l'objet \textit{SparkConf} comme illustré dans l'exemple du Listing \ref{lst:label}, où nous donnons un nom à l'application Spark (ligne \ref{line:app-name}) et nous précisons l'URL du cluster (ligne \ref{line:app-thread}). 
 
-\begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple de configuration avec SparkConf},label={lst:label}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple de la configuration d'une application Spark via l'objet SparkConf},label={lst:label}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1,numberstyle=\scriptsize]
 //imports
 import org.apache.spark.SparkConf
@@ -132,7 +143,7 @@ val conf = new SparkConf().setAppName("Link delay analysis") |\label{line:app-na
                           .setMaster("local"),  |\label{line:app-thread}|
 \end{lstlisting}
 
-Nous pouvons passer certains paramètres au moment de la soumission de l'application au cluster.  Un exemple de ces paramètres est illustré dans le Listing \ref{lst:submit}. Enfin, quelques paramètres peuvent être lus depuis le fichier de configuration  \textit{conf/spark-defaults.conf}\footnote{Plus de détails relatifs à la configuration sont disponibles sur \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $14/04/2019$.}. 
+Nous pouvons passer certains paramètres lors de la soumission de l'application au cluster.  Un exemple de ces paramètres est illustré dans le Listing \ref{lst:submit}. Enfin, quelques paramètres peuvent être lus depuis le fichier de configuration  \textit{conf/spark-defaults.conf}\footnote{Plus de détails relatifs à la configuration sont disponibles sur l'URL  \url{https://spark.apache.org/docs/latest/configuration.html}, consulté le $14/04/2019$.}. 
 %Certains paramètres peuvent être précisés 
 
 %en ligne de commande ou bien dans le fichier de configuration \footnote{Plus de détails sont disponibles.}. 
@@ -145,16 +156,22 @@ Nous pouvons passer certains paramètres au moment de la soumission de l'applica
 
 Le point d'entrée vers les fonctionnalités de Spark se fait par la création du  \textit{SparkContext}. 
 Néanmoins, il existe d'autres points d'entrée qui sont plus spécifiques aux composantes du \textit{Spark Unified Stack}. Par exemple,  \textit{SparkSession}  est le point d'entrée vers Spark SQL, \textit{StreamingContext} est le point d'entrée vers Spark Streaming, etc.
-Dans notre cas, nous avons utilisé \textit{SparkSession} pour lire les traceroutes en tant que liste d'objets.
+Dans notre cas, nous avons utilisé \textit{SparkSession} pour lire les traceroutes en tant que liste d'objets de type Traceroute.
 
-
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Creation d'une session Spark},label={lst:SparkSession-initiation}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+val spark = SparkSession
+		.builder()
+		.config(conf)
+		.getOrCreate()
+\end{lstlisting}
 
 \paragraph{Lecture de données}~
 
-L'outil de détection proposé par R. Fontugne et al. n'exploite qu'une partie des données d'une réponse traceroute\footnote{Un exemple d'une réponse  traceroute  est donné dans l'annexe \ref{exemple-traceroute}.}.
+L'outil de détection proposé par  Fontugne et al. n'exploite qu'une partie des données d'une réponse traceroute\footnote{Un exemple d'une réponse  traceroute  est donné dans l'annexe \ref{exemple-traceroute}.}.
 En particulier, on peut utiliser Spark SQL pour  ne lire que les données qui nous intéressent, c'est un des avantages du principe du \textit{Schema-On-Read} décrit dans la section \ref{sec:schema-read-write}. 
 
-Chaque réponse traceroute est structurée dans un objet JSON dans une seule ligne. Afin de lire chaque ligne, nous avons créé la classe Traceroute, cette dernière  a pour objectif de faire l'association entre l'objet JSON  et un objet Traceroute de sorte à encapsuler les données d'un objet JSON. La classe \textit{Traceroute} reprend le nom de la destination de la requête traceroute (\textit{dst\_name}), l'adresse IP de la sonde effectuant la requête traceroute (\textit{from}), l'identifiant de cette sonde (\textit{prb\_id}), le temps de la requête (\textit{timestamp}) et enfin la liste des sauts (\textit{Seq[Hop]}). La classe Traceroute est définie en Scala comme montre le Listing \ref{lst:case-class-Traceroute}.
+Chaque réponse traceroute est structurée dans un objet JSON dans une seule ligne. Afin de lire chaque ligne, nous avons créé la classe Traceroute, cette dernière  a pour objectif de faire l'association entre l'objet JSON  et un objet Traceroute de sorte à encapsuler les données d'un objet JSON. La classe \textit{Traceroute} reprend le nom de la destination de la requête traceroute (\textit{dst\_name}), l'adresse IP de la sonde effectuant la requête traceroute (\textit{from}), l'identifiant de cette sonde (\textit{prb\_id}), le temps de la requête (\textit{timestamp}) et enfin la liste des sauts (\textit{Seq[Hop]}). La classe Traceroute est définie dans le Listing \ref{lst:case-class-Traceroute}.
 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la  classe Traceroute},label={lst:case-class-Traceroute}, basicstyle = \footnotesize,escapechar=|,numbers=left,
@@ -176,7 +193,7 @@ case class Hop(
 	hop:        Int)
 \end{lstlisting}
 
-Un signal (\textit{Signal}) est émis par  un routeur  dont l'adresse IP est \textit{from}. Le temps nécessaire à la réception du signal par la source est   \textit{rtt}. Enfin, \textit{x} est un indicateur de la validité du signal car il se peut que la sonde ne reçoive pas une réponse d'un ou de plusieurs routeurs. Si le signal est valide, \textit{x} est une chaîne vide. Dans le cas d'un signal invalide, \textit{x} vaut "*". Nous précisons qu'un signal est invalide quand la sonde ne reçoit pas une réponse après le temps \textit{tiemout}. Afin d'adapter un saut aussi dans le cas de l'absence des détails du signal, les attributs \textit{rtt}, \textit{x}  et \textit{from} sont définis comme étant optionnels.  
+Un signal (\textit{Signal}) est émis par  un routeur  dont l'adresse IP est \textit{from}. Le temps nécessaire à la réception du signal par la source (ici c'est la sonde) est   \textit{rtt}. Enfin, \textit{x} est un indicateur de la validité du signal, car il se peut que la sonde ne reçoive pas une réponse d'un ou de plusieurs routeurs. Si le signal est valide, \textit{x} est une chaîne vide et \textit{rtt} et \textit{from} sont présents et ont des valeurs. Dans le cas d'un signal invalide, \textit{x} vaut "*" et \textit{rtt} et \textit{from} sont absents. Nous précisons qu'un signal est invalide quand la sonde ne reçoit pas une réponse après le temps \textit{tiemout}. Afin d'adapter un saut aussi dans le cas de l'absence des détails du signal, les attributs \textit{rtt}, \textit{x}  et \textit{from} sont définis comme étant optionnels.  
 Un signal est modélisé par la classe Signal (voir le Listing \ref{lst:case-class-signal}). 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la  classe Signal}, label={lst:case-class-signal}, basicstyle = \footnotesize,escapechar=|,numbers=left,
@@ -187,7 +204,7 @@ case class Signal(
 	from: Option[String])
 \end{lstlisting}
 
-Nous avons défini  la classe \textit{Traceroute} qui nous permet de lire les données. Pour ce faire, nous utilisons l'objet \textit{spark} de type \textit{SparkSession} créé précédemment. En particulier, nous faisons appel à   la fonction \textit{read()} via ce dernier. Nous spécifions à \textit{read()} le schéma de lecture à travers la classe Traceroute, le chemin vers les fichiers de données (\textit{dataPath}) et comment  les données  sont structurées (\textit{json}). 
+Nous avons défini  la classe \textit{Traceroute} qui nous permet de lire les données. Pour ce faire, nous utilisons l'objet \textit{spark} de type \textit{SparkSession} créé précédemment dans le Listing \ref{lst:SparkSession-initiation}. En particulier, nous faisons appel à   la fonction \textit{read()} via \textit{spark}. Nous spécifions à \textit{read()} le schéma de lecture à travers la classe Traceroute, le chemin vers les fichiers de données (\textit{dataPath}) et comment  les données  sont structurées (\textit{json}). 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={La lecture des données traceroutes},label={lst:mapping}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -200,8 +217,8 @@ import spark.implicits._ |\label{lst:implicits}|
 
 Nous obtenons la liste des traceroutes dans la variable \textit{rawTraceroutes}. Ce dernier est un Dataset d'objets  Traceroute.
 La correspondance entre un enregistrement traceroute JSON et une instance de Traceroute se base sur les noms des attributs dans JSON.
-Nous notons que la réussite de la correspondance ne nécessite pas l'association de tous les attributs de l'objet JSON. C'est un des avantages du principe \textit{schema on read}.  Si par exemple, nous définissons des attributs dans la classe Traceroute et que ces attributs ne font pas partie des attributs de l'objet JSON, aucune erreur ne sera survenue.  
-La ligne \ref{lst:implicits} du Listing \ref{lst:mapping}  est nécessaire  pour pouvoir utiliser  l'API du Spark, précisément,  les fonctionnalités relatives DataSets et DataFrames. L'appel à la ligne \ref{lst:implicits} du Listing \ref{lst:mapping} ne peut pas être fait sans avoir une instance du \textit{SparkContext}. Dans notre cas, nous avons défini une instance de \textit{SparkSession}, et une instance  de \textit{SparkContext} est fournie, par défaut,  avec cette dernière.
+Nous notons que la réussite de la correspondance ne nécessite pas l'association de tous les attributs de l'objet JSON.   Si par exemple, nous définissons des attributs dans la classe Traceroute et que ces attributs ne font pas partie des attributs de l'objet JSON, aucune erreur ne sera survenue.  
+La ligne \ref{lst:implicits} du Listing \ref{lst:mapping}  est nécessaire  pour pouvoir utiliser  l'API du Spark, précisément,  les fonctionnalités relatives aux DataSets et aux DataFrames. L'appel à la ligne \ref{lst:implicits} du Listing \ref{lst:mapping} ne peut pas être fait sans avoir une instance du \textit{SparkContext}. Dans notre cas, nous avons défini une instance de \textit{SparkSession}, et  l'instance  du \textit{SparkContext} est fournie, par défaut,  avec \textit{SparkSession}.
 
 
 % A , nous appelons certaines fonctionnalités nécessaires à la lecture des données. Il est important de noter que Apache Spark adopte ce qu'on appelle \textit{lazy evaluation}; %(voir la section \ref{lazy-evaluation}). Ainsi,
@@ -229,9 +246,8 @@ A la fin de cette étape, toutes les périodes sont déterminées. Nous passons 
 \paragraph{Groupement des traceroutes}~
 
 L'objectif de cette étape est de grouper les traceroutes capturés par période. 
-Dans l'implémentation du travail de référence\cite{DBLP:journals/corr/FontugneAPB16}, les données sont organisées dans des collections MongoDB (voir la section \ref{subsubsection:mongodb}), le groupement des traceroutes par période se base sur la structuration des noms des collections\footnote{Voir la section \ref{mongodb-impleme}.}. Pour une période donnée, seules les collections concernées  seront interrogées. 
+Dans l'implémentation du travail de référence \cite{DBLP:journals/corr/FontugneAPB16}, les données sont organisées dans des collections MongoDB (voir la section \ref{subsubsection:mongodb}), le groupement des traceroutes par période se base sur la structuration des noms des collections\footnote{Voir la section \ref{mongodb-impleme}.}. Pour une période donnée, seules les collections concernées  seront interrogées.  Nous présentons le groupement selon MongoDB et selon Spark/Scala :
  
-
 
 \subparagraph{MongoDB}
 Nous résumons dans la Figure \ref{fig:read-data-from-mongodb} le groupement  tel qu'il est présenté dans le travail de référence.  
@@ -275,7 +291,7 @@ il faut chercher les traceroutes dans plus d'une collection.
 \subparagraph{Spark/Scala} En ce qui concerne l'implémentation en Spark/Scala,
  nous avons groupé les traceroutes autrement. 
  %en partant de ces derniers. 
- Les traceroutes sont organisés dans des fichiers reprenant des traceroutes d'une heure, d'une journée ou d'une toute autre période.  Peu importe le nombre de ces fichiers, Spark lit tout ce qui est disponible dans le chemin \textit{dataPath}. 
+ Les traceroutes sont organisés dans des fichiers qui peuvent contenir des traceroutes d'une heure, d'une journée ou de toute autre période.  Peu importe le nombre de ces fichiers, Spark lit tout ce qui est disponible dans le chemin \textit{dataPath}. 
  Notons que le  parcours de tous les fichiers à chaque  période est coûteux en terme de performance.
   C'est pourquoi nous avons attribué les traceroutes aux périodes. Dans ce cas, les fichiers de données sont lus une seule fois. C'est ce que nous résumons dans l'algorithme \ref{group-data-sparkscala}. Les lignes entre \ref{initate-list} et \ref{finloop1} de l'algorithme \ref{group-data-sparkscala} permettent d'associer chaque traceroute à une période faisant partie de la période de l'analyse. La ligne  \ref{groupby} permet de grouper les traceroutes par période; il s'agit de grouper les traceroutes ayant la même période. L'objectif des lignes entre \ref{begin-groupby} et \ref{end-groupby}  de l'algorithme \ref{group-data-sparkscala} est d'appliquer les traitements sur les groupes de traceroutes, cependant, elles ne sont pas détaillés dans cet algorithme. 
   
@@ -302,7 +318,7 @@ il faut chercher les traceroutes dans plus d'une collection.
 \end{algorithmic}
 \end{algorithm}
 
-En Spark/Scala, nous avons chargé les traceroutes disponibles à l'analyse sur un RDD. Ce dernier crée des partitions de données, sensées être manipulées sur différentes machines si Spark est lancé sur un cluster de machine. Afin de créer les groupes de traceroutes, nous vérifions l'appartenance de chaque traceroute à une des périodes considérées.
+En Spark/Scala, nous avons chargé les traceroutes disponibles à l'analyse sur un RDD. Ce dernier crée des partitions de données, sensées être manipulées sur différentes machines si Spark est lancé sur un cluster de machine, autrement dit, en mode cluster. Afin de créer les groupes de traceroutes, nous vérifions l'appartenance de chaque traceroute à une des périodes considérées.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={},label={lst:groupalltraceroutes}, basicstyle = \small,escapechar=|,numbers=left,
 stepnumber=1]
@@ -319,6 +335,7 @@ Avec la ligne \ref{line:groupTraceroutes} dans le Listing \ref{lst:groupalltrace
 	\item nous passons d'un RDD de type \textit{Traceroute} à un RDD de type \textit{TracerouteWithPeriod}.
 \end{itemize}
 
+
 La  classe \textit{TracerouteWithPeriod}, définie dans le Listing \ref{lst:TracerouteWithTimewindow}, permet de représenter un traceroute avec sa période dans une seule entité. 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe TracerouteWithPeriod },label={lst:TracerouteWithTimewindow}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -327,9 +344,9 @@ case class TracerouteWithPeriod(
 	period:     Int)
 \end{lstlisting}
 
-\subparagraph{Elimination des traceroutes qui n'appartiennent pas à l'analyse}~
+\paragraph{Elimination des traceroutes qui n'appartiennent pas à l'analyse}~
 
-Il se peut qu'un traceroute ne fait pas partie de la période de l'analyse. Ce sont les objets de type \textit{TracerouteWithPeriod}  ayant  \textit{period} de valeur $0$ et période = 0 si traceroute.timestamp n'appartient à aucune des période. C'est pourquoi nous filtrons ces traceroutes, comme  illustre le Listing  \ref{lst:filterTracerouteWithTimewindow}.
+Il se peut qu'un traceroute ne fait pas partie de la période de l'analyse. Ce sont les objets de type \textit{TracerouteWithPeriod}  où  \textit{period} vaut $0$ par construction. Ce sont les traceroutes ayant un   \textit{timestamp}  qui n'appartient à aucune des période. C'est pourquoi nous filtrons ces traceroutes, comme  illustre le Listing  \ref{lst:filterTracerouteWithTimewindow}.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Elimination des traceroutes non concernés par l'analyse },label={lst:filterTracerouteWithTimewindow}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -338,13 +355,13 @@ val onlyConcernedTraceroutes = tracerouteAndPeriodRdd.filter(_.period != 0)
 
 Après l'élimination des traceroutes non concernés, nous agrégeons ces derniers par période pour construire une liste de type   \textit{TraceroutesPerPeriod} dont sa définition est  donnée dans le Listing \ref{lst:classTraceroutesPerPeriod}. 
 L'objectif de cette agrégation est de créer des groupes de traceroutes et y  appliquer les traitements relatifs à la détection. 
-Le Listing \ref{lst:agregatePeriodTraceroutes} illustre l'étape de l'agrégation.
+Le Listing \ref{lst:agregatePeriodTraceroutes} illustre l'étape de l'agrégation, la ligne 
+\ref{line:groupeby} effectue le groupement et la ligne \ref{line:resumegroupeby} organise les groupes de traceroutes dans une nouvelle structure de données : \textit{TraceroutesPerPeriod}.
 
-
-\begin{lstlisting}[language=scala,firstnumber=1, caption={Le groupement des traceroutes },label={lst:agregatePeriodTraceroutes}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Le groupement des traceroutes par période},label={lst:agregatePeriodTraceroutes}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-val groupedTraceroutesByPeriod = onlyConcernedTraceroutes.groupBy(_.period)
-val traceroutesPerPeriod = groupedTraceroutesByPeriod.map(f => TraceroutesPerPeriod(f._2.map(f => f.traceroute).toSeq, f._1))
+val groupedTraceroutesByPeriod = onlyConcernedTraceroutes.groupBy(_.period)|\label{line:groupeby}|
+val traceroutesPerPeriod = groupedTraceroutesByPeriod.map(f => TraceroutesPerPeriod(f._2.map(twp => twp.traceroute).toSeq, f._1)) |\label{line:resumegroupeby}|
 \end{lstlisting}
 
 
@@ -359,40 +376,40 @@ case class TraceroutesPerPeriod(
 
 L'étape qui suit le groupement des traceroutes est la génération des liens. Ainsi, nous générons les différents liens possibles dans chacune des périodes avec le code du Listing \ref{lst:linkInference} :
 
-\begin{lstlisting}[language=scala,firstnumber=1, caption={La classe TracerouteWithPeriod },label={lst:linkInference}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Etape de déduction des liens},label={lst:linkInference}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 val allLinksRttDiffsPeriods = traceroutesPerPeriod.map(f => linksInference(spark, f))
 \end{lstlisting}
 
 La fonction \textit{linksInference} est une abstraction de plusieurs traitements appliqués sur chaque groupe de traceroutes.  Cette fonction renvoie
-la liste des liens caractérisés par leurs périodes et RTTs différentiels. Le Listing \ref{lst:DeductionLinks}
-illustre les étapes de la déduction des liens par groupe de traceroutes, ces étapes sont les suivantes : 
+la liste des liens caractérisés par leurs périodes et RTTs différentiels. Les étapes aboutissant à ces résultats  sont : 
 
 \begin{enumerate}
 	\item élimination des traceroutes échoués;
 	\item élimination des sauts non valides;
 	\item calcul de la médiane de chaque saut;
-	\item lister les liens possibles par traceroute en encapsulant ces derniers dans des objets \textit{DetailedLink};
+	\item énumération des liens possibles par traceroute en encapsulant ces derniers dans des objets \textit{DetailedLink};
 	\item construction d'une liste reprenant les listes de l'étape $4$.
 	\item tri alphanumérique des adresses IP de chaque lien;
 	\item groupement des liens ayant les mêmes adresses IP;
-	\item création d'un récapitulatif de chaque lien; chaque lien est associé à une liste des RTTs différentiels ainsi que la liste des périodes. La liste des périodes contient la période courante dupliquée en nombre de RTTs différentiels de ce lien durant cette période. 
+	\item création d'un récapitulatif de chaque lien de toutes les périodes; chaque lien est associé à une liste des RTTs différentiels ainsi qu'à une liste des périodes. Cette dernière contient la période associée à un RTT différentiel dupliquée en nombre des RTTs différentiels de ce lien durant cette période. 
 \end{enumerate}
 
 %Les étapes énumérées ci-dessus sont illustrées par le Listing \ref{lst:DeductionLinks}.
-
+Le Listing \ref{lst:DeductionLinks}
+illustre les étapes de la déduction des liens par groupe de traceroutes.
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Deduction des liens par groupe de traceroutes},label={lst:DeductionLinks}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
- def linksInference(spark: SparkSession, rawtraceroutes: TraceroutesPerPeriod): Seq[ResumedLink] = {
+ def linksInference(spark: SparkSession, rawtraceroutes: TraceroutesPerPeriod): Seq[SummarizedLink] = {
 	
 	//Filter failed traceroutes ... 
 	val notFailedTraceroutes = rawtraceroutes.traceroutes.filter(t => t.result(0).result != null) |\label{notFailedTraceroutes}|
 	
 	//Remove invalid data  in hops
-	val cleanedTraceroutes = notFailedTraceroutes.map(t => removeInvalidSignals(t)) |\label{cleanedTraceroutes}|
+	val cleanedTraceroutes = notFailedTraceroutes.map(removeInvalidSignals) |\label{cleanedTraceroutes}|
 	
 	//Compute median by hop
-	val tracerouteMedianByHop = cleanedTraceroutes.map(t => computeMedianRTTByhop(t)) |\label{tracerouteMedianByHopline}|
+	val tracerouteMedianByHop = cleanedTraceroutes.map(computeMedianRTTByhop)|\label{tracerouteMedianByHopline}|
 	
 	//Find links in a traceroute
 	import org.apache.spark.mllib.rdd.RDDFunctions._
@@ -405,22 +422,22 @@ stepnumber=1]
 	val allDetailedLinks = detailedLinks.flatten |\label{allDetailedLinksFlattenline}|
 	
 	//Sort the links
-	val sortAllDetailedLinks = allDetailedLinks.map(l => sortLinks(l)) |\label{sortAllDetailedLinksline}|
+	val sortAllDetailedLinks = allDetailedLinks.map(sortLinks) |\label{sortAllDetailedLinksline}|
 	
 	//Merge the links from all traceroutes in the current bin
 	val mergedLinks = sortAllDetailedLinks.groupBy(_.link) |\label{mergedLinksline}|
 	
 	//Summarize the link 
-	val summarizeLink = mergedLinks.map(f => ResumedLink(f._1, f._2.map(_.probe), f._2.map(_.rttDiff), generateDatesSample(f._2.size, rawtraceroutes.timeWindow)))  |\label{summarizeLinkline}|
+	val summarizeLink = mergedLinks.map(f => SummarizedLink(f._1, f._2.map(_.probe), f._2.map(_.rttDiff), generateDatesSample(f._2.size, rawtraceroutes.timeWindow)))  |\label{summarizeLinkline}|
 	
 	summarizeLink.toSeq    
 }
 \end{lstlisting}
 
 
-Nous reprenons dans les sections suivantes la définition de fonctions utilisées dans la fonction \textit{linksInference}.
+Nous reprenons dans les sections suivantes la définition des fonctions utilisées dans la fonction \textit{linksInference}.
 
-\subparagraph{Elimination des traceroutes échoués} (Ligne \ref{notFailedTraceroutes} dans le Listing \ref{lst:DeductionLinks}) Nous parcourons chaque traceroute de la liste des traceroutes \textit{rawtraceroutes.traceroutes} afin d'éliminer tout traceroute échoué. Dans l'implémentation de l'outil de détection, ils ont constaté que la liste des sauts d'un traceroute échoué contient un seul saut (\textit{t.result(0)}) et la liste des signaux n'existe pas (\textit{t.result(0).result != null}). Avec \textit{t} dénote le traceroute courant dans la liste \textit{rawtraceroutes.traceroutes}. 
+\subparagraph{Elimination des traceroutes échoués} (Ligne \ref{notFailedTraceroutes} dans le Listing \ref{lst:DeductionLinks}) Nous parcourons chaque traceroute de la liste des traceroutes \textit{rawtraceroutes.traceroutes} afin d'éliminer tout traceroute échoué. Dans l'implémentation de l'outil de détection, ils ont constaté que la liste des sauts d'un traceroute échoué contient un seul saut (\textit{t.result(0)}) et sa liste de signaux n'existe pas (\textit{t.result(0).result != null}). Avec \textit{t} dénote le traceroute courant dans la liste \textit{rawtraceroutes.traceroutes}. 
 
 
 \subparagraph{Elimination des sauts non valides} (Ligne \ref{cleanedTraceroutes} dans le Listing \ref{lst:DeductionLinks}) Nous parcourons les traceroutes valides (\textit{notFailedTraceroutes}) et nous appliquons  \textit{removeInvalidSignals} sur chaque traceroute. Cette fonction renvoie un traceroute après avoir appliqué la fonction \textit{checkSignal} sur chaque signal de chaque saut. 
@@ -438,7 +455,7 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-Le rôle de la fonction \textit{checkSignal}, définie dans le Listing \ref{lst:checkSignal},  est de vérifier chaque signal : si le signal est valide (Ligne \ref{timesout}), si le RTT existe (Ligne \ref{rttnotnone}), si le RTT est positif \label{rttpositif} et enfin si le signal ne provient pas d'une adresse IP privée (Ligne \ref{notprivate}).
+Le rôle de la fonction \textit{checkSignal}, définie dans le Listing \ref{lst:checkSignal},  est de vérifier chaque signal : si le signal est valide (Ligne \ref{timesout}), si le RTT existe (Ligne \ref{rttnotnone}), si le RTT est positif \label{rttpositif} et enfin si le signal ne provient pas d'une adresse IP privée (Ligne \ref{notprivate}). Nous avons utilisé les expressions régulières pour vérifier si l'adresse IP est publique ou bien privée. Nous avons profité de l'interopérabilité du Scala avec Java et nous avons  utilisé la classe java.util.regex.Pattern.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la méthode checkSignal},label={lst:checkSignal}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -472,7 +489,7 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-Le traceroute renvoyé est de type \textit{MedianByHopTraceroute}. Ce dernier est défini dans le Listing \ref{lst:MedianByHopTracerouteclass}. Une instance de la classe \textit{Traceroute} est se diffère  d'une instance de la classe \textit{MedianByHopTraceroute} au niveau de l'attribut \textit{result} qui désigne la liste des sauts.
+Le traceroute renvoyé est de type \textit{MedianByHopTraceroute}. Ce dernier est défini dans le Listing \ref{lst:MedianByHopTracerouteclass}. Une instance de la classe \textit{Traceroute} est  diffente  d'une instance de la classe \textit{MedianByHopTraceroute} au niveau de l'attribut \textit{result} qui désigne la liste des sauts.
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe MedianByHopTraceroute},label={lst:MedianByHopTracerouteclass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
 case class MedianByHopTraceroute(
@@ -484,7 +501,7 @@ case class MedianByHopTraceroute(
 	result:    Seq[PreparedHop])
 \end{lstlisting}
 
-La nouvelle classe qui représente un saut est définie dans le Listing \ref{lst:PreparedHopclass}.
+La nouvelle classe (\textit{PreparedHop}) qui représente un saut est définie dans le Listing \ref{lst:PreparedHopclass}.
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe PreparedHop},label={lst:PreparedHopclass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
 case class PreparedHop(
@@ -500,7 +517,7 @@ case class PreparedSignal(
 	from:      String)
 \end{lstlisting}
 
-\subparagraph{Enumération des liens possibles par traceroute et leur RTT différentiel} (Ligne \ref{tracerouteLinksline} du Listing \ref{lst:DeductionLinks})  La fonction \textit{findLinksAndRttDiffByTraceroute} prend en paramètre une instance de \textit{MedianByHopTraceroute} et renvoie une instance de \textit{LinksTraceroute}. Les liens sont déduits suivant l'approche décrite dans la Figure \ref{fig:link-inference}. Le rôle de cette méthode est de parcourir les sauts afin de construire les liens possibles. Précisément, c'est la fonction findAllLinks (Ligne \ref{findAllLinksline} du Listing \ref{lst:functionfindLinksAndRttDiffByTraceroute}) qui crée les liens possibles pour tous deux sauts consécutifs et calcule leur RTT différentiel.
+\subparagraph{Enumération des liens possibles par traceroute et leur RTT différentiel} (Ligne \ref{tracerouteLinksline} du Listing \ref{lst:DeductionLinks})  La fonction \textit{findLinksAndRttDiffByTraceroute} prend en paramètre une instance de \textit{MedianByHopTraceroute} et renvoie une instance de \textit{LinksTraceroute}. Les liens sont déduits suivant l'approche décrite dans la Figure \ref{fig:link-inference_}. Le rôle de cette méthode est de parcourir les sauts afin de construire les liens possibles. Précisément, c'est la fonction findAllLinks (Ligne \ref{findAllLinksline} du Listing \ref{lst:functionfindLinksAndRttDiffByTraceroute}) qui crée les liens possibles pour tous deux sauts consécutifs et calcule leur RTT différentiel.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la fonction findLinksAndRttDiffByTraceroute},label={lst:functionfindLinksAndRttDiffByTraceroute}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
@@ -537,8 +554,8 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-Après avoir parcouru les sauts consécutifs du traceroute, nous créons une instance de la classe \textit{LinksTraceroute}. Cette classe reprend la liste des liens au lieu de la liste des sauts avec les autres informations du traceroute. La définition de cette classe est donnée dans le Listing :
-\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la fonction},label={lst:function}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+Après avoir parcouru les sauts consécutifs du traceroute, nous créons une instance de la classe \textit{LinksTraceroute}. Cette classe reprend la liste des liens au lieu de la liste des sauts avec les autres informations du traceroute. La définition de cette classe est donnée dans le Listing \ref{lst:classLinksTraceroute}.
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe LinksTraceroute},label={lst:classLinksTraceroute}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
 case class LinksTraceroute(
 	dst_name:  String,
@@ -572,7 +589,7 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-La classe \textit{DetailedLink}, définie dans le Listing \ref{lst:DetailedLinkclass}, permet  modéliser un seul lien. 
+La classe \textit{DetailedLink}, définie dans le Listing \ref{lst:DetailedLinkclass},   modélise un seul lien.  Le mot clé \textbf{\textit{var}} rend l'attribut \textit{link} mutable.
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe DetailedLink},label={lst:DetailedLinkclass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
 case class DetailedLink(
@@ -581,9 +598,10 @@ case class DetailedLink(
 	probe:    BigInt)
 \end{lstlisting}
 
-La fonction \textit{linksInference} est appliqué sur chaque groupe de traceroutes. Dans ce cas, pour chaque groupe de traceroutes, on associe une liste des liens encapsulés chacun dans une instance de \textit{DetailedLink}. Maintenant que chaque lien reprend l'information de la période pendant laquelle il a été identifié, nous pouvons créer une liste d'instance de \textit{DetailedLink} concernant toutes les périodes. C'est ce que fait la ligne \ref{allDetailedLinksFlattenline} dans la fonction dans le Listing \ref{lst:DeductionLinks}.
+La fonction \textit{linksInference} est appliquée sur chaque groupe de traceroutes. Dans ce cas, pour chaque groupe de traceroutes, on associe une liste des liens encapsulés chacun dans une instance de \textit{DetailedLink}. Nous avons utilisé la fonction \textit{flatten} pour regrouper tous les liens dans un groupe de traceroute, c'est ce que fait la ligne \ref{allDetailedLinksFlattenline} dans la fonction dans le Listing \ref{lst:DeductionLinks}.
+%[!]Maintenant que chaque lien reprend l'information de la période pendant laquelle il a été identifié, nous pouvons créer une liste d'instance de \textit{DetailedLink} concernant toutes les périodes. 
 
-\subparagraph{Tri alphanumérique des adresses IP de chaque lien} (Ligne \ref{sortAllDetailedLinksline} dans le Listing \ref{lst:DeductionLinks}). La méthode \textit{sortLinks}, définie dans le Listing \ref{lst:sortLinksfunction}, permet de trier les deux adresses IP du lien donné en paramètre et renvoi un nouveau lien.
+\subparagraph{Tri alphanumérique des adresses IP de chaque lien} (Ligne \ref{sortAllDetailedLinksline} dans le Listing \ref{lst:DeductionLinks}). La méthode \textit{sortLinks}, définie dans le Listing \ref{lst:sortLinksfunction}, permet de trier les deux adresses IP du lien donné en paramètre et renvoi un nouveau lien. Cette fonction s'applique sur tout lien (\textit{DetailedLink}).
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la fonction sortLinks},label={lst:sortLinksfunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1] 
 def sortLinks(linkToSort: DetailedLink): DetailedLink = {
@@ -596,14 +614,14 @@ def sortLinks(linkToSort: DetailedLink): DetailedLink = {
 
 
 \subparagraph{Groupement des liens ayant les mêmes adresses IP} (Ligne \ref{mergedLinksline} dans le Listing \ref{lst:DeductionLinks})
-Nous regroupons les liens par leurs adresses IP en utilisant la fonction GroupBy de Scala.
+Après avoir ordonné les deux adresses IP des liens, nous regroupons les liens par leurs adresses IP en utilisant la fonction GroupBy de Scala.
 
 \subparagraph{Création d'un récapitulatif de chaque lien} (Ligne \ref{summarizeLinkline} dans le Listing \ref{lst:DeductionLinks})
-C'est la dernière étape de la phase de la préparation de données.  L'objectif de cette étape est de regrouper les même lien dans une seule entité, représentée par une instance de la classe \textit{ResumedLink} définie dans le Listing \ref{lst:ResumedLinkClasscase}.
- Cette classe reprend les deux  adresses IP du lien (\textit{link}), la liste des sondes ayant identifié ce lien (\textit{probes}), la liste des RTTs différentiels de ce lien (\textit{rttDiffs}) et enfin les \textit{periods} qui  représentent les périodes  pendant lesquelles les \textit{rttDiffs} ont été identifiés. 
+C'est la dernière étape de la phase de la préparation de données.  L'objectif de cette étape est de regrouper les même lien dans une seule entité, représentée par une instance de la classe \textit{SummarizedLink} définie dans le Listing \ref{lst:SummarizedLinkClasscase}.
+ Cette classe reprend les deux  adresses IP du lien (\textit{link}), la liste des sondes ayant identifié ce lien (\textit{probes}), la liste des RTTs différentiels de ce lien (\textit{rttDiffs}) et enfin  \textit{periods} qui  représentent les périodes  pendant lesquelles les \textit{rttDiffs} ont été identifiés. 
 
 
-\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe ResumedLink},label={lst:ResumedLinkClasscase}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe SummarizedLink},label={lst:SummarizedLinkClasscase}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 case class SummarizedLink(
 	link:     LinkIPs,
@@ -615,22 +633,22 @@ case class SummarizedLink(
 
 \paragraph{Caractérisation des liens de toutes les périodes de l'analyse}~
 
-Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.ResumedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un cluster de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  
-Le code illustrant la collecte des résultats est illustrée par le Listing \ref{lst:rddcollecte}. Autrement dit, le \textit{driver}  reçoit les résultats des traitements appliqués sur les données et effectués par les \textit{workers}\footnote{Voir le principe de la distribution des traitements en Spark dans la section \ref{sparkpresentationsection}.}.
+Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.SummarizedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un cluster de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  
+Le code illustrant la collecte des résultats est illustrée par le Listing \ref{lst:rddcollecte}. Autrement dit, le \textit{driver}  reçoit les résultats des traitements appliqués sur les données et effectués par les \textit{workers}\footnote{Voir le principe de la distribution des traitements en Spark dans la section \ref{sparkpresentationsection}.}. Nous appliquons ensuite la fonction \textit{flatten} sur les collectés.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Collecte des résultats intermédiares },label={lst:rddcollecte}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 val finalLinksDetailsList = allLinksRttDiffsPeriods.collect().toSeq.flatten
 \end{lstlisting}
 
-Après avoir collecté les résultats intermédiaires, nous fusionnons les données des liens en provenance de toutes les périodes. C'est ce que illustre le Listing \ref{lst:rddmergeLinks}. La différence entre cette collecte et la collecte précédente (Ligne \ref{allDetailedLinksFlattenline} dans le Listing \ref{lst:DeductionLinks}), c'est que la première a été faite au niveau d'un \textit{worker}, or, la collecte précédente est fait au niveau du \textit{driver}.
+Après avoir collecté les résultats intermédiaires, nous fusionnons les données des liens en provenance de toutes les périodes. C'est ce que illustre le Listing \ref{lst:rddmergeLinks}. La différence entre cette collecte et la collecte précédente (Ligne \ref{allDetailedLinksFlattenline} dans le Listing \ref{lst:DeductionLinks}), c'est que la première a été faite au niveau d'un \textit{worker}, or, la collecte précédente est faite au niveau du \textit{driver}.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Fusion des liens de toute la période de l'analyse},label={lst:rddmergeLinks}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 
 // Merge all links from all periods
 val finalResult = collectedRTTDiff.groupBy(_.link)
-val finalRawRttDiff = finalResult.map(f => ResumedLink(
+val finalRawRttDiff = finalResult.map(f => SummarizedLink(
                                             f._1, 
                                             (f._2.map(_.probes)).flatten, 
                                             (f._2.map(_.rttDiffs)).flatten, 
@@ -640,15 +658,14 @@ val finalRawRttDiff = finalResult.map(f => ResumedLink(
 
 Commentaires  du Listing \ref{lst:rddmergeLinks} :
 
-\noindent \textit{finalResult} est de type Map  : la clé est de type \textit{LinkIPs} et la valeur est de type
+\noindent \textit{finalResult} est de type Map  : (\textit{Map[classes.LinkIPs, Seq[classes.SummarizedLink]]}), la clé est de type \textit{LinkIPs} et la valeur est de type
+ \textit{Seq[classes.SummarizedLink]}.
 
-\noindent \textit{Seq[classes.SummarizedLink]} (\textit{Map[classes.LinkIPs, Seq[classes.SummarizedLink]]}).
-
-\noindent En parcourons  \textit{finalResult}, l'élément courant parcouru $f$ contient deux partie, vu qu'il appartient à une Map, la première, $ f\_1 $, représente la clé (de type \textit{LinkIPs})  et la deuxième,  $ f\_2 $, représente la valeur (de type  \textit{Seq[classes.SummarizedLink]}).  Ainsi, le rôle de \textit{f.\_2.map(\_.periods)).flatten} est parcourir (via la fonction map) la liste des liens, et de récupérer en particulier la liste des période stockée dans \textit{periods} enfin regrouper toute les période en une seule liste (via flatten).
+\noindent En parcourons  \textit{finalResult}, l'élément courant parcouru $f$ contient deux parties, vu qu'il appartient à une Map, la première, $ f\_1 $, représente la clé (de type \textit{LinkIPs})  et la deuxième,  $ f\_2 $, représente la valeur (de type  \textit{Seq[classes.SummarizedLink]}).  Ainsi, le rôle de \textit{f.\_2.map(\_.periods)). flatten} est de parcourir, via la fonction \textit{map}, la liste des liens, et de récupérer en particulier la liste des périodes stockée dans \textit{periods} pour ensuite regrouper toutes ces période en une seule liste (via \textit{flatten}).
 
 
-A cette étape, nous avons une liste de type \textit{ResumedLink} qui concerne  la période entière de l'analyse. 
-%Ce dernier est définie dans le Listing \ref{lst:ResumedLinkClasscase}. 
+A cette étape, nous avons une liste de type \textit{SummarizedLink} qui concerne  la période entière de l'analyse. 
+%Ce dernier est définie dans le Listing \ref{lst:SummarizedLinkClasscase}. 
 
 %\begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la classe ResumedLink},label={lst:ResumedLinkClass}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 %stepnumber=1]
@@ -671,7 +688,7 @@ A la fin de la phase I, nous obtenons une liste des liens de type \textit{Iterab
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Détection des alarmes des liens},label={lst:paralelizeAndDtectAnomalies}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-// Create a RDD having the ResumedLink elements from stage I
+// Create a RDD having the SummarizedLink elements from stage I
 val finalRawRttDiffRdd = spark.sparkContext.parallelize(finalRawRttDiff.toSeq) |\label{parallelizefinalRawRttDiff}|
 
 // Alarms detection by link
@@ -682,15 +699,15 @@ La méthode \textit{listAlarms} est détaillée dans le Listing \ref{lst:findAna
 
 
 \begin{enumerate}
-	\item initialisation des variables : \textit{reference} est l'état référence du lien, \textit{current} est l'état courant du lien, \textit{alarmsValues} est la liste des alarmes qui sont des RTTs différentiels médians, \textit{alarmsDates} est la liste dates correspondantes aux alarmes, \textit{dates} est la liste des dates concernées; ce sont les périodes ayant une distribution des RTTs différentiels de taille plus grande d'un nombre donné.
-	\item  génération des périodes; nous générons les périodes correspondantes à au moins une journée;
-    \item  en partant des périodes générées, dans leurs ordre chronologique, nous appliquons la méthode \textit{findAlarms()} sur les RTTs différentiels de chaque période;
-    \item enfin, nous construisons un objet JSON reprenant les détails du lien. A savoir, leurs périodes, leurs anomalies et leurs dates d'anomalies. 
+	\item Initialisation des variables : \textit{reference} est l'état référence du lien, \textit{current} est l'état courant du lien, \textit{alarmsValues} est la liste des alarmes qui sont des RTTs différentiels médians, \textit{alarmsDates} est la liste des dates correspondantes aux alarmes, \textit{dates} est la liste des dates concernées; ce sont les périodes ayant une distribution des RTTs différentiels de taille plus grande d'un nombre donné.
+	\item  Génération des périodes; nous générons les périodes correspondantes à au moins une journée. Par construction, les périodes générées à la phase I sont les mêmes générées à la phase II.
+    \item  En partant des périodes générées, dans leurs ordre chronologique, nous appliquons la méthode \textit{findAlarms()} sur les RTTs différentiels de chaque période. 
+    \item Enfin, nous construisons un objet JSON reprenant les détails du lien. A savoir, leurs périodes, leurs anomalies et leurs dates d'anomalies. 
 \end{enumerate}
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la méthode listAlarms},label={lst:findAnalomalies}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-  def listAlarms(spark: SparkSession, rawDataLinkFiltred: ResumedLink, timewindow: Int, rangeDates: Seq[Int]): String = {
+  def listAlarms(spark: SparkSession, rawDataLinkFiltred: SummarizedLink, timewindow: Int, rangeDates: Seq[Int]): String = {
 	// Save the reference state of a link
 	var reference = LinkState(Seq(), Seq(), Seq(), Seq())
 	
@@ -731,38 +748,38 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-La définition de la fonction \textit{findAlarms} est donnée dans le Listing \ref{lst:findAlarmsFunction}. Cette méthode s'applique sur les données d'un lien,
+La définition de la fonction \textit{findAlarms} est donnée dans le Listing \ref{lst:findAlarmsFunction}. Cette méthode s'applique sur les données d'un seul lien,
 son objectif  est de comparer l'état courant du lien en question avec la référence suivant les trois cas détaillés dans l'étape II.5 du processus décrit dans la section \ref{processus-de-detection}.
 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la méthode findAlarms},label={lst:findAlarmsFunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-  def findAlarms(spark: SparkSession, date: Int, reference: LinkState, dataPeriod: ResumedLink, current: LinkState, alarmsDates: AlarmsDates, alarmsValues: AlarmsValues, dates: AllDates): Unit = {
+  def findAlarms(spark: SparkSession, date: Int, reference: LinkState, dataPeriod: SummarizedLink, current: LinkState, alarmsDates: AlarmsDates, alarmsValues: AlarmsValues, dates: AllDates): Unit = {
 	println("Find indices ...")
-	val indices = dataPeriod.bins.zipWithIndex.filter(_._1 == date).map(_._2)
-	val dist = indices.map(f => dataPeriod.rttDiffs(f))
+	val indices = dataPeriod.bins.zipWithIndex.filter(_._1 == date).map(_._2) |\label{lst:lineindices}|
+	val dist = indices.map(f => dataPeriod.rttDiffs(f)) |\label{lst:linedist}|
 	
 	println("Find RTTs for the current timewindow ...")
 	val distSize = dist.size
 	
-	if (distSize > 3) {
+	if (distSize > 3) {  |\label{lst:linedistSizesup}|
 		val tmpDates = dates.dates :+ date
 		dates.dates = tmpDates
 		
 		// Compute the Wilson Score
-		val wilsonCi = scoreWilsonScoreCalculator(spark, dist.size).map(f => f * dist.size)
+		val wilsonCi = scoreWilsonScoreCalculator(spark, dist.size).map(f => f * dist.size) |\label{lsl:linewilson}|
 		
 		//update the current link state
-		updateLinkCurrentState(spark, dist, current, wilsonCi)
+		updateLinkCurrentState(spark, dist, current, wilsonCi) |\label{lst:lineupdateLinkCurrentState}|
 		
 		//Sort the distribution
-		val newDist = dist.sorted
+		val newDist = dist.sorted |\label{linenewDist}|
 		
 		//Get the reference
-		val tmpReference = reference
+		val tmpReference = reference |\label{line-getreference}|
 		
 		// Case : 1
-		if (tmpReference.valueMedian.size < 3) {
+		if (tmpReference.valueMedian.size < 3) { |\label{lsl-debutcases}|
 			val newReferenceValueMedian = tmpReference.valueMedian :+ current.valueMedian.last
 			val newReferenceValueHi = tmpReference.valueHi :+ newDist(javatools.JavaTools.getIntegerPart(wilsonCi(1)))
 			val newReferenceValueLow = tmpReference.valueLow :+ newDist(javatools.JavaTools.getIntegerPart(wilsonCi(0)))
@@ -796,10 +813,10 @@ stepnumber=1]
 			val newReferenceValueLow2 = tmpReference.valueLow :+ (0.99 * tmpReference.valueLow.last + 0.01 * newDist(javatools.JavaTools.getIntegerPart(wilsonCi(0))))
 			reference.valueHi = newReferenceValueHi2
 			reference.valueLow = newReferenceValueLow2
-			reference.valueMedian = newReferenceValueMedian2
+			reference.valueMedian = newReferenceValueMedian2 |\label{lsl-fincases}|
 			
 			//Anomalies dection : compare the current with the reference
-			if ((BigDecimal(current.valueMedian.last) - BigDecimal(current.valueLow.last) > reference.valueHi.last || current.valueMedian.last + current.valueHi.last < reference.valueLow.last) && scala.math.abs(current.valueMedian.last - reference.valueMedian.last) > 1) {
+			if ((BigDecimal(current.valueMedian.last) - BigDecimal(current.valueLow.last) > |\label{debutdetection}| reference.valueHi.last || current.valueMedian.last + current.valueHi.last < reference.valueLow.last) && scala.math.abs(current.valueMedian.last - reference.valueMedian.last) > 1) {
 				
 				val updateAlarmsDates = alarmsDates.dates :+ date
 				alarmsDates.dates = updateAlarmsDates
@@ -815,22 +832,27 @@ stepnumber=1]
  Nous résumons le fonctionnement de la méthode \textit{findAlarms} dans les étapes suivantes. Notons que \textit{spark}  est l'objet SparkSession créé au début du programme Spark,  \textit{date} est la période courante, \textit{reference} est l'état référence du lien, \textit{dataPeriod} est la liste des RTTs différentiels de la période  \textit{date}, \textit{current} est l'état courant du lien, \textit{alarmsDates} sont les dates d'alarmes, \textit{alarmsValues} sont les RTTs différentiels médians et \textit{dates} sont les dates où on constate une distribution assez représentable des RTTs différentiels.   
  
  \begin{enumerate}
- 	\item trouver les indices,  dans \textit{dataPeriod.bins}, correspondants à la période \textit{date} (\textit{indices});
+ 	\item trouver les indices,  dans \textit{dataPeriod.bins}, correspondants à la période \textit{date} (\textit{indices}) (ligne \ref{lst:lineindices});
  	
- 	\item trouver les RTTs différentiels, dans \textit{dataPeriod.rttDiffs}, identifiés durant  \textit{date} (\textit{dist});
+ 	\item trouver les RTTs différentiels, dans \textit{dataPeriod.rttDiffs}, identifiés durant  \textit{date} (\textit{dist}) (ligne \ref{lst:linedist});
  	
- 	\item la représentativité d'une distribution dépend d'une valeur donnée  (ici $3$), Si la taille de \textit{dist} est supérieure à cette valeur, nous ajoutons \textit{date} à \textit{dates} et nous continuons l'analyse de cette période;
- 	\item calculer le score de Wilson, qui fournit deux valeurs, et multiplier ce score par la taille de la distribution;
- 	\item calculer l'état courant du lien (\textit{current}), cela inclut la borne inférieure de l'intervalle de confiance, le RTT différentiel médian et la borne supérieure de l'intervalle de confiance;
- 	\item  récupérer l'état référence du lien;
- 	\item mettre à jour l'état référence du lien \textit{reference} suivant les trois cas;
- 	\item  comparer les deux intervalles de confiance s'il s'agit du cas $3$ et mettre à jour \textit{alarmsValues} et \textit{alarmsDates} si une anomalie est identifiée.
+ 	\item la représentativité d'une distribution dépend d'une valeur donnée  (ici $3$), Si la taille de \textit{dist} est supérieure à cette valeur, nous ajoutons \textit{date} à \textit{dates} et nous continuons l'analyse de cette période (ligne \ref{lst:linedistSizesup});
+ 	\item calculer le score de Wilson, qui fournit deux valeurs, et multiplier ce score par la taille de la distribution  (ligne \ref{lsl:linewilson});
+ 	\item calculer l'état courant du lien (\textit{current}), cela inclut la borne inférieure de l'intervalle de confiance de la médiane des RTTs différentiels, le RTT différentiel médian et la borne supérieure de l'intervalle de confiance de la médiane des RTTs différentiels (ligne \ref{lst:lineupdateLinkCurrentState});
+ 	\item ordonner les RTTs différentiels (\textit{dist}) (ligne \ref{linenewDist});
+ 	\item récupérer l'état référence du lien (ligne \ref{line-getreference});
+ 	\item mettre à jour l'état référence du lien \textit{reference} suivant les trois cas (lignes entre \ref{lsl-debutcases} et \ref{lsl-fincases});
+ 	\item  comparer les deux intervalles de confiance s'il s'agit du cas $3$ et mettre à jour \textit{alarmsValues} et \textit{alarmsDates} si une anomalie est identifiée (ligne \ref{debutdetection}).
  	
  \end{enumerate}
 
 
 
-\subsection{Exécution d'une application Spark} Afin de pouvoir exécuter une application Spark, il faut qu'elle soit packagée dans un fichier de type JAR. Ce dernier doit reprendre une classe contenant une méthode \textit{main} et doit reprendre toutes les dépendances nécessaires à l'exécution de l'application.  Enfin, l'application Spark  est soumise avec la commande \textit{bin/spark-submit}. Un exemple d'une soumission est donné dans \ref{lst:submit}.
+\subsection{Exécution d'une application Spark} 
+
+Afin de pouvoir exécuter une application Spark, il faut qu'elle soit packagée dans un fichier de type JAR. Ce dernier doit reprendre une classe contenant une méthode \textit{main} et doit reprendre toutes les dépendances nécessaires à l'exécution de l'application.  Enfin, l'application Spark  est soumise avec la commande \textit{bin/spark-submit}. Tout en indiquant les paramètres du cluster et les paramètre de l'application. Nous donnons deux exemples de soumission. La première est destinée à être exécutée dans une machine locale. Alors que la deuxième soumission est destinée à être executée dans un cluster de machines. 
+
+\paragraph{Mode local}~
 
 \begin{lstlisting}[language=bash,firstnumber=1, caption={Exemple de la soumissions d'un traitement sur Spark},label={lst:submit}, basicstyle = \small,escapechar=|,numbers=left,
 stepnumber=1]
@@ -845,6 +867,12 @@ La commande \textit{bin/spark-submit} prend plusieurs paramètres, nous présent
 	\item  \textit{--conf} "key = value" est une manière de configurer l'application Spark. Dans l'exemple, "spark.network.timeout=10000000", $ 10000000 $ est le temps durant lequel le driver doit recevoir  des mises à jour de la part des différents workers; après ce temps, le worker n'est plus considéré comme actif.
 \end{itemize}
 
+\paragraph{Amazon EMR }~
+
+\begin{lstlisting}[language=bash,firstnumber=1, caption={Exemple de la soumissions d'un traitement sur Spark},label={lst:submit}, basicstyle = \small,escapechar=|,numbers=left,
+stepnumber=1]
+spark-submit --deploy-mode cluster --class ripeatlasanalysis.traceroutesAnalysis s3://amazon-emr-bucket/DelayAnalysis-AWS-EMR-Final-0.0.2-SNAPSHOT-jar-with-dependencies.jar 1517961600 1518048000 3600 s3://ripeatlasdata/traceroute/source=api/af_=4/type_=builtin/msm=5004/year=2018/month=2/day=07 s3://amazon-emr-bucket/resultats
+\end{lstlisting}
 \paragraph{Résultats finaux}~
 
 Nous sauvegardons le résultat de l'analyse dans un fichier JSON en vue de toute réutilisation. Un exemple de résultat est illustré dans le Listing \ref{resultLink}.
@@ -928,6 +956,9 @@ Nous sauvegardons le résultat de l'analyse dans un fichier JSON en vue de toute
 }
 \end{lstlisting}
 \section{Conclusion}
+
+Dans ce chapitre, nous avons décrit l'implémentation de l'outil de détection en Spark/Scala.  C'est la reproduction de l'outil implémenté en MongoDB. A travers cette implémentation, nous avons évalué les différentes défis relatifs à la réutilisation du code source des autres et la façon de réutiliser impélementation destinée à être distribuée. Nous allons évaluer l'application Spark sur quelques échantillons de données dans le chapitre \ref{chap:application-on-traceroutes} avec d'autres implémentations utilisant d'autres technologies Big Data. 
+
 
 
 
