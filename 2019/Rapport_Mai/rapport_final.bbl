@@ -207,6 +207,14 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 \newblock {\em Big Data}.
 \newblock 2017.
 
+\bibitem{bigdatafunctional}
+{\sc Marshall, D.}
+\newblock {Functional Programming and Big Data, Hadoop Summit 2015}.
+\newblock URL:
+  \url{https://pt.slideshare.net/Hadoop_Summit/functional-programming-and-big-data},
+  2015.
+\newblock (consulté le $ 11/05/2019 $).
+
 \bibitem{IDC-data}
 {\sc Reinsel, D., Gantz, J., and Rydning, J.}
 \newblock {The Digitization of the World From Edge to Core}.

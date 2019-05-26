@@ -65,39 +65,38 @@
 \BOOKMARK [2][-]{subsection.3.4.1}{MongoDB}{section.3.4}% 65
 \BOOKMARK [2][-]{subsection.3.4.2}{Amazon\040DynamoDB}{section.3.4}% 66
 \BOOKMARK [2][-]{subsection.3.4.3}{Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{section.3.4}% 67
-\BOOKMARK [2][-]{subsection.3.4.4}{Hadoop\040ecosystem}{section.3.4}% 68
+\BOOKMARK [2][-]{subsection.3.4.4}{Apache\040Hadoop}{section.3.4}% 68
 \BOOKMARK [2][-]{subsection.3.4.5}{Apache\040Spark\040}{section.3.4}% 69
 \BOOKMARK [2][-]{subsection.3.4.6}{Amazon\040Elastic\040MapReduce}{section.3.4}% 70
 \BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 71
 \BOOKMARK [0][-]{chapter.4}{Implémentation en Spark/Scala}{}% 72
 \BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 73
-\BOOKMARK [1][-]{section.4.2}{La\040programmation\040fonctionnelle\040et\040Big\040Data}{chapter.4}% 74
-\BOOKMARK [2][-]{subsection.4.2.1}{Les\040apports\040de\040la\040programmation\040fonctionnelle}{section.4.2}% 75
-\BOOKMARK [2][-]{subsection.4.2.2}{La\040programmation\040fonctionnelle\040au\040service\040du\040Big\040Data\040}{section.4.2}% 76
-\BOOKMARK [1][-]{section.4.3}{Implémentation}{chapter.4}% 77
-\BOOKMARK [2][-]{subsection.4.3.1}{Description\040de\040l'environnement}{section.4.3}% 78
-\BOOKMARK [2][-]{subsection.4.3.2}{Brève présentation de l'implémentation}{section.4.3}% 79
-\BOOKMARK [2][-]{subsection.4.3.3}{Création d'une application Spark/Scala}{section.4.3}% 80
-\BOOKMARK [2][-]{subsection.4.3.4}{Exécution d'une application Spark}{section.4.3}% 81
-\BOOKMARK [1][-]{section.4.4}{Conclusion}{chapter.4}% 82
-\BOOKMARK [0][-]{chapter.5}{Application\040de\040quelques\040technologies\040Big\040Data\040sur\040l'analyse\040des\040traceroutes}{}% 83
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 84
-\BOOKMARK [1][-]{section.5.2}{Critères d'évaluation des technologies Big Data}{chapter.5}% 85
-\BOOKMARK [1][-]{section.5.3}{Caractéristiques de l'environnement de test}{chapter.5}% 86
-\BOOKMARK [1][-]{section.5.4}{Collecte des traceroutes depuis le dépôt d'Atlas }{chapter.5}% 87
-\BOOKMARK [1][-]{section.5.5}{Application\0401\040:\040MongoDB}{chapter.5}% 88
-\BOOKMARK [1][-]{section.5.6}{Application\0402\040:\040Amazon\040DynamoDB}{chapter.5}% 89
-\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{chapter.5}% 90
-\BOOKMARK [1][-]{section.5.8}{Application\0404\040:\040Spark\040Apache\040avec\040Scala}{chapter.5}% 91
-\BOOKMARK [2][-]{subsection.5.8.1}{Mode\040local}{section.5.8}% 92
-\BOOKMARK [2][-]{subsection.5.8.2}{Cluster\040Amazon\040EMR}{section.5.8}% 93
-\BOOKMARK [1][-]{section.5.9}{Conclusion}{chapter.5}% 94
-\BOOKMARK [1][-]{section.5.10}{Récapitulatif}{chapter.5}% 95
-\BOOKMARK [0][-]{appendix.A}{Amazon\040Athena\040}{}% 96
-\BOOKMARK [1][-]{section.A.1}{Création de la table traceroutes }{appendix.A}% 97
-\BOOKMARK [1][-]{section.A.2}{Partitionnement de données sur Amazon Athena }{appendix.A}% 98
-\BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 99
-\BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 100
-\BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 101
-\BOOKMARK [0][-]{appendix.B}{Exemple d'une réponse traceroute}{}% 102
-\BOOKMARK [0][-]{appendix.C}{Table\040des\040intervalles\040de\040confiance}{}% 103
+\BOOKMARK [1][-]{section.4.2}{Présentation de Scala}{chapter.4}% 74
+\BOOKMARK [1][-]{section.4.3}{La\040programmation\040fonctionnelle\040et\040le\040Big\040Data}{chapter.4}% 75
+\BOOKMARK [1][-]{section.4.4}{Implémentation}{chapter.4}% 76
+\BOOKMARK [2][-]{subsection.4.4.1}{Description\040de\040l'environnement}{section.4.4}% 77
+\BOOKMARK [2][-]{subsection.4.4.2}{Brève présentation de l'implémentation}{section.4.4}% 78
+\BOOKMARK [2][-]{subsection.4.4.3}{Création d'une application Spark/Scala}{section.4.4}% 79
+\BOOKMARK [2][-]{subsection.4.4.4}{Exécution d'une application Spark}{section.4.4}% 80
+\BOOKMARK [1][-]{section.4.5}{Conclusion}{chapter.4}% 81
+\BOOKMARK [0][-]{chapter.5}{Application\040de\040quelques\040technologies\040Big\040Data\040sur\040l'analyse\040des\040traceroutes}{}% 82
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 83
+\BOOKMARK [1][-]{section.5.2}{Critères d'évaluation des technologies Big Data}{chapter.5}% 84
+\BOOKMARK [1][-]{section.5.3}{Caractéristiques de l'environnement de test}{chapter.5}% 85
+\BOOKMARK [1][-]{section.5.4}{Collecte des traceroutes depuis le dépôt d'Atlas }{chapter.5}% 86
+\BOOKMARK [1][-]{section.5.5}{Application\0401\040:\040MongoDB}{chapter.5}% 87
+\BOOKMARK [1][-]{section.5.6}{Application\0402\040:\040Amazon\040DynamoDB}{chapter.5}% 88
+\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{chapter.5}% 89
+\BOOKMARK [1][-]{section.5.8}{Application\0404\040:\040Spark\040Apache\040avec\040Scala}{chapter.5}% 90
+\BOOKMARK [2][-]{subsection.5.8.1}{Mode\040local}{section.5.8}% 91
+\BOOKMARK [2][-]{subsection.5.8.2}{Cluster\040Amazon\040EMR}{section.5.8}% 92
+\BOOKMARK [1][-]{section.5.9}{Conclusion}{chapter.5}% 93
+\BOOKMARK [1][-]{section.5.10}{Récapitulatif}{chapter.5}% 94
+\BOOKMARK [0][-]{appendix.A}{Amazon\040Athena\040}{}% 95
+\BOOKMARK [1][-]{section.A.1}{Création de la table traceroutes }{appendix.A}% 96
+\BOOKMARK [1][-]{section.A.2}{Partitionnement de données sur Amazon Athena }{appendix.A}% 97
+\BOOKMARK [2][-]{subsection.A.2.1}{Présentation du partitionnement}{section.A.2}% 98
+\BOOKMARK [2][-]{subsection.A.2.2}{Application\040du\040partitionnement\040sur\040les\040traceroutes\040Atlas}{section.A.2}% 99
+\BOOKMARK [2][-]{subsection.A.2.3}{L'interrogation de données sur Amazon Athena}{section.A.2}% 100
+\BOOKMARK [0][-]{appendix.B}{Exemple d'une réponse traceroute}{}% 101
+\BOOKMARK [0][-]{appendix.C}{Table\040des\040intervalles\040de\040confiance}{}% 102

@@ -254,15 +254,19 @@ La meilleure approche dépend des besoins de l'analyse. La première approche es
 		\begin{itemize}
 			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
 			
-			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. Par ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma Map-Reduce,  présenté dans la section  \ref{mapreducesection}. 
+			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. Par ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma MapReduce (voir la section  \ref{mapreducesection}). 
 		\end{itemize}
 \subsection{MapReduce} \label{mapreducesection}
 %https://softwareengineering.stackexchange.com/questions/220605/why-big-data-needs-to-be-functional
 
-MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un cluster de machines. Un programme MapReduce est composé de deux principales phases  \textit{Map} et  \textit{Reduce}.
-\begin{tcolorbox}
-	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
-\end{tcolorbox}
+MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un cluster de machines. Un programme MapReduce est composé de deux phases principales   \textit{Map} et  \textit{Reduce}.
+
+MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. 
+
+%Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. 
+%\begin{tcolorbox}
+%	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des %calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 %téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
+%\end{tcolorbox}
 La Figure 	\ref{fig:2-figure1-1-map-reduce-workflow} représente une vue d'ensemble du modèle de programmation MapReduce. 
 
 \begin{figure}[h]
@@ -273,16 +277,18 @@ La Figure 	\ref{fig:2-figure1-1-map-reduce-workflow} représente une vue d'ensem
 \end{figure}
 
 
-Le modèle de données dans MapReduce est la paire clé/valeur. Pendant la phase de \textit{Map}, la fonction  associée  au Map est exécutée sur chaque paire clé/valeur (K1,V1) des données d'entrée (\textit{data split}), ce que produit   des paires clé/valeur (List(K2,V2)) intermédiaires. Il existe une autre phase entre  \textit{Map} et de \textit{Reduce}, c'est la phase de \textit{Shffling}. Durant cette dernière,  les paires clé/valeur (List(K2,V2))  intermédiaire sont triées et regroupées par la clé. Il en résulte un ensemble de paires clé/valeur (K2, List(V2)) où chaque paire contient toutes les valeurs associées à une clé particulière (K2). Ces paires clé/valeur sont ensuite partitionnées et regroupées sur la clé, puis passée à la phase Reduce au cours de laquelle la fonction de réduction est appliquée individuellement à chaque clé et aux valeurs associées pour cette clé (K2,List(V2)). La phase \textit{Reduce} peut produire une valeur nulle ou une sortie (List(K3,V3)).
+Le modèle de données dans MapReduce est la paire clé/valeur. Pendant la phase de \textit{Map}, la fonction  associée  au Map est exécutée sur chaque paire clé/valeur (K1,V1) des données d'entrée (\textit{data split}), ce que produit   une liste des paires clé/valeur (List(K2,V2)) intermédiaires pour chaque clé/valeur (K1,V1). Il existe une autre phase entre  \textit{Map} et de \textit{Reduce}, c'est la phase de \textit{Shffling}. Durant cette dernière,  les paires clé/valeur (List(K2,V2))  intermédiaire sont triées et regroupées par la clé. Il en résulte un ensemble de paires clé/valeur (K2, List(V2)) où chaque paire contient toutes les valeurs associées à une clé particulière (K2). Ces paires clé/valeur sont ensuite partitionnées et regroupées sur la clé, puis passée à la phase Reduce au cours de laquelle la fonction de réduction est appliquée individuellement à chaque clé et aux valeurs associées pour cette clé (K2,List(V2)). La phase \textit{Reduce} peut produire une valeur nulle ou une sortie (List(K3,V3)).
 
 	\section{Parcours de quelques technologies du Big Data}
-La liste des technologies dans le domaine du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du RIPE Atlas.
+La liste des technologies  du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du projet Atlas.
+
+MongoDB est la base de données utilisée dans l'implémentation du travail de référence \cite{InternetHealthReport}. Amazon DynamoDB est la première technologie que nous avons utilisée pour réécrire l'outil de détection, puis, nous avons évalué la combinaison de trois services Web d'Amazon S3, Glue et Athena. Ensuite, nous avons reproduit l'outil de détection en Spark/Scala. Enfin, nous présentons Amazon Elastic MapReduce. Nous présentons aussi l'écosystème Hadoop, étant donné qu'il fait partie des principales plateformes du Big Data.
 	
 \subsection{MongoDB} \label{subsubsection:mongodb}
 %	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
-MongoDB\footnote{Source : \url{https://www.mongodb.com/}, consultée le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBDs adoptant le couple CP (Consistency et Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections. Une collection dans MongoDB est équivalente à une table dans un SGBDR.
+MongoDB\footnote{URL : \url{https://www.mongodb.com/}, consulté le $02/08/2018$.} est une base de données  NoSQL de type Document\footnote{Une base de données NoSQL de type document est décrite dans la section \ref{sec:nosql-database}.}.  MongoDB est classé parmi les  SGBDs adoptant le couple CP (Consistency et Partition Tolerance) dans le théorème  CAP\footnote{Le théorème  CAP est décrit dans la section \ref{par:cap-theorem}}. Une base de données créées dans MongoDB est un ensemble de collections. Une collection dans MongoDB est équivalente à une table dans un SGBDR.
 	
-En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{Source : \url{https://www.mongodb.com/cloud/atlas}, consultée le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépendent du stockage, de la  RAM allouée et des options choisies. Les documents sont stockés dans MongoDB sous format BSON.
+En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas \footnote{URL : \url{https://www.mongodb.com/cloud/atlas}, consulté le $ 02/08/2018 $.}.  Il est distribué à travers les trois fournisseurs du cloud: Amazon Web Services (AWS), Google Cloud Platform et Microsoft Azure.  En terme de tarifs, plusieurs formules sont proposées \footnote{Source : \url{https://www.mongodb.com/cloud/atlas/pricing}, consultée le $ 02/08/2018 $.}, y inclut l'offre gratuite pour expérimenter MongoDB Atlas.  Les frais d'utilisation du service MongoDB Atlas dépendent du stockage, de la  RAM allouée et des options choisies. Les documents sont stockés dans MongoDB sous format BSON.
 	
 \begin{tcolorbox}
 	BSON (ou Binary JSON) est un format utilisé pour stocker et transférer les données dans la base de données MongoDB. BSON facilite la représentation des structures de données simples et des tableaux associatifs\footnote{Source : \url{https://fr.wikipedia.org/wiki/BSON}, consultée le $ 02/08/2018 $.}.
@@ -292,7 +298,7 @@ En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas
 	
 	% \paragraph{Amazon DynamoDB :}\label{aws:dynmo}~
 	
-	Amazon DynamoDB\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/}, consultée le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est un service  simple et facile à utiliser,  il ne nécessite aucune configuration préalable. 
+	Amazon DynamoDB\footnote{URL : \url{https://aws.amazon.com/fr/dynamodb/}, consulté le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est un service  simple et facile à utiliser,  il ne nécessite aucune configuration préalable. 
 	
 	Amazon DynamoDB  est une base de données évolutive permettant à l'utilisateur final de passer à l'échelle facilement et rapidement. Cette technologie offre des performances constantes à une échelle essentiellement infinie, limitée uniquement par la taille physique du cloud AWS. Elle est flexible. Aucun schéma n'est requis pour stocker les données. Les frais d'utilisation de ce service dépendent de trois éléments\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/pricing/}, consultée $02/05/2018$.}:
 	\begin{itemize}
@@ -308,7 +314,7 @@ La combinaison d'Amazon S3, Amazon Glue et Amazon Athena permet de créer un env
 %\paragraph{Introduction aux services Amazon S3, Amazon Athena et Amazon Glue }
 
 \paragraph{Amazon S3}
-\footnote{Source : \url{https://aws.amazon.com/fr/s3/}, consultée le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
+\footnote{URL : \url{https://aws.amazon.com/fr/s3/}, consulté le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
 
 Dans Amazon S3, le fichier à stocker et considéré comme objet. Un objet est référencé par une clé qui reprend d'abords le chemin vers un pseudo répertoire suivi par  le nom de l'objet.  Le terme pseudo répertoire est utilisé car, en réalité, Amazon S3 ne stocke pas les objets dans des dossiers comme le cas d'un système d'exploitation. Chaque objet appartient à un compartiment, un compartiment appartient aussi à une des régions d'Amazon et le nom d'un compartiment est unique. Prenons l'exemple d'un  compartiment \textit{foo}, contenant deux objets ayant respectivement les clés \textit{A/b/c/i.txt} et \textit{A/b/d/k.txt}, dans ce cas, ces deux objets ne partagent que le même compartiment.
 %Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, . 
@@ -329,43 +335,42 @@ Le Tableau   	\ref{tab:pricing-s3-standard} décrit les tarifs de la formule sta
 
 
 \paragraph{Amazon  Glue} \label{aws:glue}
-\footnote{Source : \url{https://aws.amazon.com/fr/glue/}, consultée le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rend accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  de données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisables. 
+\footnote{URL : \url{https://aws.amazon.com/fr/glue/}, consulté le $06/07/2018$.} est un service d'extraction, de transformation et de chargement. L'objectif de ce service est de découvrir les données, les transformer et les rendre accessibles à la recherche et à l'interrogation.  Amazon Glue  est utile pour la construction des entrepôts de données; il découvre les métadonnées relatives aux magasins de données et les rend accessibles dans un catalogue central. En prenant en entrée les données  présentes dans un compartiment dans Amazon S3, Amazon Glue découvre le schéma de ces données. Il dispose de plusieurs classificateurs intégrés pour la découverte des données. Par exemple un classificateur pour trouver le schéma  de données en format JSON, XML, etc. Si les classificateurs intégrés ne répondent pas aux besoins particuliers, il est possible de créer des classificateurs personnalisés. 
 
 Les frais de ce service dépendent du temps écoulé lors de l'analyse des données par les robots d'analyse durant la découverte du schéma. A ces frais s'ajoutent les frais du catalogue de données qui va être peuplé par les résultats fournis par les robots de l'analyse. Par exemple, on paye $ 0,44 $ USD par heure par DPU\footnote{DPU : unité de traitement des données.}, il est facturé à la seconde avec un minimum de $ 10 $ minutes par robot d'analyse exécuté. Plus de détails sont disponibles sur le site Web d'Amazon Glue\footnote{Source : \url{https://aws.amazon.com/fr/glue/pricing/}, consultée le $05/08/2018$.}.
 
-\paragraph{Amazon Athena}\label{aws:athena}\footnote{Source : \url{https://aws.amazon.com/fr/athena/}, consultée le $06/07/2018$.} est un service de requêtes  interactif. Il permet d'interroger les données présentes dans Amazon S3 avec des requêtes SQL plus avancées. Le service Amazon Athena est considéré comme \textit{serverless}. Amazon Athena utilise l'approche \textbf{\textit{schema-on-read}} (voir la section \ref{sec:schema-read-write}) afin de projeter le schéma donné en entrée sur les données au moment de l'exécution de la requête SQL demandée. Le schéma sur lequel les données peuvent être projetées peut être créé manuellement ou bien utiliser le catalogue créé dans Amazon Glue.
+\paragraph{Amazon Athena}\label{aws:athena}\footnote{URL : \url{https://aws.amazon.com/fr/athena/}, consulté le $06/07/2018$.} est un service de requêtes  interactif. Il permet d'interroger les données présentes dans Amazon S3 avec des requêtes SQL plus avancées. Le service Amazon Athena est considéré comme \textit{serverless}. Amazon Athena utilise l'approche \textbf{\textit{schema-on-read}} (voir la section \ref{sec:schema-read-write}) afin de projeter le schéma donné en entrée sur les données au moment de l'exécution de la requête SQL demandée. Le schéma sur lequel les données peuvent être projetées peut être créé manuellement ou bien utiliser le catalogue créé dans Amazon Glue.
 Le service Amazon Athena est facturé suivant la quantité de données analysée. Précisément, $ 5 $ USD par To de données analysées.
 
 
 \begin{tcolorbox}
-	Une \textbf{\textit{requête est	interactive}} si on peut  obtenir immédiatement une réponse à la requête.  Dans le cas échéant, les résultats sont obtenus  dans le cadre d'un code source pour un des langages de programmation, souvent à travers une API.
+	Une \textbf{\textit{requête est	interactive}} si on peut  obtenir immédiatement une réponse à la requête.  Dans le cas échéant, les résultats sont obtenus  dans le cadre d'un code source pour un des langages de programmation, typiquement à travers une API.
 \end{tcolorbox}
 
 \begin{tcolorbox}
-	\textbf{\textit{Serverless}} peut être décomposé en \textit{server} et \textit{less}. Un outil est \textit{serverless} quand l'utilisateur final de cet outil peut l'utiliser sans se soucier de toute configuration ou gestion des serveurs derrière ce service. D'après Amazon\footnote{\url{https://aws.amazon.com/serverless/}, consultée le  $05/08/2018$.},  \textit{Serverless} est l'architecture native du cloud.
+	\textbf{\textit{Serverless}} peut être décomposé en \textit{server} et \textit{less}. Un outil est \textit{serverless} quand l'utilisateur final de cet outil peut l'utiliser sans se soucier de toute configuration ou gestion des serveurs derrière ce service. D'après Amazon\footnote{URL : \url{https://aws.amazon.com/serverless/}, consultée le  $05/08/2018$.},  \textit{Serverless} est l'architecture native du cloud.
 \end{tcolorbox}
 
-L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Presto. Pour les instruction DDL (Data Definition Language), elles sont effectuées par  \textit{Hive Data Definition Language} \footnote{Source : \url{https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL}, consultée le $05/08/2018$.}. Les requêtes DDL incluent la création, la suppression et la mise à jour de la structure de la table dans le cas d'une base de données relationnelles, d'une collection, d'une vue, etc. 
+L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Presto. Pour les instruction DDL (Data Definition Language), elles sont effectuées par  \textit{Hive Data Definition Language} \footnote{URL : \url{https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL}, consulté le $05/08/2018$.}. Les requêtes DDL incluent la création, la suppression et la mise à jour de la structure de la table dans le cas d'une base de données relationnelles, d'une collection, d'une vue, etc. 
 
 \begin{tcolorbox}
 	\textbf{Hive Data definition language} (DLL) est un sous-ensemble de déclarations qui décrivent la structure de données dans Apache Hive.  Principalement, ce sont les instruction de création, suppression et de mise à jour de la structure des objets comme les bases de données, les tables, les vues et autres.
 \end{tcolorbox}
 
 \begin{tcolorbox}
-	\textbf{\textit{Presto\footnote{Source : \url{http://prestodb.io/}, consultée le $01/08/2018$.} }} est un moteur de requêtes SQL open source destiné au Big Data. Il permet d'exécuter des requêtes analytiques interactives sur des données de taille importante; jusqu'à des Pétaoctets de données.
+	\textbf{\textit{Presto\footnote{URL : \url{http://prestodb.io/}, consulté le $01/08/2018$.} }} est un moteur de requêtes SQL open source destiné au Big Data. Il permet d'exécuter des requêtes analytiques interactives sur des données de taille importante; jusqu'à des pétaoctets de données.
 	
 	Presto interroge les données où elles sont hébergées. Ceci inclut les bases de données relationnelles, Amazon S3 et autres dépôts propriétaires. De plus, une même requête SQL peut combiner plusieurs sources de données. C'est intéressant pour les organisations ayant plusieurs sources de données. Il fournit les résultats en quelques secondes, voire quelques minutes.  Il supporte les types de données complexes comme les objets JSON, les tableaux d'éléments, etc. 
 \end{tcolorbox} 
 
 
-\subsection{Hadoop ecosystem}
+\subsection{Apache Hadoop}
 
-Hadoop est un écosystème destiné au Big Data et il regroupe plusieurs projets. \par 
-\textbf{Apache Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
-\textbf{Hadoop Yarn (Yet Another Resource Negotiator)} est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  Yarn  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
+Hadoop est un écosystème destiné au Big Data, il regroupe plusieurs modules.  \par 
+\textbf{Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
+\textbf{Hadoop YARN} (Yet Another Resource Negotiator) est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  YARN  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
 
-\textbf{Hadoop MapReduce}  représente la couche destinée aux traitement en parallèle  dans l'écosystème Hadoop. En particulier, ce sont les traitement qui concernent des volumes de données importants.
-MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. 
+\textbf{Hadoop MapReduce} (voir la section \ref{mapreducesection}).
 
  %Apache Spark est présenté dans la section \ref{apache-spark}.
 
@@ -383,7 +388,7 @@ MapReduce divise le travail en petites parties, chacune pouvant être effectuée
 
 %\subsection{Introduction à Apache Sprk}
 
-Apache Spark\footnote{Source : \url{https://spark.apache.org/}, consultée le $14/12/2018$} 
+Apache Spark\footnote{URL : \url{https://spark.apache.org/}, consulté le $14/12/2018$} 
 est un framework de calcul distribué. C'est un ensemble de composantes conçues pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité dans l'analyse des données à grande échelle. Plusieurs APIs sont disponibles pour interagir avec Spark et 
  appliquer les transformations sur les données à analyser. 
 
@@ -391,7 +396,7 @@ est un framework de calcul distribué. C'est un ensemble de composantes conçues
 
 \subparagraph{Spark Clusters et Resource Management System}
 
-Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{Site officiel : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
+Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
 Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
 
@@ -442,29 +447,21 @@ La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark 
 	\label{fig:unified-stack}
 \end{figure}
 
-\paragraph{Resilient Distributed Datasets}~
+\paragraph{Resilient Distributed Datasets}\label{rdd-presentation} ~
 
 
 Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster afin d'être traités en parallèle. Un RDD peut être conservé  pour une éventuelle réutilisation. On distingue deux manières de persistance. La conservation du RDD dans la mémoire (in-memory) ce que garantit l'amélioration des performances. En outre, un RDD peut être aussi conservé dans un disque. 
 
 Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD.
 
-Input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
+
+
+Dans la Figure 	\ref{fig:globalviewrdd}, Input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
 Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois qu'une partition est localisée sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
 
 En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
 
-
-%Resilient Distributed Dataset (RDD) allows Spark to transparently store data on the memory, and send to disk only what’s important or needed. As a result, a lot of time that is spent on the disc read and write is saved.
-
-%Le RDD (Resilient Distributed Dataset) permet à Spark de stocker des données de manière transparente dans la mémoire et d’envoyer sur disque uniquement ce qui est important ou nécessaire. En conséquence, une grande partie du temps consacré à la lecture et à l'écriture du disque est enregistrée.[!]
-
-\paragraph{A propos lazy evaluation} \label{lazy-evaluation}
-Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrés dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
-
- La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. Dans cette figure, \textit{input data} représente les données qu'on souhaite analyser. Ces dernières sont en provenance de sources de stockage externes. Le framework Spark crée le RDD représenté par le premier rectangle orange à gauche. Ce dernier  comprend  des petits rectangles chacun représente une partition du RDD.  Les transformations  peuvent être enchaînées sur le RDD créé sans être exécutées. Les partitions seront envoyées à travers les n\oe{}ds dés que le \textit{driver} appelle une action sur ce RDD. Un n\oe{}d est une machine avec des ressources de stockage (\textit{disk}), de calcul (\textit{CPU}), etc. Enfin, le reste des opérations peuvent s'enchaîner  sur chaque n\oe{}d où se trouvent les données.
- 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\captionsetup{justification= centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/global_view_rdd}
@@ -473,25 +470,30 @@ Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on ex�
 	\source{ \url{https://www.duchess-france.org/starting-with-spark-in-practice/}, consultée le $15/12/2018$.}
 \end{figure}
 
+%Resilient Distributed Dataset (RDD) allows Spark to transparently store data on the memory, and send to disk only what’s important or needed. As a result, a lot of time that is spent on the disc read and write is saved.
+
+%Le RDD (Resilient Distributed Dataset) permet à Spark de stocker des données de manière transparente dans la mémoire et d’envoyer sur disque uniquement ce qui est important ou nécessaire. En conséquence, une grande partie du temps consacré à la lecture et à l'écriture du disque est enregistrée.[!]
+
+\paragraph{Lazy evaluation} \label{lazy-evaluation}
+Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrées dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{Lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
+
+ La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. Dans cette figure, \textit{input data} représente les données qu'on souhaite analyser. Ces dernières sont en provenance de sources de stockage externes. Le framework Spark crée le RDD représenté par le premier rectangle orange à gauche. Ce dernier  comprend  des petits rectangles chacun représente une partition du RDD.  Les transformations  peuvent être enchaînées sur le RDD créé sans être exécutées. Les partitions seront envoyées à travers les n\oe{}ds dés que le \textit{driver} appelle une action sur ce RDD. Un n\oe{}d est une machine avec des ressources de stockage (\textit{disk}), de calcul (\textit{CPU}), etc. Enfin, le reste des opérations peuvent s'enchaîner  sur chaque n\oe{}d où se trouvent les données.
+ 
+
+
 
 
 \paragraph{Les APIs de Spark}
 
-Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utiliser les fonctionnalités fournies par ce framework : Scala, Python, Java et R. Il n'est pas évident de choisir entre ces quatre langages, car ce choix dépend du contexte de l'analyse. 
+Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utiliser les fonctionnalités fournies par ce framework : Scala, Python, Java et R. 
+%Il n'est pas évident de choisir entre ces quatre langages, car ce choix dépend du contexte de l'analyse. 
 
 
 %Nous allons comparer ces langages dans le contexte du Big Data.
 
 
 
-\paragraph{Présentation de Scala} \label{scala-presentation}
 
-%Nous allons présenter le langage Scala\footnote{Présentation basée sur \url{http://igm.univ-mlv.fr/~dr/XPOSE2011/le_langage_scala/}, consultée le $09/04/2019$}. 
-
-Le première version du langage Scala date de l'année $2003$. Scala  est un terme venant du \textit{ Scalable language }. C'est un langage basé sur le langage Java, ainsi, sur sa machine virtuelle. La particularité de ce langage est le fait de proposer à la fois les concepts suivants : scalability, programmation multi-paradigme et compatibilité.  
-Scala est un langage à la fois orienté objet, un paradigme qui a prouvé ses performances depuis des années. De plus, Scala supporte la programmation fonctionnelle. En terme de compatibilité, Scala est interopérable avec le code Java, car ce dernier est compilé en bytecode Java. Ce que permet d'utiliser du code Java avec le code Scala et garantit l'indépendance des systèmes d'exploitation du moment qu'ils disposent d'une machine virtuelle Java.
-
-L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
 \paragraph{Lancement d'une application avec de Spark} \label{spark-master-modes}~
 
@@ -500,26 +502,27 @@ On distingue deux modes d'exécution d'une application écrite en Spark : cluste
  
 Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{Source : \url{https://aws.amazon.com/fr/emr/}, consultée le $08/05/2019$}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
 
-Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins rapide en le comparant au framework Apache Spark.  Une étude \cite{article-comparaison-spark-hadoop} comparative entre Hadoop MapReduce et Spark a montré que Spark est $ 3 $ à $ 4 $ fois rapide que Hadoop MapReduce.
+\paragraph{Apache Spark VS Apache Hadoop}
 
+Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins rapide en le comparant au framework Apache Spark.  Une étude \cite{article-comparaison-spark-hadoop} comparative entre Hadoop MapReduce et Spark a montré que Spark est $ 3 $ à $ 4 $ fois rapide que Hadoop MapReduce.
  Ceci est dû au fait que Spark traite les données suivant l'approche in-memory. Tandis que  les traitements basés sur l'écosystème Hadoop sont basés sur des lectures/écritures sur le disque.  
 %http://csjournals.com/IJCSC/PDF7-2/13.%20JP.pdf
 \subsection{Amazon Elastic MapReduce} \label{emr-aws-presentation}
 
 Amazon Elastic MapReduce\footnote{URL : \url{https://docs.aws.amazon.com/fr_fr/emr/}, onsulté le $10/05/2019$.} (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
-Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{Source : \url{https://aws.amazon.com/ec2/}, consultée le $14/05/2019$.}.
+Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{URL : \url{https://aws.amazon.com/ec2/}, consulté le $14/05/2019$.}.
 Il existe plusieurs variantes d'instances EC2. Les instances sont conçues pour répondre 
 aux besoins classés par AWS dans les catégories suivantes : usage général, calcul optimisé, calcul accéléré et stockage optimisé.
-Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. 
+Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Le coût d'utilisation des instances EC2 indépendamment d'EMR est différent du cas où une instance est utilisée pour former un cluster.
 
-Par défaut, Amazon EMR utilise YARN pour gérer les ressources. On distingue trois types de n\oe{}ds dans Amazon EMR. 
+Par défaut, Amazon EMR utilise YARN pour gérer les ressources. On distingue trois types de n\oe{}uds dans Amazon EMR. 
 \begin{itemize}
 	\item N\oe{}ud principal (\textit{Master node}) : il gère le cluster.
 	\item N\oe{}ud de noyau (\textit{Core node}): exécute les tâches et stocke les données dans le système de fichier distribué Hadoop HDFS sur le cluster.
 	\item N\oe{}ud de  tâche (\textit{Task node}) : il exécute les tâches et ne stocke pas les données dans HDFS. Les n\oe{}uds de tâches sont facultatifs.
 \end{itemize}
 
-Les coûts appliqués  à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{Source : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
+Les coûts appliqués  à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{URL : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
 
 
 \section{Conclusion}

@@ -2,92 +2,120 @@
 
 \section{Introduction}
 
-Les fonctionnalités de Spark sont accessibles avec les  APIs en Scala, Java et Python. Nous avons choisi l'utilisation de l'API en Scala parce que Scala est le langage natif de Spark. De plus, Scala est interopérable avec Java. 
+Ce chapitre  décrit  l'implémentation de l'outil de détection en utilisant le framework Spark, avec Scala comme API.  Dans un premier temps, nous présentons brièvement le langage Scala qui fait partie des langages de programmation fonctionnelle. Ensuite, nous 
+décrivons les notre implémentation en Spar/Scala.
 
-Ce chapitre  décrit  l'implémentation de l'outil de détection en utilisant le framework Spark, décrit dans la section \ref{apache-spark}, en utilisant l'API Scala (voir la présentation de Scala dans \ref{scala-presentation}). 
-%L'outil implémenté est décrit dans le chapitre \ref{chap:algorith-detection}. 
+\section{Présentation de Scala} \label{scala-presentation}
 
+%Nous allons présenter le langage Scala\footnote{Présentation basée sur \url{http://igm.univ-mlv.fr/~dr/XPOSE2011/le_langage_scala/}, consultée le $09/04/2019$}. 
 
-%[!] Avec Spark, on travaille sur des collections d'objets, sur lesquelles on applique des traitements. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données, appelées \textit{case class}. De plus, nous avons besoin de définir les fonctions à appliquer  sur ces objets. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes, dans l'annexe \ref{application:spark}, en vue de tracer l'évolution des RTTs différentiels des liens au cours du temps. 
-
-\section{La programmation fonctionnelle et Big Data}
-\subsection{Les apports de la programmation fonctionnelle}
-
-\paragraph{Fonctions d'ordre supérieur.} ou  higher-order functions en anglais. Dans un langage, si une fonction est traitée comme first-class value, elle est considérée comme fonction d'ordre supérieur \cite{DBLP:journals/csur/Hudak89}.  
-
-\begin{tcolorbox}
-	\textbf{First-class functions}: ou fonctions de première classe dans un langage de programmation sont des fonctions qui peuvent être stockées dans des structures de données, peuvent être passées comme arguments aux fonctions et être retournées comme résultats.
-\end{tcolorbox}
-\paragraph{Structures de données immuables.} Un objet est immuable est celui qu'on ne peut pas changer son état après sa création. 
-
-\paragraph{Stateless.} Une fonction est dite ayant effet de bord, \textit{side effect} en anglais, quand cette fonction modifie une variable en dehors de son environnement local. Par exemple, les fonctions qui modifient l'état d'une variable passé à cette fonction par référence.
-
-\subsection{La programmation fonctionnelle au service du Big Data }
-
-Quand il s'agit des traitements appliqués sur des données massives dépassant la capacité d'une seule machine, la distribution de ces traitements sur plus d'une machine  est nécessaire. La programmation fonctionnelle peut apporter des facilités aux projets Big Data. On distingue deux sous-catégories de langages de programmation fonctionnelle. Des langages qui sont purement fonctionnels et les autres hybrides.
-
-
-La programmation fonctionnelle offre de nombreux avantages dans un contexte Big Data. 
-L'absence d'effet de bord pour les fonction est un élément clé pour faciliter la parallélisation des traitements appliqués sur des volumes importants de données. Cela permet aussi de mieux gérer les opérations concurrentielles. 
-La manipulations des structures de données immuables permet d'écrire un code lisible grâce au nombre réduit de dépendances sur ces structures. De plus, les structures de données immuables facilitent la parallélisation, car elles supportent seulement le mode lecture-seule.
-\section{Implémentation}
-\subsection{Description de l'environnement}
-%Spark est destiné aux traitements distribués sur un cluster de machines, toutefois,n
-La création d'une application Spark/Scala passe par les étapes suivantes:
-\begin{itemize}
-	\item gérer les dépendances nécessaires au fonctionnement de l'application avec le fichier de modèle objet du projet (POM);
-	\item écrire l'application dans Scala;
-	\item générer le fichier JAR de l'application;
-	 \item  exécuter l'application en soumettant cette dernière au cluster. 
-\end{itemize}
-
-Dans l'implémentation proposée, nous avons utilisé le mode local de Spark, intitulé \textit{Standalone}. 
-Le code source, qui traduit l'ensemble des traitements, est organisé dans une archive de type JAR.
-En ce qui concerne  l'automatisation et la gestion du fichier JAR, nous avons utilisé l'outil \textit{Maven}\footnote{\url{https://maven.apache.org/}, consultée le $09/04/2019$.}.
-% Les traitements de données sont organisés dans le fichier JAR.
-
-
-\subsection{Brève présentation  de l'implémentation}
-
-Un programme Spark implique un ensemble d'éléments. La première chose à faire est de configurer le programme Spark.
-%et ce à travers  un objet \textit{SparkConf}. Ce dernier contient les informations sur l'application. 
-Ensuite, nous utilisons la composante Spark SQL   du Spark Unified Stack (voir la section \ref{Spark Uniffied-Stack}) pour lire les traceroutes présents dans des fichiers d'entrée. Cela permet de créer un Dataset d'objet Traceroute.  Nous convertissons ensuite un Dataset en un RDD afin d'appliquer différentes transformations aboutissant à l'identification des anomalies dans les délais des liens.
-
-\subsection{Création d'une application Spark/Scala}
-
-\paragraph{Gestion des dépendances}~
-
-Le fichier POM permettant de gérer les dépendances est disponible sur GitHub\footnote{\url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/pom.xml}, consultée le $23/04/2019$.}. Ces dépendances concernent les composantes de Spark comme spark-core, spark-mllib, spark-sql. De plus, il y a les dépendances permettant de gérer les fichiers de type JSON.
-
+La première version du langage Scala date de l'année $2003$, le terme  Scala  est dérivé de \textit{Scalable language}. 
+La particularité de ce langage est le fait de proposer à la fois plusieurs avantages. Scala appartient à la 
+programmation multi-paradigme, c'est  un langage à la fois orienté objet, il supporte la programmation fonctionnelle et fait partie des langages impératifs. En terme de compatibilité, Scala est interopérable avec  Java, car ce dernier est compilé en bytecode Java. Ceci permet d'utiliser du code Java avec le code Scala, de garantir l'indépendance des systèmes d'exploitation et d'utiliser la richesse des bibliothèques en Java. De plus, le code écrit en Scala est facile à lire.
+Nous comparons dans le Listing \ref{java-vs-scala} l'écriture d'un même traitement écrit en Java et en Scala.
+\begin{center}
+	\begin{minipage}[t]{.50\textwidth}
+\begin{lstlisting}[language=java, basicstyle=\small]
+//Java
+Integer[] intArray = {1,2,3,4,5};
+List <Integer> numsList = Arrays.asList(intArray);
+List <Integer> positves = new LinkedList < Integer > ();
+for (int i: numsList) {
+  if (i > 0) positives.add(n);
+}
+\end{lstlisting}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.49\textwidth}
+\begin{lstlisting}[language=scala, basicstyle=\small]
+// Scala 
+val positives = List(1,2,3,4,5).filter(_ > 0)
+\end{lstlisting}
+	\end{minipage}
+	\captionof{lstlisting}{Comparaison entre un traitement écrit en Java et en Scala}
+	\label{java-vs-scala}
+\end{center}
+%L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
 \paragraph{Notation relatives au langage Scala}~
 
-Nous présentons  des notations   propres au langage Scala, elles sont utilisées dans quelques Listings. c'est une liste non exhaustive, elle est utilisée pour comprendre les morceaux de code introduits tout au long de ce chapitre.\\
-\textbf{\textit{case class}}: créer une case classe.\\
-\textit{\textbf{Seq}}: créer une séquence, équivalent à une liste. Par exemple Seq[String] représente le type d'une liste dont ses éléments sont de type String.  \\
-\textbf{\textit{Dataset}}:  est une collection distribuée de données. \\
-\textit{\textbf{map}}: permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoi une liste transformée. \\
-\textit{\textbf{Option}} : représente une valeur optionnelle.  \\
-\textit{\textbf{groupBy}}: groupBy est une fonction utile pour regrouper les éléments d'une liste ayant une clé en commun.
+Nous présentons  des notations   propres au langage Scala. Ce  sont les mots clés utilisés  dans les Listings du présent chapitre. \\
+\textbf{\textit{case class}} (mot-clé): définir une  classe.\\
+\textit{\textbf{Seq}} (type): créer une séquence, équivalent à créer une liste. Par exemple Seq[String] représente le type d'une liste dont ses éléments sont de type String.  \\
+\textbf{\textit{Dataset}} (type):  est une collection distribuée de données. Elle est similaire à un RDD (voir la section \ref{rdd-presentation}) et plus récente que les RDDs. \\
+\textit{\textbf{map}} (fonction): permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoi une liste transformée. \\
+\textit{\textbf{Option}} (type) : représente une valeur optionnelle.  \\
+\textit{\textbf{groupBy}} (fonction): groupBy est une fonction utile pour regrouper les éléments d'une liste ayant une clé en commun.
 %Sa définition est : def groupBy[K](f : (A) => K) : Map[K, This] 
 \\
-\textbf{\textit{List}}: crée une liste d'un type donné. La liste \textit{l\_1} de deux chaînes de caractères est créée comme suit:
+\textbf{\textit{List}} (type): créer une liste d'un type donné. La liste \textit{l\_1} de deux chaînes de caractères est créée comme suit:
 \begin{lstlisting}[language=scala,firstnumber=1,label={lst:case-class-hop}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 l_1: List[Int] = List("aa", "bb")
 \end{lstlisting} 
-\noindent \textbf{\textit{filter}} : cette fonction permet de filtrer les éléments d'une collection pour créer une nouvelle collection contenant uniquement les éléments de la collection   vérifiant une condition. Prenons un  exemple : 
+\noindent \textbf{\textit{filter}} (fonction): cette fonction permet de filtrer les éléments d'une collection pour créer une nouvelle collection contenant uniquement les éléments de la collection   vérifiant une condition. Prenons un  exemple : 
 \begin{lstlisting}[language=scala,firstnumber=1, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
-//créer une liste d'entier entre 1 et 10, l_2 vaut List(1, 2, 3, 4, 5, 6, 7, 8, 9)
+//créer une liste d'entiers entre 1 et 10, l_2 vaut List(1, 2, 3, 4, 5, 6, 7, 8, 9)
 val l_2 = List.range(1, 10)   
 // filter les éléments de l_2 afin de ne garder que ceux paires, evens vaut List(2, 4, 6, 8)
 val evens = l_2.filter(_ % 2 == 0)  
 \end{lstlisting}
 
+\section{La programmation fonctionnelle et le Big Data}
+%\subsection{Les apports de la programmation fonctionnelle}
+
+La programmation fonctionnelle est un style de programmation où l'évaluation se base sur les fonctions.  La programmation fonctionnelle se caractérise par les éléments suivants \cite{bigdatafunctional} :
+
+\textbf{Fonctions d'ordre supérieur} ou  \textit{higher-order} functions en anglais. Dans un langage, si une fonction est traitée comme first-class value, elle est considérée comme fonction d'ordre supérieur \cite{DBLP:journals/csur/Hudak89}.
+\begin{tcolorbox}
+	\textbf{First-class functions}: ou fonctions de première classe dans un langage de programmation sont des fonctions qui peuvent être stockées dans des structures de données, peuvent être passées comme arguments aux fonctions et être retournées comme résultats.
+\end{tcolorbox}
+\par
+\textbf{Structures de données immuables.} Un objet est immuable est celui qu'on ne peut pas changer son état après sa création. \par
+\textbf{Stateless} ou \textit{no side effect} en anglais.  Une fonction est dite n'ayant pas  l'effet de bord, quand cette fonction ne modifie pas une variable en dehors de son environnement local. Par exemple, les fonctions qui modifient l'état d'une variable passée à cette fonction par référence sont considérées comme ayant un effet de bord.\par
+%\subsection{La programmation fonctionnelle au service du Big Data }
+
+Quand il s'agit des traitements appliqués sur des données massives dépassant la capacité d'une seule machine, la distribution de ces traitements sur plus d'une machine  est nécessaire. La programmation fonctionnelle peut apporter des facilités aux projets Big Data. 
+En particulier, l'absence d'effet de bord lors de la conception des fonction est un élément clé pour faciliter la parallélisation des traitements appliqués sur des volumes importants de données. Ceci permet aussi de mieux gérer les opérations concurrentielles. 
+La manipulation des structures de données immuables permet d'écrire un code lisible grâce au nombre réduit de dépendances sur ces structures. De plus, les structures de données immuables facilitent la parallélisation, car elles supportent seulement le mode lecture-seule.
+
+%On distingue deux sous-catégories de langages de programmation fonctionnelle. Des langages qui sont purement fonctionnels et les autres hybrides.
+%La programmation fonctionnelle offre de nombreux avantages dans un contexte Big Data. 
+
+
+
+\section{Implémentation}
+\subsection{Description de l'environnement}
+%Spark est destiné aux traitements distribués sur un cluster de machines, toutefois,n
+La création d'une application Spark/Scala implique  les étapes suivantes:
+\begin{itemize}
+	\item gérer les dépendances nécessaires au fonctionnement de l'application avec le fichier de modèle objet du projet (POM);
+	\item écrire l'application en Scala;
+	\item créer le fichier JAR de l'application Spark;
+	 \item Soumettre  l'application  au cluster de machines. 
+\end{itemize}
+
+L'implémentation proposée est adaptée au mode local de Spark  ainsi qu'au  mode cluster. 
+Le code source, qui traduit l'ensemble des traitements, est organisé dans une archive de type JAR.
+En ce qui concerne  l'automatisation et la gestion du fichier JAR, nous avons utilisé l'outil \textit{Maven}\footnote{URL : \url{https://maven.apache.org/}, consulté le $09/04/2019$.}.
+% Les traitements de données sont organisés dans le fichier JAR.
+
+
+\subsection{Brève présentation  de l'implémentation}
+
+%Un programme Spark implique un ensemble d'éléments. 
+%et ce à travers  un objet \textit{SparkConf}. Ce dernier contient les informations sur l'application. 
+La première chose à faire lors de la conception d'une application Spark est de configurer cette dernière. Ensuite, nous utilisons en particulier le module  Spark SQL  du Spark Unified Stack (voir la section \ref{Spark Uniffied-Stack}) pour lire les traceroutes présents dans les fichiers indiquées à l'entrée de l'application. Cela permet de créer un Dataset d'objet Traceroute.  Nous convertissons ensuite un Dataset en un RDD afin d'appliquer différentes transformations aboutissant à l'identification des anomalies dans les délais des liens.
+
+\subsection{Création d'une application Spark/Scala}
+
+\paragraph{Gestion des dépendances}~
+
+Le fichier POM permettant de gérer les dépendances est disponible sur GitHub\footnote{URL : \url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/pom.xml}, consultée le $23/04/2019$.}. Ces dépendances concernent les composantes de Spark comme spark-core, spark-mllib, spark-sql. A ces dépendances, ils s'ajoutent celles permettant de gérer les fichiers de type JSON. 
 
 \paragraph{Paramètres de l'analyse}~
-Afin de tracer l'évolution du délai des liens, nous avons besoin des fichiers stockant les  traceroutes  dans  des objets JSON\footnote{Voir la liste des traceroutes utilisés dans l'exemple illustratif disponible sur GitHub \url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/src/main/resources/test/result_modified.json}, consultée le $23/04/2019$.}, la date du début de l'analyse (p. ex. $ 1517961600 $), la date de fin (p. ex. $ 1518134400 $) et enfin la durée d'une période (p. ex. $3600$s). En ce qui concerne les fichiers de données, ils sont stockés localement et le chemin vers ces derniers est configuré dans un fichier de configuration.
+
+Afin de tracer l'évolution du délai des liens, nous avons besoin des fichiers stockant les  traceroutes  dans  des objets JSON\footnote{Voir la liste des traceroutes utilisés dans l'exemple illustratif disponible sur GitHub. URL : \url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/src/main/resources/test/result_modified.json}, consulté le $23/04/2019$.}, la date du début de l'analyse (p. ex. $ 1517961600 $), la date de la fin (p. ex. $ 1518134400 $) et enfin la durée d'une période (p. ex. $3600$s). En ce qui concerne les fichiers de données, en mode local, ils sont stockés localement et le chemin vers ces derniers est configuré dans un fichier de configuration. Pour le mode cluster, le chemin vers les fichiers de traceroutes est celui vers le compartiment S3 contenant ces derniers.
 
 \paragraph{Configuration d'une application  Spark}~
 
@@ -901,3 +929,14 @@ Nous sauvegardons le résultat de l'analyse dans un fichier JSON en vue de toute
 \end{lstlisting}
 \section{Conclusion}
 
+
+
+
+%Les fonctionnalités de Spark sont accessibles avec les  APIs en Scala, Java et Python. Nous avons choisi l'utilisation de l'API en Scala parce que Scala est le langage natif de Spark. De plus, Scala est interopérable avec Java. 
+
+
+%décrit dans la section \ref{apache-spark}, en utilisant l'API Scala (voir la présentation de Scala dans \ref{scala-presentation}). 
+%L'outil implémenté est décrit dans le chapitre \ref{chap:algorith-detection}. 
+
+
+%[!] Avec Spark, on travaille sur des collections d'objets, sur lesquelles on applique des traitements. Dans une application écrite en Spark, nous avons besoin des classes modélisant les objets tout au long de l'analyse de données, appelées \textit{case class}. De plus, nous avons besoin de définir les fonctions à appliquer  sur ces objets. Nous avons décrit les différentes \textit{case class} conçues pour traiter les objets traceroutes, dans l'annexe \ref{application:spark}, en vue de tracer l'évolution des RTTs différentiels des liens au cours du temps. 
