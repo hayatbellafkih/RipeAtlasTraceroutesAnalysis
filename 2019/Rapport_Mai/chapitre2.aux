@@ -2,6 +2,7 @@
 \providecommand\hyper@newdestlabel[2]{}
 \citation{DBLP:journals/corr/FontugneAPB16}
 \citation{DBLP:journals/corr/FontugneAPB16}
+\citation{DBLP:journals/corr/FontugneAPB16}
 \citation{anant-shah}
 \@writefile{toc}{\contentsline {chapter}{\numberline {II}Détection des anomalies dans les délais d'un lien}{28}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -41,85 +42,87 @@
 \newlabel{par:parametre-de-lanalyse}{{II.6.2}{32}{Description des paramètres de l'analyse des délais}{subsection.2.6.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.2}{\ignorespaces Illustration des périodes de l'analyse entre la date de début et la date de fin.\relax }}{33}{figure.caption.28}}
 \newlabel{fig:timing_tex_}{{II.2}{33}{Illustration des périodes de l'analyse entre la date de début et la date de fin.\relax }{figure.caption.28}{}}
+\newlabel{moyenne-exponenetiel}{{II.6}{33}{Description des paramètres de l'analyse des délais}{equation.2.6.6}{}}
 \citation{InternetHealthReport}
 \@writefile{toc}{\contentsline {subsection}{\numberline {II.6.3}Processus de détection des anomalies : notation formelle}{34}{subsection.2.6.3}}
 \newlabel{steps-rtt-analysis}{{II.6.3}{34}{Processus de détection des anomalies : notation formelle}{subsection.2.6.3}{}}
 \@writefile{toc}{\contentsline {subparagraph}{Notations}{34}{section*.29}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{34}{figure.caption.30}}
-\newlabel{fig:traceroute}{{II.3}{34}{Illustration des sauts d'un traceroute avec leurs informations\relax }{figure.caption.30}{}}
-\@writefile{toc}{\contentsline {paragraph}{1. Regroupement des traceroutes par période $d_k$.}{34}{section*.31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{35}{figure.caption.30}}
+\newlabel{fig:traceroute}{{II.3}{35}{Illustration des sauts d'un traceroute avec leurs informations\relax }{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {paragraph}{1. Regroupement des traceroutes par période $d_k$.}{35}{section*.31}}
 \@writefile{toc}{\contentsline {paragraph}{2. Vérification de la validité de chaque traceroute.}{35}{section*.32}}
 \@writefile{toc}{\contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut.}{35}{section*.33}}
 \@writefile{toc}{\contentsline {paragraph}{4. Inférence des liens topologiques par traceroute.}{35}{section*.34}}
-\@writefile{toc}{\contentsline {paragraph}{5. Calcul des RTTs différentiels des liens.}{35}{section*.36}}
-\@writefile{toc}{\contentsline {paragraph}{6. Fusion des informations d'un lien.}{35}{section*.37}}
 \@writefile{lof}{\contentsline {figure}{\numberline {II.4}{\ignorespaces Inférence des liens possibles entre les routeurs des deux sauts $h_{1}$ et $h_{2}$\relax }}{36}{figure.caption.35}}
 \newlabel{fig:link-inference_}{{II.4}{36}{Inférence des liens possibles entre les routeurs des deux sauts $h_{1}$ et $h_{2}$\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {paragraph}{5. Calcul des RTTs différentiels des liens.}{36}{section*.36}}
+\@writefile{toc}{\contentsline {paragraph}{6. Fusion des informations d'un lien.}{36}{section*.37}}
 \@writefile{toc}{\contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et de son intervalle de confiance courants.}{36}{section*.38}}
 \@writefile{toc}{\contentsline {paragraph}{8. Mise à jour de la médiane des RTTs différentiels et de son intervalle de confiance de référence.}{36}{section*.39}}
 \@writefile{toc}{\contentsline {paragraph}{9. Comparaison des intervalles de confiance des RTTs différentiels : courant et référence.}{36}{section*.40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{37}{figure.caption.41}}
-\newlabel{fig:intervals-comparaison}{{II.5}{37}{La comparaison des deux intervalles de confiance : courant et référence \relax }{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.6.4}Processus de détection des anomalies : notation par fonctions}{37}{subsection.2.6.4}}
-\newlabel{processus-de-detection}{{II.6.4}{37}{Processus de détection des anomalies : notation par fonctions}{subsection.2.6.4}{}}
-\@writefile{toc}{\contentsline {paragraph}{Phase I : préparation de données.}{37}{section*.42}}
-\@writefile{toc}{\contentsline {paragraph}{ Phase II : détection des alarmes.}{38}{section*.43}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.1}Conditions de présence d'une anomalie pour un lien}{40}{lstlisting.2.1}}
-\@writefile{toc}{\contentsline {paragraph}{ Illustrations des deux phases de détection}{40}{section*.44}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.6}{\ignorespaces Phase I : préparation de données \relax }}{41}{figure.caption.45}}
-\newlabel{fig:step-preparing-data}{{II.6}{41}{Phase I : préparation de données \relax }{figure.caption.45}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.7}{\ignorespaces Phase II : détection des alarmes \relax }}{42}{figure.caption.46}}
-\newlabel{fig:step-detection-anomalies}{{II.7}{42}{Phase II : détection des alarmes \relax }{figure.caption.46}{}}
 \citation{DBLP:journals/corr/FontugneAPB16}
 \citation{leboudec2010performance}
-\@writefile{toc}{\contentsline {section}{\numberline {II.7}Exemples illustratifs de la détection des anomalies}{43}{section.2.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{43}{subsection.2.7.1}}
-\newlabel{conf-inter-section-exemple}{{II.7.1}{43}{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{subsection.2.7.1}{}}
-\newlabel{align:formule-j}{{II.9}{43}{}{equation.2.7.9}{}}
-\newlabel{align:formule-k}{{II.10}{43}{}{equation.2.7.10}{}}
-\newlabel{the21}{{1}{43}{}{equation.2.7.10}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{43}{subsubsection.2.7.1.1}}
-\newlabel{CI-theorem}{{II.7.1.1}{43}{Le théorème 2.1 par l'exemple}{subsubsection.2.7.1.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{37}{figure.caption.41}}
+\newlabel{fig:intervals-comparaison}{{II.5}{37}{La comparaison des deux intervalles de confiance : courant et référence \relax }{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II.7}Quelques étapes détaillées de la détection}{38}{section.2.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{38}{subsection.2.7.1}}
+\newlabel{conf-inter-section-exemple}{{II.7.1}{38}{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{subsection.2.7.1}{}}
+\newlabel{align:formule-j}{{II.7}{38}{}{equation.2.7.7}{}}
+\newlabel{align:formule-k}{{II.8}{38}{}{equation.2.7.8}{}}
+\newlabel{the21}{{1}{38}{}{equation.2.7.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{38}{subsubsection.2.7.1.1}}
+\newlabel{CI-theorem}{{II.7.1.1}{38}{Le théorème 2.1 par l'exemple}{subsubsection.2.7.1.1}{}}
 \citation{doi:10.1002/sim.2164}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.8}{\ignorespaces Illustration de la médiane\relax }}{44}{figure.caption.48}}
-\newlabel{fig:medianIllustration}{{II.8}{44}{Illustration de la médiane\relax }{figure.caption.48}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{44}{table.caption.49}}
-\newlabel{tab:outlierexample}{{II.2}{44}{Exemple 2 d'application du théorème 2.1\relax }{table.caption.49}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.7.1.2}Méthode de score de Wilson}{44}{subsubsection.2.7.1.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.6}{\ignorespaces Illustration de la médiane\relax }}{39}{figure.caption.43}}
+\newlabel{fig:medianIllustration}{{II.6}{39}{Illustration de la médiane\relax }{figure.caption.43}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{39}{table.caption.44}}
+\newlabel{tab:outlierexample}{{II.2}{39}{Exemple 2 d'application du théorème 2.1\relax }{table.caption.44}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.7.1.2}Méthode du score de Wilson}{39}{subsubsection.2.7.1.2}}
+\newlabel{align:wilson-formula}{{II.9}{39}{Méthode du score de Wilson}{equation.2.7.9}{}}
 \citation{DBLP:conf/infocom/FontugneMF15}
 \citation{elementdestatistiques}
 \citation{elementdestatistiques}
-\newlabel{align:wilson-formula}{{II.11}{45}{Méthode de score de Wilson}{equation.2.7.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{45}{subsection.2.7.2}}
-\newlabel{reference-lissage}{{II.7.2}{45}{Calcul de la référence}{subsection.2.7.2}{}}
-\newlabel{smoothe-formula}{{II.12}{46}{Calcul de la référence}{equation.2.7.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }}{47}{table.caption.50}}
-\newlabel{result-3-cas}{{II.3}{47}{Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }{table.caption.50}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.7.2.1}Détection des anomalies}{47}{subsubsection.2.7.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.9}{\ignorespaces Nomination utilisée\relax }}{47}{figure.caption.51}}
-\newlabel{fig:explainCis}{{II.9}{47}{Nomination utilisée\relax }{figure.caption.51}{}}
-\newlabel{align:condition-1}{{II.13}{47}{Détection des anomalies}{equation.2.7.13}{}}
-\newlabel{align:condition-2}{{II.14}{48}{Détection des anomalies}{equation.2.7.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {II.10}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{48}{figure.caption.52}}
-\newlabel{fig:anomalies}{{II.10}{48}{Illustration des sauts d'un traceroute avec leurs informations\relax }{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.3}Etapes détaillées du processus de détection}{48}{subsection.2.7.3}}
-\@writefile{toc}{\contentsline {paragraph}{Description de l'échantillon}{48}{section*.54}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{40}{subsection.2.7.2}}
+\newlabel{reference-lissage}{{II.7.2}{40}{Calcul de la référence}{subsection.2.7.2}{}}
+\newlabel{smoothe-formula}{{II.10}{41}{Calcul de la référence}{equation.2.7.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }}{42}{table.caption.45}}
+\newlabel{result-3-cas}{{II.3}{42}{Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }{table.caption.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.7.3}Détection des anomalies}{42}{subsection.2.7.3}}
+\newlabel{Detection-anomalies}{{II.7.3}{42}{Détection des anomalies}{subsection.2.7.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.7}{\ignorespaces Nomination utilisée\relax }}{42}{figure.caption.46}}
+\newlabel{fig:explainCis}{{II.7}{42}{Nomination utilisée\relax }{figure.caption.46}{}}
+\newlabel{align:condition-1}{{II.11}{42}{Détection des anomalies}{equation.2.7.11}{}}
+\newlabel{align:condition-2}{{II.12}{42}{Détection des anomalies}{equation.2.7.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.8}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{43}{figure.caption.47}}
+\newlabel{fig:anomalies}{{II.8}{43}{Illustration des sauts d'un traceroute avec leurs informations\relax }{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II.8}Processus de détection des anomalies : notation par fonctions}{43}{section.2.8}}
+\newlabel{processus-de-detection}{{II.8}{43}{Processus de détection des anomalies : notation par fonctions}{section.2.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{Phase I : préparation de données.}{43}{section*.49}}
+\@writefile{toc}{\contentsline {paragraph}{ Phase II : détection des alarmes.}{44}{section*.50}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.1}Conditions de présence d'une anomalie pour un lien}{46}{lstlisting.2.1}}
+\@writefile{toc}{\contentsline {paragraph}{ Illustrations des deux phases de détection}{46}{section*.51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.9}{\ignorespaces Phase I : préparation de données \relax }}{47}{figure.caption.52}}
+\newlabel{fig:step-preparing-data}{{II.9}{47}{Phase I : préparation de données \relax }{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {II.10}{\ignorespaces Phase II : détection des alarmes \relax }}{48}{figure.caption.53}}
+\newlabel{fig:step-detection-anomalies}{{II.10}{48}{Phase II : détection des alarmes \relax }{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II.9}Exemple illustratif du processus de détection des anomalies}{49}{section.2.9}}
+\@writefile{toc}{\contentsline {paragraph}{Description de l'échantillon}{49}{section*.54}}
 \newlabel{beforemedianagg}{{II.2}{49}{Les sauts du traceroute T7 (sans agrégation)}{lstlisting.2.2}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {II.2}Les sauts du traceroute T7 (sans agrégation)}{49}{lstlisting.2.2}}
 \newlabel{aftermedianagg}{{II.3}{49}{Les sauts du traceroute T7 (après l'agrégation)}{lstlisting.2.3}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {II.3}Les sauts du traceroute T7 (après l'agrégation)}{49}{lstlisting.2.3}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.4}Exemple des liens inférés du traceroute T7}{49}{lstlisting.2.4}}
-\newlabel{sortLinks}{{II.5}{49}{Illustration de l'ordre des liens}{lstlisting.2.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.5}Illustration de l'ordre des liens}{49}{lstlisting.2.5}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.4}Exemple des liens inférés du traceroute T7}{50}{lstlisting.2.4}}
+\newlabel{sortLinks}{{II.5}{50}{Illustration de l'ordre des liens}{lstlisting.2.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.5}Illustration de l'ordre des liens}{50}{lstlisting.2.5}}
 \newlabel{linksofsometraceroutes}{{II.6}{50}{Liste des liens possibles inférés via les traceroutes T1, T2, T3, T4 et T5}{lstlisting.2.6}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {II.6}Liste des liens possibles inférés via les traceroutes T1, T2, T3, T4 et T5}{50}{lstlisting.2.6}}
 \newlabel{morelinks}{{II.7}{50}{Caractérisation des liens identifiés lors de la période 1514769800 avec les traceroutes T1, T2, T3, T4 et T5}{lstlisting.2.7}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {II.7}Caractérisation des liens identifiés lors de la période 1514769800 avec les traceroutes T1, T2, T3, T4 et T5}{50}{lstlisting.2.7}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.8}Illustration de l'ordre des liens}{50}{lstlisting.2.8}}
-\@writefile{toc}{\contentsline {section}{\numberline {II.8}Conclusion}{54}{section.2.8}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {II.8}Illustration de l'ordre des liens}{51}{lstlisting.2.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {II.10}Conclusion}{54}{section.2.10}}
 \@setckpt{chapitre2}{
 \setcounter{page}{55}
-\setcounter{equation}{14}
+\setcounter{equation}{15}
 \setcounter{enumi}{3}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -128,7 +131,7 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{2}
-\setcounter{section}{8}
+\setcounter{section}{10}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
@@ -156,7 +159,7 @@
 \setcounter{Item}{12}
 \setcounter{Hfootnote}{46}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{52}
+\setcounter{bookmark@seq@number}{53}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}

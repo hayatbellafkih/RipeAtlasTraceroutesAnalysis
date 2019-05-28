@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  26 MAY 2019 23:38
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  28 MAY 2019 04:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1595,28 +1595,15 @@ Chapitre II.
 ] [29]
 File: illustrations/rtt-differ.png Graphic file (type bmp)
 <illustrations/rtt-differ.png>
- [30] [31] (./illustrations/timing.tex)
+ [30] [31] [32] (./illustrations/timing.tex) [33]
+(./illustrations/traceroute_.tex) [34] (./illustrations/link-inference.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[32] [33] (./illustrations/traceroute_.tex) [34]
-(./illustrations/link-inference.tex)
+[35] [36] (./illustrations/intervals-comparaison_v2.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[35] (./illustrations/intervals-comparaison_v2.tex)
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[36] [37] [38] [39] [40] (./illustrations/step-preparing-data.tex)
-Overfull \vbox (24.53622pt too high) has occurred while \output is active []
-
-
-[41] (./illustrations/step-detection-anomalies.tex)
-Overfull \vbox (24.52914pt too high) has occurred while \output is active []
-
-
-[42]
+ [37]
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
@@ -1625,38 +1612,57 @@ Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no − in font cmr12!
 Missing character: There is no ≥ in font cmr12!
- (./illustrations/medianeIllustra.tex) [43] [44] [45] [46]
-Underfull \hbox (badness 10000) in paragraph at lines 649--649
+
+(./illustrations/medianeIllustra.tex) [38] [39] [40]
+Underfull \hbox (badness 10000) in paragraph at lines 516--516
 [][][]\T1/ptm/m/n/10 .[][][][]$\T1/pcr/m/n/10 https : / / github . com / hayatb
 ellafkih / SparkSalacaTraceroutesAnalysis / blob /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 649--649
+Underfull \hbox (badness 10000) in paragraph at lines 516--516
 \T1/pcr/m/n/10 master / rttDelaysSparkScala / src / main / resources / test / r
 esult _ modified . json$[][]\T1/ptm/m/n/10 ,
  []
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 664.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 531.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 664.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 531.
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--698
+Underfull \hbox (badness 10000) in paragraph at lines 525--565
 []$[]$$[]$$[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--698
+Underfull \hbox (badness 10000) in paragraph at lines 525--565
 
  []
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 (./illustrations/explainCis.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 703--713
+Underfull \hbox (badness 10000) in paragraph at lines 570--580
 [][]\T1/ptm/m/n/12 II.7.2[][].
  []
 
-[47] (./illustrations/casesAnomalies.tex) [48] [49] [50] [51]
+[41]
+Underfull \hbox (badness 1728) in paragraph at lines 583--584
+[]\T1/ptm/m/n/12 Soit \T1/ptm/m/it/12 cur-rent-Ci-Low\T1/ptm/m/n/12 , \T1/ptm/m
+/it/12 cur-rent-Ci-High\T1/ptm/m/n/12 , \T1/ptm/m/it/12 cur-rent-Me-
+ []
+
+(./illustrations/casesAnomalies_2.tex) [42] [43] [44] [45] [46]
+(./illustrations/step-preparing-data.tex)
+Overfull \vbox (24.53622pt too high) has occurred while \output is active []
+
+
+[47] (./illustrations/step-detection-anomalies.tex)
+Overfull \vbox (24.52914pt too high) has occurred while \output is active []
+
+
+[48] [49] [50] [51]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [52]
@@ -1679,7 +1685,7 @@ Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
 Missing character: There is no × in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 1049--1049
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1063
 []|\T1/ptm/m/n/12 15.352609999999999 (car $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\
 OT1/cmr/m/n/12 994\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 402 + 0\OML/cmm/m/it/12 :\O
 T1/cmr/m/n/12 011099\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 463 =
@@ -2148,12 +2154,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32728 strings out of 493007
- 572200 string characters out of 6136719
- 1140791 words of memory out of 5000000
- 35873 multiletter control sequences out of 15000+600000
+ 32730 strings out of 493007
+ 572249 string characters out of 6136719
+ 1096563 words of memory out of 5000000
+ 35875 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,21n,97p,1104b,1898s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,21n,97p,1104b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on rapport_final.pdf (133 pages).

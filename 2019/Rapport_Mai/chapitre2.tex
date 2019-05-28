@@ -1,7 +1,7 @@
 \chapter{Détection des anomalies dans les délais d'un lien}\label{chap:algorith-detection}
 
 \section{Introduction}
-Dans le présent chapitre, nous présentons l'outil de détection des anomalies dans les délais d'un lien. Cet outil a été  conçu dans le cadre du travail \cite{DBLP:journals/corr/FontugneAPB16}  de  Fontugne et al.. Nous avons choisi de réutiliser ce travail qui se base sur les traceroutes collectés par les sondes, et ce en vue d'évaluer son implémentation avec quelques technologies  Big Data.  
+Dans le présent chapitre, nous présentons l'outil de détection des anomalies dans les délais d'un lien. Cet outil a été  conçu par Fontugne et al. dans le cadre du travail \cite{DBLP:journals/corr/FontugneAPB16}. Nous avons choisi de réutiliser ce travail qui se base sur les traceroutes collectés par les sondes, et ce en vue d'évaluer son implémentation avec quelques technologies  Big Data.  
 
 \section{Présentation générale}
 
@@ -16,7 +16,7 @@ La comparaison de la référence avec la valeur courante ne se déclenche que lo
 
 %Il existe un bon nombre de sujets à traiter en exploitant les données collectées par les sondes Atlas. Quelques exemples de sujets ont été déjà présentés dans la section \ref{use-cases-atlas}. Notre choix de reprendre le travail de Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16} a été fait après avoir parcouru un ensemble de travaux basés sur le projet  RIPE Atlas. 
 
-Pour certains travaux, il n'était pas possible  de les reprendre suite au manque de détails et de l'accès à  certaines ressources réseaux utilisées dans ces travaux \footnote{Par exemple, les informations du peering entre les Systèmes Autonomes, la géolocalisation des adresses IP, etc.}. Par exemple, afin d'étudier la censure dans un pays donné, il faut être au courant des spécificités de ce pays, les circonstances politiques et sociales, les opposants,  etc.  Un autre exemple concerne le sujet de la détection des détours du trafic local dans un pays.  Anant Shah  et al. ont travaillé sur la détection des détours, ils ont présenté dans  \cite{anant-shah} les contraintes relatives à ce sujet: la difficulté d'avoir une géolocalisation exacte d'une adresse IP d'une part et l'absence des informations de peering entre les ASs d'autre part. Ces dernières peuvent changer complètement les conclusions finales. 
+Nous avons choisi le travail \cite{DBLP:journals/corr/FontugneAPB16} de Fontugne parmi plusieurs travaux étudiés. Pour certains travaux, il n'était pas possible  de les reprendre suite au manque de détails et de l'accès à  certaines ressources réseaux utilisées dans ces travaux \footnote{Par exemple, les informations du peering entre les Systèmes Autonomes, la géolocalisation des adresses IP, etc.}. Par exemple, afin d'étudier la censure dans un pays donné, il faut être au courant des spécificités de ce pays, les circonstances politiques et sociales, les opposants,  etc.  Un autre exemple concerne le sujet de la détection des détours du trafic local dans un pays.  Anant Shah  et al. ont travaillé sur la détection des détours, ils ont présenté dans  \cite{anant-shah} les contraintes relatives à ce sujet: la difficulté d'avoir une géolocalisation exacte d'une adresse IP d'une part et l'absence des informations de peering entre les ASs d'autre part. Ces dernières peuvent changer complètement les conclusions finales. 
 
 Le travail sur lequel nous nous basons \cite{DBLP:journals/corr/FontugneAPB16} pour l'évaluation de quelques technologies Big Data s'inscrit dans les travaux traitant les performances des réseaux informatiques. Dans la suite de ce document, ce travail est appelé  travail de référence.  Ce travail a été choisi comme référence pour plusieurs raisons:
 
@@ -90,7 +90,7 @@ RTT_{PC} & = \delta_{PA} + \delta_{AB} + \delta_{BC} + \delta_{CD} + \delta_{DA}
 \end{align}
 
 où $\delta_{BC}$ est le délai du lien $BC$ et $\varepsilon_{PBC}$ est la différence entre les deux chemins de retour : $B$ vers $P$ et $C$ vers $P$.  Le chemin de retour est celui  présenté dans  la Figure \ref{fig:rtt-differ} (b). 
-Nous notons qu'en pratique, un RTT différentiel peut avoir des valeurs négatives ($ \Delta_{XY} < 0 $). Car $Y$ a un RTT plus petit que celui de $ X $, cela résulte de l'asymétrie du trafic. 
+Nous notons qu'en pratique, un RTT différentiel peut avoir des valeurs négatives ($ \Delta_{PXY} < 0 $). Car $Y$ a un RTT plus petit que celui de $ X $, ceci résulte de l'asymétrie du trafic. 
 Le suivi des performances du réseau avec traceroute soulève trois défis majeurs : la variété des RTTs, les pertes de paquets et l'asymétrie du trafic. Ces défis sont discutés dans le travail de référence \cite{DBLP:journals/corr/FontugneAPB16}.
 
 %La première composante dépend de l'état des routeurs $B$ et $C$. La deuxième composante dépend de la sonde $P$. L'analyse du RTT différentiel repose sur la variation de valeurs qu'il prend, au lieu des valeurs exactes, dans  le cas des valeurs exactes, elles peuvent dévier l'interprétation.
@@ -112,7 +112,7 @@ Supposons qu'on dispose d'un nombre $n$ de sondes Atlas P$_i$, $i$ $\in$ [$1$, $
 \Delta_{P_{n}BC} &= \delta_{BC} + \varepsilon_{P_{n}BC}\\
 \end{align*}
 
-Les valeurs de  $\varepsilon_{P_{i}BC}$ sont  indépendantes. L'indépendance de ces valeurs implique que la distribution $\Delta_{P_{i}BC}$ est estimé  stable au cours du temps si $\delta_{BC}$ est constant. Toutefois, un changement significatif de la valeur de $\delta_{BC}$ influence les valeurs des RTTs différentiels, ainsi,  la distribution des RTTs différentiels ($\Delta_{P_{i}BC}$) change. D'où l'idée de l'évolution du délai d'un lien déduit  à partir de l'évolution de son RTT différentiel.
+Les valeurs de  $\varepsilon_{P_{i}BC}$ sont  indépendantes. L'indépendance de ces valeurs implique que la distribution $\Delta_{P_{i}BC}$ est estimée  stable au cours du temps si $\delta_{BC}$ est constant. Toutefois, un changement significatif de la valeur de $\delta_{BC}$ influence les valeurs des RTTs différentiels, ainsi,  la distribution des RTTs différentiels ($\Delta_{P_{i}BC}$) change. D'où l'idée de l'évolution du délai d'un lien déduit  à partir de l'évolution de son RTT différentiel.
 
 \paragraph{Caractérisation des délais d'un lien}~
 
@@ -131,12 +131,19 @@ Les auteurs du travail de référence  ont évalué le délai d'un lien en éval
 	\end{equation}
 \end{tcolorbox}
 
-L'application de ce théorème, dans  l'analyse des délais des liens, implique que quelque soit la distribution des RTTs différentiels, la moyenne arithmétique d'un échantillon  est distribuée normalement si la taille de l'échantillon est relativement grande. En pratique,
+L'application de ce théorème, dans  l'analyse des délais des liens, implique que quelque soit la distribution des RTTs différentiels, obtenue en analysant les traceroutes effectués par des sondes et suivant la formule \ref{eq:rttdifference}, la moyenne arithmétique d'un échantillon  est distribuée normalement si la taille de l'échantillon est relativement grande. 
+
+En pratique,
 si un lien subit un changement anormal, la distribution de la moyenne des RTTs différentiels dévie de la distribution normale, par conséquent, la moyenne des RTTs différentiels ayant produit ce changement est identifiée comme  étant une anomalie.
 
+
+
+
 Après avoir évalué les premiers résultats d'application de ce théorème, les auteurs ont conclu que l'utilisation de la médiane,  au lieu de la moyenne, a montré plus de performance en terme de détection des anomalies.
-Afin de tenir compte de l'incertitude dans la médiane calculée, ayant la capacité d'identifier un changement anormal, les auteurs ont  calculé  l'intervalle de confiance de cette dernière.
+Afin de tenir compte de l'incertitude dans la médiane calculée, ayant la capacité d'identifier un changement anormal, les auteurs ont  calculé  l'intervalle de confiance de cette médiane.
 %La distribution des médianes des RTTs différentiels caractérisant un lien est mise à jour tout au long de l'analyse des différentes périodes. 
+
+Soient $X_1,...,X_n$ $n$ variables aléatoires indépendantes et identiquement distribuées (i.i.d.).
 Par définition\footnote{Definition 2.1 dans \cite{leboudec2010performance}.},  un intervalle de confiance à un niveau $\gamma$,  d'un paramètre $m$ fixé mais inconnu est l'intervalle  $(u(X_1,...,X_n),v(X_1,...,X_n)) $ tel que  :
 
 \begin{align}
@@ -154,14 +161,16 @@ Les étapes du processus de détection peuvent être résumées dans les éléme
 	
 	\item Vérification de la validité de tout traceroute.
 	
-	\item Identification et calcul des RTTs différentiels de chaque lien identifié dans les traceroutes.
+	\item Calcul des RTTs différentiels de chaque lien identifié dans les traceroutes.
 	
 	\item Caractérisation des liens avec le théorème central limite (CLT).
 	
 	\item  Comparaison de l'état de chaque lien avec sa référence  et l'identification des anomalies.
 	
-	\item Mise à jour de la référence du lien.
+	\item Mise à jour de l'état référence du lien.
 \end{enumerate}
+
+L'état d'un lien, à une période donnée,  comprend la médiane des RTTs différentiels, la borne inférieure de l'intervalle de confiance de cette médiane et  la borne supérieure de l'intervalle de confiance de cette médiane.  L'état courant est calculé selon l'échantillon des RTTs différentiels de ce lien à cette période. Tandis que l'état référence implique à la fois l'état courant et les états courants des périodes qui précèdent cette période.
 
 \subsection{Description des paramètres de l'analyse des délais} \label{par:parametre-de-lanalyse}~
 La détection des changements des délais nécessite l'ajustement de quelques paramètres. Ces paramètres ont des valeurs par défaut  définies dans le travail de référence. Nous décrivons ci-dessous tous les paramètres : ceux ayant une valeur par défaut et ceux à ajuster :
@@ -201,22 +210,19 @@ La détection des changements des délais nécessite l'ajustement de quelques pa
 	La  moyenne mobile exponentielle est utilisée pour calculer la moyenne des RTTs différentiels de référence durant une période $d_k$.
 	% Cette médiane constitue une référence  sur laquelle se base la détection des anomalies.
 	La  valeur de la médiane des RTTs différentiels de référence $ \overline{m}_{t}$   pour la période $ t $ et  le lien $l$ est:
-	\begin{align*}
-	\overline{m}_{t} &=  \alpha{m}_{t} + (1 -  \alpha)  \overline{m}_{t-1}
-	\end{align*} 
+	\begin{align}
+	\overline{m}_{t} &=  \alpha{m}_{t} + (1 -  \alpha)  \overline{m}_{t-1} \label{moyenne-exponenetiel}
+	\end{align} 
 	$m_t$ la médiane des RTTs différentiels observée pour $l$ durant la \textit{période} $t$. 
 	
 	$ \overline{m}_{t-1}$  la médiane des  RTTs différentiels  de référence durant la \textit{période} $ t-1 $.  
 	
-	
-	
 	Pour précision, \{$m_t$\} et \{$ \overline{m}_{t}$\} désignent deux ensembles différents.   Le premier est l'ensemble des médianes des RTTs différentiels de chaque période $d_k$. Or, le deuxième est l'ensemble des médianes des RTTs différentiels, de référence, construite en utilisant la méthode de la moyenne mobile exponentielle. Le calcul de cette dernière prend en compte les médianes des RTTs différentiels précédentes ainsi que la médiane des RTTs différentiels courante. La participation de ces dernières dans le calcul de la référence est dirigé par le paramètre $\alpha$. Plus de détails sur ce calcul est donné dans la section  \ref{reference-lissage}.
 	%La  valeur de la médiane de référence  $ \overline{m}_{t}$ de la période $t$ est obtenue par: 
 	
-	
-	
 	Le paramètre $\alpha$  contrôle l'importance  des mesures précédentes par rapport aux mesures récentes. De ce fait, \guillemotleft \textit{plus $\alpha$ est proche de $ 1 $ plus les observations récentes influent sur la prévision, à l'inverse un $\alpha$ proche de $0$ conduit à une prévision très stable prenant en compte un passé lointain}\footnote{Voir le lissage exponentiel dans \url{https://www.math.u-psud.fr/~goude/Materials/time_series/cours3_lissage_expo.pdf}, consultée le $30/09/2018$.}.\guillemotright.  Dans le travail de référence, le paramètre $\alpha$  vaut par défaut $0.01$.
 	
+	La formule \ref{moyenne-exponenetiel} montre le calcul de la médiane des RTTs différentiels de référence. C'est la même formule utilisée pour calculer les deux bornes de l'intervalle de confiance; la médiane est remplacée la borne inférieure ou supérieure.
 	
 	\item[confInterval] : ce paramètre indique le niveau de confiance de l'intervalle de confiance de la médiane calculée des RTTs différentiels. Précisément, cet intervalle de confiance calculé est de niveau de confiance égal à $ 1 - confInterval $.  L'intervalle de confiance d'une moyenne  est défini comme représentant les valeurs probables que peut prendre cette moyenne, si on accepte une marge d'erreur définie à l'avance. Avec la variante adoptée, on parle de la médiane des RTTs différentiels. Il existe plusieurs méthodes pour calculer l'intervalle de confiance d'une proportion. Parmi les critères impliqués sur le choix de la méthode du calcul, on note le nombre total d'expériences.
 	
@@ -230,12 +236,16 @@ Soient $ d_1 $, $  d_2 $, $d_k$, ..., $ d_n $ l'ensemble $D$ de $n$ périodes en
 
 Le processus de la détection des anomalies, selon l'implémentation \cite{InternetHealthReport} des auteurs du travail de référence,  passe par plusieurs étapes. D'abord on  regroupe les traceroutes à analyser par période $d_k$ (étape $ 1 $). Ensuite, on prépare les traceroutes de toute  période $d_k$ en y appliquant un nombre d'opérations (étapes  $ 2 $ à $ 6 $) afin d'énumérer les liens possibles avec leurs RTTs différentiels. A la fin de la préparation des traceroutes de toutes les périodes, nous obtenons une liste de liens par période. Nous résumons ensuite ces liens en fusionnant les mêmes liens identifiés durant toutes les périodes tout en conservant la période pendant laquelle il a été identifié. Sur base des détails d'un lien donné,  nous identifions les anomalies dans leurs délais (étapes $ 7 $ à $9$). 
 
-\subparagraph{Notations} Chaque traceroute contient un ensemble de sauts, et chaque saut contient un ensemble de signaux. Chaque signal se caractérise par le routeur émettant ce signal et le RTT correspondant. 
+\subparagraph{Notations} Un traceroute  est un ensemble de sauts $h_i$ auxquels sont joints l'identifiant de la sonde ayant effectué la requête traceroute,  la destination de la requête, le temps de la requête, etc. Chaque saut contient un ensemble de signaux. Chaque signal se caractérise par le routeur ayant émis une réponse à la sonde parmi les routeurs traversés avant d'atteindre la destination finale et le RTT correspondant. 
 Soit  $h_i$ le i\up{ème} saut d'un traceroute donné tel que
 
- $h_i =\{s_{i,j} |  j \in [1, S], i\in [1,H]  \}$, $S$ et $H$ sont des entiers. Soit $ s_{i,j} $  le j\up{ème} signal du i\up{ème} saut, il se caractérise par le routeur  source du signal $from_{i,j}$ et le RTT correspondant est $rtt_{i,j}$.
-
-Un traceroute  est un ensemble de sauts $h_i$ auxquels sont joints l'identifiant de la sonde ayant effectué la requête traceroute  la destination de la requête, le temps de la requête, etc. Chaque saut est décrit par un ensemble de signaux dans  $S$.  Chaque signal décrit le routeur ayant émis une réponse à la sonde parmi les routeurs traversés avant d'atteindre la destination finale.  Pour le saut $h_i$, on note trois\footnote{Le nombre trois peut varier dans certains cas. L'outil de détection conçu est adapté à tout nombre de signaux.} signaux $s_{i, j},  j\in [1,3]$ dont le routeur émettant le signal est $from_{i,j}$ et son RTT est égal à $rtt_{i,j}$. C'est ce qu'illustre  la Figure \ref{fig:traceroute}.
+ $h_i =\{s_{i,j} |  j \in [1, S], i\in [1,H]  \}$, $S$ et $H$ sont des entiers. Soit $ s_{i,j} $  le j\up{ème} signal du i\up{ème} saut, il se caractérise par le routeur  source du signal $from_{i,j}$ et le RTT correspondant  $rtt_{i,j}$. C'est ce qu'illustre  la Figure \ref{fig:traceroute}.
+ %Chaque saut est décrit par un ensemble de signaux dans  $S$.  
+ %Chaque signal décrit le routeur   
+ Pour le saut $h_i$, on note trois\footnote{Le nombre trois peut varier dans certains cas. L'outil de détection conçu est adapté à tout nombre de signaux.} 
+ signaux $s_{i, j}$.  Un exemple d'une réponse à une requête traceroute est donné dans l'annexe  \ref{exemple-traceroute} illustrant la description donnée d'un traceroute.
+ %,  j\in [1,3]$ dont le routeur émettant le signal est $from_{i,j}$ et son RTT est égal à $rtt_{i,j}$. 
+ 
 
 \begin{figure}[H]
 	\centering
@@ -250,7 +260,7 @@ Un traceroute  est un ensemble de sauts $h_i$ auxquels sont joints l'identifiant
 
 Les étapes $ 1$ à $9$ décrivant le processus de la détection sont les suivantes : 
 
-\paragraph{1. Regroupement des traceroutes  par période $d_k$.} A chaque période $d_k$, on associe les traceroutes ayant été effectués durant $d_k$, noté $T_k$,  parmi ceux disponibles à l'analyse. 
+\paragraph{1. Regroupement des traceroutes  par période $d_k$.} A chaque période $d_k$, on associe les traceroutes ayant été effectués durant $d_k$  parmi ceux disponibles à l'analyse.   $T_k$ dénote  le groupe de traceroutes effectués durant $d_k$.
 %, $k+1$ $\leq$ $n $ et  $d_k$ est exprimé en secondes (Unix Timestamp). Les étapes  ($ 2 $ à $ 6 $) concernent  les traceroutes de chaque $d_k$.  
 
 
@@ -266,7 +276,7 @@ Chaque traceroute $t_{k,m}$ de l'ensemble $T_k$, $m$  est le m\up{ème}  tracero
 Il existe deux sortes d'échecs dans un traceroute : échec complet et échec partiel. Dans le premier,   la sonde  ne réussit pas à atteindre la destination, dans ce cas, la liste des sauts est vide. Dans le deuxième cas, l'échec peut concerner un ou plusieurs saut, ou bien il peut concerner un, deux ou plusieurs signaux d'un saut. A la fin de cette étape, nous obtenons une liste de traceroutes noté aussi $T_k$ pour la simplification. Car durant cette étape, des sauts ou des traceroutes peuvent être supprimés.
 
 \paragraph{3. Calcul de la médiane des RTTs par saut.} 
-Pour tout $ h_i $,  on calcule la médiane des RTTs ayant une même source $from_{i,j}$.  La médiane des RTTs d'un saut $h_i$ est  :
+Pour tout $ h_i $,  on calcule la médiane des RTTs ($ rtt_{i, j} $) ayant une même source $from_{i,j}$.  La médiane des RTTs d'un saut $h_i$ est  :
 
 mediane\_rtt ($h_i$) =  $\{median(\{rtt_{i, j}  \})\}$
 %\footnote{La notation $a.b$ désigne la valeur de l'attribut $b$ de l'objet $a$, ainsi $\{a.b\}$ est l'ensemble des $b$ obtenus à partir d'un ensemble d'éléments de type $a$ .}  
@@ -286,7 +296,8 @@ Autrement dit, le nouveau saut du traceroute est reconstruit en regroupant les s
 	\caption{Inférence des liens possibles entre les routeurs des deux sauts $h_{1}$ et $h_{2}$}
 	\label{fig:link-inference_}
 \end{figure}
-\paragraph{5. Calcul des RTTs différentiels des liens.}  A cette étape, on calcule le RTT différentiel de chaque  lien, parmi les liens obtenus de l'étape $4$, en calculant la différence entre les RTTs des deux routeurs impliqués dans le  lien en question (équation \ref{eq:rttdifference}). En plus du RTT différentiel, on note aussi la sonde  ayant effectué la requête traceroute où le lien a été identifié. 
+\paragraph{5. Calcul des RTTs différentiels des liens.}  A cette étape, on calcule le RTT différentiel de chaque  lien, parmi les liens obtenus à l'étape $4$, en calculant la différence entre les RTTs des deux routeurs impliqués dans le  lien en question (formule \ref{eq:rttdifference}).
+% En plus du RTT différentiel, on note aussi la sonde  ayant effectué la requête traceroute où le lien a été identifié. 
 
 %A l'issue de cette étape, pour tout traceroute, on obtient la liste des liens possibles tout en reprenant des informations générales de la requête traceroute comme le temps de la requête (timestamp), etc.
 
@@ -296,17 +307,16 @@ Autrement dit, le nouveau saut du traceroute est reconstruit en regroupant les s
 A la fin de l'étape 6, tous les traceroutes sont préparés. A présent, l'objectif est d'identifier les dates pendant lesquelles des anomalies ont été détectées. Pour ce faire, l'idée du travail de référence est de conserver, pour un lien donné, une référence du RTT différentiel médian.  Cette référence est d'abord comparée avec la médiane courante des RTTs différentiels,  puis,  mise à jour au fur et à mesure   tout au long de la période de l'analyse. A cette médiane, un intervalle de confiance est associé. Ainsi, l'intervalle de confiance fait partie aussi de la référence du lien. 
 
 
-\paragraph{7. Calcul de la médiane des RTTs différentiels et  de son intervalle de confiance courants.} Pour un lien donné, on calcule la médiane des RTTs différentiels d'une période $d_k$, ensuite on calcule les deux bornes de l'intervalle de confiance  courant de cette médiane pour $d_k$.  
+\paragraph{7. Calcul de la médiane des RTTs différentiels et  de son intervalle de confiance courants.} Pour un lien donné, on calcule la médiane des RTTs différentiels d'une période $d_k$, ensuite on calcule les deux bornes de l'intervalle de confiance  courant de cette médiane pour $d_k$, ce calcul dépend  du paramètre \textit{confInterval} décrit dans la section \ref{par:parametre-de-lanalyse}.   Les détails du  calcul de l'intervalle de confiance de la médiane sont donnés dans la section \ref{conf-inter-section-exemple}. 
 
 
-\paragraph{8. Mise à jour de la médiane  des RTTs différentiels et de son intervalle  de confiance de  référence.} La médiane des RTTs différentiels de référence ainsi que l'intervalle de confiance de référence sont mise à jour tant que la période déclenchant la détection des anomalies n'est pas atteinte.  La mise à jour de la référence : médiane et les bornes de l'intervalle de confiance se base sur la moyenne mobile exponentielle. Cette méthode prend en compte les valeurs antérieures ainsi que celles récentes en étant dirigée par le paramètre \textit{confInterval} décrit dans la section \ref{par:parametre-de-lanalyse}.
+\paragraph{8. Mise à jour de la médiane  des RTTs différentiels et de son intervalle  de confiance de  référence.} La médiane des RTTs différentiels de référence ainsi que l'intervalle de confiance de référence sont mis à jour tant que la période déclenchant la détection des anomalies n'est pas atteinte.  La mise à jour de la référence : médiane et les bornes de l'intervalle de confiance se base sur la moyenne mobile exponentielle. Cette méthode prend en compte les valeurs antérieures ainsi que celles récentes en étant dirigée par le paramètre \textit{alpha} décrit dans la section \ref{par:parametre-de-lanalyse}.
 
 
 \paragraph{9. Comparaison des intervalles de confiance  des RTTs différentiels : courant et référence.} 
 
 La comparaison de l'état courant du lien avec celui de référence est effectuée en analysant le chevauchement d'intervalles de confiance  courant et de référence.  Soient 
- \textit{referenceCiLow} et \textit{referenceCiHight} sont les bornes de l'intervalle de confiance de référence.  \textit{currentCiLow} et \textit{currentCiHight} sont les bornes de l'intervalle de confiance courant.
-
+ \textit{referenceCiLow} et \textit{referenceCiHight}  les bornes de l'intervalle de confiance de référence. Soient  \textit{currentCiLow} et \textit{currentCiHight}  les bornes de l'intervalle de confiance courant. Les détails de la comparaison sont donnés dans la section \ref{Detection-anomalies}.
 %Le délai d'un lien est jugé normal si son intervalle de confiance courant est inclus dans l'intervalle de confiance de référence. C'est le cas $1$ dans 
 %, 
 %D'après le travail de référence, on distingue quatre cas possibles  illustrés dans la Figure 	\ref{fig:intervals-comparaison}:
@@ -338,190 +348,43 @@ La Figure 	\ref{fig:intervals-comparaison} représente des cas possibles de posi
 %Ces étapes sont reprises dans  la Figure \ref{fig:process-rttanalysis_tex}. [!]
 
 
-\subsection{Processus de détection des anomalies :  notation par fonctions} \label{processus-de-detection}
-La détection des anomalies dans les délais des liens peut être organisée en deux phases: la préparation de données et la détection des alarmes. Nous reprenons le même processus de détection décrit dans la section \ref{steps-rtt-analysis} et nous organisons les étapes décrites dans cette section \ref{steps-rtt-analysis} en deux phases. Nous développons chaque phase en plusieurs étapes. Chaque étape est décrite par  son objectif, ses entrées et ses sorties. Ces deux phases sont illustrées par les Figures et .
-\paragraph{Phase I : préparation de données.}
-
-\begin{itemize}
-	\item \textbf{findAllBins (I.1)} : nous cherchons la liste des périodes ({\color{gray}[bin]}) entre  {\color{gray}start} et  {\color{gray}end}. La durée de chaque {\color{gray}bin} vaut  {\color{gray}timeWindow}.
-	\item \textbf{findTraceroutesByBin (I.2)} : pour toute période  ({\color{gray}bin}), nous récupérons les traceroutes
-	capturés durant cette dernière. Le nombre de traceroutes associés à chaque {\color{gray}bin} dépend
-	des traceroutes disponibles à l'analyse  ({\color{gray}[traceroute]}).
-	\item \textbf{removeInvalidTraceroutes (I.3)} : certains traceroutes ne réussissent pas à atteindre la destination prévue, dans ce cas, ces traceroutes sont ignorés. De même, les sauts ayant des RTTs invalides
-	sont aussi ignorés.
-	\item \textbf{aggregateRttsByHop (I.4)} : étant donné que chaque saut  ({\color{gray}hop}) est décrit par plus d'un RTT, nous calculons la médiane de ces RTTs  ({\color{gray}rttAgg}), et ce par source de signal.
-	\item \textbf{linkInference (I.5)} : chaque deux sauts consécutifs d'un traceroute forment un lien. Pour
-	tout traceroute d'un  {\color{gray}bin} donné, nous déduisons les liens possibles, ensuite, nous caractérisons tout lien  {\color{gray}(ip1, ip2)} avec son RTT différentiel  ({\color{gray}rttDiff}).
-	\item \textbf{sortLinks (I.6)}: nous ordonnons les couples d'adresses IP  {\color{gray}(ip1, ip2)} de chaque lien suivant l'ordre alphanumérique. 
-	%Par exemple, 
-	\item \textbf{mergeLinks (I.7)} : nous fusionnons les liens avec leurs caractéristiques. En résultat, les
-	liens $ (ip1, ip2) $ et $ (ip2, ip1) $ sont fusionnés et sont représentés par le lien $ (ip1, ip2) $ si $ (ip1, ip2) $ $ < $ $ (ip2, ip1) $. $<$ désigne l'ordre alphanumérique.
-	\item \textbf{summarizeData (1.8)} : jusqu'à cette étape, les liens sont organisés par période ({\color{gray}bin}). A travers \textit{summarizeData}, nous réorganisons chaque lien de toutes les périodes de sorte que chaque RTT différentiel soit associé à la période correspondante; la période pendant laquelle il a été identifié. C'est pourquoi les deux listes  {\color{gray}[rttDiff]} et  {\color{gray}[bin]} ont la même longueur.
-	
-	%Vu qu'un lien peut être identifié durant plusieurs périodes, nous résumons un lien en fusionnant leurs
-	%RTTs différentiels. Toutefois, chaque RTT différentiel doit garder le  {\color{gray}bin} pendant lequel il a été identifié, ainsi 
-	
-	
-	
-\end{itemize}
-
-\paragraph{ Phase II : détection des alarmes.}
-
-A la fin de la phase I, nous avons tous les liens identifiés avec leurs
-RTTs différentiels. 
-
-\begin{itemize}
-	
-	\item \textbf{findAllBins (II.1)} : nous générons les mêmes périodes  ({\color{gray}[bin]}) que celles générées à
-	l'étape (I.1).
-	\item \textbf{findRTTDiffByBin (II.2)} : nous reprenons les périodes générées dans l'ordre chronologique et
-	pour chaque période nous cherchons les RTTs différentiels correspondants. Soit  {\color{gray}dist} l'ensemble des RTTs différentiels correspondants à la période courante.
-	Seules les périodes ayant enregistré au moins  quatre RTTs différentiels qui  seront considérées.
-	\item \textbf{wilsonScoreProcess (II.3)} : le calcul de l'intervalle de confiance à partir du score de Wilson nécessite d'avoir le nombre total des expériences, le nombre d'expérience réussies et  le risque d'erreur. Nous calculons les deux valeurs du score de Wilson suivant les étapes suivantes :
-	
-	\begin{enumerate}
-		\item Soit $n$ la taille de la distribution, nous calculons le score de Wilson et cela donne le couple de valeurs ($ low $, $ hight $);
-		\item nous multiplions $ low $ et $ hight $ par  $n$, ainsi nous avons ($ lo $, $ hi $) =  ($ n*low $, $ n*hight $);
-		\item nous récupérons la partie entière du  $ lo $ et $ hi $ et  nous obtenons
-		
-		($l$, $h$) = ($ int $($ lo $), $ int $($ hi $))\footnote{La fonction $  int() $ est utilisée pour avoir la partie entière d'un nombre réel.};
-		\item  nous trions  {\color{gray}{dist}}  et nous parcourons cette dernière pour trouver les RTTs différentiels  se trouvant au rang $  l $ et $ h $ dans {\color{gray}dist}, respectivement sont $ rttDiffL $, $ rttDiffH $. Ainsi :
-		
-		$ rttDiffL  = dist[l]$  et $ rttDiffH = dist[h]$, avec $l$, $h$ $\in$ $[0,n[$. 
-		
-	\end{enumerate}
-	
-	
-	\item \textbf{updateCurrentLinkState (II.4)} :  {\color{gray}current}  est l'objet encapsulant  l'état courant du lien à une période donnée, il a
-	les éléments suivants:
-	
-	\begin{itemize}[label=$\square$]
-		\item le RTT différentiel médian\footnote{\textit{median(list)} calcule la valeur médiane de la liste \textit{list}. } ({\color{gray}median}),
-		{\color{gray}currentMedian} = median(dist) 
-		
-		\item  la borne inférieure de l'intervalle de confiance ({\color{gray}ciLow}),
-		
-		{\color{gray}currentCiLow} = {\color{gray}median} --  $ rttDiffL $
-		
-		\item   la borne supérieure de l'intervalle de confiance ({\color{gray}ciHight}),
-		
-		{\color{gray}currentCiHight} =  $ rttDiffH$ --  {\color{gray}median}
-		
-	\end{itemize}
-	
-	\item \textbf{ updateReferenceLinkState (II.5)} :  {\color{gray}reference}  est l'objet décrivant l'état de référence du lien à une période donnée. Il reprend les mêmes éléments que  l'objet {\color{gray}current}, à savoir, {\color{gray}median}, {\color{gray}ciLow} et {\color{gray}ciHight}. Ainsi, l'état référence est décrit par la médiane du RTT différentiel ({\color{gray}referenceMedian}), la borne inférieure de l'intervalle de confiance de référence ({\color{gray}referenceCiLow}) et enfin la borne supérieure de l'intervalle de confiance de référence ({\color{gray}referenceCiHight}).
-	
-	L'état courant décrit un lien à une période donnée, alors que l'état référence décrit l'état d'un lien à une période donnée en prenant en compte aussi les périodes qui précédent la période courante. La mise à jour de {\color{gray}reference}  est réalisée selon trois cas :
-	
-	\begin{enumerate}
-		\item \underline{Cas $1$}: tant que nous n'avons pas construit une référence assez représentable de l'état du lien,  nous mettons à jour la référence ({\color{gray}reference}) comme suit: 
-		\begin{align}
-		referenceMedian &= median(dist)\\
-		referenceCiLow &= rttDiffL\\
-		referenceCiHight& = rttDiffH
-		\end{align}
-		\item \underline{Cas $2$} : une fois nous atteignons le nombre nécessaire de  mise à jour de la référence assurant sa représentativité, nous mettons à jour l'état référence en remplaçant, pour chaque période, la médiane par \textit{ aggr\_median}, la borne inférieure  par  \textit{aggr\_ciLow} et la borne sépérieure par \textit{aggr\_ciHigh}.
-		\begin{itemize}
-			
-			\item  Soit \textit{aggr\_median} la médiane de tous les RTTs différentiels médians de référence calculés pour toutes les périodes précédentes. 
-			
-			\item 	Soit \textit{aggr\_ciLow} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
-			
-			\item 	Soit \textit{aggr\_ciHigh} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
-			
-		\end{itemize}
-		
-		
-		\item \underline{Cas $3$} : une fois la référence est assez représentable, nous mettons à jour cette dernière comme suit \footnote{Nous précisons que $ var[-1] $ dénote la dernière valeur que $ var $  avait. }:
-\begin{align*}
-referenceMedian &=  0.99*referenceMedian[-1]+0.01*currentMedian\\
-referenceCiLow &=	 0.99*referenceLow[-1]+0.01*rttDiffL\\
-referenceCiHight &=  0.99*referenceHight[-1]+0.01*rttDiffH
-\end{align*}
-		
-		
-Pour toute période, la mise à jour de la référence est effectuée selon un des trois cas. Nous précision que $ \alpha = 0.01 $.
-		
-	\end{enumerate}
-	\item \textbf{ alarmsDetection (II.6) }:   la détection des anomalies est déclenchée à partir du cas $3$. Si une anomalie est détectée, nous mettons à jour la liste des alarmes  {\color{gray}(alarmsValues)} avec le RTT différentiel médian (currentMedian) ainsi que la
-	liste des dates  {\color{gray}(alarmsDates)} qui correspondent à ces anomalies. Les anomalies sont détectées en évaluant le chevauchement entre l'intervalle de confiance courant et celui de référence. La période courante présente une anomalie si la condition suivante est vraie\footnote{Nous notons par [-1] l'élément précédent d'une mesure. Par exemple, currentMedian[-1] est la médiane des RTTs différentiels de la période qui précède la période courante.}:
-	\begin{lstlisting}[language=json,firstnumber=1, caption={Conditions de présence d'une anomalie pour un lien},
-	basicstyle =\footnotesize]
-	currentCiLow[-1] > referenceHi[-1] or
-	currentCiHigh[-1] < referenceCiLow[-1]) and
-	np.abs(currentMedian[-1]-referenceMedian[-1])>1
-	\end{lstlisting}
-	
-	
-	
-\end{itemize}
-
-\paragraph{ Illustrations des deux phases de détection}~
-La Figure  \ref{fig:step-preparing-data} reprend les étapes de la phase I et
-%. Chaque étape est définie par ses entrées et
-%ses sorties ainsi que son objectif et
-la Figure \ref{fig:step-detection-anomalies} illustre aussi les principales étapes  de la phase II.
-\newpage
-
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification=centering}
-	\resizebox{!}{\textheight}{
-		\input{illustrations/step-preparing-data.tex}
-	}
-	\caption{Phase I : préparation de données }
-	\label{fig:step-preparing-data}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification=centering}
-	\resizebox{\textwidth}{\textheight}{
-		\input{illustrations/step-detection-anomalies.tex}
-	}
-	\caption{Phase II : détection des alarmes }
-	\label{fig:step-detection-anomalies}
-\end{figure}
-
-
-\section{Exemples illustratifs  de la détection des anomalies}
-
+\section{Quelques étapes détaillées de la détection}
 
 \subsection{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels} \label{conf-inter-section-exemple}
 
 Il existe plusieurs méthodes pour calculer l'intervalle de confiance de la médiane. Dans le travail de référence \cite{DBLP:journals/corr/FontugneAPB16}, les auteurs ont calculé l'intervalle de confiance de la médiane en utilisant la méthode de Wilson. Avant de présenter leur méthode, nous allons illustrer le principe du calcul de l'intervalle de confiance de la médiane en utilisant le théorème  2.1  \cite{leboudec2010performance}. Ce théorème est repris dans le Tableau \ref{fig:thereme-2-1-ci-median}.
 
 \begin{tcolorbox}
-
-\begin{theorem}
-Let $X_1,..., X_n$ be n iid random variables, with a common CDF F(.). Assume that F(.) has a density, and let $m_p$ be a p-quantile of  F(.), i.e F($m_p$) = p, for 0 < p < 1.
-Let $X_{(1)} \leq X_{(2)} \leq ... \leq X_{n}$ be the order statistic, i.e. the set of values of $X_i$ sorted in increasing order. Let $B_{n,p}$ be the CDF of the binomial distribution with n repetitions and probability of success p. A confidence interval for $m_p$ at level $\gamma$ is :
-
-
-\begin{align*}
-&[X_{(j)}X_{(k)}]
-\end{align*}
-
-where j an k satisfy 
-\begin{align*}
-&B_{n,p}(k−1)−B{n,p}(j−1)≥\gamma
-\end{align*}
-See the table in section \ref{tables-confidence-intervalle} for practical values. For largen, we can use the aproximation 
-
-\begin{align}
-j&\approx \lfloor np - \eta  \sqrt{np(1-p)}\rfloor \label{align:formule-j}\\
-k&\approx \lceil np + \eta  \sqrt{np(1-p)}\rceil + 1 \label{align:formule-k}
-\end{align}
-	\label{the21}
 	
-	where $\eta$ is defined by $N_{0,1}(\eta) = \frac{1+ \gamma}{2}$ (e.g. $\eta = 1.96$ for $\gamma = 0.95$)
-\end{theorem}
+	\begin{theorem}
+		Let $X_1,..., X_n$ be n iid random variables, with a common CDF F(.). Assume that F(.) has a density, and let $m_p$ be a p-quantile of  F(.), i.e F($m_p$) = p, for 0 < p < 1.
+		Let $X_{(1)} \leq X_{(2)} \leq ... \leq X_{n}$ be the order statistic, i.e. the set of values of $X_i$ sorted in increasing order. Let $B_{n,p}$ be the CDF of the binomial distribution with n repetitions and probability of success p. A confidence interval for $m_p$ at level $\gamma$ is :
+		
+		
+		\begin{align*}
+		&[X_{(j)}X_{(k)}]
+		\end{align*}
+		
+		where j an k satisfy 
+		\begin{align*}
+		&B_{n,p}(k−1)−B{n,p}(j−1)≥\gamma
+		\end{align*}
+		See the table in section \ref{tables-confidence-intervalle} for practical values. For largen, we can use the aproximation 
+		
+		\begin{align}
+		j&\approx \lfloor np - \eta  \sqrt{np(1-p)}\rfloor \label{align:formule-j}\\
+		k&\approx \lceil np + \eta  \sqrt{np(1-p)}\rceil + 1 \label{align:formule-k}
+		\end{align}
+		\label{the21}
+		
+		where $\eta$ is defined by $N_{0,1}(\eta) = \frac{1+ \gamma}{2}$ (e.g. $\eta = 1.96$ for $\gamma = 0.95$)
+	\end{theorem}
 \end{tcolorbox}
 
 
 \subsubsection{Le théorème 2.1 par l'exemple} \label{CI-theorem}
 
-Les intervalles de confiance de la médiane des RTTs différentiels, appelée $\mu$, sont formulés par un calcul binomial et ils sont de type \textit{distribution free}. Ce type de distributions ne suivent pas une loi spécifique.
+Les intervalles de confiance de la médiane des RTTs différentiels, appelée $\mu$, sont formulés par un calcul binomial. Ces intervalles de confiances sont de type \textit{distribution free}. Les distributions de type \textit{free} ne suivent pas une loi spécifique.
 %De plus, ils ont utilisé le score de Wilson pour le calcul des deux bornes de l'intervalle.
 Nous illustrons le calcul de l'intervalle de confiance de la médiane par un exemple.  Nous considérons  l'ensemble des données $X$ suivant : 
 \begin{center}
@@ -552,11 +415,13 @@ et   $8$ ( $(7.92 + 8.08)/2 = 8 $) est la médiane.
 	\caption{Illustration de la médiane}\label{fig:medianIllustration}
 \end{wrapfigure} 
 %------------------------------------------
-Par définition, la médiane d'un ensemble est la valeur qui permet de diviser cet ensemble en deux parties égales. Notre objectif est de quantifier  l'incertitude de la médiane calculée.
-Soit \textmu, dans la Figure \ref{fig:medianIllustration},  la médiane d'une distribution donnée, c'est la valeur telle que $50\%$ des valeurs de la distribution sont au dessous de {\textmu}  et $50\%$ des valeurs de la distribution sont au dessus de  \textmu. Autrement dit, avec une probabilité de $50\%$ une valeur de \textit{X} est au dessous de {\textmu}  et avec une probabilité de $50\%$ une valeur de \textit{X} est au dessus de \textmu.
+%Par définition, la médiane d'un ensemble est la valeur qui permet de diviser cet ensemble en deux parties égales.
+
+Notre objectif est de quantifier  l'incertitude de la médiane calculée.
+Soit \textmu, dans la Figure \ref{fig:medianIllustration},  la médiane d'une distribution donnée, c'est la valeur telle que $50\%$ des valeurs de la distribution $\leq$ {\textmu}  et $50\%$ des valeurs de la distribution $\geq$  \textmu. Autrement dit, avec une probabilité de $50\%$ une valeur de \textit{X} est au dessous de {\textmu}  et avec une probabilité de $50\%$ une valeur de \textit{X} est au dessus de \textmu.
 
 
-Il est clair que {\textmu} est une valeur unique. Ce que nous cherchons est d'approcher {\textmu}. Pour ce faire, nous allons appliquer le théorème 2.1 relatif au calcul de l'intervalle de confiance de la médiane. Ce théorème permet de calculer l'intervalle de confiance de la médiane d'un ensemble de données. Comme $n = 10 $, nous avons besoin d'une table comme celle  donnée dans l'annexe \ref{tables-confidence-intervalle}. A partir de la taille de l'ensemble ($n$) et le niveau de confiance $\gamma$, il est possible de trouver la borne inférieure de l'intervalle de confiance ($X_{(j)}$) et la borne supérieure de l'intervalle de confiance ($X_{(k)}$) à une probabilité $p$. Cette table fournit l'intervalle de confiance à $95 \%$ de confiance pour tout $n \leq 70$. A partir de $n \geq 71$, nous utilisons les deux formules de $ j $ (\ref{align:formule-j}) et $ k $ (\ref{align:formule-k}).
+Il est clair que {\textmu} est une valeur unique. Ce que nous cherchons est d'approcher {\textmu}. Pour ce faire, nous allons appliquer le théorème $ 2.1 $. Comme $n = 10 $, nous avons besoin d'une table comme celle  donnée dans l'annexe \ref{tables-confidence-intervalle}. A partir de la taille de l'ensemble ($n$) et le niveau de confiance $\gamma$, il est possible de trouver la borne inférieure de l'intervalle de confiance ($X_{(j)}$) et la borne supérieure de l'intervalle de confiance ($X_{(k)}$) à une probabilité $p$. Cette table fournit l'intervalle de confiance à $95 \%$ de confiance pour tout $n \leq 70$. A partir de $n \geq 71$, nous utilisons les deux formules de $ j $ (\ref{align:formule-j}) et $ k $ (\ref{align:formule-k}).
 
 Dans notre exemple,  $n = 10$, ainsi, à une probabilité $95\%$, $j = 2$ et $ k = 9$, revenons aux données ordonnées,  $ X_{(2)} = 7.76 $ et  $ X_{(9)} =8.32 $. Autrement dit, à $95\%$, il est sûr que la valeur réelle de la médiane de l'ensemble de données, utilisées pour l'exemple, se trouve dans l'intervalle $[7.76, 8.32]$.
 
@@ -580,18 +445,20 @@ Afin de montrer l'importance    de l'intervalle de confiance de la médiane dans
 
 Le théorème $ 2.1 $ indique que l'intervalle de confiance de la médiane de l'ensemble de données dans la Table \ref{tab:outlierexample}  est formé par $ X_{(2)} $ et $X_{(9)}$, ce que donne $[7.76, 8.72]$ comme intervalle de confiance. L'intervalle de confiance obtenu pour cet ensemble de données est relativement différent de celui obtenu pour le premier ensemble de données. Toutefois, le deuxième intervalle de confiance est capable d'éliminer une valeur aberrante ($792$). 
 
-\subsubsection{Méthode de score de  Wilson}
-Les auteurs ont choisi le score de Wilson pour trouver l'intervalle de confiance de la médiane,  car il fonctionne bien, même avec un  nombre réduit d'échantillons \cite{doi:10.1002/sim.2164}. Le score De Wilson est calculé avec la formule \ref{align:wilson-formula}, avec  $n$ est la taille de l'ensemble de données, $p$ est la probabilité de succès et $z$ est égale à $1.96$ pour un niveau de confiance égale à $95\%$.
+\subsubsection{Méthode du score de  Wilson}
+Les auteurs ont choisi le score de Wilson pour trouver l'intervalle de confiance de la médiane,  car il fonctionne bien, même avec un  nombre réduit d'échantillons \cite{doi:10.1002/sim.2164}. Le score De Wilson est calculé avec la formule \ref{align:wilson-formula}, où  $n$ est la taille de l'ensemble de données, $p$ est la probabilité de succès et $z$ est égale à $1.96$ pour un niveau de confiance égal à $95\%$.
 \begin{align}
 w&= \frac{1}{1 + \frac{1}{n}z^2} \left( p + \frac{1}{2n} z^2 \pm z \sqrt{\frac{1}{n}p(1-p)+ \frac{1}{4n^2}z^2} \right)\label{align:wilson-formula}
 \end{align} 
-En pratique, le score de Wilson  produit deux valeurs appelées $w_l$ et $w_u$ dont leur valeurs sont dans $[0, 1]$. En multipliant $w_l$ et $w_u$ par $n$, nous obtenons les indices de le borne inférieure $l = nw_l$  et supérieure $u = nw_u$ de l'intervalle de confiance de la médiane. Nous précisons qu'en pratique, seule la partie entière de $l$ et $u$ qui indique l'indice. 
+En pratique, le score de Wilson  produit deux valeurs appelées $w_l$ et $w_u$ dont leur valeurs sont dans $[0, 1]$. En multipliant $w_l$ et $w_u$ par $n$, nous obtenons les indices des bornes inférieure $l = nw_l$  et supérieure $u = nw_u$ de l'intervalle de confiance de la médiane. Nous précisons qu'en pratique, ce sont  les parties entières de $l$ et de $u$ qui indiquent les indices $i$ et $j$. 
+%Tandis que pour l'approche du théorème 2.1,les indices sont obtenus en appliquant 
+
 De la même manière que la méthode décrite dans la section \ref{CI-theorem}, nous ordonnons les $n$ données et nous construisons l'intervalle $[X_{(l)}, X_{(u)}]$.
 
 
 En se basant uniquement sur l'ordre statistique, le score de Wilson produit des intervalles de confiance asymétriques dans le cas de distributions asymétriques, ce qui est le cas  des distributions des RTTs d'après l'étude \cite{DBLP:conf/infocom/FontugneMF15}. En outre, cette technique de calcul, basée uniquement sur l'ordre statistique de la variable permet d'éliminer les valeurs aberrantes indésirables.
 
-Pour résumer, tout lien et pour chaque période, il est caractérisé par un ensemble de RTTs différentiels. Sur base de cet ensemble, les auteurs ont pu  caractériser ce lien par  la médiane  des RTTs différentiels.  De plus, en se basant encore sur cet ensemble, ils ont calculé l'intervalle de confiance de cette médiane. De la même manière, ils ont calculé une référence reprenant la médiane des RTTs différentiels et son intervalle de confiance. Cette référence prend en considération les observations des périodes précédentes.  
+Pour résumer, tout lien et pour chaque période,  est caractérisé par un ensemble de RTTs différentiels. Sur base de cet ensemble, les auteurs ont pu  caractériser ce lien par  la médiane  des RTTs différentiels.  De plus, en se basant encore sur cet ensemble, ils ont calculé l'intervalle de confiance de cette médiane. De la même manière, ils ont calculé une référence reprenant la médiane des RTTs différentiels et son intervalle de confiance. Cette référence prend en considération les observations des périodes précédentes.  
 
 
 
@@ -699,7 +566,7 @@ Ces trois cas sont illustrés dans les  Tables \ref{result-3-cas}, ces derniers 
 \end{table}
 
 
-\subsubsection{Détection des anomalies}
+\subsection{Détection des anomalies} \label{Detection-anomalies}
 Afin d'identifier un changement dans le délai d'un lien, il suffit de comparer l'intervalle de confiance courant avec l'intervalle de 
 confiance de référence. Cette comparaison ne se déclenche que si la référence de ce lien est assez représentable, autrement dit, le nombre d'observations est atteint pour calculer $\overline{m}_{1}$. Ce nombre est personnalisable et par défaut il est configuré sur $ 24 $. Si par exemple la durée d'une période est 1 heure, il faut avoir une journée d'observation pour construire la première référence du lien en question. Une fois la référence est  assez représentable, dorénavant,  elle est mise à jour en utilisant  le lissage exponentiel décrit dans la section \ref{reference-lissage}.
 \begin{wrapfigure}{r}{.4\textwidth}
@@ -713,11 +580,11 @@ confiance de référence. Cette comparaison ne se déclenche que si la référen
 \end{wrapfigure}
 
 
-Soit \textit{currentCiLow}, \textit{currentCiHight}, \textit{currentMedian}, \textit{referenceCiLow}, \textit{referenceCiHight}, \textit{referenceMedian} dénote respectivement la borne inférieure de l'intervalle de confiance de médiane courante, la borne supérieure de l'intervalle de confiance de la médiane courante, la médiane des RTTs différentiels courante, la borne inférieure de l'intervalle de confiance de la médiane de référence, la borne supérieure de l'intervalle de confiance de la médiane de référence, la médiane des RTTs différentiels de référence. La Figure 	\ref{fig:explainCis} illustre la nomination utilisée dans la Figure \ref{fig:anomalies}.
+Soit \textit{currentCiLow}, \textit{currentCiHigh}, \textit{currentMedian}, \textit{referenceCiLow}, \textit{referenceCiHigh}, \textit{referenceMedian} dénote respectivement la borne inférieure de l'intervalle de confiance de médiane courante, la borne supérieure de l'intervalle de confiance de la médiane courante, la médiane des RTTs différentiels courante, la borne inférieure de l'intervalle de confiance de la médiane de référence, la borne supérieure de l'intervalle de confiance de la médiane de référence, la médiane des RTTs différentiels de référence. La Figure 	\ref{fig:explainCis} illustre la nomination utilisée dans la Figure \ref{fig:anomalies}.
 
 Dans le travail de référence, une anomalie est détectée si les conditions \ref{align:condition-1} et \ref{align:condition-2} sont vraies. La première condition évalue le chevauchement entre les deux intervalles de confiance. Or, la deuxième condition assure que seulement la  différence entre la médiane des RTTs différentiels courante et celle de référence dépassant $1 ms$ qui est prise en compte.
 \begin{align}
-(currentCiLow > referenceCiHight OU  currentCiHight <  referenceCiLow) \label{align:condition-1}
+(currentCiLow > referenceCiHigh &&||&&   currentCiHigh <  referenceCiLow) \label{align:condition-1}
 \end{align}
 \begin{align}
 (abs(currentMedian - referenceMedian) > 1 ) \label{align:condition-2}
@@ -729,7 +596,7 @@ La Figure \ref{fig:anomalies} illustre les différents cas possibles de position
 	\centering
 	\captionsetup{justification=centering}
 	\resizebox{\textwidth}{!}{
-		\input{illustrations/casesAnomalies.tex}
+		\input{illustrations/casesAnomalies_2.tex}
 	}
 	\caption{Illustration des sauts d'un traceroute avec leurs informations}
 	\label{fig:anomalies}
@@ -750,7 +617,154 @@ Nous notons que dans le cas d'une anomalie détectée, l'écart entre les deux i
 	\end{tabular}
 \end{table}
 
-\subsection{Etapes détaillées du processus de détection}
+\section{Processus de détection des anomalies :  notation par fonctions} \label{processus-de-detection}
+La détection des anomalies dans les délais des liens peut être organisée en deux phases: la préparation de données et la détection des alarmes. Nous décrivons le même processus de détection décrit dans la section \ref{steps-rtt-analysis} (étapes $1$ à $9$)  selon ces deux phases. Nous développons chaque phase en plusieurs étapes. Chaque étape est décrite par  son objectif, ses entrées et ses sorties. Ces deux phases sont illustrées par les Figures et .
+\paragraph{Phase I : préparation de données.}
+
+\begin{itemize}
+	\item \textbf{findAllBins (I.1)} : nous cherchons la liste des périodes ({\color{gray}[bin]}) entre  {\color{gray}start} et  {\color{gray}end}. La durée de chaque {\color{gray}bin} vaut  {\color{gray}timeWindow}.
+	\item \textbf{findTraceroutesByBin (I.2)} : pour toute période  ({\color{gray}bin}), nous récupérons les traceroutes
+	capturés durant cette dernière. Le nombre de traceroutes associés à chaque {\color{gray}bin} dépend
+	des traceroutes disponibles à l'analyse  ({\color{gray}[traceroute]}).
+	\item \textbf{removeInvalidTraceroutes (I.3)} : certains traceroutes ne réussissent pas à atteindre la destination prévue, dans ce cas, ces traceroutes sont ignorés. De même, les sauts ayant des RTTs invalides
+	sont aussi ignorés.
+	\item \textbf{aggregateRttsByHop (I.4)} : étant donné que chaque saut  ({\color{gray}hop}) est décrit par plus d'un RTT, nous calculons la médiane de ces RTTs  ({\color{gray}rttAgg}), et ce par source de signal.
+	\item \textbf{linkInference (I.5)} : chaque deux sauts consécutifs d'un traceroute forment un lien. Pour
+	tout traceroute d'un  {\color{gray}bin} donné, nous déduisons les liens possibles, ensuite, nous caractérisons tout lien  {\color{gray}(ip1, ip2)} avec son RTT différentiel  ({\color{gray}rttDiff}).
+	\item \textbf{sortLinks (I.6)}: nous ordonnons les couples d'adresses IP  {\color{gray}(ip1, ip2)} de chaque lien suivant l'ordre alphanumérique. 
+	%Par exemple, 
+	\item \textbf{mergeLinks (I.7)} : nous fusionnons les liens avec leurs caractéristiques. En résultat, les
+	liens $ (ip1, ip2) $ et $ (ip2, ip1) $ sont fusionnés et sont représentés par le lien $ (ip1, ip2) $ si $ (ip1, ip2) $ $ < $ $ (ip2, ip1) $. $<$ désigne l'ordre alphanumérique.
+	\item \textbf{summarizeData (1.8)} : jusqu'à cette étape, les liens sont organisés par période ({\color{gray}bin}). A travers \textit{summarizeData}, nous réorganisons chaque lien de toutes les périodes de sorte que chaque RTT différentiel soit associé à la période correspondante; la période pendant laquelle il a été identifié. C'est pourquoi les deux listes  {\color{gray}[rttDiff]} et  {\color{gray}[bin]} ont la même longueur.
+	
+	%Vu qu'un lien peut être identifié durant plusieurs périodes, nous résumons un lien en fusionnant leurs
+	%RTTs différentiels. Toutefois, chaque RTT différentiel doit garder le  {\color{gray}bin} pendant lequel il a été identifié, ainsi 
+	
+	
+	
+\end{itemize}
+
+\paragraph{ Phase II : détection des alarmes.}
+
+A la fin de la phase I, nous avons tous les liens identifiés avec leurs
+RTTs différentiels. 
+
+\begin{itemize}
+	
+	\item \textbf{findAllBins (II.1)} : nous générons les mêmes périodes  ({\color{gray}[bin]}) que celles générées à
+	l'étape (I.1).
+	\item \textbf{findRTTDiffByBin (II.2)} : nous reprenons les périodes générées dans l'ordre chronologique et
+	pour chaque période nous cherchons les RTTs différentiels correspondants. Soit  {\color{gray}dist} l'ensemble des RTTs différentiels correspondants à la période courante.
+	Seules les périodes ayant enregistré au moins  quatre RTTs différentiels qui  seront considérées.
+	\item \textbf{wilsonScoreProcess (II.3)} : le calcul de l'intervalle de confiance à partir du score de Wilson nécessite d'avoir le nombre total des expériences, le nombre d'expérience réussies et  le risque d'erreur. Nous calculons les deux valeurs du score de Wilson suivant les étapes suivantes :
+	
+	\begin{enumerate}
+		\item Soit $n$ la taille de la distribution, nous calculons le score de Wilson et cela donne le couple de valeurs ($ low $, $ high $);
+		\item nous multiplions $ low $ et $ high $ par  $n$, ainsi nous avons ($ lo $, $ hi $) =  ($ n*low $, $ n*high $);
+		\item nous récupérons la partie entière du  $ lo $ et $ hi $ et  nous obtenons
+		
+		($l$, $h$) = ($ int $($ lo $), $ int $($ hi $))\footnote{La fonction $  int() $ est utilisée pour avoir la partie entière d'un nombre réel.};
+		\item  nous trions  {\color{gray}{dist}}  et nous parcourons cette dernière pour trouver les RTTs différentiels  se trouvant au rang $  l $ et $ h $ dans {\color{gray}dist}, respectivement sont $ rttDiffL $, $ rttDiffH $. Ainsi :
+		
+		$ rttDiffL  = dist[l]$  et $ rttDiffH = dist[h]$, avec $l$, $h$ $\in$ $[0,n[$. 
+		
+	\end{enumerate}
+	
+	
+	\item \textbf{updateCurrentLinkState (II.4)} :  {\color{gray}current}  est l'objet encapsulant  l'état courant du lien à une période donnée, il a
+	les éléments suivants:
+	
+	\begin{itemize}[label=$\square$]
+		\item le RTT différentiel médian\footnote{\textit{median(list)} calcule la valeur médiane de la liste \textit{list}. } ({\color{gray}median}),
+		{\color{gray}currentMedian} = median(dist) 
+		
+		\item  la borne inférieure de l'intervalle de confiance ({\color{gray}ciLow}),
+		
+		{\color{gray}currentCiLow} = {\color{gray}median} --  $ rttDiffL $
+		
+		\item   la borne supérieure de l'intervalle de confiance ({\color{gray}ciHigh}),
+		
+		{\color{gray}currentCiHigh} =  $ rttDiffH$ --  {\color{gray}median}
+		
+	\end{itemize}
+	
+	\item \textbf{ updateReferenceLinkState (II.5)} :  {\color{gray}reference}  est l'objet décrivant l'état de référence du lien à une période donnée. Il reprend les mêmes éléments que  l'objet {\color{gray}current}, à savoir, {\color{gray}median}, {\color{gray}ciLow} et {\color{gray}ciHigh}. Ainsi, l'état référence est décrit par la médiane du RTT différentiel ({\color{gray}referenceMedian}), la borne inférieure de l'intervalle de confiance de référence ({\color{gray}referenceCiLow}) et enfin la borne supérieure de l'intervalle de confiance de référence ({\color{gray}referenceCiHigh}).
+	
+	L'état courant décrit un lien à une période donnée, alors que l'état référence décrit l'état d'un lien à une période donnée en prenant en compte aussi les périodes qui précédent la période courante. La mise à jour de {\color{gray}reference}  est réalisée selon trois cas :
+	
+	\begin{enumerate}
+		\item \underline{Cas $1$}: tant que nous n'avons pas construit une référence assez représentable de l'état du lien,  nous mettons à jour la référence ({\color{gray}reference}) comme suit: 
+		\begin{align}
+		referenceMedian &= median(dist)\\
+		referenceCiLow &= rttDiffL\\
+		referenceCiHigh& = rttDiffH
+		\end{align}
+		\item \underline{Cas $2$} : une fois nous atteignons le nombre nécessaire de  mise à jour de la référence assurant sa représentativité, nous mettons à jour l'état référence en remplaçant, pour chaque période, la médiane par \textit{ aggr\_median}, la borne inférieure  par  \textit{aggr\_ciLow} et la borne sépérieure par \textit{aggr\_ciHigh}.
+		\begin{itemize}
+			
+			\item  Soit \textit{aggr\_median} la médiane de tous les RTTs différentiels médians de référence calculés pour toutes les périodes précédentes. 
+			
+			\item 	Soit \textit{aggr\_ciLow} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
+			
+			\item 	Soit \textit{aggr\_ciHigh} la médiane de     toutes les bornes inférieures calculées pendant les périodes précédentes.
+			
+		\end{itemize}
+		
+		
+		\item \underline{Cas $3$} : une fois la référence est assez représentable, nous mettons à jour cette dernière comme suit \footnote{Nous précisons que $ var[-1] $ dénote la dernière valeur que $ var $  avait. }:
+\begin{align*}
+referenceMedian &=  0.99*referenceMedian[-1]+0.01*currentMedian\\
+referenceCiLow &=	 0.99*referenceLow[-1]+0.01*rttDiffL\\
+referenceCiHigh &=  0.99*referenceHigh[-1]+0.01*rttDiffH
+\end{align*}
+		
+		
+Pour toute période, la mise à jour de la référence est effectuée selon un des trois cas. Nous précision que $ \alpha = 0.01 $.
+		
+	\end{enumerate}
+	\item \textbf{ alarmsDetection (II.6) }:   la détection des anomalies est déclenchée à partir du cas $3$. Si une anomalie est détectée, nous mettons à jour la liste des alarmes  {\color{gray}(alarmsValues)} avec le RTT différentiel médian (currentMedian) ainsi que la
+	liste des dates  {\color{gray}(alarmsDates)} qui correspondent à ces anomalies. Les anomalies sont détectées en évaluant le chevauchement entre l'intervalle de confiance courant et celui de référence. La période courante présente une anomalie si la condition suivante est vraie\footnote{Nous notons par [-1] l'élément précédent d'une mesure. Par exemple, currentMedian[-1] est la médiane des RTTs différentiels de la période qui précède la période courante.}:
+	\begin{lstlisting}[language=json,firstnumber=1, caption={Conditions de présence d'une anomalie pour un lien},
+	basicstyle =\footnotesize]
+	currentCiLow[-1] > referenceHi[-1] or
+	currentCiHigh[-1] < referenceCiLow[-1]) and
+	np.abs(currentMedian[-1]-referenceMedian[-1])>1
+	\end{lstlisting}
+	
+	
+	
+\end{itemize}
+
+\paragraph{ Illustrations des deux phases de détection}~
+La Figure  \ref{fig:step-preparing-data} reprend les étapes de la phase I et
+%. Chaque étape est définie par ses entrées et
+%ses sorties ainsi que son objectif et
+la Figure \ref{fig:step-detection-anomalies} illustre aussi les principales étapes  de la phase II.
+\newpage
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{!}{\textheight}{
+		\input{illustrations/step-preparing-data.tex}
+	}
+	\caption{Phase I : préparation de données }
+	\label{fig:step-preparing-data}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\resizebox{\textwidth}{\textheight}{
+		\input{illustrations/step-detection-anomalies.tex}
+	}
+	\caption{Phase II : détection des alarmes }
+	\label{fig:step-detection-anomalies}
+\end{figure}
+
+
+
+\section{Exemple illustratif du processus de détection des anomalies}
 
 \paragraph{Description de  l'échantillon} :
 

@@ -9,14 +9,14 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {II.1}{\ignorespaces (a) Le RTT entre la sonde P et les routeurs B et C. (b) La différence entre les chemins de retour depuis les routeurs B et C vers la sonde P. Source : \cite {DBLP:journals/corr/FontugneAPB16}\relax }}{30}{figure.caption.25}
 \contentsline {figure}{\numberline {II.2}{\ignorespaces Illustration des périodes de l'analyse entre la date de début et la date de fin.\relax }}{33}{figure.caption.28}
-\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{34}{figure.caption.30}
+\contentsline {figure}{\numberline {II.3}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{35}{figure.caption.30}
 \contentsline {figure}{\numberline {II.4}{\ignorespaces Inférence des liens possibles entre les routeurs des deux sauts $h_{1}$ et $h_{2}$\relax }}{36}{figure.caption.35}
 \contentsline {figure}{\numberline {II.5}{\ignorespaces La comparaison des deux intervalles de confiance : courant et référence \relax }}{37}{figure.caption.41}
-\contentsline {figure}{\numberline {II.6}{\ignorespaces Phase I : préparation de données \relax }}{41}{figure.caption.45}
-\contentsline {figure}{\numberline {II.7}{\ignorespaces Phase II : détection des alarmes \relax }}{42}{figure.caption.46}
-\contentsline {figure}{\numberline {II.8}{\ignorespaces Illustration de la médiane\relax }}{44}{figure.caption.48}
-\contentsline {figure}{\numberline {II.9}{\ignorespaces Nomination utilisée\relax }}{47}{figure.caption.51}
-\contentsline {figure}{\numberline {II.10}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{48}{figure.caption.52}
+\contentsline {figure}{\numberline {II.6}{\ignorespaces Illustration de la médiane\relax }}{39}{figure.caption.43}
+\contentsline {figure}{\numberline {II.7}{\ignorespaces Nomination utilisée\relax }}{42}{figure.caption.46}
+\contentsline {figure}{\numberline {II.8}{\ignorespaces Illustration des sauts d'un traceroute avec leurs informations\relax }}{43}{figure.caption.47}
+\contentsline {figure}{\numberline {II.9}{\ignorespaces Phase I : préparation de données \relax }}{47}{figure.caption.52}
+\contentsline {figure}{\numberline {II.10}{\ignorespaces Phase II : détection des alarmes \relax }}{48}{figure.caption.53}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {III.1}{\ignorespaces Architecture standard du Big Data. Source : \cite {anil-big-data}\relax }}{58}{figure.caption.67}
 \contentsline {figure}{\numberline {III.2}{\ignorespaces Illustration d'une base de données NoSQL de type clé-valeur\relax }}{60}{figure.caption.79}

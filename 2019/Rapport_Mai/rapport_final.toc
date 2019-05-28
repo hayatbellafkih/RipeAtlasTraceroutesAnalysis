@@ -58,28 +58,28 @@
 \contentsline {subsection}{\numberline {II.6.2}Description des paramètres de l'analyse des délais}{32}{subsection.2.6.2}
 \contentsline {subsection}{\numberline {II.6.3}Processus de détection des anomalies : notation formelle}{34}{subsection.2.6.3}
 \contentsline {subparagraph}{Notations}{34}{section*.29}
-\contentsline {paragraph}{1. Regroupement des traceroutes par période $d_k$.}{34}{section*.31}
+\contentsline {paragraph}{1. Regroupement des traceroutes par période $d_k$.}{35}{section*.31}
 \contentsline {paragraph}{2. Vérification de la validité de chaque traceroute.}{35}{section*.32}
 \contentsline {paragraph}{3. Calcul de la médiane des RTTs par saut.}{35}{section*.33}
 \contentsline {paragraph}{4. Inférence des liens topologiques par traceroute.}{35}{section*.34}
-\contentsline {paragraph}{5. Calcul des RTTs différentiels des liens.}{35}{section*.36}
-\contentsline {paragraph}{6. Fusion des informations d'un lien.}{35}{section*.37}
+\contentsline {paragraph}{5. Calcul des RTTs différentiels des liens.}{36}{section*.36}
+\contentsline {paragraph}{6. Fusion des informations d'un lien.}{36}{section*.37}
 \contentsline {paragraph}{7. Calcul de la médiane des RTTs différentiels et de son intervalle de confiance courants.}{36}{section*.38}
 \contentsline {paragraph}{8. Mise à jour de la médiane des RTTs différentiels et de son intervalle de confiance de référence.}{36}{section*.39}
 \contentsline {paragraph}{9. Comparaison des intervalles de confiance des RTTs différentiels : courant et référence.}{36}{section*.40}
-\contentsline {subsection}{\numberline {II.6.4}Processus de détection des anomalies : notation par fonctions}{37}{subsection.2.6.4}
-\contentsline {paragraph}{Phase I : préparation de données.}{37}{section*.42}
-\contentsline {paragraph}{ Phase II : détection des alarmes.}{38}{section*.43}
-\contentsline {paragraph}{ Illustrations des deux phases de détection}{40}{section*.44}
-\contentsline {section}{\numberline {II.7}Exemples illustratifs de la détection des anomalies}{43}{section.2.7}
-\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{43}{subsection.2.7.1}
-\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{43}{subsubsection.2.7.1.1}
-\contentsline {subsubsection}{\numberline {II.7.1.2}Méthode de score de Wilson}{44}{subsubsection.2.7.1.2}
-\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{45}{subsection.2.7.2}
-\contentsline {subsubsection}{\numberline {II.7.2.1}Détection des anomalies}{47}{subsubsection.2.7.2.1}
-\contentsline {subsection}{\numberline {II.7.3}Etapes détaillées du processus de détection}{48}{subsection.2.7.3}
-\contentsline {paragraph}{Description de l'échantillon}{48}{section*.54}
-\contentsline {section}{\numberline {II.8}Conclusion}{54}{section.2.8}
+\contentsline {section}{\numberline {II.7}Quelques étapes détaillées de la détection}{38}{section.2.7}
+\contentsline {subsection}{\numberline {II.7.1}Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{38}{subsection.2.7.1}
+\contentsline {subsubsection}{\numberline {II.7.1.1}Le théorème 2.1 par l'exemple}{38}{subsubsection.2.7.1.1}
+\contentsline {subsubsection}{\numberline {II.7.1.2}Méthode du score de Wilson}{39}{subsubsection.2.7.1.2}
+\contentsline {subsection}{\numberline {II.7.2}Calcul de la référence}{40}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {II.7.3}Détection des anomalies}{42}{subsection.2.7.3}
+\contentsline {section}{\numberline {II.8}Processus de détection des anomalies : notation par fonctions}{43}{section.2.8}
+\contentsline {paragraph}{Phase I : préparation de données.}{43}{section*.49}
+\contentsline {paragraph}{ Phase II : détection des alarmes.}{44}{section*.50}
+\contentsline {paragraph}{ Illustrations des deux phases de détection}{46}{section*.51}
+\contentsline {section}{\numberline {II.9}Exemple illustratif du processus de détection des anomalies}{49}{section.2.9}
+\contentsline {paragraph}{Description de l'échantillon}{49}{section*.54}
+\contentsline {section}{\numberline {II.10}Conclusion}{54}{section.2.10}
 \contentsline {chapter}{\numberline {III}Introduction au Big Data}{55}{chapter.3}
 \contentsline {section}{\numberline {III.1}Introduction}{55}{section.3.1}
 \contentsline {section}{\numberline {III.2}Processus d'analyse de données massives}{55}{section.3.2}
