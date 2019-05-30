@@ -7,19 +7,20 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {II.1}{\ignorespaces Récapitulatif des traceroutes utilisés dans le travail de référence \relax }}{30}{table.caption.23}
 \contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{39}{table.caption.44}
-\contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de calcul et mise à jour de la borne inférieure de l'intervalle de confiance référence de la médiane \relax }}{42}{table.caption.45}
+\contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de Mise à jour de la borne inférieure de l'intervalle de confiance de la médiane de référence\relax }}{42}{table.caption.45}
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {III.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{68}{table.caption.95}
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {IV.1}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{99}{table.caption.145}
+\contentsline {table}{\numberline {IV.2}{\ignorespaces Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }}{100}{table.caption.146}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {V.1}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{99}{table.caption.142}
-\contentsline {table}{\numberline {V.2}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{103}{table.caption.150}
-\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{105}{table.caption.155}
-\contentsline {table}{\numberline {V.4}{\ignorespaces Description de quelques instances d'Amazon EC2\relax }}{109}{table.caption.162}
-\contentsline {table}{\numberline {V.5}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{109}{table.caption.164}
-\contentsline {table}{\numberline {V.6}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{109}{table.caption.165}
-\contentsline {table}{\numberline {V.7}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{110}{table.caption.167}
+\contentsline {table}{\numberline {V.1}{\ignorespaces Les paramètres de l'outil de détection\relax }}{105}{table.caption.153}
+\contentsline {table}{\numberline {V.2}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{107}{table.caption.157}
+\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{108}{table.caption.161}
+\contentsline {table}{\numberline {V.4}{\ignorespaces Description de quelques instances d'Amazon EC2\relax }}{112}{table.caption.169}
+\contentsline {table}{\numberline {V.5}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{112}{table.caption.173}
+\contentsline {table}{\numberline {V.6}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{112}{table.caption.174}
+\contentsline {table}{\numberline {V.7}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{113}{table.caption.176}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {C.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{122}{table.caption.173}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{119}{table.caption.180}

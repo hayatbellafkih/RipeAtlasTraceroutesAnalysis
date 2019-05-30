@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  28 MAY 2019 04:23
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  30 MAY 2019 01:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1302,38 +1302,37 @@ LaTeX Warning: Label `rttpositif' multiply defined.
 
 LaTeX Warning: Label `lst:submit' multiply defined.
 
-) (./chapitre5.aux) (./lecons-apprises.aux) (./Conclusion_new.aux)
-(./conclusion.aux) (./annexes.aux) (./Un_enregistrement_traceroute.aux)
+) (./chapitre5.aux) (./conclusion.aux) (./Un_enregistrement_traceroute.aux)
 (./table-theoreme21-formattex_annexe.aux))
 \openout1 = `rapport_final.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 234.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 234.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 235.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 235.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 234.
-LaTeX Font Info:    ... okay on input line 234.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 234.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 235.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -1342,15 +1341,15 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
 )
-Package hyperref Info: Option `plainpages' set `false' on input line 234.
-Package hyperref Info: Option `colorlinks' set `true' on input line 234.
-LaTeX Info: Redefining \dots on input line 234.
-LaTeX Info: Redefining \up on input line 234.
+Package hyperref Info: Option `plainpages' set `false' on input line 235.
+Package hyperref Info: Option `colorlinks' set `true' on input line 235.
+LaTeX Info: Redefining \dots on input line 235.
+LaTeX Info: Redefining \up on input line 235.
 
 
 Package french.ldf Warning: Add \usepackage{fontspec} to the
 (french.ldf)                preamble of your document, reported on input line 2
-34.
+35.
 
 \c@lstlisting=\count302
 ABD: EveryShipout initializing macros
@@ -1359,7 +1358,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box66
-Package hyperref Info: Link coloring ON on input line 234.
+Package hyperref Info: Link coloring ON on input line 235.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1369,9 +1368,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count303
 )
-LaTeX Info: Redefining \ref on input line 234.
-LaTeX Info: Redefining \pageref on input line 234.
-LaTeX Info: Redefining \nameref on input line 234.
+LaTeX Info: Redefining \ref on input line 235.
+LaTeX Info: Redefining \pageref on input line 235.
+LaTeX Info: Redefining \nameref on input line 235.
 
 (./rapport_final.out) (./rapport_final.out)
 \@outlinefile=\write8
@@ -1412,30 +1411,30 @@ LaTeX Info: Redefining \nameref on input line 234.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for T1+phv on input line 234.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 235.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 234.
+LaTeX Font Info:    Try loading font information for U+msa on input line 235.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 234.
+LaTeX Font Info:    Try loading font information for U+msb on input line 235.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-File: UMONS_FS.pdf Graphic file (type pdf)
-<use UMONS_FS.pdf>
+File: Sciencesvert-rouge.png Graphic file (type bmp)
+<Sciencesvert-rouge.png>
 File: UMONS+txt.pdf Graphic file (type pdf)
 <use UMONS+txt.pdf>
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 234.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 235.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 234.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 235.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <30> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 234.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 235.
  [1
 
 ] [2]
@@ -1806,41 +1805,45 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 34.
+(caption)                particular \caption on input line 35.
 See the caption package documentation for explanation.
 
 [75
 
 
 ] [76] [77]
-Underfull \hbox (badness 3179) in paragraph at lines 129--129
+Underfull \hbox (badness 3179) in paragraph at lines 130--130
 [][][]\T1/ptm/m/n/10 .[][]Voir la liste des tra-ce-routes uti-li-sés dans l'exe
 mple illus-tra-tif dis-po-nible sur Gi-tHub. URL :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--129
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
 [][]$\T1/pcr/m/n/10 https : / / github . com / hayatbellafkih / SparkSalacaTrac
 eroutesAnalysis / blob /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--129
+Underfull \hbox (badness 10000) in paragraph at lines 130--130
 \T1/pcr/m/n/10 master / rttDelaysSparkScala / src / main / resources / test / r
 esult _ modified . json$[][]\T1/ptm/m/n/10 ,
  []
 
 Missing character: There is no   in font ptmr8t!
-[78] [79] [80] (./illustrations/read-data-from-mongodb.tex)
+[78] [79] (./illustrations/read-data-from-mongodb.tex) [80]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 271.
+put line 272.
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
+Underfull \hbox (badness 10000) in paragraph at lines 280--281
 [] $\OML/cmm/m/it/12 rawTraceroutes$ $\OMS/cmsy/m/n/12  $ \T1/pcr/m/n/12 les tr
 aceroutes stockés dans $\OML/cmm/m/it/12 collection$ \T1/pcr/m/n/12 et
  []
 
-[81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91]
+
+Underfull \vbox (badness 4013) has occurred while \output is active []
+
+ [81]
+[82] [83] [84] [85] [86] [87] [88] [89] [90] [91]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [92]
@@ -1852,131 +1855,99 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) [93] [94]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [95])
-[96]
+ [95]
+File: illustrations/glue_crawler.png Graphic file (type bmp)
+<illustrations/glue_crawler.png>
+
+Overfull \hbox (4.51187pt too wide) in paragraph at lines 999--1001
+[]\T1/ptm/m/n/12 Afin de dé-cou-vrir ra-pi-de-ment le schéma des tra-ce-routes,
+ la dé-tec-tion au-to-ma-tique du schéma|
+ []
+
+[96] [97]
+File: illustrations/partitionnement-athena.png Graphic file (type bmp)
+<illustrations/partitionnement-athena.png>
+ [98] [99]
+File: illustrations/sqlRequestAthena1.png Graphic file (type bmp)
+<illustrations/sqlRequestAthena1.png>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[100] [101] [102]) [103]
 \openout2 = `chapitre5.aux'.
 
  (./chapitre5.tex
 Chapitre V.
-[97
+[104
 
 
-] [98]
-File: illustrations/mongoDBtiming_0.png Graphic file (type bmp)
-<illustrations/mongoDBtiming_0.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[99]
-File: illustrations/glue_crawler.png Graphic file (type bmp)
-<illustrations/glue_crawler.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[100] [101]
-File: illustrations/partitionnement-athena.png Graphic file (type bmp)
-<illustrations/partitionnement-athena.png>
- [102] [103] [104]
+] [105] (./illustrations/mongodbmesuretime.tex) [106]
+File: illustrations/medianTime-execution-mongodb.png Graphic file (type bmp)
+<illustrations/medianTime-execution-mongodb.png>
+ [107]
+(./illustrations/amazonathenatiming.tex)
 File: illustrations/temps-avec-aws_1.png Graphic file (type bmp)
 <illustrations/temps-avec-aws_1.png>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [105]
-[106]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 1546) has occurred while \output is active []
+
+ [108]
+(./illustrations/sparktimingLocal.tex) [109]
 File: illustrations/variant_driver_memory.png Graphic file (type bmp)
 <illustrations/variant_driver_memory.png>
- [107] [108] [109]
-Underfull \hbox (badness 10000) in paragraph at lines 568--568
+ [110] [111]
+(./illustrations/sparktimingEMR.tex) [112]
+Underfull \hbox (badness 10000) in paragraph at lines 532--532
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / aws . amazon
  . com / fr / premiumsupport / knowledge -[] center / emr -[]
  []
 
+[113]
 File: illustrations/spark-executoronyarn.png Graphic file (type bmp)
 <illustrations/spark-executoronyarn.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) [110] [111]
-\openout2 = `lecons-apprises.aux'.
-
- (./lecons-apprises.tex) [112
-
-
-]
-\openout2 = `Conclusion_new.aux'.
-
- (./Conclusion_new.tex) [113
-
-
-]
+) [114]
 \openout2 = `conclusion.aux'.
 
-
-(./conclusion.tex) [114
-
-
-]
-\openout2 = `annexes.aux'.
-
- (./annexes.tex
-Annexe A.
-[115
+ (./conclusion.tex) [115
 
 
 ]
-File: illustrations/partitionnement-athena.png Graphic file (type bmp)
-<illustrations/partitionnement-athena.png>
- [116]
-File: illustrations/sqlRequestAthena.png Graphic file (type bmp)
-<illustrations/sqlRequestAthena.png>
-
-Underfull \vbox (badness 5741) has occurred while \output is active []
-
- [117])
-[118]
 \openout2 = `Un_enregistrement_traceroute.aux'.
 
  (./Un_enregistrement_traceroute.tex
-Annexe B.
-[119
+Annexe A.
+[116
 
 
-]) [120]
+]) [117]
 \openout2 = `table-theoreme21-formattex_annexe.aux'.
 
  (./table-theoreme21-formattex_annexe.tex
-Annexe C.
-) [121
+Annexe B.
+) [118
 
 
-] [122] (./rapport_final.lof
-Underfull \vbox (badness 3343) has occurred while \output is active []
-
- [123
+] [119] (./rapport_final.lof [120
 
 ])
 \tf@lof=\write10
 \openout10 = `rapport_final.lof'.
 
-
-[124] (./rapport_final.lot
-Overfull \hbox (5.33357pt too wide) in paragraph at lines 10--10
- [][] [][][]\T1/ptm/m/n/12 Exemple de cal-cul et mise à jour de la borne in-fé-
-rieure de l'in-ter-valle de confiance |
- []
-
-)
+ [121] (./rapport_final.lot)
 \tf@lot=\write11
 \openout11 = `rapport_final.lot'.
 
- [125] (./rapport_final.lol [126])
+ [122]
+(./rapport_final.lol [123])
 \tf@lol=\write12
 \openout12 = `rapport_final.lol'.
 
- [127] (./rapport_final.bbl
+ [124] (./rapport_final.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 34--39
 \T1/pcr/m/n/12 net / AmazonWebServices / best -[] practices -[] for -[] using -
 [] apache -[]
@@ -2030,7 +2001,7 @@ Underfull \hbox (badness 4328) in paragraph at lines 83--88
 tm/m/n/12 , 2015.  (consulté le
  []
 
-[128]
+[125]
 Underfull \hbox (badness 10000) in paragraph at lines 90--94
 []\T1/ptm/m/sc/12 Fontugne, R.  \T1/ptm/m/n/12 In-ter-ne-tHeal-thRe-port - tar-
 ti-flette.  URL : [][]$\T1/pcr/m/n/12 https : / /
@@ -2097,7 +2068,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--183
 t -[] devices$[][]\T1/ptm/m/n/12 , 2017.
  []
 
-[129]
+[126]
 Underfull \hbox (badness 1043) in paragraph at lines 211--217
 []\T1/ptm/m/sc/12 Marshall, D.  \T1/ptm/m/n/12 Func-tio-nal Pro-gram-ming and B
 ig Data, Ha-doop Sum-mit 2015.
@@ -2139,27 +2110,26 @@ Underfull \hbox (badness 3758) in paragraph at lines 270--276
 ][]\T1/ptm/m/n/12 , 2016.  (consulté le
  []
 
-[130]) [131]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
+[127]) [128]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 296.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 296.
  (./rapport_final.aux (./resume.aux) (./Remerciéments.aux)
 (./introductionII.aux) (./chapitre1.aux) (./chapitre2.aux) (./chapitre3.aux)
-(./chapitre4.aux) (./chapitre5.aux) (./lecons-apprises.aux)
-(./Conclusion_new.aux) (./conclusion.aux) (./annexes.aux)
+(./chapitre4.aux) (./chapitre5.aux) (./conclusion.aux)
 (./Un_enregistrement_traceroute.aux) (./table-theoreme21-formattex_annexe.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 295.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 295.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 296.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 296.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32730 strings out of 493007
- 572249 string characters out of 6136719
- 1096563 words of memory out of 5000000
- 35875 multiletter control sequences out of 15000+600000
+ 32734 strings out of 493007
+ 572605 string characters out of 6136719
+ 1093624 words of memory out of 5000000
+ 35888 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,21n,97p,1104b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on rapport_final.pdf (133 pages).
+Output written on rapport_final.pdf (130 pages).

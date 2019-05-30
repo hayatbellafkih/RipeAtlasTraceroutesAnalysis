@@ -9,10 +9,7 @@ A level-1 auxiliary file: chapitre2.aux
 A level-1 auxiliary file: chapitre3.aux
 A level-1 auxiliary file: chapitre4.aux
 A level-1 auxiliary file: chapitre5.aux
-A level-1 auxiliary file: lecons-apprises.aux
-A level-1 auxiliary file: Conclusion_new.aux
 A level-1 auxiliary file: conclusion.aux
-A level-1 auxiliary file: annexes.aux
 A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
@@ -51,7 +48,7 @@ Warning--empty publisher in anil-big-data
 Warning--empty journal in article-comparaison-spark-hadoop
 You've used 44 entries,
             2253 wiz_defined-function locations,
-            782 strings with 11958 characters,
+            779 strings with 11910 characters,
 and the built_in function-call counts, 11381 in all, are:
 = -- 1096
 > -- 386

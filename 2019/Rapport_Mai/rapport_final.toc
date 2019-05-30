@@ -137,15 +137,16 @@
 \contentsline {paragraph}{Apache Spark VS Apache Hadoop}{74}{section*.111}
 \contentsline {subsection}{\numberline {III.4.6}Amazon Elastic MapReduce}{74}{subsection.3.4.6}
 \contentsline {section}{\numberline {III.5}Conclusion}{74}{section.3.5}
-\contentsline {chapter}{\numberline {IV}Implémentation en Spark/Scala}{75}{chapter.4}
-\contentsline {section}{\numberline {IV.1}Introduction}{75}{section.4.1}
-\contentsline {section}{\numberline {IV.2}Présentation de Scala}{75}{section.4.2}
+\contentsline {chapter}{\numberline {IV}Implémentations }{75}{chapter.4}
+\contentsline {section}{\numberline {IV.1}Implémentation en Spark/Scala}{75}{section.4.1}
+\contentsline {subsection}{\numberline {IV.1.1}Introduction}{75}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {IV.1.2}Présentation de Scala}{75}{subsection.4.1.2}
 \contentsline {paragraph}{Notation relatives au langage Scala}{75}{section*.112}
-\contentsline {section}{\numberline {IV.3}La programmation fonctionnelle et le Big Data}{76}{section.4.3}
-\contentsline {section}{\numberline {IV.4}Implémentation}{77}{section.4.4}
-\contentsline {subsection}{\numberline {IV.4.1}Description de l'environnement}{77}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {IV.4.2}Brève présentation de l'implémentation}{77}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {IV.4.3}Création d'une application Spark/Scala}{78}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {IV.1.3}La programmation fonctionnelle et le Big Data}{76}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {IV.1.4}Implémentation}{77}{subsection.4.1.4}
+\contentsline {subsubsection}{\numberline {IV.1.4.1}Description de l'environnement}{77}{subsubsection.4.1.4.1}
+\contentsline {subsubsection}{\numberline {IV.1.4.2}Brève présentation de l'implémentation}{77}{subsubsection.4.1.4.2}
+\contentsline {subsubsection}{\numberline {IV.1.4.3}Création d'une application Spark/Scala}{78}{subsubsection.4.1.4.3}
 \contentsline {paragraph}{Gestion des dépendances}{78}{section*.113}
 \contentsline {paragraph}{Paramètres de l'analyse}{78}{section*.114}
 \contentsline {paragraph}{Configuration d'une application Spark}{78}{section*.115}
@@ -167,48 +168,44 @@
 \contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{88}{section*.132}
 \contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{88}{section*.133}
 \contentsline {paragraph}{Détection des anomalies}{89}{section*.134}
-\contentsline {subsection}{\numberline {IV.4.4}Exécution d'une application Spark}{93}{subsection.4.4.4}
+\contentsline {subsubsection}{\numberline {IV.1.4.4}Exécution d'une application Spark}{93}{subsubsection.4.1.4.4}
 \contentsline {paragraph}{Mode local}{93}{section*.135}
 \contentsline {paragraph}{Amazon EMR }{94}{section*.136}
 \contentsline {paragraph}{Résultats finaux}{94}{section*.137}
-\contentsline {section}{\numberline {IV.5}Conclusion}{96}{section.4.5}
-\contentsline {chapter}{\numberline {V}Application de quelques technologies Big Data sur l'analyse des traceroutes}{97}{chapter.5}
-\contentsline {section}{\numberline {V.1}Introduction}{97}{section.5.1}
-\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{97}{section.5.2}
-\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{98}{section.5.3}
-\contentsline {paragraph}{La machine de test}{98}{section*.138}
-\contentsline {paragraph}{Paramètres de l'analyse}{98}{section*.139}
-\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{98}{section.5.4}
-\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{98}{section.5.5}
-\contentsline {paragraph}{Evaluation des critères de sélection}{98}{section*.140}
-\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{99}{section*.141}
-\contentsline {section}{\numberline {V.6}Application 2 : Amazon DynamoDB}{99}{section.5.6}
-\contentsline {section}{\numberline {V.7}Application 3 : Amazon S3, Amazon Glue et Amazon Athena }{100}{section.5.7}
-\contentsline {paragraph}{Vue générale}{100}{section*.144}
-\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{101}{section*.146}
-\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{101}{section*.147}
-\contentsline {paragraph}{Partitionnement des données stockés dans Amazon S3}{101}{section*.148}
-\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{103}{section*.151}
-\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{103}{section*.152}
-\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{104}{section*.153}
-\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{105}{section*.154}
-\contentsline {section}{\numberline {V.8}Application 4 : Spark Apache avec Scala}{106}{section.5.8}
-\contentsline {subsection}{\numberline {V.8.1}Mode local}{106}{subsection.5.8.1}
-\contentsline {paragraph}{Variant la mémoire allouée au driver}{106}{section*.157}
-\contentsline {paragraph}{Variant le mode local : local vs local[N]}{107}{section*.159}
-\contentsline {paragraph}{Notes concernant le mode local}{108}{section*.160}
-\contentsline {subsection}{\numberline {V.8.2}Cluster Amazon EMR}{108}{subsection.5.8.2}
-\contentsline {paragraph}{Création d'un cluster EMR}{108}{section*.161}
-\contentsline {paragraph}{Variant la taille du cluster}{109}{section*.163}
-\contentsline {paragraph}{Variant la taille de données}{109}{section*.166}
-\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{110}{section*.168}
-\contentsline {section}{\numberline {V.9}Conclusion}{110}{section.5.9}
-\contentsline {section}{\numberline {V.10}Récapitulatif}{112}{section.5.10}
-\contentsline {chapter}{\numberline {A}Amazon Athena }{115}{appendix.A}
-\contentsline {section}{\numberline {A.1}Création de la table traceroutes }{115}{section.A.1}
-\contentsline {section}{\numberline {A.2}Partitionnement de données sur Amazon Athena }{116}{section.A.2}
-\contentsline {subsection}{\numberline {A.2.1}Présentation du partitionnement}{116}{subsection.A.2.1}
-\contentsline {subsection}{\numberline {A.2.2}Application du partitionnement sur les traceroutes Atlas}{116}{subsection.A.2.2}
-\contentsline {subsection}{\numberline {A.2.3}L'interrogation de données sur Amazon Athena}{117}{subsection.A.2.3}
-\contentsline {chapter}{\numberline {B}Exemple d'une réponse traceroute}{119}{appendix.B}
-\contentsline {chapter}{\numberline {C}Table des intervalles de confiance}{121}{appendix.C}
+\contentsline {section}{\numberline {IV.2}Implémentation avec Amazon S3 e Athena}{96}{section.4.2}
+\contentsline {paragraph}{Vue générale}{96}{section*.138}
+\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{96}{section*.140}
+\contentsline {paragraph}{Création manuelle de la table \textit {traceroutes\_api}}{97}{section*.141}
+\contentsline {subparagraph}{Création de la table traceroutes }{97}{section*.142}
+\contentsline {paragraph}{Partitionnement des données stockées dans Amazon S3}{98}{section*.143}
+\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{100}{section*.147}
+\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{100}{section*.149}
+\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{102}{section*.150}
+\contentsline {section}{\numberline {IV.3}Implémentation avec MongoDB}{102}{section.4.3}
+\contentsline {section}{\numberline {IV.4}Conclusion}{103}{section.4.4}
+\contentsline {chapter}{\numberline {V}Application de technologies Big Data à l'analyse de traceroutes}{104}{chapter.5}
+\contentsline {section}{\numberline {V.1}Introduction}{104}{section.5.1}
+\contentsline {section}{\numberline {V.2}Critères d'évaluation des technologies Big Data}{104}{section.5.2}
+\contentsline {section}{\numberline {V.3}Caractéristiques de l'environnement de test}{105}{section.5.3}
+\contentsline {paragraph}{La machine de test}{105}{section*.151}
+\contentsline {paragraph}{Paramètres de l'analyse.}{105}{section*.152}
+\contentsline {section}{\numberline {V.4}Collecte des traceroutes depuis le dépôt d'Atlas }{105}{section.5.4}
+\contentsline {section}{\numberline {V.5}Application 1 : MongoDB}{106}{section.5.5}
+\contentsline {paragraph}{Evaluation des critères de sélection}{106}{section*.154}
+\contentsline {paragraph}{Performances de la base de données MongoDB dans l'analyse des délais }{106}{section*.155}
+\contentsline {section}{\numberline {V.6}Application 2 : Amazon Athena et Amazon S3}{107}{section.5.6}
+\contentsline {paragraph}{Performances des services Amazon S3 et Athena dans l'analyse des délais }{107}{section*.159}
+\contentsline {section}{\numberline {V.7}Application 3 : Spark Apache avec Scala}{109}{section.5.7}
+\contentsline {subsection}{\numberline {V.7.1}Mode local}{109}{subsection.5.7.1}
+\contentsline {paragraph}{Variant la mémoire allouée au driver}{109}{section*.164}
+\contentsline {paragraph}{Variant le mode local : local vs local[N]}{111}{section*.166}
+\contentsline {paragraph}{Notes concernant le mode local}{111}{section*.167}
+\contentsline {subsection}{\numberline {V.7.2}Cluster Amazon EMR}{111}{subsection.5.7.2}
+\contentsline {paragraph}{Création d'un cluster EMR}{111}{section*.168}
+\contentsline {paragraph}{Que ce qu'on mesure}{112}{section*.170}
+\contentsline {paragraph}{Variant la taille du cluster}{112}{section*.172}
+\contentsline {paragraph}{Variant la taille de données}{113}{section*.175}
+\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{113}{section*.177}
+\contentsline {section}{\numberline {V.8}Conclusion}{114}{section.5.8}
+\contentsline {chapter}{\numberline {A}Exemple d'une réponse traceroute}{116}{appendix.A}
+\contentsline {chapter}{\numberline {B}Table des intervalles de confiance}{118}{appendix.B}

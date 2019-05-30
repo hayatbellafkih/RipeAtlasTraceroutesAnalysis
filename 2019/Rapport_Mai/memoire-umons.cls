@@ -208,7 +208,7 @@
           %\ifpdf@umons
           \begin{tabular}[t]{@{}l@{}}
             %\resizebox{!}{20mm}{\includegraphics{lorentz}}\\[-5mm]
-            \resizebox{!}{15mm}{\includegraphics{UMONS_FS}}\\%
+            \resizebox{!}{15mm}{\includegraphics{Sciencesvert-rouge}}\\%
             \@institut
           \end{tabular}%
           %\fi

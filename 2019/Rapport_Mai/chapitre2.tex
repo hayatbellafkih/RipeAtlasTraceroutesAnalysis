@@ -180,7 +180,7 @@ La détection des changements des délais nécessite l'ajustement de quelques pa
 	%Les  traceroutes sont obtenus en utilisant l'API fournie par Atlas.
 	\item[start] : c'est la date de début de l'analyse. Seuls les traceroutes effectués par les sondes  à partir de cette date sont analysés.
 	\item[end]  : c'est la date marquant la fin de l'analyse. Comme le paramètre \textit{start}, c'est la date maximale des  traceroutes à considérer effectués par les sondes.
-	\item[timeWindow]:  ce paramètre est exprimé en secondes. Il correspond à la durée de chaque période des $n$ périodes de l'analyse. Ces périodes ont la même durée. Autrement dit, la durée entre   \textit{start} et \textit{end} est divisée par \textit{timeWindow}. Ceci est illustré à la Figure  \ref{fig:timing_tex_}. Avec $d_i$ dénote le début de la i\up{ème} période,  $i \in [1,n]$. Par défaut, \textit{timeWindow} vaut $ 3600 $ secondes. 
+	\item[timeWindow]:  ce paramètre est exprimé en secondes. Il correspond à la durée de chaque période des $n$ périodes de l'analyse. Ces périodes ont la même durée. Autrement dit, la durée entre   \textit{start} et \textit{end} est divisée par \textit{timeWindow}. Ceci est illustré à la Figure  \ref{fig:timing_tex_}. Avec $d_i$ dénote le début de la i\up{ème} période,  $i \in [1,n]$. Par défaut, \textit{timeWindow} vaut $ 3600 $ secondes. Dans le reste de ce document, on utilise  aussi le terme fenêtre pour désigner \textit{timeWindow}.
 	%illustre le contexte des trois paramètres \textit{start}, \textit{end} et \textit{timeWindow} avec les étapes principales
 	\begin{figure}[h]
 		\centering
@@ -520,7 +520,7 @@ Ces trois cas sont illustrés dans les  Tables \ref{result-3-cas}, ces derniers 
 	
 	\footnotesize{
 		
-		\caption{Exemple de calcul et mise à jour de la borne inférieure de l'intervalle  de confiance référence de la médiane }
+		\caption{Exemple de Mise à jour de la borne inférieure de l'intervalle  de confiance  de la médiane de référence}
 		\label{result-3-cas}
 		\begin{minipage}{.3\linewidth}
 			
