@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  30 MAY 2019 01:00
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  31 MAY 2019 02:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1720,20 +1720,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./illustrations/document-nosql-3.tex) [59]
-File: illustrations/colomn-db-2.png Graphic file (type bmp)
-<illustrations/colomn-db-2.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 File: illustrations/GraphDatabase_PropertyGraph.png Graphic file (type bmp)
 <illustrations/GraphDatabase_PropertyGraph.png>
-[60]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[61]
+[59] (./illustrations/document-nosql-3.tex) [60]
+File: illustrations/colomn-db-2.png Graphic file (type bmp)
+<illustrations/colomn-db-2.png>
+ [61]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 
@@ -1749,48 +1741,36 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 219.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 222.
 
 [65]
 File: illustrations/2-Figure1-1-map-reduce-workflow.png Graphic file (type bmp)
 
 <illustrations/2-Figure1-1-map-reduce-workflow.png>
  [66] [67] [68]
-Underfull \hbox (badness 7133) in paragraph at lines 354--354
+Underfull \hbox (badness 7133) in paragraph at lines 355--355
 [][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / cwiki . apache 
 . org / confluence / display / Hive / LanguageManual +
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [69]
-[70]
+[69]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
-File: illustrations/unified-stack.jpg Graphic file (type bmp)
-<illustrations/unified-stack.jpg>
- [71]
-File: illustrations/global_view_rdd.png Graphic file (type bmp)
-<illustrations/global_view_rdd.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[72]
-Underfull \hbox (badness 2846) in paragraph at lines 501--501
-[][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / hadoop . apa
-che . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 501--501
-[][][]\T1/ptm/m/n/10 .[][][][]$\T1/pcr/m/n/10 https : / / spark . apache . org 
-/ docs / latest / submitting -[] applications . html #
+[70] [71]
+File: illustrations/global_view_rdd.png Graphic file (type bmp)
+<illustrations/global_view_rdd.png>
+ [72]
+Underfull \hbox (badness 10000) in paragraph at lines 507--507
+[][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / hadoop . apache
+ . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
  []
 
 [73]
-Underfull \hbox (badness 10000) in paragraph at lines 525--525
+Underfull \hbox (badness 10000) in paragraph at lines 531--531
 [][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / calculator . s3
  . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée le
  []
@@ -2124,10 +2104,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32734 strings out of 493007
- 572605 string characters out of 6136719
- 1093624 words of memory out of 5000000
- 35888 multiletter control sequences out of 15000+600000
+ 32729 strings out of 493007
+ 572463 string characters out of 6136719
+ 1093598 words of memory out of 5000000
+ 35884 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,21n,97p,1104b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s

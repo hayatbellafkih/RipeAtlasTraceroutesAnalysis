@@ -16,7 +16,7 @@ définition de problème, exploration de données, préparation de données, mod
 
 \textbf{Exploration de données } Ce que caractérise cette étape, c'est la découverte de la nature  des données, les sources des données, la qualité des données, etc. \par
 
-\textbf{Préparation de données} \label{par:step-preparedata} C'est durant cette phase que se passent les opérations d'ETL (Extract-Transform-Load), ce sont les opérations de transformation, de nettoyage et de chargement des données vers les entrepôts de données (voir la section \ref{sec:etl}). Durant cette étape,  ce ne sont que  des tentatives  faites pour créer le schéma de données.  Dans certains cas, cela amène  à chercher des sources complémentaires de données ou bien à appliquer de nouvelles transformations  sur les données. \par
+\textbf{Préparation de données} \label{par:step-preparedata} C'est durant cette phase que se passent les opérations d'ETL (Extract-Transform-Load), ce sont les opérations de transformation, de nettoyage et de chargement des données vers les entrepôts de données (voir ETL dans la section \ref{sec:etl}). Durant cette étape,  ce ne sont que  des tentatives  faites pour créer le schéma de données.  Dans certains cas, cela amène  à chercher des sources complémentaires de données ou bien à appliquer de nouvelles transformations  sur les données. \par
 %Tel qu'un  schéma comporte les différentes tables, les attributs pertinents et autres. 
 
 \textbf{Modélisation} A l'issue de cette étape, un modèle de qualité est créé. Ce modèle  doit  répondre aux objectifs précédemment établis dans l'étape de la définition du problème. Cette étape implique des principes en statistiques, probabilités, \textit{machine learning}, etc. \par
@@ -29,7 +29,7 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 \subsection{Définition du Big Data : Volume, Vélocité, Variété et Véracité}
 		IBM définit le Big Data suivant les quatre dimensions suivants : volume, variété, vélocité et véracité. 
 		\paragraph{Volume de données}~
-		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de gigaoctets (GO) et de téraoctets (TO). Toutefois, le Big Data est mesuré en pétaoctets (PO), exaoctets (EO), voire plus. Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon une étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ Zettaoctets\footnote{ $ 1$ ZB = $1,000,000,000,000$ GB. } par  entreprise en $2020$. Dans un rapport récent \cite{IDC-data}, 
+		La quantité de données manipulées par les outils traditionnels de la gestion des données est de l'ordre de gigaoctets (GO) et de téraoctets (TO). Toutefois, le Big Data est mesuré en pétaoctets (PO), exaoctets (EO), voire plus. Une des premières applications du Big Data est la recherche dans Word-Wide Web (WWW). Selon l'étude (\cite{6567202}, $2013$) de l'International Data Corporation (IDC), le volume de données  va atteindre $40$ zettaoctets\footnote{ $ 1$ ZO = $1,000,000,000,000$ GO. } par  entreprise en $2020$. Dans un rapport récent (\cite{IDC-data}, $ 2018 $), 
 		IDC prédit que le volume de la  datasphère  planétaire, c'est-à-dire le volume de nouvelles données créées et répliquées chaque année, appelée  Global Datasphere en anglais,  passera de $  33 $ ZO en $2018$ à $175$ ZO d'ici $ 2025 $.
 		
 		\paragraph{Vélocité de données} ~
@@ -76,7 +76,7 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 		 %afin de faciliter l'accès à ces dernières. Ce sont les  données obtenues  de la part .
 		\paragraph{Infrastructure layer} Cette composante est responsable de la gestion des ressources de stockage, des ressources du calcul et de la gestion de la communication. Les fonctionnalités de cette couche sont typiquement fournies à travers le cloud computing.
 		\paragraph{Distributed File System layer} Cette couche permet de stocker une grande quantité de données, de sorte que ces données soient rapidement et facilement accessibles à toutes les couches qui forment un système  Big Data. C'est ce qu'assure, par exemple, Hadoop Distributed File System (HDFS).
-		\paragraph{Data consumption layer} Cette dernière couche utilise les résultats obtenus par les couches de l'analyse. Les résultats fournis peuvent être exprimés avec des rapports, des dashboards, des visualisations, un moteur de recommandation ou tout autre format.
+		\paragraph{Data consumption layer} Cette dernière couche utilise les résultats obtenus par les couches de l'analyse. Les résultats fournis peuvent être exprimés avec des rapports, des tableaux d'indicateurs, des visualisations, un moteur de recommandation ou tout autre format.
 	\subsection{Les bases de données NoSQL (Not Only SQL) } \label{sec:nosql}
 	\paragraph{Introduction } ~
 	
@@ -84,15 +84,15 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 	
 	Le terme NoSQL est apparu pour la première fois en $ 1998 $. Carlo Strozzi \cite{CarloStrozziNosql} a parlé des bases de données relationnelles qui n'utilisent pas le SQL comme langage d'interrogation des tables. Des années plus tard, des solutions  open source basées sur ce concept ont vu le jour. 
 	
-	Les bases de données relationnelles sont conçues pour gérer les données structurées et sont optimisées pour offrir la précision et la cohérence de données. De plus, elles sont utilisées par la majorité des entreprises pour plusieurs raisons comme   la facilité d'utilisation, la disponibilité de plusieurs produits et développeurs, etc. Ces dernières années, avec l'augmentation exponentielle de la quantité de données générées par certaines entreprises, ces dernières ont constaté l'insuffisance des Systèmes de Gestion de Bases de Données Relationnelles (SGBDR) pour répondre à leurs besoins.
+	Les bases de données relationnelles sont conçues pour gérer les données structurées et sont optimisées pour offrir la précision et la cohérence de données. De plus, elles sont utilisées par de nombreuses entreprises pour plusieurs raisons comme   la facilité d'utilisation, la disponibilité de plusieurs produits et développeurs, etc. Ces dernières années, avec l'augmentation exponentielle de la quantité de données générées par certaines entreprises, ces dernières ont constaté l'insuffisance des Systèmes de Gestion de Bases de Données Relationnelles (SGBDR) pour répondre à leurs besoins.
 	
     %	\paragraph{ Les besoins auxquels répondent NoSQL}  ~
-	Les bases de données NoSQL sont conçues pour gérer des  volumes de données importants. Le flux ainsi que la structure de  ces données sont imprévisibles. C'est pourquoi les bases de données relationnelles ne sont pas convenables. L'idée  de ces bases de données NoSQL, c'est d'abord assurer la capacité de stocker des données à grande échelle dont la  quantité  évolue rapidement, voire exponentiellement.  En deuxième lieu, les données stockées  doivent être interrogées  avec efficacité. Les données stockées dans  les bases de données NoSQL n'obéissent pas à un modèle prédéfini comme c'est le cas pour les bases de données relationnelles. Cette flexibilité est une des caractéristiques des bases de données NoSQL.
+	Les bases de données NoSQL sont conçues pour gérer des  volumes de données importants. Le flux ainsi que la structure de  ces données sont imprévisibles. C'est pourquoi les bases de données relationnelles ne sont pas convenables. L'idée  des bases de données NoSQL, c'est d'abord assurer la capacité de stocker des données à grande échelle dont la  quantité  évolue rapidement, voire exponentiellement.  En deuxième lieu, les données stockées  doivent être interrogées  avec efficacité. Les données stockées dans  les bases de données NoSQL n'obéissent pas à un modèle prédéfini comme c'est le cas pour les bases de données relationnelles. Cette flexibilité est une des caractéristiques des bases de données NoSQL.
 	\paragraph{Types de base de données NoSQL} \label{sec:nosql-database}  ~
 	
 	Il existe quatre catégories distinctes de bases de données NoSQL. Chaque catégorie répond  à des besoins particuliers. On distingue les bases de données clé-valeur, document, graphe et colonne.
 	\subparagraph {Clé-valeur} Une base de données de type clé-valeur repose sur le paradigme clé-valeur; chaque donnée, que ce soit un nombre, du texte ou tout autre type est associé à une clé unique. Cette clé est le seul moyen d'accéder aux données stockées.
-	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La Figure \ref{fig:key-value-nosql} reprend un exemple d'une base de données NoSQL de type clé-valeur.
+	Dans les bases de données NoSQL de type clé-valeur, les enregistrements  n'adhèrent pas à une structure prédéfinie. Par exemple, on peut avoir le premier enregistrement de type entier et le deuxième enregistrement de type texte. Cela assure une forte évolutivité grâce à l'absence d'une structure ou de typage. La Figure \ref{fig:key-value-nosql} montre un exemple de données stockées sous forme de paires clé-valeur.
 	\begin{figure}[h]
 		\captionsetup{justification=centering}
 		\centering
@@ -102,6 +102,16 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 		\caption{Illustration d'une base de données NoSQL de type clé-valeur}
 		\label{fig:key-value-nosql}
 	\end{figure}
+
+	\subparagraph{Graphe} Dans une base de données de type graphe, les données stockées sont les n\oe{}uds, les liens et les propriétés sur les n\oe{}uds et sur les liens. Un exemple  de base de données NoSQL de type graphe est le réseau social; chaque entité représente une personne et les relations entre ces personnes peuvent prendre plusieurs formes. Un autre exemple de données stockées  dans une base de données orientée graphe est donné dans la Figure  	\ref{fig:graphe-nosql}. Avec cette représentation, par exemple, on peut chercher les membres du groupe \textit{Chess}.  
+\begin{figure}[h]
+	\centering
+	%	\resizebox{\textwidth}{!}{
+	\includegraphics[width=.9\linewidth]{illustrations/GraphDatabase_PropertyGraph.png}		
+	%   }
+	\caption{Illustration d'une base de données NoSQL de type graphe. Source : \url{https://en.wikipedia.org/wiki/Graph_database}, consultée le $10/05/2019$}
+	\label{fig:graphe-nosql}
+\end{figure}
 		\subparagraph{Document} Une base de données NoSQL de type document permet de stocker les données en reposant sur le paradigme clé-valeur. Toutefois, les valeur stockées sont complexes, il s'agit de documents de type JSON, XML, etc. L'accès aux données d'un enregistrement peut se faire de manière hiérarchique. La possibilité de stocker des objets complexes et hétérogènes  est un des points forts des bases de données NoSQL de type  document. Un exemple est fourni dans la Figure \ref{fig:document-nosql}. Une des différences majeures entre les bases de données clé-valeur et celles de type document c'est que pour les premières, l'indexation est au niveau  des clés seulement, tandis que pour les deuxièmes, l'indexation est au niveau clé et valeur. En pratique, pour les bases de données clé-valeur, les données sont récupérées en se basant sur la clé et pour les autres, la récupération d'un enregistrement peut être basée sur la clé et sur la valeur étant donné que la valeur est semi-structuré (valeur de type JSON, XML, etc.)
 		\begin{figure}[h]
 			\centering
@@ -120,26 +130,18 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 		\caption{Illustration d'une base de données NoSQL de type colonne}
 		\label{fig:comomn-nosql}
 	\end{figure}
-	\subparagraph{Graphe} Dans une base de données de type graphe, les données stockées sont les n\oe{}uds, les liens et les propriétés sur les n\oe{}uds et sur les liens. Un exemple  de base de données NoSQL de type graphe est le réseau social; chaque entité représente une personne et les relations entre ces personnes peuvent prendre plusieurs formes. Un autre exemple de données stockées  dans une base orientée graphe est donné dans la Figure  	\ref{fig:graphe-nosql}.
-	\begin{figure}[h]
-		\centering
-	%	\resizebox{\textwidth}{!}{
-		\includegraphics[width=.7\linewidth]{illustrations/GraphDatabase_PropertyGraph.png}		
-	 %   }
-		\caption{Illustration d'une base de données NoSQL de type graphe}
-		\label{fig:graphe-nosql}
-	\end{figure}
+
 
 Les bases de données NoSQL sont conçues pour répondre à des besoins spécifiques. Elles n'ont pas été créées pour remplacer les bases de données relationnelles. Il existe plusieurs implémentations des quatre types des bases de données NoSQL. Chaque implémentation favorise un ou plusieurs  éléments suivants : la disponibilité des données, la cohérence des données et la tolérance au partitionnement.  C'est ce qu'explique le théorème CAP.	
 		\paragraph{Big Data et le théorème  CAP} \label{par:cap-theorem}:
 		
 		Dans le but d'assurer un traitement rapide de données à grande échelle, ces dernières sont réparties sur un cluster de machines  (appelées aussi  n\oe{}uds). Le théorème CAP annonce que dans le cadre d'un système distribué où le stockage de données est  réparti sur plusieurs machines,
 		%(ou n\oe{}uds) (voir \ref{sec:distruted-camput}),  
-		une base de données ne peut pas garantir les trois attributs suivants à la fois: \textit{Consistency}, \textit{Availability} et \textit{Partition Tolerence}  en même temps. 
-			\subparagraph{Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite.
-			\subparagraph{Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client.
+		une base de données ne peut pas garantir les trois attributs suivants : \textit{Consistency}, \textit{Availability} et \textit{Partition Tolerence}  en même temps. \par
+			\textbf{Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite. \par
+			\textbf{Availability (ou disponibilité)} Une base de données doit toujours fournir une réponse à une requête d'un client.\par
 			%En cas d'une panne technique sur un des serveurs qui hébergent  la base de données, il faut s'assurer de desservir  des clients.  Généralement, cela est assuré à travers la réplication des données
-			 \subparagraph{Partition tolerance (ou  tolérance au partitionnement) } Une coupure du réseau entre deux n\oe{}uds ou l'indisponibilité d'un de ces n\oe{}uds ne devrait pas affecter le bon fonctionnement du système. Tout de même,  ce dernier doit répondre à la demande d'un client. 
+			 \textbf{Partition tolerance (ou  tolérance au partitionnement) } Une coupure du réseau entre deux n\oe{}uds ou l'indisponibilité d'un de ces n\oe{}uds ne devrait pas affecter le bon fonctionnement du système. Tout de même,  ce dernier doit répondre à la demande d'un client. 
 
 		
 		%conclusion
@@ -182,18 +184,17 @@ Les bases de données NoSQL sont conçues pour répondre à des besoins spécifi
 		Dans une même organisation, il est possible d'avoir plusieurs sources de données~: des bases de données relationnelles, des bases de données NoSQL, des fichiers de données de type Excel, etc. 
 		Dans le cas où une analyse de données devrait impliquer des données en provenance de  sources  de données hétérogènes, il est nécessaire de faire appel aux opérations ETL :
 		
-		\textbf{Extraction} :  la diversité des sources de données implique des formats de données différents. Généralement, ce sont des données en provenance des bases de données relationnelles, des fichiers plats, des bases de données non relationnelles,  etc. En général,  le but de la phase d'extraction est de convertir les données en un seul format approprié à l'étape de la transformation. Cette phase  vérifier si les données respectent un modèle ou une structure attendu. Si ce n'est pas le cas, les données peuvent être totalement ou partiellement rejetées.
+		\textbf{Extraction} :  la diversité des sources de données implique des formats de données différents. Généralement, ce sont des données en provenance des bases de données relationnelles, des fichiers plats, des bases de données non relationnelles,  etc. Le but de la phase d'extraction est de convertir les données en un seul format approprié à l'étape de la transformation. Cette phase  vérifie si les données respectent  une structure attendue. Si ce n'est pas le cas, les données peuvent être totalement ou partiellement rejetées.
 		
-		\textbf{Transformation} : cette étape  s'applique  sur les données extraites. Elle comprend  une série de règles ou de fonctions. Ces derniers sont appliqués sur les données avant de les envoyer vers la cible. Certaines sources de données nécessitent  peu de transformations, voire aucune. Dans d'autres cas, un ou plusieurs  types de transformation sont  nécessaires. Quelques exemples de transformations dans sont reprises dans la liste ci-dessous :
+		\textbf{Transformation} : cette étape  s'applique  sur les données extraites. Elle comprend  une série de règles ou de fonctions. Ces derniers sont appliqués sur les données avant de les envoyer vers la cible. Certaines sources de données nécessitent  peu de transformations, voire aucune. Dans d'autres cas, un ou plusieurs  types de transformation sont  nécessaires. Quelques exemples de transformations  sont    listées ci-dessous :
 		\begin{itemize}
-			\item sélection de  seulement un nombre de colonnes à charger;
-			\item adaptation des codes. Par exemple,  quand le système de stockage source utilise 1 pour dénoter un homme et l'entrepôt de données utilise "H"; 
+			\item sélection d'un nombre  de colonnes à charger parmi plusieurs colonnes;
+			\item adaptation des codes. Par exemple,  quand le système de stockage source utilise 1 pour dénoter un homme et l'entrepôt de données cible  utilise "H"; 
 			\item conversion des devises, c'est le cas par exemple où les salaires sont exprimés en une devise différente de l'euro;
-			\item élimination des doublons;
-			\item etc.
+			\item élimination des doublons.
 		\end{itemize}
 		
-		\textbf{Loading} : l'objectif de cette étape est de charger les données transformées vers l'entrepôt de données. Le chargement des données dépend des besoins de l'organisation. Dans certains cas, on prévoit le remplacement des informations existantes par des informations cumulative plus récentes. Dans d'autre cas, les nouvelles informations sont ajoutées dans la suite de celles existantes. 
+		\textbf{Loading} : l'objectif de cette étape est de charger les données transformées vers l'entrepôt de données. Le chargement des données dépend des besoins de l'organisation. Dans certains cas, on prévoit le remplacement des informations existantes par des informations cumulatives plus récentes. Dans d'autres cas, les nouvelles informations sont ajoutées dans la suite de celles existantes. 
 		
 		En ce qui concerne la fréquence  des opérations ETL, elles peuvent être planifiées de manière horaire, quotidienne, hebdomadaire, mensuelle ou autre.
 		
@@ -211,10 +212,12 @@ Les bases de données NoSQL sont conçues pour répondre à des besoins spécifi
 		
 		Dans la deuxième, les données sont chargées telles qu'elles sont, sans transformations ou changements. L'interprétation de ces données se fait lors de la lecture, et cela dépend des besoins pour lesquels les données sont analysées. Ainsi, les mêmes données peuvent être lues de différentes manières. Par exemple, l'action  de lire les données  d'une colonne, qu'elles soient de type entier ou bien chaîne de caractère d'un fichier CSV est la même, c'est le type de la donnée qui diffère. C'est l'approche utilisée par Amazon Athena (voir la section \ref{aws:athena}). 
 		
-\paragraph{Exemple illustratif} Afin de montrer la différence entre les deux approches, nous comparons Apache Spark avec une base de données relationnelle (SQL Server). 
+\paragraph{Exemple illustratif}~
+
+ Afin de montrer la différence entre les deux approches, nous comparons Apache Spark (présenté en détail dans la section \ref{apache-spark}) avec une base de données relationnelle (SQL Server).   Les étapes suivantes concernent  SQL Server:
 %\begin{tcolorbox}{SQL RDBMS : exemple de SQL Server}
 \begin{enumerate}
-	\item Créer la table Traceroutes en SQL Server:
+	\item Créer la table Traceroutes :
 \begin{lstlisting}[language = sql, basicstyle=\small]
 CREATE TABLE Traceroutes(
 	id INT,
@@ -223,27 +226,26 @@ CREATE TABLE Traceroutes(
 )
 \end{lstlisting}
 		
-	\item  Charger les données depuis le fichier \textit{traceroute-2019-04-08T0000.json} vers la table Traceroutes, nous savons que chaque ligne du fichier correspond à la \underline{même} structure  créée à l'étape $ 1 $:
+	\item  Charger les données depuis le fichier \textit{traceroute-2019-04-08T0000.json} vers la table Traceroutes, chaque ligne du fichier doit correspondre à la  structure  créée à l'étape $ 1 $:
 \begin{lstlisting}[language = sql, basicstyle=\small]
 BULK INSERT  Traceroutes
-FROM 'c:\traceroutes\traceroute-2019-04-08T0000.json'
+FROM 'c:\traceroutes\traceroute-2019-04-08T0000.csv'
 WITH ROWTERMINATOR = '\n'
 \end{lstlisting}
 	
-	\item Interroger les données : à l'issue de l'étape 2,  les données sont chargées et prêtes à l'interrogation: 
+	\item Interroger les données : à l'issue de l'étape $2$,  les données sont chargées et prêtes à l'interrogation: 
 \begin{lstlisting}[language = sql, basicstyle=\small]
 SELECT dst_name FROM  Traceroutes
 \end{lstlisting}
 	\end{enumerate}
 
 Pour les bases de données relationnelles, qui adoptent l'approche \textit{Schema on Write}, on ne peut pas ajouter des données avant de créer le schéma dirigeant ces dernières. De plus, la création du schéma nécessite la compréhension  exhaustive des données. 
-Car en cas d'un changement du contenu du fichier de données, en terme de structure, la table créée doit être supprimée, mise à jour, ensuite recharger à nouveau les données. L'implication de la mise à jour du schéma peut être coûteuse, en terme de temps  si par exemple  le volume de donnée est important, de l'ordre de plusieurs centaines de téraoctets. Dans certains cas, une mise à jour des relations avec d'autres tables est requise.
+Car en cas d'un changement du contenu du fichier de données, en terme de structure, la table créée doit être supprimée, mise à jour, ensuite il faut recharger à nouveau les données. L'implication de la mise à jour du schéma peut être coûteuse en terme de temps  dans le cas  d'un  volume de donnée  important, de l'ordre de plusieurs centaines de téraoctets. Dans certains cas, une mise à jour des relations avec d'autres tables est requise.
 
-En ce qui concerne l'approche \textit{Schema on Read}, nous prenons un exemple de la technologie AWS Athena présentée en détail dans la section \ref{aws:athena}. En utilisant cette technologie, on crée un schéma selon les besoins de l'analyse de ces données.
+En ce qui concerne l'approche \textit{Schema on Read}, nous prenons l'exemple d'Apache Spark présenté en détail dans la section \ref{apache-spark}. En utilisant cette technologie, on crée un schéma selon les besoins de l'analyse de ces données.
 % et non pas pour que la structure des données soit exactement celle à créer, sauf si cela fait partie des besoins. 
-Par exemple, on peut créer une table dont les colonnes correspondent  seulement à la moitié des colonnes possibles. Un autre exemple concerne l'utilisation  des conditions; on crée une table et durant le chargement des données, on ne charge que celles vérifiant une condition donnée. Pour AWS Athena et les autres technologies qui se basent sur  cette approche, les données sont chargées au moment de l'utilisation et avec plus de flexibilité.
-
-Pour illustrer cette approche, l'annexe \ref{exemple-traceroute} présente une réponse d'une requête traceroute. Pour les besoins de l'outil de détection (voir chapitre \ref{chap:algorith-detection}), plusieurs attributs ne sont pas pertinents. Ainsi, il est inutile de les charger.   En Spark, les données sont lues en associant les attributs d'une classe aux attributs de la réponse traceroute. C'est la classe Traceroute décrites dans le Listing \ref{lst:case-class-Traceroute}. En résultat, seules les données utiles qui sont chargées en mémoire pour qu'elles soient traitées.
+%Par exemple, on peut créer une table dont les colonnes correspondent  seulement à la moitié des colonnes possibles. Un autre exemple concerne l'utilisation  des conditions; on crée une table et durant le chargement des données, on ne charge que celles vérifiant une condition donnée. Pour AWS Athena et les autres technologies qui se basent sur  cette approche, les données sont chargées au moment de l'utilisation et avec plus de flexibilité.
+Pour illustrer cette approche, l'annexe \ref{exemple-traceroute} présente une réponse d'une requête traceroute. Pour les besoins de l'outil de détection (voir le chapitre \ref{chap:algorith-detection}), plusieurs attributs ne sont pas pertinents. Ainsi, il est inutile de les charger lors de l'analyse.   En Spark, les données sont lues en associant les attributs d'une classe aux attributs de la réponse traceroute; c'est la classe Traceroute décrite dans le Listing \ref{lst:case-class-Traceroute}. En résultat, seules les données utiles qui sont chargées en mémoire pour qu'elles soient traitées.
 
 La meilleure approche dépend des besoins de l'analyse. La première approche est meilleure en performances, en revanche, la deuxième est tolérante aux erreurs  humaines.
 
@@ -252,7 +254,7 @@ La meilleure approche dépend des besoins de l'analyse. La première approche es
 		
 		
 		\begin{itemize}
-			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds;
+			\item[--] Par distribution des traitements (\textit{scaling} des traitements)~: les traitements sont distribués sur un nombre de n\oe{}uds important. De ce fait, les données sont amenées jusqu'à ces n\oe{}uds.
 			
 			\item[--] Par distribution des données (\textit{scaling} des données)~: les données sont distribuées sur un nombre important de n\oe{}uds. Par ailleurs cela permet  de stocker un maximum de données. Il s'agit d'amener les traitements aux machines sur lesquelles les données sont stockées. Du fait que le stockage de données est réparti sur plusieurs machines, il est possible de traiter des données très volumineuses en un temps optimal. La première mise en \oe{}uvre de cette approche est le schéma MapReduce (voir la section  \ref{mapreducesection}). 
 		\end{itemize}
@@ -262,7 +264,6 @@ La meilleure approche dépend des besoins de l'analyse. La première approche es
 MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un cluster de machines. Un programme MapReduce est composé de deux phases principales   \textit{Map} et  \textit{Reduce}.
 
 MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. 
-
 %Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. 
 %\begin{tcolorbox}
 %	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des %calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 %téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
@@ -277,12 +278,12 @@ La Figure 	\ref{fig:2-figure1-1-map-reduce-workflow} représente une vue d'ensem
 \end{figure}
 
 
-Le modèle de données dans MapReduce est la paire clé/valeur. Pendant la phase de \textit{Map}, la fonction  associée  au Map est exécutée sur chaque paire clé/valeur (K1,V1) des données d'entrée (\textit{data split}), ce que produit   une liste des paires clé/valeur (List(K2,V2)) intermédiaires pour chaque clé/valeur (K1,V1). Il existe une autre phase entre  \textit{Map} et de \textit{Reduce}, c'est la phase de \textit{Shffling}. Durant cette dernière,  les paires clé/valeur (List(K2,V2))  intermédiaire sont triées et regroupées par la clé. Il en résulte un ensemble de paires clé/valeur (K2, List(V2)) où chaque paire contient toutes les valeurs associées à une clé particulière (K2). Ces paires clé/valeur sont ensuite partitionnées et regroupées sur la clé, puis passée à la phase Reduce au cours de laquelle la fonction de réduction est appliquée individuellement à chaque clé et aux valeurs associées pour cette clé (K2,List(V2)). La phase \textit{Reduce} peut produire une valeur nulle ou une sortie (List(K3,V3)).
+Le modèle de données de base dans MapReduce  est la paire clé/valeur. Pendant la phase de \textit{Map}, la fonction  associée  au Map est exécutée sur chaque paire clé/valeur (K1,V1) des données d'entrée (\textit{Data Split}), ce que produit   une liste des paires clé/valeur (List(K2,V2)) intermédiaires pour chaque clé/valeur (K1,V1). Il existe une autre phase entre  \textit{Map} et de \textit{Reduce}, c'est la phase de \textit{Shffling}. Durant cette dernière,  les paires clé/valeur (List(K2,V2))  intermédiaire sont triées et regroupées par la clé. Il en résulte un ensemble de paires clé/valeur (K2, List(V2)) où chaque paire contient toutes les valeurs associées à une clé particulière (K2). Ces paires clé/valeur sont ensuite partitionnées et regroupées sur la clé, puis passée à la phase Reduce au cours de laquelle la fonction de réduction est appliquée individuellement à chaque clé et aux valeurs associées pour cette clé (K2,List(V2)). La phase \textit{Reduce} peut produire une valeur nulle ou une sortie (List(K3,V3)).
 
-	\section{Parcours de quelques technologies du Big Data}
+\section{Parcours de quelques technologies du Big Data}
 La liste des technologies  du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du projet Atlas.
 
-MongoDB est la base de données utilisée dans l'implémentation du travail de référence \cite{InternetHealthReport}. Amazon DynamoDB est la première technologie que nous avons utilisée pour réécrire l'outil de détection, puis, nous avons évalué la combinaison de trois services Web d'Amazon S3, Glue et Athena. Ensuite, nous avons reproduit l'outil de détection en Spark/Scala. Enfin, nous présentons Amazon Elastic MapReduce. Nous présentons aussi l'écosystème Hadoop, étant donné qu'il fait partie des principales plateformes du Big Data.
+MongoDB est la base de données NoSQL utilisée dans l'implémentation du travail de référence \cite{InternetHealthReport}. Amazon DynamoDB est la première technologie Big Data que nous avons utilisé pour réécrire l'outil de détection, ensuite, nous avons évalué la combinaison de trois services Web d'Amazon S3, Glue et Athena. Enfin, nous avons reproduit l'outil de détection en Spark/Scala. Pour Amazon Elastic MapReduce, nous l'avons utilisé pour exécuter l'application Spark/Scala dans un cluster de machines. Nous présentons aussi l'écosystème Hadoop, étant donné qu'il fait partie des principales plateformes du Big Data.
 	
 \subsection{MongoDB} \label{subsubsection:mongodb}
 %	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
@@ -300,7 +301,7 @@ En $ 2016 $, MongoDB devient disponible en mode cloud sous le nom  MongoDB Atlas
 	
 	Amazon DynamoDB\footnote{URL : \url{https://aws.amazon.com/fr/dynamodb/}, consulté le $02/05/2018$.} est une base de données NoSQL de type clé-valeur distribuée, gérée par les services d'Amazon. Elle est capable de stocker un volume important de données limité par la capacité de l'infrastructure d'AWS. Amazon DynamoDB   est un service  simple et facile à utiliser,  il ne nécessite aucune configuration préalable. 
 	
-	Amazon DynamoDB  est une base de données évolutive permettant à l'utilisateur final de passer à l'échelle facilement et rapidement. Cette technologie offre des performances constantes à une échelle essentiellement infinie, limitée uniquement par la taille physique du cloud AWS. Elle est flexible. Aucun schéma n'est requis pour stocker les données. Les frais d'utilisation de ce service dépendent de trois éléments\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/pricing/}, consultée $02/05/2018$.}:
+	Amazon DynamoDB  est une base de données évolutive permettant à l'utilisateur final de passer à l'échelle facilement et rapidement. Cette technologie offre des performances constantes à une échelle essentiellement infinie, limitée uniquement par la taille physique du cloud AWS. Amazon DynamoDB est flexible. Aucun schéma n'est requis pour stocker les données. Les frais d'utilisation de ce service dépendent de trois éléments\footnote{Source : \url{https://aws.amazon.com/fr/dynamodb/pricing/}, consultée $02/05/2018$.}:
 	\begin{itemize}
 		\item[--] la quantité de données stockées : DynamoDB est facturé par Go d'espace disque utilisé ($ 0,250 $ USD par Go par mois);
 		\item[--] la capacité en lecture par seconde ($ 0,470 $ USD par unité de capacité d'écriture par mois);
@@ -316,7 +317,7 @@ La combinaison d'Amazon S3, Amazon Glue et Amazon Athena permet de créer un env
 \paragraph{Amazon S3}
 \footnote{URL : \url{https://aws.amazon.com/fr/s3/}, consulté le $06/07/2018$.} est un service de stockage d'objets dans le cloud. Il est conçu pour stocker et  récupérer toute quantité de données. Il peut assurer $ 99,999999999 $ \% de durabilité. La sécurité  et l'accès aux données sont assurés. Il existe plusieurs classes de stockage qui répondent aux différents besoins. 
 
-Dans Amazon S3, le fichier à stocker et considéré comme objet. Un objet est référencé par une clé qui reprend d'abords le chemin vers un pseudo répertoire suivi par  le nom de l'objet.  Le terme pseudo répertoire est utilisé car, en réalité, Amazon S3 ne stocke pas les objets dans des dossiers comme le cas d'un système d'exploitation. Chaque objet appartient à un compartiment, un compartiment appartient aussi à une des régions d'Amazon et le nom d'un compartiment est unique. Prenons l'exemple d'un  compartiment \textit{foo}, contenant deux objets ayant respectivement les clés \textit{A/b/c/i.txt} et \textit{A/b/d/k.txt}, dans ce cas, ces deux objets ne partagent que le même compartiment.
+Dans Amazon S3, le fichier à stocker et considéré comme objet. Un objet est référencé par une clé qui reprend d'abord le chemin vers un pseudo répertoire suivi par  le nom de l'objet.  Le terme pseudo répertoire est utilisé car, en réalité, Amazon S3 ne stocke pas les objets dans des dossiers comme le cas d'un système d'exploitation. Chaque objet appartient à un compartiment, un compartiment appartient aussi à une des régions d'Amazon et le nom d'un compartiment est unique. Prenons l'exemple d'un  compartiment \textit{foo}, contenant deux objets ayant respectivement les clés \textit{A/b/c/i.txt} et \textit{A/b/d/k.txt}, dans ce cas, ces deux objets ne partagent que le même compartiment.
 %Les fichiers des données sont organisés dans ce qu'on appelle un compartiment, c'est une simulation de dossier dans un système d'exploitation. A l'intérieur d'un compartiment, il est possible de créer des compartiments imbriqués. C'est une simulation d'arborescence de dossiers car physiquement cet arborescence n'existe pas. En ce qui concerne les frais du service AWS S3, . 
 Le Tableau   	\ref{tab:pricing-s3-standard} décrit les tarifs de la formule standard relative à un mois.
 \begin{table}[H]
@@ -359,15 +360,14 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 
 \begin{tcolorbox}
 	\textbf{\textit{Presto\footnote{URL : \url{http://prestodb.io/}, consulté le $01/08/2018$.} }} est un moteur de requêtes SQL open source destiné au Big Data. Il permet d'exécuter des requêtes analytiques interactives sur des données de taille importante; jusqu'à des pétaoctets de données.
-	
-	Presto interroge les données où elles sont hébergées. Ceci inclut les bases de données relationnelles, Amazon S3 et autres dépôts propriétaires. De plus, une même requête SQL peut combiner plusieurs sources de données. C'est intéressant pour les organisations ayant plusieurs sources de données. Il fournit les résultats en quelques secondes, voire quelques minutes.  Il supporte les types de données complexes comme les objets JSON, les tableaux d'éléments, etc. 
+	Presto interroge les données où elles sont hébergées. Ceci inclut les bases de données relationnelles, Amazon S3 et autres dépôts propriétaires. De plus, une même requête SQL peut combiner plusieurs sources de données. C'est intéressant pour les organisations ayant plusieurs sources de données.% Il fournit les résultats en quelques secondes, voire quelques minutes.  Il supporte les types de données complexes comme les objets JSON, les tableaux d'éléments, etc. 
 \end{tcolorbox} 
 
 
 \subsection{Apache Hadoop}
 
-Hadoop est un écosystème destiné au Big Data, il regroupe plusieurs modules.  \par 
-\textbf{Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
+Hadoop est un framework open source conçu pour garantir le stockage et le traitement des données massives. Ceci est effectué  en utilisant des machines  qui collaborent  au sein d'un cluster. Hadoop regroupe plusieurs modules.  On présente brièvement les trois modules principaux :   \par 
+\textbf{Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux dans un cluster Hadoop  tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
 \textbf{Hadoop YARN} (Yet Another Resource Negotiator) est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  YARN  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
 
 \textbf{Hadoop MapReduce} (voir la section \ref{mapreducesection}).
@@ -388,20 +388,20 @@ Hadoop est un écosystème destiné au Big Data, il regroupe plusieurs modules. 
 
 %\subsection{Introduction à Apache Sprk}
 
-Apache Spark\footnote{URL : \url{https://spark.apache.org/}, consulté le $14/12/2018$} 
+Apache Spark\footnote{URL : \url{https://spark.apache.org/}, consulté le $14/12/2018$.} 
 est un framework de calcul distribué. C'est un ensemble de composantes conçues pour assurer la rapidité, la facilité d'utilisation ainsi que la flexibilité dans l'analyse des données à grande échelle. Plusieurs APIs sont disponibles pour interagir avec Spark et 
  appliquer les transformations sur les données à analyser. 
 
 \paragraph{Core Concepts et architecture de Spark}
 
-\subparagraph{Spark Clusters et Resource Management System}
+\subparagraph{Spark Cluster et Resource Management System}
 
 Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
-Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque worker dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque worker. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application spark, le cluster manager et les \textit{workers}.
+Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque \textit{worker} dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque \textit{worker}. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application Spark, le cluster manager et les \textit{workers}.
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\captionsetup{justification= centering}
 	\includegraphics[width=0.7\linewidth]{illustrations/cluster-overview.jpg}
@@ -431,33 +431,36 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 
 \subparagraph{Spark Unified Stack} \label{Spark Uniffied-Stack}Spark offre ce qu'on appelle Spark \textit{Stack}. C'est un ensemble de composantes construites au dessus de la composante Spark Core.  Ces composantes sont conçues pour répondre à des besoins spécifiques :
 \begin{itemize}
-	\item Spark SQL  est conçu pour le traitement interactif;
-	\item Spark Streaming est utilisé pour les traitements en temps réel;
-	\item  GraphX est destiné au traitement de graphes;
-	\item MLib est conçu pour le machine learning;
-	\item SparkR est consacré au traitement lié au machine learning en utilisant  R.
+	\item Spark SQL  est conçu effectuer des traitements sur des données structurées. Les traitements s'effectuent en se basant sur des requêtes SQL;
+	\item Spark Streaming est utilisé pour les traitements    en temps réel des données en flux;
+	\item  GraphX est destiné au traitement de graphes. Des fonctionnalités sont offertes afin d'analyser les graphes;
+	\item MLib est conçu pour le machine learning. Ceci inclut la disponibilité des différents algorithmes et utilitaire du machine learning. Par exemple, les algorithmes de clustering, la classification, etc;
+	\item SparkR est consacré aux traitements liés au machine learning en utilisant  R.
 \end{itemize}
 \subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribuée du calcul. Cette dernière est responsable de la distribution, de la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donné et le transfert de données entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante aux pannes et en lecture seule. 
-La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark Unified Stack avec Spark Core.
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification=centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/unified-stack}
-	\caption{ Spark Unified Stack. Source : \cite{eginning-Apache-Spark-2-unified-stack}}
-	\label{fig:unified-stack}
-\end{figure}
+%La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark Unified Stack avec Spark Core.
+%\begin{figure}[H]
+%	\centering
+%	\captionsetup{justification=centering}
+%	\includegraphics[width=0.7\linewidth]{illustrations/unified-stack}
+%	\caption{ Spark Unified Stack. Source : \cite{eginning-Apache-Spark-2-unified-stack}}
+%	\label{fig:unified-stack}
+%\end{figure}
 
 \paragraph{Resilient Distributed Datasets}\label{rdd-presentation} ~
 
 
 Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster afin d'être traités en parallèle. Un RDD peut être conservé  pour une éventuelle réutilisation. On distingue deux manières de persistance. La conservation du RDD dans la mémoire (in-memory) ce que garantit l'amélioration des performances. En outre, un RDD peut être aussi conservé dans un disque. 
 
-Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} calcule le nombre d'objets d'un RDD.
+Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} compte le nombre d'objets d'un RDD.
 
 
 
-Dans la Figure 	\ref{fig:globalviewrdd}, Input data sont les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
-Il existe plusieurs transformations à appliquer sur un RDD, avec la possibilité d'enchaîner plusieurs transformations. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois qu'une partition est localisée sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
+%Dans la Figure 	\ref{fig:globalviewrdd}, Input data représente  les données à analyser en utilisant Spark. Ces données sont récupérées depuis des sources extérieures vers Spark. Ce dernier crée un RDD basé sur ces données. Un RDD est représenté par le rectangle en orange, les morceaux en orange dans le rectangle représentent les partitions d'un RDD. 
+%On peut enchaîner plusieurs transformations sur un RDD. Comme une transformation est à la base  \textit{lazy}, les partitions ne sont partagées sur les n\oe{}uds du cluster qu'à la suite de l'appel d'une action. Une fois qu'une partition est localisée sur un n\oe{}ud donné, les transformations ainsi que les actions peuvent s'enchaîner.
+
+
+ La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. Dans cette figure, \textit{input data} représente les données qu'on souhaite analyser. Ces dernières sont en provenance de sources de stockage externes. Le framework Spark crée le RDD représenté par le premier rectangle orange à gauche. Ce dernier  comprend  des petits rectangles chacun représente une partition du RDD.  Les transformations  peuvent être enchaînées sur le RDD créé sans être exécutées. Les partitions seront envoyées à travers les n\oe{}ds dés que le \textit{driver} appelle une action sur ce RDD. Un n\oe{}ud est une machine avec des ressources de stockage (\textit{disk}), de calcul (\textit{CPU}), etc. Enfin, le reste des opérations peuvent s'enchaîner  sur chaque n\oe{}ud où se trouvent les données.
 
 En cas de perte de partition pour une raison ou une autre, Spark est capable de reproduire automatiquement la partition en question. Cette fonctionnalité est assurée via le DAG (Direct Acyclic Graph). Dans ce graphe, Spark enregistre toutes les opérations appliquées sur un RDD.
 
@@ -475,17 +478,17 @@ En cas de perte de partition pour une raison ou une autre, Spark est capable de 
 %Le RDD (Resilient Distributed Dataset) permet à Spark de stocker des données de manière transparente dans la mémoire et d’envoyer sur disque uniquement ce qui est important ou nécessaire. En conséquence, une grande partie du temps consacré à la lecture et à l'écriture du disque est enregistrée.[!]
 
 \paragraph{Lazy evaluation} \label{lazy-evaluation}
-Les transformations en Spark sont \textit{lazy}. Cela implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrées dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{Lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
+Une transformation en Spark est considérée comme \textit{lazy}. Ceci implique que lorsqu'on exécute des fonctions de transformation en Spark, celles-ci ne sont pas exécutées de suite. Par contre, elles sont enregistrées dans le graphe (DAG).  Les transformations sont exécutées une fois le \textit{driver} invoque un appel à une fonction de type action. \textit{Lazy} ou l'évaluation paresseuse est un mécanisme permettant d'éviter le chargement de données depuis la source tant que ceci n'est pas nécessaire. Par conséquent, cela peut améliorer considérablement les performances.
 
- La Figure 	\ref{fig:globalviewrdd} illustre un flux de données avec l'utilisation de Spark. Dans cette figure, \textit{input data} représente les données qu'on souhaite analyser. Ces dernières sont en provenance de sources de stockage externes. Le framework Spark crée le RDD représenté par le premier rectangle orange à gauche. Ce dernier  comprend  des petits rectangles chacun représente une partition du RDD.  Les transformations  peuvent être enchaînées sur le RDD créé sans être exécutées. Les partitions seront envoyées à travers les n\oe{}ds dés que le \textit{driver} appelle une action sur ce RDD. Un n\oe{}d est une machine avec des ressources de stockage (\textit{disk}), de calcul (\textit{CPU}), etc. Enfin, le reste des opérations peuvent s'enchaîner  sur chaque n\oe{}d où se trouvent les données.
+
  
 
 
 
 
-\paragraph{Les APIs de Spark}
+%\paragraph{Les APIs de Spark}
 
-Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utiliser les fonctionnalités fournies par ce framework : Scala, Python, Java et R. 
+%Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utiliser les fonctionnalités fournies par ce framework : Scala, Python, Java et R. 
 %Il n'est pas évident de choisir entre ces quatre langages, car ce choix dépend du contexte de l'analyse. 
 
 
@@ -493,19 +496,22 @@ Le framework Spark a été écrit en Scala.  Il existe plusieurs APIs pour utili
 
 
 
+\paragraph{Les APIs du Spark}~
 
+Spark dispose des APIs standards permettant aux développeurs  de créer une application Spark. Il existe une API en Scala, Python, Java et R. 
 
 \paragraph{Lancement d'une application avec de Spark} \label{spark-master-modes}~
 
-On distingue deux modes d'exécution d'une application écrite en Spark : cluster et local. En  mode local, l'application  peut être exécuté au sein d'une machine locale. Par exemple,  avec un seul worker thread (aucun parallélisme),  en précisant $K$ worker sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine sur laquelle Spark est installé, etc. 
- Pour le mode cluster, on distingue plusieurs types de clusters. Ces derniers  varient suivant le gestionnaire de ressources qui assure la communication entre les différentes entités du cluster selon le principe master-slave. Par exemple Hadoop YARN\footnote{Source : \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consultée  le $14/05/2019$ }, Apache Mesos\footnote{Source : \url{https://mesos.apache.org/}, consultée le $14/05/2019$.}. La liste détaillée des alternatives pour chaque mode est donnée dans le site Web de Spark\footnote{\url{https://spark.apache.org/docs/latest/submitting-applications.html\#master-urls}, consultée le $14/05/2019$.}. 
+%Afin de pouvoir exécuter une application Spark, il faut l'installer. 
+On distingue deux modes d'exécution d'une application  Spark : cluster et local. En  mode local, l'application  peut être exécuté au sein d'une machine locale. Par exemple,  avec un seul \textit{worker} thread (aucun parallélisme),  en précisant $K$ \textit{worker} sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine sur laquelle Spark est installé, etc. 
+ Pour le mode cluster, on distingue plusieurs types de clusters. Ces derniers  varient suivant le gestionnaire de ressources qui assure la communication entre les différentes entités du cluster selon le principe master-slave. Par exemple Hadoop YARN\footnote{URL : \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté  le $14/05/2019$ } et Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $14/05/2019$.}. La liste détaillée des alternatives pour chaque mode est donnée dans le site Web de Spark\footnote{URL : \url{https://spark.apache.org/docs/latest/submitting-applications.html\#master-urls}, consulté le $14/05/2019$.}. 
  
-Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{Source : \url{https://aws.amazon.com/fr/emr/}, consultée le $08/05/2019$}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
+Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{URL  : \url{https://aws.amazon.com/fr/emr/}, consulté le $08/05/2019$.}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
 
 \paragraph{Apache Spark VS Apache Hadoop}
 
 Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins rapide en le comparant au framework Apache Spark.  Une étude \cite{article-comparaison-spark-hadoop} comparative entre Hadoop MapReduce et Spark a montré que Spark est $ 3 $ à $ 4 $ fois rapide que Hadoop MapReduce.
- Ceci est dû au fait que Spark traite les données suivant l'approche in-memory. Tandis que  les traitements basés sur l'écosystème Hadoop sont basés sur des lectures/écritures sur le disque.  
+ Ceci est dû au fait que Spark traite les données suivant l'approche in-memory. Tandis que  les traitements basés sur le framework Hadoop sont basés sur des lectures/écritures sur le disque.  
 %http://csjournals.com/IJCSC/PDF7-2/13.%20JP.pdf
 \subsection{Amazon Elastic MapReduce} \label{emr-aws-presentation}
 
@@ -513,7 +519,7 @@ Amazon Elastic MapReduce\footnote{URL : \url{https://docs.aws.amazon.com/fr_fr/e
 Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{URL : \url{https://aws.amazon.com/ec2/}, consulté le $14/05/2019$.}.
 Il existe plusieurs variantes d'instances EC2. Les instances sont conçues pour répondre 
 aux besoins classés par AWS dans les catégories suivantes : usage général, calcul optimisé, calcul accéléré et stockage optimisé.
-Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Le coût d'utilisation des instances EC2 indépendamment d'EMR est différent du cas où une instance est utilisée pour former un cluster.
+Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Le coût d'utilisation des instances EC2 indépendamment d'EMR est différent du cas où une instance est utilisée pour former un cluster EMR.
 
 Par défaut, Amazon EMR utilise YARN pour gérer les ressources. On distingue trois types de n\oe{}uds dans Amazon EMR. 
 \begin{itemize}
