@@ -3,8 +3,12 @@
 
 \section{Introduction}
 
-Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipulation des données massives à l'analyse des traceroutes disponibles dans le dépôt d'Atlas  afin de tracer l'évolution du délai d'un lien selon  le processus décrit dans le chapitre \ref{chap:big-data-intro}.
-Nous avons choisi quatre technologies. La première est MongoDB utilisée uniquement pour le stockage de données massives. La deuxième technologie concerne l'utilisation de la base de données Amazon DynamoDB pour le stockage de données à grande échelle. Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage et l'interrogation des données stockées. Le dernier choix est d'utiliser une technologie dédiée  au traitement distribué des données stockées dans des endroits différents.
+Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipulation des données massives. En particulier  pour l'analyse des traceroutes disponibles dans le dépôt d'Atlas selon le processus décrit dans le chapitre \ref{chap:algorith-detection}. Dans ce chapitre, on mesure le temps d'exécution  des  implémentations  décrites dans le chapitre \ref{chapter-implementations}.  
+%d'étudier comment ces technologies peuvent être utilisées, les défis relatifs à leur utilisation et enfin 
+% tracer l'évolution du délai d'un lien selon  le processus décrit dans le chapitre \ref{chap:big-data-intro}.
+ La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de données massives. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage de données à grande échelle, ce que propose MongoDB.
+ Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des données massives. En dernier choix, on a  utilisé une technologie dédiée  au traitement distribué des données dans un cluster de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
+
 
 % Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
 %Le présent chapitre reprend l'application de quelques technologies du Big Data manipulées en vue d'analyser le délai des liens. 
@@ -15,19 +19,22 @@ Nous avons choisi quatre technologies. La première est MongoDB utilisée unique
  %L'évaluation des performances  des technologies choisies est faite sur une machine ayant les caractéristiques reprises dans le tableau[!].
 
 \section{Critères d'évaluation des technologies  Big Data}
-Les critères d'évaluation d'une technologie Big Data  varient  suivant son objectif : stockage, calcul, etc.  En général, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data est très longue.  Les critères sur lesquels nous  évaluons  les différentes technologies  Big Data expérimentées sont les suivants:
+Les critères de l'évaluation de l'adéquation d'une technologie Big Data  varient  suivant  l'objectif de cette technologie : stockage, calcul, etc.  En général, la liste des critères que l'on peut considérer dans la comparaison des technologies Big Data est très longue.  Les critères sur lesquels nous  évaluons  les différentes technologies  Big Data expérimentées sont les suivants:
 \begin{itemize}
-	\item facilité de la mise en route et de la configuration de l'environnement de la technologie;
+	%\item facilité de la mise en route et de la configuration de l'environnement de la technologie;
 	\item flexibilité liée à la définition du  schéma de  données présentes dans les fichiers;
 	\item temps d'exécution nécessaire pour fournir les résultats finaux d'une analyse de traceroutes;
 	\item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
 \end{itemize}
 
-Dans la présente évaluation de quelques technologies Big Data, nous n'avons pas pris en compte d'autres critères, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Nous avons donné des indications théoriques concernant les frais d'utilisation de deux technologies dédiées au stockage de données massives : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}) et MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.}. 
+Dans la présente évaluation de  technologies Big Data, nous n'avons pas pris en compte d'autres critères, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Des indications théoriques concernant les frais d'utilisation de quelques technologies 
+ : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}),  MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.} et pour Spark, les frais d'utilisation d'un cluster EMR peuvent être estimés via le  calculateur mensuel d'AWS. 
 
 \section{Caractéristiques de l'environnement de test} \label{machine-openvz-caracteritics}
 
-\paragraph{La machine de test} L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisé sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux 7.11 (wheezy),  32,768 MB de  RAM, CPU MHz $ 2294.331 $.
+\paragraph{La machine de test}~
+
+ L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisée sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux $ 7.11 $ (wheezy),  $ 32,768 $ MO de  RAM, CPU MHz $ 2294.331 $. Ce sont les évaluations qui peuvent être effectuées localement comme celle de MongoDB et de Spark.
 %, nombre de CPUs $64$.
 
 %Le Tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
@@ -44,8 +51,31 @@ Dans la présente évaluation de quelques technologies Big Data, nous n'avons pa
 	Il existe différentes catégories de virtualisation. \textbf{OpenVZ} s'inscrit dans la catégorie Isolateur. Un isolateur est un logiciel permettant d'isoler l'exécution des applications dans des contextes ou zones d'exécution. Un conteneur OpenVZ  adopte un partitionnement logique au niveau des ressources systèmes : processus, réseau et système de fichier\footnote{Source : \url{http://cesar.resinfo.org/IMG/pdf/jtsiars-openvz_1_.pdf}, consultée le $29/12/2018$.}.
 \end{tcolorbox}
 
-Les différents tests effectués, présentés dans le présent chapitre, ont été effectués  au sein de cette machine. Nous notons qu'un seul test est lancé à un moment donné dans la machine.
-\paragraph{Paramètres de l'analyse.} Dans le Tableau \ref{params-detection}, nous présentons les valeurs des paramètres de l'analyse. Les dates de début et de fin  varient selon les traceroutes analysés. Nous donnons ces dates au fur et au mesure de chaque analyse.
+Les différents tests effectués, présentés dans le présent chapitre, ont été effectués  au sein de cette machine. Avec un seul test  lancé à un moment donné dans la machine.
+
+\paragraph{Les clusters EMR}~
+
+Le Tableau \ref{instances-types-description} reprend  les caractéristiques de certaines instances Amazon EC2\footnote{Sources : \url{https://aws.amazon.com/fr/ec2/previous-generation/} et \url{https://aws.amazon.com/fr/sap/instance-types/}, consultées le $15/05/2019$.}. Ce sont celles utilisées dans nos tests. Pour chaque instance, on note le nombre de vCPU (unité centrale virtuelle) et la taille de la mémoire (RAM). Plusieurs clusters EMR ont été utilisés dans nos tests, les détails de chaque  cluster utilisé sont donnés au fur et au mesure.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c c c}
+		\hline 
+		\textbf{Modèle} &	\textbf{vCPU} &\textbf{	Mém. (GiB)} \\ 
+		\hline 
+		m4.large&	$ 2 $&	$ 8 $ \\
+		\hline 
+		m3.xlarge&	$ 4 $&	$ 15 $\\
+		\hline 
+		m4.2xlarge&	$8  $&	$ 32 $ \\ 
+		\hline 
+	\end{tabular}
+	\caption{Description de quelques instances d'Amazon EC2}
+	\label{instances-types-description}
+\end{table}
+
+\paragraph{Paramètres de l'analyse des délais}~
+
+ Dans le Tableau \ref{params-detection}, nous présentons les valeurs des paramètres de l'analyse. Les dates de début et de fin  varient selon les traceroutes analysés. Nous donnons ces dates au fur et au mesure de chaque analyse.
 
 \begin{table}[h]
 	\centering
@@ -69,8 +99,9 @@ Les différents tests effectués, présentés dans le présent chapitre, ont ét
 
 
 \section{Collecte des traceroutes depuis le dépôt d'Atlas }
-Nous avons utilisé l'API d'Atlas  comme source pour récupérer les traceroutes depuis le dépôt d'Atlas. L'API permet de collecter des traceroutes depuis le dépôt d'Atlas en ajustant quelques paramètres comme  l'identifiant de la mesure, la période souhaitée, etc. Toutefois, les données collectés doivent être réorganisées. Précisément, il faut passer d'un fichier d'une seule ligne qui contient une liste de traceroute à un fichier contenant plusieurs lignes et chaque ligne représente un traceroute. Nous avons manipulé des échantillons de traceroutes dont la taille entre $ 1 $ et $ 10 $ GO, ce sont des volumes  adaptés pour que la machine de test prenne en charge la récupération de ces volumes  et ensuite  réorganisation de ces traceroutes. 
-La réorganisation des traceroute n'est pas nécessaire  MongoDB; l'import des traceroutes vers une base de données MongoDB peut être fait soit  via la liste des traceroutes ou bien via des lignes dans un fichier. Pour Amazon Athena et Spark, chaque traceroute doit occuper une  ligne dans les fichiers dans lesquels ils sont stockés. 
+Nous avons utilisé l'API d'Atlas  comme source pour récupérer les traceroutes depuis le dépôt d'Atlas. L'API permet de collecter des traceroutes depuis le dépôt d'Atlas en ajustant quelques paramètres comme  l'identifiant de la mesure, la période souhaitée, etc. Toutefois, les données collectés doivent être réorganisées. Précisément, il faut passer d'un fichier d'une seule ligne qui contient une liste de traceroutes (liste en JSON) à un fichier contenant plusieurs lignes et chaque ligne représente un traceroute (objet JSON). Les échantillons des traceroutes utilisés sont récupérés  avec la machine de test. 
+La réorganisation des traceroute n'est pas nécessaire  pour MongoDB; l'import des traceroutes vers une base de données MongoDB peut être fait soit  via la liste des traceroutes ou bien via des lignes dans un fichier. Pour Amazon Athena et Spark, chaque traceroute doit occuper une  ligne dans les fichiers dans lesquels ils sont stockés. Il est plus  intéressant d'utiliser des fichiers compressés dans le cas d'Amazon Athena. Ceci peut réduire considérablement les frais d'utilisation d'Amazon Athena.
+
 
 \section{Application 1 : MongoDB} \label{mongodb-impleme}
 %\paragraph{ Application sur  MongoDB}~
@@ -79,17 +110,11 @@ La réorganisation des traceroute n'est pas nécessaire  MongoDB; l'import des t
 
 \paragraph{Evaluation des critères de sélection}~
 
-MongoDB est la technologie Big Data utilisée par  Fontugne et al.  dans l'implémentation de l'outil de détection \cite{InternetHealthReport}. 
-MongoDB est une technologie conçue pour assurer  le stockage de données dans un processus d'analyse de données.
-Dans MongoDB, les traceroutes sont organisés  dans des collections.  Par convention,  $V$  vaut $6$ s'il s'agit de l'adressage IPv6 et est vide dans le cas de l'adressage IPv4.  Le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$. La nomenclature  des collections permet de ne récupérer que les traceroutes concernés par l'analyse lancée.
+Nous avons utilisé la version locale de MongoDB, la quantité de données qu'on peut stocker ainsi que le traitement appliqué sur les données récupérées dépendent principalement des ressources de la machine dans laquelle MongoDB est installé.
  
+MongoDB est flexible en terme de définition du schéma de données; aucun schéma n'est requis.   Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination. Dans ce cas, la structure de ces  traceroutes est différente  de la structure des traceroutes réussis. Les deux types de traceroutes sont stockés dans MongoDB sans contrainte.
 
- 
- Nous avons utilisé la version locale de MongoDB, la quantité de données que nous pouvons stocker ainsi que le traitement appliqué sur les données récupérées dépendent principalement des ressources de la machine dans laquelle MongoDB est installé.
- 
-MongoDB est flexible en terme de définition du schéma de données; aucun schéma n'est requis.   Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination. Dans ce cas, la structure de ces  traceroutes est différente  de la structure des traceroutes réussis. Les deux types de traceroutes sont stockés sans contrainte.
-
-Les données stockées dans une collection MongoDB peuvent être manipulées en mode lecture et en mode écriture. Dans le premier, on cherche à lire des données en provenance de différentes sources. C'est le plus répandu dans les projets Big Data. Pour le deuxième mode, on peut mettre à jour un enregistrement dans une collection MongoDB. Ceci est moins fréquent dans les projets Big Data.
+Les données stockées dans une collection MongoDB peuvent être manipulées en mode lecture et en mode écriture. Dans le premier, on cherche à lire des données en provenance de différentes sources. C'est le plus répandu dans les projets Big Data. Pour le deuxième mode, on peut mettre à jour un enregistrement dans une collection MongoDB. La modification des données  est moins fréquente dans les projets Big Data. Par exemple, les détails (timestamp, adresse IP de destination, etc) d'un traceroute effectué ne peuvent pas être changés au cours du temps.
 
 %Généralement l'analyse de données à grande échelle se limite qu'au mode lecture de données pour en tirer les connaissances. 
 %MongoDB est adapté  aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet dans une collection (modification ou suppression). 
@@ -123,36 +148,41 @@ Les différentes analyses ont été effectuées avec une installation locale  d'
 
  
 
-Le Tableau \ref{tab:mongotiming-timing} montre les résultats des mesures. Pour chaque période, nous mesurons le temps à  $5$ reprises
+Le Tableau \ref{tab:mongotiming-timing2} montre les résultats des mesures. Pour chaque période, nous mesurons le temps à  $5$ reprises
 %L'analyse de chaque période est fait $5$ fois, ce qu'on appelle ici des essais 
-: Essai 1, Essai 2, etc. Sur base de ces temps, on calcule leur valeur médiane, l'écart-type et la déviation.
- Les traceroutes analysés sont ceux à destination des instances du f.root-servers.net\footnote{Voir les détails de la mesure $ 5004 $ sur \url{https://atlas.ripe.net/measurements/5004/}, consultée le $12/12/2018$.}.
-
+: Essai 1, Essai 2, etc. Sur base des $5$ essais, on calcule leur valeur médiane, écart-type et leur déviation.
+ Les traceroutes analysés sont ceux à destination des instances du f.root-servers.net\footnote{Voir les détails de la mesure $ 5004 $ sur \url{https://atlas.ripe.net/measurements/5004/}, consultée le $12/12/2018$.}. La taille est donnée en octets, le temps de chaque essai est donné en secondes. De même pour la médiane.
 %en terme de stockage pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés, nous ne présentons que les premier trois essais. 
-
 
 \begin{table}[h]
 	\captionsetup{justification=centering}
-	\resizebox{1\textwidth}{!}{
-	\begin{tabular}{cccccccc}
-\textbf{Période}&\textbf{Taille (bytes)}&\textbf{Essai 1 (s)}&\textbf{Essai 2 (s)} &\textbf{Essai 3 (s)}&\textbf{Essai 4 (s)}&\textbf{Essai 5 (s)}&\textbf{Médiane (s)} \\ \hline
-$ 07/02/2018 - 07/02/2018 $&$  1,028,343,572 $&$  $&$  $&$  $ &&&\\ \hline 
-$ 07/02/2018 - 08/02/2018 $&$  $&$  $&$  $&$  $ &&&\\ \hline 
-$ 07/02/2018 - 09/02/2018 $&$  $&$  $&$  $&$  $ &&&\\ \hline 
-$ 07/02/2018 - 10/02/2018 $&$  $&$  $&$  $&$  $&&&\\ \hline 
-$ 07/02/2018 - 11/02/2018 $&$  $&$  $&$  $&$  $&&&  \\ \hline 
+\resizebox{1\textwidth}{!}{
+	\begin{tabular}{cccccccccc}
+		\textbf{Période}	&\textbf{Taille}	&\textbf{Essai 1}&	\textbf{Essai 2}&	\textbf{Essai 3}&	\textbf{Essai 4	}&\textbf{Essai 5}	&\textbf{Médiane} 	&\textbf{Ecart-type}	&\textbf{Variance} \\ \hline
+		07/02/2018 - 07/02/18 &	1028343572&	749.84&	748.38&	742.52&	746.25&	741.82&	746.25&	3.53&	12.44\\ \hline
+		07/02/2018 - 08/02/18 &	2055167238	&1519.32&	1540.66&	1562.08&	1505.33&	1511.92&	1519.32&	23.29&	542.37 \\ \hline
+		07/02/2018 - 09/02/18 &	3083779157&	2288.49&	2277.75&	2266.55&	2272.92	&2270.32&	2272.92&	8.47	&71.74 \\ \hline
+		07/02/2018 - 10/02/18 &	4113776434&	3056.69&	3075.97&	3127.8&	3046.18	&3059.59&	3059.59&	32.31	&1,044.18\\ \hline
+		07/02/2018 - 11/02/18 &	5143831662&	3831.58&	3198.83&	3229.39&	3212.36&	3300.38&	3229.39&	269.55&	72655.94 \\ \hline
+		07/02/2018 - 12/02/18 &	6176159820&	4696.27&	4684.97&	4709.83&	4709.83	&4686.39&	4696.27&	12.10&	146.50 \\ \hline
 	\end{tabular}
-}
-\caption{Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB}
-\label{tab:mongotiming-timing}
+	}
+
+			\caption{Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB}
+			\label{tab:mongotiming-timing2}
 \end{table}
+
+
+
+
+
 
 
 %Nous reprenons les informations du 
 
-La Figure \ref{fig:mongodbtiming} montre graphiquement les résultats du Tableau \ref{tab:mongotiming-timing}. L'axe  des abscisses représente la taille des fichiers. %contenant les traceroutes  analysés, appelée  $q$. 
+La Figure \ref{fig:mongodbtiming} montre graphiquement les résultats du Tableau \ref{tab:mongotiming-timing2}. L'axe  des abscisses représente la taille des fichiers. %contenant les traceroutes  analysés, appelée  $q$. 
 L'axe  des ordonnées  représente le temps d'exécution médian calculé en se basant sur les $5$ essais. 
-Nous agrégeons les temps des différents essais et nous calculons  leur valeur minimale, maximale et la médiane.
+%Nous agrégeons les temps des différents essais et nous calculons  leur valeur minimale, maximale et la médiane.
 Pour précision, le temps calculé est la différence entre l'instant  qui précède le lancement de l'analyse et l'instant qui suit la fin de l'analyse.
 \begin{figure}[h]
 	\centering
@@ -163,7 +193,7 @@ Pour précision, le temps calculé est la différence entre l'instant  qui préc
 \end{figure}
 
 
-D'un test au test suivant, on ajoute les traceroutes d'une journée, le temps qui s'est ajouté est respectivement  773.08, 753.59, 786.67, 771.99, 871.48. 
+%D'un test au test suivant, on ajoute les traceroutes d'une journée. Le temps qui s'est ajouté en élargissant l'échantillon de traceroutes  est respectivement  773.08, 753.59, 786.67, 771.99, 871.48. 
 
 
 
@@ -311,6 +341,36 @@ La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tail
 \end{figure}
 
 
+Le temps d'exécution obtenu lors de l'utilisation des services Amazon S3 et Athena dépendent du temps nécessaire pour recevoir la réponse à la requête SQL. Avec l'intégration proposée, l'analyse des traceroutes est effectuée par période d'une heure et les traceroutes sont stockées par journée. On compte une requête SQL vers Amazon Athena pour chaque période. La requête SQL est configurée pour chercher les traceroutes d'une période dans les partitions  correspondantes. Les temps de réponse aux requêtes SQL est obtenu en utilisant l'API d'Amazon Athena en Python. Sachant qu'on peut obtenir ce temps en évaluant directement la requête SQL dans la console d'Amazon Athena.
+
+Nous précisons qu'une même requête exécutée depuis la console d'Amazon Athena est exécutée plus rapidement qu'une requête exécutée en utilisant l'API en Python. 
+Afin de mesurer l'effet du partitionnement sur le temps de l'analyse ainsi que pour avoir une idée sur une des composantes affectant les temps obtenus dans le Tableau \ref{tab:athena-data}.
+
+Nous avons évalué dans  Le Tableau \ref{datatimeathenaconsole}  le temps écoulé pour récupérer les traceroutes effectués durant une heure et  en provenance de l'identifiant de la mesure $5004$ (msm='5004'), l'année (year='2018'), le mois (month='2'). Pour les jours (partition day), elles sont données dans le Tableau   \ref{datatimeathenaconsole}.
+
+\begin{table}[h]
+	\captionsetup{justification=centering}
+	\centering
+		\resizebox{1\textwidth}{!}{
+\begin{tabular}{c c l}
+\textbf{Temps d'exécution (s)}&	\textbf{Taille de données (MO)}& \multicolumn{1}{c}{ \textbf{Partitions : day}}  \\ \hline
+	29.38&	96.81 & '7'\\ \hline
+	31.15&	203.2 & '7' or '8' \\ \hline
+	31.43&	309.78 &  '7' or  '8' or 9\\ \hline
+	29.88&	416.5  & '7' or  '8' or 9 or 10\\ \hline
+	31.27&	523.23 & '7' or  '8' or 9 or 10 or '11'\\ \hline
+	49.91&	618.93 & '7' or  '8' or 9 or 10 or '11' or '27'\\ \hline
+\end{tabular} 
+}
+\caption{Les temps d'exécution d'une requête SQL sur Amazon Athena selon les données analysées}
+\label{datatimeathenaconsole}
+\end{table}
+
+Si le temps se diffère selon les données analysées. Ce même temps est différent aussi si cette requête est exécutées depuis la console d'Athena ou via l'API. La même requête SQL a été exécutée depuis la console d'Athena  en $ 29.38 $ secondes et $ 67.45 $ secondes depuis l'API.
+
+
+
+
 
 
 \section{Application 3 : Spark Apache avec Scala}
@@ -354,10 +414,25 @@ Pour les valeurs nulles relatives au temps d'exécution, l'exécution de la l'ap
 
 D'après la Figure 	\ref{fig:variantdrivermemory}, nous remarquons qu'à partir d'une taille mémoire allouée au driver, le temps écoulé durant l'exécution de l'application Spark est relativement stable. De plus, nous constatons qu'il faut prévoir une taille mémoire minimal pour assurer l'exécution de l'application Spark. Les tailles mémoire supérieures à cette valeur minimale affectent faiblement le temps d'exécution.  Cette valeur minimale dépend fortement de la quantité de données à analyser. Enfin, malgré que la machine sur laquelle nous lançons l'application Spark ne dispose que de $ 32 $ Go de RAM, le fait d'allouer au driver $ 35 $ Go, $ 40$ Go, $ 45 $ Go n'a pas généré une erreur lors de l'exécution.
 
-\paragraph{Variant le mode local : local vs local[N]}~
+\paragraph{Variant la taille des données analysées}~
 
 local[*] Run Spark locally with as many worker threads as logical cores on your machine.
 local [*] Exécutez Spark localement avec autant de threads de travail que de c\oe{}urs logiques sur votre ordinateur.
+
+
+\begin{table}[h]
+	\resizebox{\textwidth}{!}{
+	\begin{tabular}{cccccccccc}
+\textbf{Période (début - fin)}	&\textbf{Taille de données (octets)}&	\textbf{Essai 1}	&\textbf{Essai 2}&\textbf{	Essai 3}&\textbf{	Essai 4}	&\textbf{Essai 5}&	\textbf{Médiane}&\textbf{	Ecart type}&	\textbf{Variance} \\ \hline
+07/02/18 - 07/02/18&	1028343572&	301&	301&	314	&280	&324	&301&	14.85	&220.3 \\ \hline
+07/02/18 - 08/02/18&	2055167238&	722&	645&	597&	655&	603&	645&	50.24&	2019.1 \\ \hline
+07/02/18 - 09/02/18&	3083779157&	1060&	1015&	984&	978&	978&	984&	35.37&	1060.97 \\ \hline
+07/02/18 - 10/02/18&	4113776434&	1162&	1103&	1250&	1265&	1122&	1162&	73.73&	4404.67 \\ \hline
+07/02/18 - 11/02/18&	5143831662&	1319&	1243&	1159	&1184&	1228&	1228&	61.64&	3038.97 \\ \hline
+
+	\end{tabular}
+}
+\end{table}
 
 \paragraph{Notes concernant le mode local}~
 
@@ -386,23 +461,7 @@ On distingue le temps nécessaire à la mise en place du cluster et à la config
 
 
 Ce que nous testons avec Amazon EMR sont les mêmes traitements dans le mode local, mais avec une infrastructure différente. Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille et le type des modèles des instances du cluster créé pour lancer la détection. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
-Le Tableau \ref{instances-types-description} reprend uniquement les caractéristiques des instances Amazon EC2  utilisées dans nos tests. Pour chaque instance, nous avons le nombre de c\oe{}urs virtuels YARN et la taille de la mémoire (RAM).
-\begin{table}[H]
-	\centering
-\begin{tabular}{c c c}
-	\hline 
-\textbf{Modèle} &	\textbf{vCores} &\textbf{	Mém. (GiB)} \\ 
-	\hline 
-m4.large&	$ 4 $&	$ 8 $ \\
-	\hline 
-m3.xlarge&	$ 8 $&	$ 15 $\\
-\hline 
-m4.2xlarge&	$ 16 $&	$ 32 $ \\ 
-	\hline 
-\end{tabular}
-\caption{Description de quelques instances d'Amazon EC2}
-\label{instances-types-description}
-\end{table} 
+
 
 \paragraph{Que ce qu'on mesure}~
 

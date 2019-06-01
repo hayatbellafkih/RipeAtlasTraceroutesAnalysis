@@ -46,45 +46,45 @@ Warning--to sort, need author or key in best-practices-emr
 Warning--can't use both author and editor fields in anil-big-data
 Warning--empty publisher in anil-big-data
 Warning--empty journal in article-comparaison-spark-hadoop
-You've used 44 entries,
+You've used 43 entries,
             2253 wiz_defined-function locations,
-            779 strings with 11910 characters,
-and the built_in function-call counts, 11381 in all, are:
-= -- 1096
-> -- 386
+            776 strings with 11835 characters,
+and the built_in function-call counts, 11109 in all, are:
+= -- 1071
+> -- 379
 < -- 0
-+ -- 167
-- -- 122
-* -- 606
-:= -- 1768
-add.period$ -- 148
-call.type$ -- 44
-change.case$ -- 189
++ -- 164
+- -- 120
+* -- 592
+:= -- 1724
+add.period$ -- 145
+call.type$ -- 43
+change.case$ -- 185
 chr.to.int$ -- 0
-cite$ -- 54
-duplicate$ -- 485
-empty$ -- 1111
-format.name$ -- 122
-if$ -- 2517
+cite$ -- 53
+duplicate$ -- 469
+empty$ -- 1083
+format.name$ -- 120
+if$ -- 2454
 int.to.chr$ -- 0
-int.to.str$ -- 44
-missing$ -- 25
-newline$ -- 239
-num.names$ -- 74
-pop$ -- 354
+int.to.str$ -- 43
+missing$ -- 23
+newline$ -- 234
+num.names$ -- 72
+pop$ -- 345
 preamble$ -- 1
-purify$ -- 149
+purify$ -- 146
 quote$ -- 0
-skip$ -- 332
+skip$ -- 324
 stack$ -- 0
-substring$ -- 434
-swap$ -- 135
+substring$ -- 427
+swap$ -- 131
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 164
+type$ -- 162
 warning$ -- 10
-while$ -- 92
-width$ -- 46
-write$ -- 467
+while$ -- 89
+width$ -- 45
+write$ -- 455
 (There were 5 error messages)
