@@ -35,12 +35,13 @@
 \contentsline {figure}{\numberline {IV.4}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{89}{figure.caption.131}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {V.1}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec MongoDB \relax }}{108}{figure.caption.155}
-\contentsline {figure}{\numberline {V.2}{\ignorespaces Le temps d'exécution selon la taille des données avec MongoDB\relax }}{109}{figure.caption.157}
-\contentsline {figure}{\numberline {V.3}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec Amazon S3 et Athena \relax }}{109}{figure.caption.159}
-\contentsline {figure}{\numberline {V.4}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{110}{figure.caption.161}
-\contentsline {figure}{\numberline {V.5}{\ignorespaces \relax }}{111}{figure.caption.163}
-\contentsline {figure}{\numberline {V.6}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{112}{figure.caption.165}
-\contentsline {figure}{\numberline {V.7}{\ignorespaces \relax }}{114}{figure.caption.171}
-\contentsline {figure}{\numberline {V.8}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{116}{figure.caption.178}
+\contentsline {figure}{\numberline {V.2}{\ignorespaces Le temps d'exécution selon la taille des données avec MongoDB\relax }}{108}{figure.caption.157}
+\contentsline {figure}{\numberline {V.3}{\ignorespaces Fréquence des traceroutes ayant un même nombre de sauts\relax }}{109}{figure.caption.158}
+\contentsline {figure}{\numberline {V.4}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec Amazon S3 et Athena \relax }}{109}{figure.caption.160}
+\contentsline {figure}{\numberline {V.5}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{110}{figure.caption.162}
+\contentsline {figure}{\numberline {V.6}{\ignorespaces \relax }}{112}{figure.caption.164}
+\contentsline {figure}{\numberline {V.7}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{113}{figure.caption.166}
+\contentsline {figure}{\numberline {V.8}{\ignorespaces \relax }}{115}{figure.caption.172}
+\contentsline {figure}{\numberline {V.9}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{117}{figure.caption.179}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

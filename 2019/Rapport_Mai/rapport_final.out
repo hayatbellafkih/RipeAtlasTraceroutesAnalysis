@@ -14,7 +14,7 @@
 \BOOKMARK [2][-]{subsection.1.4.3}{Les mesures personnalisées : User Defined Mesurement }{section.1.4}% 14
 \BOOKMARK [2][-]{subsection.1.4.4}{Sélection des sondes}{section.1.4}% 15
 \BOOKMARK [1][-]{section.1.5}{Les sources de données Atlas}{chapter.1}% 16
-\BOOKMARK [1][-]{section.1.6}{Les\040ancres\040VS\040sondes}{chapter.1}% 17
+\BOOKMARK [1][-]{section.1.6}{Les\040ancres\040Atlas}{chapter.1}% 17
 \BOOKMARK [1][-]{section.1.7}{Limitations\040du\040projet\040Atlas}{chapter.1}% 18
 \BOOKMARK [2][-]{subsection.1.7.1}{Les sondes et la vie privée}{section.1.7}% 19
 \BOOKMARK [2][-]{subsection.1.7.2}{La sécurité dans Atlas}{section.1.7}% 20
@@ -59,7 +59,7 @@
 \BOOKMARK [2][-]{subsection.3.3.2}{L'architecture\040standard\040du\040Big\040Data}{section.3.3}% 59
 \BOOKMARK [2][-]{subsection.3.3.3}{Les bases de données NoSQL \(Not Only SQL\) }{section.3.3}% 60
 \BOOKMARK [2][-]{subsection.3.3.4}{Extraction,\040Transformation,\040Loading\040\(ETL\)}{section.3.3}% 61
-\BOOKMARK [2][-]{subsection.3.3.5}{Schema\040on\040Write\040VS\040Schema\040on\040Read}{section.3.3}% 62
+\BOOKMARK [2][-]{subsection.3.3.5}{Schema\040on\040Write\040et\040Schema\040on\040Read}{section.3.3}% 62
 \BOOKMARK [2][-]{subsection.3.3.6}{L'informatique distribuée et l'analyse de données massives}{section.3.3}% 63
 \BOOKMARK [2][-]{subsection.3.3.7}{MapReduce}{section.3.3}% 64
 \BOOKMARK [1][-]{section.3.4}{Parcours\040de\040quelques\040technologies\040du\040Big\040Data}{chapter.3}% 65
@@ -72,12 +72,12 @@
 \BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 72
 \BOOKMARK [0][-]{chapter.4}{Implémentations }{}% 73
 \BOOKMARK [1][-]{section.4.1}{Implémentation avec MongoDB}{chapter.4}% 74
-\BOOKMARK [1][-]{section.4.2}{Implémentation avec Amazon S3 et Athena}{chapter.4}% 75
+\BOOKMARK [1][-]{section.4.2}{Implémentation avec Amazon S3 et Amazon Athena}{chapter.4}% 75
 \BOOKMARK [1][-]{section.4.3}{Implémentation en Spark/Scala}{chapter.4}% 76
 \BOOKMARK [2][-]{subsection.4.3.1}{Introduction}{section.4.3}% 77
 \BOOKMARK [2][-]{subsection.4.3.2}{Présentation de Scala}{section.4.3}% 78
 \BOOKMARK [2][-]{subsection.4.3.3}{La\040programmation\040fonctionnelle\040et\040le\040Big\040Data}{section.4.3}% 79
-\BOOKMARK [2][-]{subsection.4.3.4}{Implémentation}{section.4.3}% 80
+\BOOKMARK [2][-]{subsection.4.3.4}{Implémentation détaillée }{section.4.3}% 80
 \BOOKMARK [1][-]{section.4.4}{Conclusion}{chapter.4}% 81
 \BOOKMARK [0][-]{chapter.5}{Application de technologies Big Data à l'analyse de traceroutes}{}% 82
 \BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 83
@@ -86,7 +86,7 @@
 \BOOKMARK [1][-]{section.5.4}{Collecte des traceroutes depuis le dépôt d'Atlas }{chapter.5}% 86
 \BOOKMARK [1][-]{section.5.5}{Application\0401\040:\040MongoDB}{chapter.5}% 87
 \BOOKMARK [1][-]{section.5.6}{Application\0402\040:\040Amazon\040Athena\040et\040Amazon\040S3}{chapter.5}% 88
-\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Spark\040Apache\040avec\040Scala}{chapter.5}% 89
+\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Apache\040Spark\040avec\040Scala}{chapter.5}% 89
 \BOOKMARK [2][-]{subsection.5.7.1}{Mode\040local}{section.5.7}% 90
 \BOOKMARK [2][-]{subsection.5.7.2}{Cluster\040Amazon\040EMR}{section.5.7}% 91
 \BOOKMARK [1][-]{section.5.8}{Conclusion}{chapter.5}% 92

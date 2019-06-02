@@ -5,16 +5,6 @@
 \newblock URL~: \url{http://www.caida.org/projects/ark/}.
 \newblock (consulté le $19/01/2018$).
 
-\bibitem{CAIDA}
-{Center for Applied Internet Data Analysis (CAIDA)}.
-\newblock URL~: \url{http://www.caida.org/}.
-\newblock (consulté le $ 06/04/2018$).
-
-\bibitem{create-UDM}
-{Create a New Measurement - RIPE Atlas}.
-\newblock URL~: \url{https://atlas.ripe.net/measurements/form/}.
-\newblock consulté le $05/08/2018$.
-
 \bibitem{ripe-atlas-data}
 Le dépôt des données {RIPE} {A}tlas.
 \newblock URL : \url{https://data-store.ripe.net/datasets/atlas-daily-dumps/}.
@@ -271,7 +261,7 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 
 \bibitem{article-comparaison-spark-hadoop}
 {\sc Verma, J., and Patel, A.}
-\newblock Comparison of mapreduce and spark programming frameworks for big data
-  analytics on hdfs.
+\newblock {Comparison of MapReduce and Spark Programming Frameworks for Big
+  Data Analytics on HDFS}.
 
 \end{thebibliography}

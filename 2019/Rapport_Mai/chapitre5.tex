@@ -6,7 +6,7 @@
 Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipulation des données massives. En particulier  pour l'analyse des traceroutes disponibles dans le dépôt d'Atlas selon le processus décrit dans le chapitre \ref{chap:algorith-detection}. Dans ce chapitre, on mesure le temps d'exécution  des  implémentations  décrites dans le chapitre \ref{chapter-implementations}.  
 %d'étudier comment ces technologies peuvent être utilisées, les défis relatifs à leur utilisation et enfin 
 % tracer l'évolution du délai d'un lien selon  le processus décrit dans le chapitre \ref{chap:big-data-intro}.
- La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de données massives. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage de données à grande échelle, ce que propose MongoDB.
+ La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de données massives. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage, ce que propose MongoDB.
  Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des données massives. En dernier choix, on a  utilisé une technologie dédiée  au traitement distribué des données dans un cluster de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
 
 
@@ -27,14 +27,15 @@ Les critères de l'évaluation de l'adéquation d'une technologie Big Data  vari
 	\item évolutivité de l'environnement Big Data mis en place pour des nouvelles données et de nouveaux besoins.
 \end{itemize}
 
-Dans la présente évaluation de  technologies Big Data, nous n'avons pas pris en compte d'autres critères, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données massives ainsi qu'au traitement de ces dernières. Des indications théoriques concernant les frais d'utilisation de quelques technologies 
+Dans la présente évaluation de  technologies Big Data, nous n'avons pas pris en compte d'autres critères, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données  ainsi qu'au traitement de ces dernières. Des indications théoriques concernant les frais d'utilisation de quelques technologies sont données
  : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}),  MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.} et pour Spark, les frais d'utilisation d'un cluster EMR peuvent être estimés via le  calculateur mensuel d'AWS. 
 
 \section{Caractéristiques de l'environnement de test} \label{machine-openvz-caracteritics}
 
 \paragraph{La machine de test}~
 
- L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisée sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux $ 7.11 $ (wheezy),  $ 32,768 $ MO de  RAM, CPU MHz $ 2294.331 $. Ce sont les évaluations qui peuvent être effectuées localement comme celle de MongoDB et de Spark.
+ L'évaluation des technologies Big Data choisies sur un échantillon de traceroutes a été réalisée sur un conteneur de type OpenVZ ayant les caractéristiques suivantes :  système Debian GNU/Linux $ 7.11 $ (wheezy),  $ 32,768 $ MO de  RAM, CPU MHz $ 2294.331 $. 
+ %Ce sont les évaluations qui peuvent être effectuées localement comme celle de MongoDB et de Spark.
 %, nombre de CPUs $64$.
 
 %Le Tableau \ref{tab:test-machine} présente les caractéristique de la machine sur laquelle nous avons effectué les différents tests. 
@@ -55,7 +56,7 @@ Les différents tests effectués, présentés dans le présent chapitre, ont ét
 
 \paragraph{Les clusters EMR}~
 
-Le Tableau \ref{instances-types-description} reprend  les caractéristiques de certaines instances Amazon EC2\footnote{Sources : \url{https://aws.amazon.com/fr/ec2/previous-generation/} et \url{https://aws.amazon.com/fr/sap/instance-types/}, consultées le $15/05/2019$.}. Ce sont celles utilisées dans nos tests. Pour chaque instance, on note le nombre de vCPU (unité centrale virtuelle) et la taille de la mémoire (RAM). Plusieurs clusters EMR ont été utilisés dans nos tests, les détails de chaque  cluster utilisé sont donnés au fur et au mesure.
+Le Tableau \ref{instances-types-description} reprend  les caractéristiques de certaines instances Amazon EC2\footnote{Sources : \url{https://aws.amazon.com/fr/ec2/previous-generation/} et \url{https://aws.amazon.com/fr/sap/instance-types/}, consultées le $15/05/2019$.}. Ce sont celles utilisées dans nos tests. Pour chaque instance, on note le nombre de vCPU (unité centrale virtuelle) et la taille de la mémoire (RAM). Plusieurs clusters EMR ont été utilisés dans nos tests, les détails de chaque  cluster utilisé sont donnés au fur et à mesure de la présentation du test.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{c c c}
@@ -75,7 +76,7 @@ Le Tableau \ref{instances-types-description} reprend  les caractéristiques de c
 
 \paragraph{Paramètres de l'analyse des délais}~
 
- Dans le Tableau \ref{params-detection}, nous présentons les valeurs des paramètres de l'analyse. Les dates de début et de fin  varient selon les traceroutes analysés. Nous donnons ces dates au fur et au mesure de chaque analyse.
+ Dans le Tableau \ref{params-detection}, nous présentons les valeurs des paramètres de l'analyse. Les dates de début et de fin  varient selon les traceroutes analysés. Ces dates sont indiquées au fur et à mesure de chaque analyse.
 
 \begin{table}[h]
 	\centering
@@ -83,7 +84,7 @@ Le Tableau \ref{instances-types-description} reprend  les caractéristiques de c
 		\hline 
 	\textbf{Paramètre}	& \textbf{Valeur}  \\ 
 		\hline 
-	minSeen	& 3 \\ 
+	minSeen	& $ 3 $ \\ 
 		\hline 
 	alpha	&  $ 0,01 $\\ 
 		\hline 
@@ -99,8 +100,8 @@ Le Tableau \ref{instances-types-description} reprend  les caractéristiques de c
 
 
 \section{Collecte des traceroutes depuis le dépôt d'Atlas }
-Nous avons utilisé l'API d'Atlas  comme source pour récupérer les traceroutes depuis le dépôt d'Atlas. L'API permet de collecter des traceroutes depuis le dépôt d'Atlas en ajustant quelques paramètres comme  l'identifiant de la mesure, la période souhaitée, etc. Toutefois, les données collectés doivent être réorganisées. Précisément, il faut passer d'un fichier d'une seule ligne qui contient une liste de traceroutes (liste en JSON) à un fichier contenant plusieurs lignes et chaque ligne représente un traceroute (objet JSON). Les échantillons des traceroutes utilisés sont récupérés  avec la machine de test. 
-La réorganisation des traceroute n'est pas nécessaire  pour MongoDB; l'import des traceroutes vers une base de données MongoDB peut être fait soit  via la liste des traceroutes ou bien via des lignes dans un fichier. Pour Amazon Athena et Spark, chaque traceroute doit occuper une  ligne dans les fichiers dans lesquels ils sont stockés. Il est plus  intéressant d'utiliser des fichiers compressés dans le cas d'Amazon Athena. Ceci peut réduire considérablement les frais d'utilisation d'Amazon Athena.
+Nous avons utilisé l'API d'Atlas  comme moyen de  récupération des traceroutes depuis le dépôt d'Atlas. L'API permet de collecter des traceroutes depuis le dépôt d'Atlas en ajustant quelques paramètres comme  l'identifiant de la mesure, la période souhaitée, etc. Toutefois, les données collectées doivent être réorganisées. Précisément, il faut passer d'un fichier d'une seule ligne qui contient une liste de traceroutes (tableau en JSON) à un fichier contenant plusieurs lignes et chaque ligne représente un traceroute (objet JSON). Les échantillons des traceroutes utilisés sont récupérés  avec la machine de test. 
+La réorganisation des traceroute n'est pas nécessaire  pour MongoDB, car l'import des traceroutes vers une base de données MongoDB peut être fait soit  à travers un tableau  de traceroutes ou bien via des lignes dans un fichier. Pour Amazon Athena et Spark, chaque traceroute doit occuper une  ligne dans les fichiers dans lesquels ils sont stockés. Pour Amazon Athena, les fichiers  sont compressés après leur réorganisation. Ceci  réduit considérablement les frais d'utilisation d'Amazon Athena.
 
 
 \section{Application 1 : MongoDB} \label{mongodb-impleme}
@@ -114,7 +115,7 @@ Nous avons utilisé la version locale de MongoDB, la quantité de données qu'on
  
 MongoDB est flexible en terme de définition du schéma de données; aucun schéma n'est requis.   Par exemple, dans certains cas, les traceroutes planifiés ne réussissent pas à atteindre une destination. Dans ce cas, la structure de ces  traceroutes est différente  de la structure des traceroutes réussis. Les deux types de traceroutes sont stockés dans MongoDB sans contrainte.
 
-Les données stockées dans une collection MongoDB peuvent être manipulées en mode lecture et en mode écriture. Dans le premier, on cherche à lire des données en provenance de différentes sources. C'est le plus répandu dans les projets Big Data. Pour le deuxième mode, on peut mettre à jour un enregistrement dans une collection MongoDB. La modification des données  est moins fréquente dans les projets Big Data. Par exemple, les détails (timestamp, adresse IP de destination, etc) d'un traceroute effectué ne peuvent pas être changés au cours du temps.
+Les données stockées dans une collection MongoDB peuvent être manipulées en mode lecture et en mode écriture. Dans le premier, on cherche à lire des données en provenance de différentes sources. C'est le plus répandu dans les projets Big Data. Pour le deuxième mode, on peut mettre à jour un enregistrement dans une collection MongoDB. La modification des données  est moins fréquente dans les projets Big Data. Par exemple, les détails (timestamp, adresse IP de destination, etc.) d'un traceroute effectué ne peuvent pas être changés au cours du temps.
 
 %Généralement l'analyse de données à grande échelle se limite qu'au mode lecture de données pour en tirer les connaissances. 
 %MongoDB est adapté  aux projets visant la lecture de données massives mais aussi aux projets où on envisage la mise à jour d'un objet dans une collection (modification ou suppression). 
@@ -132,8 +133,8 @@ Les données stockées dans une collection MongoDB peuvent être manipulées en 
 \paragraph{Performances de la base de données MongoDB dans l'analyse des délais }~
 
 Afin de suivre l'évolution du  temps d'exécution d'une analyse de traceroutes en utilisant l'implémentation du travail de référence \cite{InternetHealthReport}, plusieurs échantillons de traceroutes ont été analysés.
-La Figure \ref{fig:mongodbmesuretime} montre ce que inclut le temps d'exécution. C'est le temps nécessaire pour récupérer les traceroutes stockés dans une base de données MongoDB selon les paramètres indiqués,  lancer  l'analyse des traceroutes récupérés et détecter les anomalies dans le délai des liens
- suivant les étapes des  phases I et II et  sauvegarder les résultats dans un fichier localement. Chaque ligne de ce dernier  décrit un lien comme l'exemple donné dans le Listing \ref{resultLink}. 
+La Figure \ref{fig:mongodbmesuretime} montre ce que inclut le temps d'exécution. C'est le temps nécessaire pour récupérer les traceroutes stockés dans une base de données MongoDB selon les paramètres indiqués,  lancer  l'analyse des traceroutes récupérés et détecter les anomalies dans le délai des liens.
+ Les différents traitements concernent les étapes des  phases I et II. A la fin des traitements, les résultats sont  sauvegardés dans un fichier localement. Chaque ligne de ce dernier  décrit un lien comme l'exemple donné dans le Listing \ref{resultLink}. 
 Les différentes analyses ont été effectuées avec une installation locale  d'une base de données MongoDB dans la machine du test.
 \begin{figure}[H]
 	\centering
@@ -148,9 +149,9 @@ Les différentes analyses ont été effectuées avec une installation locale  d'
 
  
 
-Le Tableau \ref{tab:mongotiming-timing2} montre les résultats des mesures. Pour chaque période, nous mesurons le temps à  $5$ reprises
+Le Tableau \ref{tab:mongotiming-timing2} montre les résultats des mesures. Pour chaque période, nous mesurons le temps d'exécution à  $5$ reprises
 %L'analyse de chaque période est fait $5$ fois, ce qu'on appelle ici des essais 
-: Essai 1, Essai 2, etc. Sur base des $5$ essais, on calcule leur valeur médiane, écart-type et leur déviation.
+: Essai 1, Essai 2, etc. Sur base des $5$ essais, on calcule leur valeur médiane, écart-type et leur variance.
  Les traceroutes analysés sont ceux à destination des instances du f.root-servers.net\footnote{Voir les détails de la mesure $ 5004 $ sur \url{https://atlas.ripe.net/measurements/5004/}, consultée le $12/12/2018$.}. La taille est donnée en octets, le temps de chaque essai est donné en secondes. De même pour la médiane.
 %en terme de stockage pour mesurer le temps nécessaire pour avoir  l'évolution de tous les liens présents dans  les traceroutes analysés, nous ne présentons que les premier trois essais. 
 
@@ -159,12 +160,12 @@ Le Tableau \ref{tab:mongotiming-timing2} montre les résultats des mesures. Pour
 \resizebox{1\textwidth}{!}{
 	\begin{tabular}{cccccccccc}
 		\textbf{Période}	&\textbf{Taille}	&\textbf{Essai 1}&	\textbf{Essai 2}&	\textbf{Essai 3}&	\textbf{Essai 4	}&\textbf{Essai 5}	&\textbf{Médiane} 	&\textbf{Ecart-type}	&\textbf{Variance} \\ \hline
-		07/02/2018 - 07/02/18 &	1028343572&	749.84&	748.38&	742.52&	746.25&	741.82&	746.25&	3.53&	12.44\\ \hline
-		07/02/2018 - 08/02/18 &	2055167238	&1519.32&	1540.66&	1562.08&	1505.33&	1511.92&	1519.32&	23.29&	542.37 \\ \hline
-		07/02/2018 - 09/02/18 &	3083779157&	2288.49&	2277.75&	2266.55&	2272.92	&2270.32&	2272.92&	8.47	&71.74 \\ \hline
-		07/02/2018 - 10/02/18 &	4113776434&	3056.69&	3075.97&	3127.8&	3046.18	&3059.59&	3059.59&	32.31	&1,044.18\\ \hline
-		07/02/2018 - 11/02/18 &	5143831662&	3831.58&	3198.83&	3229.39&	3212.36&	3300.38&	3229.39&	269.55&	72655.94 \\ \hline
-		07/02/2018 - 12/02/18 &	6176159820&	4696.27&	4684.97&	4709.83&	4709.83	&4686.39&	4696.27&	12.10&	146.50 \\ \hline
+		07/02/2018 - 07/02/18 &	$ 1028343572 $&	$ 749.84 $&	$ 748.38 $&	$ 742.52 $&	$ 746.25 $&	$ 741.82 $&	$ 746.25 $&	$ 3.53 $&	$ 12.44 $\\ \hline
+		07/02/2018 - 08/02/18 &	$ 2055167238 $	&$ 1519.32 $&	$ 1540.66 $&$ 	1562.08 $&	$ 1505.33 $&	$ 1511.92 $&	$ 1519.32 $&	$ 23.29 $&	$ 542.37 $ \\ \hline
+		07/02/2018 - 09/02/18 &	$ 3083779157 $&	$ 2288.49 $&	$ 2277.75 $&	$ 2266.55 $&	$ 2272.92 $	&$ 2270.32 $&	$ 2272.92 $&	$ 8.47 $	&$ 71.74 $ \\ \hline
+		07/02/2018 - 10/02/18 &	$ 4113776434 $&	$ 3056.69 $&	$ 3075.97 $&	$ 3127.8 $&$ 	3046.18 $	&$ 3059.59 $&	$ 3059.59 $&	$ 32.31 $	&$ 1044.18 $\\ \hline
+		07/02/2018 - 11/02/18 &	$ 5143831662 $&	$ 3831.58 $&	$ 3198.83 $&	$ 3229.39 $&	$ 3212.36 $&	$ 3300.38 $&	$ 3229.39 $&	$ 269.55 $&	$ 72655.94 $ \\ \hline
+		07/02/2018 - 12/02/18 &	$ 6176159820 $&	$ 4696.27 $&	$ 4684.97 $&$ 	4709.83 $&	$ 4709.83 $	&$ 4686.39 $&	$ 4696.27 $&	$ 12.10 $&	$ 146.50 $ \\ \hline
 	\end{tabular}
 	}
 
@@ -246,6 +247,14 @@ Pour précision, le temps calculé est la différence entre l'instant  qui préc
 
 %Avec une autre technologie qui travaille en mémoire, les résultats sont données plus rapidement. 
 
+Nous avons utilisé le volume de traceroutes analysés au lieu du nombre de traceroutes.  Etant donné que le nombre de sauts est différents d'un traceroute à un autre. Les traceroutes ayant plus de sauts nécessitent plus de temps pour être traités. A titre indicatif, la Figure \ref{fig:frequencesauttraceroutes} montre la fréquence des traceroutes ayant le même nombre de sauts. Ces résultats concernent la période entre 07/02/18  et 08/02/18 et l'identifiant de la mesure $ 5004 $.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{illustrations/frequencesauttraceroutes2}
+	\caption{Fréquence des traceroutes ayant un même nombre de sauts}
+	\label{fig:frequencesauttraceroutes}
+\end{figure}
 
 
 \section{Application 2 : Amazon Athena et Amazon S3} 
@@ -253,9 +262,9 @@ Pour précision, le temps calculé est la différence entre l'instant  qui préc
 \paragraph{Performances des services Amazon S3 et Athena dans l'analyse des délais }~ \label{aws-perforsm}
 
 
- Notre objectif est de mesurer le temps d'exécution avec  l'intégration des deux services  Amazon S3 et Athena dans l'outil de détection afin d'assurer le stockage des traceroutes. Cette intégration est détaillée dans la section \ref{implementation-athena}. 
-La Figure 	\ref{fig:amazonathena} reprend les composantes du temps d'exécution. 
-Ainsi, selon les paramètres de l'analyse, la requête SQL  est préparée pour que Amazon Athena puisse récupérer les traceroutes depuis Amazon S3. L'interaction avec Amzon Athena est effectué à travers l'API REST en Python\footnote{Python a été choisi car l'implémentation de référence est écrite en Python.}. Suivant l'état de la requête : succès ou échec, les traitements peuvent être enchaînes sur ces traceroutes incluant les opérations des I et II et ce au sein de la machine local. A l'issu de l'analyse de tous les traceroutes, les résultats sont sauvegardés dans un fichier localement.
+ Notre objectif est de mesurer le temps d'exécution avec  l'intégration des deux services  Amazon S3 et Athena dans l'outil de détection. Cette intégration ne garantit que le stockage des traceroutes. Elle est détaillée dans la section \ref{implementation-athena}. 
+La Figure 	\ref{fig:amazonathena} reprend les composantes du temps d'exécution mesuré en se basant sur cette intégration. 
+ Selon les paramètres de l'analyse, la requête SQL  est préparée pour que Amazon Athena puisse récupérer les traceroutes depuis Amazon S3. L'interaction avec Amzon Athena est effectuée à travers l'API REST en Python\footnote{Python a été choisi car l'implémentation de référence est écrite en Python.}. Suivant l'état de la requête : succès ou échec, les traitements peuvent être enchaînés sur ces traceroutes incluant les étapes des phases I et II et ce au sein de la machine local. A l'issu de l'analyse de tous les traceroutes, les résultats sont sauvegardés dans un fichier localement.
 
 %On précise que cette intégration envisage la récupération des traceroutes depuis Amason S3 vers la machine de test et ce via Amazon Athena. Le reste des traitements relatifs aux phases I et II sont effectués dans cette machine.   Le temps mesuré concerne la première possibilité décrite dans la section \ref{integration-aws-possibilite-une}. 
 
@@ -279,29 +288,41 @@ Ainsi, selon les paramètres de l'analyse, la requête SQL  est préparée pour 
 
 Etant donné que nous avons utilisé le partitionnement de données, la préparation de la requête SQL 
 doit prendre en compte le choix des partitions à consulter selon les données souhaitées.
-Par exemple, avec les paramètres de l'outil de détection, seules les dates de début et de fin qui indiquent les traceroutes à considérer. Or, avec l'utilisation du partitionnement, on peut encore  préciser les traceroutes en se limitant à une ou plusieurs identifiants de mesures des sondes. 
-La requête SQL présentée dans la Figure 	\ref{fig:sqlrequestathena}  où on se limite aux traceroutes en provenance des mesures $ 5001 $ et $ 5004 $.
+Les paramètres de l'outil de détection permettent d'avoir  la date de début et de fin. Ceci permet d'inférer toutes les périodes de l'analyse. Ainsi, pour chaque période, on a les informations relatives aux partitions suivantes  : \textit{year}, \textit{month} et \textit{day}. Les paramètres de l'analyse ont été adaptés pour prendre en compte les identifiants de mesures lors de la préparation de la requête SQL. Si des identifiants de mesures sont indiqués, les partitions concernées sont considérées. Or, si ce n'est pas le cas, toutes les mesures sont analysées sans exception.
+
+%qui indiquent les traceroutes à considérer. 
+
+%Or, avec l'utilisation du partitionnement, on peut encore  préciser les traceroutes en se limitant à une ou plusieurs   mesures Atlas. 
+%La requête SQL présentée dans la Figure 	\ref{fig:sqlrequestathena} montre un exemple où on se limite aux traceroutes en provenance des mesures $ 5001 $ et $ 5004 $.
  
 %une analyse des délais nécessite d'autres paramètres à ajuster en plus de ceux relatifs à la détection. Ce sont les paramètres permettant de sélectionner les traceroutes présents sur Amazon S3. Du fait que le partitionnement de données (voir une partie de l'arborescence dans la Figure 	\ref{fig:partitionnement-athena}) est réalisé sur base du type de traceroute (\textit{builtin} ou \textit{anchor}) et de l'identifiant de la mesure ($ 5004 $, $6001$, etc) qui a enregistré un traceroute, nous devons personnaliser  la requête visant la   récupération des traceroutes  depuis Amazon S3 pour qu'elle prennent en compte aussi les partitions.
 
-Le Tableau \ref{tab:athena-data} contient les temps d'exécution suivant la taille de l'ensemble de traceroutes considérés.
+Le Tableau \ref{tab:athena-data} montre les temps d'exécution obtenus lors de deux essais selon la taille de l'ensemble de traceroutes analysés et le temps médian de ces deux temps.
 
 \begin{table}[h]
 	\centering
 	\captionsetup{justification=centering}
-\begin{tabular}{c c c}
-	\textbf{Période} & \textbf{Taille(GB)} & \textbf{Temps (secondes) } \\ 	\hline 
-$ 07/02/2018 - 07/02/2018 $	&$ 1 $&	$ 1898.31 $ \\ 	\hline 
-$ 07/02/2018 - 08/02/2018 $	&$ 2 $&	$ 3533.6562171 $ \\ 	\hline 
-$ 07/02/2018 - 09/02/2018 $&	$ 3 $&	$ 5284.91494989  $ \\ 	\hline 
-$ 07/02/2018 - 10/02/2018 $	&$ 4 $&$ 	7228.88 $  \\ 	\hline 
-$ 07/02/2018 - 11/02/2018 $	&$ 5 $& $ 8984.873281	 $ \\ 	\hline 
+	\resizebox{\textwidth}{!}{
+\begin{tabular}{c c ccc}
+	\textbf{Période (début - fin)} & \textbf{Taille(octets)} & \textbf{Essai 1 (secondes) }&\textbf{Essai 2 (secondes) } & \textbf{Médiane (secondes)} \\ 	\hline 
+$ 07/02/18 - 07/02/18 $	&$ 1028343572 $&	$ 1898.31 $  &$1766.13$ &$ 1832.22 $\\ 	\hline 
+$ 07/02/18 - 08/02/18 $	&$ 2055167238 $&	$ 3533.65 $ &$ 3622.10 $ & $3577.88$\\ 	\hline 
+$ 07/02/18 - 09/02/18 $&	$ 3083779157 $&	$ 5284.91  $ & $ 5415.67 $ & $5350.29$\\ 	\hline 
+$ 07/02/18 - 10/02/18 $	&$ 4113776434 $&$ 	7228.88 $ &$ 7658.80 $ & $7443.84$  \\ 	\hline 
+$ 07/02/18 - 11/02/18 $	&$ 5143831662 $& $ 8984.87	 $ &$ 9245.56 $  & $9115.21$\\ 	\hline 
 \end{tabular} 
+}
 \caption{Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)}
 \label{tab:athena-data}
 \end{table}
 
-Nous distinguons trois phases dans cette approche (approche 1). Premièrement,  les données sont récupérées depuis Amazon S3. Plusieurs facteurs affectent cette étape. Par exemple,  les conditions du réseau, les ressources allouées par Amazon pour répondre à chaque requête  Athena à destination des données disponibles sur Amazon S3, l'optimalité de la requête SQL, etc.  En deuxième lieu, les résultats de la requête doivent être désérialisés pour pouvoir les utiliser localement. Enfin, sur base des données récupérées, la détection des anomalies peut être déclenchée.
+
+
+
+
+
+Le temps d'exécution calculé concerne trois phases principales. Premièrement,  les données sont récupérées depuis Amazon S3. Plusieurs facteurs affectent cette étape. Par exemple,  les conditions du réseau, les ressources allouées par Amazon pour répondre à chaque requête  Athena à destination des données disponibles sur Amazon S3, l'optimalité de la requête SQL, etc.
+En deuxième lieu, les résultats de la requête doivent être désérialisés pour pouvoir les utiliser localement. Enfin, sur base des données récupérées, les phases I et II peuvent être effectuées. Les résultats obtenus sont stockés dans un fichier localement.
 %
 %
 %Nous évaluons les temps d'exécution de plusieurs  analyses de délais lancées en variant la taille de données. Rappelons qu'il s'agit de la première possibilité: Amazon S3 pour le stockage de traceroutes et Amazon Athena pour récupérer les traceroutes valides, le reste de traitements sont effectués au sein de la machine locale.  Le Tableau	\ref{tab:awstiming-timing} reprend plus de détails. 
@@ -330,51 +351,56 @@ Nous distinguons trois phases dans cette approche (approche 1). Premièrement,  
 %	\caption{La moyenne des temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec Amazon S3 et Amazon Athena }
 %	\label{tab:awstiming-timing}
 %\end{table}
-La Figure \ref{fig:temps-avec-aws} présente un seul essai pour chacune des tailles utilisées auparavant avec MongoDB.  Le temps de chaque essai comprend l'étape de la récupération des traceroutes depuis Amazon S3, le temps de préparation des traceroute et enfin le temps de la détection des anomalies. Autrement dit, le temps nécessaire à la réalisation des phases I, II et celui nécessaire pour sauvegarder les résultats par lien.
+La Figure \ref{fig:temps-avec-aws} présente graphiquement le temps médian des deux  essais pour chacune des tailles utilisées auparavant avec MongoDB. 
+
+% Le temps de chaque essai comprend l'étape de la récupération des traceroutes depuis Amazon S3, le temps de préparation des traceroute et enfin le temps de la détection des anomalies. Autrement dit, le temps nécessaire à la réalisation des phases I, II et celui nécessaire pour sauvegarder les résultats par lien.
 
 \begin{figure}[h]
 	\centering
 	\captionsetup{justification=centering}
-	\includegraphics[width=0.7\linewidth]{illustrations/temps-avec-aws_1}
+	\includegraphics[width=\linewidth]{illustrations/temps-exection-amazonathena}
 	\caption{Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)}
 	\label{fig:temps-avec-aws}
 \end{figure}
 
 
-Le temps d'exécution obtenu lors de l'utilisation des services Amazon S3 et Athena dépendent du temps nécessaire pour recevoir la réponse à la requête SQL. Avec l'intégration proposée, l'analyse des traceroutes est effectuée par période d'une heure et les traceroutes sont stockées par journée. On compte une requête SQL vers Amazon Athena pour chaque période. La requête SQL est configurée pour chercher les traceroutes d'une période dans les partitions  correspondantes. Les temps de réponse aux requêtes SQL est obtenu en utilisant l'API d'Amazon Athena en Python. Sachant qu'on peut obtenir ce temps en évaluant directement la requête SQL dans la console d'Amazon Athena.
+Le temps d'exécution obtenu lors de l'utilisation des services Amazon S3 et Athena dépendent du temps nécessaire pour recevoir la réponse à la requête SQL. Avec l'intégration proposée, l'analyse des traceroutes est effectuée par périodes d'une heure et les traceroutes sont stockées par journée. On compte une requête SQL vers Amazon Athena pour chaque période. 
+A chaque période, une requête SQL est préparée pour chercher les traceroutes  dans les partitions  correspondantes. Le temps de réponse aux requêtes SQL sur Amazon Athena peut être calculé en utilisant l'API d'Athena en Python ou bien à travers la console d'Athena.  
 
-Nous précisons qu'une même requête exécutée depuis la console d'Amazon Athena est exécutée plus rapidement qu'une requête exécutée en utilisant l'API en Python. 
-Afin de mesurer l'effet du partitionnement sur le temps de l'analyse ainsi que pour avoir une idée sur une des composantes affectant les temps obtenus dans le Tableau \ref{tab:athena-data}.
 
-Nous avons évalué dans  Le Tableau \ref{datatimeathenaconsole}  le temps écoulé pour récupérer les traceroutes effectués durant une heure et  en provenance de l'identifiant de la mesure $5004$ (msm='5004'), l'année (year='2018'), le mois (month='2'). Pour les jours (partition day), elles sont données dans le Tableau   \ref{datatimeathenaconsole}.
-
+Afin de mesurer l'effet du partitionnement sur le temps de l'analyse ainsi que pour avoir une idée sur une des composantes affectant les temps obtenus dans le Tableau \ref{tab:athena-data}, nous avons évalué dans  Le Tableau \ref{datatimeathenaconsole}  le temps écoulé pour récupérer les traceroutes effectués durant une heure,  en provenance de l'identifiant de la mesure $5004$ (msm='5004'), concernant l'année (year='2018') et le mois (month='2'). Pour les jours (partition day), elles sont variées et données dans le Tableau   \ref{datatimeathenaconsole}.
+Ce dernier reprend le temps d'exécution de la requête SQL et les données analysées selon les valeurs de la partition \textit{day}.
 \begin{table}[h]
 	\captionsetup{justification=centering}
 	\centering
 		\resizebox{1\textwidth}{!}{
 \begin{tabular}{c c l}
-\textbf{Temps d'exécution (s)}&	\textbf{Taille de données (MO)}& \multicolumn{1}{c}{ \textbf{Partitions : day}}  \\ \hline
-	29.38&	96.81 & '7'\\ \hline
-	31.15&	203.2 & '7' or '8' \\ \hline
-	31.43&	309.78 &  '7' or  '8' or 9\\ \hline
-	29.88&	416.5  & '7' or  '8' or 9 or 10\\ \hline
-	31.27&	523.23 & '7' or  '8' or 9 or 10 or '11'\\ \hline
-	49.91&	618.93 & '7' or  '8' or 9 or 10 or '11' or '27'\\ \hline
+\textbf{Temps d'exécution (secondes)}&	\textbf{Taille de données (MO)}& \multicolumn{1}{c}{ \textbf{Partitions : day}}  \\ \hline
+	$ 29.38 $&	$ 96.81 $ & '7'\\ \hline
+	$ 31.15 $&	$ 203.2 $ & '7' or '8' \\ \hline
+	$ 31.43 $&	$ 309.78 $ &  '7' or  '8' or 9\\ \hline
+	$ 29.88 $&	$ 416.5 $  & '7' or  '8' or 9 or 10\\ \hline
+	$ 31.27 $&	$ 523.23 $ & '7' or  '8' or 9 or 10 or '11'\\ \hline
+	$ 49.91 $&	$ 618.93 $ & '7' or  '8' or 9 or 10 or '11' or '27'\\ \hline
 \end{tabular} 
 }
 \caption{Les temps d'exécution d'une requête SQL sur Amazon Athena selon les données analysées}
 \label{datatimeathenaconsole}
 \end{table}
 
-Si le temps se diffère selon les données analysées. Ce même temps est différent aussi si cette requête est exécutées depuis la console d'Athena ou via l'API. La même requête SQL a été exécutée depuis la console d'Athena  en $ 29.38 $ secondes et $ 67.45 $ secondes depuis l'API.
+
+%Nous précisons qu'une même requête exécutée depuis la console d'Amazon Athena est exécutée plus rapidement qu'une requête exécutée en utilisant l'API en Python. 
+
+
+Si le temps se diffère selon les données analysées. Ce même temps est différent aussi si cette requête est exécutées depuis la console d'Athena ou via l'API. Par exemple, une même requête SQL a été exécutée depuis la console d'Athena  en $ 29.38 $ secondes et en $ 67.45 $ secondes depuis l'API.
 
 
 
 
 
 
-\section{Application 3 : Spark Apache avec Scala}
-Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans le chapitre \ref{application:spark}.  Nous avons évalué le temps d'exécution de l'outil de détection en analysant différents échantillons de traceroutes  en mode local et en mode cluster. Pour le mode local, nous avons lancer l'application Spark sur la machine ayant les caractéristiques  reprises dans la section \ref{machine-openvz-caracteritics}. Pour le mode cluster, nous avons utilisé le cluster EMR et nous donnons les caractéristiques techniques du cluster utilisé.
+\section{Application 3 : Apache Spark  avec Scala}
+Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans le chapitre \ref{application:spark}.  Nous avons évalué le temps d'exécution de l'outil de détection en analysant différents échantillons de traceroutes  en mode local et en mode cluster. Pour le mode local, nous avons lancé l'application Spark sur la machine ayant les caractéristiques  reprises dans la section \ref{machine-openvz-caracteritics}. Pour le mode cluster, nous avons utilisé le cluster EMR et nous donnons les caractéristiques techniques du cluster utilisé pour chaque test.
 
 
 \subsection{Mode local}
@@ -400,7 +426,7 @@ Nous avons évalué le temps d'exécution de l'implémentation de l'outil de dé
 
 Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GB pour le $ driver $ et $ 1 $ GB pour chaque \textit{executor}. 
 
-En mode local (--master local), le \textit{driver} et le \textit{worker} sont liés au même processus.  Nous avons mesuré le temps d'exécution de l'application Spark en varaint la taille mémoire allouée au \textit{driver} via le paramètre \textit{driver-memory}. Par défaut, la mémoire allouée au driver est de 1 Go. Avec cette valeur, il n'est pas possible  d'analyser un ensemble de traceroutes qui fait $ 1,028,343,572 $ octets. Afin de voir l'effet de la mémoire allouée au \textit{driver}, en mode d'exécution local, nous avons utilisé deux échantillons de traceroutes. La première comprend les traceroutes capturés pendant le $ 07/02/2018 $ dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 1,028,343,572 $ octets (\textit{data\_1go}). Pour le deuxième échantillon, il reprend les traceroutes effectués  entre le $ 07/02/2018 $ et le $ 08/02/2018 $ effectués aussi dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 2,055,167,238 $ (\textit{ data\_2go}) octets.
+En mode local (--master local), le \textit{driver} et le \textit{worker} sont liés au même processus.  Nous avons mesuré le temps d'exécution de l'application Spark en variant la taille mémoire allouée au \textit{driver} via le paramètre \textit{driver-memory}. Par défaut, la mémoire allouée au driver est de 1 Go. Avec cette valeur, il n'est pas possible  d'analyser un ensemble de traceroutes qui fait $ 1,028,343,572 $ octets. Afin de voir l'effet de la mémoire allouée au \textit{driver}, en mode d'exécution local, nous avons utilisé deux échantillons de traceroutes. La première comprend les traceroutes capturés pendant le $ 07/02/2018 $ dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 1,028,343,572 $ octets (\textit{data\_1go}). Pour le deuxième échantillon, il reprend les traceroutes effectués  entre le $ 07/02/2018 $ et le $ 08/02/2018 $ effectués aussi dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 2,055,167,238 $ (\textit{ data\_2go}) octets.
 
 La Figure 	\ref{fig:variantdrivermemory} présente les résultats obtenus. L'axe des abscisses indique la quantité de mémoire allouée au \textit{driver} et l'axe des ordonnées représente le temps d'exécution de détection. Pour les mêmes quantités de mémoire allouée au \textit{driver}, nous mesurons le temps d'exécution une fois pour  \textit{data\_1g}  et une autre fois pour  \textit{data\_2g}.
 Pour les valeurs nulles relatives au temps d'exécution, l'exécution de la l'application a échoué. La raison de l'échec revient au manque de mémoire (message d'erreur est OutOfMemoryError: Java heap space).
@@ -455,7 +481,7 @@ La création d'un cluster dans Amazon EMR destiné à une application Spark néc
 	\item indiquer le chemin du compartiment Amazon S3 contenant  les données à analyser.
 \end{itemize}
 
-Nous avons énumérer quelques éléments demandés lors de la création et du déploiement d'une application Spark sur un cluster Amazon EMR. Bien  qu'il existe d'autres paramètres qu'on peut ajuster. 
+Nous avons énuméré quelques éléments demandés lors de la création et du déploiement d'une application Spark sur un cluster Amazon EMR. Bien  qu'il existe d'autres paramètres qu'on peut ajuster. 
 
 On distingue le temps nécessaire à la mise en place du cluster et à la configuration du cluster (\textit{Starting}). Une fois le cluster est prêt, l'état du cluster passe à (\textit{Waiting}).  A la soumission de l'application, le cluster passe à l'état (Running). Suivant la configuration du cluster de l'utilisateur, le cluster peut s'éteindre dés la fin de l'exécution de l'application ou rester actif à l'écoute de nouvelles tâches. Toutefois, la dernière option peut produire des frais élevés.  
 
@@ -504,7 +530,7 @@ Le Tableau \ref{clusters-description} décrit les clusters créés au sein d'AWS
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
-	\begin{tabular}{|c|c|c|c|}
+	\begin{tabular}{ c c c c }
 	\hline 
 \textbf{Nom du cluster}	&\textbf{Taille du cluster}	&  \textbf{Modèle d'instances ( n\oe{}ud principal, n\oe{}ud de noyau )}  &\textbf{Temps total (s)} \\ 
 	\hline 
@@ -563,7 +589,7 @@ Pour les clusters C2, C3, C4 et C5, nous constatons que plus on ajoute un nouvea
 \paragraph{Variant la taille de données}~
 
 
-Nous avons choisi un cluster de $ 5 $ machines, appelé C7, afin d'évaluer plusieurs ensembles de données. Nous avons choisi le modèle m4.large pour le n\oe{}ud principale et les n\oe{}uds de noyau. Les échantillons de traceroutes utilisés sont décrits dans le Tableau \ref{variantlesdonnes-fixedcluster}. Nous avons utilisé les données en provenance de la mesure $ 5008 $\footnote{URL : \url{https://atlas.ripe.net/measurements/5008/}, consulté le $16/05/2019$.}.
+Nous avons choisi un cluster de $ 5 $ machines, appelé C7, afin d'évaluer plusieurs ensembles de données. Nous avons choisi le modèle m4.large pour le n\oe{}ud principal et les n\oe{}uds de noyau. Les échantillons de traceroutes utilisés sont décrits dans le Tableau \ref{variantlesdonnes-fixedcluster}. Nous avons utilisé les données en provenance de la mesure $ 5008 $\footnote{URL : \url{https://atlas.ripe.net/measurements/5008/}, consulté le $16/05/2019$.}.
 
 
 \begin{table}[H]
@@ -586,7 +612,7 @@ Nous avons choisi un cluster de $ 5 $ machines, appelé C7, afin d'évaluer plus
 \label{variantlesdonnes-fixedcluster}
 \end{table}
 
-Les deux test E1 et E2 sont bien passés. Toutefois, Le test E3 a échoué pour la raison de dépassement de mémoire. L'erreur reporté est relative à la charge de travail qu'a subi un \textit{executor} au sein d'un container. Précisément, ceci concerne la mémoire $ memoryOverhead $. 
+Les deux tests E1 et E2 sont bien passés. Toutefois, Le test E3 a échoué pour la raison de dépassement de mémoire. L'erreur reporté est relative à la charge de travail qu'a subi un \textit{executor} au sein d'un container. Précisément, ceci concerne la mémoire $ memoryOverhead $. 
 
 \textit{La surcharge de mémoire est la quantité de mémoire hors tas allouée à chaque exécuteur. Par défaut, la surcharge de mémoire est définie sur 10 \% de la mémoire de l'exécuteur ou sur 384 (par défaut, la plus élevée). La surcharge de mémoire est utilisée pour les tampons directs Java NIO, les piles de thread, les bibliothèques natives partagées ou les fichiers mappés en mémoire\footnote{Source : \url{https://aws.amazon.com/fr/premiumsupport/knowledge-center/emr-spark-yarn-memory-limit/}, consultée le $20/05/2019$.}.}
 
@@ -595,7 +621,7 @@ Les deux test E1 et E2 sont bien passés. Toutefois, Le test E3 a échoué pour 
 La mise en place d'un cluster de machines en utilisant le service Amazon EMR est facile et rapide si les éléments nécessaires sont prêts : l'application à déployer sur le cluster et la configuration du cluster.
 
 Après avoir créé quelques clusters EMR et les évaluer sur quelques ensembles de données, nous notons les défis qui se résultent de cette utilisation. 
-Le premier défi est relatif au  choix des modèles des instances. Préférer un modèle par rapport à un autre dépend des coûts et   des d'opérations à appliquer sur les données; plus de calcul, plus de mémoire, etc.
+Le premier défi est relatif au  choix des modèles des instances. Préférer un modèle par rapport à un autre dépend des coûts et   des opérations à appliquer sur les données; plus de calcul, plus de mémoire, etc.
 
 La configuration du cluster est un élément clé afin d'éviter les échecs inattendus d'une analyse en cours. C'était le cas pour  quelques analyses lancées. Sur base de nos  analyses échouées, nous notons deux  raisons. Pour la première,  l'application Spark a  utilisé les paramètres par défaut en ce qui concerne l'allocation de mémoire au  \textit{driver} et aux \textit{executors}, ainsi les ressources n'étaient pas exploitées convenablement.  Pour la deuxième, elle est aussi relative  à l'allocation de la mémoire. Toutefois, ceci concerne plusieurs blocs de mémoire comme le montre la Figure 	\ref{fig:spark-executoronyarn}.
 
@@ -645,8 +671,10 @@ Les blocs de mémoire d'un conteneur YARN   peuvent être configurés en donnant
 
 \section{Conclusion}
 
-Les trois applications évaluées dans ce chapitre sont des  implémentations du principe de détection des anomalies dans les délais des liens. Chaque technologie relève ses défis. De plus, la réutilisation d'une implémentation pour   créer une autre relève aussi des défis. 
-La réécriture de la même  approche utilisée pour résoudre un problème donné avec d'autres technologies n'est pas toujours optimale. Ce qui est le cas pour l'outil de détection. Le plus optimal est d'exploiter les avantages de chaque technologie. 
+Trois applications ont été évaluées dans ce chapitre. ce  sont des  implémentations du principe de détection des anomalies dans les délais des liens. Chaque implémentation  concerne une technologie Big Data. Les temps d'exécution obtenus pour chaque implémentation dépendent de plusieurs entrées. Pour la base de données  MongoDB, les temps  mesurés sont affectés par les ressources disponibles dans la machine locale où MongoDB est installé, et les ressources allouée pour récupérer les traceroutes pour chaque période et ensuite les traiter. L'implémentation d'Amazon Athena et S3 dépend du partitionnement utilisé, du temps nécessaire à la récupération des traceroutes, pour chaque période,  depuis Amazon S3 et les envoyés vers la machine locale en vue de les traiter. Tandis qu'en Spark, les temps obtenus dépendent des caractéristiques du cluster de machines où l'application Spark s'exécute et de la configuration adéquate du cluster étant dépendante des caractéristiques techniques du cluster, du type des traitements appliqués sur les données et du volume de données   analysées.
+
+%Chaque technologie relève ses défis. De plus, la réutilisation d'une implémentation pour   créer une autre relève aussi des défis. 
+%La réécriture de la même  approche utilisée pour résoudre un problème donné avec d'autres technologies n'est pas toujours optimale. Ce qui est le cas pour l'outil de détection. Le plus optimal est d'exploiter les avantages de chaque technologie. 
 
 
 

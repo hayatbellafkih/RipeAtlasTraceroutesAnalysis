@@ -2,15 +2,43 @@
 
 %Rappel de la problématique.
 
-L'objectif du présent travail est d'évaluer quelques technologies Big Data sur des données massives et réelles. Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, nous avons 
-limité cette évaluation à la mise en place de la technologie ainsi qu'au temps d'exécution.
+L'objectif du présent travail est d'évaluer quelques technologies Big Data sur des données à grande échelle en provenance du dépot d'Atlas. Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, la présente évaluation envisage 
+ la mise en place de la technologie afin d'analyser  des traceroutes et ensuite  le calcul du temps d'exécution obtenus en analysant différents échantillons de données.
 %L'évaluation de la convenance d'une technologie Big Data nécessite de disposer de données assez suffisantes pour couvrir  le plus des  cas possibles. 
-Nous avons choisi des données dans le domaine des réseaux informatiques,  disponibles sur le dépôt de RIPE Atlas,  d'où l'intérêt  de bien détailler ce projet.
+%Nous avons choisi des données dans le domaine des réseaux informatiques,  disponibles sur le dépôt de RIPE Atlas,  d'où l'intérêt  de bien détailler ce projet.
 
 
-Notre premier objectif est de montrer les limites des outils traditionnels à manipuler les données à grande échelle, et la force des technologies Big Data à répondre aux besoins liés au passage à l'échelle. Pour ce faire, nous avons choisi de réutiliser un travail dans lequel un outil de détection d'anomalies a été conçu,  basé sur les données du RIPE Atlas.  
+
+%Que peut-on déduire du travail de recherche ?
 
 %Résultats de recherche et réponses aux questions de recherche.
+%% reponse à la question 1 de recherche : pourquoi passer au big data
+
+Les données choisies pour l'évaluation des technologies Big Data ont un volume important.  Une dizaine de gigaoctets de traceroutes sont générés quotidiennement. De plus, les données quotidiennes augmentent d'un jour au suivant. Un tel volume et telle vélocité  
+ont démontré  les limites des outils traditionnels et leur incapacité de  manipuler les données à grande échelle.
+En revanche, la gestion du volume important et de la vélocité des données  font partie des objectifs du Big Data.
+ 
+
+
+Les technologies Big Data sont capables de manipuler les données à grande échelle en terme de stockage comme propose le service Amazon S3, le service Amazon DynamoDB, MongoDB Atlas, etc. En terme de traitement comme garantit le framework Spark. 
+Suite à l'application  du sous-ensemble de technologies sur l'outil de détection, on distingue deux défis. Le premier est relatif à l'utilisation d'un modèle existant. Tandis que le deuxième défi est lié à la mise en place d'une technologie Big Data.
+
+%la réutilisation d'un travail existant
+%Le travail de référence sur lequel ce travail est  
+Le travail de référence 
+ La réécriture complète ou partielle d'un travail autre travail peut 
+Les implémentations présentées dans ce travail utilise le principe de détection des anomalies créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16}. La réécriture exacte n'est pas toujours optimale, car certains choix ont été faits selon la technologie avec laquelle est implémentée. 
+
+
+%l'utilisation des technologies Big Data
+L'adoption d'une technologie Big Data en particulier pour traiter des données une décision qui doit prendre en compte plusieurs entrées dont on cite quelques unes selon l'évaluation réalisée dans ce travail. D'abord, il faut préciser la fréquence de l'analyse. 
+
+ Sur base de la fréquence, des frais d'utilisation des technologies Big Data sont appliqués. ainsi, cela affecte l'évolutivité de la technologie.  Ensuite, il faut prendre en compte  le temps  accepté   suite à l'utilisation d'une technologie. Pour certaines technologies Big Data, la configuration de celles-ci est crucial. La nature de données manipulées est importante pour préférer une technologie en particulier. Car certaines technologies sont conçues  et optimisée pour traiter des types de données en particulier. La nature des traitement joue un rôle important dans le choix d'une technologie Big Data. Ainsi, certaines technologies sont mieux adaptées à un type de traitement et pas un autre.
+
+
+%  D'abord, il faut préciser la  fréquence d'une analyse  conclusion du chapitre 5
+
+D'abord, on  frais d'utilisation
 
 D'après les quelques technologies expérimentées, il est très important d'avoir à l'avance les informations utiles à la prise de décision concernant une technologie proposée.  Comme la fréquence de l'analyse, la fréquence de la génération de données, l'évolution de la quantité des nouvelles données générées dont la solution proposée doit en prendre en compte, les frais générés  à d'utilisation de la technologie, le temps écoulé pour avoir les résultats finaux d'une analyse lancée, l'évolutivité de la solution mise en place, la disponibilité des outils de la visualisation des résultats et d'autres éléments. Ces critères reflètent les questions posées lors de la  manipulation des technologies évaluées.  Enfin, malgré que les  évaluations des technologies Big Data ont été effectuées en mode local, nous avons pu découvrir, en pratique, les défis de la manipulation des données massives, comme la présence des données manquantes, les données incomplètes,  la limite des outils traditionnels pour lancer le premier test impliquant des données massives, etc. 
 

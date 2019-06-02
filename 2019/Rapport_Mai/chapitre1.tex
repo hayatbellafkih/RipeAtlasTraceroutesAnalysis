@@ -135,7 +135,7 @@ L'architecture du système Atlas est constituée par  les composantes suivantes:
 	
 	\item [Controller]: un contrôleur accepte d'établir une connexion avec une sonde parmi celles dont il a reçu leurs clés du serveur d'enregistrement (Reg.server). Une fois la connexion est établie entre une sonde et un contrôleur, ce dernier garde cette connexion active pour  prévenir la sonde des mesures à effectuer et recevoir les résultats de ces mesures.  Le rôle du contrôleur est de communiquer avec les sondes,  associer les mesures aux sondes en se basant sur leur disponibilité  et sur autres critères, et enfin, collecter les résultats intermédiaires des mesures.
 	
-	\item [UI] (User Interface): elle s'occupe des interactions de l'utilisateur. Elle sert les pages pour l'interface graphique de mesures \cite{create-UDM}, elle traite les appels en provenance de l'API \footnote{Source : \url{https://atlas.ripe.net/docs/api/v2/manual/}, consultée le $05/08/2018$.} et sert les demandes de téléchargement en provenance de l'API.
+	\item [UI] (User Interface): elle s'occupe des interactions de l'utilisateur. Elle sert les pages pour l'interface graphique de mesures\footnote{URL~: \url{https://atlas.ripe.net/measurements/form/}, consulté le $05/08/2018$.}, elle traite les appels en provenance de l'API \footnote{Source : \url{https://atlas.ripe.net/docs/api/v2/manual/}, consultée le $05/08/2018$.} et sert les demandes de téléchargement en provenance de l'API.
 	
 	\item [Message Queue (MQ)] : tout d'abord définissons MQ:
 	\begin{tcolorbox}[title=Message Queue]
@@ -292,7 +292,7 @@ Tel que :
 
 \subsection{Les mesures personnalisées : User Defined Mesurement } \label{par:udm}
 %En plus des mesures intégrées, 
-Les sondes  peuvent effectuer des mesures personnalisées,  notées aussi \textit{udm},  qui peuvent être lancées via l'interface Web \cite{create-UDM} ou bien via  HTTP REST API. %Toutefois, la planification des  mesures personnalisées nécessite l'acquisition de ce qu'on appelle les "crédits" au sens RIPE Atlas.  En plus des mesures intégrées, par défaut, dans une sonde Atlas, il est possible de planifier des mesures personnalisées. 
+Les sondes  peuvent effectuer des mesures personnalisées,  notées aussi \textit{udm},  qui peuvent être lancées via l'interface Web\footnote{URL~: \url{https://atlas.ripe.net/measurements/form/}, consulté le $05/08/2018$.} ou bien via  HTTP REST API. %Toutefois, la planification des  mesures personnalisées nécessite l'acquisition de ce qu'on appelle les "crédits" au sens RIPE Atlas.  En plus des mesures intégrées, par défaut, dans une sonde Atlas, il est possible de planifier des mesures personnalisées. 
 Ce sont les m\^{e}mes~  types de mesures que ceux des mesures intégrées. A savoir, ping, traceroute,  HTTP Get, SSLCert , DNS, NTP et TLS, mais pour des destinations personnalisées.
 %Cette planification coûte des crédits, en effet, 
 Il faut avoir assez de crédits pour pouvoir lancer ces mesures. L'interface web dédiée à la création d'une nouvelle mesure offre toute les possibilités comme la personnalisation des éléments suivants :
@@ -356,7 +356,7 @@ En considérant toutes les possibilités des types, la quantité de données gé
 Depuis $15$ mars $2018$, les résultats des mesures sont  regroupés différemment. $24$ archives par jour,  une seule archive pour chaque heure et  type de mesure. Le nom de l'archive ne distingue pas entre mesures IPv4 et IPv6,  entre mesures intégrées et  personnalisées. Ce sont des informations qu'on peut retrouver dans chaque enregistrement dans les nouvelles archives. Il existe un attribut \textit{af} qui distingue entre IPv4 et IPv6 et l'identifiant de la mesure \textit{(msm\_id)} pour distinguer les  mesures intégrées et celles personnalisées. Par exemple, les mesures personnalisées ont un \textit{msm\_id} $ > 1,000,000$. 
 
 Streaming API permet de récupérer les résultats de mesures en temps réel en provenance des sondes publiques. Elle  fournit continuellement de nouveaux résultats en temps réel, et ce  via une connexion de type HTTPS web-socket active tout le temps.
-\section{Les ancres VS sondes} \label{subsec:ancre}
+\section{Les ancres Atlas} \label{subsec:ancre}
 %Les ancres  Atlas, appelées seulement ancres dans la suite du présent document,  sont des
 Les ancres Atlas, auxquelles on référerait dans la suite du document seulement par le terme <<ancres>>, sont des dispositifs agissant comme cibles aux différentes mesures lancées par les sondes. Il est possible de planifier des mesures entre les ancres, ces mesures permettent de vérifier l'état des réseaux qui hébergent ces ancres. Les ancres  peuvent être considérées comme  cibles aux mesures suivantes:
 \begin{itemize}
@@ -507,7 +507,7 @@ Malgré le niveau de couverture assuré par ProbeAPI, ces sondes se connectent e
 
 \subsection{Archipelago}
 %\footnote{URL~: \url{http://www.caida.org/projects/ark/}
-Archipelago (Ark) \cite{Archipelago} est l'infrastructure de mesures actives du CAIDA \cite{CAIDA}. Elle est au service des chercheurs en réseau depuis $2007$. Pour précision, c'est un Raspberry Pi 2nd gen. L'objectif de ce projet est de couvrir un maximum de régions afin de collecter un maximum de résultats de mesures, ensuite, produire des visualisations facilitant l'amélioration  de l'Internet. 
+Archipelago (Ark) \cite{Archipelago} est l'infrastructure de mesures actives du CAIDA\footnote{URL~: \url{http://www.caida.org/}, consulté le $ 06/04/2018$.}. Elle est au service des chercheurs en réseau depuis $2007$. Pour précision, c'est un Raspberry Pi 2nd gen. L'objectif de ce projet est de couvrir un maximum de régions afin de collecter un maximum de résultats de mesures, ensuite, produire des visualisations facilitant l'amélioration  de l'Internet. 
 
 
 \subsection{DIMES}
