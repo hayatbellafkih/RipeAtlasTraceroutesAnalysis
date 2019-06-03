@@ -1,0 +1,485 @@
+\documentclass[]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,wrapfig,lipsum}
+%######################################################################################################
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{makecell,tabularx}
+\renewcommand\theadfont{\bfseries\scshape}
+\usepackage{graphicx}
+\setcounter{secnumdepth}{3}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\setlength{\parindent}{2em}
+\usepackage{tcolorbox}
+\usepackage{colortbl}
+%\usepackage[frensh]{babel}
+\usepackage[francais]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{times}
+\usepackage[hyphens]{url}
+\usepackage{standalone}
+\usepackage{comment}
+\usepackage[subfigure]{tocloft} 
+\usepackage{subfigure} 
+%\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{lscape}
+
+\usepackage{color,soul}
+\usepackage{csvsimple,booktabs}
+\usepackage{tikz}
+\usepackage{afterpage}
+\usepackage{rotating}
+\usepackage{csvsimple}
+\usepackage{caption}
+
+%\frenchbsetup{StandardLists=true}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{array}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{mygray}{gray}{0.6}
+\colorlet{numb}{magenta!60!black}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\renewcommand{\bibname}{References}
+\usepackage{enumerate}
+\usepackage{tablefootnote}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{pstricks}
+\usepackage{eqparbox}
+\usepackage{hyperref}
+\usepackage{tablefootnote}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{pifont}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{appendix}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Théorème}
+
+
+%\usepackage{titlesec}
+%\titleformat{\chapter}[hang] 
+%{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{1em}{} 
+
+
+\setlist{itemsep=0pt}
+\usepackage[flushleft]{threeparttable}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\lstset{
+	showstringspaces=false,
+	string=[s]{"}{"},
+	stringstyle=\color{blue},
+	comment=[l]{:},
+	commentstyle=\color{black},
+	backgroundcolor=\color{lstcolor},
+	breaklines=true,
+}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	numbers=left,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{background},
+	literate=
+	*{0}{{{\color{numb}0}}}{1}
+	{1}{{{\color{numb}1}}}{1}
+	{2}{{{\color{numb}2}}}{1}
+	{3}{{{\color{numb}3}}}{1}
+	{4}{{{\color{numb}4}}}{1}
+	{5}{{{\color{numb}5}}}{1}
+	{6}{{{\color{numb}6}}}{1}
+	{7}{{{\color{numb}7}}}{1}
+	{8}{{{\color{numb}8}}}{1}
+	{9}{{{\color{numb}9}}}{1}
+	{:}{{{\color{punct}{:}}}}{1}
+	{,}{{{\color{punct}{,}}}}{1}
+	{\{}{{{\color{delim}{\{}}}}{1}
+	{\}}{{{\color{delim}{\}}}}}{1}
+	{[}{{{\color{delim}{[}}}}{1}
+	{]}{{{\color{delim}{]}}}}{1},
+}
+
+
+
+\definecolor{lstcolor}{HTML}{F5F5F5}
+\definecolor{orange}{HTML}{F8F9F9}
+\definecolor{ligntrose}{HTML}{FFF8DC}
+\tcbset{colback= orange,fonttitle=\bfseries, colframe=white }
+
+
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{myScalastyle}{
+	frame=tb,
+	language=scala,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+}
+%%%%%%%%%%%%%%%%%%%
+\renewcommand\labelitemi{--}
+\newcommand{\source}[1]{\caption*{Source: {#1}} }
+\definecolor{lightgray}{gray}{0.9}
+\renewcommand{\cleardoublepage}{}
+
+
+
+%%%%%%%%% like and dislike icons
+\usepackage{graphicx}
+\newcommand*{\RightThumbsUpAux}[1]{%
+	\begingroup
+	\sbox0{Ag}%
+	\raisebox{-\dp0}{%
+		\includegraphics[{%
+			height=\dimexpr\dp0+\ht0\relax,
+			#1%
+		}]{Symbol_thumbs_up-crop.pdf}%
+	}%
+	\endgroup
+}
+\newcommand*{\RightThumbsDownAux}[1]{%
+	\begingroup
+	\sbox0{Ag}%
+	\raisebox{-\dp0}{%
+		\includegraphics[{%
+			height=\dimexpr\dp0+\ht0\relax,
+			#1%
+		}]{Symbol_thumbs_down-crop.pdf}%
+	}%
+	\endgroup
+}
+\newcommand*{\RightThumbsUp}{%
+	\RightThumbsUpAux{}%
+}
+\newcommand*{\RightThumbsDown}{%
+	\RightThumbsUpAux{origin=c,angle=180}%
+}
+\newcommand*{\LeftThumbsUp}{%
+	\scalebox{-1}[1]{\RightThumbsUp}%
+}
+\newcommand*{\LeftThumbsDown}{%
+	\scalebox{-1}[1]{\RightThumbsDown}%
+}
+\begin{document}
+
+
+\chapter{MongoDB}
+
+\paragraph{Code source } ~
+
+Voir \url{https://github.com/InternetHealthReport/tartiflette}.
+
+\paragraph{Création de l'environement virtualdev}~
+
+Voici la liste des dépendances :
+\begin{lstlisting}
+(tartiflette-env) 162558@inet-bigd:~$ pip freeze
+appdirs==1.4.3
+awscli==1.15.50
+backports.functools-lru-cache==1.5
+backports.os==0.1.1
+boto3==1.7.44
+botocore==1.10.49
+certifi==2018.4.16
+chardet==3.0.4
+colorama==0.3.9
+configparser==3.5.0
+cycler==0.10.0
+decorator==4.3.0
+docutils==0.14
+enum34==1.1.6
+fs==2.0.23
+fs-s3fs==0.1.8
+future==0.16.0
+futures==3.2.0
+get==1.0.3
+idna==2.7
+jmespath==0.9.3
+kiwisolver==1.0.1
+matplotlib==2.1.1
+networkx==1.11
+numpy==1.14.5
+pandas==0.23.1
+pathlib==1.0.1
+patsy==0.5.0
+post==1.0.2
+psycopg2==2.7.5
+psycopg2-binary==2.7.5
+public==1.0.3
+py-radix==0.10.0
+pyasn1==0.4.3
+pygeoip==0.3.2
+pymongo==3.6.1
+pyparsing==2.2.0
+python-dateutil==2.7.3
+pytz==2018.4
+PyYAML==3.12
+query-string==1.0.2
+request==1.0.2
+requests==2.19.1
+ripe.atlas.cousteau==1.4.2
+rsa==3.4.2
+s3transfer==0.1.13
+scipy==1.1.0
+six==1.11.0
+socketIO-client==0.7.2
+statsmodels==0.9.0
+subprocess32==3.5.2
+typing==3.6.4
+urllib3==1.23
+websocket-client==0.48.0
+\end{lstlisting}
+\paragraph{Importation des traceroutes dans MOngoDB}
+Voir README.md.
+\paragraph{Configurer l'analyse}
+Il faut mettre à jour le fichier de configuration de l'analyse  disponible sur : https://github.com/InternetHealthReport/tartiflette/blob/master/analysis/conf/getRttData.conf
+
+Exemple : 
+
+\begin{lstlisting}
+{
+	"comment": "60 min May and June 2015", 
+	"af": "", 
+	"minASNEntropy": 0.5, 
+	"alpha": 0.01, 
+	"end": {
+		"$date": 1518393600000
+	}, 
+	"binMult": 3, 
+	"timeWindow": 4600, 
+	"minSeen": 3, 
+	"start": {
+		"$date": 1517961600000
+	}, 
+	"minASN": 3, 
+	"nbProcesses": 24, 
+	"experimentDate": {
+		"$date": 1546093776000
+	}, 
+	"confInterval": 0.05,
+	"prefixes": ""
+}
+\end{lstlisting}
+\paragraph{Préparer les données avec la fonction getRTTData }
+Voir  \textit{getRttData} dans  \url{https://github.com/InternetHealthReport/tartiflette/blob/master/analysis/plot.py}
+\paragraph{Traiter  les liens : dessiner l'évolution de chaque lien}
+Voir  \textit{rttEvolution} dans  \url{https://github.com/InternetHealthReport/tartiflette/blob/master/analysis/plot.py}
+\paragraph{Fichier Python : rttEvolution.py}
+
+Le fichier rttEvolution.py doit être créé au même endroit que le script \textit{plot.py}.
+\begin{lstlisting}
+#imports 
+from plot import *
+import time
+import datetime
+
+start = time.time()
+## Prepare data
+a,b,c=getRttData()
+
+## Process each link
+finalResult =[]
+for k, v in a.iteritems():
+	result= rttEvolution([a[k],c[k]],k,"")
+	finalResult.append(result)
+
+## Save link's details
+now = datetime.datetime.now()
+filePath= str(now.strftime("%Y-%m-%d_%H-%M"))
+fp = open('%s.json'%filePath, 'w') 
+for result in finalResult:
+json.dump(result, fp, default=str)
+
+
+end = time.time()
+print("\n Total Time is "+ str(end - start))
+\end{lstlisting}
+
+\paragraph{Lancer une analyse}
+
+Etapes : 
+\begin{itemize}
+	\item configurer l'analyse;
+	\item importer les données vers MongoDB
+	\item activer VirtualEnv;
+	\item lancer l'analyse via python $ rttEvolution.py $.  
+\end{itemize}
+
+\chapter{Amazon S3 et Amazon Athena}
+
+
+
+\paragraph{Créer les partitions dans Amazon S3}
+Voir l'arborescence dans le rapport de mémoire.
+\paragraph{Importer des traceroutes dans Amazon S3} Via l'interface graphique, l'API ou bien à travers AWS Command Line Interface (CLI).
+
+\paragraph{Créer la table dans Amazon Athena}
+Voir la structure dans le rapport de mémoire.
+\paragraph{Configurer l'analyse}
+Il faut mettre à jour le fichier de configuration appelé \textit{getRttDataAthena.conf}. 
+
+Un exemple de fichier de configuration :
+\begin{lstlisting}
+{
+	"comment": "60 min May and June 2015", 
+	"af": "", 
+	"minASNEntropy": 0.5, 
+	"alpha": 0.01, 
+	"end": {
+		"$date": 1518307200000
+	}, 
+	"binMult": 3, 
+	"timeWindow": 3600, 
+	"minSeen": 3, 
+	"start": {
+		"$date": 1517961600000
+	}, 
+	"minASN": 3, 
+	"nbProcesses": 24, 
+	"experimentDate": {
+		"$date": 1456747743895
+	}, 
+	"confInterval": 0.05,
+	"prefixes": "",
+	"msmIds" : [5004],
+	"msmType" : "builtin"
+}
+\end{lstlisting}
+\paragraph{Préparer les données avec la fonction getRTTData }
+
+\paragraph{Traiter  les liens : dessiner l'évolution de chaque lien}
+
+\paragraph{Fichier Python : rttEvolutionAthena.py}
+Voir  \url{https://github.com/hayatbellafkih/RipeAtlasTraceroutesAnalysis/blob/master/2019/AWSAthenaTools/rttEvolutionAthena.py}
+
+Ou :
+\begin{lstlisting}
+## imports
+from athenaTools import *
+
+import time
+start = time.time()
+import datetime
+
+## Prepare Data
+a,b,c=getRttDataAthena()
+
+## Process each link
+finalResult =[]
+for k, v in a.iteritems():
+	result=rttEvolution([a[k],c[k]],k,"")
+	finalResult.append(result)
+
+## Save link's details
+now = datetime.datetime.now()
+filePath= str(now.strftime("%Y-%m-%d_%H-%M"))
+fp = open('%s.json'%filePath, 'w')
+for result in finalResult:
+json.dump(result, fp, default=str)
+
+end = time.time()
+print("Total Time is "+ str(end - start))
+\end{lstlisting}
+
+\paragraph{Requête SQL pour la récupération des traceroutes} \label{sqlformat}
+
+Nous présentons la requête SQL générique utilisée (Listing \ref{lst:sqlrequest}). Elle est formatée pour chaque période d'analyse afin de :
+ 
+ ligne \ref{lineperiode} : ajouter les limites de la période en cours : le timestamp minimum et celui maximum;
+ 
+ ligne \ref{partitions} : choisir les partitions. Les identifiants de mesures sont ceux dans le fichier de configuration. Les partitions relatives à la date : \textit{year}, \textit{month} et \textit{day} sont déduits de la période en cours.
+\begin{lstlisting}[language=scala,firstnumber=1, caption={ Requête SQL dans Athena },label={lst:sqlrequest}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+stepnumber=1]
+with dataset as( SELECT prb_id ,"from",msm_id,  if (result[1].result[1].err is  null and result[1].result is not null ,transform(result , x -> transform (x.result, entry->  Map(array[ if (entry."from" is not null, concat('"',cast(entry."from" as varchar),'"') , concat('"','none','"')) ],  array[if (entry."from" is not null ,entry."rtt" ,0)]  ))),array[])  as datay from traceroutes_api 
+where   "timestamp" >= {} and "timestamp"< {} and  |\label{lineperiode}|
+{} |\label{partitions}|
+) select "from",prb_id,msm_id,datay as result from dataset;
+\end{lstlisting}
+
+\paragraph{Traiter les traceroutes obtenus depuis Amazon Athena}
+
+Nous avons regrouper les fonctions adaptées  dans un seul fichier appelé \textit{athenaTools.py}. Il est disponible sur : 
+\url{https://github.com/hayatbellafkih/RipeAtlasTraceroutesAnalysis/blob/master/2019/AWSAthenaTools/athenaTools.py} Nous décrivons brièvement les fonctions dans ce fichier.
+
+\begin{description}
+	\item[load\_sql\_request\_by\_file] : la requête SQL présentée précédemment est créée dans un fichier\footnote{\url{https://github.com/hayatbellafkih/RipeAtlasTraceroutesAnalysis/blob/master/2019/AWSAthenaTools/sqlRequestForAthena.sql}} et cette fonction permet de récupérer cette requête comme étant une chaîne de caractère;
+	
+	\item[generateSQLAthenaRequest] : cette fonction consiste à formater la requête SQL avec les  valeurs adéquates (Voir le paragraphe \ref{sqlformat});
+	
+	\item[computeRtt\_athena] : équivalente à  la fonction  \textit{computeRtt}  dans l'implémentation MongoDB;
+	
+	\item[readOneTracerouteAllSigna] : fonction équivalente à  la fonction \textit{readOneTraceroute} dans l'implémentation MongoDB;
+	
+	\item[mergeRttResults\_athena] : fonction équivalente à la fonction \textit{mergeRttResults}  dans l'implémentation MongoDB;
+	
+	\item[getRttDataAthena] :  fonction équivalente à la fonction \textit{getRttData}  dans l'implémentation MongoDB;
+	
+	\item[rttEvolution] : est la même fonction que celle dans l'implémentation MongoDB;
+	
+	\item[fetchall\_athena] : c'est la fonction qui se charge de faire l'appel à Amazon Athena 
+\end{description}
+
+
+\chapter{Apache Spark}
+\paragraph{}
+La fonction \textit{main} se trouve dans l'objet .
+
+\paragraph{L'application Spark}
+Il est possible de générer le fichier .jar avec Maven.
+
+\paragraph{Soumission de l'application}
+param1 : date début (format timestamp).
+param2 : date de fin (format timestamp)
+param3 : fenêtre   (en secondes)
+param4 : endroit des fichiers de données
+param5 : chemin destination des résultats de l'analyse
+
+\paragraph{Exemple}
+
+
+
+\end{document}          

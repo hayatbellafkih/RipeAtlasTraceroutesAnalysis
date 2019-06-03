@@ -14,21 +14,17 @@ A level-1 auxiliary file: Un_enregistrement_traceroute.aux
 A level-1 auxiliary file: table-theoreme21-formattex_annexe.aux
 The style file: acm.bst
 Database file #1: references.bib.bib
-You're missing a field part---line 306 of file references.bib.bib
- :   year         = 
- :                  ,
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 980 of file references.bib.bib
+I was expecting a `,' or a `}'---line 988 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 993 of file references.bib.bib
+I was expecting a `,' or a `}'---line 1001 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 1005 of file references.bib.bib
+I was expecting a `,' or a `}'---line 1013 of file references.bib.bib
  :  
  :  chapter = {1}
 (Error may have been on previous line)
@@ -41,48 +37,46 @@ Warning--to sort, need author or key in LantronixXPortPro
 Warning--to sort, need author or key in Archipelago
 Warning--to sort, need author or key in SamKnows
 Warning--to sort, need author or key in best-practices-emr
-Warning--can't use both author and editor fields in anil-big-data
-Warning--empty publisher in anil-big-data
 Warning--empty journal in article-comparaison-spark-hadoop
 You've used 41 entries,
             2253 wiz_defined-function locations,
-            766 strings with 11578 characters,
-and the built_in function-call counts, 10773 in all, are:
-= -- 1037
+            764 strings with 11523 characters,
+and the built_in function-call counts, 10780 in all, are:
+= -- 1041
 > -- 377
 < -- 0
 + -- 162
 - -- 120
-* -- 582
-:= -- 1686
-add.period$ -- 139
+* -- 578
+:= -- 1690
+add.period$ -- 140
 call.type$ -- 41
 change.case$ -- 179
 chr.to.int$ -- 0
-cite$ -- 49
+cite$ -- 47
 duplicate$ -- 455
 empty$ -- 1037
 format.name$ -- 120
-if$ -- 2370
+if$ -- 2374
 int.to.chr$ -- 0
 int.to.str$ -- 41
 missing$ -- 23
-newline$ -- 224
+newline$ -- 225
 num.names$ -- 72
 pop$ -- 325
 preamble$ -- 1
 purify$ -- 142
 quote$ -- 0
-skip$ -- 314
+skip$ -- 312
 stack$ -- 0
 substring$ -- 417
-swap$ -- 129
+swap$ -- 128
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 154
-warning$ -- 8
+warning$ -- 6
 while$ -- 89
 width$ -- 43
-write$ -- 437
-(There were 5 error messages)
+write$ -- 441
+(There were 4 error messages)

@@ -79,8 +79,9 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 \bibitem{InternetHealthReport}
 {\sc Fontugne, R.}
 \newblock {InternetHealthReport - tartiflette}.
-\newblock URL~:
-  \url{https://github.com/InternetHealthReport/tartiflette/tree/master/dataManipulation}.
+\newblock URL~: \url{https://github.com/InternetHealthReport/tartiflette},
+  2017.
+\newblock (consulté le $ 02/02/2018$).
 
 \bibitem{DBLP:journals/corr/FontugneAPB16}
 {\sc Fontugne, R., Aben, E., Pelsser, C., and Bush, R.}
@@ -120,7 +121,7 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 {\sc Herold, J.}
 \newblock {BGP + Traceroute using RIPE NCC Atlas}.
 \newblock URL~: \url{https://github.com/wires/bgp-traceroutes}, 2015.
-\newblock consulté le $08/08/2018$.
+\newblock (consulté le $08/08/2018$).
 
 \bibitem{Holterbach:2015:QIM:2815675.2815710}
 {\sc Holterbach, T., Pelsser, C., Bush, R., and Vanbever, L.}
@@ -157,11 +158,11 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 
 \bibitem{how-we-manage-our-probe}
 {\sc Kisteleki, R.}
-\newblock {RIPE} {A}tlas {A}rchitecture - how we manage our probes.
+\newblock {{RIPE} {A}tlas {A}rchitecture - How We Manage Our Probes}.
 \newblock URL~:
   \url{https://labs.ripe.net/Members/kistel/ripe-atlas-architecture-how-we-manage-our-probes},
   2017.
-\newblock consulté le ($08/08/2018$).
+\newblock (consulté le $08/08/2018$).
 
 \bibitem{WinNT}
 {\sc Kisteleki, R.}
@@ -190,7 +191,7 @@ Best {Practices} for {Using} {Apache} {Spark} on {AWS}.
 \bibitem{anil-big-data}
 {\sc Maheshwari, A.}
 \newblock {\em Big Data}.
-\newblock 2017.
+\newblock McGraw-Hill Education, 2017.
 
 \bibitem{bigdatafunctional}
 {\sc Marshall, D.}
