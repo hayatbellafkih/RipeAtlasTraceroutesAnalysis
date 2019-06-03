@@ -71,7 +71,7 @@ def generateSQLAthenaRequest (start, end,currentTimestamp, endTimestamp, msmIds=
 	
 	#add dates
 
-	#add msm Ids only if defined
+	#add msm Ids only if are defined
 	nbMsmIds= len(msmIds)
 
 	print ("%d measuremet id found "% nbMsmIds)
@@ -97,7 +97,7 @@ def generateSQLAthenaRequest (start, end,currentTimestamp, endTimestamp, msmIds=
 			
 		s= s+  ors[count] + ")"
 	else:
-		#do not add measurement Ids, in this cas we consider
+		#do not add measurement Ids, add only partitions about date
 		for i in range(delta.days + 1):
 			tmpDate = start + timedelta(i)
 			partialPartSqlRequest= "(year = '%s' and month = '%s' and day = '%s' )"%(tmpDate.year, tmpDate.month, tmpDate.day)
@@ -117,14 +117,14 @@ def generateSQLAthenaRequest (start, end,currentTimestamp, endTimestamp, msmIds=
 	print ("Start formating  the SQL request ...")
 	sqlRequest= load_sql_request_by_file("sqlRequestForAthena.sql")
 	finalRequest= sqlRequest.format( currentTimestamp, endTimestamp, s)
-	
-
 	return finalRequest
 
 
 def computeRtt_athena( (alltraceroutes) ):
 
-
+    """
+    Process each traceroute in alltraceroutes. alltraceroutes are the traceroutes for a given period
+    """
     nbRow = 0
     diffRtt = defaultdict(dict)
 
@@ -133,7 +133,7 @@ def computeRtt_athena( (alltraceroutes) ):
         readOneTracerouteAllSigna(trace, diffRtt)
         nbRow += 1
 
-    #print(diffRtt)
+
     return diffRtt, nbRow
 
 
@@ -142,18 +142,12 @@ def readOneTracerouteAllSigna(trace, diffRtt, metric=np.nanmedian):
     differential RTTs.
     """
 
-    #print(trace)
+
     traceroute=[element.encode('ascii', 'ignore')  for element in trace]
-    #traceroute = trace.encode('ascii', 'ignore')
     data=str(trace[3].encode('ascii', 'ignore'))
     entry = data.replace("=", ":")
     data = json.loads(entry.decode('string-escape').strip('"'))
 
-    #data = json.loads(entry.decode('string-escape').strip('"'))
-    #trace = data
-
-
-    #print(prb_id, '  ', msm_id, '  ', prb_ip)
 
     if len(data) ==0:
         return diffRtt
@@ -214,7 +208,7 @@ def readOneTracerouteAllSigna(trace, diffRtt, metric=np.nanmedian):
             prevRttMed = rttMed
             # TODO we miss 2 inferred links if a router never replies
 
-    #print(diffRtt)
+
     return diffRtt
 
 
@@ -242,24 +236,6 @@ def mergeRttResults_athena(iRtt, compRows):
                 diffRtt[ipPair] = v
 
     nbRow += compRows
-    """
-    timeSpent = (time.time() - tsS)
-    if nbBins > 1:
-        sys.stdout.write(
-            "\r%s     [%s%s]     %.1f sec,      %.1f row/sec           " % (datetime.utcfromtimestamp(currDate),
-                                                                            "#" * (30 * i / (nbBins - 1)), "-" * (
-                                                                                        30 * (nbBins - i) / (
-                                                                                            nbBins - 1)), timeSpent,
-                                                                            float(nbRow) / timeSpent))
-    else:
-        sys.stdout.write(
-            "\r%s     [%s%s]     %.1f sec,      %.1f row/sec           " % (datetime.utcfromtimestamp(currDate),
-                                                                            "#" * (30 * i / (nbBins)),
-         
-                                                                       "-" * (30 * (nbBins - i) / (nbBins)),
-                                                                            timeSpent, float(nbRow) / timeSpent))
-    """
-    #print("diffRtt = %s"%diffRtt)
     print("nbRow=%s "%nbRow)
     return diffRtt, nbRow
 
@@ -272,7 +248,7 @@ def get_traceroutes_by_sql_request( final_request=""):
 	aws_secret_access_key='yours'	)
 	resultat = fetchall_athena(final_request, client)
 	end = time.time()
-	print("TOTAL Time is "+ str(end - start))
+	print("Total Time is "+ str(end - start))
 	print ("Total results is %d "%len(resultat))
 
 	return resultat
@@ -445,22 +421,14 @@ def rttEvolution(res, ips, suffix):
 
     start = np.min(rttDiff[1])
     end = np.max(rttDiff[1])
-
-    print(start)
-    print(end)
     diff = end-start
-    print(diff)
 
-    # dateRange = pd.date_range(start, end, freq="1H").tolist()
-    # dateRange = range(start, end, 60*60)
+
     dateRange = [start+timedelta(hours=x) for x in range((diff.days+1)*24)]
 
     for d in dateRange:
-        # print d
-        # print rttDiff[1]
-        indices = rttDiff[1]==d  #@bellafkih indices contien true|false a la i eme position . true si la i eme position du array egale a d
+        indices = rttDiff[1]==d  
         dist = rttDiff[0][indices]
-        #print('###dist  ',dist)
         if len(dist) < 3:
             continue
         dates.append(d)
@@ -471,7 +439,6 @@ def rttEvolution(res, ips, suffix):
         wilsonCi = np.array(wilsonCi)*len(dist)
         ciLow.append( median[-1] - dist[int(wilsonCi[0])] )
         ciHigh.append( dist[int(wilsonCi[1])] - median[-1] )
-        #print("smoothAvg  ",smoothAvg)
         if len(smoothAvg)<3:
             smoothAvg.append(median[-1])
             smoothHi.append(dist[int(wilsonCi[1])])
