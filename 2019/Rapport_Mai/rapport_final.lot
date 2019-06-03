@@ -20,9 +20,9 @@
 \contentsline {table}{\numberline {V.4}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{111}{table.caption.161}
 \contentsline {table}{\numberline {V.5}{\ignorespaces Les temps d'exécution d'une requête SQL sur Amazon Athena selon les données analysées\relax }}{112}{table.caption.163}
 \contentsline {table}{\numberline {V.6}{\ignorespaces Temps d'exécution de l'analyse des délais avec Spark/Scala en mode local\relax }}{113}{table.caption.167}
-\contentsline {table}{\numberline {V.7}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{114}{table.caption.172}
-\contentsline {table}{\numberline {V.8}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{115}{table.caption.173}
-\contentsline {table}{\numberline {V.9}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{115}{table.caption.175}
+\contentsline {table}{\numberline {V.7}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{115}{table.caption.173}
+\contentsline {table}{\numberline {V.8}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{115}{table.caption.174}
+\contentsline {table}{\numberline {V.9}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{116}{table.caption.176}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{123}{table.caption.179}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{123}{table.caption.180}

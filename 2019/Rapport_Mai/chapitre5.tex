@@ -3,11 +3,11 @@
 
 \section{Introduction}
 
-Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipulation des données massives. En particulier  pour l'analyse des traceroutes disponibles dans le dépôt d'Atlas selon le processus décrit dans le chapitre \ref{chap:algorith-detection}. Dans ce chapitre, on mesure le temps d'exécution  des  implémentations  décrites dans le chapitre \ref{chapter-implementations}.  
+Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipulation des données massives. En particulier  pour l'analyse des traceroutes disponibles dans le dépôt d'Atlas selon le processus décrit dans le chapitre \ref{chap:algorith-detection}. Dans ce chapitre, nous mesurons le temps d'exécution  des  implémentations  décrites dans le chapitre \ref{chapter-implementations}.  
 %d'étudier comment ces technologies peuvent être utilisées, les défis relatifs à leur utilisation et enfin 
 % tracer l'évolution du délai d'un lien selon  le processus décrit dans le chapitre \ref{chap:big-data-intro}.
- La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de données massives. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage, ce que propose MongoDB.
- Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des données massives. En dernier choix, on a  utilisé une technologie dédiée  au traitement distribué des données dans un cluster de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
+ La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de traceroutes. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage, ce que propose MongoDB.
+ Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des traceroutes. En dernier choix, nous avons  utilisé une technologie dédiée  au traitement distribué des données dans un cluster de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
 
 
 % Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
@@ -462,6 +462,15 @@ Après avoir fixé la mémoire allouée au driver à $ 30 $. Plusieurs tests ont
 \caption{Temps d'exécution de l'analyse des délais avec Spark/Scala en mode local}
 \label{tab:spark-local}
 \end{table}
+
+La Figure \ref{fig:spark-localmode} est une représentation graphique du temps médian obtenu en analysant les échantillons de traceroutes présentés dans le Tableau \ref{tab:spark-local}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{illustrations/spark-localmode1}
+	\caption{Temps d'exécution médian avec l'implémentation  Spark/Scala en mode local}
+	\label{fig:spark-localmode}
+\end{figure}
 
 \paragraph{Notes concernant le mode local}~
 

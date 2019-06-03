@@ -198,13 +198,13 @@
 \contentsline {subsection}{\numberline {V.7.1}Mode local}{112}{subsection.5.7.1}
 \contentsline {paragraph}{Variant la mémoire allouée au driver}{113}{section*.165}
 \contentsline {paragraph}{Variant la taille des données analysées}{113}{section*.166}
-\contentsline {paragraph}{Notes concernant le mode local}{113}{section*.168}
+\contentsline {paragraph}{Notes concernant le mode local}{113}{section*.169}
 \contentsline {subsection}{\numberline {V.7.2}Cluster Amazon EMR}{113}{subsection.5.7.2}
-\contentsline {paragraph}{Création d'un cluster EMR}{114}{section*.169}
-\contentsline {paragraph}{Variant la taille du cluster}{114}{section*.171}
-\contentsline {paragraph}{Variant la taille de données}{115}{section*.174}
-\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{116}{section*.176}
-\contentsline {section}{\numberline {V.8}Conclusion}{116}{section.5.8}
-\contentsline {chapter}{Conclusion}{118}{chapter*.178}
+\contentsline {paragraph}{Création d'un cluster EMR}{114}{section*.170}
+\contentsline {paragraph}{Variant la taille du cluster}{115}{section*.172}
+\contentsline {paragraph}{Variant la taille de données}{116}{section*.175}
+\contentsline {paragraph}{Notes sur l'utilisation d'un cluster Amazon EMR}{116}{section*.177}
+\contentsline {section}{\numberline {V.8}Conclusion}{117}{section.5.8}
+\contentsline {chapter}{Conclusion}{118}{chapter*.179}
 \contentsline {chapter}{\numberline {A}Exemple d'une réponse traceroute}{120}{appendix.A}
 \contentsline {chapter}{\numberline {B}Table des intervalles de confiance}{122}{appendix.B}

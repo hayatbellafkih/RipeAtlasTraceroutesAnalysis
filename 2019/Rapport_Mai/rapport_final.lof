@@ -40,7 +40,8 @@
 \contentsline {figure}{\numberline {V.4}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec Amazon S3 et Athena \relax }}{110}{figure.caption.160}
 \contentsline {figure}{\numberline {V.5}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{111}{figure.caption.162}
 \contentsline {figure}{\numberline {V.6}{\ignorespaces Déroulement d'une analyse de traceroutes en Spark/Scala en mode local \relax }}{113}{figure.caption.164}
-\contentsline {figure}{\numberline {V.7}{\ignorespaces Déroulement d'une analyse de traceroutes en Spark/Scala en mode cluster EMR\relax }}{114}{figure.caption.170}
-\contentsline {figure}{\numberline {V.8}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{116}{figure.caption.177}
+\contentsline {figure}{\numberline {V.7}{\ignorespaces Temps d'exécution médian avec l'implémentation Spark/Scala en mode local\relax }}{114}{figure.caption.168}
+\contentsline {figure}{\numberline {V.8}{\ignorespaces Déroulement d'une analyse de traceroutes en Spark/Scala en mode cluster EMR\relax }}{115}{figure.caption.171}
+\contentsline {figure}{\numberline {V.9}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{117}{figure.caption.178}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
