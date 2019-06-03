@@ -2,202 +2,200 @@
 \providecommand\hyper@newdestlabel[2]{}
 \citation{InternetHealthReport}
 \citation{InternetHealthReport}
-\@writefile{toc}{\contentsline {chapter}{\numberline {IV}Implémentations }{76}{chapter.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {IV}Implémentations }{77}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter-implementations}{{IV}{76}{Implémentations}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV.1}Implémentation avec MongoDB}{76}{section.4.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV.2}Implémentation avec Amazon S3 et Amazon Athena}{77}{section.4.2}}
-\newlabel{implementation-athena}{{IV.2}{77}{Implémentation avec Amazon S3 et Amazon Athena}{section.4.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Vue générale}{77}{section*.109}}
-\@writefile{lof}{\contentsline {figure}{\numberline {IV.1}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{77}{figure.caption.110}}
-\newlabel{fig:gluecrawler}{{IV.1}{77}{Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }{figure.caption.110}{}}
-\@writefile{toc}{\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{77}{section*.111}}
-\@writefile{toc}{\contentsline {paragraph}{Création manuelle de la table \textit  {traceroutes\_api}}{78}{section*.112}}
-\newlabel{creer-table-traceroute}{{IV.2}{78}{Création manuelle de la table \textit {traceroutes\_api}}{section*.112}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Création de la table traceroutes }{78}{section*.113}}
-\newlabel{createAthenaTable}{{IV.1}{78}{Création de la table des traceroutes dans Amazon Athena}{lstlisting.4.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.1}Création de la table des traceroutes dans Amazon Athena}{78}{lstlisting.4.1}}
-\@writefile{toc}{\contentsline {paragraph}{Partitionnement des données stockées dans Amazon S3}{79}{section*.114}}
-\@writefile{lof}{\contentsline {figure}{\numberline {IV.2}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit  {s3://ripeatlasdata}\relax }}{80}{figure.caption.115}}
-\newlabel{fig:partitionnement-athenaa}{{IV.2}{80}{L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }{figure.caption.115}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {IV.2}{\ignorespaces Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }}{80}{table.caption.117}}
-\newlabel{partitions-sql}{{IV.2}{80}{Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }{table.caption.117}{}}
-\@writefile{toc}{\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{80}{section*.118}}
-\newlabel{sql-athena-request}{{IV.2}{80}{Interrogation des données Avec Amazon Athena}{section*.118}{}}
+\newlabel{chapter-implementations}{{IV}{77}{Implémentations}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV.1}Introduction}{77}{section.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV.2}Implémentation avec MongoDB}{77}{section.4.2}}
+\@writefile{toc}{\contentsline {paragraph}{Notes sur l'organisation des traceroutes dans la base de données MongoDB}{78}{section*.109}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV.3}Implémentation avec Amazon S3 et Amazon Athena}{78}{section.4.3}}
+\newlabel{implementation-athena}{{IV.3}{78}{Implémentation avec Amazon S3 et Amazon Athena}{section.4.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Vue générale}{78}{section*.110}}
+\@writefile{lof}{\contentsline {figure}{\numberline {IV.1}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{78}{figure.caption.111}}
+\newlabel{fig:gluecrawler}{{IV.1}{78}{Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }{figure.caption.111}{}}
+\@writefile{toc}{\contentsline {paragraph}{Création de la table traceroutes avec Amazon Glue}{79}{section*.112}}
+\@writefile{toc}{\contentsline {paragraph}{Création manuelle de la table \textit  {traceroutes\_api}}{79}{section*.113}}
+\newlabel{creer-table-traceroute}{{IV.3}{79}{Création manuelle de la table \textit {traceroutes\_api}}{section*.113}{}}
+\newlabel{createAthenaTable}{{IV.1}{79}{Création de la table des traceroutes dans Amazon Athena}{lstlisting.4.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.1}Création de la table des traceroutes dans Amazon Athena}{79}{lstlisting.4.1}}
+\@writefile{toc}{\contentsline {paragraph}{Partitionnement des données stockées dans Amazon S3}{80}{section*.114}}
+\@writefile{lof}{\contentsline {figure}{\numberline {IV.2}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit  {s3://ripeatlasdata}\relax }}{81}{figure.caption.115}}
+\newlabel{fig:partitionnement-athenaa}{{IV.2}{81}{L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }{figure.caption.115}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {IV.1}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{81}{table.caption.116}}
 \newlabel{tab:partition-description}{{IV.1}{81}{Exemple des partitions créées dans un compartiment Amazon S3\relax }{table.caption.116}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {IV.3}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{81}{figure.caption.119}}
-\newlabel{fig:sqlrequestathena}{{IV.3}{81}{Une exemple d'une requête SQL sur Amazon Athena\relax }{figure.caption.119}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV.2}{\ignorespaces Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }}{82}{table.caption.117}}
+\newlabel{partitions-sql}{{IV.2}{82}{Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }{table.caption.117}{}}
+\@writefile{toc}{\contentsline {paragraph}{Interrogation des données Avec Amazon Athena}{82}{section*.118}}
+\newlabel{sql-athena-request}{{IV.3}{82}{Interrogation des données Avec Amazon Athena}{section*.118}{}}
 \citation{InternetHealthReport}
-\@writefile{toc}{\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{82}{section*.120}}
-\newlabel{integration-aws-possibilite-une}{{IV.2}{82}{Intégration d'Amazon Athena dans l'outil de détection}{section*.120}{}}
-\newlabel{update-link}{{4}{82}{Intégration d'Amazon Athena dans l'outil de détection}{section*.120}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Une partie de l'étape $4$ du processus de la détection des anomalies des délais \relax }}{82}{algorithm.1}}
-\newlabel{alo-inference-link}{{1}{82}{Une partie de l'étape $4$ du processus de la détection des anomalies des délais \relax }{algorithm.1}{}}
-\@writefile{toc}{\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{83}{section*.121}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV.3}Implémentation en Spark/Scala}{83}{section.4.3}}
-\newlabel{application:spark}{{IV.3}{83}{Implémentation en Spark/Scala}{section.4.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV.3.1}Introduction}{83}{subsection.4.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV.3.2}Présentation de Scala}{83}{subsection.4.3.2}}
-\newlabel{scala-presentation}{{IV.3.2}{83}{Présentation de Scala}{subsection.4.3.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.2}{\ignorespaces Comparaison entre un traitement écrit en Java et en Scala\relax }}{84}{lstlisting.4.2}}
-\newlabel{java-vs-scala}{{IV.2}{84}{Comparaison entre un traitement écrit en Java et en Scala\relax }{lstlisting.4.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Notation relatives au langage Scala}{84}{section*.122}}
-\newlabel{lst:generalFunction}{{IV.3}{84}{Exemple d'une fonction en Scala}{lstlisting.4.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.3}Exemple d'une fonction en Scala}{84}{lstlisting.4.3}}
-\newlabel{lst:case-class-hop}{{IV.3.2}{84}{}{lstlisting.4.-7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {IV.3}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{83}{figure.caption.119}}
+\newlabel{fig:sqlrequestathena}{{IV.3}{83}{Une exemple d'une requête SQL sur Amazon Athena\relax }{figure.caption.119}{}}
+\@writefile{toc}{\contentsline {paragraph}{Intégration d'Amazon Athena dans l'outil de détection}{83}{section*.120}}
+\newlabel{integration-aws-possibilite-une}{{IV.3}{83}{Intégration d'Amazon Athena dans l'outil de détection}{section*.120}{}}
+\newlabel{update-link}{{4}{84}{Intégration d'Amazon Athena dans l'outil de détection}{section*.120}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Une partie de l'étape $4$ du processus de la détection des anomalies des délais \relax }}{84}{algorithm.1}}
+\newlabel{alo-inference-link}{{1}{84}{Une partie de l'étape $4$ du processus de la détection des anomalies des délais \relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Evaluation des critères pour Amazon S3 et Amazon Athena }{84}{section*.121}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV.4}Implémentation en Spark/Scala}{85}{section.4.4}}
+\newlabel{application:spark}{{IV.4}{85}{Implémentation en Spark/Scala}{section.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.4.1}Présentation de Scala}{85}{subsection.4.4.1}}
+\newlabel{scala-presentation}{{IV.4.1}{85}{Présentation de Scala}{subsection.4.4.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.2}{\ignorespaces Comparaison entre un traitement écrit en Java et en Scala\relax }}{85}{lstlisting.4.2}}
+\newlabel{java-vs-scala}{{IV.2}{85}{Comparaison entre un traitement écrit en Java et en Scala\relax }{lstlisting.4.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Notations relatives au langage Scala}{85}{section*.122}}
+\newlabel{lst:generalFunction}{{IV.3}{85}{Exemple d'une fonction en Scala}{lstlisting.4.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.3}Exemple d'une fonction en Scala}{85}{lstlisting.4.3}}
 \citation{bigdatafunctional}
 \citation{DBLP:journals/csur/Hudak89}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV.3.3}La programmation fonctionnelle et le Big Data}{85}{subsection.4.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV.3.4}Implémentation détaillée }{85}{subsection.4.3.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.3.4.1}Description de l'environnement}{85}{subsubsection.4.3.4.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.3.4.2}Brève présentation de l'implémentation}{86}{subsubsection.4.3.4.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.3.4.3}Création d'une application Spark/Scala}{86}{subsubsection.4.3.4.3}}
-\@writefile{toc}{\contentsline {paragraph}{Gestion des dépendances}{86}{section*.123}}
-\@writefile{toc}{\contentsline {paragraph}{Paramètres de l'analyse}{86}{section*.124}}
-\@writefile{toc}{\contentsline {paragraph}{Configuration d'une application Spark}{86}{section*.125}}
-\newlabel{lst:label}{{IV.4}{86}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstlisting.4.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.4}Exemple de la configuration d'une application Spark via l'objet SparkConf}{86}{lstlisting.4.4}}
-\newlabel{line:app-name}{{5}{86}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstnumber.IV.4.5}{}}
-\newlabel{line:app-thread}{{6}{86}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstnumber.IV.4.6}{}}
-\@writefile{toc}{\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{87}{section*.126}}
-\newlabel{lst:SparkSession-initiation}{{IV.5}{87}{Creation d'une session Spark}{lstlisting.4.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.5}Creation d'une session Spark}{87}{lstlisting.4.5}}
-\@writefile{toc}{\contentsline {paragraph}{Lecture de données}{87}{section*.127}}
-\newlabel{lst:case-class-Traceroute}{{IV.6}{87}{Définition de la classe Traceroute}{lstlisting.4.6}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.6}Définition de la classe Traceroute}{87}{lstlisting.4.6}}
-\newlabel{lst:case-class-hop}{{IV.7}{87}{Définition de la classe Hop}{lstlisting.4.7}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.7}Définition de la classe Hop}{87}{lstlisting.4.7}}
-\newlabel{lst:case-class-signal}{{IV.8}{88}{Définition de la classe Signal}{lstlisting.4.8}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.8}Définition de la classe Signal}{88}{lstlisting.4.8}}
-\newlabel{lst:mapping}{{IV.9}{88}{La lecture des données traceroutes}{lstlisting.4.9}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.9}La lecture des données traceroutes}{88}{lstlisting.4.9}}
-\newlabel{lst:implicits}{{5}{88}{La lecture des données traceroutes}{lstnumber.IV.9.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{Trouver les périodes de l'analyse}{88}{section*.128}}
-\newlabel{lst:findbins}{{IV.10}{88}{Etape FindBins (I.1)}{lstlisting.4.10}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.10}Etape FindBins (I.1)}{88}{lstlisting.4.10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.4.2}La programmation fonctionnelle et le Big Data}{86}{subsection.4.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV.4.3}Implémentation détaillée }{87}{subsection.4.4.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.4.3.1}Description de l'environnement}{87}{subsubsection.4.4.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.4.3.2}Brève présentation de l'implémentation}{87}{subsubsection.4.4.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.4.3.3}Création d'une application Spark/Scala}{87}{subsubsection.4.4.3.3}}
+\@writefile{toc}{\contentsline {paragraph}{Gestion des dépendances}{87}{section*.123}}
+\@writefile{toc}{\contentsline {paragraph}{Paramètres de l'analyse}{87}{section*.124}}
+\@writefile{toc}{\contentsline {paragraph}{Configuration d'une application Spark}{88}{section*.125}}
+\newlabel{lst:label}{{IV.4}{88}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstlisting.4.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.4}Exemple de la configuration d'une application Spark via l'objet SparkConf}{88}{lstlisting.4.4}}
+\newlabel{line:app-name}{{5}{88}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstnumber.IV.4.5}{}}
+\newlabel{line:app-thread}{{6}{88}{Exemple de la configuration d'une application Spark via l'objet SparkConf}{lstnumber.IV.4.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Point d'entrée vers les fonctionnalités de Spark}{88}{section*.126}}
+\newlabel{lst:SparkSession-initiation}{{IV.5}{88}{Creation d'une session Spark}{lstlisting.4.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.5}Creation d'une session Spark}{88}{lstlisting.4.5}}
+\@writefile{toc}{\contentsline {paragraph}{Lecture de données}{88}{section*.127}}
+\newlabel{lst:case-class-Traceroute}{{IV.6}{88}{Définition de la classe Traceroute}{lstlisting.4.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.6}Définition de la classe Traceroute}{88}{lstlisting.4.6}}
+\newlabel{lst:case-class-hop}{{IV.7}{89}{Définition de la classe Hop}{lstlisting.4.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.7}Définition de la classe Hop}{89}{lstlisting.4.7}}
+\newlabel{lst:case-class-signal}{{IV.8}{89}{Définition de la classe Signal}{lstlisting.4.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.8}Définition de la classe Signal}{89}{lstlisting.4.8}}
+\newlabel{lst:mapping}{{IV.9}{89}{La lecture des données traceroutes}{lstlisting.4.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.9}La lecture des données traceroutes}{89}{lstlisting.4.9}}
+\newlabel{lst:implicits}{{5}{89}{La lecture des données traceroutes}{lstnumber.IV.9.5}{}}
 \citation{DBLP:journals/corr/FontugneAPB16}
-\@writefile{toc}{\contentsline {paragraph}{Groupement des traceroutes}{89}{section*.129}}
-\@writefile{toc}{\contentsline {subparagraph}{MongoDB}{89}{section*.130}}
-\@writefile{lof}{\contentsline {figure}{\numberline {IV.4}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{89}{figure.caption.131}}
-\newlabel{fig:read-data-from-mongodb}{{IV.4}{89}{Groupement des traceroutes avec MongoDB\relax }{figure.caption.131}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Groupement des traceroutes dans le cas de MongoDB\relax }}{89}{algorithm.2}}
-\newlabel{group-traceroutesmongodb}{{2}{89}{Groupement des traceroutes dans le cas de MongoDB\relax }{algorithm.2}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Spark/Scala}{90}{section*.132}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Groupement des traceroutes en Spark\relax }}{90}{algorithm.3}}
-\newlabel{group-data-sparkscala}{{3}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{initate-list}{{1}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{finloop1}{{7}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{groupby}{{8}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{begin-groupby}{{9}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{end-groupby}{{11}{90}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
-\newlabel{lst:groupalltraceroutes}{{IV.3.4.3}{90}{}{lstlisting.4.-9}{}}
-\newlabel{line:groupTraceroutes}{{3}{90}{}{lstnumber.-9.3}{}}
-\newlabel{lst:TracerouteWithTimewindow}{{IV.11}{91}{Définition de la classe TracerouteWithPeriod}{lstlisting.4.11}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.11}Définition de la classe TracerouteWithPeriod}{91}{lstlisting.4.11}}
-\@writefile{toc}{\contentsline {paragraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{91}{section*.133}}
-\newlabel{lst:filterTracerouteWithTimewindow}{{IV.12}{91}{Elimination des traceroutes non concernés par l'analyse}{lstlisting.4.12}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.12}Elimination des traceroutes non concernés par l'analyse}{91}{lstlisting.4.12}}
-\newlabel{lst:agregatePeriodTraceroutes}{{IV.13}{91}{Le groupement des traceroutes par période}{lstlisting.4.13}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.13}Le groupement des traceroutes par période}{91}{lstlisting.4.13}}
-\newlabel{line:groupeby}{{1}{91}{Le groupement des traceroutes par période}{lstnumber.IV.13.1}{}}
-\newlabel{line:resumegroupeby}{{2}{91}{Le groupement des traceroutes par période}{lstnumber.IV.13.2}{}}
-\newlabel{lst:classTraceroutesPerPeriod}{{IV.14}{91}{Définition de la classe TraceroutesPerPeriod}{lstlisting.4.14}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.14}Définition de la classe TraceroutesPerPeriod}{91}{lstlisting.4.14}}
-\@writefile{toc}{\contentsline {paragraph}{Déduction des liens}{91}{section*.134}}
-\newlabel{lst:linkInference}{{IV.15}{91}{Etape de déduction des liens}{lstlisting.4.15}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.15}Etape de déduction des liens}{91}{lstlisting.4.15}}
-\newlabel{lst:DeductionLinks}{{IV.16}{92}{Deduction des liens par groupe de traceroutes}{lstlisting.4.16}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.16}Deduction des liens par groupe de traceroutes}{92}{lstlisting.4.16}}
-\newlabel{notFailedTraceroutes}{{4}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.4}{}}
-\newlabel{cleanedTraceroutes}{{7}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.7}{}}
-\newlabel{tracerouteMedianByHopline}{{10}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.10}{}}
-\newlabel{tracerouteLinksline}{{14}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.14}{}}
-\newlabel{liens-par-périodeline}{{17}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.17}{}}
-\newlabel{allDetailedLinksFlattenline}{{20}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.20}{}}
-\newlabel{sortAllDetailedLinksline}{{23}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.23}{}}
-\newlabel{mergedLinksline}{{26}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.26}{}}
-\newlabel{summarizeLinkline}{{29}{92}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.29}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Elimination des traceroutes échoués}{92}{section*.135}}
-\@writefile{toc}{\contentsline {subparagraph}{Elimination des sauts non valides}{93}{section*.136}}
-\newlabel{lst:removeInvalidSignals}{{IV.17}{93}{Définition de la méthode removeInvalidSignals}{lstlisting.4.17}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.17}Définition de la méthode removeInvalidSignals}{93}{lstlisting.4.17}}
-\newlabel{rttpositif}{{IV.3.4.3}{93}{Elimination des sauts non valides}{lstnumber.IV.17.9}{}}
-\newlabel{lst:checkSignal}{{IV.18}{93}{Définition de la méthode checkSignal}{lstlisting.4.18}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.18}Définition de la méthode checkSignal}{93}{lstlisting.4.18}}
-\newlabel{timesout}{{3}{93}{Définition de la méthode checkSignal}{lstnumber.IV.18.3}{}}
-\newlabel{rttnotnone}{{6}{93}{Définition de la méthode checkSignal}{lstnumber.IV.18.6}{}}
-\newlabel{rttpositif}{{8}{93}{Définition de la méthode checkSignal}{lstnumber.IV.18.8}{}}
-\newlabel{notprivate}{{10}{93}{Définition de la méthode checkSignal}{lstnumber.IV.18.10}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{93}{section*.137}}
-\newlabel{lst:computeMedianRTTByhopFunction}{{IV.19}{93}{Définition de la fonction computeMedianRTTByhop}{lstlisting.4.19}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.19}Définition de la fonction computeMedianRTTByhop}{93}{lstlisting.4.19}}
-\newlabel{lst:MedianByHopTracerouteclass}{{IV.20}{94}{Définition de la classe MedianByHopTraceroute}{lstlisting.4.20}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.20}Définition de la classe MedianByHopTraceroute}{94}{lstlisting.4.20}}
-\newlabel{lst:PreparedHopclass}{{IV.21}{94}{Définition de la classe PreparedHop}{lstlisting.4.21}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.21}Définition de la classe PreparedHop}{94}{lstlisting.4.21}}
-\newlabel{lst:PreparedSignalclass}{{IV.22}{94}{Définition de la classe PreparedSignal}{lstlisting.4.22}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.22}Définition de la classe PreparedSignal}{94}{lstlisting.4.22}}
-\@writefile{toc}{\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{94}{section*.138}}
-\newlabel{lst:functionfindLinksAndRttDiffByTraceroute}{{IV.23}{94}{Définition de la fonction findLinksAndRttDiffByTraceroute}{lstlisting.4.23}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.23}Définition de la fonction findLinksAndRttDiffByTraceroute}{94}{lstlisting.4.23}}
-\newlabel{findAllLinksline}{{8}{95}{Définition de la fonction findLinksAndRttDiffByTraceroute}{lstnumber.IV.23.8}{}}
-\newlabel{lst:findAllLinksfunction}{{IV.24}{95}{Définition de la fonction findAllLinks}{lstlisting.4.24}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.24}Définition de la fonction findAllLinks}{95}{lstlisting.4.24}}
-\newlabel{lst:classLinksTraceroute}{{IV.25}{95}{Définition de la classe LinksTraceroute}{lstlisting.4.25}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.25}Définition de la classe LinksTraceroute}{95}{lstlisting.4.25}}
-\newlabel{lst:Linkclass}{{IV.26}{95}{Définition de la classe Link}{lstlisting.4.26}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.26}Définition de la classe Link}{95}{lstlisting.4.26}}
-\@writefile{toc}{\contentsline {subparagraph}{Construction de la liste des liens par période }{95}{section*.139}}
-\newlabel{lst:summarizeLinksTraceroutefunction}{{IV.27}{96}{Définition de la fonction summarizeLinksTraceroute}{lstlisting.4.27}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.27}Définition de la fonction summarizeLinksTraceroute}{96}{lstlisting.4.27}}
-\newlabel{lst:DetailedLinkclass}{{IV.28}{96}{Définition de la classe DetailedLink}{lstlisting.4.28}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.28}Définition de la classe DetailedLink}{96}{lstlisting.4.28}}
-\@writefile{toc}{\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{96}{section*.140}}
-\newlabel{lst:sortLinksfunction}{{IV.29}{96}{Définition de la fonction sortLinks}{lstlisting.4.29}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.29}Définition de la fonction sortLinks}{96}{lstlisting.4.29}}
-\@writefile{toc}{\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{96}{section*.141}}
-\@writefile{toc}{\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{96}{section*.142}}
-\newlabel{lst:SummarizedLinkClasscase}{{IV.30}{96}{Définition de la classe SummarizedLink}{lstlisting.4.30}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.30}Définition de la classe SummarizedLink}{96}{lstlisting.4.30}}
-\@writefile{toc}{\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{97}{section*.143}}
-\newlabel{lst:rddcollecte}{{IV.31}{97}{Collecte des résultats intermédiares}{lstlisting.4.31}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.31}Collecte des résultats intermédiares}{97}{lstlisting.4.31}}
-\newlabel{lst:rddmergeLinks}{{IV.32}{97}{Fusion des liens de toute la période de l'analyse}{lstlisting.4.32}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.32}Fusion des liens de toute la période de l'analyse}{97}{lstlisting.4.32}}
-\@writefile{toc}{\contentsline {paragraph}{Détection des anomalies}{97}{section*.144}}
-\newlabel{lst:paralelizeAndDtectAnomalies}{{IV.33}{98}{Détection des alarmes des liens}{lstlisting.4.33}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.33}Détection des alarmes des liens}{98}{lstlisting.4.33}}
-\newlabel{parallelizefinalRawRttDiff}{{2}{98}{Détection des alarmes des liens}{lstnumber.IV.33.2}{}}
-\newlabel{listAlarmscall}{{5}{98}{Détection des alarmes des liens}{lstnumber.IV.33.5}{}}
-\newlabel{lst:findAnalomalies}{{IV.34}{98}{Définition de la méthode listAlarms}{lstlisting.4.34}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.34}Définition de la méthode listAlarms}{98}{lstlisting.4.34}}
-\newlabel{lst:findAlarmsFunction}{{IV.35}{99}{Définition de la méthode findAlarms}{lstlisting.4.35}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.35}Définition de la méthode findAlarms}{99}{lstlisting.4.35}}
-\newlabel{lst:lineindices}{{3}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.3}{}}
-\newlabel{lst:linedist}{{4}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.4}{}}
-\newlabel{lst:linedistSizesup}{{9}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.9}{}}
-\newlabel{lsl:linewilson}{{14}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.14}{}}
-\newlabel{lst:lineupdateLinkCurrentState}{{17}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.17}{}}
-\newlabel{linenewDist}{{20}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.20}{}}
-\newlabel{line-getreference}{{23}{99}{Définition de la méthode findAlarms}{lstnumber.IV.35.23}{}}
-\newlabel{lsl-debutcases}{{26}{100}{Définition de la méthode findAlarms}{lstnumber.IV.35.26}{}}
-\newlabel{lsl-fincases}{{60}{100}{Définition de la méthode findAlarms}{lstnumber.IV.35.60}{}}
-\newlabel{debutdetection}{{63}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.63}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.3.4.4}Exécution d'une application Spark}{101}{subsubsection.4.3.4.4}}
-\@writefile{toc}{\contentsline {paragraph}{Mode local}{102}{section*.145}}
-\newlabel{lst:submit}{{IV.36}{102}{Exemple de la soumissions d'un traitement sur Spark}{lstlisting.4.36}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.36}Exemple de la soumissions d'un traitement sur Spark}{102}{lstlisting.4.36}}
-\@writefile{toc}{\contentsline {paragraph}{Amazon EMR }{102}{section*.146}}
-\newlabel{lst:submit}{{IV.37}{102}{Exemple de la soumissions d'un traitement sur Spark}{lstlisting.4.37}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.37}Exemple de la soumissions d'un traitement sur Spark}{102}{lstlisting.4.37}}
-\@writefile{toc}{\contentsline {paragraph}{Résultats finaux}{102}{section*.147}}
-\newlabel{resultLink}{{IV.38}{102}{Exemple des résultats de l'analyse d'un lien}{lstlisting.4.38}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.38}Exemple des résultats de l'analyse d'un lien}{102}{lstlisting.4.38}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV.4}Conclusion}{104}{section.4.4}}
+\@writefile{toc}{\contentsline {paragraph}{Trouver les périodes de l'analyse}{90}{section*.128}}
+\newlabel{lst:findbins}{{IV.10}{90}{Etape FindBins (I.1)}{lstlisting.4.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.10}Etape FindBins (I.1)}{90}{lstlisting.4.10}}
+\@writefile{toc}{\contentsline {paragraph}{Groupement des traceroutes}{90}{section*.129}}
+\@writefile{toc}{\contentsline {subparagraph}{MongoDB}{90}{section*.130}}
+\@writefile{lof}{\contentsline {figure}{\numberline {IV.4}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{90}{figure.caption.131}}
+\newlabel{fig:read-data-from-mongodb}{{IV.4}{90}{Groupement des traceroutes avec MongoDB\relax }{figure.caption.131}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Groupement des traceroutes dans le cas de MongoDB\relax }}{91}{algorithm.2}}
+\newlabel{group-traceroutesmongodb}{{2}{91}{Groupement des traceroutes dans le cas de MongoDB\relax }{algorithm.2}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Spark/Scala}{91}{section*.132}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Groupement des traceroutes en Spark\relax }}{91}{algorithm.3}}
+\newlabel{group-data-sparkscala}{{3}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{initate-list}{{1}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{finloop1}{{7}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{groupby}{{8}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{begin-groupby}{{9}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{end-groupby}{{11}{91}{Groupement des traceroutes en Spark\relax }{algorithm.3}{}}
+\newlabel{lst:groupalltraceroutes}{{IV.4.3.3}{91}{}{lstlisting.4.-9}{}}
+\newlabel{line:groupTraceroutes}{{3}{91}{}{lstnumber.-9.3}{}}
+\newlabel{lst:TracerouteWithTimewindow}{{IV.11}{92}{Définition de la classe TracerouteWithPeriod}{lstlisting.4.11}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.11}Définition de la classe TracerouteWithPeriod}{92}{lstlisting.4.11}}
+\@writefile{toc}{\contentsline {paragraph}{Elimination des traceroutes qui n'appartiennent pas à l'analyse}{92}{section*.133}}
+\newlabel{lst:filterTracerouteWithTimewindow}{{IV.12}{92}{Elimination des traceroutes non concernés par l'analyse}{lstlisting.4.12}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.12}Elimination des traceroutes non concernés par l'analyse}{92}{lstlisting.4.12}}
+\newlabel{lst:agregatePeriodTraceroutes}{{IV.13}{92}{Le groupement des traceroutes par période}{lstlisting.4.13}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.13}Le groupement des traceroutes par période}{92}{lstlisting.4.13}}
+\newlabel{line:groupeby}{{1}{92}{Le groupement des traceroutes par période}{lstnumber.IV.13.1}{}}
+\newlabel{line:resumegroupeby}{{2}{92}{Le groupement des traceroutes par période}{lstnumber.IV.13.2}{}}
+\newlabel{lst:classTraceroutesPerPeriod}{{IV.14}{92}{Définition de la classe TraceroutesPerPeriod}{lstlisting.4.14}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.14}Définition de la classe TraceroutesPerPeriod}{92}{lstlisting.4.14}}
+\@writefile{toc}{\contentsline {paragraph}{Déduction des liens}{92}{section*.134}}
+\newlabel{lst:linkInference}{{IV.15}{92}{Etape de déduction des liens}{lstlisting.4.15}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.15}Etape de déduction des liens}{92}{lstlisting.4.15}}
+\newlabel{lst:DeductionLinks}{{IV.16}{93}{Deduction des liens par groupe de traceroutes}{lstlisting.4.16}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.16}Deduction des liens par groupe de traceroutes}{93}{lstlisting.4.16}}
+\newlabel{notFailedTraceroutes}{{4}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.4}{}}
+\newlabel{cleanedTraceroutes}{{7}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.7}{}}
+\newlabel{tracerouteMedianByHopline}{{10}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.10}{}}
+\newlabel{tracerouteLinksline}{{14}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.14}{}}
+\newlabel{liens-par-périodeline}{{17}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.17}{}}
+\newlabel{allDetailedLinksFlattenline}{{20}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.20}{}}
+\newlabel{sortAllDetailedLinksline}{{23}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.23}{}}
+\newlabel{mergedLinksline}{{26}{93}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.26}{}}
+\newlabel{summarizeLinkline}{{29}{94}{Deduction des liens par groupe de traceroutes}{lstnumber.IV.16.29}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Elimination des traceroutes échoués}{94}{section*.135}}
+\@writefile{toc}{\contentsline {subparagraph}{Elimination des sauts non valides}{94}{section*.136}}
+\newlabel{lst:removeInvalidSignals}{{IV.17}{94}{Définition de la méthode removeInvalidSignals}{lstlisting.4.17}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.17}Définition de la méthode removeInvalidSignals}{94}{lstlisting.4.17}}
+\newlabel{lst:checkSignal}{{IV.18}{94}{Définition de la méthode checkSignal}{lstlisting.4.18}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.18}Définition de la méthode checkSignal}{94}{lstlisting.4.18}}
+\newlabel{timesout}{{3}{94}{Définition de la méthode checkSignal}{lstnumber.IV.18.3}{}}
+\newlabel{rttnotnone}{{6}{94}{Définition de la méthode checkSignal}{lstnumber.IV.18.6}{}}
+\newlabel{rttpositif}{{8}{94}{Définition de la méthode checkSignal}{lstnumber.IV.18.8}{}}
+\newlabel{notprivate}{{10}{94}{Définition de la méthode checkSignal}{lstnumber.IV.18.10}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Calcul de la médiane de chaque saut}{95}{section*.137}}
+\newlabel{lst:computeMedianRTTByhopFunction}{{IV.19}{95}{Définition de la fonction computeMedianRTTByhop}{lstlisting.4.19}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.19}Définition de la fonction computeMedianRTTByhop}{95}{lstlisting.4.19}}
+\newlabel{lst:MedianByHopTracerouteclass}{{IV.20}{95}{Définition de la classe MedianByHopTraceroute}{lstlisting.4.20}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.20}Définition de la classe MedianByHopTraceroute}{95}{lstlisting.4.20}}
+\newlabel{lst:PreparedHopclass}{{IV.21}{95}{Définition de la classe PreparedHop}{lstlisting.4.21}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.21}Définition de la classe PreparedHop}{95}{lstlisting.4.21}}
+\newlabel{lst:PreparedSignalclass}{{IV.22}{95}{Définition de la classe PreparedSignal}{lstlisting.4.22}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.22}Définition de la classe PreparedSignal}{95}{lstlisting.4.22}}
+\@writefile{toc}{\contentsline {subparagraph}{Enumération des liens possibles par traceroute et leur RTT différentiel}{95}{section*.138}}
+\newlabel{lst:functionfindLinksAndRttDiffByTraceroute}{{IV.23}{96}{Définition de la fonction findLinksAndRttDiffByTraceroute}{lstlisting.4.23}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.23}Définition de la fonction findLinksAndRttDiffByTraceroute}{96}{lstlisting.4.23}}
+\newlabel{findAllLinksline}{{8}{96}{Définition de la fonction findLinksAndRttDiffByTraceroute}{lstnumber.IV.23.8}{}}
+\newlabel{lst:findAllLinksfunction}{{IV.24}{96}{Définition de la fonction findAllLinks}{lstlisting.4.24}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.24}Définition de la fonction findAllLinks}{96}{lstlisting.4.24}}
+\newlabel{lst:classLinksTraceroute}{{IV.25}{96}{Définition de la classe LinksTraceroute}{lstlisting.4.25}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.25}Définition de la classe LinksTraceroute}{96}{lstlisting.4.25}}
+\newlabel{lst:Linkclass}{{IV.26}{97}{Définition de la classe Link}{lstlisting.4.26}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.26}Définition de la classe Link}{97}{lstlisting.4.26}}
+\@writefile{toc}{\contentsline {subparagraph}{Construction de la liste des liens par période }{97}{section*.139}}
+\newlabel{lst:summarizeLinksTraceroutefunction}{{IV.27}{97}{Définition de la fonction summarizeLinksTraceroute}{lstlisting.4.27}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.27}Définition de la fonction summarizeLinksTraceroute}{97}{lstlisting.4.27}}
+\newlabel{lst:DetailedLinkclass}{{IV.28}{97}{Définition de la classe DetailedLink}{lstlisting.4.28}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.28}Définition de la classe DetailedLink}{97}{lstlisting.4.28}}
+\@writefile{toc}{\contentsline {subparagraph}{Tri alphanumérique des adresses IP de chaque lien}{97}{section*.140}}
+\newlabel{lst:sortLinksfunction}{{IV.29}{97}{Définition de la fonction sortLinks}{lstlisting.4.29}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.29}Définition de la fonction sortLinks}{97}{lstlisting.4.29}}
+\@writefile{toc}{\contentsline {subparagraph}{Groupement des liens ayant les mêmes adresses IP}{98}{section*.141}}
+\@writefile{toc}{\contentsline {subparagraph}{Création d'un récapitulatif de chaque lien}{98}{section*.142}}
+\newlabel{lst:SummarizedLinkClasscase}{{IV.30}{98}{Définition de la classe SummarizedLink}{lstlisting.4.30}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.30}Définition de la classe SummarizedLink}{98}{lstlisting.4.30}}
+\@writefile{toc}{\contentsline {paragraph}{Caractérisation des liens de toutes les périodes de l'analyse}{98}{section*.143}}
+\newlabel{lst:rddcollecte}{{IV.31}{98}{Collecte des résultats intermédiares}{lstlisting.4.31}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.31}Collecte des résultats intermédiares}{98}{lstlisting.4.31}}
+\newlabel{lst:rddmergeLinks}{{IV.32}{98}{Fusion des liens de toute la période de l'analyse}{lstlisting.4.32}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.32}Fusion des liens de toute la période de l'analyse}{98}{lstlisting.4.32}}
+\@writefile{toc}{\contentsline {paragraph}{Détection des anomalies}{99}{section*.144}}
+\newlabel{lst:paralelizeAndDtectAnomalies}{{IV.33}{99}{Détection des alarmes des liens}{lstlisting.4.33}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.33}Détection des alarmes des liens}{99}{lstlisting.4.33}}
+\newlabel{parallelizefinalRawRttDiff}{{2}{99}{Détection des alarmes des liens}{lstnumber.IV.33.2}{}}
+\newlabel{listAlarmscall}{{5}{99}{Détection des alarmes des liens}{lstnumber.IV.33.5}{}}
+\newlabel{lst:findAnalomalies}{{IV.34}{99}{Définition de la méthode listAlarms}{lstlisting.4.34}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.34}Définition de la méthode listAlarms}{99}{lstlisting.4.34}}
+\newlabel{lst:findAlarmsFunction}{{IV.35}{100}{Définition de la méthode findAlarms}{lstlisting.4.35}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.35}Définition de la méthode findAlarms}{100}{lstlisting.4.35}}
+\newlabel{lst:lineindices}{{3}{100}{Définition de la méthode findAlarms}{lstnumber.IV.35.3}{}}
+\newlabel{lst:linedist}{{4}{100}{Définition de la méthode findAlarms}{lstnumber.IV.35.4}{}}
+\newlabel{lst:linedistSizesup}{{9}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.9}{}}
+\newlabel{lsl:linewilson}{{14}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.14}{}}
+\newlabel{lst:lineupdateLinkCurrentState}{{17}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.17}{}}
+\newlabel{linenewDist}{{20}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.20}{}}
+\newlabel{line-getreference}{{23}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.23}{}}
+\newlabel{lsl-debutcases}{{26}{101}{Définition de la méthode findAlarms}{lstnumber.IV.35.26}{}}
+\newlabel{lsl-fincases}{{60}{102}{Définition de la méthode findAlarms}{lstnumber.IV.35.60}{}}
+\newlabel{debutdetection}{{63}{102}{Définition de la méthode findAlarms}{lstnumber.IV.35.63}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV.4.3.4}Exécution d'une application Spark}{103}{subsubsection.4.4.3.4}}
+\@writefile{toc}{\contentsline {paragraph}{Mode local}{103}{section*.145}}
+\newlabel{lst:submit}{{IV.36}{103}{Exemple de la soumissions d'un traitement sur Spark}{lstlisting.4.36}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.36}Exemple de la soumissions d'un traitement sur Spark}{103}{lstlisting.4.36}}
+\@writefile{toc}{\contentsline {paragraph}{Amazon EMR }{103}{section*.146}}
+\newlabel{lst:submitemr}{{IV.37}{103}{Exemple de la soumissions d'un traitement sur Spark}{lstlisting.4.37}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.37}Exemple de la soumissions d'un traitement sur Spark}{103}{lstlisting.4.37}}
+\@writefile{toc}{\contentsline {paragraph}{Résultats finaux}{104}{section*.147}}
+\newlabel{resultLink}{{IV.38}{104}{Exemple des résultats de l'analyse d'un lien}{lstlisting.4.38}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.38}Exemple des résultats de l'analyse d'un lien}{104}{lstlisting.4.38}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV.5}Conclusion}{105}{section.4.5}}
 \@setckpt{chapitre4}{
-\setcounter{page}{105}
+\setcounter{page}{106}
 \setcounter{equation}{0}
 \setcounter{enumi}{9}
 \setcounter{enumii}{0}
@@ -207,7 +205,7 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{4}
-\setcounter{section}{4}
+\setcounter{section}{5}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
@@ -235,7 +233,7 @@
 \setcounter{Item}{36}
 \setcounter{Hfootnote}{92}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{81}
+\setcounter{bookmark@seq@number}{82}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}

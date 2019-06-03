@@ -1,28 +1,38 @@
 \chapter{Implémentations  } \label{chapter-implementations}
 
 
+\section{Introduction}
+
+Le but de ce chapitre est de présenter les différentes implémentations du principe de détection des anomalies.  Dans un premier temps, nous présentons brièvement l'implémentation du travail de  référence. Ensuite, nous décrivons l'intégration des services Amazon S3 et Athena dans l'implémentation de référence.  De sorte à récupérer les traceroutes depuis Amazon S3 et à travers   Amazon Athena au lieu de les récupérer depuis MongoDB. Enfin, nous présentons l'implémentation détaillée du principe de détection en Spark/Scala. 
+
 \section{Implémentation avec MongoDB}
 
 MongoDB est la technologie Big Data utilisée par  Fontugne et al.  dans l'implémentation de l'outil de détection \cite{InternetHealthReport}. 
 %MongoDB est une technologie conçue pour assurer  le stockage de données dans un processus d'analyse de données.
-Dans MongoDB, les traceroutes sont organisés  dans des collections.  Par convention,  $V$  vaut $6$ s'il s'agit de l'adressage IPv6 et est vide dans le cas de l'adressage IPv4.  Le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$. La nomenclature  des collections permet de ne récupérer que les traceroutes concernés par l'analyse lancée.
+
+
+Dans MongoDB, les traceroutes sont organisés  dans des collections.  Par convention,  $V$  vaut $6$ s'il s'agit de l'adressage IPv6 et est vide dans le cas de l'adressage IPv4.  Le nom d'une collection est structuré comme suit: 	$tracerouteV\_YYYY\_MM\_DD$. Où $ YYYY\_MM\_DD $ représente la date du jour pendant lequel les traceroutes stockés dans la collection $$tracerouteV\_YYYY\_MM\_DD$$ sont effectués.
+La nomenclature  des collections permet de ne récupérer que les traceroutes concernés par l'analyse lancée.
 L'implémentation détaillée de l'outil de détection est disponible sur GitHub \cite{InternetHealthReport}.  
 
 En faisant appel à d'autres fonctions, les deux fonctions 
-On note les deux fonctions \footnote{Voir l'implémentation des deux fonctions sur : \url{https://github.com/InternetHealthReport/tartiflette/blob/master/analysis/plot.py}, consulté le consulté le $ 02/02/2018$.} principales qui permettent de tracer l'évolution du délais des liens sont  :  
+\footnote{Voir l'implémentation des deux fonctions sur : \url{https://github.com/InternetHealthReport/tartiflette/blob/master/analysis/plot.py}, consulté  le $ 02/02/2018$.} principales qui permettent de tracer l'évolution du délai des liens sont  :  
 
-\textit{\textbf{getRttData(configFile=None)}} : en se basant sur les paramètres indiqués à travers le fichier de configuration \textit{configFile}, les traceroutes sont analysés. Cette fonction renvoie les liens identifiés avec leurs RTTs différentiels.
+\textit{\textbf{getRttData(configFile=None)}} : en se basant sur les paramètres indiqués à travers le fichier de configuration \textit{configFile}, les traceroutes sont préparés (Phase I). Cette fonction renvoie les liens identifiés avec leurs RTTs différentiels, leurs périodes et les sondes ayant identifié chaque lien.
 
-\textit{\textbf{rttEvolution(res, ips, suffix)}} : cette fonction prend en paramètre \textit{res} qui représente les détails du lien : les périodes de l'analyse, les RTTs différentiels qui correspondent à chaque période et les sondes ayant identifié ce RTT différentiel. Le paramètre \textit{ips} représente un lien; les deux adresses IPs.  \textit{suffix} n'a pas été utilisé dans la fonction.
+\textit{\textbf{rttEvolution(res, ips, suffix)}} : cette fonction prend en paramètre \textit{res} qui représente les détails du lien : les périodes de l'analyse, les RTTs différentiels qui correspondent à chaque période et les sondes ayant identifié chaque RTT différentiel. Le paramètre \textit{ips} représente un lien;  deux adresses IPs. Le paramètre \textit{suffix} n'a pas été utilisé dans la fonction.
 
 
+\paragraph{Notes sur l'organisation des traceroutes dans la base de données MongoDB}~
 
-Avec MongoDB,  la manière d'organiser les données dans des collections est importante pour assurer l'optimalité de la récupération des données. Dans l'implémentation de référence, chaque collection reprend les traceroutes d'une journée peu importe leur destination. Avec une fenêtre d'une heure et d'une journée d'analyse,  une même collection est consultée $24$ fois.   Or, si les collections ont été créées de sorte à contenir une heure de traceroutes, ceci aurait réduit la consultation des données inutilement dans le cas où la fenêtre est d'une heure, mais aussi pour les fenêtres de plus d'une heure. 
+Avec MongoDB,  la manière d'organiser les données dans des collections est importante pour assurer l'optimalité de leur récupération. Dans l'implémentation de référence, chaque collection reprend les traceroutes d'une journée, peu importe leur destination. Durant  une journée d'analyse et avec une fenêtre d'une heure,  une même collection est consultée $24$ fois pour renvoyer les traceroutes qui corespondent à chaque fenêtre.   Or, si les collections ont été créées de sorte à contenir une heure de traceroutes, ceci aurait réduit la consultation des données inutilement dans le cas où la fenêtre est d'une heure. 
+%mais aussi pour les fenêtres de plus d'une heure. 
 
-De plus, en partant du fait qu'une collection reprend une journée de traceroute, le choix de la taille de la fenêtre peut amener à négliger des traceroutes. Par exemple, si \textit{timeWindow} vaut   $ 4600 $ secondes et l'analyse s'étale sur $2$ journée, selon l'implémentation de référence, les traceroutes relatifs à la période entre  \textit{07/02/2018 23:00} et \textit{07/02/2018 00:15}   sont recherchés dans la collection  \textit{traceroute\_2018\_02\_07} et les traceroutes 
+De plus, en partant du fait qu'une collection reprend une journée de traceroute, le choix de la taille de la fenêtre peut amener à négliger des traceroutes. Si par exemple la fenêtre vaut   $ 4600 $ secondes et l'analyse s'étale sur $2$ journées, selon l'implémentation de référence, les traceroutes relatifs à la période entre  \textit{07/02/2018 23:00} et \textit{07/02/2018 00:15}   sont recherchés dans la collection  \textit{traceroute\_2018\_02\_07} et les traceroutes 
 relatifs à la période entre \textit{08/02/2018 00:16} et \textit{08/02/2018 01:32}  sont recherchés dans la collection \textit{traceroute\_2018\_02\_08}. Dans ce cas, les traceroutes entre \textit{08/02/2018 00:00} et \textit{08/02/2018 00:15} sont négligés.
 
-En ce qui concerne la capacité de  stockage d'une base de données MongoDB,  si les ressources de la machine locale où MongoDB est installé sont insuffisantes, il existe la version cloud de MongoDB (MongoDB Atlas). 
+En ce qui concerne la capacité de  stockage d'une base de données MongoDB,  elle est limitée par les ressources de la machine locale où elle est installée. 
+%  il existe la version cloud de MongoDB (MongoDB Atlas). 
 
 
 
@@ -34,10 +44,7 @@ En ce qui concerne la capacité de  stockage d'une base de données MongoDB,  si
 
 Les trois services d'Amazon (Amazon S3, Amazon Glue  et Amazon Athena) ont été combinés  afin de créer un environnement d'analyse de données massives. 
 Un des scénarios possibles mettant en pratique ensemble ces trois services est illustré dans la Figure
-\ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. Les  détails concernant chaque services sont donnés dans les sections suivantes.
-
-Afin d'utiliser Amazon Athena pour l'interrogation des traceroutes stockés dans des fichiers, il faut d'abord  stocker ces fichiers dans Amazon S3. De plus, il faut créer un  schéma de données. Il s'agit de créer une table comme les tables dans un SGBDR. Chaque enregistrement dans cette table correspond à une ligne dans les fichiers de données censés être lus par cette table. Il existe deux manières pour créer une table dans Athena : en utilisant Amazon Glue ou création manuelle. \textit{traceroutes\_api} désigne le nom de la table reprenant tous les traceroutes.
-%Une vue globale du  processus de l'analyse  est illustré dans la Figure  
+\ref{fig:gluecrawler}\footnote{Amazon Redshift  est un entrepôt de données et  Amazon Quicksight  est un service cloud d'informatique décisionnelle.}. Les  détails concernant chaque service sont donnés dans les sections suivantes.
 
 \begin{figure}[h]
 	\centering
@@ -47,19 +54,21 @@ Afin d'utiliser Amazon Athena pour l'interrogation des traceroutes stockés dans
 	\label{fig:gluecrawler}
 	\source{\url{https://docs.aws.amazon.com/fr_fr/athena/latest/ug/glue-best-practices.html}, consultée le $16/05/2018$.}
 \end{figure}
+Afin d'utiliser Amazon Athena pour l'interrogation des traceroutes stockés dans des fichiers, il faut d'abord  stocker ces fichiers dans Amazon S3. De plus, il faut créer un  schéma de données. Il s'agit de créer une table comme les tables dans un SGBDR. Chaque enregistrement dans cette table correspond à une ligne dans les fichiers de données censés être lus par cette table. Il existe deux manières pour créer une table dans Athena : en utilisant Amazon Glue ou en la créant  manuellement.  \textit{traceroutes\_api} désigne le nom de la table reprenant tous les traceroutes.
+%Une vue globale du  processus de l'analyse  est illustré dans la Figure  
+
+
 
 
 \paragraph{Création de la table traceroutes avec Amazon Glue}~
 
-Afin de découvrir rapidement le schéma des traceroutes,     la détection automatique du schéma a été lancées, avec Amazon Glue, sur un ensemble de  traceroutes enregistrés dans un fichier faisant une taille de $500$ MB. Toutefois, la détection a échoué. Autrement dit, Amazon Glue n'a pas pu inférer le schéma d'une seule table capable de lire tout traceroute dans ce fichier.  L'échec de l'inférence est dû au fait que le fichier contient des traceroutes différents en terme de structure, car la structure dépend de la version du firmware de la sonde ayant effectué le traceroute. Les différentes versions du firmware  pour chaque type de mesure sont détaillées dans le site Web d'Atlas\footnote{\url{https://atlas.ripe.net/docs/data_struct/}, consultée le $16/01/2018$.}.
+Dans le but de découvrir rapidement le schéma des traceroutes, la détection automatique du schéma a été lancées avec Amazon Glue sur un ensemble de  traceroutes enregistrés dans un fichier faisant une taille de $500$ MO. Toutefois, la détection a échoué. Autrement dit, Amazon Glue n'a pas pu inférer le schéma d'une seule table capable de lire tout traceroute dans ce fichier.  L'échec de l'inférence est dû au fait que le fichier contient des traceroutes différents en terme de structure, car la structure dépend de la version du firmware de la sonde ayant effectué le traceroute. Les différentes versions du firmware  pour chaque type de mesure sont détaillées dans le site Web d'Atlas\footnote{URL : \url{https://atlas.ripe.net/docs/data_struct/}, consultée le $16/01/2018$.}.
 %L'origine de cette différence  est le fait que ces traceroutes ont été effectués par des sondes ayant un firmware différent. Car le contenu des résultats d'une requête traceroute  et son organisation dans un objet JSON dépend partiellement du firmware de la sonde. 
 
 \paragraph{Création manuelle de la table \textit{traceroutes\_api}}~ \label{creer-table-traceroute}
 
-Suite à l'échec d'Amazon Glue  et comme la structure des réponses traceroutes est disponible,  la structure de la table a été créée   manuellement en se basant sur la structure détaillée d'une réponse traceroute pour chaque version du firmware. \textit{traceroutes\_api} dénote le nom de la table créée. Les différentes structures de réponses d'une requête traceroute n'ont posé aucun problème dans la création manuelle de la table. Dans notre cas, la réussite de la création manuelle est due au fait que les attributs dont l'outil de détection a besoin sont présents dans toutes les versions du firmware d'une part. D'autre part, Amazon Athena est flexible en ce qui concerne l'association entre un objet JSON et un enregistrement dans une table. Autrement dit, si un attribut existe dans l'objet JSON, la colonne correspondante prend sa valeur et vide dans le cas échéant.  
-
-\subparagraph{Création de la table traceroutes } 
-La création d'une table reprend plusieurs parties :
+Suite à l'échec d'Amazon Glue  et comme la structure des réponses traceroutes est disponible,  la structure de la table a été créée   manuellement en se basant sur la structure détaillée d'une réponse traceroute pour chaque version du firmware.  Les différentes structures de réponses d'une requête traceroute n'ont posé aucun problème dans la création manuelle de la table. Dans notre cas, la réussite de la création manuelle est due au fait que les attributs dont l'outil de détection a besoin sont présents dans toutes les versions du firmware d'une part. D'autre part, Amazon Athena est flexible en ce qui concerne l'association entre un objet JSON et un enregistrement dans une table. Autrement dit, si un attribut existe dans l'objet JSON, la colonne correspondante prend sa valeur. Dans le cas échéant, la colonne reste vide.  %\subparagraph{Création de la table traceroutes } 
+La création d'une table dans Amazon Athena  reprend les parties suivantes  :
 \begin{itemize}
 	\item les colonnes de la table avec le type correspondant (int, string, array pour définir une liste, struct pour définir un objet );
 	\item LOCATION : c'est l'endroit où les données sont stockées dans Amazon S3, il faut préciser le chemin vers le compartiment de données;
@@ -67,6 +76,8 @@ La création d'une table reprend plusieurs parties :
 	\item PARTITIONED BY : elle définit la manière dont les données sont organisées dans le compartiment de données; 
 	\item WITH serdeproperties : elle définit les options de la sérialisation/désérialisation.
 \end{itemize}
+
+La table \textit{traceroutes\_api}  créée est présentée dans le Listing \ref{createAthenaTable}.
 \begin{lstlisting}[language=SQL, basicstyle=\footnotesize, label=createAthenaTable, caption={Création de la table des traceroutes dans Amazon Athena }]
 CREATE EXTERNAL TABLE traceroutes_api(
 af int,
@@ -113,24 +124,23 @@ LOCATION 's3://ripeatlasdata/traceroute/source=api/'
 
 \paragraph{Partitionnement des données stockées dans Amazon S3}~
 
-La table \textit{traceroutes\_api} créée a été conçue de sorte qu'elle prenne en compte  le partitionnement de données dans un compartiment S3 dans la création de la table \textit{traceroutes\_api}.  L'utilisation du partitionnement est optionnel. 
-Il permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore donc les performances d'Amazon Athena. D'une part, la requête s'exécute plus rapidement. D'autre part, il réduit les coûts engendrés  suite à l'utilisation d'Amazon Athena, car ce dernier est facturé selon la quantité de données analysées. En pratique,  une partition créée joue un rôle similaire à celui d'une colonne durant l'interrogation d'une table dans Athena. 
+La table \textit{traceroutes\_api} créée a été conçue de sorte qu'elle prenne en compte  le partitionnement de données dans un compartiment S3.  L'utilisation du partitionnement est optionnelle. Toutefois, il permet de limiter la quantité de données à analyser par une requête Amazon Athena. Le partitionnement améliore donc les performances d'Amazon Athena. D'une part, la requête s'exécute plus rapidement. D'autre part, ceci réduit les coûts engendrés  suite à l'utilisation d'Amazon Athena, car ce dernier est facturé selon la quantité de données analysées. En pratique,  une partition créée joue un rôle similaire à celui d'une colonne durant l'interrogation d'une table dans Athena. 
 
-Prenons un exemple illustrant l'apport du partitionnement. Nous avons des traceroutes effectué en adressage IP  version  $ 4 $ et $ 6 $.
+Prenons un exemple illustrant l'apport du partitionnement. Nous avons des traceroutes effectués en adressage IP  version  $ 4 $ et $ 6 $.
 
 
 \textit{af\_} désigne le type d'adressage : \textit{af\_} vaut $4$ en cas d'adressage IPv4 et $6$ en cas d'adressage IPv6. Sans l'utilisation du partitionnement et si on ne souhaite récupérer que  les traceroutes ayant comme adressage IPv4, tous les traceroutes présents dans le compartiment S3 (appelé \textit{s3://ripeatlasdata}) sont évalués.
 %\footnote{L'évaluation du type  d'adressage est effectué selon la valeur de l'attribut \textit{af} d'un traceroute, il vaut \textit{4} ou \textit{6}.}.
 
-Toutefois, en partitionnant les données suivant par exemple le type d'adressage, seuls les fichiers dans la partition
+Toutefois, en partitionnant les données suivant, par exemple, le type d'adressage, seuls les fichiers dans la partition
 %\footnote{Partition dans le sens d'Amazon Athena.} 
 af\_ = $4$  sont analysés. Par conséquent, le partitionnement permet de réduire les coûts d'utilisation du service Amazon Athena, surtout si la quantité de données est très importante. 
 
 
 Les partitions   créées sont illustrées  dans la Figure 	\ref{fig:partitionnement-athenaa}. Ces partitions ont été créées manuellement. Le choix des partitions à créer  dépend de l'interrogation des données; des paramètres de la requête SQL conçue pour récupérer  les données. Par exemple, si toutes les requêtes SQL  sont indifférentes concernant la version IP, il n'est pas nécessaire de créer la partition af\_. Pour précision, le partitionnement permet  d'organiser les données en une structure de répertoires hiérarchique. Les valeurs de chaque partition sont distinctes.
 Le  Tableau \ref{tab:partition-description} 
-reprend les  partitions créés.  La première colonne représente le nom de la partition, dans 
-la deuxième colonne on donne quelques valeurs de chaque partition et la troisième colonne de ce tableau reprend la description de la partition.
+reprend les  partitions créées dans le compartiment S3 reprenant les traceroutes à analyser.  La première colonne représente le nom de la partition, dans 
+la deuxième colonne décrit quelques valeurs de chaque partition et la troisième colonne de ce tableau reprend la description de la partition.
 
 \begin{figure}[h]
 	\centering
@@ -170,16 +180,15 @@ la deuxième colonne on donne quelques valeurs de chaque partition et la troisi�
 	\label{tab:partition-description}
 \end{table}
 
-Les   partitions \textit{af\_} et \textit{type\_} sont nommées de cette manière, au lieu de \textit{af} et \textit{type} car  la table \textit{traceroutes\_api} contient des colonnes avec ces noms et comme les partitions agissent comme des colonnes  lors de l'évaluation d'une requêtes avec Amazon Athena, les noms de ces partitions ont été adaptés.
+Les   partitions \textit{af\_} et \textit{type\_} sont nommées de cette manière, au lieu de \textit{af} et \textit{type} car  la table \textit{traceroutes\_api} contient des colonnes ayant ces noms et comme les partitions agissent comme des colonnes  lors de l'évaluation d'une requête avec Amazon Athena, les noms de ces partitions ont été adaptés.
 
-Par exemple, les traceroutes qui se trouvent dans  le fichier\\
+Prenons un exemple, les traceroutes qui se trouvent dans  le fichier\\
 \textit{2016-10-01 00:00:00\_msmId5001.json.gz} sont analysés par toute requête SQL Athena  
-impliquant les partitions d'une des manières énumérées dans le Tableau \ref{partitions-sql}.
+impliquant les partitions d'une des manières énumérées dans le Tableau \ref{partitions-sql}. En effet, d'une combinaison à une autre, le volume de données consultées qui est différent. 
 
 \begin{table}[H]
 	\resizebox{\textwidth}{!}{
 		\begin{tabular}{l}
-			\textbf{Prédicat} \\ \hline
 			(source = api) \\ \hline
 			(source = api et af\_ = 4)\\ \hline
 			(source = api et af\_ = 4 et type = builtin) \\ \hline
@@ -192,25 +201,33 @@ impliquant les partitions d'une des manières énumérées dans le Tableau \ref{
 	\caption{Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena}
 	\label{partitions-sql}
 \end{table}
+
 \paragraph{Interrogation des données Avec Amazon Athena}~  \label{sql-athena-request}
 
-Une fois les fichiers de données  synchronisés vers le compartiment AWS S3 et le schéma  de données  créé, on passe à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  On peut décomposer une requête SQL en trois parties principales:
+Une fois les fichiers de données  synchronisés vers le compartiment AWS S3 et le schéma  de données  créé, nous  passons à l'interrogation de données en utilisant les requêtes SQL basées sur Presto.  Une requete SQL dans Athena est décomposée suivant trois parties principales:
 
-\begin{description}
-	\item[Les données sollicitées] Ça peut être une colonne ou bien bien une colonne transformée suite à l'application d'une ou de plusieurs fonctions de Presto.
-	\item[Les partitions de données concernées] La requête SQL est paramétrée de sorte à limiter les données à analyser sur Amazon S3. 
-	\item[Les paramètres appliqués sur les colonnes] La requête SQL doit filtrer les données suivant les conditions sur les colonnes de la table.
-\end{description}
+	\textbf{les données sollicitées} : préciser  la  colonne souhaitée ou  bien une colonne transformée suite à l'application d'une ou de plusieurs fonctions de Presto;
+	
+    \textbf{les partitions de données concernées} : la requête SQL est paramétrée de sorte à limiter les données à analyser sur Amazon S3;
+	
+	\textbf{les paramètres appliqués sur les colonnes} : la requête SQL doit filtrer les données suivant les conditions sur les colonnes de la table.
+
 
 La Figure \ref{fig:sqlrequestathena} montre  un exemple d'une  requête SQL dans Athena.  Cette requête fait appel aux fonctionnalités  de Presto\footnote{URL : \url{https://prestodb.github.io/docs/current/}, consulté le $10/06/2018$.} comme  \textit{transform}, \textit{concat}, etc. 
-Pour les données sollicitées, ce sont les trois colonnes \textit{prb\_id}, \textit{from}, \textit{msm\_id} (ligne $2$)et la liste de saut (\textit{hops})obtenue après quelques vérifications (lignes $3$ à $9$). A la ligne $10$, c'est la table créée pour les traceroutes (voir les détails de la table dans \ref{createAthenaTable}). Les traceroutes à analyser sont ceux obtenus en vérifiant les conditions dans la ligne  $12$ et $13$. C'est à dire, Athena va regarder les traceroutes qui se trouvent dans les sous dossiers year=2016/month=10/day=21 qui se trouvent aussi dans les deux dossiers msm=5001 et msm=5004. Ce que revient à chercher les traceroutes dans les deux endroits suivants:
+
+Par les lignes $1$ à $2$, nous définissons  une relation nommée appelée \textit{dataset}.
+Pour les données sollicitées, ce sont les trois colonnes \textit{prb\_id}, \textit{from}, \textit{msm\_id} (ligne $2$) et la liste de saut (\textit{hops}) (ligne $9$)  obtenue après quelques vérifications (lignes $3$ à $8$). L'objectif de ces lignes est de vérifier la validité du traceroute.  Le premier \textit{result} contient la liste sauts, pour chaque saut, \textit{result} représente la liste des signaux. D'abord nous vérifions la validité d'un traceroute, ensuite nous transformons chaque signal (\textit{entry}) de la liste des signaux de chaque saut (\textit{x}) afin de ne récupérer que \textit{from} et \textit{rtt} entourés par "".  Ceci  facilite le passage d'une réponse fournie par Amazon Athena à une structure de données manipulée en Python.
+
+ A la ligne $10$, nous indiquons  la table des  traceroutes (voir les détails de la table dans \ref{createAthenaTable}). La ligne $11$ permet de filtrer les traceroutes selon leur timestamp.
+ Les traceroutes à analyser sont ceux obtenus en vérifiant les conditions dans la ligne  $12$ et $13$. C'est à dire, Athena va regarder les traceroutes qui se trouvent dans les sous dossiers year=2016/month=10/day=21 qui se trouvent  dans les deux dossiers msm=5001 et msm=5004. Ce que revient à chercher les traceroutes dans les deux endroits suivants:
 
 \begin{lstlisting}[basicstyle= \footnotesize]
 s3://ripeatlasdata/traceroute/source=api/af_=4/type_=builtin/msm=5001/year=2016/month=10/day=21
 s3://ripeatlasdata/traceroute/source=api/af_=4/type_=builtin/msm=5004/year=2016/month=10/day=21
 \end{lstlisting}
 
-Le choix des partitions est basé sur les identifiants des mesures indiquées dans les paramètres. Si aucun des identifiant n'est précisé, toutes les identifiants des mesures sont considérées. En ce qui concerne les partitions \textit{year}, \textit{month} et \textit{day}, leur valeur est inférée de la période en cours.
+Enfin, les lignes $15$ à $18$  indiquent les  colonnes  sélectionnées.
+Le choix des partitions est basé sur les identifiants des mesures indiquées dans les paramètres. Si aucun des identifiants n'est précisé, toutes les identifiants des mesures sont considérés. En ce qui concerne les partitions \textit{year}, \textit{month} et \textit{day}, leur valeur est inférée de la période en cours.
 
 \begin{figure}[h]
 	%	\resizebox{}{!}{
@@ -273,7 +290,7 @@ Avec :
 \end{itemize}
 
 
-Le service Athena est conçu pour la lecture de données, toute mise à jour de données n'est pas possible avec ce service. C'est pourquoi la distribution des RTTs différentiels de chaque  lien identifié doit être sauvegardée dans un endroit accessible en lecture et en écriture, par exemple dans un compartiment AWS S3. Que ce soit un fichier reprenant la distribution des RTTs différentiels  par un seul lien ou bien un fichier pour tous les liens,   à la ligne  \ref{update-link} du pseudo-code \ref{alo-inference-link}, un fichier doit être lu et mise à jour avec de nouvelle valeur. Pour une période $d_k$ d'une heure, le nombre de traceroutes est de l'ordre de milliers. Chaque traceroute $t_{k,j}$ peut inclure $L_{k,j}$ liens. Dans ce cas, le nombre total, d'une période $d_k$, de mise à jour de la distribution des RTTs différentiels est    $ \sum_{m=1}^{R_k}  L_{k,m}$. $ L_{k,j} $ dépend du nombre de saut du  traceroute $t_{k,j}$.
+Le service Athena est conçu pour la lecture de données, toute mise à jour de données n'est pas possible avec ce service. C'est pourquoi la distribution des RTTs différentiels de chaque  lien identifié doit être sauvegardée dans un endroit accessible en lecture et en écriture, par exemple dans un compartiment AWS S3. Que ce soit un fichier reprenant la distribution des RTTs différentiels  par un seul lien ou bien un fichier pour tous les liens,   à la ligne  \ref{update-link} du pseudo-code \ref{alo-inference-link}, un fichier doit être lu et mis à jour avec de nouvelles valeurs. Pour une période $d_k$ d'une heure, le nombre de traceroutes est de l'ordre de milliers. Chaque traceroute $t_{k,j}$ peut inclure $L_{k,j}$ liens. Dans ce cas, le nombre total, d'une période $d_k$, de mise à jour de la distribution des RTTs différentiels est    $ \sum_{m=1}^{R_k}  L_{k,m}$. $ L_{k,j} $ dépend du nombre de saut du  traceroute $t_{k,j}$.
 
 %de l'ordre $R_k$\texttimes$L$ de fois.  Cette estimation est à titre indicatif, de plus elle ne concerne que l'étape $4$, le nombre de lectures et/ou d'écritures dépend des requêtes SQL créées pour les autres étapes. 
 
@@ -286,16 +303,12 @@ Afin d'utiliser le service Amazon Athena à moindre coût, il est conseillé d'u
 
 En ce qui concerne l'évolutivité d'une application basée sur ces deux services d'Amazon, on note que toute mise à jour de la structure de données des objets traceroutes peut affecter l'entièreté de la configuration initiale. A savoir, l'organisation des fichiers de données via le partitionnement, le schéma de données et les requêtes SQL.
 
-Quant à la flexibilité du schéma de données, le service  Amazon Athena est tolérant au données manquantes. Etant donné que la structure d'un objet traceroute dépend de la version du firmware de la sonde, nous avons créé trois schémas de tables. La première table  modélise tout objet traceroute de  version $5$, la deuxième modélise tout objet traceroute de version $6$ et enfin la troisième table modélise ceux ayant la version $7$. En expérimentant différentes requêtes, nous avons conclu  que Amazon Athena a pu récupérer les données de la version récente ($7$) via le schéma de la version $5$ malgré que la version $7$ a plus d'attributs par rapport à la version $5$.
+Quant à la flexibilité du schéma de données, le service  Amazon Athena est tolérant aux données manquantes. Etant donné que la structure d'un objet traceroute dépend de la version du firmware de la sonde, nous avons créé trois schémas de tables. La première table  modélise tout objet traceroute de  version $5$, la deuxième modélise tout objet traceroute de version $6$ et enfin la troisième table modélise ceux ayant la version $7$. En expérimentant différentes requêtes, nous avons conclu  que Amazon Athena a pu récupérer les données de la version récente ($7$) via le schéma de la version $5$ malgré que la version $7$ a plus d'attributs par rapport à la version $5$.
 
 
 
 
 \section{Implémentation  en Spark/Scala} \label{application:spark}
-\subsection{Introduction}
-
-Ce chapitre  décrit  l'implémentation de l'outil de détection en utilisant le framework Spark, avec Scala comme API.  Dans un premier temps, nous présentons brièvement le langage Scala qui fait partie des langages de programmation fonctionnelle. Ensuite, nous 
-décrivons les notre implémentation en Spar/Scala.
 
 \subsection{Présentation de Scala} \label{scala-presentation}
 
@@ -328,7 +341,8 @@ val positives = List(1,2,3,4,5).filter(_ > 0)
 \end{center}
 %L'implémentation proposée implique plusieurs éléments relatifs au langage Scala comme les case class, les fonctions et le RDD relatif au Spark. 
 
-\paragraph{Notation relatives au langage Scala}~
+\paragraph{Notations relatives au langage Scala}~
+
 Il existe plusieurs manières pour définir une fonction en Scala. Nous présentons celle utilisée dans les Listings du présent chapitre. Dans le Listing \ref{lst:generalFunction}, on crée une fonction appelée  \textit{functionName}, ayant deux paramètres : \textit{x} de type \textit{Int} et \textit{y} de type \textit{Int}, elle renvoie \textit{result} de type \textit{String}, le mot-clé \textit{return} est optionnel.  
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple d'une fonction en  Scala}, label={lst:generalFunction}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1,numberstyle=\scriptsize]
@@ -338,15 +352,15 @@ def functionName(x: Type, y Int): String = {
 }
 \end{lstlisting} \par
 
-Nous présentons  des notations   propres au langage Scala. Ce  sont les mots clés utilisés  dans les Listings du présent chapitre. \par
+Nous présentons  des notations   propres au langage Scala. Ce  sont les mots-clés utilisés  dans les Listings du présent chapitre. \par
 \textbf{\textit{case class}} (mot-clé): définir une  classe.\par
-\textit{\textbf{Seq}} (type): créer une séquence, équivalent à créer une liste. Par exemple Seq[String] représente le type d'une liste dont ses éléments sont de type String. Lors du parcours d'une séquence  l'élément courant est accessible via " \_".  \par
+\textit{\textbf{Seq}} (type): créer une séquence, équivalent à créer une liste. Par exemple Seq[String] représente le type d'une liste dont les éléments sont de type String. Lors du parcours d'une séquence, l'élément courant est accessible via " \_".  \par
 \textbf{\textit{Dataset}} (type):  est une collection distribuée de données. Elle est similaire à un RDD (voir la section \ref{rdd-presentation}) et plus récente que les RDDs. \par
-\textit{\textbf{map}} (fonction): permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoi une liste transformée. \par
+\textit{\textbf{map}} (fonction): permet de transformer le contenu d'une liste en appelant une fonction sur chaque élément de la liste, elle renvoie une liste transformée. \par
 \textit{\textbf{Option}} (type) : représente une valeur optionnelle.  \par
 \textit{\textbf{groupBy}} (fonction):  est une fonction utilisée pour regrouper les éléments d'une liste (\textit{l\_0}) ayant une clé en commun (\textit{key}). Cette fonction renvoie une liste de tuples. Chaque tuple (\textit{tup})  contient deux éléments. Le premier représente la clé (\textit{key})  du groupement, son contenu est accessible via \textit{tup.\_1}. Le deuxième élément est une liste d'éléments de \textit{l\_0} ayant la même clé, son contenu est accessible via \textit{tup.\_2}.\par
 \textbf{\textit{List}} (type): créer une liste d'un type donné. La liste \textit{l\_1} de deux chaînes de caractères est créée comme suit:
-\begin{lstlisting}[language=scala,firstnumber=1,label={lst:case-class-hop}, basicstyle = \footnotesize,escapechar=|,numbers=left,
+\begin{lstlisting}[language=scala,firstnumber=1, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
 l_1: List[Int] = List("aa", "bb")
 \end{lstlisting} \par
@@ -395,7 +409,7 @@ La création d'une application Spark/Scala implique  les étapes suivantes:
 	\item gérer les dépendances nécessaires au fonctionnement de l'application avec le fichier de modèle objet du projet (POM);
 	\item écrire l'application en Scala;
 	\item créer le fichier JAR de l'application Spark;
-	 \item Soumettre  l'application  au cluster de machines. 
+	 \item soumettre  l'application  au cluster de machines. 
 \end{itemize}
 
 L'implémentation proposée est adaptée au mode local de Spark  ainsi qu'au  mode cluster. 
@@ -747,7 +761,7 @@ stepnumber=1]
 }
 \end{lstlisting}
 
-Le rôle de la fonction \textit{checkSignal}, définie dans le Listing \ref{lst:checkSignal},  est de vérifier chaque signal : si le signal est valide (Ligne \ref{timesout}), si le RTT existe (Ligne \ref{rttnotnone}), si le RTT est positif \label{rttpositif} et enfin si le signal ne provient pas d'une adresse IP privée (Ligne \ref{notprivate}). Nous avons utilisé les expressions régulières pour vérifier si l'adresse IP est publique ou bien privée. Nous avons profité de l'interopérabilité du Scala avec Java et nous avons  utilisé la classe java.util.regex.Pattern.
+Le rôle de la fonction \textit{checkSignal}, définie dans le Listing \ref{lst:checkSignal},  est de vérifier chaque signal : si le signal est valide (Ligne \ref{timesout}), si le RTT existe (Ligne \ref{rttnotnone}), si le RTT est positif  (Ligne \ref{rttpositif}) et enfin si le signal ne provient pas d'une adresse IP privée (Ligne \ref{notprivate}). Nous avons utilisé les expressions régulières pour vérifier si l'adresse IP est publique ou bien privée. Nous avons profité de l'interopérabilité du Scala avec Java et nous avons  utilisé la classe java.util.regex.Pattern.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Définition de la méthode checkSignal},label={lst:checkSignal}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1]
@@ -1161,7 +1175,7 @@ La commande \textit{bin/spark-submit} prend plusieurs paramètres, nous présent
 
 \paragraph{Amazon EMR }~
 
-\begin{lstlisting}[language=bash,firstnumber=1, caption={Exemple de la soumissions d'un traitement sur Spark},label={lst:submit}, basicstyle = \small,escapechar=|,numbers=left,
+\begin{lstlisting}[language=bash,firstnumber=1, caption={Exemple de la soumissions d'un traitement sur Spark},label={lst:submitemr}, basicstyle = \small,escapechar=|,numbers=left,
 stepnumber=1]
 spark-submit --deploy-mode cluster --class ripeatlasanalysis.traceroutesAnalysis s3://amazon-emr-bucket/DelayAnalysis-AWS-EMR-Final-0.0.2-SNAPSHOT-jar-with-dependencies.jar 1517961600 1518048000 3600 s3://ripeatlasdata/traceroute/source=api/af_=4/type_=builtin/msm=5004/year=2018/month=2/day=07 s3://amazon-emr-bucket/resultats
 \end{lstlisting}
@@ -1267,4 +1281,7 @@ Nous sauvegardons le résultat de l'analyse dans un fichier JSON en vue de toute
 
 \section{Conclusion}
 
-Dans ce chapitre, nous avons décrit l'implémentation de l'outil de détection en Spark/Scala.  C'est la reproduction de l'outil implémenté en MongoDB. A travers cette implémentation, nous avons évalué les différentes défis relatifs à la réutilisation du code source des autres et la façon de réutiliser impélementation destinée à être distribuée. Nous allons évaluer l'application Spark sur quelques échantillons de données dans le chapitre \ref{chap:application-on-traceroutes} avec d'autres implémentations utilisant d'autres technologies Big Data. 
+Dans ce chapitre, nous avons décrit l'implémentation de l'outil de détection en utilisant trois technologies différentes dédiées à la manipulation des données massives.  C'est la reproduction de l'outil implémenté en MongoDB.
+%A travers cette implémentation, nous avons évalué les différentes défis relatifs à la réutilisation du code source des autres et la façon de réutiliser impélementation destinée à être distribuée.
+Dans  le chapitre \ref{chap:application-on-traceroutes}, nous allons évaluer l'application de ces implémentations sur différents échantillons de traceroutes.
+% dans le chapitre \ref{chap:application-on-traceroutes} avec d'autres implémentations utilisant d'autres technologies Big Data. 

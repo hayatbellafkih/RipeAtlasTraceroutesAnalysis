@@ -1,9 +1,11 @@
 \chapter*{Conclusion}
-
+\addcontentsline{toc}{chapter}{Conclusion}
 %Rappel de la problématique.
 
-L'objectif du présent travail est d'évaluer quelques technologies Big Data sur des données à grande échelle en provenance du dépot d'Atlas. Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, la présente évaluation envisage 
- la mise en place de la technologie afin d'analyser  des traceroutes et ensuite  le calcul du temps d'exécution obtenus en analysant différents échantillons de données.
+L'objectif du présent travail consiste à évaluer un sous-ensemble de technologies Big Data sur des données à grande échelle en provenance du dépôt d'Atlas. Etant donné que l'évaluation des technologies Big Data peut prendre plusieurs formes, la présente évaluation envisage 
+ la mise en place de la technologie  et   le calcul du temps d'exécution obtenu en analysant différents échantillons de données avec cette technologie.
+ 
+ Le modèle choisi pour l'évaluation des technologies Big Data se base sur des réponses aux requêtes de type traceroute effectués par des sondes.  Le volume et la vélocité  avec lesquels les traceroutes  sont générés dépassent la capacité des outils traditionnels comme les bases de données relationnelles. La gestion des données à grande échelle  fait partie des objectifs du Big Data.
 %L'évaluation de la convenance d'une technologie Big Data nécessite de disposer de données assez suffisantes pour couvrir  le plus des  cas possibles. 
 %Nous avons choisi des données dans le domaine des réseaux informatiques,  disponibles sur le dépôt de RIPE Atlas,  d'où l'intérêt  de bien détailler ce projet.
 
@@ -14,94 +16,82 @@ L'objectif du présent travail est d'évaluer quelques technologies Big Data sur
 %Résultats de recherche et réponses aux questions de recherche.
 %% reponse à la question 1 de recherche : pourquoi passer au big data
 
-Les données choisies pour l'évaluation des technologies Big Data ont un volume important.  Une dizaine de gigaoctets de traceroutes sont générés quotidiennement. De plus, les données quotidiennes augmentent d'un jour au suivant. Un tel volume et telle vélocité  
-ont démontré  les limites des outils traditionnels et leur incapacité de  manipuler les données à grande échelle.
-En revanche, la gestion du volume important et de la vélocité des données  font partie des objectifs du Big Data.
+
+%données   ayant un volume important.  Une dizaine de gigaoctets de traceroutes sont générés quotidiennement. De plus, les données quotidiennes augmentent d'un jour au un autre.
+%ont démontré  les limites des outils traditionnels et leur incapacité de  manipuler les données à grande échelle.
+
  
+Après avoir manipulé de nombreuses traceroutes, nous avons appris que les technologies Big Data doivent garantir plusieurs tâches dans un processus d'analyse de donnés. En particulier, la collecte de données, le stockage de données, le traitement de ces dernières, voire d'autres.
 
-
-Les technologies Big Data sont capables de manipuler les données à grande échelle en terme de stockage comme propose le service Amazon S3, le service Amazon DynamoDB, MongoDB Atlas, etc. En terme de traitement comme garantit le framework Spark. 
-Suite à l'application  du sous-ensemble de technologies sur l'outil de détection, on distingue deux défis. Le premier est relatif à l'utilisation d'un modèle existant. Tandis que le deuxième défi est lié à la mise en place d'une technologie Big Data.
+ %sont capables de gérer les données à grande échelle. 
+%Les technologies Big Data sont capables de manipuler les données à grande échelle
+ En terme de stockage,   le service Amazon S3 est dédié au stockage des fichiers de données de grande taille. Les données stockées dans ces fichiers sont accessibles à travers le service Amazon Athena. 
+  Une autre catégorie de stockage est  les bases de données NoSQL, dont l'exemple  du service Amazon DynamoDB. Ce dernier   garantit le stockage de toute quantité de données. Un autre exemple est la base   de données NoSQL   MongoDB Atlas. Du fait qu'elle est de type document, elle peut stocker les réponses de requête traceroute sauvegardées en format JSON.  
+  
+  
+  En plus du stockage de données massives, la récupération de ces données pour  les traiter  rapidement est un autre défi du Big Data.
+  C'est pourquoi, l'utilisation d'une technologie permettant de distribuer ces traitements permet d'améliorer considérablement une analyse en terme de temps. C'est l'objectif  du framework Spark, tel qu'il garantit la  distribution des traitements des données sur un \textit{cluster} de machines.
+  
+   Chaque technologie Big Data apporte ses propres concepts. En effet, pour un traitement donné, des solutions sont proposées en adéquation avec ces concepts. Une base de données MongoDB manipule des collections, des documents, etc. Amazon Athena adopte le principe de \textit{schema on read}, l'organisation des fichiers de données à travers le partitionnement, etc. La mise en place d'une application basée sur Spark nécessite  la traduction des traitements pour qu'elles soient effectués le plus possible  de manière distribuée. De plus, il  faut construire les machines du \textit{cluster} tout en prenant en compte le coût, le temps et les volumes de données manipulés.
+    
+   %demande des efforts pour choisir les entités du cluster et  configurer ce dernier tout en prenant en compte le volume de données traitées, la nature des opérations, les caractéristiques techniques du cluster, etc.  Tous ces éléments ont un effet sur les frais d'utilisation de la présente technologie.
+  
+  
+  % gérer différents types de projets vu les modules riches qu'il inclut. Comme les projets où on manipule des données semi-structurées, des données structurées, etc. Des projets relatifs au machine learning.  Ce framework est capable de distribuer les traitements sur cluster de machine et les données sont manipulées en mémoire.
+ 
 
 %la réutilisation d'un travail existant
 %Le travail de référence sur lequel ce travail est  
-Le travail de référence 
- La réécriture complète ou partielle d'un travail autre travail peut 
-Les implémentations présentées dans ce travail utilise le principe de détection des anomalies créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16}. La réécriture exacte n'est pas toujours optimale, car certains choix ont été faits selon la technologie avec laquelle est implémentée. 
+%Le travail de référence 
+ %La réécriture complète ou partielle d'un travail autre travail peut 
+%Les implémentations présentées dans ce travail utilise le principe de détection des anomalies créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16}. La réécriture exacte n'est pas toujours optimale, car certains choix ont été faits selon la technologie avec laquelle est implémentée. 
 
 
 %l'utilisation des technologies Big Data
-L'adoption d'une technologie Big Data en particulier pour traiter des données une décision qui doit prendre en compte plusieurs entrées dont on cite quelques unes selon l'évaluation réalisée dans ce travail. D'abord, il faut préciser la fréquence de l'analyse. 
-
- Sur base de la fréquence, des frais d'utilisation des technologies Big Data sont appliqués. ainsi, cela affecte l'évolutivité de la technologie.  Ensuite, il faut prendre en compte  le temps  accepté   suite à l'utilisation d'une technologie. Pour certaines technologies Big Data, la configuration de celles-ci est crucial. La nature de données manipulées est importante pour préférer une technologie en particulier. Car certaines technologies sont conçues  et optimisée pour traiter des types de données en particulier. La nature des traitement joue un rôle important dans le choix d'une technologie Big Data. Ainsi, certaines technologies sont mieux adaptées à un type de traitement et pas un autre.
+%Suite à l'application  du sous-ensemble de technologies sur l'outil de détection, on distingue deux défis. Le premier est relatif à l'utilisation d'un modèle existant. Tandis que le deuxième défi est lié à la mise en place d'une technologie Big Data.
 
 
-%  D'abord, il faut préciser la  fréquence d'une analyse  conclusion du chapitre 5
+L'adoption d'une technologie Big Data en particulier pour traiter des données  doit prendre en compte plusieurs entrées. Nous citons quelques-unes selon l'évaluation réalisée dans ce mémoire. D'abord, il faut préciser la fréquence de l'analyse : si l'analyse est effectuée une seule fois ou d'une manière périodique. La fréquence de la génération des données à analyser.   Le temps admissible pour analyser un volume de données, au-delà de ce temps, l'analyse est considérée non optimale. 
+%Ce temps dépend à la fois des données analysées et les choix techniques comme les caractéristiques techniques d'un cluster EMR. De plus, la nature de données manipulées est importante. 
+%Ceci  permet de choisir la technologie la plus adaptée. Car 
+La nature des données traitées, car certaines technologies sont conçues  et optimisées pour traiter un type de donnée en particulier, c'est l'exemple des bases de données NoSQL. La nature des traitements à appliquer sur les données. Les frais d'utilisation d'une technologie est un autre facteur dans le choix de cette dernière. 
 
-D'abord, on  frais d'utilisation
-
-D'après les quelques technologies expérimentées, il est très important d'avoir à l'avance les informations utiles à la prise de décision concernant une technologie proposée.  Comme la fréquence de l'analyse, la fréquence de la génération de données, l'évolution de la quantité des nouvelles données générées dont la solution proposée doit en prendre en compte, les frais générés  à d'utilisation de la technologie, le temps écoulé pour avoir les résultats finaux d'une analyse lancée, l'évolutivité de la solution mise en place, la disponibilité des outils de la visualisation des résultats et d'autres éléments. Ces critères reflètent les questions posées lors de la  manipulation des technologies évaluées.  Enfin, malgré que les  évaluations des technologies Big Data ont été effectuées en mode local, nous avons pu découvrir, en pratique, les défis de la manipulation des données massives, comme la présence des données manquantes, les données incomplètes,  la limite des outils traditionnels pour lancer le premier test impliquant des données massives, etc. 
-
-%Ouverture.
-La disponibilité des outils informatiques permettant de stocker et de traiter des données à grande échelle, avec efficacité,  est important. Toutefois,  le modèle qui dirige l'ensemble de données est aussi de même degré d'importance dans un processus d'analyse de données, comme le cas  du modèle créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16} pour la détection des anomalies.  Nous avons compris le fonctionnement ainsi que le paramétrage du modèle. Comme continuité du présent travail, on note quelques possibilités. Par exemple, il est possible de réévaluer la précision  de ce modèle avec de nouvelles données, varier les paramètres du modèle de la détection comme la méthode adoptée au calcul des intervalles de confiance, etc. Du fait que RIPE Atlas dispose du mode Streaming dans lequel les données peuvent être récupérée en temps réel, il est intéressant d'évaluer l'intégration de l'extension \textit{Spark streaming} pour analyser les données RIPE Atlas en temps réel.  
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%I) Apports
-%II) Limites
-%III) Perspectives
-
-
-
-
-%3. Une ouverture
-
-%Les données en provenance du RIPE Atlas analysées dans ce travail peuvent passer à l'échelle 
-%dés qu'on considère plusieurs heures de traceroutes en provenance de plusieurs sondes. A travers ce travail, nous avons évalué des technologies Big Data pour analyser des échantillons de données.  
-
-
-%le choix des technologies
-
-%1. La problématique
-
-%2. Les réponses à la problématique
-
-%A travers ce travail, nous souhaitions évaluer des technologies Big Data pour l'analyse de données en provenance du dépôt RIPE Atlas. Le choix d'une technologie Big Data dépend de plusieurs facteurs. Dans un premier temps, nous avons utilisé deux technologies conçues pour le stockage de données à grande échelle : MongoDB et DynamoDB. Ensuite, nous avons expérimenté trois services d'Amazon, le premier pour le stockage de données, le deuxième  pour la découverte de données et le troisième service  est conçu pour l'interrogation  de données. Enfin, nous avons utilisé un framework qui gère le traitement distribué de données dans un cluster de machines.
-%
-%%le choix de données
-%Nous avons à disposition une variété de données, à titre indicatif, des années  de mesures effectuées par les sondes Atlas. Notre premier objectif de l'évaluation est d'évaluer les  performances des choix technique. C'est pourquoi nous n'avons pas défini des critères pour choisir l'ensemble de données. 
-%%evaluation des technologies
-%Nous avons évalué  les performances des technologies en terme de temps écoulé tout au long de l'analyse de différents échantillons.
-% Les performances de MongoDB dépendent de ... 
-% Toutefois, les performances des trois services d'Amazon dépendent de 
-% Tandis que Apache Spark dépend de 
- 
- 
 
 %perspectives
 
-%Si nous aurions plus de temps, nous aurions aimé évalué les performances de l'outil de détection conçu par Fontugne\cite{DBLP:journals/corr/FontugneAPB16} en terme de précision dans la détection d'anomalies dans les délais des liens. 
+
+%La disponibilité des outils informatiques permettant de stocker et de traiter des données à grande échelle, avec efficacité,  est important. Toutefois,  le modèle qui dirige l'ensemble de données est aussi de même degré d'importance dans un processus d'analyse de données, comme le cas  du modèle créé par Fontugne et al. \cite{DBLP:journals/corr/FontugneAPB16} pour la détection des anomalies.  Nous avons compris le fonctionnement ainsi que le paramétrage du modèle. Comme continuité du présent travail, on note quelques possibilités. 
+Nous avons validé les résultats obtenus   avec  l'implémentation de référence avec ceux obtenus avec nos deux implémentations : les services d'Amazon S3 et Athena et  Spark/Scala. Notre évaluation des technologies Big Data a examiné la mise en place de ces dernières ainsi que  le temps d'exécution obtenu sur différents échantillons de données.  Comme  suite de ce travail, il est intéressant d'évaluer la précision de l'outil de détection  en choisissant des données ciblées.
+Du fait que RIPE Atlas dispose du mode Streaming dans lequel les données peuvent être récupérées en temps réel, il est intéressant d'évaluer l'intégration de l'extension \textit{Spark streaming} pour analyser des données  d'Atlas en temps réel.  
+
+ %soutil de détection 
+%Par exemple, il est possible de réévaluer la précision  de ce modèle avec de nouvelles données, varier les paramètres du modèle de la détection comme la méthode adoptée au calcul des intervalles de confiance, etc. 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

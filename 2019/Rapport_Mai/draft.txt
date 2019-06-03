@@ -94,3 +94,54 @@ es tests non paramétriques n'ont pas besoin de supposer un type de distribution
 \label{fig:on-read}
 \source{ \url{https://blogs.oracle.com/datawarehousing/big-data-sql-quick-start-schema-on-read-and-schema-on-write-part11}, consultée le $05/08/2018$.}
 \end{figure}
+
+%Car une analyse périodique 
+%Sur base de la fréquence, des frais d'utilisation des technologies Big Data sont appliqués. 
+%De plus, la fréquence d'une analyse permet d'envisager l'évolutivité de la technologie.  Ensuite, il faut prendre en compte  le temps  accepté   suite à l'utilisation d'une technologie. Pour certaines technologies Big Data, la configuration de celles-ci est crucial. 
+
+
+%  D'abord, il faut préciser la  fréquence d'une analyse  conclusion du chapitre 5
+
+%D'abord, on  frais d'utilisation
+
+%D'après les quelques technologies expérimentées, il est très important d'avoir à l'avance les informations utiles à la prise de décision concernant une technologie proposée.  Comme la fréquence de l'analyse, la fréquence de la génération de données, l'évolution de la quantité des nouvelles données générées dont la solution proposée doit en prendre en compte, les frais générés  à d'utilisation de la technologie, le temps écoulé pour avoir les résultats finaux d'une analyse lancée, l'évolutivité de la solution mise en place, la disponibilité des outils de la visualisation des résultats et d'autres éléments. Ces critères reflètent les questions posées lors de la  manipulation des technologies évaluées.  
+
+%Enfin, malgré que les  évaluations des technologies Big Data ont été effectuées en mode local, nous avons pu découvrir, en pratique, les défis de la manipulation des données massives, comme la présence des données manquantes, les données incomplètes,  la limite des outils traditionnels pour lancer le premier test impliquant des données massives, etc. 
+
+%Ouverture.
+
+
+%I) Apports
+%II) Limites
+%III) Perspectives
+
+
+
+
+%3. Une ouverture
+
+%Les données en provenance du RIPE Atlas analysées dans ce travail peuvent passer à l'échelle 
+%dés qu'on considère plusieurs heures de traceroutes en provenance de plusieurs sondes. A travers ce travail, nous avons évalué des technologies Big Data pour analyser des échantillons de données.  
+
+
+%le choix des technologies
+
+%1. La problématique
+
+%2. Les réponses à la problématique
+
+%A travers ce travail, nous souhaitions évaluer des technologies Big Data pour l'analyse de données en provenance du dépôt RIPE Atlas. Le choix d'une technologie Big Data dépend de plusieurs facteurs. Dans un premier temps, nous avons utilisé deux technologies conçues pour le stockage de données à grande échelle : MongoDB et DynamoDB. Ensuite, nous avons expérimenté trois services d'Amazon, le premier pour le stockage de données, le deuxième  pour la découverte de données et le troisième service  est conçu pour l'interrogation  de données. Enfin, nous avons utilisé un framework qui gère le traitement distribué de données dans un cluster de machines.
+%
+%%le choix de données
+%Nous avons à disposition une variété de données, à titre indicatif, des années  de mesures effectuées par les sondes Atlas. Notre premier objectif de l'évaluation est d'évaluer les  performances des choix technique. C'est pourquoi nous n'avons pas défini des critères pour choisir l'ensemble de données. 
+%%evaluation des technologies
+%Nous avons évalué  les performances des technologies en terme de temps écoulé tout au long de l'analyse de différents échantillons.
+% Les performances de MongoDB dépendent de ... 
+% Toutefois, les performances des trois services d'Amazon dépendent de 
+% Tandis que Apache Spark dépend de 
+
+
+
+%perspectives
+
+%Si nous aurions plus de temps, nous aurions aimé évalué les performances de l'outil de détection conçu par Fontugne\cite{DBLP:journals/corr/FontugneAPB16} en terme de précision dans la détection d'anomalies dans les délais des liens. 

@@ -18,30 +18,29 @@
 \contentsline {figure}{\numberline {II.9}{\ignorespaces Phase I : préparation de données \relax }}{48}{figure.caption.53}
 \contentsline {figure}{\numberline {II.10}{\ignorespaces Phase II : détection des alarmes \relax }}{49}{figure.caption.54}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {III.1}{\ignorespaces Architecture standard du Big Data. Source : \cite {anil-big-data}\relax }}{59}{figure.caption.68}
-\contentsline {figure}{\numberline {III.2}{\ignorespaces Illustration d'une base de données NoSQL de type clé-valeur\relax }}{61}{figure.caption.80}
-\contentsline {figure}{\numberline {III.3}{\ignorespaces Illustration d'une base de données NoSQL de type graphe. Source : \url {https://en.wikipedia.org/wiki/Graph_database}, consultée le $10/05/2019$\relax }}{61}{figure.caption.82}
-\contentsline {figure}{\numberline {III.4}{\ignorespaces Illustration d'une base de données NoSQL de type document\relax }}{62}{figure.caption.84}
-\contentsline {figure}{\numberline {III.5}{\ignorespaces Illustration d'une base de données NoSQL de type colonne\relax }}{62}{figure.caption.86}
-\contentsline {figure}{\numberline {III.6}{\ignorespaces Bases de données NoSQL suivant le théorème de CAP \relax }}{64}{figure.caption.88}
-\contentsline {figure}{\numberline {III.7}{\ignorespaces Un classement des SGBDs sur \textit {DB-Engines Ranking} du $1$ août $2018$ \relax }}{65}{figure.caption.89}
-\contentsline {figure}{\numberline {III.8}{\ignorespaces Vue d'ensemble du modèle MapReduce. Source : \cite {6427487}\relax }}{67}{figure.caption.91}
-\contentsline {figure}{\numberline {III.9}{\ignorespaces Interaction entre une application Spark et le cluster manager. Source : \cite {eginning-Apache-Spark-2-cluster-overwiew}\relax }}{72}{figure.caption.98}
-\contentsline {figure}{\numberline {III.10}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{73}{figure.caption.104}
+\contentsline {figure}{\numberline {III.1}{\ignorespaces Architecture standard du Big Data. Source : \cite {anil-big-data}\relax }}{60}{figure.caption.68}
+\contentsline {figure}{\numberline {III.2}{\ignorespaces Illustration d'une base de données NoSQL de type clé-valeur\relax }}{62}{figure.caption.80}
+\contentsline {figure}{\numberline {III.3}{\ignorespaces Illustration d'une base de données NoSQL de type graphe. \relax }}{62}{figure.caption.82}
+\contentsline {figure}{\numberline {III.4}{\ignorespaces Illustration d'une base de données NoSQL de type document\relax }}{63}{figure.caption.84}
+\contentsline {figure}{\numberline {III.5}{\ignorespaces Illustration d'une base de données NoSQL de type colonne\relax }}{63}{figure.caption.86}
+\contentsline {figure}{\numberline {III.6}{\ignorespaces Bases de données NoSQL suivant le théorème de CAP \relax }}{65}{figure.caption.88}
+\contentsline {figure}{\numberline {III.7}{\ignorespaces Un classement des SGBDs sur \textit {DB-Engines Ranking} du $1$ août $2018$ \relax }}{66}{figure.caption.89}
+\contentsline {figure}{\numberline {III.8}{\ignorespaces Vue d'ensemble du modèle MapReduce. Source : \cite {6427487}\relax }}{68}{figure.caption.91}
+\contentsline {figure}{\numberline {III.9}{\ignorespaces Interaction entre une application Spark et le cluster manager. Source : \cite {eginning-Apache-Spark-2-cluster-overwiew}\relax }}{73}{figure.caption.98}
+\contentsline {figure}{\numberline {III.10}{\ignorespaces Exemple d'un flux de données avec Spark\relax }}{74}{figure.caption.104}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {IV.1}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{77}{figure.caption.110}
-\contentsline {figure}{\numberline {IV.2}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }}{80}{figure.caption.115}
-\contentsline {figure}{\numberline {IV.3}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{81}{figure.caption.119}
-\contentsline {figure}{\numberline {IV.4}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{89}{figure.caption.131}
+\contentsline {figure}{\numberline {IV.1}{\ignorespaces Une combinaison des services web d'Amazon : Amazon S3, Amazon Glue, Amazon Athena, Amazon Quicksight et Amazon Redshift\relax }}{78}{figure.caption.111}
+\contentsline {figure}{\numberline {IV.2}{\ignorespaces L'organisation des traceroutes dans le compartiment Amazon S3 \textit {s3://ripeatlasdata}\relax }}{81}{figure.caption.115}
+\contentsline {figure}{\numberline {IV.3}{\ignorespaces Une exemple d'une requête SQL sur Amazon Athena\relax }}{83}{figure.caption.119}
+\contentsline {figure}{\numberline {IV.4}{\ignorespaces Groupement des traceroutes avec MongoDB\relax }}{90}{figure.caption.131}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {V.1}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec MongoDB \relax }}{108}{figure.caption.155}
-\contentsline {figure}{\numberline {V.2}{\ignorespaces Le temps d'exécution selon la taille des données avec MongoDB\relax }}{108}{figure.caption.157}
-\contentsline {figure}{\numberline {V.3}{\ignorespaces Fréquence des traceroutes ayant un même nombre de sauts\relax }}{109}{figure.caption.158}
-\contentsline {figure}{\numberline {V.4}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec Amazon S3 et Athena \relax }}{109}{figure.caption.160}
-\contentsline {figure}{\numberline {V.5}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{110}{figure.caption.162}
-\contentsline {figure}{\numberline {V.6}{\ignorespaces \relax }}{112}{figure.caption.164}
-\contentsline {figure}{\numberline {V.7}{\ignorespaces Mesure des temps d'exécution de l'application Spark selon différentes tailles de mémoire allouées au \textit {driver} et pour deux ensembles de données différentes\relax }}{113}{figure.caption.166}
-\contentsline {figure}{\numberline {V.8}{\ignorespaces \relax }}{115}{figure.caption.172}
-\contentsline {figure}{\numberline {V.9}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{117}{figure.caption.179}
+\contentsline {figure}{\numberline {V.1}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec MongoDB \relax }}{109}{figure.caption.155}
+\contentsline {figure}{\numberline {V.2}{\ignorespaces Le temps d'exécution selon la taille des données avec MongoDB\relax }}{109}{figure.caption.157}
+\contentsline {figure}{\numberline {V.3}{\ignorespaces Fréquence des traceroutes ayant un même nombre de sauts\relax }}{110}{figure.caption.158}
+\contentsline {figure}{\numberline {V.4}{\ignorespaces Les composantes du temps d'exécution lors de l'analyse des traceroutes avec Amazon S3 et Athena \relax }}{110}{figure.caption.160}
+\contentsline {figure}{\numberline {V.5}{\ignorespaces Les temps d'exécution de la détection des anomalies en fonction de la taille de données (Amazon S3 et Amazon Athena)\relax }}{111}{figure.caption.162}
+\contentsline {figure}{\numberline {V.6}{\ignorespaces Déroulement d'une analyse de traceroutes en Spark/Scala en mode local \relax }}{113}{figure.caption.164}
+\contentsline {figure}{\numberline {V.7}{\ignorespaces Déroulement d'une analyse de traceroutes en Spark/Scala en mode cluster EMR\relax }}{114}{figure.caption.170}
+\contentsline {figure}{\numberline {V.8}{\ignorespaces Organisation de la mémoire d'un conteneur YARN. Source : \cite {best-practices-emr}\relax }}{116}{figure.caption.177}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

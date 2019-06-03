@@ -1,94 +1,96 @@
-\BOOKMARK [0][-]{chapter.1}{RIPE\040Atlas}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Introduction}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{RIPE\040NCC}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.3}{Présentation du projet Atlas}{chapter.1}% 4
-\BOOKMARK [2][-]{subsection.1.3.1}{Les\040mesures\040actives\040et\040passives\040de\040l'Internet}{section.1.3}% 5
-\BOOKMARK [2][-]{subsection.1.3.2}{Généralités sur les sondes}{section.1.3}% 6
-\BOOKMARK [2][-]{subsection.1.3.3}{Les générations des sondes}{section.1.3}% 7
-\BOOKMARK [2][-]{subsection.1.3.4}{Les\040versions\040du\040firmware\040des\040sondes}{section.1.3}% 8
-\BOOKMARK [2][-]{subsection.1.3.5}{Connexion des sondes à Internet}{section.1.3}% 9
-\BOOKMARK [2][-]{subsection.1.3.6}{Architecture du système Atlas}{section.1.3}% 10
-\BOOKMARK [1][-]{section.1.4}{Les\040mesures\040des\040sondes}{chapter.1}% 11
-\BOOKMARK [2][-]{subsection.1.4.1}{Les mesures intégrées : Built-in mesurement }{section.1.4}% 12
-\BOOKMARK [2][-]{subsection.1.4.2}{Les crédits d'Atlas}{section.1.4}% 13
-\BOOKMARK [2][-]{subsection.1.4.3}{Les mesures personnalisées : User Defined Mesurement }{section.1.4}% 14
-\BOOKMARK [2][-]{subsection.1.4.4}{Sélection des sondes}{section.1.4}% 15
-\BOOKMARK [1][-]{section.1.5}{Les sources de données Atlas}{chapter.1}% 16
-\BOOKMARK [1][-]{section.1.6}{Les\040ancres\040Atlas}{chapter.1}% 17
-\BOOKMARK [1][-]{section.1.7}{Limitations\040du\040projet\040Atlas}{chapter.1}% 18
-\BOOKMARK [2][-]{subsection.1.7.1}{Les sondes et la vie privée}{section.1.7}% 19
-\BOOKMARK [2][-]{subsection.1.7.2}{La sécurité dans Atlas}{section.1.7}% 20
-\BOOKMARK [2][-]{subsection.1.7.3}{Quelques\040limitations\040des\040mesures\040des\040sondes}{section.1.7}% 21
-\BOOKMARK [2][-]{subsection.1.7.4}{Confiance aux données Atlas}{section.1.7}% 22
-\BOOKMARK [1][-]{section.1.8}{Projets\040existants\040de\040mesures\040d'Internet}{chapter.1}% 23
-\BOOKMARK [2][-]{subsection.1.8.1}{Test\040Traffic\040Measurement\040Service}{section.1.8}% 24
-\BOOKMARK [2][-]{subsection.1.8.2}{ProbeAPI}{section.1.8}% 25
-\BOOKMARK [2][-]{subsection.1.8.3}{Archipelago}{section.1.8}% 26
-\BOOKMARK [2][-]{subsection.1.8.4}{DIMES}{section.1.8}% 27
-\BOOKMARK [2][-]{subsection.1.8.5}{SamKnows}{section.1.8}% 28
-\BOOKMARK [1][-]{section.1.9}{Quelques cas d'utilisation des données collectées par les sondes}{chapter.1}% 29
-\BOOKMARK [2][-]{subsection.1.9.1}{Détection des coupures d'Internet}{section.1.9}% 30
-\BOOKMARK [2][-]{subsection.1.9.2}{Aide à la prise de décision}{section.1.9}% 31
-\BOOKMARK [2][-]{subsection.1.9.3}{Le\040suivi\040des\040censures}{section.1.9}% 32
-\BOOKMARK [2][-]{subsection.1.9.4}{Le suivi des performances d'un réseau}{section.1.9}% 33
-\BOOKMARK [2][-]{subsection.1.9.5}{Le suivi des détours dans un trafic local}{section.1.9}% 34
-\BOOKMARK [2][-]{subsection.1.9.6}{Visualisation\040:\040indicateurs\040et\040dashboard}{section.1.9}% 35
-\BOOKMARK [1][-]{section.1.10}{Conclusion}{chapter.1}% 36
-\BOOKMARK [0][-]{chapter.2}{Détection des anomalies dans les délais d'un lien}{}% 37
-\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 38
-\BOOKMARK [1][-]{section.2.2}{Présentation générale}{chapter.2}% 39
-\BOOKMARK [1][-]{section.2.3}{Pourquoi analyser les délais des liens ?}{chapter.2}% 40
-\BOOKMARK [1][-]{section.2.4}{Les données utilisées dans l'analyse des délais}{chapter.2}% 41
-\BOOKMARK [1][-]{section.2.5}{Le principe de détection des changements des délais}{chapter.2}% 42
-\BOOKMARK [1][-]{section.2.6}{L'étude des délais des liens en pratique : l'évolution du RTT différentiel des liens}{chapter.2}% 43
-\BOOKMARK [2][-]{subsection.2.6.1}{Les étapes principales de détection}{section.2.6}% 44
-\BOOKMARK [2][-]{subsection.2.6.2}{Description des paramètres de l'analyse des délais}{section.2.6}% 45
-\BOOKMARK [2][-]{subsection.2.6.3}{Processus de détection des anomalies : notation formelle}{section.2.6}% 46
-\BOOKMARK [1][-]{section.2.7}{Quelques étapes détaillées de la détection}{chapter.2}% 47
-\BOOKMARK [2][-]{subsection.2.7.1}{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{section.2.7}% 48
-\BOOKMARK [2][-]{subsection.2.7.2}{Calcul de la référence}{section.2.7}% 49
-\BOOKMARK [2][-]{subsection.2.7.3}{Détection des anomalies}{section.2.7}% 50
-\BOOKMARK [1][-]{section.2.8}{Processus de détection des anomalies : notation par fonctions}{chapter.2}% 51
-\BOOKMARK [1][-]{section.2.9}{Exemple illustratif du processus de détection des anomalies}{chapter.2}% 52
-\BOOKMARK [1][-]{section.2.10}{Conclusion}{chapter.2}% 53
-\BOOKMARK [0][-]{chapter.3}{Introduction\040au\040Big\040Data}{}% 54
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 55
-\BOOKMARK [1][-]{section.3.2}{Processus d'analyse de données massives}{chapter.3}% 56
-\BOOKMARK [1][-]{section.3.3}{Quelques concepts associés au Big Data}{chapter.3}% 57
-\BOOKMARK [2][-]{subsection.3.3.1}{Définition du Big Data : Volume, Vélocité, Variété et Véracité}{section.3.3}% 58
-\BOOKMARK [2][-]{subsection.3.3.2}{L'architecture\040standard\040du\040Big\040Data}{section.3.3}% 59
-\BOOKMARK [2][-]{subsection.3.3.3}{Les bases de données NoSQL \(Not Only SQL\) }{section.3.3}% 60
-\BOOKMARK [2][-]{subsection.3.3.4}{Extraction,\040Transformation,\040Loading\040\(ETL\)}{section.3.3}% 61
-\BOOKMARK [2][-]{subsection.3.3.5}{Schema\040on\040Write\040et\040Schema\040on\040Read}{section.3.3}% 62
-\BOOKMARK [2][-]{subsection.3.3.6}{L'informatique distribuée et l'analyse de données massives}{section.3.3}% 63
-\BOOKMARK [2][-]{subsection.3.3.7}{MapReduce}{section.3.3}% 64
-\BOOKMARK [1][-]{section.3.4}{Parcours\040de\040quelques\040technologies\040du\040Big\040Data}{chapter.3}% 65
-\BOOKMARK [2][-]{subsection.3.4.1}{MongoDB}{section.3.4}% 66
-\BOOKMARK [2][-]{subsection.3.4.2}{Amazon\040DynamoDB}{section.3.4}% 67
-\BOOKMARK [2][-]{subsection.3.4.3}{Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{section.3.4}% 68
-\BOOKMARK [2][-]{subsection.3.4.4}{Apache\040Hadoop}{section.3.4}% 69
-\BOOKMARK [2][-]{subsection.3.4.5}{Apache\040Spark\040}{section.3.4}% 70
-\BOOKMARK [2][-]{subsection.3.4.6}{Amazon\040Elastic\040MapReduce}{section.3.4}% 71
-\BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 72
-\BOOKMARK [0][-]{chapter.4}{Implémentations }{}% 73
-\BOOKMARK [1][-]{section.4.1}{Implémentation avec MongoDB}{chapter.4}% 74
-\BOOKMARK [1][-]{section.4.2}{Implémentation avec Amazon S3 et Amazon Athena}{chapter.4}% 75
-\BOOKMARK [1][-]{section.4.3}{Implémentation en Spark/Scala}{chapter.4}% 76
-\BOOKMARK [2][-]{subsection.4.3.1}{Introduction}{section.4.3}% 77
-\BOOKMARK [2][-]{subsection.4.3.2}{Présentation de Scala}{section.4.3}% 78
-\BOOKMARK [2][-]{subsection.4.3.3}{La\040programmation\040fonctionnelle\040et\040le\040Big\040Data}{section.4.3}% 79
-\BOOKMARK [2][-]{subsection.4.3.4}{Implémentation détaillée }{section.4.3}% 80
-\BOOKMARK [1][-]{section.4.4}{Conclusion}{chapter.4}% 81
-\BOOKMARK [0][-]{chapter.5}{Application de technologies Big Data à l'analyse de traceroutes}{}% 82
-\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 83
-\BOOKMARK [1][-]{section.5.2}{Critères d'évaluation des technologies Big Data}{chapter.5}% 84
-\BOOKMARK [1][-]{section.5.3}{Caractéristiques de l'environnement de test}{chapter.5}% 85
-\BOOKMARK [1][-]{section.5.4}{Collecte des traceroutes depuis le dépôt d'Atlas }{chapter.5}% 86
-\BOOKMARK [1][-]{section.5.5}{Application\0401\040:\040MongoDB}{chapter.5}% 87
-\BOOKMARK [1][-]{section.5.6}{Application\0402\040:\040Amazon\040Athena\040et\040Amazon\040S3}{chapter.5}% 88
-\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Apache\040Spark\040avec\040Scala}{chapter.5}% 89
-\BOOKMARK [2][-]{subsection.5.7.1}{Mode\040local}{section.5.7}% 90
-\BOOKMARK [2][-]{subsection.5.7.2}{Cluster\040Amazon\040EMR}{section.5.7}% 91
-\BOOKMARK [1][-]{section.5.8}{Conclusion}{chapter.5}% 92
-\BOOKMARK [0][-]{appendix.A}{Exemple d'une réponse traceroute}{}% 93
-\BOOKMARK [0][-]{appendix.B}{Table\040des\040intervalles\040de\040confiance}{}% 94
+\BOOKMARK [0][-]{chapter*.3}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.1}{RIPE\040Atlas}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Introduction}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{RIPE\040NCC}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Présentation du projet Atlas}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.3.1}{Les\040mesures\040actives\040et\040passives\040de\040l'Internet}{section.1.3}% 6
+\BOOKMARK [2][-]{subsection.1.3.2}{Généralités sur les sondes}{section.1.3}% 7
+\BOOKMARK [2][-]{subsection.1.3.3}{Les générations des sondes}{section.1.3}% 8
+\BOOKMARK [2][-]{subsection.1.3.4}{Les\040versions\040du\040firmware\040des\040sondes}{section.1.3}% 9
+\BOOKMARK [2][-]{subsection.1.3.5}{Connexion des sondes à Internet}{section.1.3}% 10
+\BOOKMARK [2][-]{subsection.1.3.6}{Architecture du système Atlas}{section.1.3}% 11
+\BOOKMARK [1][-]{section.1.4}{Les\040mesures\040des\040sondes}{chapter.1}% 12
+\BOOKMARK [2][-]{subsection.1.4.1}{Les mesures intégrées : Built-in mesurement }{section.1.4}% 13
+\BOOKMARK [2][-]{subsection.1.4.2}{Les crédits d'Atlas}{section.1.4}% 14
+\BOOKMARK [2][-]{subsection.1.4.3}{Les mesures personnalisées : User Defined Mesurement }{section.1.4}% 15
+\BOOKMARK [2][-]{subsection.1.4.4}{Sélection des sondes}{section.1.4}% 16
+\BOOKMARK [1][-]{section.1.5}{Les sources de données Atlas}{chapter.1}% 17
+\BOOKMARK [1][-]{section.1.6}{Les\040ancres\040Atlas}{chapter.1}% 18
+\BOOKMARK [1][-]{section.1.7}{Limitations\040du\040projet\040Atlas}{chapter.1}% 19
+\BOOKMARK [2][-]{subsection.1.7.1}{Les sondes et la vie privée}{section.1.7}% 20
+\BOOKMARK [2][-]{subsection.1.7.2}{La sécurité dans Atlas}{section.1.7}% 21
+\BOOKMARK [2][-]{subsection.1.7.3}{Quelques\040limitations\040des\040mesures\040des\040sondes}{section.1.7}% 22
+\BOOKMARK [2][-]{subsection.1.7.4}{Confiance aux données Atlas}{section.1.7}% 23
+\BOOKMARK [1][-]{section.1.8}{Projets\040existants\040de\040mesures\040d'Internet}{chapter.1}% 24
+\BOOKMARK [2][-]{subsection.1.8.1}{Test\040Traffic\040Measurement\040Service}{section.1.8}% 25
+\BOOKMARK [2][-]{subsection.1.8.2}{ProbeAPI}{section.1.8}% 26
+\BOOKMARK [2][-]{subsection.1.8.3}{Archipelago}{section.1.8}% 27
+\BOOKMARK [2][-]{subsection.1.8.4}{DIMES}{section.1.8}% 28
+\BOOKMARK [2][-]{subsection.1.8.5}{SamKnows}{section.1.8}% 29
+\BOOKMARK [1][-]{section.1.9}{Quelques cas d'utilisation des données collectées par les sondes}{chapter.1}% 30
+\BOOKMARK [2][-]{subsection.1.9.1}{Détection des coupures d'Internet}{section.1.9}% 31
+\BOOKMARK [2][-]{subsection.1.9.2}{Aide à la prise de décision}{section.1.9}% 32
+\BOOKMARK [2][-]{subsection.1.9.3}{Le\040suivi\040des\040censures}{section.1.9}% 33
+\BOOKMARK [2][-]{subsection.1.9.4}{Le suivi des performances d'un réseau}{section.1.9}% 34
+\BOOKMARK [2][-]{subsection.1.9.5}{Le suivi des détours dans un trafic local}{section.1.9}% 35
+\BOOKMARK [2][-]{subsection.1.9.6}{Visualisation\040:\040indicateurs\040et\040dashboard}{section.1.9}% 36
+\BOOKMARK [1][-]{section.1.10}{Conclusion}{chapter.1}% 37
+\BOOKMARK [0][-]{chapter.2}{Détection des anomalies dans les délais d'un lien}{}% 38
+\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 39
+\BOOKMARK [1][-]{section.2.2}{Présentation générale}{chapter.2}% 40
+\BOOKMARK [1][-]{section.2.3}{Pourquoi analyser les délais des liens ?}{chapter.2}% 41
+\BOOKMARK [1][-]{section.2.4}{Les données utilisées dans l'analyse des délais}{chapter.2}% 42
+\BOOKMARK [1][-]{section.2.5}{Le principe de détection des changements des délais}{chapter.2}% 43
+\BOOKMARK [1][-]{section.2.6}{L'étude des délais des liens en pratique : l'évolution du RTT différentiel des liens}{chapter.2}% 44
+\BOOKMARK [2][-]{subsection.2.6.1}{Les étapes principales de détection}{section.2.6}% 45
+\BOOKMARK [2][-]{subsection.2.6.2}{Description des paramètres de l'analyse des délais}{section.2.6}% 46
+\BOOKMARK [2][-]{subsection.2.6.3}{Processus de détection des anomalies : notation formelle}{section.2.6}% 47
+\BOOKMARK [1][-]{section.2.7}{Quelques étapes détaillées de la détection}{chapter.2}% 48
+\BOOKMARK [2][-]{subsection.2.7.1}{Calcul de l'intervalle de confiance de la médiane des RTTs différentiels}{section.2.7}% 49
+\BOOKMARK [2][-]{subsection.2.7.2}{Calcul de la référence}{section.2.7}% 50
+\BOOKMARK [2][-]{subsection.2.7.3}{Détection des anomalies}{section.2.7}% 51
+\BOOKMARK [1][-]{section.2.8}{Processus de détection des anomalies : notation par fonctions}{chapter.2}% 52
+\BOOKMARK [1][-]{section.2.9}{Exemple illustratif du processus de détection des anomalies}{chapter.2}% 53
+\BOOKMARK [1][-]{section.2.10}{Conclusion}{chapter.2}% 54
+\BOOKMARK [0][-]{chapter.3}{Introduction\040au\040Big\040Data}{}% 55
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 56
+\BOOKMARK [1][-]{section.3.2}{Processus d'analyse de données massives}{chapter.3}% 57
+\BOOKMARK [1][-]{section.3.3}{Quelques concepts associés au Big Data}{chapter.3}% 58
+\BOOKMARK [2][-]{subsection.3.3.1}{Définition du Big Data : Volume, Vélocité, Variété et Véracité}{section.3.3}% 59
+\BOOKMARK [2][-]{subsection.3.3.2}{L'architecture\040standard\040du\040Big\040Data}{section.3.3}% 60
+\BOOKMARK [2][-]{subsection.3.3.3}{Les bases de données NoSQL \(Not Only SQL\) }{section.3.3}% 61
+\BOOKMARK [2][-]{subsection.3.3.4}{Extraction,\040Transformation,\040Loading\040\(ETL\)}{section.3.3}% 62
+\BOOKMARK [2][-]{subsection.3.3.5}{Schema\040on\040Write\040et\040Schema\040on\040Read}{section.3.3}% 63
+\BOOKMARK [2][-]{subsection.3.3.6}{L'informatique distribuée et l'analyse de données massives}{section.3.3}% 64
+\BOOKMARK [2][-]{subsection.3.3.7}{MapReduce}{section.3.3}% 65
+\BOOKMARK [1][-]{section.3.4}{Parcours\040de\040quelques\040technologies\040du\040Big\040Data}{chapter.3}% 66
+\BOOKMARK [2][-]{subsection.3.4.1}{MongoDB}{section.3.4}% 67
+\BOOKMARK [2][-]{subsection.3.4.2}{Amazon\040DynamoDB}{section.3.4}% 68
+\BOOKMARK [2][-]{subsection.3.4.3}{Amazon\040S3,\040Amazon\040Glue\040et\040Amazon\040Athena\040}{section.3.4}% 69
+\BOOKMARK [2][-]{subsection.3.4.4}{Apache\040Hadoop}{section.3.4}% 70
+\BOOKMARK [2][-]{subsection.3.4.5}{Apache\040Spark\040}{section.3.4}% 71
+\BOOKMARK [2][-]{subsection.3.4.6}{Amazon\040Elastic\040MapReduce}{section.3.4}% 72
+\BOOKMARK [1][-]{section.3.5}{Conclusion}{chapter.3}% 73
+\BOOKMARK [0][-]{chapter.4}{Implémentations }{}% 74
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 75
+\BOOKMARK [1][-]{section.4.2}{Implémentation avec MongoDB}{chapter.4}% 76
+\BOOKMARK [1][-]{section.4.3}{Implémentation avec Amazon S3 et Amazon Athena}{chapter.4}% 77
+\BOOKMARK [1][-]{section.4.4}{Implémentation en Spark/Scala}{chapter.4}% 78
+\BOOKMARK [2][-]{subsection.4.4.1}{Présentation de Scala}{section.4.4}% 79
+\BOOKMARK [2][-]{subsection.4.4.2}{La\040programmation\040fonctionnelle\040et\040le\040Big\040Data}{section.4.4}% 80
+\BOOKMARK [2][-]{subsection.4.4.3}{Implémentation détaillée }{section.4.4}% 81
+\BOOKMARK [1][-]{section.4.5}{Conclusion}{chapter.4}% 82
+\BOOKMARK [0][-]{chapter.5}{Application de technologies Big Data à l'analyse de traceroutes}{}% 83
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 84
+\BOOKMARK [1][-]{section.5.2}{Critères d'évaluation des technologies Big Data}{chapter.5}% 85
+\BOOKMARK [1][-]{section.5.3}{Caractéristiques de l'environnement de test}{chapter.5}% 86
+\BOOKMARK [1][-]{section.5.4}{Collecte des traceroutes depuis le dépôt d'Atlas }{chapter.5}% 87
+\BOOKMARK [1][-]{section.5.5}{Application\0401\040:\040MongoDB}{chapter.5}% 88
+\BOOKMARK [1][-]{section.5.6}{Application\0402\040:\040Amazon\040Athena\040et\040Amazon\040S3}{chapter.5}% 89
+\BOOKMARK [1][-]{section.5.7}{Application\0403\040:\040Apache\040Spark\040avec\040Scala}{chapter.5}% 90
+\BOOKMARK [2][-]{subsection.5.7.1}{Mode\040local}{section.5.7}% 91
+\BOOKMARK [2][-]{subsection.5.7.2}{Cluster\040Amazon\040EMR}{section.5.7}% 92
+\BOOKMARK [1][-]{section.5.8}{Conclusion}{chapter.5}% 93
+\BOOKMARK [0][-]{chapter*.178}{Conclusion}{}% 94
+\BOOKMARK [0][-]{appendix.A}{Exemple d'une réponse traceroute}{}% 95
+\BOOKMARK [0][-]{appendix.B}{Table\040des\040intervalles\040de\040confiance}{}% 96

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  2 JUN 2019 05:09
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.11.1)  3 JUN 2019 02:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1292,18 +1292,8 @@ Package: threeparttable 2003/06/13  v 3.0
 )
 (./scalamacros.tex) (./rapport_final.aux (./resume.aux) (./Remerciéments.aux)
 (./introductionII.aux) (./chapitre1.aux) (./chapitre2.aux) (./chapitre3.aux)
-(./chapitre4.aux
-
-LaTeX Warning: Label `lst:case-class-hop' multiply defined.
-
-
-LaTeX Warning: Label `rttpositif' multiply defined.
-
-
-LaTeX Warning: Label `lst:submit' multiply defined.
-
-) (./chapitre5.aux) (./conclusion.aux) (./Un_enregistrement_traceroute.aux)
-(./table-theoreme21-formattex_annexe.aux))
+(./chapitre4.aux) (./chapitre5.aux) (./conclusion.aux)
+(./Un_enregistrement_traceroute.aux) (./table-theoreme21-formattex_annexe.aux))
 \openout1 = `rapport_final.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 235.
@@ -1322,7 +1312,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 235.
 LaTeX Font Info:    ... okay on input line 235.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 235.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 235.
-
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -1452,14 +1441,17 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
  (./Remerciéments.tex) [2
 
 
-] (./rapport_final.toc [3
+] (./rapport_final.toc
+Underfull \vbox (badness 1400) has occurred while \output is active []
 
-] [4])
+ [3
+
+]
+[4])
 \tf@toc=\write9
 \openout9 = `rapport_final.toc'.
 
-
-[5]
+ [5]
 \openout2 = `introductionII.aux'.
 
  (./introductionII.tex) [6
@@ -1695,12 +1687,12 @@ T1/cmr/m/n/12 011099\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 463 =
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [54])
-[55]
+[55] [56]
 \openout2 = `chapitre3.aux'.
 
  (./chapitre3.tex
 Chapitre III.
-[56
+[57
 
 
 ]
@@ -1710,23 +1702,23 @@ dmarr . com / default . asp ? contentID = 690$[][]\T1/ptm/m/n/10 , consul-tée l
 e
  []
 
-[57]
+[58]
 File: illustrations/bigdata-architecture.png Graphic file (type bmp)
 <illustrations/bigdata-architecture.png>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[58] [59] (./illustrations/key-value-nosql-4.tex)
+[59] [60] (./illustrations/key-value-nosql-4.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: illustrations/GraphDatabase_PropertyGraph.png Graphic file (type bmp)
 <illustrations/GraphDatabase_PropertyGraph.png>
-[60] (./illustrations/document-nosql-3.tex) [61]
+[61] (./illustrations/document-nosql-3.tex) [62]
 File: illustrations/colomn-db-2.png Graphic file (type bmp)
 <illustrations/colomn-db-2.png>
- [62]
+ [63]
 File: illustrations/cap.jpg Graphic file (type bmp)
 <illustrations/cap.jpg>
 
@@ -1738,171 +1730,146 @@ File: illustrations/ranking-db.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[63] [64] [65] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[64] [65] [66] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 222.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 224.
 
-[66]
+[67]
 File: illustrations/2-Figure1-1-map-reduce-workflow.png Graphic file (type bmp)
 
 <illustrations/2-Figure1-1-map-reduce-workflow.png>
- [67] [68] [69]
-Underfull \hbox (badness 7133) in paragraph at lines 355--355
+ [68] [69] [70]
+Underfull \hbox (badness 7133) in paragraph at lines 357--357
 [][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / cwiki . apache 
 . org / confluence / display / Hive / LanguageManual +
  []
 
-[70]
+[71]
 File: illustrations/cluster-overview.jpg Graphic file (type bmp)
 <illustrations/cluster-overview.jpg>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[71] [72]
+[72] [73]
 File: illustrations/global_view_rdd.png Graphic file (type bmp)
 <illustrations/global_view_rdd.png>
- [73]
-Underfull \hbox (badness 10000) in paragraph at lines 507--507
+ [74]
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
 [][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / hadoop . apache
  . org / docs / current / hadoop -[] yarn / hadoop -[] yarn -[]
  []
 
-[74]
-Underfull \hbox (badness 10000) in paragraph at lines 531--531
+[75]
+Underfull \hbox (badness 10000) in paragraph at lines 533--533
 [][][]\T1/ptm/m/n/10 .[][]URL : [][]$\T1/pcr/m/n/10 https : / / calculator . s3
  . amazonaws . com / index . html # s = EMR$[][]\T1/ptm/m/n/10 , consul-tée le
  []
 
-) [75]
+) [76]
 \openout2 = `chapitre4.aux'.
 
  (./chapitre4.tex
 Chapitre IV.
-[76
+[77
 
 
 ]
 File: illustrations/glue_crawler.png Graphic file (type bmp)
 <illustrations/glue_crawler.png>
-
-Overfull \hbox (4.51187pt too wide) in paragraph at lines 54--56
-[]\T1/ptm/m/n/12 Afin de dé-cou-vrir ra-pi-de-ment le schéma des tra-ce-routes,
- la dé-tec-tion au-to-ma-tique du schéma|
- []
-
-[77] [78]
+ [78] [79] [80]
 File: illustrations/partitionnement-athena.png Graphic file (type bmp)
 <illustrations/partitionnement-athena.png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[79] [80]
+ [81] [82]
 File: illustrations/sqlRequestAthena2.png Graphic file (type bmp)
 <illustrations/sqlRequestAthena2.png>
- Excluding 'comment' comment. [81]
+ Excluding 'comment' comment.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 264.
- [82]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+put line 281.
+
+Underfull \vbox (badness 1783) has occurred while \output is active []
+
+ [83]
+[84] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 326.
+(caption)                particular \caption on input line 339.
 See the caption package documentation for explanation.
 
-[83] [84] [85]
-Underfull \hbox (badness 3179) in paragraph at lines 421--421
+[85] [86]
+Underfull \hbox (badness 3179) in paragraph at lines 435--435
 [][][]\T1/ptm/m/n/10 .[][]Voir la liste des tra-ce-routes uti-li-sés dans l'exe
 mple illus-tra-tif dis-po-nible sur Gi-tHub. URL :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 421--421
+Underfull \hbox (badness 10000) in paragraph at lines 435--435
 [][]$\T1/pcr/m/n/10 https : / / github . com / hayatbellafkih / SparkSalacaTrac
 eroutesAnalysis / blob /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 421--421
+Underfull \hbox (badness 10000) in paragraph at lines 435--435
 \T1/pcr/m/n/10 master / rttDelaysSparkScala / src / main / resources / test / r
 esult _ modified . json$[][]\T1/ptm/m/n/10 ,
  []
 
-[86]
+[87]
 Missing character: There is no   in font ptmr8t!
- [87] [88] (./illustrations/read-data-from-mongodb.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 571--572
+ [88] [89] (./illustrations/read-data-from-mongodb.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 [] $\OML/cmm/m/it/12 rawTraceroutes$ $\OMS/cmsy/m/n/12  $ \T1/pcr/m/n/12 les tr
 aceroutes stockés dans $\OML/cmm/m/it/12 collection$ \T1/pcr/m/n/12 et
  []
 
-[89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99]
+[90] [91] [92] [93] [94] [95] [96] [97] [98] [99] [100]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [100]
-[101] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [101]
+[102] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) [102]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [103])
-[104]
+) [103] [104])
+[105]
 \openout2 = `chapitre5.aux'.
 
  (./chapitre5.tex
 Chapitre V.
-[105
+[106
 
 
 ]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[106] (./illustrations/mongodbmesuretime.tex) [107]
+[107] (./illustrations/mongodbmesuretime.tex) [108]
 File: illustrations/medianTime-execution-mongodb.png Graphic file (type bmp)
 <illustrations/medianTime-execution-mongodb.png>
- [108]
+ [109]
 File: illustrations/frequencesauttraceroutes2.png Graphic file (type bmp)
 <illustrations/frequencesauttraceroutes2.png>
 
-(./illustrations/amazonathenatiming.tex) [109]
+(./illustrations/amazonathenatiming.tex) [110]
 File: illustrations/temps-exection-amazonathena.png Graphic file (type bmp)
 <illustrations/temps-exection-amazonathena.png>
- [110] [111]
-(./illustrations/sparktimingLocal.tex)
-File: illustrations/variant_driver_memory.png Graphic file (type bmp)
-<illustrations/variant_driver_memory.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [112]
-[113] (./illustrations/sparktimingEMR.tex)
-Underfull \vbox (badness 4036) has occurred while \output is active []
-
- [114]
-[115]
-Underfull \hbox (badness 10000) in paragraph at lines 617--617
+ [111]
+(./illustrations/sparktimingLocal.tex) [112] [113]
+(./illustrations/sparktimingEMR.tex) [114]
+Underfull \hbox (badness 10000) in paragraph at lines 616--616
 [][][]\T1/ptm/m/n/10 .[][]Source : [][]$\T1/pcr/m/n/10 https : / / aws . amazon
  . com / fr / premiumsupport / knowledge -[] center / emr -[]
  []
 
+[115]
 File: illustrations/spark-executoronyarn.png Graphic file (type bmp)
 <illustrations/spark-executoronyarn.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[116]) [117]
+ [116]) [117]
 \openout2 = `conclusion.aux'.
 
  (./conclusion.tex [118
@@ -1911,7 +1878,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ]) [119]
 \openout2 = `Un_enregistrement_traceroute.aux'.
 
- (./Un_enregistrement_traceroute.tex
+
+(./Un_enregistrement_traceroute.tex
 Annexe A.
 [120
 
@@ -2111,17 +2079,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 296.
 (./Un_enregistrement_traceroute.aux) (./table-theoreme21-formattex_annexe.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 296.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 296.
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 32735 strings out of 493007
- 572735 string characters out of 6136719
- 1093746 words of memory out of 5000000
- 35887 multiletter control sequences out of 15000+600000
+ 32732 strings out of 493007
+ 572587 string characters out of 6136719
+ 1093778 words of memory out of 5000000
+ 35885 multiletter control sequences out of 15000+600000
  69329 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,21n,97p,1128b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,21n,97p,1111b,1998s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on rapport_final.pdf (133 pages).

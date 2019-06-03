@@ -1,0 +1,33 @@
+\documentclass[]{report}
+
+
+% Title Page
+\title{}
+\author{}
+
+
+\begin{document}
+\chapter*{Résumé}
+
+
+RIPE Atlas est un projet créé et géré par l'organisme RIPE NCC.  Ce projet consiste  à déployer de
+simples dispositifs, appelés sondes, que l'on  connecte à un routeur. Ces sondes consomment une quantité
+faible d'électricité et de bande passante. Elle ont la capacité d'effectuer des mesures liées aux réseaux informatiques.
+La répartition abondante des sondes Atlas engendre quotidiennement une quantité importante
+de données qui dépasse la capacité des outils traditionnels de stockage et de traitements. On parle de données massives. 
+
+Certaines problématiques dans le domaine des réseaux
+informatiques nécessitent une exploration en profondeur des données réseaux afin d'aboutir à des
+résultats significatifs, voire d'en tirer des connaissances. Dans ce mémoire, des technologies adaptées aux données massives ont été évaluées pour étudier un des problèmes liés aux performances des réseaux informatiques. Cette adepte  outil existant qui utilise    un nombre très important de traceroutes. 
+
+
+%en utilisant des technologies adaptées aux données massives
+
+%il s'agit d'étudier le délai des liens topologiques en se basant sur 
+
+
+%L'étude des délais des liens a été évaluée par un nombre de technologies ad
+
+
+\textbf{Mots clés} : RIPE Atlas, Traceroute,  Big Data, données massives, MongoDB, Amazon Web Service, Apache Spark.
+\end{document}          

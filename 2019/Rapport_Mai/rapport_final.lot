@@ -9,19 +9,20 @@
 \contentsline {table}{\numberline {II.2}{\ignorespaces Exemple 2 d'application du théorème 2.1\relax }}{40}{table.caption.45}
 \contentsline {table}{\numberline {II.3}{\ignorespaces Exemple de Mise à jour de la borne inférieure de l'intervalle de confiance de la médiane de référence\relax }}{43}{table.caption.46}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {III.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{69}{table.caption.93}
+\contentsline {table}{\numberline {III.1}{\ignorespaces Les tarifs du AWS S3 (formule Stockage standard S3)\relax }}{70}{table.caption.93}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {IV.2}{\ignorespaces Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }}{80}{table.caption.117}
 \contentsline {table}{\numberline {IV.1}{\ignorespaces Exemple des partitions créées dans un compartiment Amazon S3\relax }}{81}{table.caption.116}
+\contentsline {table}{\numberline {IV.2}{\ignorespaces Exemple d'utilisation des partitions dans une requête SQL dans Amazon Athena\relax }}{82}{table.caption.117}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {V.1}{\ignorespaces Description de quelques instances d'Amazon EC2\relax }}{106}{table.caption.150}
-\contentsline {table}{\numberline {V.2}{\ignorespaces Les paramètres de l'outil de détection\relax }}{107}{table.caption.152}
-\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{108}{table.caption.156}
-\contentsline {table}{\numberline {V.4}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{110}{table.caption.161}
-\contentsline {table}{\numberline {V.5}{\ignorespaces Les temps d'exécution d'une requête SQL sur Amazon Athena selon les données analysées\relax }}{111}{table.caption.163}
-\contentsline {table}{\numberline {V.6}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{115}{table.caption.174}
-\contentsline {table}{\numberline {V.7}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{115}{table.caption.175}
-\contentsline {table}{\numberline {V.8}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{116}{table.caption.177}
+\contentsline {table}{\numberline {V.1}{\ignorespaces Description de quelques instances d'Amazon EC2\relax }}{107}{table.caption.150}
+\contentsline {table}{\numberline {V.2}{\ignorespaces Les paramètres de l'outil de détection\relax }}{108}{table.caption.152}
+\contentsline {table}{\numberline {V.3}{\ignorespaces Les temps d'exécution d'analyse de traceroutes en fonction de la taille de données avec MongoDB\relax }}{109}{table.caption.156}
+\contentsline {table}{\numberline {V.4}{\ignorespaces Les temps d'exécution par taille de l'ensemble de données (Amazon Athena et Amazon S3)\relax }}{111}{table.caption.161}
+\contentsline {table}{\numberline {V.5}{\ignorespaces Les temps d'exécution d'une requête SQL sur Amazon Athena selon les données analysées\relax }}{112}{table.caption.163}
+\contentsline {table}{\numberline {V.6}{\ignorespaces Temps d'exécution de l'analyse des délais avec Spark/Scala en mode local\relax }}{113}{table.caption.167}
+\contentsline {table}{\numberline {V.7}{\ignorespaces Les données analysées dans les clusters C1 à C6 \relax }}{114}{table.caption.172}
+\contentsline {table}{\numberline {V.8}{\ignorespaces Description des clusters utilisés avec le temps total d'exécution sur les données A\relax }}{115}{table.caption.173}
+\contentsline {table}{\numberline {V.9}{\ignorespaces Les traceroutes utilisés dans le cluster C7\relax }}{115}{table.caption.175}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{123}{table.caption.181}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Quantile $ q=50\% $, Confidence Levels $\gamma =95\%$\relax }}{123}{table.caption.179}
