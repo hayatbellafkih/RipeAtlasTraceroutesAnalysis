@@ -137,7 +137,7 @@ Etant donné que le domaine du Big Data implique plusieurs concepts, nous prése
 Les bases de données NoSQL sont conçues pour répondre à des besoins spécifiques. Elles n'ont pas été créées pour remplacer les bases de données relationnelles. Il existe plusieurs implémentations des quatre types des bases de données NoSQL. Chaque implémentation favorise un ou plusieurs  éléments suivants : la disponibilité des données, la cohérence des données et la tolérance au partitionnement.  C'est ce qu'explique le théorème CAP.	
 		\paragraph{Big Data et le théorème  CAP} \label{par:cap-theorem}:
 		
-		Dans le but d'assurer un traitement rapide de données à grande échelle, ces dernières sont réparties sur un cluster de machines  (appelées aussi  n\oe{}uds). Le théorème CAP annonce que dans le cadre d'un système distribué où le stockage de données est  réparti sur plusieurs machines,
+		Dans le but d'assurer un traitement rapide de données à grande échelle, ces dernières sont réparties sur un \textit{cluster} de machines  (appelées aussi  n\oe{}uds). Le théorème CAP annonce que dans le cadre d'un système distribué où le stockage de données est  réparti sur plusieurs machines,
 		%(ou n\oe{}uds) (voir \ref{sec:distruted-camput}),  
 		une base de données ne peut pas garantir les trois attributs suivants : \textit{Consistency}, \textit{Availability} et \textit{Partition Tolerence}  en même temps. \par
 			\textbf{Consistency (ou intégrité)} Chaque donnée a un seul état visible depuis l'extérieur. Par exemple, les différents serveurs hébergeant la base de données voient tous les mêmes données. C'est pourquoi une lecture faite après une écriture doit renvoyer la donnée précédemment écrite. \par
@@ -263,9 +263,9 @@ La meilleure approche dépend des besoins de l'analyse. La première approche es
 \subsection{MapReduce} \label{mapreducesection}
 %https://softwareengineering.stackexchange.com/questions/220605/why-big-data-needs-to-be-functional
 
-MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un cluster de machines. Un programme MapReduce est composé de deux phases principales   \textit{Map} et  \textit{Reduce}.
+MapReduce est un modèle de programmation proposé par Google. Il est conçu pour   le traitement distribué de grands ensembles de données   sur un \textit{cluster} de machines. Un programme MapReduce est composé de deux phases principales   \textit{Map} et  \textit{Reduce}.
 
-MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le cluster de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. 
+MapReduce divise le travail en petites parties, chacune pouvant être effectuée en parallèle sur le \textit{cluster} de machines. Autrement dit, le  problème est divisé en un grand nombre de problèmes plus petits, chaque petit problème est traité pour donner des résultats individuelles. Ces résultats sont ensuite traités pour donner un résultat final. 
 %Hadoop MapReduce est évolutif et peut également être utilisé sur de nombreux ordinateurs. 
 %\begin{tcolorbox}
 %	\textit{ MapReduce est un patron d'architecture de développement informatique, inventé par Google, dans lequel sont effectués des %calculs parallèles, et souvent distribués, de données potentiellement très volumineuses, typiquement supérieures en taille à 1 %téraoctet} \footnote{Source : \url{https://fr.wikipedia.org/wiki/MapReduce}, consultée le $20/12/2018$.}. 
@@ -285,7 +285,7 @@ Le modèle de données de base dans MapReduce  est la paire clé/valeur. Pendant
 \section{Parcours de quelques technologies du Big Data}
 La liste des technologies  du Big Data est en expansion continue pour répondre au mieux aux besoins de l'analyse de données massives. C'est pourquoi nous allons parcourir une liste non exhaustive des technologies liées au Big Data. En particulier, ce sont les technologies expérimentées pour analyser les traceroutes en provenance du projet Atlas.
 
-MongoDB est la base de données NoSQL utilisée dans l'implémentation du travail de référence \cite{InternetHealthReport}. Amazon DynamoDB est la première technologie Big Data que nous avons utilisé pour réécrire l'outil de détection, ensuite, nous avons évalué la combinaison de trois services Web d'Amazon S3, Glue et Athena. Enfin, nous avons reproduit l'outil de détection en Spark/Scala. Pour Amazon Elastic MapReduce, nous l'avons utilisé pour exécuter l'application Spark/Scala dans un cluster de machines. Nous présentons aussi l'écosystème Hadoop, étant donné qu'il fait partie des principales plateformes du Big Data.
+MongoDB est la base de données NoSQL utilisée dans l'implémentation du travail de référence \cite{InternetHealthReport}. Amazon DynamoDB est la première technologie Big Data que nous avons utilisé pour réécrire l'outil de détection, ensuite, nous avons évalué la combinaison de trois services Web d'Amazon S3, Glue et Athena. Enfin, nous avons reproduit l'outil de détection en Spark/Scala. Pour Amazon Elastic MapReduce, nous l'avons utilisé pour exécuter l'application Spark/Scala dans un \textit{cluster} de machines. Nous présentons aussi l'écosystème Hadoop, étant donné qu'il fait partie des principales plateformes du Big Data.
 	
 \subsection{MongoDB} \label{subsubsection:mongodb}
 %	\paragraph{Introduction à la base de données MongoDB} \label{subsubsection:mongodb}~
@@ -368,9 +368,9 @@ L'exécution des requêtes SQL est effectuée par le moteur de requêtes SQL Pre
 
 \subsection{Apache Hadoop}
 
-Hadoop est un framework open source conçu pour garantir le stockage et le traitement des données massives. Ceci est effectué  en utilisant des machines  qui collaborent  au sein d'un cluster. Hadoop regroupe plusieurs modules.  On présente brièvement les trois modules principaux :   \par 
-\textbf{Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux dans un cluster Hadoop  tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
-\textbf{Hadoop YARN} (Yet Another Resource Negotiator) est la composante  de Hadoop permettant de  gérer les ressources dans un cluster Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  YARN  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
+Hadoop est un framework open source conçu pour garantir le stockage et le traitement des données massives. Ceci est effectué  en utilisant des machines  qui collaborent  au sein d'un \textit{cluster}. Hadoop regroupe plusieurs modules.  On présente brièvement les trois modules principaux :   \par 
+\textbf{Hadoop HDFS}  (Hadoop Distributed File System) est un système de fichier distribué permettant de stocker les fichiers volumineux dans un \textit{cluster} Hadoop  tout en  offrant une haute disponibilité, fiabilité et tolérance aux pannes.\par
+\textbf{Hadoop YARN} (Yet Another Resource Negotiator) est la composante  de Hadoop permettant de  gérer les ressources dans un \textit{cluster} Hadoop. Ceci inclut l'allocation des ressources aux différentes applications.  YARN  garantit les différents traitements d'être exécutés sur les données stockées dans HDFS.\par
 
 \textbf{Hadoop MapReduce} (voir la section \ref{mapreducesection}).
 
@@ -398,9 +398,9 @@ est un framework de calcul distribué. C'est un ensemble de composantes conçues
 
 \subparagraph{Spark Cluster et Resource Management System}
 
-Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du cluster en nombre de machines est variable. Il est possible d'avoir un cluster avec peu de machines mais aussi un cluster avec des milliers de machines. En vue de gérer efficacement les machines d'un cluster, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
+Spark est un système distribué conçu pour traiter les données massives rapidement et avec efficacité. Ce système est déployé sur un ensemble de machines, qu'on appelle Spark \textit{cluster}. La taille du \textit{cluster} en nombre de machines est variable. Il est possible d'avoir un \textit{cluster} avec peu de machines mais aussi un \textit{cluster} avec des milliers de machines. En vue de gérer efficacement les machines d'un \textit{cluster}, les entreprises recourent à un système de gestion de ressources tel que Apache YARN\footnote{Description dans \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté le $09/12/2018$.} ou Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $09/12/2018$.}. Les deux composantes les plus importantes dans un système de gestion de ressources sont : le \textit{cluster manager} et le \textit{worker}.
 
-Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque \textit{worker} dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque \textit{worker}. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application Spark, le cluster manager et les \textit{workers}.
+Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{workers}; la mémoire qu'ils ont et le nombre de c\oe{}urs CPU dont chaque \textit{worker} dispose. Le rôle du \textit{cluster manager} est d'orchestrer le travail en le désignant à chaque \textit{worker}. Tandis que le rôle d'un \textit{worker} est de fournir les informations utiles pour le \textit{cluster manager} ainsi que la réalisation du travail y assigné. La Figure \ref{fig:cluster-overview} montre l'interaction entre une application Spark, le \textit{cluster manager} et les \textit{workers}.
 
 
 \begin{figure}[h]
@@ -415,13 +415,13 @@ Le \textit{cluster manager} a une vue globale de l'emplacement des \textit{worke
 
 
 \subparagraph{Application Spark} \label{sparkpresentationsection}
-Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le driver interagit avec le cluster manager afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le driver Spark lance le processus \textit{executor} en passant par le cluster manager. Un autre rôle du  driver Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque executor. Pour précision , dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
+Une application Spark consiste en deux parties. La première partie concerne la logique décrivant les traitements à appliquer sur les données.  Cette logique est décrite en utilisant les APIs\footnote{API en Java, Scala, Python ou R.} disponibles. La deuxième partie est appelée le \textit{driver}, c'est le coordinateur principal d'une application Spark. Le \textit{driver} interagit avec le \textit{cluster manager} afin de trouver les machines sur lesquelles le traitement de données doit être réalisé. Ainsi, pour chacune de ces machines, le \textit{driver} Spark lance le processus \textit{executor} en passant par le \textit{cluster manager}. Un autre rôle du  \textit{driver} Spark est de gérer et de distribuer les tâches Spark en provenance de l'application Spark sur chaque \textit{executor}. Pour précision , dans la Figure \ref{fig:cluster-overview}, la classe \textit{SparkSession} est le point d'entrée vers une application Spark.
 
 \subparagraph{Spark driver et executor}
 
 Chaque Spark \textit{executor} est alloué exclusivement à une application Spark spécifique et la durée de vie d'un \textit{executor} est celle de l'application Spark. 
 
-Spark utilise l'architecture master-slave. Spark \textit{driver} est le master et Spark \textit{executor} est le slave. De ce fait, une application Spark n'a qu'un seul Spark driver et plusieurs Spark \textit{executors}. Chaque Spark \textit{executor} s'occupe d'un traitement  sur une partie  des données à analyser. De cette manière,  Spark est capable de traiter  les données de façon parallèle. 
+Spark utilise l'architecture master-slave. Spark \textit{driver} est le master et Spark \textit{executor} est le slave. De ce fait, une application Spark n'a qu'un seul Spark \textit{driver } et plusieurs Spark \textit{executors}. Chaque Spark \textit{executor} s'occupe d'un traitement  sur une partie  des données à analyser. De cette manière,  Spark est capable de traiter  les données de façon parallèle. 
 %La Figure \ref{fig:small-cluster-3} illustre un exemple d'un cluster. Ce dernier est composé de trois \textit{executors}.
 %\begin{figure}[H]
 %	\centering
@@ -439,7 +439,7 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 	\item MLib est conçu pour le machine learning. Ceci inclut la disponibilité des différents algorithmes et utilitaire du machine learning. Par exemple, les algorithmes de clustering, la classification, etc;
 	\item SparkR est consacré aux traitements liés au machine learning en utilisant  R.
 \end{itemize}
-\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribuée du calcul. Cette dernière est responsable de la distribution, de la coordination et de la planification des tâches  sur les différentes machines formant le cluster. De plus, cette partie gère l'échec d'un traitement donné et le transfert de données entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante aux pannes et en lecture seule. 
+\subparagraph{Spark Core} est la base du moteur Spark pour le traitement distribué de données.  On distingue deux parties formant Spark Core. Premièrement, la partie concernant l'infrastructure distribuée du calcul. Cette dernière est responsable de la distribution, de la coordination et de la planification des tâches  sur les différentes machines formant le \textit{cluster}. De plus, cette partie gère l'échec d'un traitement donné et le transfert de données entre les machines. Le deuxième élément formant Spark Core est appelé RDD (Resilient Distributed Dataset). Un RDD est une collection partitionnée d'objets, tolérante aux pannes et en lecture seule. 
 %La Figure \ref{fig:unified-stack}  présente les différentes entités du Spark Unified Stack avec Spark Core.
 %\begin{figure}[H]
 %	\centering
@@ -452,7 +452,7 @@ Spark utilise l'architecture master-slave. Spark \textit{driver} est le master e
 \paragraph{Resilient Distributed Datasets}\label{rdd-presentation} ~
 
 
-Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du cluster afin d'être traités en parallèle. Un RDD peut être conservé  pour une éventuelle réutilisation. On distingue deux manières de persistance. La conservation du RDD dans la mémoire (in-memory) ce que garantit l'amélioration des performances. En outre, un RDD peut être aussi conservé dans un disque. 
+Spark dispose d'une abstraction notée Resilient Distributed Datasets (ou RDDs). Un RDD est une collection d'objets immuable. Ces objets sont répartis sur les n\oe{}uds du \textit{cluster} afin d'être traités en parallèle. Un RDD peut être conservé  pour une éventuelle réutilisation. On distingue deux manières de persistance. La conservation du RDD dans la mémoire (in-memory) ce que garantit l'amélioration des performances. En outre, un RDD peut être aussi conservé dans un disque. 
 
 Les RDDs supportent deux types d'opérations sur les objets stockés : les transformations et les actions. Une  transformation appliquée sur un RDD crée un nouveau RDD, par exemple la transformation \textit{filter} retourne un RDD ayant vérifié la condition donnée en entrée.  Pour les actions, une action appliquée sur un RDD retourne une seule valeur, par exemple l'action \textit{count} compte le nombre d'objets d'un RDD.
 
@@ -505,10 +505,10 @@ Spark dispose des APIs standards permettant aux développeurs  de créer une app
 \paragraph{Lancement d'une application avec de Spark} \label{spark-master-modes}~
 
 %Afin de pouvoir exécuter une application Spark, il faut l'installer. 
-On distingue deux modes d'exécution d'une application  Spark : cluster et local. En  mode local, l'application  peut être exécuté au sein d'une machine locale. Par exemple,  avec un seul \textit{worker} thread (aucun parallélisme),  en précisant $K$ \textit{worker} sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine sur laquelle Spark est installé, etc. 
- Pour le mode cluster, on distingue plusieurs types de clusters. Ces derniers  varient suivant le gestionnaire de ressources qui assure la communication entre les différentes entités du cluster selon le principe master-slave. Par exemple Hadoop YARN\footnote{URL : \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté  le $14/05/2019$ } et Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $14/05/2019$.}. La liste détaillée des alternatives pour chaque mode est donnée dans le site Web de Spark\footnote{URL : \url{https://spark.apache.org/docs/latest/submitting-applications.html\#master-urls}, consulté le $14/05/2019$.}. 
+On distingue deux modes d'exécution d'une application  Spark : \textit{cluster} et local. En  mode local, l'application  peut être exécuté au sein d'une machine locale. Par exemple,  avec un seul \textit{worker} thread (aucun parallélisme),  en précisant $K$ \textit{worker} sur $K$ threads, idéalement $K$ est le nombre des  c\oe{}urs de la machine sur laquelle Spark est installé, etc. 
+ Pour le mode \textit{cluster}, on distingue plusieurs types de \textit{clusters}. Ces derniers  varient suivant le gestionnaire de ressources qui assure la communication entre les différentes entités du \textit{cluster} selon le principe master-slave. Par exemple Hadoop YARN\footnote{URL : \url{https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html}, consulté  le $14/05/2019$ } et Apache Mesos\footnote{URL : \url{https://mesos.apache.org/}, consulté le $14/05/2019$.}. La liste détaillée des alternatives pour chaque mode est donnée dans le site Web de Spark\footnote{URL : \url{https://spark.apache.org/docs/latest/submitting-applications.html\#master-urls}, consulté le $14/05/2019$.}. 
  
-Il est possible d'installer Spark dans un cluster Amazon EMR (Elastic MapReduce)\footnote{URL  : \url{https://aws.amazon.com/fr/emr/}, consulté le $08/05/2019$.}. Par défaut, ce cluster utilise YARN comme gestionnaire de ressources.
+Il est possible d'installer Spark dans un \textit{cluster} Amazon EMR (Elastic MapReduce)\footnote{URL  : \url{https://aws.amazon.com/fr/emr/}, consulté le $08/05/2019$.}. Par défaut, ce \textit{cluster} utilise YARN comme gestionnaire de ressources.
 
 \paragraph{Apache Spark VS Apache Hadoop}
 
@@ -518,19 +518,19 @@ Hadoop MapReduce est considéré dans \cite{Global-Journals} comme étant moins 
 \subsection{Amazon Elastic MapReduce} \label{emr-aws-presentation}
 
 Amazon Elastic MapReduce\footnote{URL : \url{https://docs.aws.amazon.com/fr_fr/emr/}, onsulté le $10/05/2019$.} (EMR) est  un service Web proposé par Amazon  destiné aux traitements des données massives en utilisant Apache Hadoop, Apache Spark et autres.
-Amazon EMR distribue le traitement de données à travers un cluster  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{URL : \url{https://aws.amazon.com/ec2/}, consulté le $14/05/2019$.}.
+Amazon EMR distribue le traitement de données à travers un \textit{cluster}  de machines virtuelles redimensionnable. Ces machines sont des instances de type Amazon EC2\footnote{URL : \url{https://aws.amazon.com/ec2/}, consulté le $14/05/2019$.}.
 Il existe plusieurs variantes d'instances EC2. Les instances sont conçues pour répondre 
 aux besoins classés par AWS dans les catégories suivantes : usage général, calcul optimisé, calcul accéléré et stockage optimisé.
-Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Le coût d'utilisation des instances EC2 indépendamment d'EMR est différent du cas où une instance est utilisée pour former un cluster EMR.
+Elles se varient suivant leurs caractéristiques techniques comme la  RAM disponible, le nombre de CPUs, le nombre de c\oe{}urs physiques, etc. Les coûts d'utilisation des instances EC2 dépendent de ces caractéristiques,  de la région où se trouvent ces instances et du temps d'utilisation. Le coût d'utilisation des instances EC2 indépendamment d'EMR est différent du cas où une instance est utilisée pour former un \textit{cluster} EMR.
 
 Par défaut, Amazon EMR utilise YARN pour gérer les ressources. On distingue trois types de n\oe{}uds dans Amazon EMR. 
 \begin{itemize}
-	\item N\oe{}ud principal (\textit{Master node}) : il gère le cluster.
-	\item N\oe{}ud de noyau (\textit{Core node}): exécute les tâches et stocke les données dans le système de fichier distribué Hadoop HDFS sur le cluster.
+	\item N\oe{}ud principal (\textit{Master node}) : il gère le \textit{cluster}.
+	\item N\oe{}ud de noyau (\textit{Core node}): exécute les tâches et stocke les données dans le système de fichier distribué Hadoop HDFS sur le \textit{cluster}.
 	\item N\oe{}ud de  tâche (\textit{Task node}) : il exécute les tâches et ne stocke pas les données dans HDFS. Les n\oe{}uds de tâches sont facultatifs.
 \end{itemize}
 
-Les coûts appliqués  à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du cluster, la région d'Amazon choisie du cluster et enfin le temps d'utilisation du cluster. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{URL : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
+Les coûts appliqués  à l'utilisation du service Amazon EMR dépendent des caractéristiques techniques des entités du \textit{cluster}, la région d'Amazon choisie du \textit{cluster} et enfin le temps d'utilisation du \textit{cluster}. Il est possible d'estimer les frais d'utilisation d'Amazon EMR via le calculateur disponible sur le site Web d'Amazon\footnote{URL : \url{https://calculator.s3.amazonaws.com/index.html\#s=EMR}, consultée le $14/05/2019$.}.
 
 
 \section{Conclusion}

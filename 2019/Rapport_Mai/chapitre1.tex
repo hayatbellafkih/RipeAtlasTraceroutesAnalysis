@@ -142,7 +142,7 @@ L'architecture du système Atlas est constituée par  les composantes suivantes:
 		\og    \textbf{\textit{Message Queue ou file d'attente de message}} \textit{:  est une technique de programmation utilisée pour la communication interprocessus ou la communication de serveur-à-serveur. Les files d'attente de message permettent le fonctionnement des liaisons asynchrones normalisées entre deux serveurs, c'est-à-dire de canaux de communications tels que l'expéditeur et le récepteur du message ne sont pas contraints de s'attendre l'un l'autre, mais poursuivent chacun l'exécution de leurs tâches} \footnote{Source : \url{https://fr.wikipedia.org/wiki/File\_d'attente\_de\_message}, consultée le $05/08/2018$.}. \fg{}
 	\end{tcolorbox} 
 	
-	Un cluster de serveurs MQ  agit comme un système nerveux central au sein de l'architecture d'Atlas. Il gère la connectivité entre les composantes de l'infrastructure et  il garantit l'échange de messages avec un délai minimal. C'est cette composante qui élimine le besoin que les autres composantes de l'infrastructure soient au courant des états des autres composantes de l'infrastructure. En plus, chaque composante peut être ajoutée ou retirée sans devoir synchroniser cette information avec l'infrastructure entière. Si c'est le cas d'une déconnexion d'une composante, les messages seront sauvegardés sur différents niveaux jusqu'au moment de la reconnexion.
+	Un \textit{cluster} de serveurs MQ  agit comme un système nerveux central au sein de l'architecture d'Atlas. Il gère la connectivité entre les composantes de l'infrastructure et  il garantit l'échange de messages avec un délai minimal. C'est cette composante qui élimine le besoin que les autres composantes de l'infrastructure soient au courant des états des autres composantes de l'infrastructure. En plus, chaque composante peut être ajoutée ou retirée sans devoir synchroniser cette information avec l'infrastructure entière. Si c'est le cas d'une déconnexion d'une composante, les messages seront sauvegardés sur différents niveaux jusqu'au moment de la reconnexion.
 	
 	
 
@@ -153,7 +153,7 @@ L'architecture du système Atlas est constituée par  les composantes suivantes:
 	
 	\item [DB] : c'est une base de données SQL contenant toutes les informations du système  Atlas : les informations sur les sondes et leurs propriétés, les meta-data des mesures, les utilisateurs, les crédits, etc. 
 	
-	\item [Data Storage] : c'est un cluster Hadoop/HBase pour le stockage à long terme de tous les résultats des mesures. Cette technologie permet aussi d'effectuer des calculs d'agrégation périodiques et  d'autres tâches. 
+	\item [Data Storage] : c'est un \textit{cluster} Hadoop/HBase pour le stockage à long terme de tous les résultats des mesures. Cette technologie permet aussi d'effectuer des calculs d'agrégation périodiques et  d'autres tâches. 
 	
 	
 	\begin{tcolorbox}

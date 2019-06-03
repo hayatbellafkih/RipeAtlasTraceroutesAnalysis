@@ -409,10 +409,10 @@ La création d'une application Spark/Scala implique  les étapes suivantes:
 	\item gérer les dépendances nécessaires au fonctionnement de l'application avec le fichier de modèle objet du projet (POM);
 	\item écrire l'application en Scala;
 	\item créer le fichier JAR de l'application Spark;
-	 \item soumettre  l'application  au cluster de machines. 
+	 \item soumettre  l'application  au \textit{cluster} de machines. 
 \end{itemize}
 
-L'implémentation proposée est adaptée au mode local de Spark  ainsi qu'au  mode cluster. 
+L'implémentation proposée est adaptée au mode local de Spark  ainsi qu'au  mode \textit{cluster}. 
 Le code source, qui traduit l'ensemble des traitements, est organisé dans une archive de type JAR.
 En ce qui concerne  l'automatisation et la gestion du fichier JAR, nous avons utilisé l'outil \textit{Maven}\footnote{URL : \url{https://maven.apache.org/}, consulté le $09/04/2019$.}.
 % Les traitements de données sont organisés dans le fichier JAR.
@@ -432,12 +432,12 @@ Le fichier POM permettant de gérer les dépendances est disponible sur GitHub\f
 
 \paragraph{Paramètres de l'analyse}~
 
-Afin de tracer l'évolution du délai des liens, nous avons besoin des fichiers stockant les  traceroutes  dans  des objets JSON\footnote{Voir la liste des traceroutes utilisés dans l'exemple illustratif disponible sur GitHub. URL : \url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/src/main/resources/test/result_modified.json}, consulté le $23/04/2019$.}, la date du début de l'analyse (p. ex. $ 1517961600 $), la date de la fin (p. ex. $ 1518134400 $) et enfin la durée d'une période (p. ex. $3600$s). En ce qui concerne les fichiers de données, en mode local, ils sont stockés localement et le chemin vers ces derniers est configuré dans un fichier de configuration. Pour le mode cluster, le chemin vers les fichiers de traceroutes est celui vers le compartiment S3 contenant ces derniers.
+Afin de tracer l'évolution du délai des liens, nous avons besoin des fichiers stockant les  traceroutes  dans  des objets JSON\footnote{Voir la liste des traceroutes utilisés dans l'exemple illustratif disponible sur GitHub. URL : \url{https://github.com/hayatbellafkih/SparkSalacaTraceroutesAnalysis/blob/master/rttDelaysSparkScala/src/main/resources/test/result_modified.json}, consulté le $23/04/2019$.}, la date du début de l'analyse (p. ex. $ 1517961600 $), la date de la fin (p. ex. $ 1518134400 $) et enfin la durée d'une période (p. ex. $3600$s). En ce qui concerne les fichiers de données, en mode local, ils sont stockés localement et le chemin vers ces derniers est configuré dans un fichier de configuration. Pour le mode \textit{cluster}, le chemin vers les fichiers de traceroutes est celui vers le compartiment S3 contenant ces derniers.
 
 \paragraph{Configuration d'une application  Spark}~
 
-Une application Spark nécessite l'ajustement de quelques paramètres, qu'il s'agisse d'une application qui tourne en mode local ou bien en mode cluster. 
- On peut ajuster ces paramètres selon trois possibilités. La première possibilité est à travers l'objet \textit{SparkConf} comme illustré dans l'exemple du Listing \ref{lst:label}, où nous donnons un nom à l'application Spark (ligne \ref{line:app-name}) et nous précisons l'URL du cluster (ligne \ref{line:app-thread}). 
+Une application Spark nécessite l'ajustement de quelques paramètres, qu'il s'agisse d'une application qui tourne en mode local ou bien en mode \textit{cluster}. 
+ On peut ajuster ces paramètres selon trois possibilités. La première possibilité est à travers l'objet \textit{SparkConf} comme illustré dans l'exemple du Listing \ref{lst:label}, où nous donnons un nom à l'application Spark (ligne \ref{line:app-name}) et nous précisons l'URL du \textit{cluster} (ligne \ref{line:app-thread}). 
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Exemple de la configuration d'une application Spark via l'objet SparkConf},label={lst:label}, basicstyle = \footnotesize,escapechar=|,numbers=left,
 stepnumber=1,numberstyle=\scriptsize]
@@ -449,7 +449,7 @@ val conf = new SparkConf().setAppName("Link delay analysis") |\label{line:app-na
                           .setMaster("local"),  |\label{line:app-thread}|
 \end{lstlisting}
 
-Nous pouvons passer certains paramètres lors de la soumission de l'application au cluster.  Un exemple de ces paramètres est illustré dans le Listing \ref{lst:submit}. Enfin, quelques paramètres peuvent être lus depuis le fichier de configuration  \textit{conf/spark-defaults.conf}\footnote{Plus de détails relatifs à la configuration sont disponibles sur l'URL  \url{https://spark.apache.org/docs/latest/configuration.html}, consulté le $14/04/2019$.}. 
+Nous pouvons passer certains paramètres lors de la soumission de l'application au \textit{cluster}.  Un exemple de ces paramètres est illustré dans le Listing \ref{lst:submit}. Enfin, quelques paramètres peuvent être lus depuis le fichier de configuration  \textit{conf/spark-defaults.conf}\footnote{Plus de détails relatifs à la configuration sont disponibles sur l'URL  \url{https://spark.apache.org/docs/latest/configuration.html}, consulté le $14/04/2019$.}. 
 %Certains paramètres peuvent être précisés 
 
 %en ligne de commande ou bien dans le fichier de configuration \footnote{Plus de détails sont disponibles.}. 
@@ -624,7 +624,7 @@ il faut chercher les traceroutes dans plus d'une collection.
 \end{algorithmic}
 \end{algorithm}
 
-En Spark/Scala, nous avons chargé les traceroutes disponibles à l'analyse sur un RDD. Ce dernier crée des partitions de données, sensées être manipulées sur différentes machines si Spark est lancé sur un cluster de machine, autrement dit, en mode cluster. Afin de créer les groupes de traceroutes, nous vérifions l'appartenance de chaque traceroute à une des périodes considérées.
+En Spark/Scala, nous avons chargé les traceroutes disponibles à l'analyse sur un RDD. Ce dernier crée des partitions de données, sensées être manipulées sur différentes machines si Spark est lancé sur un \textit{cluster} de machine, autrement dit, en mode \textit{cluster}. Afin de créer les groupes de traceroutes, nous vérifions l'appartenance de chaque traceroute à une des périodes considérées.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={},label={lst:groupalltraceroutes}, basicstyle = \small,escapechar=|,numbers=left,
 stepnumber=1]
@@ -939,7 +939,7 @@ case class SummarizedLink(
 
 \paragraph{Caractérisation des liens de toutes les périodes de l'analyse}~
 
-Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.SummarizedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un cluster de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  
+Après avoir traité tous les groupes de traceroutes, nous obtenons un RDD de liste de liens (\textit{RDD[Seq[classes.SummarizedLink]]}). Nous devons collecter les résultats des traitements de chacune des partitions de ce RDD afin de passer à la phase II de l'analyse des délais. Dans le cas d'un \textit{cluster} de machines, il s'agit de la collecte de ces résultats de la part de chaque machine.  
 Le code illustrant la collecte des résultats est illustrée par le Listing \ref{lst:rddcollecte}. Autrement dit, le \textit{driver}  reçoit les résultats des traitements appliqués sur les données et effectués par les \textit{workers}\footnote{Voir le principe de la distribution des traitements en Spark dans la section \ref{sparkpresentationsection}.}. Nous appliquons ensuite la fonction \textit{flatten} sur les collectés.
 
 \begin{lstlisting}[language=scala,firstnumber=1, caption={Collecte des résultats intermédiares },label={lst:rddcollecte}, basicstyle = \footnotesize,escapechar=|,numbers=left,
@@ -1156,7 +1156,7 @@ stepnumber=1]
 
 \subsubsection{Exécution d'une application Spark} 
 
-Afin de pouvoir exécuter une application Spark, il faut qu'elle soit packagée dans un fichier de type JAR. Ce dernier doit reprendre une classe contenant une méthode \textit{main} et doit reprendre toutes les dépendances nécessaires à l'exécution de l'application.  Enfin, l'application Spark  est soumise avec la commande \textit{bin/spark-submit}. Tout en indiquant les paramètres du cluster et les paramètre de l'application. Nous donnons deux exemples de soumission. La première est destinée à être exécutée dans une machine locale. Alors que la deuxième soumission est destinée à être executée dans un cluster de machines. 
+Afin de pouvoir exécuter une application Spark, il faut qu'elle soit packagée dans un fichier de type JAR. Ce dernier doit reprendre une classe contenant une méthode \textit{main} et doit reprendre toutes les dépendances nécessaires à l'exécution de l'application.  Enfin, l'application Spark  est soumise avec la commande \textit{bin/spark-submit}. Tout en indiquant les paramètres du \textit{cluster} et les paramètre de l'application. Nous donnons deux exemples de soumission. La première est destinée à être exécutée dans une machine locale. Alors que la deuxième soumission est destinée à être executée dans un \textit{cluster} de machines. 
 
 \paragraph{Mode local}~
 
@@ -1167,10 +1167,10 @@ stepnumber=1]
 La commande \textit{bin/spark-submit} prend plusieurs paramètres, nous présentons quelques paramètres utilisés :
 \begin{itemize}
 	\item \textit{class} est un objet Scala contenant la fonction \textit{main};
-	\item  \textit{master} est l'URL du cluster (voir les différents modes dans la section \ref{spark-master-modes});
-	\item \textit{driver-memory} est la mémoire dont le processus du driver peut utiliser;
+	\item  \textit{master} est l'URL du \textit{cluster} (voir les différents modes dans la section \ref{spark-master-modes});
+	\item \textit{driver-memory} est la mémoire dont le processus du \textit{driver} peut utiliser;
 	
-	\item  \textit{--conf} "key = value" est une manière de configurer l'application Spark. Dans l'exemple, "spark.network.timeout=10000000", $ 10000000 $ est le temps durant lequel le driver doit recevoir  des mises à jour de la part des différents workers; après ce temps, le worker n'est plus considéré comme actif.
+	\item  \textit{--conf} "key = value" est une manière de configurer l'application Spark. Dans l'exemple, "spark.network.timeout=10000000", $ 10000000 $ est le temps durant lequel le \textit{driver} doit recevoir  des mises à jour de la part des différents workers; après ce temps, le worker n'est plus considéré comme actif.
 \end{itemize}
 
 \paragraph{Amazon EMR }~
@@ -1281,7 +1281,7 @@ Nous sauvegardons le résultat de l'analyse dans un fichier JSON en vue de toute
 
 \section{Conclusion}
 
-Dans ce chapitre, nous avons décrit l'implémentation de l'outil de détection en utilisant trois technologies différentes dédiées à la manipulation des données massives.  C'est la reproduction de l'outil implémenté en MongoDB.
+Dans ce chapitre, nous avons décrit l'implémentation de l'outil de détection en utilisant trois technologies différentes dédiées à la manipulation des données massives.  La première représente l'implémentation du travail de référence. La deuxième  vise la modification de l'implémentation de référence afin d'utiliser une autre technologie de stockage de données. Tandis que la troisième est une reproduction de l'implémentation de référence avec un framework dédié au traitement des données massives.
 %A travers cette implémentation, nous avons évalué les différentes défis relatifs à la réutilisation du code source des autres et la façon de réutiliser impélementation destinée à être distribuée.
 Dans  le chapitre \ref{chap:application-on-traceroutes}, nous allons évaluer l'application de ces implémentations sur différents échantillons de traceroutes.
 % dans le chapitre \ref{chap:application-on-traceroutes} avec d'autres implémentations utilisant d'autres technologies Big Data. 

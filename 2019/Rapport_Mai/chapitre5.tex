@@ -7,7 +7,7 @@ Ce chapitre applique un sous-ensemble de  technologies destinées  à la manipul
 %d'étudier comment ces technologies peuvent être utilisées, les défis relatifs à leur utilisation et enfin 
 % tracer l'évolution du délai d'un lien selon  le processus décrit dans le chapitre \ref{chap:big-data-intro}.
  La première technologie est la base de données NoSQL MongoDB de type document  utilisée uniquement pour le stockage de traceroutes. La deuxième technologie est la base de données NoSQL  Amazon DynamoDB de type clé-valeur conçue pour le stockage de données à grande échelle. Cette technologie n'a pas été  mise en pratique car elle n'assure que le stockage, ce que propose MongoDB.
- Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des traceroutes. En dernier choix, nous avons  utilisé une technologie dédiée  au traitement distribué des données dans un cluster de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
+ Le troisième choix s'est porté sur trois services d'Amazon pour assurer le stockage des traceroutes. En dernier choix, nous avons  utilisé une technologie dédiée  au traitement distribué des données dans un \textit{cluster} de machines. Pour chaque technologie, plusieurs tests sont effectués sur différents échantillons de traceroutes.
 
 
 % Nous allons présenter l'objectif de chaque technologie, ses avantages, ses inconvénients et ses limitations dans le cas de la présente analyse.
@@ -28,7 +28,7 @@ Les critères de l'évaluation de l'adéquation d'une technologie Big Data  vari
 \end{itemize}
 
 Dans la présente évaluation de  technologies Big Data, nous n'avons pas pris en compte d'autres critères, car nous ne pouvons pas les évaluer. Par exemple, l'utilisation du  Big Data engendre des coûts  liés aux ressources nécessaires au stockage de données  ainsi qu'au traitement de ces dernières. Des indications théoriques concernant les frais d'utilisation de quelques technologies sont données
- : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}),  MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.} et pour Spark, les frais d'utilisation d'un cluster EMR peuvent être estimés via le  calculateur mensuel d'AWS. 
+ : Amazon S3 (voir le Tableau \ref{tab:pricing-s3-standard}),  MongoDB Atlas dont les frais d'utilisation  dépendent de plusieurs paramètres\footnote{Une estimation est possible suivant le fournisseur de cloud, elle est disponible  sur \url{https://www.mongodb.com/cloud/atlas/pricing}, consulté le $25/12/2018$.} et pour Spark, les frais d'utilisation d'un \textit{cluster} EMR peuvent être estimés via le  calculateur mensuel d'AWS. 
 
 \section{Caractéristiques de l'environnement de test} \label{machine-openvz-caracteritics}
 
@@ -56,7 +56,7 @@ Les différents tests effectués, présentés dans le présent chapitre, ont ét
 
 \paragraph{Les clusters EMR}~
 
-Le Tableau \ref{instances-types-description} reprend  les caractéristiques de certaines instances Amazon EC2\footnote{Sources : \url{https://aws.amazon.com/fr/ec2/previous-generation/} et \url{https://aws.amazon.com/fr/sap/instance-types/}, consultées le $15/05/2019$.}. Ce sont celles utilisées dans nos tests. Pour chaque instance, on note le nombre de vCPU (unité centrale virtuelle) et la taille de la mémoire (RAM). Plusieurs clusters EMR ont été utilisés dans nos tests, les détails de chaque  cluster utilisé sont donnés au fur et à mesure de la présentation du test.
+Le Tableau \ref{instances-types-description} reprend  les caractéristiques de certaines instances Amazon EC2\footnote{Sources : \url{https://aws.amazon.com/fr/ec2/previous-generation/} et \url{https://aws.amazon.com/fr/sap/instance-types/}, consultées le $15/05/2019$.}. Ce sont celles utilisées dans nos tests. Pour chaque instance, on note le nombre de vCPU (unité centrale virtuelle) et la taille de la mémoire (RAM). Plusieurs \textit{clusters} EMR ont été utilisés dans nos tests, les détails de chaque  \textit{cluster} utilisé sont donnés au fur et à mesure de la présentation du test.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{c c c}
@@ -400,18 +400,18 @@ Si le temps se diffère selon les données analysées. Ce même temps est diffé
 
 
 \section{Application 3 : Apache Spark  avec Scala}
-Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans la section \ref{application:spark}.  Nous avons évalué le temps d'exécution de l'outil de détection en analysant différents échantillons de traceroutes  en mode local et en mode cluster. Pour le mode local, nous avons lancé l'application Spark sur la machine ayant les caractéristiques  reprises dans la section \ref{machine-openvz-caracteritics}. Pour le mode cluster, nous avons utilisé le cluster EMR et nous donnons les caractéristiques techniques du cluster utilisé pour chaque test.
+Nous avons implémenté l'outil de détection avec le framework Spark et l'API Scala. Les détails de l'implémentation sont donnés dans la section \ref{application:spark}.  Nous avons évalué le temps d'exécution de l'outil de détection en analysant différents échantillons de traceroutes  en mode local et en mode \textit{cluster}. Pour le mode local, nous avons lancé l'application Spark sur la machine ayant les caractéristiques  reprises dans la section \ref{machine-openvz-caracteritics}. Pour le mode \textit{cluster}, nous avons utilisé le \textit{cluster} EMR et nous donnons les caractéristiques techniques du \textit{cluster} utilisé pour chaque test.
 
 
 \subsection{Mode local}
 
-A la base Spark est conçu pour être utilisé dans un cluster de machines sur  lequel l'analyse de données est distribuée. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, on trouve le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au même processus initié par le \textit{driver}. 
+A la base Spark est conçu pour être utilisé dans un \textit{cluster} de machines sur  lequel l'analyse de données est distribuée. Toutefois, Spark peut être utilisé en mode local. Dans ce mode, on trouve le \textit{driver} et un seul \textit{executor}. Ce dernier est "lié" au même processus initié par le \textit{driver}. 
 
 
 %\paragraph{Performances d'Apache Spark dans l'analyse des délais }~
 %Nous avons évalué le temps d'exécution de l'implémentation de l'outil de détection en utilisant Spark en variant le nombre de traceroutes à analyser. Nous avons aussi varié certains paramètres relatifs à la soumission de l'application au Spark. Nous avons varié la taille de la mémoire allouée au driver afin de choisir celle la plus adaptée. Ensuite nous avons mesuré le temps d'exécution dans le cas de local, local[K] et local[*].
 
-La Figure \ref{fig:sparktimingLocal} illustre les principales étapes de l'analyse des traceroutes en utilisant Spark et Scala.
+La Figure \ref{fig:sparktimingLocal} illustre les principales étapes de l'analyse des traceroutes en utilisant Spark et Scala en mode local. Selon les paramètres de l'analyse et les paramètres du Spark, la commande permettant la soumission l'application Spark est préparée. A la soumission de l'application, les données à analyser sont lues depuis l'endroit local. Après avoir traité tous les traceroutes en effectuant les étapes de la phase I et II, les résultats obtenus pour chaque lien sont sauvegardés localement. 
 
 \begin{figure}[H]
 	\centering
@@ -426,7 +426,7 @@ La Figure \ref{fig:sparktimingLocal} illustre les principales étapes de l'analy
 
 \paragraph{Variant la mémoire allouée au driver}~
 
-Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GB pour le $ driver $ et $ 1 $ GB pour chaque \textit{executor}. 
+Dans une application Spark, la taille de la mémoire allouée pour le \textit{driver} et les \textit{executors} est  définie par défaut. D'après la documentation officielle de Spark\footnote{Source : \url{https://spark.apache.org/docs/latest/configuration.html}, consultée le $29/12/2018$.}, Spark réserve $ 1 $ GO pour le $ driver $ et $ 1 $ GO pour chaque \textit{executor}. 
 L'analyse d'un échantillons de traceroutes  a montré que ces valeurs de mémoires doivent être adaptées suivant les données analysées. De ce fait, il se peut qu'une configuration des mémoires soit adaptée à un volume de traceroutes mais pas pour un autre volume. 
 
 %En mode local (--master local), le \textit{driver} et le \textit{worker} sont liés au même processus.  Nous avons mesuré le temps d'exécution de l'application Spark en variant la taille mémoire allouée au \textit{driver} via le paramètre \textit{driver-memory}. Par défaut, la mémoire allouée au driver est de 1 Go. Avec cette valeur, il n'est pas possible  d'analyser un ensemble de traceroutes qui fait $ 1,028,343,572 $ octets. Afin de voir l'effet de la mémoire allouée au \textit{driver}, en mode d'exécution local, nous avons utilisé deux échantillons de traceroutes. La première comprend les traceroutes capturés pendant le $ 07/02/2018 $ dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 1,028,343,572 $ octets (\textit{data\_1go}). Pour le deuxième échantillon, il reprend les traceroutes effectués  entre le $ 07/02/2018 $ et le $ 08/02/2018 $ effectués aussi dans le cadre de la mesure ayant l'identifiant $ 5004 $, ce qui fait $ 2,055,167,238 $ (\textit{ data\_2go}) octets.
@@ -445,17 +445,17 @@ L'analyse d'un échantillons de traceroutes  a montré que ces valeurs de mémoi
 
 \paragraph{Variant la taille des données analysées}~
 
-Après avoir fixé la mémoire allouée au driver à $ 30 $. Plusieurs tests ont été réalisés en vue de mesurer le temps d'exécution en variant la tailles des échantillons de traceroutes. Le Tableau \ref{tab:spark-local} contient les temps d'exécution obtenus lors de 5 essai pour chaque échantillon de traceroutes.
+Après avoir fixé la mémoire allouée au driver à $ 30 $. Plusieurs tests ont été réalisés en vue de mesurer le temps d'exécution en variant la tailles des échantillons de traceroutes. Le Tableau \ref{tab:spark-local} contient les temps d'exécution obtenus lors de 5 essais pour chaque échantillon de traceroutes. Les temps des essais et de la médiane des essais sont exprimés en secondes. 
 
 \begin{table}[h]
 	\resizebox{\textwidth}{!}{
 	\begin{tabular}{cccccccccc}
 \textbf{Période (début - fin)}	&\textbf{Taille de données (octets)}&	\textbf{Essai 1}	&\textbf{Essai 2}&\textbf{	Essai 3}&\textbf{	Essai 4}	&\textbf{Essai 5}&	\textbf{Médiane}&\textbf{	Ecart type}&	\textbf{Variance} \\ \hline
-07/02/18 - 07/02/18&	1028343572&	301&	301&	314	&280	&324	&301&	14.85	&220.3 \\ \hline
-07/02/18 - 08/02/18&	2055167238&	722&	645&	597&	655&	603&	645&	50.24&	2019.1 \\ \hline
-07/02/18 - 09/02/18&	3083779157&	1060&	1015&	984&	978&	978&	984&	35.37&	1060.97 \\ \hline
-07/02/18 - 10/02/18&	4113776434&	1162&	1103&	1250&	1265&	1122&	1162&	73.73&	4404.67 \\ \hline
-07/02/18 - 11/02/18&	5143831662&	1319&	1243&	1159	&1184&	1228&	1228&	61.64&	3038.97 \\ \hline
+07/02/18 - 07/02/18&	$ 1,028,343,572 $&	$ 301 $&	$ 301 $&	$ 314 $	&$ 280 $	&$ 324 $	&$ 301 $&	$ 14.85 $	&$ 220.3 $ \\ \hline
+07/02/18 - 08/02/18&	$ 2,055,167,238 $&	$ 722 $&	$ 645 $&	$ 597 $&	$ 655 $&	$ 603 $&	$ 645 $&	$ 50.24 $&	$ 2019.1 $ \\ \hline
+07/02/18 - 09/02/18&	$ 3,083,779,157 $&	$ 1060 $&	$ 1015 $&	$ 984 $&	$ 978 $&	$ 978 $&	$ 984 $&	$ 35.37 $&	$ 1060.97 $ \\ \hline
+07/02/18 - 10/02/18&	$ 4,113,776,434 $&	$ 1162 $&	$ 1103 $&	$ 1250 $&	$ 1265 $&	$ 1122 $&	$ 1162 $&	$ 73.73 $&	$ 4404.67 $ \\ \hline
+07/02/18 - 11/02/18&	$ 5,143,831,662 $&	$ 1319 $&	$ 1243 $&	$ 1159 $	&$ 1184 $&	$ 1228 $&	$ 1228 $&	$ 61.64 $&	$ 3038.97 $ \\ \hline
 
 	\end{tabular}
 }
@@ -467,38 +467,38 @@ La Figure \ref{fig:spark-localmode} est une représentation graphique du temps m
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{illustrations/spark-localmode1}
+	\includegraphics[width=\linewidth]{illustrations/spark-localmode2}
 	\caption{Temps d'exécution médian avec l'implémentation  Spark/Scala en mode local}
 	\label{fig:spark-localmode}
 \end{figure}
 
 \paragraph{Notes concernant le mode local}~
 
-Le mode local d'exécution d'une application Spark est typiquement utilisé pour tester le code sur une petite quantité de données dans un environnement local. Cependant, ce mode  ne fournit pas les avantages de l'environnement distribué. 
+Le mode local d'exécution d'une application Spark est typiquement utilisé pour tester le code sur une petite quantité de données dans un environnement local. Cependant, ce mode  ne fournit pas les avantages de l'environnement distribué. C'est pourquoi nous avons évalué l'implémentation avec Spark/Scala sur un \textit{cluster} de machines. 
 
 \subsection{Cluster Amazon EMR}
 
-Nous évaluons le temps d'exécution obtenu lors du lancement de l'application de détection dans un cluster créé au sein d'Amazon EMR. D'abord, nous  décrivons le déroulement de la création d'un cluster dans Amazon EMR. Ensuite, nous mesurons le temps d'exécution de l'application de la détection sur différents clusters. Ce temps inclut le temps nécessaire  pour chercher les traceroutes dans le compartiment d'Amazon S3, le temps nécessaire pour traiter ces données et  le temps pour créer le fichier résultat et le stocker dans un compartiment Amazon S3. Enfin, nous mesurons ce temps  aussi dans le cas d'un seul cluster, choisi à l'avance, et en variant la taille  de données à analyser. Une brève présentation d'Amazon EMR est donnée dans la section \ref{emr-aws-presentation}.
+Nous évaluons le temps d'exécution obtenu lors du lancement de l'application de détection dans un \textit{cluster} créé au sein d'Amazon EMR. D'abord, nous  décrivons le déroulement de la création d'un \textit{cluster} dans Amazon EMR. Ensuite, nous mesurons le temps d'exécution de l'application de la détection sur différents \textit{clusters}. Ce temps inclut le temps nécessaire  pour chercher les traceroutes dans le compartiment d'Amazon S3, le temps nécessaire pour traiter ces données et  le temps pour créer le fichier résultat et le stocker dans un compartiment Amazon S3. Enfin, nous mesurons ce temps  aussi dans le cas d'un seul \textit{cluster}, choisi à l'avance, et en variant la taille  de données à analyser. Une brève présentation d'Amazon EMR est donnée dans la section \ref{emr-aws-presentation}.
 
 \paragraph{Création d'un cluster EMR}~
 
-La création d'un cluster dans Amazon EMR destiné à une application Spark nécessite de  :
+La création d'un \textit{cluster} dans Amazon EMR destiné à une application Spark nécessite de  :
 \begin{itemize}
-	\item donner un nom au cluster;
-	\item créer la configuration du cluster;
+	\item donner un nom au \textit{cluster};
+	\item créer la configuration du \textit{cluster};
 	\item définir le modèle du n\oe{}ud principal (\textit{master}) 
-	\item choisir le nombre des n\oe{}uds de noyau  du cluster et leur modèle;
+	\item choisir le nombre des n\oe{}uds de noyau  du \textit{cluster} et leur modèle;
 	%\item paramétrer l'application Spark comme l'indication de la classe Main;
 	\item spécifier les paramètres de l'application  (.jar) après avoir transférer l'archive vers  un compartiment Amazon S3;
 	\item indiquer le chemin du compartiment Amazon S3 contenant  les données à analyser.
 \end{itemize}
 
-Nous avons énuméré quelques éléments demandés lors de la création et du déploiement d'une application Spark sur un cluster Amazon EMR. Bien  qu'il existe d'autres paramètres qu'on peut ajuster. 
+Nous avons énuméré quelques éléments demandés lors de la création et du déploiement d'une application Spark sur un \textit{cluster} Amazon EMR. Bien  qu'il existe d'autres paramètres qu'on peut ajuster. 
 
-On distingue le temps nécessaire à la mise en place du cluster et à la configuration du cluster (\textit{Starting}). Une fois le cluster est prêt, l'état du cluster passe à (\textit{Waiting}).  A la soumission de l'application, le cluster passe à l'état (Running). Suivant la configuration du cluster de l'utilisateur, le cluster peut s'éteindre dés la fin de l'exécution de l'application ou rester actif à l'écoute de nouvelles tâches. Toutefois, la dernière option peut produire des frais élevés.  
+On distingue le temps nécessaire à la mise en place du \textit{cluster} et à la configuration du \textit{cluster} (\textit{Starting}). Une fois le \textit{cluster} est prêt, l'état du \textit{cluster} passe à (\textit{Waiting}).  A la soumission de l'application, le \textit{cluster} passe à l'état (Running). Suivant la configuration du \textit{cluster} de l'utilisateur, le \textit{cluster} peut s'éteindre dés la fin de l'exécution de l'application ou rester actif à l'écoute de nouvelles tâches. Toutefois, la dernière option peut produire des frais élevés.  
 
 
-Ce que nous testons avec Amazon EMR sont les mêmes traitements dans le mode local, mais avec une infrastructure différente (Figure \ref{fig:sparktimingEMR}). Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille et le type des modèles des instances du cluster créé pour lancer la détection. Pour le deuxième cas, nous fixons les caractéristiques du cluster et  nous choisissons différents ensembles de traceroutes. 
+Ce que nous testons avec Amazon EMR sont les mêmes traitements que ceux dans le mode local. La première  différence est au niveau le nombre de machines qui forment le \textit{cluster}.   De plus, les traceroutes à analyser sans disponibles dans un compartiment Amazon S3, et les résultats de l'analyse sont sauvegardés dans un compartiment Amazon S3 (voir la Figure \ref{fig:sparktimingEMR}). 
 
 
 \begin{figure}[H]
@@ -507,31 +507,32 @@ Ce que nous testons avec Amazon EMR sont les mêmes traitements dans le mode loc
 	\resizebox{\textwidth}{!}{
 		\input{illustrations/sparktimingEMR.tex}
 	}
-	\caption{Déroulement d'une analyse de  traceroutes en Spark/Scala en mode cluster EMR}
+	\caption{Déroulement d'une analyse de  traceroutes en Spark/Scala en mode \textit{cluster} EMR}
 	\label{fig:sparktimingEMR}
 \end{figure}
 
+Nous évaluons la détection en variant deux éléments. Dans un premier temps, nous varions la taille et le type des modèles des instances du \textit{cluster} créé pour lancer la détection. Pour le deuxième cas, nous fixons les caractéristiques du \textit{cluster} et  nous choisissons différents ensembles de traceroutes. 
 
 \paragraph{Variant la taille du cluster}
 
-Le Tableau 	\ref{variantlesdonnes-fixeddata} reprend les données analysées dans les clusters créés (C1 à C6).
+Le Tableau 	\ref{variantlesdonnes-fixeddata} reprend les données analysées dans les \textit{clusters} créés (C1 à C6). Ce sont les traceroutes effectués dans le cadre de la mesure $ 5004 $.
 
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{
-		\begin{tabular}{c c c c c c c}
+	%\resizebox{\textwidth}{!}{
+		\begin{tabular}{c c c c c  c}
 			\hline 
-			\textbf{Id}	& \textbf{Taille (Octets)}  & \textbf{Nb. de traceroutes} & \textbf{Nb. liens } &\textbf{Id. msm}& \textbf{période} \\ 
+			\textbf{Id}	& \textbf{Taille (Octets)}  & \textbf{Nb. de traceroutes}  &\textbf{Id. msm}& \textbf{Période} \\ 
 			\hline 
-			$ A $	& $ 1,028,343,572 $ & $ 494,158 $ &  & $ 5004 $ & 07/02/2018 - 07/02/2018 \\ 
+			$ A $	& $ 1,028,343,572 $ & $ 494,158 $ &   $ 5004 $ & 07/02/18 - 07/02/18 \\ 
 			\hline 
 		\end{tabular} 
-	}
-	\caption{Les données analysées dans les clusters C1 à C6 }
+	%}
+	\caption{Les données analysées dans les \textit{clusters} C1 à C6 }
 	\label{variantlesdonnes-fixeddata}
 \end{table}
 
-Le Tableau \ref{clusters-description} décrit les clusters créés au sein d'AWS EMR. Pour chaque cluster, on reprend son nom, le nombre d'instances formant le cluster; le n\oe{}ud principal et  les n\oe{}uds de noyau, le modèle de chaque n\oe{}ud (instance EC2) et enfin le temps total de l'analyse. 
+Le Tableau \ref{clusters-description} décrit les \textit{clusters} créés au sein d'AWS EMR. Pour chaque \textit{cluster}, on reprend son nom, le nombre d'instances formant le \textit{cluster}; le n\oe{}ud principal et  les n\oe{}uds de noyau, le modèle de chaque n\oe{}ud (instance EC2) et enfin le temps total de l'analyse. 
 %Le temps de l'analyse est calculé de la même façon  que le mode local. 
 %\subparagraph{Description de l'ensemble de données}~
 
@@ -540,7 +541,7 @@ Le Tableau \ref{clusters-description} décrit les clusters créés au sein d'AWS
 	\resizebox{\textwidth}{!}{%
 	\begin{tabular}{ c c c c }
 	\hline 
-\textbf{Nom du cluster}	&\textbf{Taille du cluster}	&  \textbf{Modèle d'instances ( n\oe{}ud principal, n\oe{}ud de noyau )}  &\textbf{Temps total (s)} \\ 
+\textbf{Nom du \textit{cluster}}	&\textbf{Taille du \textit{cluster}}	&  \textbf{Modèle d'instances ( n\oe{}ud principal, n\oe{}ud de noyau )}  &\textbf{Temps total (s)} \\ 
 	\hline 
 C1	&   1 &  (m4.2xlarge, --- ) & échec \\ 
 	\hline 
@@ -556,14 +557,14 @@ C6	& 5 & (m4.large, m4.large)&  212\\
 \hline
 \end{tabular} 
 }
-\caption{Description des clusters utilisés avec le temps total d'exécution sur les données A}
+\caption{Description des \textit{clusters} utilisés avec le temps total d'exécution sur les données A}
 \label{clusters-description}
 \end{table}
 %De même que le mode local, on peut paramétrer le cluster avant  la soumission de l'application Spark. 
 
-Etant donné que le cluster créé est destiné principalement à l'analyse des traceroutes avec Spark, nous avons configuré le cluster pour utiliser toutes les ressources disponibles de mémoire, et ce à travers la propriété \textit{maximizeResourceAllocation} (voir le Listing \ref{configsparkemr}). 
+Etant donné que le \textit{cluster} créé est destiné principalement à l'analyse des traceroutes avec Spark, nous avons configuré le \textit{cluster} pour utiliser toutes les ressources disponibles de mémoire, et ce à travers la propriété \textit{maximizeResourceAllocation} (voir le Listing \ref{configsparkemr}). 
 
-\begin{lstlisting}[language=json, basicstyle=\small, label= configsparkemr, caption = Exemple de fichier de configuration d'un cluster Amazon EMR]
+\begin{lstlisting}[language=json, basicstyle=\small, label= configsparkemr, caption = Exemple du fichier de configuration d'un cluster Amazon EMR]
 [
 {"Classification": "spark","Properties": {"maximizeResourceAllocation": "true"} }
 ]
@@ -590,14 +591,14 @@ Etant donné que le cluster créé est destiné principalement à l'analyse des 
 
 %C1%https://aws-logs-847444427255-eu-west-1.s3-eu-west-1.amazonaws.com/elasticmapreduce/j-2YU5Q88TKMGBK/steps/s-H0VT3FD9TJLO/stderr.gz?
 
-Les temps obtenus avec les deux clusters C5 et C6 montrent que pour une même taille de cluster,  si les ressources du cluster augmentent  les tâches sont exécutées rapidement. 
-Pour les clusters C2, C3, C4 et C5, nous constatons que plus on ajoute un nouveau n\oe{}ud dans  le cluster, plus le temps total est réduit. En ce qui concerne le cluster C1, l'échec de la détection est dû au manque des ressources minimales pour assurer la détection. Nous notons que l'erreur reportée  indique que le conteneur YARN est en cours d'exécution au-delà des limites de la mémoire physique.
+Les temps obtenus avec les deux \textit{clusters} C5 et C6 montrent que pour une même taille de \textit{cluster},  si les ressources du \textit{cluster} augmentent  les tâches sont exécutées rapidement. 
+Pour les \textit{clusters} C2, C3, C4 et C5, nous constatons que plus on ajoute un nouveau n\oe{}ud dans  le \textit{cluster}, plus le temps total est réduit. En ce qui concerne le \textit{cluster} C1, l'échec de la détection est dû au manque des ressources minimales pour assurer la détection. Nous notons que l'erreur reportée  indique que le conteneur YARN est en cours d'exécution au-delà des limites de la mémoire physique.
 
 
 \paragraph{Variant la taille de données}~
 
 
-Nous avons choisi un cluster de $ 5 $ machines, appelé C7, afin d'évaluer plusieurs ensembles de données. Nous avons choisi le modèle m4.large pour le n\oe{}ud principal et les n\oe{}uds de noyau. Les échantillons de traceroutes utilisés sont décrits dans le Tableau \ref{variantlesdonnes-fixedcluster}. Nous avons utilisé les données en provenance de la mesure $ 5008 $\footnote{URL : \url{https://atlas.ripe.net/measurements/5008/}, consulté le $16/05/2019$.}.
+Nous avons choisi un \textit{cluster} de $ 5 $ machines, appelé C7, afin d'évaluer plusieurs ensembles de données. Nous avons choisi le modèle \textit{m4.large} pour le n\oe{}ud principal et les n\oe{}uds de noyau. Les échantillons de traceroutes utilisés sont décrits dans le Tableau \ref{variantlesdonnes-fixedcluster}. Nous avons utilisé les données en provenance de la mesure $ 5008 $\footnote{URL : \url{https://atlas.ripe.net/measurements/5008/}, consulté le $16/05/2019$.}.
 
 
 \begin{table}[H]
@@ -605,37 +606,37 @@ Nous avons choisi un cluster de $ 5 $ machines, appelé C7, afin d'évaluer plus
 	\resizebox{\textwidth}{!}{
 	\begin{tabular}{ccccccc}
 		\hline 
-		\textbf{Id test}	& \textbf{Taille (Octets)}  & \textbf{Nb. de traceroutes} & \textbf{Nb. liens} &\textbf{Id. msm}& \textbf{Période}&\textbf{Temps total (s)} \\ 
+		\textbf{Id test}	& \textbf{Taille (Octets)}  & \textbf{Nb. de traceroutes}  &\textbf{Id. msm}& \textbf{Période}&\textbf{Temps total (s)} \\ 
 		\hline 
-	$ E1 $	& $ 1,263,894,997 $ & $ 497,810 $ &  & $ 5008 $ & 01/05/2019 - 01/05/2019 &$ 221 $ \\ 
+	$ E1 $	& $ 1,263,894,997 $ & $ 497,810 $ &   $ 5008 $ & 01/05/19 - 01/05/19 &$ 221 $ \\ 
 		\hline 
-	$ E2 $	& $2,527,872,377$ & $995,811$  &  & $ 5008 $&01/05/2019 - 02/05/2019&  $ 415 $\\ 
+	$ E2 $	& $2,527,872,377$ & $995,811$  &  $ 5008 $&01/05/19 - 02/05/19&  $ 415 $\\ 
 		\hline 
-	$ E3 $	& $ 3,792,532,958 $  & $ 1,492,196 $ &  & $ 5008 $ & 01/05/2019 - 03/05/2019 & échec\\ 
+	$ E3 $	& $ 3,792,532,958 $  & $ 1,492,196 $ &   $ 5008 $ & 01/05/19 - 03/05/19 & échec\\ 
 
 \hline 
 	\end{tabular} 
 }
-\caption{Les traceroutes utilisés dans le cluster C7}
+\caption{Les traceroutes utilisés dans le \textit{cluster} C7}
 \label{variantlesdonnes-fixedcluster}
 \end{table}
 
-Les deux tests E1 et E2 sont bien passés. Toutefois, Le test E3 a échoué pour la raison de dépassement de mémoire. L'erreur reporté est relative à la charge de travail qu'a subi un \textit{executor} au sein d'un container. Précisément, ceci concerne la mémoire $ memoryOverhead $. 
+Les deux tests E1 et E2 sont bien passés. Toutefois, Le test E3 a échoué pour la raison de dépassement de mémoire. L'erreur reporté est relative à la charge de travail qu'a subi un \textit{executor} au sein d'un conteneur YARN. Précisément, ceci concerne la mémoire $ memoryOverhead $. 
 
 \textit{La surcharge de mémoire est la quantité de mémoire hors tas allouée à chaque exécuteur. Par défaut, la surcharge de mémoire est définie sur 10 \% de la mémoire de l'exécuteur ou sur 384 (par défaut, la plus élevée). La surcharge de mémoire est utilisée pour les tampons directs Java NIO, les piles de thread, les bibliothèques natives partagées ou les fichiers mappés en mémoire\footnote{Source : \url{https://aws.amazon.com/fr/premiumsupport/knowledge-center/emr-spark-yarn-memory-limit/}, consultée le $20/05/2019$.}.}
 
 \paragraph{Notes sur l'utilisation d'un cluster Amazon EMR}~
 
-La mise en place d'un cluster de machines en utilisant le service Amazon EMR est facile et rapide si les éléments nécessaires sont prêts : l'application à déployer sur le cluster et la configuration du cluster.
+La mise en place d'un \textit{cluster} de machines en utilisant le service Amazon EMR est facile et rapide si les éléments nécessaires sont prêts : l'application à déployer sur le \textit{cluster} et la configuration du \textit{cluster}.
 
-Après avoir créé quelques clusters EMR et les évaluer sur quelques ensembles de données, nous notons les défis qui se résultent de cette utilisation. 
+Après avoir créé quelques \textit{clusters} EMR et les évaluer sur quelques ensembles de données, nous notons les défis qui se résultent de cette utilisation. 
 Le premier défi est relatif au  choix des modèles des instances. Préférer un modèle par rapport à un autre dépend des coûts et   des opérations à appliquer sur les données; plus de calcul, plus de mémoire, etc.
 
-La configuration du cluster est un élément clé afin d'éviter les échecs inattendus d'une analyse en cours. C'était le cas pour  quelques analyses lancées. Sur base de nos  analyses échouées, nous notons deux  raisons. Pour la première,  l'application Spark a  utilisé les paramètres par défaut en ce qui concerne l'allocation de mémoire au  \textit{driver} et aux \textit{executors}, ainsi les ressources n'étaient pas exploitées convenablement.  Pour la deuxième, elle est aussi relative  à l'allocation de la mémoire. Toutefois, ceci concerne plusieurs blocs de mémoire comme le montre la Figure 	\ref{fig:spark-executoronyarn}.
+La configuration du \textit{cluster} EMR est un élément-clé pour éviter les échecs inattendus d'une analyse en cours. C'était le cas pour  quelques analyses lancées. Sur base de nos  analyses échouées, nous notons deux  raisons. Pour la première,  l'application Spark a  utilisé les paramètres par défaut en ce qui concerne l'allocation de mémoire au  \textit{driver} et aux \textit{executors}, ainsi les ressources n'étaient pas exploitées convenablement.  Pour la deuxième, elle est aussi relative  à la répartition de la  mémoire au sein d'un conteneur YARN. Toutefois, ceci concerne plusieurs blocs de mémoire comme le montre la Figure 	\ref{fig:spark-executoronyarn}.
 
 
-D'abord, nous tenons à préciser que les \textit{executors} s'exécutent dans des conteneurs YARN gérés par YARN \textit{NodeManager}. Ces conteneurs sont créés dans les n\oe{}uds de noyau. La Figure 	\ref{fig:spark-executoronyarn} montre l'organisation de la mémoire d'un conteneur YARN. Par cette illustration, nous montrons l'importance de la configuration personnalisée adaptée au modèle utilisé  des n\oe{}uds et aux types des traitements effectués par ces n\oe{}uds. 
-Les blocs de mémoire d'un conteneur YARN   peuvent être configurés en donnant des valeurs aux propriétés associées à chaque bloc de mémoire. Ces propriétés doivent être renseignées lors de la création du cluster  dans un fichier de configuration  comme celui du le Listing \ref{configsparkemr}.
+D'abord, nous tenons à préciser que les \textit{executors} s'exécutent dans des conteneurs YARN gérés par YARN \textit{NodeManager}\footnote{Les \textit{NodeManagers} sont des agents tournant sur chaque n\oe{}ud d'un \textit{cluster} Hadoop. Ils surveillent les ressources des n\oe{}uds, ils gèrent la communication des n\oe{}uds avec le \textit{ResourceManager}, etc.}. Ces conteneurs sont créés dans les n\oe{}uds de noyau. La Figure 	\ref{fig:spark-executoronyarn} montre l'organisation de la mémoire d'un conteneur YARN. Par cette illustration, nous montrons l'importance de la configuration personnalisée adaptée au modèle utilisé  des n\oe{}uds et aux types des traitements effectués par ces n\oe{}uds. 
+Les blocs de mémoire d'un conteneur YARN   peuvent être configurés en donnant des valeurs aux propriétés associées à chaque bloc de mémoire. Ces propriétés doivent être renseignées lors de la création du \textit{cluster}  dans un fichier de configuration  comme celui dans le Listing \ref{configsparkemr}.
 
 \begin{figure}[h]
 	\centering
@@ -679,7 +680,7 @@ Les blocs de mémoire d'un conteneur YARN   peuvent être configurés en donnant
 
 \section{Conclusion}
 
-Les trois implémentations du principe de détection des anomalies dans les délais des liens ont été évaluées dans ce chapitre. Chaque implémentation  concerne une technologie Big Data. Les temps d'exécution obtenus pour chaque implémentation dépendent de plusieurs entrées. Pour la base de données  MongoDB, les temps  mesurés sont affectés par les ressources disponibles dans la machine locale où MongoDB est installé, et les ressources allouées pour récupérer les traceroutes pour chaque période et ensuite les traiter. L'implémentation d'Amazon Athena et S3 dépend du partitionnement utilisé, du temps nécessaire à la récupération des traceroutes, pour chaque période,  depuis Amazon S3 et les envoyés vers la machine locale en vue de les traiter. Tandis qu'en Spark, les temps obtenus dépendent des caractéristiques du cluster de machines où l'application Spark s'exécute et de la configuration adéquate du cluster. Cette dernière dépend des caractéristiques techniques du cluster, du type des traitements appliqués sur les données et du volume de données   analysées.
+Les trois implémentations du principe de détection des anomalies dans les délais des liens ont été évaluées dans ce chapitre. Chaque implémentation  concerne une technologie Big Data. Les temps d'exécution obtenus pour chaque implémentation dépendent de plusieurs entrées. Pour la base de données  MongoDB, les temps  mesurés sont affectés par les ressources disponibles dans la machine locale où MongoDB est installé, et les ressources allouées pour récupérer les traceroutes pour chaque période et ensuite les traiter. L'implémentation d'Amazon Athena et S3 dépend du partitionnement utilisé, du temps nécessaire à la récupération des traceroutes, pour chaque période,  depuis Amazon S3 et les envoyés vers la machine locale en vue de les traiter. Tandis qu'en Spark, les temps obtenus dépendent des caractéristiques du \textit{cluster} de machines où l'application Spark s'exécute et de la configuration adéquate du \textit{cluster}. Cette dernière dépend des caractéristiques techniques du \textit{cluster}, du type des traitements appliqués sur les données et du volume de données   analysées.
 
 %Chaque technologie relève ses défis. De plus, la réutilisation d'une implémentation pour   créer une autre relève aussi des défis. 
 %La réécriture de la même  approche utilisée pour résoudre un problème donné avec d'autres technologies n'est pas toujours optimale. Ce qui est le cas pour l'outil de détection. Le plus optimal est d'exploiter les avantages de chaque technologie. 
