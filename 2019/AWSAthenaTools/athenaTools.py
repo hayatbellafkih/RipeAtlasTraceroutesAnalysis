@@ -339,10 +339,6 @@ def get_value_property(config= None,section='', key=''):
         print(e.args)
 
 def getRttDataAthena(configFile=None):
-	"""
-		Notes: takes about 6G of RAM for 1 week of data for 1 measurement id
-    """
-
 
 	print("Find RTT differentiel for each traceroute")
 
