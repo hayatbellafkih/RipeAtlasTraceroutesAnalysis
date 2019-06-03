@@ -268,8 +268,8 @@ def get_traceroutes_by_sql_request( final_request=""):
 	print("Start get_traceroutes_by_sql_request : "+ str())
 	start = time.time()
 	client = boto3.client("athena", region_name =region,
-	aws_access_key_id='AKIAJEIK3DAOS3XOP2GQ',
-	aws_secret_access_key='4S1qmjbbfprxJEJYqnVv8tAjRBXJ15OVkfHHRJ0f'	)
+	aws_access_key_id='yours',
+	aws_secret_access_key='yours'	)
 	resultat = fetchall_athena(final_request, client)
 	end = time.time()
 	print("TOTAL Time is "+ str(end - start))
